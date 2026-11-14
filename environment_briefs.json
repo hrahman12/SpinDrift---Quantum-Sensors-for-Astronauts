@@ -1,0 +1,96 @@
+{
+  "spindrift_version": "2.0",
+  "prototype_disclaimer": "Prototype thresholds and operational briefs — not clinically validated",
+  "environments": {
+    "iss": {
+      "name": "International Space Station (ISS)",
+      "era": "today",
+      "human_data_available": true,
+      "brief": "In ~400 km low-Earth orbit, your wearable QuSpin QZFM OPM, 49–128 channel OPM-MEG helmet, and finger NV-diamond sensor monitor heart, brain, and oxidative stress continuously without electrodes that peel in sweat, cryogenic helium, or blood-draw consumables—and free of terrestrial 50/60 Hz power-grid clutter. Primary ISS health risks are microgravity cephalad fluid shift, plasma-volume contraction, and Spaceflight-Associated Neuro-ocular Syndrome (SANS), alongside South Atlantic Anomaly radiation passes. What remains unknown is whether continuous inflight OPM-MEG cortical drift and NV-diamond ROS index trends predict clinical SANS or cardiac remodeling before structural changes appear on ultrasound.",
+      "sensor_advantage_or_degradation": "Continuous wearable non-cryogenic monitoring without sweat-sensitive electrodes, consumables, or terrestrial 50/60 Hz mains clutter (dipole field ~17% weaker at ~400 km than at Earth's surface, though active shielding/nulling is still required).",
+      "environment_health_risk": "Microgravity cephalad fluid shift, plasma-volume loss, cardiovascular deconditioning, SANS, and South Atlantic Anomaly radiation spikes.",
+      "knowledge_gap": "Whether continuous inflight OPM-MEG drift and NV-diamond ROS trends predict clinical SANS or cardiac remodeling prior to imaging changes."
+    },
+    "tiangong": {
+      "name": "Tiangong Space Station",
+      "era": "today",
+      "human_data_available": true,
+      "brief": "At Tiangong's ~390 km orbit, Earth's geomagnetic dipole is modestly weaker than at ground level and free of terrestrial clinic limits, letting non-cryogenic OPMs and NV-diamond T₁ relaxometry track crew physiology continuously without adhesive electrodes or single-use lab supplies. Key health risks mirror long-duration LEO: cardiovascular deconditioning, circadian disruption that elevates MEG theta while suppressing alpha power, and fluid shifts linked to SANS. How multi-month Tiangong work-rest schedules interact with continuous inflight OPM-MEG fatigue drift and NV-diamond ROS trajectories remains unvalidated in orbit.",
+      "sensor_advantage_or_degradation": "Continuous non-cryogenic, consumable-free wearable tracking at ~390 km with modestly lower dipole field than Earth's surface and no terrestrial lab constraints.",
+      "environment_health_risk": "Multi-month microgravity cardiovascular deconditioning, circadian sleep-drift (alpha drop / theta rise), and SANS fluid redistribution.",
+      "knowledge_gap": "Long-duration inflight validation of continuous OPM-MEG sleep-drift metrics and NV-diamond ROS kinetics under Tiangong mission schedules."
+    },
+    "crew_dragon": {
+      "name": "SpaceX Crew Dragon",
+      "era": "today",
+      "human_data_available": true,
+      "brief": "Inside Crew Dragon, wearable quantum sensors record continuous cardiac, neural, and oxidative baselines without cryogenic scanners or blood-draw kits—and on higher-altitude orbital trajectories, ambient geomagnetic field strength drops further below ground levels. Short-duration flights carry acute microgravity fluid shifts, space motion sickness, and elevated trapped-proton radiation exposure when orbits reach 585–1,408 km or traverse the inner Van Allen belt. Individual crew variability linking rapid plasma-volume loss and acute radiation spikes to real-time NV-diamond ROS index and OPM cardiac shifts over multi-day missions remains unknown.",
+      "sensor_advantage_or_degradation": "Consumable-free continuous monitoring during dynamic launch/orbit transitions, with lower ambient magnetic fields on higher-altitude trajectories than on Earth's surface.",
+      "environment_health_risk": "Acute microgravity fluid shift, space motion sickness, and elevated radiation exposure during high-altitude or inner Van Allen belt passes.",
+      "knowledge_gap": "Inter-individual coupling between rapid plasma-volume contraction, acute radiation spikes, and continuous inflight NV-diamond ROS or OPM cardiac shifts."
+    },
+    "orion": {
+      "name": "Orion Spacecraft (Cislunar)",
+      "era": "today",
+      "human_data_available": true,
+      "brief": "Once Orion leaves Earth's magnetosphere and enters ~1–10 nT solar-wind fields, SERF OPMs operate orders of magnitude closer to zero ambient field than on Earth, reducing magnetic shielding demands and improving baseline stability. The primary cislunar hazard is unshielded galactic cosmic ray (GCR) and solar particle event (SPE) radiation after Van Allen transit, paired with acute fluid shifts and cognitive fatigue. While Artemis II completed a ~9-day crewed lunar flyby in 2026, multi-week human biomagnetic and neuro-oxidative baselines under sustained cislunar radiation are still unknown.",
+      "sensor_advantage_or_degradation": "Outside Earth's magnetosphere (~1–10 nT IMF), SERF OPMs operate near zero field with sharply reduced shielding needs and higher stability than on Earth.",
+      "environment_health_risk": "Unshielded GCR and SPE radiation exposure beyond Earth's magnetosphere, Van Allen transit dose, acute fluid shift, and cognitive fatigue.",
+      "knowledge_gap": "Multi-week human biomagnetic and NV-diamond oxidative baselines in cislunar space beyond the short ~9-day Artemis II flyby."
+    },
+    "gateway": {
+      "name": "Lunar Gateway (NRHO)",
+      "era": "today",
+      "human_data_available": false,
+      "brief": "In lunar near-rectilinear halo orbit outside Earth's ~50 µT field, SERF OPMs sit in nanotesla-scale background fields and require far less shielding mass or active coil nulling than terrestrial MEG rooms. Crew health risks focus on chronic unshielded GCR and SPE radiation elevating systemic ROS alongside multi-week microgravity cardiac and cognitive deconditioning. No human crew has flown or inhabited Gateway yet, so human cardiac-field, MEG drift, and NV-diamond ROS curves in lunar halo orbit remain unknown.",
+      "sensor_advantage_or_degradation": "Nanotesla ambient field outside Earth's magnetosphere reduces shielding mass and active compensation noise compared with Earth.",
+      "environment_health_risk": "Chronic unshielded GCR/SPE radiation driving oxidative stress, combined with prolonged microgravity cardiovascular and neurocognitive deconditioning.",
+      "knowledge_gap": "No human crew has flown or lived aboard Gateway; all human physiological trajectories in lunar NRHO remain unknown."
+    },
+    "lunar_base": {
+      "name": "Lunar Base",
+      "era": "tomorrow",
+      "human_data_available": false,
+      "brief": "Away from localized crustal anomalies, the Moon's ~2–10 nT ambient background keeps SERF OPMs near native zero-field operation with better sensitivity and minimal shielding compared with Earth. Major crew health risks include 1/6 g bone and muscle deconditioning, continuous GCR/SPE radiation, and inhaled lunar regolith dust driving oxidative and inflammatory ROS load. Because Apollo surface missions lasted three days or less and no human crew has lived at a long-duration lunar base, multi-month human adaptation and lunar-dust ROS kinetics remain unknown.",
+      "sensor_advantage_or_degradation": "Near-zero ~2–10 nT background field (outside crustal anomalies) allows higher OPM baseline sensitivity with minimal magnetic shielding compared with Earth.",
+      "environment_health_risk": "1/6 g musculoskeletal and cardiac deconditioning, unshielded lunar radiation, and reactive lunar regolith dust elevating ROS burden.",
+      "knowledge_gap": "No human crew has lived at a long-duration lunar base (Apollo stays were <=3 days); chronic 1/6 g remodeling and sustained dust-driven ROS in humans are unknown."
+    },
+    "mars_transit": {
+      "name": "Mars Transit",
+      "era": "tomorrow",
+      "human_data_available": false,
+      "brief": "In ~1–10 nT interplanetary space, your chest and helmet SERF OPMs operate naturally near zero ambient field without Earth-style magnetic shielding, pushing sensor sensitivity toward peak performance. Peak isolation, uninterrupted GCR exposure, and months of microgravity elevate risks of cardiac remodeling, oxidative stress, and cognitive drift with no rapid abort or resupply. No human crew has ever flown a Mars transit mission, so real multi-month human MCG, OPM-MEG drift, and NV-diamond ROS baselines in deep-space transit are unknown.",
+      "sensor_advantage_or_degradation": "Interplanetary ~1–10 nT field eliminates bulky terrestrial shielding and brings SERF OPMs close to peak sensitivity.",
+      "environment_health_risk": "Peak isolation, chronic GCR/SPE radiation, progressive microgravity cardiovascular deconditioning, and neurocognitive fatigue with no emergency return.",
+      "knowledge_gap": "No human crew has ever flown a Mars transit mission; multi-month deep-space human cardiac, MEG drift, and ROS trajectories are completely unknown."
+    },
+    "mars_surface": {
+      "name": "Mars Surface",
+      "era": "tomorrow",
+      "human_data_available": false,
+      "brief": "Without a global dipolar magnetic field, Mars presents a ~2–10 nT induced background away from localized crustal anomalies, allowing SERF OPMs greater low-field sensitivity and lower shielding mass than on Earth's ~50 µT surface. Crew risks center on 0.38 g partial-gravity deconditioning, surface ionizing radiation beneath a thin atmosphere, and toxic Martian perchlorate dust driving oxidative and endocrine stress. No human crew has ever landed on Mars, so human physiological trajectories under 0.38 g and Martian perchlorate exposure remain unknown.",
+      "sensor_advantage_or_degradation": "Lack of a global dipole (~2–10 nT background outside magnetized crustal zones) supports stronger OPM sensitivity with less shielding than on Earth.",
+      "environment_health_risk": "0.38 g partial-gravity deconditioning, persistent surface radiation, and reactive perchlorate dust increasing systemic ROS and endocrine strain.",
+      "knowledge_gap": "No human crew has ever set foot on Mars; human cardiovascular, neurocognitive, and oxidative responses to 0.38 g and perchlorate dust are unknown."
+    },
+    "europa": {
+      "name": "Europa (Jovian System)",
+      "era": "tomorrow",
+      "human_data_available": false,
+      "brief": "At Europa, Jupiter's ~420 µT ambient magnetic field—nearly ten times Earth's surface field—pushes SERF OPMs out of zero-field lock and degrades OPM sensitivity compared with Earth, forcing primary reliance on finger NV-diamond T₁ relaxometry, the NV-diamond cardiac magnetometer alternative, and surviving compensated MEG channels. The defining health hazards are extreme Jovian trapped-particle radiation driving acute oxidative stress and multi-year isolation with no rescue option. No human crew has ever traveled to Europa or the Jovian system, so human physiological tolerance and sensor performance under ~420 µT flight conditions remain unknown.",
+      "sensor_advantage_or_degradation": "WORSE than Earth: Jupiter's ~420 uT field degrades SERF OPM sensitivity, shifting reliance to NV-diamond T1 relaxometry, the NV-diamond cardiac magnetometer alt (6-26 pT/sqrt(Hz)), and surviving compensated MEG channels.",
+      "environment_health_risk": "Extreme Jovian trapped-particle ionizing radiation causing acute oxidative injury, alongside multi-year isolation and zero resupply.",
+      "knowledge_gap": "No human crew has ever traveled to Europa or the Jovian system; human radiation physiology and flight sensor reliability at ~420 uT are completely unknown."
+    },
+    "deep_space": {
+      "name": "Deep Space",
+      "era": "tomorrow",
+      "human_data_available": false,
+      "brief": "With ambient magnetic fields dropping below ~1 nT—thousands of times weaker than Earth's surface—SERF OPMs achieve peak sensitivity with virtually no magnetic shielding mass or field-nulling power penalty. Crew health faces maximum autonomy risk: unmitigated Galactic Cosmic Rays, multi-year cardiac and neurocognitive deconditioning, and total absence of rescue or resupply. No human crew has ever operated in deep space beyond the Earth-Moon system, leaving multi-year human cardiac-field, MEG drift, and oxidative stress trajectories unknown.",
+      "sensor_advantage_or_degradation": "Peak SERF OPM sensitivity in sub-nanotesla to low-nanotesla ambient fields with virtually no terrestrial magnetic shielding needed.",
+      "environment_health_risk": "Unmitigated Galactic Cosmic Ray exposure, multi-year deconditioning, and total operational isolation with zero rescue or resupply.",
+      "knowledge_gap": "No human crew has ever operated in deep space beyond the Earth-Moon system; multi-year human biomagnetic and oxidative responses are unknown."
+    }
+  }
+}

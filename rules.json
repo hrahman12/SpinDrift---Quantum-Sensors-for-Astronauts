@@ -1,0 +1,471 @@
+{
+  "spindrift_version": "2.0",
+  "project": "SpinDrift — Quantum Biosensors for Astronaut Health (NASA Space Apps 2026)",
+  "prototype_disclaimer": "Prototype thresholds — not clinically validated",
+  "status_precedence": ["red", "amber", "green"],
+  "threshold_adjustment_rule": {
+    "formula": "effective_threshold = baseline + (base_threshold - baseline) * (1 - offset * step_fraction)",
+    "step_fraction": 0.05,
+    "boundary_semantics": {
+      "lower_is_worse": "green if value > amber_boundary (or >= for correlation/cardiac_field lower bound); amber if red_boundary <= value <= amber_boundary; red if value < red_boundary",
+      "higher_is_worse": "green if value < amber_boundary; amber if amber_boundary <= value <= red_boundary; red if value > red_boundary"
+    },
+    "note": "Each unit of amber_offset or red_offset tightens allowed deviation from baseline by 5% (0% at LEO up to 30% in Deep Space), widening alert windows for earlier warning where radiation, isolation, or zero-rescue constraints apply."
+  },
+  "sensor_environment_physics": {
+    "serf_opm_relationship": "SERF operation improves as ambient magnetic field drops: QuSpin QZFM and miniaturized OPM-MEG sensors require near-zero local fields (<50 nT residual) to eliminate spin-exchange relaxation. In LEO (~25-65 uT), heavy shielding or active triaxial nulling is required and orbital field gradients add noise; in cislunar, Mars transit, and deep space (nT to sub-nT ambient fields), shielding mass and compensation noise drop and OPMs reach peak sensitivity. At Europa, Jupiter's ~420 uT ambient field overwhelms standard SERF dynamic range and degrades OPM sensitivity.",
+    "nv_diamond_relationship": "NV-diamond T1 relaxometry (532 nm excitation, 637-800 nm readout) and the NV-diamond cardiac magnetometer alternative operate across strong ambient magnetic fields without cryogenic cooling or SERF zero-field lock, preserving monitoring resilience at Europa (~420 uT) when OPM channels degrade."
+  },
+  "aggregation_rules": {
+    "per_sensor_status": "Worst status among all biomarkers mapped to that sensor (red > amber > green).",
+    "overall_crew_status": {
+      "red": "Any single biomarker in red, OR two or more biomarkers in amber accompanied by degraded sensor confidence requiring flight-surgeon review.",
+      "amber": "One or more biomarkers in amber (and none in red), OR two or more sensors simultaneously showing amber across systems.",
+      "green": "All evaluated biomarkers in green."
+    },
+    "europa_degraded_mode": "Under Europa's ~420 uT Jovian field, Chest QuSpin QZFM OPM is flagged degraded — switch primary cardiac tracking to the NV-diamond cardiac magnetometer alt (12 mm head, 6-26 pT/sqrt(Hz), arXiv 2601.18843) with signal-averaged QRS, rely on surviving actively compensated OPM-MEG channels for Head, and anchor systemic stress assessment on Finger NV-diamond T1 relaxometry."
+  },
+  "environment_modifiers": {
+    "iss": {
+      "amber_offset": 0,
+      "red_offset": 0,
+      "note": "Baseline LEO thresholds",
+      "name": "International Space Station (ISS)",
+      "era": "today",
+      "ambient_field_regime": "LEO geomagnetic (~25-65 uT; ~400 km altitude)",
+      "opm_sensitivity_state": "shielded_baseline",
+      "human_data_available": true,
+      "human_data_note": "Extensive long-duration LEO human flight data; inflight continuous OPM/NV biomarker integration not yet clinically validated."
+    },
+    "tiangong": {
+      "amber_offset": 0,
+      "red_offset": 0,
+      "note": "Same LEO profile as ISS",
+      "name": "Tiangong Space Station",
+      "era": "today",
+      "ambient_field_regime": "LEO geomagnetic (~25-65 uT; ~390 km altitude, 41.5 deg inclination)",
+      "opm_sensitivity_state": "shielded_baseline",
+      "human_data_available": true,
+      "human_data_note": "Long-duration LEO crew experience exists; continuous quantum biosensor norms remain unvalidated in flight."
+    },
+    "crew_dragon": {
+      "amber_offset": 0,
+      "red_offset": 0,
+      "note": "Short duration; motion and radiation at higher orbit",
+      "name": "SpaceX Crew Dragon",
+      "era": "today",
+      "ambient_field_regime": "LEO to high-apogee Earth orbit (~25-65 uT baseline; up to ~585-1,408 km on specialized flights)",
+      "opm_sensitivity_state": "shielded_baseline",
+      "human_data_available": true,
+      "human_data_note": "Short-duration LEO and high-altitude commercial crew data exist (e.g., Inspiration4 OSDR, Polaris Dawn)."
+    },
+    "orion": {
+      "amber_offset": 2,
+      "red_offset": 2,
+      "note": "Cislunar radiation — widen windows for GCR exposure",
+      "name": "Orion Spacecraft (Cislunar)",
+      "era": "today",
+      "ambient_field_regime": "Cislunar space outside magnetosphere (~1-10 nT solar wind IMF outside Van Allen transits)",
+      "opm_sensitivity_state": "enhanced_low_field",
+      "human_data_available": true,
+      "human_data_note": "Short ~9-day crewed lunar flyby completed (Artemis II, Apr 2026); multi-week human cislunar data remain limited."
+    },
+    "gateway": {
+      "amber_offset": 2,
+      "red_offset": 2,
+      "note": "Outside magnetosphere",
+      "name": "Lunar Gateway (NRHO)",
+      "era": "today",
+      "ambient_field_regime": "Outside Earth's magnetosphere in lunar NRHO (~1-10 nT IMF baseline)",
+      "opm_sensitivity_state": "enhanced_low_field",
+      "human_data_available": false,
+      "human_data_note": "No human crew has flown or inhabited Gateway."
+    },
+    "lunar_base": {
+      "amber_offset": 3,
+      "red_offset": 3,
+      "note": "1/6 g bone and muscle loss; lunar dust ROS load",
+      "name": "Lunar Base",
+      "era": "tomorrow",
+      "ambient_field_regime": "No global dipole (~2-10 nT IMF baseline; localized crustal anomalies ~100-300 nT)",
+      "opm_sensitivity_state": "near_native_serf",
+      "human_data_available": false,
+      "human_data_note": "Apollo surface stays were <=3 days; no human crew has lived at a long-duration lunar base."
+    },
+    "mars_transit": {
+      "amber_offset": 5,
+      "red_offset": 5,
+      "note": "Peak isolation, radiation, deconditioning — widest windows, earliest alerts",
+      "name": "Mars Transit",
+      "era": "tomorrow",
+      "ambient_field_regime": "Interplanetary solar wind (~1-10 nT IMF)",
+      "opm_sensitivity_state": "peak_serf",
+      "human_data_available": false,
+      "human_data_note": "No human crew has ever flown a Mars transit mission."
+    },
+    "mars_surface": {
+      "amber_offset": 4,
+      "red_offset": 4,
+      "note": "0.38 g, perchlorate dust, radiation",
+      "name": "Mars Surface",
+      "era": "tomorrow",
+      "ambient_field_regime": "No global dipole (~2-10 nT induced baseline; strong localized crustal anomalies ~50 to >1,000 nT)",
+      "opm_sensitivity_state": "near_native_serf",
+      "human_data_available": false,
+      "human_data_note": "No human crew has ever landed on or lived on Mars."
+    },
+    "europa": {
+      "amber_offset": 4,
+      "red_offset": 4,
+      "note": "Degraded OPM sensitivity — rely on NV and surviving MEG channels",
+      "name": "Europa (Jovian System)",
+      "era": "tomorrow",
+      "ambient_field_regime": "Jupiter magnetospheric field (~420 uT at Europa)",
+      "opm_sensitivity_state": "degraded_high_field",
+      "human_data_available": false,
+      "human_data_note": "No human crew has ever traveled to Europa or the Jovian system."
+    },
+    "deep_space": {
+      "amber_offset": 6,
+      "red_offset": 6,
+      "note": "No rescue, no resupply — autonomy-first logic",
+      "name": "Deep Space",
+      "era": "tomorrow",
+      "ambient_field_regime": "Outer heliosphere / interstellar (<1 nT to few nT; ~0.1-0.5 nT in LISM)",
+      "opm_sensitivity_state": "peak_serf",
+      "human_data_available": false,
+      "human_data_note": "No human crew has ever operated in deep space beyond the Earth-Moon system."
+    }
+  },
+  "sensors": {
+    "chest_heart": {
+      "device": "QuSpin QZFM OPM",
+      "device_specs": "87Rb vapor cell, <15 fT/sqrt(Hz), domino-sized, no cryogenics",
+      "alt_device": "NV-diamond cardiac magnetometer",
+      "alt_device_specs": "12 mm head, 6-26 pT/sqrt(Hz), measured real human hearts (arXiv 2601.18843, Jan 2026)",
+      "biomarkers": [
+        {
+          "id": "cardiac_field",
+          "measurement": "Cardiac magnetic field amplitude (pT)",
+          "device_reads": "Larmor precession shift in 87Rb vapor cell",
+          "unit": "pT",
+          "baseline": 52.5,
+          "direction": "lower_is_worse",
+          "green": {
+            "range": [40, 65]
+          },
+          "amber": {
+            "range": [25, 40],
+            "above_upper_bound_note": "Values >65 pT flag amber to verify sensor standoff, motion artifact, or elevated amplitude.",
+            "action": "Increase MCG recording to daily. Compare QRS morphology to preflight baseline."
+          },
+          "red": {
+            "below": 25,
+            "action": "Continuous MCG monitoring. Flight surgeon consult within 24 h."
+          }
+        },
+        {
+          "id": "qrs_morphology",
+          "measurement": "QRS template correlation vs preflight",
+          "unit": "correlation",
+          "baseline": 1.0,
+          "direction": "lower_is_worse",
+          "green": {
+            "correlation_above": 0.95
+          },
+          "amber": {
+            "correlation_range": [0.80, 0.95],
+            "action": "Flag morphology change. Review QT interval."
+          },
+          "red": {
+            "correlation_below": 0.80,
+            "action": "Restrict strenuous activity. 12-lead ECG if available."
+          }
+        },
+        {
+          "id": "nppa",
+          "gene": "NPPA",
+          "what_it_is": "Natriuretic peptide A — released when heart wall stretches",
+          "unit": "log2fc",
+          "baseline": 0.0,
+          "direction": "higher_is_worse",
+          "green": {
+            "log2fc_below": 0.5
+          },
+          "amber": {
+            "log2fc_range": [0.5, 1.5],
+            "action": "Heart adapting to microgravity. Monitor cardiac output."
+          },
+          "red": {
+            "log2fc_above": 1.5,
+            "action": "Sustained cardiac overload. Restrict strenuous EVA. Flight surgeon within 24 h."
+          }
+        }
+      ]
+    },
+    "head_brain": {
+      "device": "OPM-MEG helmet (2026 miniaturized)",
+      "device_specs": "12 x 16.5 x 22.5 mm per sensor, <7 fT/sqrt(Hz), 130 Hz bandwidth, 0.7 W per head; 49 to 128 channels (FieldLine HEDscan class); wearable, non-cryogenic",
+      "biomarkers": [
+        {
+          "id": "alpha_power",
+          "band": "alpha",
+          "freq": "8–13 Hz",
+          "what": "Relaxed wakefulness; drops with fatigue",
+          "unit": "change_pct",
+          "baseline": 0.0,
+          "direction": "lower_is_worse",
+          "green": {
+            "change_pct_above": -15
+          },
+          "amber": {
+            "change_pct_range": [-30, -15],
+            "action": "8-hour rest block. Reduce task complexity."
+          },
+          "red": {
+            "change_pct_below": -30,
+            "action": "No EVA or vehicle ops. Mandatory 12 h stand-down."
+          }
+        },
+        {
+          "id": "theta_power",
+          "band": "theta",
+          "freq": "4–8 Hz",
+          "what": "Drowsiness and cognitive load; rises with fatigue",
+          "unit": "change_pct",
+          "baseline": 0.0,
+          "direction": "higher_is_worse",
+          "green": {
+            "change_pct_below": 20
+          },
+          "amber": {
+            "change_pct_range": [20, 50],
+            "action": "Schedule breaks."
+          },
+          "red": {
+            "change_pct_above": 50,
+            "action": "Restrict all critical tasks."
+          }
+        },
+        {
+          "id": "drift_score",
+          "what": "(theta increase + alpha decrease) / baseline",
+          "unit": "ratio",
+          "baseline": 0.0,
+          "direction": "higher_is_worse",
+          "green": {
+            "below": 0.15
+          },
+          "amber": {
+            "range": [0.15, 0.35],
+            "action": "Rest protocol. Daily psychomotor vigilance test."
+          },
+          "red": {
+            "above": 0.35,
+            "action": "Restrict mission-critical tasks. Notify flight surgeon."
+          }
+        },
+        {
+          "id": "bdnf",
+          "gene": "BDNF",
+          "unit": "log2fc",
+          "baseline": 0.0,
+          "direction": "lower_is_worse",
+          "green": {
+            "log2fc_above": -0.3
+          },
+          "amber": {
+            "log2fc_range": [-1.0, -0.3],
+            "action": "Increase exercise (strongest BDNF inducer)."
+          },
+          "red": {
+            "log2fc_below": -1.0,
+            "action": "Cognitive impairment risk. Restrict complex tasks."
+          }
+        }
+      ]
+    },
+    "finger_ras": {
+      "device": "NV-diamond T1 relaxometry",
+      "device_specs": "532 nm excitation, 637-800 nm readout, ROS sensitivity 5.3 x 10^-13 M/sqrt(Hz); demonstrated in living cardiomyocytes",
+      "biomarkers": [
+        {
+          "id": "ros_index",
+          "what": "T1_baseline / T1_current",
+          "unit": "ratio",
+          "baseline": 1.0,
+          "direction": "higher_is_worse",
+          "green": {
+            "below": 1.5
+          },
+          "amber": {
+            "range": [1.5, 2.5],
+            "action": "Antioxidant review with flight surgeon."
+          },
+          "red": {
+            "above": 2.5,
+            "action": "Oxidative stress alarm. Anti-inflammatory protocol."
+          }
+        },
+        {
+          "id": "renin_activity",
+          "what": "Renin fold-change vs preflight",
+          "unit": "fold_change",
+          "baseline": 1.0,
+          "direction": "higher_is_worse",
+          "green": {
+            "fold_below": 2.0
+          },
+          "amber": {
+            "fold_range": [2.0, 4.0],
+            "action": "Compensatory. Hydration protocol."
+          },
+          "red": {
+            "fold_above": 4.0,
+            "action": "RAS dysregulation. Increase fluids."
+          }
+        },
+        {
+          "id": "plasma_volume",
+          "what": "Plasma volume change",
+          "unit": "change_pct",
+          "baseline": 0.0,
+          "direction": "lower_is_worse",
+          "green": {
+            "change_pct_above": -8
+          },
+          "amber": {
+            "change_pct_range": [-15, -8],
+            "action": "Expected adaptation. Monitor hydration."
+          },
+          "red": {
+            "change_pct_below": -15,
+            "action": "Hypovolemia. IV fluid protocol if available."
+          }
+        }
+      ]
+    }
+  },
+  "resolved_thresholds_by_environment": {
+    "iss": {
+      "cardiac_field": {"green": [40.0, 65.0], "amber": [25.0, 40.0], "red_below": 25.0, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.95, "amber": [0.8, 0.95], "red_below": 0.8},
+      "nppa": {"green_below": 0.5, "amber": [0.5, 1.5], "red_above": 1.5},
+      "alpha_power": {"green_above": -15.0, "amber": [-30.0, -15.0], "red_below": -30.0},
+      "theta_power": {"green_below": 20.0, "amber": [20.0, 50.0], "red_above": 50.0},
+      "drift_score": {"green_below": 0.15, "amber": [0.15, 0.35], "red_above": 0.35},
+      "bdnf": {"green_above": -0.3, "amber": [-1.0, -0.3], "red_below": -1.0},
+      "ros_index": {"green_below": 1.5, "amber": [1.5, 2.5], "red_above": 2.5},
+      "renin_activity": {"green_below": 2.0, "amber": [2.0, 4.0], "red_above": 4.0},
+      "plasma_volume": {"green_above": -8.0, "amber": [-15.0, -8.0], "red_below": -15.0}
+    },
+    "tiangong": {
+      "cardiac_field": {"green": [40.0, 65.0], "amber": [25.0, 40.0], "red_below": 25.0, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.95, "amber": [0.8, 0.95], "red_below": 0.8},
+      "nppa": {"green_below": 0.5, "amber": [0.5, 1.5], "red_above": 1.5},
+      "alpha_power": {"green_above": -15.0, "amber": [-30.0, -15.0], "red_below": -30.0},
+      "theta_power": {"green_below": 20.0, "amber": [20.0, 50.0], "red_above": 50.0},
+      "drift_score": {"green_below": 0.15, "amber": [0.15, 0.35], "red_above": 0.35},
+      "bdnf": {"green_above": -0.3, "amber": [-1.0, -0.3], "red_below": -1.0},
+      "ros_index": {"green_below": 1.5, "amber": [1.5, 2.5], "red_above": 2.5},
+      "renin_activity": {"green_below": 2.0, "amber": [2.0, 4.0], "red_above": 4.0},
+      "plasma_volume": {"green_above": -8.0, "amber": [-15.0, -8.0], "red_below": -15.0}
+    },
+    "crew_dragon": {
+      "cardiac_field": {"green": [40.0, 65.0], "amber": [25.0, 40.0], "red_below": 25.0, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.95, "amber": [0.8, 0.95], "red_below": 0.8},
+      "nppa": {"green_below": 0.5, "amber": [0.5, 1.5], "red_above": 1.5},
+      "alpha_power": {"green_above": -15.0, "amber": [-30.0, -15.0], "red_below": -30.0},
+      "theta_power": {"green_below": 20.0, "amber": [20.0, 50.0], "red_above": 50.0},
+      "drift_score": {"green_below": 0.15, "amber": [0.15, 0.35], "red_above": 0.35},
+      "bdnf": {"green_above": -0.3, "amber": [-1.0, -0.3], "red_below": -1.0},
+      "ros_index": {"green_below": 1.5, "amber": [1.5, 2.5], "red_above": 2.5},
+      "renin_activity": {"green_below": 2.0, "amber": [2.0, 4.0], "red_above": 4.0},
+      "plasma_volume": {"green_above": -8.0, "amber": [-15.0, -8.0], "red_below": -15.0}
+    },
+    "orion": {
+      "cardiac_field": {"green": [41.25, 65.0], "amber": [27.75, 41.25], "red_below": 27.75, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.955, "amber": [0.82, 0.955], "red_below": 0.82},
+      "nppa": {"green_below": 0.45, "amber": [0.45, 1.35], "red_above": 1.35},
+      "alpha_power": {"green_above": -13.5, "amber": [-27.0, -13.5], "red_below": -27.0},
+      "theta_power": {"green_below": 18.0, "amber": [18.0, 45.0], "red_above": 45.0},
+      "drift_score": {"green_below": 0.135, "amber": [0.135, 0.315], "red_above": 0.315},
+      "bdnf": {"green_above": -0.27, "amber": [-0.9, -0.27], "red_below": -0.9},
+      "ros_index": {"green_below": 1.45, "amber": [1.45, 2.35], "red_above": 2.35},
+      "renin_activity": {"green_below": 1.9, "amber": [1.9, 3.7], "red_above": 3.7},
+      "plasma_volume": {"green_above": -7.2, "amber": [-13.5, -7.2], "red_below": -13.5}
+    },
+    "gateway": {
+      "cardiac_field": {"green": [41.25, 65.0], "amber": [27.75, 41.25], "red_below": 27.75, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.955, "amber": [0.82, 0.955], "red_below": 0.82},
+      "nppa": {"green_below": 0.45, "amber": [0.45, 1.35], "red_above": 1.35},
+      "alpha_power": {"green_above": -13.5, "amber": [-27.0, -13.5], "red_below": -27.0},
+      "theta_power": {"green_below": 18.0, "amber": [18.0, 45.0], "red_above": 45.0},
+      "drift_score": {"green_below": 0.135, "amber": [0.135, 0.315], "red_above": 0.315},
+      "bdnf": {"green_above": -0.27, "amber": [-0.9, -0.27], "red_below": -0.9},
+      "ros_index": {"green_below": 1.45, "amber": [1.45, 2.35], "red_above": 2.35},
+      "renin_activity": {"green_below": 1.9, "amber": [1.9, 3.7], "red_above": 3.7},
+      "plasma_volume": {"green_above": -7.2, "amber": [-13.5, -7.2], "red_below": -13.5}
+    },
+    "lunar_base": {
+      "cardiac_field": {"green": [41.875, 65.0], "amber": [29.125, 41.875], "red_below": 29.125, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.9575, "amber": [0.83, 0.9575], "red_below": 0.83},
+      "nppa": {"green_below": 0.425, "amber": [0.425, 1.275], "red_above": 1.275},
+      "alpha_power": {"green_above": -12.75, "amber": [-25.5, -12.75], "red_below": -25.5},
+      "theta_power": {"green_below": 17.0, "amber": [17.0, 42.5], "red_above": 42.5},
+      "drift_score": {"green_below": 0.1275, "amber": [0.1275, 0.2975], "red_above": 0.2975},
+      "bdnf": {"green_above": -0.255, "amber": [-0.85, -0.255], "red_below": -0.85},
+      "ros_index": {"green_below": 1.425, "amber": [1.425, 2.275], "red_above": 2.275},
+      "renin_activity": {"green_below": 1.85, "amber": [1.85, 3.55], "red_above": 3.55},
+      "plasma_volume": {"green_above": -6.8, "amber": [-12.75, -6.8], "red_below": -12.75}
+    },
+    "mars_transit": {
+      "cardiac_field": {"green": [43.125, 65.0], "amber": [31.875, 43.125], "red_below": 31.875, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.9625, "amber": [0.85, 0.9625], "red_below": 0.85},
+      "nppa": {"green_below": 0.375, "amber": [0.375, 1.125], "red_above": 1.125},
+      "alpha_power": {"green_above": -11.25, "amber": [-22.5, -11.25], "red_below": -22.5},
+      "theta_power": {"green_below": 15.0, "amber": [15.0, 37.5], "red_above": 37.5},
+      "drift_score": {"green_below": 0.1125, "amber": [0.1125, 0.2625], "red_above": 0.2625},
+      "bdnf": {"green_above": -0.225, "amber": [-0.75, -0.225], "red_below": -0.75},
+      "ros_index": {"green_below": 1.375, "amber": [1.375, 2.125], "red_above": 2.125},
+      "renin_activity": {"green_below": 1.75, "amber": [1.75, 3.25], "red_above": 3.25},
+      "plasma_volume": {"green_above": -6.0, "amber": [-11.25, -6.0], "red_below": -11.25}
+    },
+    "mars_surface": {
+      "cardiac_field": {"green": [42.5, 65.0], "amber": [30.5, 42.5], "red_below": 30.5, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.96, "amber": [0.84, 0.96], "red_below": 0.84},
+      "nppa": {"green_below": 0.4, "amber": [0.4, 1.2], "red_above": 1.2},
+      "alpha_power": {"green_above": -12.0, "amber": [-24.0, -12.0], "red_below": -24.0},
+      "theta_power": {"green_below": 16.0, "amber": [16.0, 40.0], "red_above": 40.0},
+      "drift_score": {"green_below": 0.12, "amber": [0.12, 0.28], "red_above": 0.28},
+      "bdnf": {"green_above": -0.24, "amber": [-0.8, -0.24], "red_below": -0.8},
+      "ros_index": {"green_below": 1.4, "amber": [1.4, 2.2], "red_above": 2.2},
+      "renin_activity": {"green_below": 1.8, "amber": [1.8, 3.4], "red_above": 3.4},
+      "plasma_volume": {"green_above": -6.4, "amber": [-12.0, -6.4], "red_below": -12.0}
+    },
+    "europa": {
+      "cardiac_field": {"green": [42.5, 65.0], "amber": [30.5, 42.5], "red_below": 30.5, "amber_above": 65.0, "degraded_sensor_note": "OPM degraded by ~420 uT Jovian field; use NV-diamond cardiac alt (6-26 pT/sqrt(Hz)) with signal averaging."},
+      "qrs_morphology": {"green_above": 0.96, "amber": [0.84, 0.96], "red_below": 0.84, "degraded_sensor_note": "Signal-average NV-diamond cardiac output before flagging morphology drift."},
+      "nppa": {"green_below": 0.4, "amber": [0.4, 1.2], "red_above": 1.2},
+      "alpha_power": {"green_above": -12.0, "amber": [-24.0, -12.0], "red_below": -24.0, "degraded_sensor_note": "Use surviving actively compensated OPM-MEG channels."},
+      "theta_power": {"green_below": 16.0, "amber": [16.0, 40.0], "red_above": 40.0, "degraded_sensor_note": "Use surviving actively compensated OPM-MEG channels."},
+      "drift_score": {"green_below": 0.12, "amber": [0.12, 0.28], "red_above": 0.28, "degraded_sensor_note": "Cross-check surviving MEG channels with finger NV-diamond stress trend."},
+      "bdnf": {"green_above": -0.24, "amber": [-0.8, -0.24], "red_below": -0.8},
+      "ros_index": {"green_below": 1.4, "amber": [1.4, 2.2], "red_above": 2.2, "sensor_confidence": "nominal_nv_diamond"},
+      "renin_activity": {"green_below": 1.8, "amber": [1.8, 3.4], "red_above": 3.4},
+      "plasma_volume": {"green_above": -6.4, "amber": [-12.0, -6.4], "red_below": -12.0}
+    },
+    "deep_space": {
+      "cardiac_field": {"green": [43.75, 65.0], "amber": [33.25, 43.75], "red_below": 33.25, "amber_above": 65.0},
+      "qrs_morphology": {"green_above": 0.965, "amber": [0.86, 0.965], "red_below": 0.86},
+      "nppa": {"green_below": 0.35, "amber": [0.35, 1.05], "red_above": 1.05},
+      "alpha_power": {"green_above": -10.5, "amber": [-21.0, -10.5], "red_below": -21.0},
+      "theta_power": {"green_below": 14.0, "amber": [14.0, 35.0], "red_above": 35.0},
+      "drift_score": {"green_below": 0.105, "amber": [0.105, 0.245], "red_above": 0.245},
+      "bdnf": {"green_above": -0.21, "amber": [-0.7, -0.21], "red_below": -0.7},
+      "ros_index": {"green_below": 1.35, "amber": [1.35, 2.05], "red_above": 2.05},
+      "renin_activity": {"green_below": 1.7, "amber": [1.7, 3.1], "red_above": 3.1},
+      "plasma_volume": {"green_above": -5.6, "amber": [-10.5, -5.6], "red_below": -10.5}
+    }
+  }
+}

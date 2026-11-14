@@ -1,0 +1,153 @@
+{
+  "spindrift_version": "2.0",
+  "deck_title": "SpinDrift: Quantum Biosensors for Astronaut Health",
+  "team": "SpinDrift",
+  "event": "NASA Space Apps 2026",
+  "footer_disclaimer": "Prototype thresholds — not clinically validated",
+  "slides": [
+    {
+      "slide_number": 1,
+      "id": "title",
+      "title": "SpinDrift: Quantum Biosensors for Astronaut Health",
+      "subtitle": "Today's stations. Tomorrow's destinations.",
+      "footer": "NASA Space Apps 2026",
+      "visual_direction": "Dark deep-space backdrop with astronaut silhouette and three subtle glowing quantum sensor nodes on chest, head, and finger.",
+      "speaker_notes": "Introduce SpinDrift: continuous, consumable-free astronaut health monitoring built on three real quantum sensors and an environment-aware telemetry engine across today's orbital stations and tomorrow's deep-space destinations."
+    },
+    {
+      "slide_number": 2,
+      "id": "problem",
+      "title": "The Problem",
+      "headline": "180 days to Mars. No hospital. No lab.",
+      "columns": {
+        "current_limitations": [
+          "Adhesive electrodes fail in sweat and irritate skin",
+          "Blood draws consume finite sterile supplies",
+          "Cryogenic SQUID scanners cannot fly"
+        ],
+        "mission_requirements": [
+          "Wearable, non-cryogenic hardware",
+          "Real-time continuous cardiac, neural, and oxidative telemetry",
+          "Zero consumables"
+        ]
+      },
+      "visual_direction": "Split comparison card: Current (red-amber warning icons for electrodes, blood kits, liquid-helium dewar) vs Needed (green badges for wearable, real-time, zero consumables).",
+      "speaker_notes": "As missions leave low-Earth orbit for 180-day Mars transits and beyond, crews lose rapid return and resupply. The crew medical officer needs continuous telemetry without lab consumables or cryogens."
+    },
+    {
+      "slide_number": 3,
+      "id": "three_quantum_sensors",
+      "title": "Three Quantum Sensors",
+      "layout": "One astronaut body diagram with three labeled sensor locations",
+      "sensors": [
+        {
+          "location": "Chest",
+          "label": "Chest → OPM magnetocardiography (≈50 pT cardiac field)",
+          "primary_hardware": "QuSpin QZFM OPM (⁸⁷Rb vapor cell, <15 fT/√Hz, domino-sized, no cryogenics)",
+          "alternative_hardware": "NV-diamond cardiac magnetometer (12 mm head, 6–26 pT/√Hz, measured real human hearts, arXiv 2601.18843, Jan 2026)"
+        },
+        {
+          "location": "Head",
+          "label": "Head → OPM-MEG helmet (≈100 fT neural field, <7 fT/√Hz)",
+          "primary_hardware": "Miniaturized OPM-MEG helmet (12 × 16.5 × 22.5 mm per sensor, <7 fT/√Hz, 130 Hz bandwidth, 0.7 W per head; 49–128 channels, FieldLine HEDscan class; wearable, non-cryogenic)"
+        },
+        {
+          "location": "Finger",
+          "label": "Finger → NV-diamond ROS sensing (5.3 × 10⁻¹³ M/√Hz)",
+          "primary_hardware": "NV-diamond T₁ relaxometry (532 nm excitation, 637–800 nm readout, ROS sensitivity 5.3 × 10⁻¹³ M/√Hz; demonstrated in living cardiomyocytes)"
+        }
+      ],
+      "visual_direction": "Single full-body astronaut schematic with callout lines to Chest (OPM MCG), Head (OPM-MEG helmet), and Finger (NV-diamond T₁ clip).",
+      "speaker_notes": "Every sensor in SpinDrift is grounded in demonstrated hardware: QuSpin QZFM (plus the Jan 2026 NV-diamond heart alternative), miniaturized 49–128 channel OPM-MEG helmets, and cardiomyocyte-demonstrated NV-diamond T₁ relaxometry."
+    },
+    {
+      "slide_number": 4,
+      "id": "how_they_work",
+      "title": "How They Work",
+      "core_takeaway": "All three use quantum spin states.",
+      "mechanisms": [
+        {
+          "sensor_group": "Chest & Head (OPM — ⁸⁷Rb)",
+          "flow": "Rb atoms and laser → spin precession → field readout",
+          "detail": "Laser-polarized ⁸⁷Rb vapor precesses in proportion to cardiac (~50 pT) or neural (~100 fT) magnetic fields in the Spin-Exchange Relaxation-Free (SERF) regime."
+        },
+        {
+          "sensor_group": "Finger (NV-Diamond T₁ Relaxometry)",
+          "flow": "NV centers and 532 nm laser → radical magnetic noise → T₁ shortens → ROS index",
+          "detail": "532 nm excitation initializes NV spin states; paramagnetic free radicals shorten T₁ relaxation time, read out via 637–800 nm fluorescence as ROS index (T₁_baseline / T₁_current)."
+        }
+      ],
+      "visual_direction": "Two clean horizontal physics pipelines converging on a shared badge: 'All three use quantum spin states.'",
+      "speaker_notes": "No electrodes touch sweat, and no blood leaves the body. Both sensor families read out biological signals through quantum spin state physics."
+    },
+    {
+      "slide_number": 5,
+      "id": "today_vs_tomorrow",
+      "title": "Today vs Tomorrow",
+      "columns": {
+        "today": [
+          {"id": "iss", "label": "ISS", "field_context": "LEO ~25–65 µT (shielded baseline)"},
+          {"id": "tiangong", "label": "Tiangong", "field_context": "LEO ~25–65 µT (shielded baseline)"},
+          {"id": "crew_dragon", "label": "Crew Dragon", "field_context": "LEO / high-apogee Earth orbit"},
+          {"id": "orion", "label": "Orion", "field_context": "Cislunar ~1–10 nT outside magnetosphere"},
+          {"id": "gateway", "label": "Gateway", "field_context": "Lunar NRHO outside magnetosphere (uncrewed)"}
+        ],
+        "tomorrow": [
+          {"id": "lunar_base", "label": "Lunar Base", "field_context": "1/6 g; ~2–10 nT IMF + crustal patches"},
+          {"id": "mars_transit", "label": "Mars Transit", "field_context": "Interplanetary ~1–10 nT (peak SERF regime)"},
+          {"id": "mars_surface", "label": "Mars Surface", "field_context": "0.38 g; ~2–10 nT + localized crustal zones"},
+          {"id": "europa", "label": "Europa", "field_context": "Jupiter ~420 µT field (OPMs degraded; rely on NV & surviving MEG)"},
+          {"id": "deep_space", "label": "Deep Space", "field_context": "<1 nT to few nT (peak SERF sensitivity, zero rescue)"}
+        ]
+      },
+      "sensitivity_bar": {
+        "type": "qualitative_relative_bar",
+        "progression": [
+          {"tier": "Degraded (High Field)", "environments": ["Europa (~420 µT)"]},
+          {"tier": "Shielded Baseline", "environments": ["ISS", "Tiangong", "Crew Dragon"]},
+          {"tier": "Enhanced Low-Field", "environments": ["Orion", "Gateway"]},
+          {"tier": "Near-Native SERF", "environments": ["Lunar Base", "Mars Surface"]},
+          {"tier": "Peak SERF Sensitivity", "environments": ["Mars Transit", "Deep Space"]}
+        ],
+        "note": "SERF OPM sensitivity improves as ambient magnetic field drops; Jupiter's ~420 µT field at Europa degrades OPMs while NV-diamond remains resilient."
+      },
+      "caption": "The further from Earth's field, the better the sensors work — except near Jupiter.",
+      "visual_direction": "Two side-by-side columns (TODAY vs TOMORROW) above a qualitative OPM sensitivity bar showing sensitivity rising into Deep Space and dropping sharply at Europa (~420 µT).",
+      "speaker_notes": "Most medical hardware fights spaceflight. SERF OPMs benefit from space: as ambient field drops from LEO microteslas to deep-space nanoteslas, shielding vanishes and sensitivity peaks—until Europa, where Jupiter's ~420 µT field degrades OPMs and NV-diamond takes lead."
+    },
+    {
+      "slide_number": 6,
+      "id": "real_data",
+      "title": "Real Data",
+      "datasets": [
+        "NASA OSDR OSD-580 — Spaceflight heart transcriptomics (NPPA cardiac wall-stretch signal)",
+        "NASA OSDR OSD-352 — Spaceflight hippocampus multiomics (BDNF / neurocognitive pathways)",
+        "OpenNeuro ds004902 — 71-subject sleep-deprivation EEG dataset (CC0; alpha/theta fatigue drift)",
+        "Inspiration4 (NASA OSDR) — Human flight multi-omics"
+      ],
+      "published_physiology": [
+        "Renin rise (RAS activation under fluid shift)",
+        "Plasma volume loss",
+        "Retinal thickening (Spaceflight-Associated Neuro-ocular Syndrome, SANS)"
+      ],
+      "prototype_notice": "Important: All environment-specific green/amber/red thresholds in SpinDrift are prototype hackathon thresholds — not clinically validated.",
+      "caption": "Every value traces to a dataset or a paper.",
+      "visual_direction": "Clean provenance grid linking OSDR/OpenNeuro dataset badges to each sensor channel, with a clear prototype disclaimer banner at the bottom.",
+      "speaker_notes": "We did not invent physiological trajectories. Cardiac and brain expression signals trace to OSDR OSD-580 and OSD-352, fatigue spectral drift traces to OpenNeuro ds004902, and fluid-shift biomarkers trace to Inspiration4 and published SANS literature. All alert thresholds are explicitly marked as prototype values, not clinically validated."
+    },
+    {
+      "slide_number": 7,
+      "id": "whats_next",
+      "title": "What's Next",
+      "roadmap_items": [
+        "Prototype a chest OPM patch (with NV-diamond high-field fallback)",
+        "Validate NV ROS sensing in a hypomagnetic chamber",
+        "Propose to Artemis crew health programs",
+        "Partner with an OPM-MEG manufacturer for a flight-qualified helmet"
+      ],
+      "prototype_notice": "Prototype thresholds — not clinically validated; clinical validation and flight qualification remain required next steps.",
+      "visual_direction": "Four numbered milestone cards leading from ground chamber validation to Artemis crew-health integration.",
+      "speaker_notes": "Next steps move SpinDrift from hackathon software into flight hardware: a wearable chest OPM patch, hypomagnetic chamber validation for NV-diamond T₁ ROS sensing, an Artemis crew-health proposal, and partnership with an OPM-MEG helmet manufacturer for flight qualification."
+    }
+  ]
+}
