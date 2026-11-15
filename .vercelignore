@@ -1,6 +1,7 @@
-.git
-node_modules
-*.md
-*.txt
-environment_briefs.json
-slide_content.json
+# not part of the public site (the Lean checker is rebuilt for Linux during the Vercel build)
+lean/.lake/
+app/
+public/
+data/literature/raw/
+node_modules/
+**/__pycache__/

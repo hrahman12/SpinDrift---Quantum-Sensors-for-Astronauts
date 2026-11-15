@@ -17,3 +17,6 @@ __pycache__/
 
 # Lean build output (recreate with: cd lean && lake build)
 lean/.lake/
+
+# Vercel build output (scripts/vercel_build.sh)
+public/
