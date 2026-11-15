@@ -6,6 +6,7 @@ import { createTwin } from './twin.js';
 import { createMicro, CHAINS, LEVEL_NAMES, niceLength, fovText } from './zoom.js';
 import { createSensorView } from './sensorview.js';
 import { tabBelow, TAB_HEAD } from './tabs.js';
+import { sceneFor } from './outfit.js';
 
 const FOOTER = 'Live: space magnetic-field feeds (NOAA L1 magnetometer; ISS position with the IGRF model). Near-live: an optically pumped magnetometer in orbit (ESA Swarm). Recorded: real OPM brain and heart data, NV, quantum-dot and carbon-dot lab data, and Inspiration4 astronaut lab data from NASA OSDR. Simulated: online simulators, labelled. No public live feed exists from these sensors on a human in space. Not diagnostic.';
 
@@ -386,8 +387,9 @@ st.sex = 'male';
 async function makeTwin(onProgress) {
   const old = $('#twin'), fresh = old.cloneNode(false); old.replaceWith(fresh);
   $('#labels').innerHTML = ''; $('#leaders').innerHTML = '';
+  const sc = sceneFor(S.location); st.scene = sc; $('#stage').dataset.bg = sc.backdrop;
   twin = await createTwin({ canvas: fresh, labelsEl: $('#labels'), leadersEl: $('#leaders'), sites: SITES.map((s) => ({ id: s.id, name: s.name, sensor: s.sensor })),
-    colors: { opm: S.col.opm, nv: S.col.nv, cqd: S.col.cqd }, opm: opmGeom(), sex: st.sex, onSelect: (id) => pickSite(id, true),
+    colors: { opm: S.col.opm, nv: S.col.nv, cqd: S.col.cqd }, opm: opmGeom(), sex: st.sex, outfit: sc.outfit, backdrop: sc.backdrop, onSelect: (id) => pickSite(id, true),
     onOrganPick: (p) => { if (st.tab) return; if (st.level === 'body') { st.level = 'organ'; renderRail(); } organHud(st.site, p); },
     onEdge: (d) => step(d === 'in' ? 1 : -1), onProgress });
   twin.select(st.site);
@@ -406,7 +408,15 @@ async function boot() {
   await loadAll();
   applyPalette();
   S.location = $('#location').value;
-  $('#location').addEventListener('change', (e) => { S.location = e.target.value; checkLean(); });
+  $('#location').addEventListener('change', async (e) => {
+    S.location = e.target.value; checkLean();
+    const sc = sceneFor(S.location);
+    if (twin && (sc.outfit !== st.scene?.outfit || sc.backdrop !== st.scene?.backdrop)) {
+      toast(`Dressing for ${$('#location').selectedOptions[0].textContent}…`, 2000);
+      await makeTwin();
+      if (st.tab) { const i = st.step; st.step = -1; st.stepReady = false; goStep(Math.max(0, i)); } else goLevel(['body', 'organ'].includes(st.level) ? st.level : 'body');
+    }
+  });
   $$('.tb-nav button').forEach((b) => b.addEventListener('click', () => (b.dataset.view === 'body' ? exitTab() : enterTab(b.dataset.view))));
   $('#go-specs').addEventListener('click', () => showView(st.tab));
   $$('.sex-toggle button').forEach((b) => b.addEventListener('click', () => setSex(b.dataset.sex)));

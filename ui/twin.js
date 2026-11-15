@@ -11,13 +11,15 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { comicify, inkRenderer, comicLights } from './comic.js';
 import { buildPerson } from './person.js';
+import { slimTransform, deformMesh, bodyModel, dress, hair, evaExtras } from './outfit.js';
 
 const REF_H = 1.75;          // reference height for the fallback figure (m)
 const MM = 0.001;
 const VCOL = { REQUIREMENTS_MET: 0xa9d48c, NOT_MET: 0xff6b5b, NEED_MORE_INFORMATION: 0xe9b44c };
 const SIDE = { brain: 1, heart: 1, blood: -1, skin: -1 };
 
-export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect, onProgress, onEdge, onOrganPick, colors = {}, opm = null, sex = 'male' }) {
+const GROUND = { orbit: 0x34466e, deep_space: 0x2a3148, lunar: 0x9d9b95, mars: 0xc26f3d, earth: 0x9cc77a, antarctic: 0xf4f7f9, arctic: 0x8f8574, desert: 0xd9a066, ocean: 0x3f93b5, steppe: 0xccb37e };
+export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect, onProgress, onEdge, onOrganPick, colors = {}, opm = null, sex = 'male', outfit = 'cabin', backdrop = 'orbit', skinTone = 0xd9a07b }) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   const scene = new THREE.Scene();
@@ -28,37 +30,56 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
   comicLights(scene);
   const ink = inkRenderer(renderer, 0.0024);
 
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(0.7, 96), new THREE.MeshBasicMaterial({ color: 0xe9dfc2, transparent: true, opacity: 0.75 }));
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(0.7, 96), new THREE.MeshBasicMaterial({ color: GROUND[backdrop] ?? 0xe9dfc2, transparent: true, opacity: 0.85 }));
   disc.rotation.x = -Math.PI / 2; disc.material.userData.outlineParameters = { visible: false }; scene.add(disc);
   const grid = new THREE.PolarGridHelper(0.7, 12, 7, 96, 0xb9ad8c, 0xd6cba9); grid.position.y = 0.002; scene.add(grid);
 
   // ---------------------------------------------------------------- body
-  // A regular, clothed comic person (ui/person.js). The Human Reference Atlas organs and sensor mounts (real
-  // anatomy, CC BY 4.0) sit inside it; the figure turns see-through when a sensor site is opened.
-  let anat = null, skinMeshes = [], credits = [], arm = null, hraH = null;
-  const organs = {};
+  // A real person: the Human Reference Atlas body surface (CC BY 4.0), slimmed and dressed for the scene
+  // (ui/outfit.js), with the real organs and sensor mounts inside. It turns see-through when a sensor site opens.
+  // If the matching HRA set is missing, a simple drawn figure (ui/person.js) stands in and says so.
+  let anat = null, skinMeshes = [], credits = [], arm = null;
+  const organs = {}, dressed = [];
+  let personXray = () => {}, slim = null, headC = null;
   try {
     const mod = await import('./anatomy.js');
-    anat = await mod.loadAnatomy(onProgress, { sex, exclude: ['skin'] });
+    anat = await mod.loadAnatomy(onProgress, { sex });
     const got = anat.manifest?.models?.heart?.sex || anat.manifest?.sex;
-    if (got && got !== sex) throw new Error(`HRA ${sex} organs are not built yet`);
-    scene.add(anat.group); anat.group.updateMatrixWorld(true);
+    if (got && String(got).toLowerCase() !== sex) throw new Error(`HRA ${sex} set is not built yet`);
     const skinObj = anat.skin?.object || anat.skin;
-    if (skinObj) { const bb = new THREE.Box3().setFromObject(skinObj); hraH = bb.max.y - bb.min.y; skinObj.visible = false; }
-    hraH = anat.manifest?.body_height_m || hraH;
-    Object.assign(organs, anat.organs || {});
-    credits = anat.credits || [];
-  } catch (e) { console.info('HRA anatomy not shown:', e.message); if (anat?.group) scene.remove(anat.group); anat = null; }
-  const brainC = organs.brain?.centroid ? new THREE.Vector3(...organs.brain.centroid) : null;
-  const person = buildPerson({ sex, H: hraH || (sex === 'female' ? 1.613 : 1.753), headCentre: brainC ? brainC.clone().add(new THREE.Vector3(0, -0.035, 0.012)) : null });
-  scene.add(person.group); person.group.updateMatrixWorld(true);
-  skinMeshes = person.meshes;
-  credits.push(person.credit);
-  if (!anat) credits.push(sex === 'female' ? 'Female organs: Human Reference Atlas female set not loaded yet, so no organs are drawn inside.' : 'Organs: Human Reference Atlas set not available.');
-  const personXray = (on) => person.setXray(on);
+    if (!skinObj) throw new Error('HRA skin missing');
+    scene.add(anat.group); anat.group.updateMatrixWorld(true);
+    const bb0 = new THREE.Box3().setFromObject(skinObj), H0 = bb0.max.y - bb0.min.y;
+    slim = slimTransform({ H: H0, y0: bb0.min.y, cx: (bb0.min.x + bb0.max.x) / 2, cz: (bb0.min.z + bb0.max.z) / 2, s: 0.85 });
+    skinObj.traverse((o) => { if (o.isMesh) { deformMesh(o, slim); skinMeshes.push(o); } });
+    for (const o of Object.values(anat.organs || {})) o?.object?.traverse((m) => { if (m.isMesh) deformMesh(m, slim); });
+    for (const [k, o] of Object.entries(anat.organs || {})) if (o?.object) { const c = new THREE.Box3().setFromObject(o.object).getCenter(new THREE.Vector3()); organs[k] = { ...o, centroid: c.toArray() }; }
+    credits = (anat.credits || []).concat(['Figure: the HRA reference body drawn 15% narrower (torso and limbs, head unchanged) and dressed for the scene; garments are smoothed shells grown from the body, so their thickness and colours are a drawing choice.']);
+    const body = bodyModel(skinMeshes, { H: H0, y0: bb0.min.y, cx: (bb0.min.x + bb0.max.x) / 2 });
+    const hb = new THREE.Box3(); for (let i = 0; i < body.n; i++) if (body.cls[i] === 2 && body.hy[i] > 0.88) hb.expandByPoint(new THREE.Vector3(body.P[3 * i], body.P[3 * i + 1], body.P[3 * i + 2]));
+    headC = hb.getCenter(new THREE.Vector3());
+    const { meshes } = dress(body, { outfit, sex });
+    const hr = outfit === 'eva' ? null : hair(body, { sex, headCentre: headC });
+    for (const g of [...meshes, hr].filter(Boolean)) { scene.add(g); dressed.push(g); }
+    if (outfit === 'eva') {
+      const chestY = bb0.min.y + 0.70 * H0, backZ = bb0.min.z * 0.85;
+      const ex = evaExtras({ headCentre: headC, headH: hb.max.y - hb.min.y, chestY, backZ }); scene.add(ex); dressed.push(...ex.children);
+    }
+    const skinMat = new THREE.MeshLambertMaterial({ color: skinTone });
+    for (const m of skinMeshes) m.material = skinMat;
+    const all = [skinMat, ...dressed.map((d) => d.material)];
+    personXray = (on) => { for (const m of all) { m.userData.base ??= { t: m.transparent, o: m.opacity }; m.transparent = on || m.userData.base.t; m.opacity = on ? Math.min(0.25, m.userData.base.o) : m.userData.base.o; m.depthWrite = !on && !m.userData.base.t; m.userData.outlineParameters = { ...(m.userData.outlineParameters || {}), visible: !on }; m.needsUpdate = true; } };
+    skinMeshes = [...dressed.filter((d) => d.isMesh && d.material.opacity >= 0.99), ...skinMeshes];
+  } catch (e) {
+    console.info('HRA body not used:', e.message); if (anat?.group) scene.remove(anat.group); anat = null;
+    const person = buildPerson({ sex, H: sex === 'female' ? 1.613 : 1.753 });
+    scene.add(person.group); skinMeshes = person.meshes; personXray = (on) => person.setXray(on); headC = person.head.centre;
+    credits.push(person.credit, sex === 'female' ? 'Female figure: the Human Reference Atlas female set is not built yet, so a simple drawn figure stands in, with no organs.' : 'Figure: the Human Reference Atlas set is not available, so a simple drawn figure stands in.');
+  }
   scene.updateMatrixWorld(true);
-  const bodyBox = new THREE.Box3().setFromObject(person.group);
+  const bodyBox = new THREE.Box3(); skinMeshes.forEach((m) => bodyBox.expandByObject(m));
   const H = bodyBox.max.y - bodyBox.min.y, cx = 0;
+  const person = { head: { centre: headC || new THREE.Vector3(0, bodyBox.max.y - 0.12, 0) }, points: {} };
 
   // ---------------------------------------------------------------- landmarks (from the real meshes where available)
   const centroid = (o) => { const bb = new THREE.Box3().setFromObject(o?.object || o); return bb.getCenter(new THREE.Vector3()); };
@@ -160,8 +181,8 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
     const a = pts.slice(0, cut), mx = a.reduce((s, q) => s + q[0], 0) / a.length, mz = a.reduce((s, q) => s + q[1], 0) / a.length;
     return frontOf(new THREE.Vector3(mx, y, mz));
   }
-  const forearm = person.points.forearmFront || null;
-  const elbow = person.points.elbowFront || null;
+  const forearm = person.points.forearmFront || armSlice((0.630 + 0.485) / 2);
+  const elbow = person.points.elbowFront || armSlice(0.630);
   credits.push('Forearm and elbow sites: the right forearm (between elbow 0.630 H and wrist 0.485 H) and elbow of the comic figure; neither sensor paper specifies a body site.');
   const markerGeo = new THREE.SphereGeometry(7 * MM, 20, 14);
   if (forearm) { const m = new THREE.Mesh(markerGeo, mat(colors.cqd || 0x6200ff, { emissive: colors.cqd || 0x6200ff, emissiveIntensity: 0.4 })); m.position.copy(forearm.p.clone().add(forearm.n.clone().multiplyScalar(4 * MM))); sensorGroup.add(m); sensors.skin.push(m); L.skin = forearm.p.clone(); }
@@ -172,7 +193,7 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
   for (const list of Object.values(sensors)) for (const m of list) m.userData.site = Object.keys(sensors).find((k) => sensors[k] === list);
   sensorGroup.traverse((o) => { if (o.isMesh && !o.userData.site) o.userData.site = null; });
 
-  comicify(scene, { keep: (o) => skinMeshes.includes(o) });
+  comicify(scene, { keep: (o) => skinMeshes.includes(o) || dressed.includes(o) });
 
   // ---------------------------------------------------------------- labels and picking
   const labelEls = {};

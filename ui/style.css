@@ -155,9 +155,26 @@ details.more[open] > summary { margin-bottom: 4px; }
 .stage.diving #micro { filter: blur(1.5px); }
 .flash { display: none; }
 
+/* scene backdrops behind the person: one per kind of place */
+.stage[data-bg=orbit] { background: radial-gradient(circle at 20% 15%, #fff 0 1px, transparent 2px) 0 0 / 90px 90px, radial-gradient(circle at 70% 60%, #fff 0 1px, transparent 2px) 0 0 / 130px 130px, linear-gradient(180deg, #14213d 0%, #2c4a7a 70%, #6d8fb8 100%); }
+.stage[data-bg=deep_space] { background: radial-gradient(circle at 30% 20%, #fff 0 1px, transparent 2px) 0 0 / 80px 80px, radial-gradient(circle at 80% 70%, #fff 0 1px, transparent 2px) 0 0 / 120px 120px, linear-gradient(180deg, #05070f 0%, #141a2e 100%); }
+.stage[data-bg=lunar] { background: radial-gradient(circle at 25% 18%, #fff 0 1px, transparent 2px) 0 0 / 100px 100px, linear-gradient(180deg, #050505 0%, #1b1b1d 62%, #8f8d87 62.5%, #b9b7b0 100%); }
+.stage[data-bg=mars] { background: linear-gradient(180deg, #d9a46b 0%, #e8b98a 58%, #b5602f 58.5%, #8c4523 100%); }
+.stage[data-bg=earth] { background: linear-gradient(180deg, #9fd3f0 0%, #d8eef9 60%, #a8cf86 60.5%, #7fae5f 100%); }
+.stage[data-bg=antarctic] { background: linear-gradient(180deg, #b9d8ec 0%, #e8f3fa 60%, #ffffff 60.5%, #e9eef2 100%); }
+.stage[data-bg=arctic] { background: linear-gradient(180deg, #a9c2d6 0%, #dbe6ee 60%, #9b8f7c 60.5%, #7d725f 100%); }
+.stage[data-bg=desert] { background: linear-gradient(180deg, #f2c48a 0%, #f7dcb4 60%, #d29a5c 60.5%, #b77a41 100%); }
+.stage[data-bg=ocean] { background: linear-gradient(180deg, #7cc6e6 0%, #3f93b5 55%, #1f5f7d 100%); }
+.stage[data-bg=steppe] { background: linear-gradient(180deg, #bcd9ea 0%, #e6eef2 60%, #cdb57f 60.5%, #a88e5a 100%); }
+.stage[data-bg=orbit] .fov-n b, .stage[data-bg=deep_space] .fov-n b, .stage[data-bg=lunar] .fov-n b, .stage[data-bg=ocean] .fov-n b { color: #fffdf6; text-shadow: 3px 3px 0 var(--ink); }
+.stage[data-bg=orbit] .fov small, .stage[data-bg=deep_space] .fov small, .stage[data-bg=lunar] .fov small, .stage[data-bg=ocean] .fov small, .stage[data-bg=orbit] .fov-n span, .stage[data-bg=deep_space] .fov-n span, .stage[data-bg=lunar] .fov-n span, .stage[data-bg=ocean] .fov-n span, .stage[data-bg=orbit] .rail-site, .stage[data-bg=deep_space] .rail-site, .stage[data-bg=lunar] .rail-site, .stage[data-bg=ocean] .rail-site { color: #fffdf6; }
+
 /* female / male figure switch */
-.sex-toggle { display: inline-flex; border: 2.5px solid var(--ink); border-radius: 16px; overflow: hidden; box-shadow: 2px 2px 0 var(--ink); }
-.sex-toggle button { background: var(--paper2); border: none; font: 700 13px var(--hand); padding: 3px 10px; cursor: pointer; color: var(--ink); }
+.sex-toggle { display: inline-flex; flex: none; border: 2.5px solid var(--ink); border-radius: 16px; overflow: hidden; box-shadow: 2px 2px 0 var(--ink); }
+.sex-toggle button { background: var(--paper2); border: none; font: 700 17px/1 var(--hand); padding: 4px 11px; cursor: pointer; color: var(--ink); white-space: nowrap; }
+.tb-mission { flex-wrap: nowrap; white-space: nowrap; }
+@media (max-width: 1400px) { .tb-clock { display: none; } }
+@media (max-width: 1200px) { .tb-brand small { display: none; } .tb-brand { min-width: 0; } }
 .sex-toggle button + button { border-left: 2.5px solid var(--ink); }
 .sex-toggle button.on { background: var(--acc); }
 
