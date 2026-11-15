@@ -71,7 +71,7 @@ export function createMicro({ canvas, labelsEl, scaleEl, onEdge, onFov, onTick }
       const p = pose(cur.built, cur.level, lv); range(Math.min(p.dist, camera.position.distanceTo(controls.target)));
       controls.minDistance = 0; controls.maxDistance = Infinity;
       fly = { from: camera.position.clone(), fromT: controls.target.clone(), to: p.pos, toT: p.target, t: 0, dur: 1.1, done: () => range(p.dist) };
-      cur.lv = lv; return cur;
+      cur.lv = lv; kidLabels(lv); return cur;
     }
     if (cur) {                                     // leave the old scene with a short push in (or pull out)
       const off = camera.position.clone().sub(controls.target);
@@ -96,10 +96,13 @@ export function createMicro({ canvas, labelsEl, scaleEl, onEdge, onFov, onTick }
     controls.update(); resize();
     for (const l of built.labels || []) {
       const el = document.createElement('div'); el.className = 'micro-label'; el.textContent = l.text;
-      labelsEl.appendChild(el); cur.labels.push({ p: new THREE.Vector3(...l.position), el });
+      labelsEl.appendChild(el); cur.labels.push({ p: new THREE.Vector3(...l.position), el, text: l.text, kid: null, shown: l.text });
     }
+    kidLabels(lv);
     return cur;
   }
+  // plain-words labels: a level may rename a few of the scene's labels; only those show unless Labels is on
+  function kidLabels(lv) { for (const l of cur?.labels || []) { const t = (lv.tags || []).find(([re]) => re.test(l.text)); l.kid = t ? t[1] : null; } }
   function setEnv(env) { try { cur?.built.setEnv?.(env); } catch (e) { console.warn(e); } }
   function setLabels(on) { showLabels = on; }
 
@@ -138,8 +141,9 @@ export function createMicro({ canvas, labelsEl, scaleEl, onEdge, onFov, onTick }
     const w = canvas.clientWidth, h = canvas.clientHeight;
     for (const l of cur.labels) {
       tmpA.copy(l.p).project(camera);
-      const vis = showLabels && tmpA.z < 1 && Math.abs(tmpA.x) < 1.05 && Math.abs(tmpA.y) < 1.05;
+      const vis = (showLabels || l.kid) && tmpA.z < 1 && Math.abs(tmpA.x) < 0.96 && Math.abs(tmpA.y) < 0.92;
       l.el.style.display = vis ? '' : 'none';
+      const want = showLabels ? l.text : l.kid; if (vis && want !== l.shown) { l.el.textContent = want; l.shown = want; }
       if (vis) l.el.style.transform = `translate(${((tmpA.x + 1) / 2) * w + 8}px, ${((1 - tmpA.y) / 2) * h - 9}px)`;
     }
     // true scale bar and field of view at the orbit target's depth

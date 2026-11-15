@@ -397,6 +397,8 @@ async function boot() {
     const upp = twin.unitsPerPixel(), n = niceLength(90 * upp);
     $('#scalebar i').style.width = `${n.metres / upp}px`; $('#scalebar span').textContent = `${fmtNum(n.value)} ${n.unit}`;
     setFov(twin.fieldOfView());
+    // zooming in on the astronaut past a certain point starts the dive into the chosen sensor
+    if (st.step === 0 && !busy && !fovTween && twin.fieldOfView() < 0.45) goStep(1);
   })();
   await checkLean();
   $('#ld-3').classList.add('ok'); $('#ld-num').textContent = '100';
