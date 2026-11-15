@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {validateVO,validate,ageState} from '../contract.mjs';
+const vo={value:12,unit:'nT',source:'https://example.org/measurement',tag:'live',status:'VERIFIED',as_of:'2026-01-01T00:00:00Z',note:null};
+test('live measurements require timezone-qualified measurement time',()=>{assert.deepEqual(validateVO(vo),[]);assert.ok(validateVO({...vo,as_of:null}).length);assert.ok(validateVO({...vo,as_of:'2026-01-01T00:00:00'}).length);});
+test('unknown values cannot masquerade as readings',()=>{assert.ok(validateVO({...vo,status:'NOT_STATED'}).length);assert.deepEqual(validateVO({...vo,value:null,status:'NOT_STATED'}),[]);assert.ok(validateVO({...vo,value:NaN}).length);});
+test('freshness boundary and future measurements',()=>{const now=Date.parse(vo.as_of)+30000;assert.equal(ageState(vo,30,now).stale,false);assert.equal(ageState(vo,30,now+1000).stale,true);assert.equal(ageState({...vo,as_of:'2026-01-02T00:00:00Z'},30,now).stale,true);});
+test('unprovenanced simulator scalar is rejected',()=>{const d={meta:{fixture:false,generated_at:vo.as_of,sources:[]},opm:[{tool:'test',url:'https://example.org',access:'browser',account_needed:null,models:'test',limits:'test',inputs:[],missing_inputs:[],results:[{run_at:vo.as_of,via:'pasted',outputs:{signal:12}}]}],nv:[],qd_renin:[],cqd_patch:[]};assert.ok(validate('simulators.json',d).some(x=>x.includes('require value objects')));d.opm[0].results[0].outputs.signal={...vo,tag:'simulated',as_of:null};assert.deepEqual(validate('simulators.json',d),[]);});
+test('recorded samples must align',()=>{const d={meta:{fixture:false,generated_at:vo.as_of,sources:[],dataset:'test',doi_or_url:'https://example.org',licence:'test',accessed:vo.as_of,device_type:'opm',label:'test'},x:{name:'time',unit:'s',values:[1,2]},series:[{name:'trace',unit:'pT',values:[1]}]};assert.ok(validate('recorded/test.json',d).some(x=>x.includes('unaligned')));});

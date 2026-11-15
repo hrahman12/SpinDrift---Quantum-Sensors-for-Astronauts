@@ -1,0 +1,342 @@
+[
+  {
+    "website": "https://vitruviox.vercel.app",
+    "repo": "https://github.com/Edalenp/NASA-SPACEAPPS-CHALLENGE-2026",
+    "description": "Long-duration missions expose astronauts to space radiation, isolation and confinement, altered gravity, and a hostile closed environment, which can bring immune changes, bone loss, cardiovascular eve"
+  },
+  {
+    "website": "https://github.com/miraflowwer/spaceapps-2026-crewsignal/releases/latest",
+    "repo": "https://github.com/miraflowwer/spaceapps-2026-crewsignal",
+    "description": "Offline health log for Windows and Android. Record check-ins, explore trends and export reports. NASA Space Apps 2026 research prototype."
+  },
+  {
+    "website": "https://aegis-space-med.vercel.app",
+    "repo": "https://github.com/NatNataNaty/aegis-space-app",
+    "description": "Autonomous health monitoring, diagnostic guidance, and emergency response software for astronauts on deep space missions (NASA Space Apps 2026)."
+  },
+  {
+    "website": "https://astro-med-ashy.vercel.app",
+    "repo": "https://github.com/Planet-Coders/AstroMed",
+    "description": "Astro Med is an interactive astronaut health monitoring web app built around NASA's 5 Hazards of Human Spaceflight. It helps crews track daily vitals, log ultrasound/camera diagnostics, monitor radiat"
+  },
+  {
+    "website": "https://neveleren.github.io/space-apps-2026-crew-health/",
+    "repo": "https://github.com/neveleren/space-apps-2026-crew-health",
+    "description": "Crew health monitoring for astronauts: NASA Space Apps Challenge 2026, team Just For Fun. Works offline."
+  },
+  {
+    "website": "https://tanaw-orbit.app/",
+    "repo": "https://github.com/greeklx/team-talapulse-tanaworbit",
+    "description": "Personalized astronaut health monitoring, trend analysis, and spaceflight health guidance."
+  },
+  {
+    "website": "https://space6ix-health-monitor.vercel.app",
+    "repo": "https://github.com/Shayanakbarloo/-Space6ix-Nasa-space-app-health-monitor",
+    "description": "This a competion that NASA is holding where we are building a health monitor system for astronauts "
+  },
+  {
+    "website": "https://orbital-lovat.vercel.app",
+    "repo": "https://github.com/paulinaguers/orbital",
+    "description": "ORBITAL — Your health, our mission. Astronaut health & well-being monitoring platform for space missions developed for NASA Space Apps Challenge 2026"
+  },
+  {
+    "website": "https://aniramanin.github.io/bioorbit/",
+    "repo": "https://github.com/aniramanin/bioorbit",
+    "description": "BioOrbit — offline-first health monitoring for astronauts. LIASTRA Institute & ICBS · NASA Space Apps Challenge 2026"
+  },
+  {
+    "website": "https://quantum-astronauts.github.io/pulsar/",
+    "repo": "https://github.com/quantum-astronauts/pulsar",
+    "description": "Pulsar: Crew Health Monitor. Offline astronaut health monitoring for NASA Space Apps 2026 (team Quantum Astronauts)."
+  },
+  {
+    "website": "https://habbine.github.io/synapse/",
+    "repo": "https://github.com/habbine/synapse",
+    "description": "Health-monitoring prototype for astronauts with no medical training: one screen, plain words, one next step. NASA Space Apps 2026. Synthetic data."
+  },
+  {
+    "website": "https://nasa-chi-ten.vercel.app",
+    "repo": "https://github.com/WedersonSantos/Nasa-Space-Apps---Health-Monitoring",
+    "description": "Desafio do Nasa Space Apps para criar Health Monitoring Software for Astronauts on Space Missions"
+  },
+  {
+    "website": "https://13-219-198-186.sslip.io/",
+    "repo": "https://github.com/kuriangeorgebinu/aegis-nasa-space-apps-2026",
+    "description": "AEGIS by Project Horizons: health monitoring software for astronauts. 2026 NASA Space Apps Challenge submission copy."
+  },
+  {
+    "website": "https://www.spaceappschallenge.org/2026/find-a-team/astrosoma1/?tab=details",
+    "repo": "https://github.com/Lexovian/astrosoma",
+    "description": "AstroSoma — Astronaut Bioneural & Autonomous Health Monitoring Software | NASA Space Apps Challenge 2026"
+  },
+  {
+    "website": "https://habitat-health-monitor.vercel.app",
+    "repo": "https://github.com/alefnsc/habitat-health-monitor",
+    "description": "Offline habitat health monitor for astronaut crews: real sensor nodes, a local hub that checks readings against NASA-STD-3001, and a simulated Mars link to a public ground page. NASA Space Apps Challe"
+  },
+  {
+    "website": "https://lucaspalharesbarbosa.github.io/astronaut-health-intelligence-platform/",
+    "repo": "https://github.com/lucaspalharesbarbosa/astronaut-health-intelligence-platform",
+    "description": "Real-time astronaut health monitoring and decision support with explainable personal baselines and 3D anatomy. NASA Space Apps Challenge 2026."
+  },
+  {
+    "website": "https://nabd-nasa-space-apps.vercel.app",
+    "repo": "https://github.com/malakanwarr/Nabd-NASA-Space-Apps",
+    "description": "NABD: health monitoring app for astronauts. NASA Space Apps Cairo 2026"
+  },
+  {
+    "website": "https://frontend-pearl-two-80.vercel.app",
+    "repo": "https://github.com/AnuSajikumar6264/Astra-Mind",
+    "description": "ASTRA-MIND is a prototype health monitoring platform for astronauts on long-duration space missions."
+  },
+  {
+    "website": "https://hooweisiong.github.io/aegis-crew-health/",
+    "repo": "https://github.com/hooweisiong/aegis-crew-health",
+    "description": "AEGIS - health monitoring software for astronauts on long-duration space missions (NASA Space Apps 2026). Offline-first console + wearable portal."
+  },
+  {
+    "website": "https://sol-health.vercel.app",
+    "repo": "https://github.com/AbdulrahmanHeshamEg/sol-health",
+    "description": "Sol Health: offline health monitoring for astronauts (NASA Space Apps 2026)"
+  },
+  {
+    "website": "https://astratriage.vercel.app",
+    "repo": "https://github.com/HajaraAhmad/astratriage",
+    "description": "Autonomous astronaut health monitoring & triage dashboard for Moon-to-Mars missions (NASA Space Apps 2026)"
+  },
+  {
+    "website": "https://orbital-astronaut-health-monitoring.vercel.app",
+    "repo": "https://github.com/Jishnu-JSK/orbital-astronaut-health-monitoring",
+    "description": ""
+  },
+  {
+    "website": "https://orbit-band.vercel.app/",
+    "repo": "https://github.com/Bhavith-fs/OrbitBand",
+    "description": "OrbitBand is an astronaut health-monitoring prototype for deep-space missions. It features health tracking, trend analysis, mission simulations, readiness scoring, and emergency response support. Buil"
+  },
+  {
+    "website": "https://astrohealth-neon.vercel.app",
+    "repo": "https://github.com/kaushalyadav4644/astrohealth",
+    "description": "Astronaut Health Monitoring Platform"
+  },
+  {
+    "website": "https://spacepulse-frontend.vercel.app",
+    "repo": "https://github.com/Anjana-C2007/SpacePulse",
+    "description": "Monitoring astronaut's health on-board"
+  },
+  {
+    "website": "https://spaceready.vercel.app",
+    "repo": "https://github.com/DreamConjurer3/spaceready",
+    "description": "nasa space app challange: persistent ground health monitoring tool for astronauts on a long space mission [Nov 14-15]"
+  },
+  {
+    "website": "https://www.spaceappschallenge.org",
+    "repo": "https://github.com/naughtynova69/nasa-space-apps-base-files",
+    "description": "AstroVitals - base files / team context pack for NASA Space Apps Challenge 2026 (astronaut crew health monitoring)"
+  },
+  {
+    "website": "https://team-manta.onrender.com/",
+    "repo": "https://github.com/Mahdi-hasan-shuvo/Team-Manta",
+    "description": "NASA Space Apps Challenge 2026 entry (Health Monitoring Software for Astronauts). It has a real backend: every demo on the page calls the same deterministic detector the console uses"
+  },
+  {
+    "website": "https://astronaut-health-monitor.vercel.app",
+    "repo": "https://github.com/mohammedhamada911-creator/astronaut-health-monitor",
+    "description": "Interactive astronaut health monitoring dashboard — NASA Space Apps Challenge"
+  },
+  {
+    "website": "https://aurevaapp.vercel.app/",
+    "repo": "https://github.com/Fariha9/Aureva_NASASpaceApps2026",
+    "description": "Aureva – Intelligent Astronaut Health Monitoring System | NASA Space Apps Challenge 2026"
+  },
+  {
+    "website": "https://rohini-s-286.github.io/orbital-field-medical-journal/",
+    "repo": "https://github.com/Rohini-S-286/orbital-field-medical-journal",
+    "description": "Orbital Field Medical Journal - Astronaut physiological monitoring and clinical telemetry logging PWA for NASA Space Apps 2026."
+  },
+  {
+    "website": "https://quirocode.github.io/aura-space-health-monitor/",
+    "repo": "https://github.com/quirocode/aura-space-health-monitor",
+    "description": "AURA-EIMO: Autonomous Health Monitoring & Clinical Decision Support System for Astronauts on Deep Space Missions (NASA Space Apps Challenge 2026)"
+  },
+  {
+    "website": "https://nasa-challenge-dream-team-ua-2026.vercel.app",
+    "repo": "https://github.com/Zapash0k/NASA-Challenge-Dream-Team-UA-2026",
+    "description": "Health Monitoring Software for Astronauts on Space Missions"
+  },
+  {
+    "website": "https://crew-health-monitor.vercel.app",
+    "repo": "https://github.com/AdityaK0804/Crew-Health-Monitor",
+    "description": "This is a nasa space apps challenge project that we have built to monitor astronaut health..."
+  },
+  {
+    "website": "https://astra-lac-nu.vercel.app",
+    "repo": "https://github.com/AtlasRoX/A.S.T.R.A.",
+    "description": "ASTRA: Astronaut Self-Triage & Readiness Assistant. On-board health monitoring that never waits for Earth. NASA Space Apps 2026, Team ChronoStrider."
+  },
+  {
+    "website": "https://crew-care-nasa-space-app-challenge.vercel.app",
+    "repo": "https://github.com/Muhammad-Hashir-786/CrewCare_Nasa_SpaceApp_Challenge",
+    "description": "AI-powered astronaut health monitoring and medical decision-support platform for NASA Space Apps Challenge 2026, featuring health analytics, intelligent AI assistance, and voice-guided emergency respo"
+  },
+  {
+    "website": "https://bio-matrix-eta.vercel.app",
+    "repo": "https://github.com/mundrommy/BioMatrix",
+    "description": "Astronaut health monitoring and autonomous triage, NASA Space Apps Challenge 2026"
+  },
+  {
+    "website": "https://hel-ios.vercel.app",
+    "repo": "https://github.com/aero-vitals/H.E.L.I.O.S",
+    "description": "HELIOS (Health Evaluation & Logistics Intelligence Onboard System) is an autonomous, offline-first AI-powered health monitoring and decision-support platform designed to protect astronauts during deep"
+  },
+  {
+    "website": "https://orbital-pulse-health.vercel.app",
+    "repo": "https://github.com/PortalCrown11/OrbitalPulseHealth",
+    "description": "Astronaut Health Monitoring Software for Space Missions"
+  },
+  {
+    "website": "https://space-health-monitor.vercel.app",
+    "repo": "https://github.com/bzilanbagci/space-health-monitor",
+    "description": "Interactive astronaut health monitoring & gamification app for long-duration space missions. Tracks vitals, NASA's 5 Hazards, and cellular immunity via canvas microscopy—built with zero dependencies i"
+  },
+  {
+    "website": "https://borgil0926.github.io/astropulse-health-monitor/",
+    "repo": "https://github.com/borgil0926/astropulse-health-monitor",
+    "description": "AstroPulse: offline AI doctor + health monitoring for astronauts. Answers 'can this wait for Earth?' with no internet. NASA Space Apps 2026."
+  },
+  {
+    "website": "https://aeromedpack.netlify.app/",
+    "repo": "https://github.com/doganselvi/AeroMedPack",
+    "description": "Offline-first biological black box and predictive astronaut health monitoring system for deep space missions"
+  },
+  {
+    "website": "https://abdelrahmankhalawy.github.io/task-tree/",
+    "repo": "https://github.com/abdelrahmanKhalawy/space-apps-2026",
+    "description": "Space Monkeys 🚀 · NASA Space Apps Cairo 2026 · Astronaut health monitoring"
+  },
+  {
+    "website": "https://healthsignal.space",
+    "repo": "https://github.com/kaljuste/health-signal",
+    "description": "Crew health on Mars, without waiting for Earth. Health monitoring, built-in limits and a voice assistant on a simulated Mars mission built from real data. NASA Space Apps Challenge 2026."
+  },
+  {
+    "website": "https://vitalisx.vercel.app",
+    "repo": "https://github.com/Azharelly/VitalisX",
+    "description": "VitalisX is an offline-first health copilot for crews on long-duration space missions. It learns each astronaut’s personal baseline, flags meaningful deviations across heart, sleep, bones, immune, met"
+  },
+  {
+    "website": "https://mission-tradeoff.vercel.app",
+    "repo": "https://github.com/califastudio/mission-tradeoff",
+    "description": "NASA Space Apps 2026 - Interactive space mission design game. Balance engineering, environment and crew health."
+  },
+  {
+    "website": "https://veenasahithi2004.github.io/orbit-health-astronaut-monitor/",
+    "repo": "https://github.com/veenasahithi2004/orbit-health-astronaut-monitor",
+    "description": "A crew wellness dashboard prototype for long-duration space missions"
+  },
+  {
+    "website": "https://carlosjcd.github.io/orbit/",
+    "repo": "https://github.com/CarlosJCD/orbit",
+    "description": "Offline-first, preventive biopsychosocial health self-assessment for astronauts. NASA Space Apps Challenge 2026 prototype."
+  },
+  {
+    "website": "https://louislanganay.github.io/astro-vitals/",
+    "repo": "https://github.com/LouisLanganay/astro-vitals",
+    "description": "NASA Space Apps 2026, Coflop: astronaut health self-check tablet"
+  },
+  {
+    "website": "https://haoma-mu.vercel.app",
+    "repo": "https://github.com/shahyari/haoma",
+    "description": "Astronaut health self-assessment prototype — NASA Space Apps Challenge 2026"
+  },
+  {
+    "website": "https://mission-health-bug-busters.vercel.app/",
+    "repo": "https://github.com/denzasikora-lab/mission-health",
+    "description": "Health dashboard, diary and AI chat for astronauts. Bug Busters / NASA Space Apps."
+  },
+  {
+    "website": "https://second-opinion-ruddy.vercel.app",
+    "repo": "https://github.com/shauryalowkeygotaura/second-opinion",
+    "description": "Voice-guided peer health exam for astronaut crews. NASA Space Apps 2026, Delhi, Team Vortexx."
+  },
+  {
+    "website": "https://vista-health.vercel.app",
+    "repo": "https://github.com/Ulugbek-netizen/vista",
+    "description": "Vista: astronaut health self-checks with NASA data. Team Void Voyagers, NASA Space Apps Challenge 2026."
+  },
+  {
+    "website": "https://astrovitals-ten.vercel.app",
+    "repo": "https://github.com/villano14/astrovitals",
+    "description": "Offline-first health self-assessment for astronauts on long-duration missions — NASA Space Apps Challenge 2026. Decision-support prototype, not a medical device."
+  },
+  {
+    "website": "https://replit.com/@ntD3F4ult/CrewCheck",
+    "repo": "https://github.com/Vexx-xl/Pulse-Beyond",
+    "description": "Astronaut health reporting and crew handoff prototype for NASA Space Apps 2026"
+  },
+  {
+    "website": "https://cheese-os.vercel.app",
+    "repo": "https://github.com/isabelacode/cheeseOS",
+    "description": "CheeseOS: a health assistant for astronauts, developed for the 2026 NASA Space Apps Challenge. It features an interactive 3D body model, allowing astronauts to report symptoms via voice and receive im"
+  },
+  {
+    "website": "http://nasa.yssn.tech/",
+    "repo": "https://github.com/Yass5002/space-apps-2026",
+    "description": "On-board health assistant for long-duration space missions, with a simulated Mars EVA visor demonstration. NASA Space Apps Challenge entry by Team Arasaka Corp. Simulated data; not a medical device."
+  },
+  {
+    "website": "https://nabu-lyra.vercel.app",
+    "repo": "https://github.com/stefancretu577-cell/nabu",
+    "description": "A cozy space-habitat game about astronaut health — NASA Space Apps 2026"
+  },
+  {
+    "website": "https://nasa-space-apps-challenge2026-web.vercel.app",
+    "repo": "https://github.com/zaclehmann/NasaSpaceApps_Challenge2026",
+    "description": "MissionVitals: crew health monitoring for NASA Space Apps Challenge 2026"
+  },
+  {
+    "website": "https://moai-pl.github.io/NASASpaceApps-MoAI/",
+    "repo": "https://github.com/MoAI-PL/NASASpaceApps-MoAI",
+    "description": "Astrobalance — personal-baseline health monitoring for deep-space crews (NASA Space Apps 2026)"
+  },
+  {
+    "website": "https://paulburgeth.github.io/crewcheck/",
+    "repo": "https://github.com/PaulBurgEth/crewcheck",
+    "description": "CrewCheck: crew health when Earth is far away. Onboard health monitor for space crews: rules decide, forecast warns, AI advises. NASA Space Apps 2026 prototype, synthetic data."
+  },
+  {
+    "website": "https://prohor-rho.vercel.app",
+    "repo": "https://github.com/tufayelahmedsuhagcc-dotcom/prohor",
+    "description": "PROHOR — an offline-capable, non-diagnostic mission health workspace for astronauts: personal baselines, traceable NASA evidence, and a structured handover for human review."
+  },
+  {
+    "website": "https://siddhanthvulupala-arch.github.io/Neuro-Vitals/",
+    "repo": "https://github.com/siddhanthvulupala-arch/Neuro-Vitals",
+    "description": "Autonomous deep-space astronaut health telemetry & BCI clinical command console grounded in NASA-STD-3001 and OSDR benchmarks (NASA Space Apps 2026)."
+  },
+  {
+    "website": "https://nsac-hexacura.vercel.app",
+    "repo": "https://github.com/johnaldrinsamraj/NSAC-HEXACURA",
+    "description": "ASTRA is an AI-powered astronaut health intelligence platform for long-duration space missions. It combines personalized anomaly detection, behavioral wellness tracking, a 3D digital twin, space envir"
+  },
+  {
+    "website": "https://404problemfound.vercel.app",
+    "repo": "https://github.com/Bhakti-Ruparel/Astronaut-Health-Problems",
+    "description": ""
+  },
+  {
+    "website": "https://bekur-aegis-spacehealth.vercel.app",
+    "repo": "https://github.com/melkamuatalel/bekur-aegis-spacehealth",
+    "description": "Autonomous Deep-Space Health Intelligence & 72-Hour Prognostic Digital Twin for Astronauts | NASA Space Apps Challenge 2026"
+  },
+  {
+    "website": "https://sidra-space-bio-medical-companion.ai.studio/",
+    "repo": "https://github.com/Israa963/Sidra-space-bio-medical",
+    "description": "sidra-spacebiomedical AI Assistant for Astronaut Health "
+  },
+  {
+    "website": "https://jaigod.github.io/lunar-crew-monitor/",
+    "repo": "https://github.com/JaiGod/lunar-crew-monitor",
+    "description": "SELENE: AI health companion for astronauts on the Moon. NASA HUNCH Project ARES (SIM-07)"
+  }
+]

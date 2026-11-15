@@ -1,0 +1,7 @@
+export async function mountReferences(){
+ const host=document.createElement('details');host.className='audit references';host.innerHTML='<summary>Reference projects from your CSV</summary><p>Project descriptions are supplied by the CSV and are not independently verified hardware or live-feed claims. Reference assets are reused only under their stated licences.</p><label>Find a reference project<input type="search" id="reference-search" placeholder="Anatomy, habitat, offline…"></label><div id="reference-results"></div>';
+ document.querySelector('.audit').before(host);
+ const data=await (await fetch('./research/competitor-websites.json')).json();
+ const render=q=>{const results=host.querySelector('#reference-results');results.replaceChildren();for(const entry of data.filter(x=>(x.website+' '+x.description).toLowerCase().includes(q.toLowerCase()))){const article=document.createElement('article'),title=document.createElement('a'),repo=document.createElement('a'),description=document.createElement('p');article.className='directory-card';title.href=entry.website;title.textContent=new URL(entry.website).hostname;repo.href=entry.repo;repo.textContent='Source repository ↗';for(const a of [title,repo]){a.target='_blank';a.rel='noopener noreferrer';}description.textContent=entry.description||'No description supplied';article.append(title,description,repo);results.append(article);}};
+ host.querySelector('input').oninput=e=>render(e.target.value);render('');
+}

@@ -1,0 +1,15 @@
+{
+  "serverUrl": "http://localhost:8001",
+  "dataUrl": "/data",
+  "pollMs": 5000,
+  "requestTimeoutMs": 8000,
+  "staleSeconds": {
+    "iss": 30,
+    "l1": 900,
+    "iss_cabin": 600,
+    "swarm_asm": 86400,
+    "sensor": 30
+  },
+  "sensorLivePath": "/api/sensors/live",
+  "sensorMaxAgeSeconds": 30
+}
