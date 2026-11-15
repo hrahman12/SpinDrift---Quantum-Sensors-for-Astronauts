@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "fixture": true,
+    "generated_at": "2026-11-15T07:23:28Z",
+    "sources": []
+  },
+  "opm": {},
+  "nv": {
+    "headline": {},
+    "jgu": {},
+    "zaquant": {},
+    "qant": {}
+  },
+  "qd_renin": {},
+  "cqd_patch": {},
+  "space_heritage": {
+    "oscar_qube": {},
+    "swarm_asm": {}
+  }
+}

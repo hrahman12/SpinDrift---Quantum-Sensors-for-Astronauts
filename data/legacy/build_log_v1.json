@@ -1,0 +1,30 @@
+{
+  "runs": [
+    {
+      "run_id": "run-1",
+      "ran_at": "2026-11-15T04:49:19+00:00",
+      "entries": [
+        {
+          "fact": "Field clash: OPM +/-5 nT range vs NV bias ~1 mT",
+          "value": {
+            "value": 200000,
+            "unit": "x ratio (1 mT / 5 nT)",
+            "source": "calculated from specs.json",
+            "tag": "calculated",
+            "status": "VERIFIED"
+          }
+        },
+        {
+          "fact": "Live solar-wind |B| at L1 (latest sample)",
+          "value": {
+            "value": 2.66,
+            "unit": "nT",
+            "source": "data/live_ambient.json (NOAA SWPC RTSW)",
+            "tag": "live",
+            "status": "VERIFIED"
+          }
+        }
+      ]
+    }
+  ]
+}

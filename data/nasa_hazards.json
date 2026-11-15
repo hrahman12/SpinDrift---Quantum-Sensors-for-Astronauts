@@ -1,0 +1,175 @@
+{
+  "sources": {
+    "nasa_hazards": {
+      "url": "https://www.nasa.gov/hrp/hazards/",
+      "updated": "2026-06-12"
+    },
+    "nasa_risks": {
+      "url": "https://www.nasa.gov/hrp/risks/",
+      "updated": "2026-07-21"
+    },
+    "nasa_research": {
+      "url": "https://www.nasa.gov/hrp/ongoing-hrp-research/",
+      "updated": "2026-08-18"
+    },
+    "csa_radiation": {
+      "url": "https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp",
+      "updated": "2026-02-26"
+    },
+    "csa_why_science": {
+      "url": "https://www.asc-csa.gc.ca/eng/iss/science/why-do-we-conduct-science-experiments-in-space.asp",
+      "updated": "2025-10-28"
+    }
+  },
+  "hazards": [
+    {
+      "id": "space_radiation",
+      "name": "Space Radiation",
+      "detail": "Radiation exposure during spaceflight.",
+      "source": "nasa_hazards"
+    },
+    {
+      "id": "isolation_confinement",
+      "name": "Isolation and Confinement",
+      "detail": "Behavioral responses in small groups over long periods.",
+      "source": "nasa_hazards"
+    },
+    {
+      "id": "distance_from_earth",
+      "name": "Distance from Earth",
+      "detail": "Resupply, supplies and medical care get harder to receive as distance grows.",
+      "source": "nasa_hazards"
+    },
+    {
+      "id": "gravity_fields",
+      "name": "Gravity Fields",
+      "detail": "Muscles, bones, inner ear and organs adapt to changing gravity.",
+      "source": "nasa_hazards"
+    },
+    {
+      "id": "hostile_closed_env",
+      "name": "Hostile / Closed Environments",
+      "detail": "Temperature, pressure, lighting, noise, microbes and immune responses.",
+      "source": "nasa_hazards"
+    }
+  ],
+  "hazard_facts": [
+    {
+      "fact": "Mars is on average 140 million miles from Earth.",
+      "source": "nasa_hazards"
+    },
+    {
+      "fact": "A Mars trip would take roughly three years, versus a three-day lunar trip.",
+      "source": "nasa_hazards"
+    },
+    {
+      "fact": "On Mars, astronauts would live in three-eighths of Earth's gravity for up to two years.",
+      "source": "nasa_hazards"
+    }
+  ],
+  "risks": {
+    "human_physiology": [
+      "Altered Immune System Responses",
+      "Altered Sensorimotor and Vestibular Function",
+      "Cardiovascular Adaptations",
+      "Decompression Sickness",
+      "Host-Microorganism Interactions",
+      "Hypoxia",
+      "Inadequate Food and Nutrition",
+      "Injury and Compromised Performance from Spacewalks",
+      "Reduced Cardiorespiratory and Musculoskeletal Fitness",
+      "Spaceflight Associated Neuro-ocular Syndrome (SANS)",
+      "Spaceflight-Induced Bone Changes"
+    ],
+    "behavioral_performance_human_factors": [
+      "Behavioral Changes and Psychiatric Disorders",
+      "Inadequate Teamwork",
+      "Inadequate Sleep and Irregular Schedules",
+      "Inadequate Systems Operations Support",
+      "Injury from Dynamic Loads"
+    ],
+    "space_radiation": [
+      "Radiation-Induced Cancers"
+    ],
+    "source": "nasa_risks",
+    "notes": [
+      "NASA's page caption calls Visual Impairment Intracranial Pressure (VIIP) Syndrome 'currently NASA's leading spaceflight-related health risk' (identified 2005)."
+    ]
+  },
+  "research": {
+    "artemis_ii": [
+      "ARCHeR (well-being, activity, sleep)",
+      "Immune Biomarkers (blood and saliva)",
+      "Artemis II Standard Measures (shared health data bank)"
+    ],
+    "low_earth_orbit": [
+      "B-Complex (daily B vitamin for brain and eye changes)",
+      "Brain Fluid Pressure",
+      "CIPHER (multi-body-system studies)",
+      "Simulating Manual Piloting for Moon Landings",
+      "Spacecraft Occupant Protection (re-entry discomfort and sensor data)",
+      "Spinal Fluid Biomarkers",
+      "Standard Measures",
+      "Thigh Cuff (fluid in legs and eye disorders)",
+      "Venous Haemostasis",
+      "Zero T2 (exercise without a treadmill)"
+    ],
+    "past_investigations": [
+      "Altered Immunity",
+      "Food Acceptability",
+      "Food Physiology",
+      "Omics Archive",
+      "Space Gardening (isolation)",
+      "Spinal Health",
+      "Tempus Pro (telemedicine device)",
+      "Veggie Monitoring (microbes on crop hardware)"
+    ],
+    "notes": [
+      "VEG-04 botany study harvested plants after 28 days of growth (photo caption)."
+    ],
+    "source": "nasa_research"
+  },
+  "csa": {
+    "neutron_radiation": {
+      "finding": "Neutron radiation contributes about 30% of total radiation on the ISS and is described as especially harmful because it can cause serious biological damage.",
+      "instrument": "CANS (Canadian Active Neutron Spectrometer), a compact autonomous neutron instrument",
+      "contract": "CSA contract of $5.5 million to Bubble Technology Industries for CANS development",
+      "predecessors": [
+        "bubble detectors",
+        "MOSFET",
+        "EVARM",
+        "Radi-N",
+        "Radi-N2"
+      ],
+      "earth_applications": [
+        "cancer therapy",
+        "aircrew radiation protection",
+        "nuclear threat detection",
+        "public safety"
+      ],
+      "source": "csa_radiation"
+    },
+    "iss_science": {
+      "purpose": [
+        "Prepare for deep-space destinations: identify, characterize and mitigate effects on astronaut health",
+        "Improve quality of life on Earth"
+      ],
+      "moon_mars_risks": [
+        "more weightlessness",
+        "more radiation exposure",
+        "longer isolation",
+        "communication delays",
+        "less reliance on Earth for food, materials and emergency medical help"
+      ],
+      "earth_benefits": [
+        "balance problems (such as in seniors)",
+        "osteoporosis",
+        "cardiovascular disorders",
+        "Type-2 diabetes"
+      ],
+      "experiments_on_iss_at_any_time": 200,
+      "note": "Six months in space gives data that would take years to gather on Earth.",
+      "source": "csa_why_science"
+    }
+  }
+}

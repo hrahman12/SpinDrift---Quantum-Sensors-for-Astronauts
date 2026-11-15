@@ -1,0 +1,201 @@
+{
+  "meta": {
+    "fixture": true,
+    "generated_at": "2026-11-15T07:23:28Z",
+    "sources": []
+  },
+  "recorded_id": "opm_heart_kiel",
+  "channel": "",
+  "averaged_beat": {
+    "t_s": [],
+    "pT": [],
+    "beats_averaged": {
+      "value": null,
+      "unit": "beats",
+      "source": "fixture",
+      "tag": "calculated",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "fixture: not yet built"
+    },
+    "r_peak_pT": {
+      "value": null,
+      "unit": "pT",
+      "source": "fixture",
+      "tag": "calculated",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "fixture: not yet built"
+    }
+  },
+  "per_build": {
+    "jgu": {
+      "noise_density": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "single_beat_noise_pT": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_noise_pT": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "single_beat_snr": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_snr": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_snr_measured_peak": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      }
+    },
+    "zaquant": {
+      "noise_density": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "single_beat_noise_pT": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_noise_pT": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "single_beat_snr": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_snr": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_snr_measured_peak": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      }
+    },
+    "qant": {
+      "noise_density": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "single_beat_noise_pT": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_noise_pT": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "single_beat_snr": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_snr": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "averaged_snr_measured_peak": {
+        "value": null,
+        "unit": "",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      }
+    }
+  }
+}

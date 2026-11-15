@@ -1,0 +1,56 @@
+{
+  "status": "PARTIAL — heart values from OSD-580; REN and AGTR1 absent from table",
+  "sensor": "finger_nv",
+  "source": "NASA OSDR OSD-580 (heart) and OSD-352 (brain)",
+  "genes": {
+    "heart": {
+      "ACE": {
+        "log2fc": 0.253,
+        "padj": 0.616
+      },
+      "ACE2": {
+        "log2fc": -0.672,
+        "padj": 0.0214
+      },
+      "AGT": {
+        "log2fc": -0.564,
+        "padj": 0.216
+      },
+      "REN": null,
+      "AGTR1": null,
+      "AGTR2": {
+        "log2fc": 0.348,
+        "padj": 0.888
+      },
+      "MAS1": {
+        "log2fc": 0.918,
+        "padj": 0.0934
+      }
+    },
+    "brain": {
+      "ACE": {
+        "log2fc": 0.268,
+        "padj": 1.0
+      },
+      "ACE2": {
+        "log2fc": 0.02,
+        "padj": 1.0
+      },
+      "AGT": {
+        "log2fc": 1.467,
+        "padj": 1.0
+      },
+      "REN": null,
+      "AGTR1": null,
+      "AGTR2": {
+        "log2fc": -1.47,
+        "padj": 1.0
+      },
+      "MAS1": {
+        "log2fc": -0.516,
+        "padj": 1.0
+      }
+    }
+  },
+  "published_astronaut_values": "NOT INCLUDED — renin 4.88x, plasma volume -12%, RNFL +8.5% and choroid +2.8% from the spec are unverified; add only with a checked citation."
+}

@@ -1,0 +1,41 @@
+{
+  "heart_opm": {
+    "device": "QuSpin QZFM OPM",
+    "atom": "87Rb vapor cell",
+    "noise_fT_rtHz": 15,
+    "alt": "NV-diamond cardiac magnetometer, 6–26 pT/√Hz (arXiv 2601.18843)",
+    "cardiac_field_pT": "50–100",
+    "gamma_Hz_per_nT": 7,
+    "sources": [
+      "QuSpin QZFM datasheet",
+      "Sci Rep 2021;11:5564"
+    ]
+  },
+  "brain_meg": {
+    "device": "OPM-MEG helmet",
+    "channels": "49–128",
+    "sensor_head_mm": "12 × 16.5 × 22.5",
+    "noise_fT_rtHz": 7,
+    "bandwidth_Hz": 130,
+    "power_W": {
+      "head": 0.7,
+      "total_per_sensor": 3.5
+    },
+    "neural_field_fT": 100,
+    "sources": [
+      "He et al., IEEE TBME 2026, DOI 10.1109/TBME.2026.3724753 (VERIFIED, PMID 42606964)",
+      "Hill et al. NeuroImage 2020 (not checked)"
+    ]
+  },
+  "finger_nv": {
+    "device": "NV-diamond T1 relaxometry",
+    "D_GHz": 2.87,
+    "excitation_nm": 532,
+    "readout_nm": "637–800",
+    "ros_sensitivity_M_rtHz": 5.3e-13,
+    "sources": [
+      "Ninio et al. ACS Nano 2021",
+      "Wu et al. (cardiomyocytes)"
+    ]
+  }
+}

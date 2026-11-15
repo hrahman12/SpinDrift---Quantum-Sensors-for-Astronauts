@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "fixture": true,
+    "generated_at": "2026-11-15T07:23:28Z",
+    "sources": []
+  },
+  "iss": {
+    "rows": []
+  },
+  "gateway": {
+    "rows": []
+  },
+  "lunar_base": {
+    "rows": []
+  },
+  "mars_transit": {
+    "rows": []
+  },
+  "mars_surface": {
+    "rows": []
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "checked": "2026-11-15T04:53:53Z",
+  "datasets": [
+    {
+      "name": "Kiel Cardio Database v1.0.0 (PhysioNet)",
+      "url": "https://physionet.org/content/kiel-cardio/1.0.0/",
+      "doi": "10.13026/q6r2-zz68",
+      "size": "6.8 GB uncompressed (per PhysioNet page)",
+      "licence": "CC BY-SA 4.0 (per brief; verify on page)",
+      "status": "size checked, not downloaded"
+    },
+    {
+      "name": "Zenodo 24005272 OPM-MEG interference",
+      "url": "https://zenodo.org/records/24005272",
+      "size": "3284.6 MB total (Participant 1884.8 MB, Phantom 1399.5 MB, Calibration 0.4 MB)",
+      "status": "size checked, not downloaded"
+    },
+    {
+      "name": "Zenodo 10629041",
+      "url": "https://zenodo.org/records/10629041",
+      "size": "0.2 MB total",
+      "status": "size checked, not downloaded",
+      "note": "Title is 'Determining Strain Components in a Diamond Waveguide...', not the 47-position ODMR set the brief describes. Check before use."
+    }
+  ]
+}

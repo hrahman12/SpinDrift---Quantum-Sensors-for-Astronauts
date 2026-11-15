@@ -1,0 +1,137 @@
+{
+  "opm": {
+    "sensitivity_dual_axis": {
+      "value": 15,
+      "unit": "fT/rtHz (3-100 Hz)",
+      "source": "QuSpin QZFM Gen-3 spec, quspin.com/products-qzfm (as given in brief; not re-checked)",
+      "tag": "datasheet",
+      "status": "TO_CONFIRM"
+    },
+    "sensitivity_triaxial": {
+      "value": 23,
+      "unit": "fT/rtHz (3-100 Hz)",
+      "source": "QuSpin QZFM Gen-3 spec, quspin.com/products-qzfm (as given in brief; not re-checked)",
+      "tag": "datasheet",
+      "status": "TO_CONFIRM"
+    },
+    "dynamic_range": {
+      "value": 5,
+      "unit": "nT (+/-)",
+      "source": "QuSpin QZFM Gen-3 spec, quspin.com/products-qzfm (as given in brief; not re-checked)",
+      "tag": "datasheet",
+      "status": "TO_CONFIRM"
+    },
+    "head_size": {
+      "value": "12.4 x 16.6 x 24.4",
+      "unit": "mm",
+      "source": "QuSpin QZFM Gen-3 spec, quspin.com/products-qzfm (as given in brief; not re-checked)",
+      "tag": "datasheet",
+      "status": "TO_CONFIRM"
+    },
+    "head_power": {
+      "value": 0.7,
+      "unit": "W",
+      "source": "QuSpin QZFM Gen-3 spec, quspin.com/products-qzfm (as given in brief; not re-checked)",
+      "tag": "datasheet",
+      "status": "TO_CONFIRM"
+    },
+    "total_power": {
+      "value": 5,
+      "unit": "W",
+      "source": "HSE listing of QuSpin spec (as given in brief)",
+      "tag": "datasheet",
+      "status": "TO_CONFIRM"
+    },
+    "latency": {
+      "value": 5,
+      "unit": "ms",
+      "source": "QuSpin QZFM Gen-3 spec, quspin.com/products-qzfm (as given in brief; not re-checked)",
+      "tag": "datasheet",
+      "status": "TO_CONFIRM"
+    },
+    "cooling": {
+      "value": "none, room temperature",
+      "unit": "",
+      "source": "QuSpin QZFM Gen-3 spec, quspin.com/products-qzfm (as given in brief; not re-checked)",
+      "tag": "datasheet",
+      "status": "TO_CONFIRM"
+    }
+  },
+  "nv": {
+    "jgu": {
+      "diamond": {
+        "value": "0.5 x 0.5 x 0.18 (truncated pyramid)",
+        "unit": "mm",
+        "source": "arXiv 2601.18843 (as given in brief)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM"
+      },
+      "headline_noise": {
+        "value": "6-26",
+        "unit": "pT/rtHz",
+        "source": "arXiv 2601.18843 abstract (verified title/date only)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM"
+      }
+    },
+    "zaquant": {
+      "diamond": {
+        "value": "0.5 x 0.5 x 0.5",
+        "unit": "mm",
+        "source": "arXiv 2601.18843 (as given in brief)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM"
+      }
+    },
+    "qant": {
+      "diamond": {
+        "value": "1 x 1 x 0.5",
+        "unit": "mm",
+        "source": "arXiv 2601.18843 (as given in brief)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM"
+      }
+    },
+    "headline": {
+      "sensing_volume": {
+        "value": "<0.5",
+        "unit": "mm^3",
+        "source": "arXiv 2601.18843 (as given in brief)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM"
+      }
+    }
+  },
+  "qd_renin": {
+    "detection_limit": {
+      "value": 25,
+      "unit": "pM",
+      "source": "Long et al., Anal Chem 84(20):8846, doi:10.1021/ac302284s (as given in brief)",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM"
+    },
+    "readout": {
+      "value": "TIRF single-molecule counting",
+      "unit": "",
+      "source": "same",
+      "tag": "published_spec",
+      "status": "VERIFIED"
+    }
+  },
+  "cqd_patch": {
+    "reader": {
+      "value": "IoT optoelectronic reader",
+      "unit": "",
+      "source": "Tabatabaee et al., ACS Nano 2024, doi:10.1021/acsnano.4c06191",
+      "tag": "published_spec",
+      "status": "VERIFIED"
+    },
+    "needle_dimensions": {
+      "value": null,
+      "unit": "",
+      "source": "NOT YET EXTRACTED (full text needed)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED"
+    }
+  }
+}

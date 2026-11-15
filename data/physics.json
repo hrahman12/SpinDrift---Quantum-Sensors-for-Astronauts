@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "fixture": true,
+    "generated_at": "2026-11-15T07:23:28Z",
+    "sources": []
+  },
+  "nv_odmr_lines": {
+    "plotted": false,
+    "x": [],
+    "y": [],
+    "x_label": "",
+    "y_label": "",
+    "equation": "",
+    "inputs": [],
+    "missing_inputs": []
+  },
+  "opm_zero_field": {
+    "plotted": false,
+    "x": [],
+    "y": [],
+    "x_label": "",
+    "y_label": "",
+    "equation": "",
+    "inputs": [],
+    "missing_inputs": []
+  },
+  "qd_fret_vs_distance": {
+    "plotted": false,
+    "x": [],
+    "y": [],
+    "x_label": "",
+    "y_label": "",
+    "equation": "",
+    "inputs": [],
+    "missing_inputs": []
+  },
+  "cqd_quenching": {
+    "plotted": false,
+    "x": [],
+    "y": [],
+    "x_label": "",
+    "y_label": "",
+    "equation": "",
+    "inputs": [],
+    "missing_inputs": []
+  }
+}

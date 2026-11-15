@@ -5,3 +5,12 @@ node_modules/
 !.env.example
 
 .vercel
+# secrets: tokens and API keys come from environment variables only (VIRES_TOKEN etc.)
+*.token
+secrets*
+.viresclient.ini
+# local caches and raw downloads (never committed)
+cache/
+__pycache__/
+*.pyc
+*.tmp

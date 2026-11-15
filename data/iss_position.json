@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "accessed": "2026-11-15T04:49:12+00:00",
+    "tag": "live",
+    "fixture": false,
+    "source": "wheretheiss.at ISS position",
+    "url": "https://api.wheretheiss.at/v1/satellites/25544",
+    "field_model": "NOT YET (IGRF step pending)"
+  },
+  "samples": [
+    {
+      "t": 1794718153,
+      "lat": -22.814156026078,
+      "lon": 126.84535862365,
+      "alt_km": 422.11417083897
+    }
+  ]
+}

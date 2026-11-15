@@ -1,0 +1,50 @@
+[
+  {
+    "location": "Earth surface",
+    "field_uT": 50,
+    "opm_fT": 15,
+    "gain": "1x"
+  },
+  {
+    "location": "ISS (LEO)",
+    "field_uT": 50,
+    "opm_fT": 15,
+    "gain": "1x"
+  },
+  {
+    "location": "Europa",
+    "field_uT": 0.4,
+    "opm_fT": 50,
+    "gain": "illustrative; limited by shielding and radiation, not field"
+  },
+  {
+    "location": "Moon surface",
+    "field_uT": 0.0003,
+    "opm_fT": 1.5,
+    "gain": "illustrative 10x"
+  },
+  {
+    "location": "Lunar Gateway",
+    "field_uT": 0.1,
+    "opm_fT": 1.5,
+    "gain": "illustrative 10x"
+  },
+  {
+    "location": "Mars surface",
+    "field_uT": 0.05,
+    "opm_fT": 1,
+    "gain": "illustrative 15x"
+  },
+  {
+    "location": "Mars transit",
+    "field_uT": 0.005,
+    "opm_fT": 0.1,
+    "gain": "illustrative 150x"
+  },
+  {
+    "location": "Interstellar",
+    "field_uT": 0.0005,
+    "opm_fT": 0.01,
+    "gain": "illustrative 1500x"
+  }
+]

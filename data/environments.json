@@ -1,0 +1,331 @@
+[
+  {
+    "id": "iss",
+    "era": "today",
+    "name": "International Space Station",
+    "type": "station",
+    "orbit": "LEO ~408 km",
+    "field_uT": 50,
+    "g": 0.0,
+    "comms_s": 0.13,
+    "crew": 7,
+    "risk": "Radiation, bone and muscle loss, fluid shift, SANS",
+    "nasa_hazards": [
+      "space_radiation",
+      "gravity_fields",
+      "hostile_closed_env"
+    ],
+    "heart_opm": {
+      "mode": "scalar",
+      "sensitivity_fT": 15,
+      "shielding_required": true,
+      "status": "OPERATIONAL — EARTH-LIMITED"
+    },
+    "brain_meg": {
+      "mode": "scalar",
+      "sensitivity_fT": 7,
+      "shielding_required": true,
+      "status": "OPERATIONAL — REQUIRES PORTABLE SHIELD"
+    },
+    "finger_nv": {
+      "mode": "standard",
+      "status": "OPERATIONAL — BASELINE"
+    }
+  },
+  {
+    "id": "tiangong",
+    "era": "today",
+    "name": "Tiangong Space Station",
+    "type": "station",
+    "orbit": "LEO ~389 km",
+    "field_uT": 50,
+    "g": 0.0,
+    "comms_s": 0.13,
+    "crew": 3,
+    "risk": "Same LEO profile as ISS",
+    "nasa_hazards": [
+      "space_radiation",
+      "gravity_fields"
+    ],
+    "heart_opm": {
+      "mode": "scalar",
+      "sensitivity_fT": 15,
+      "shielding_required": true,
+      "status": "OPERATIONAL — EARTH-LIMITED"
+    },
+    "brain_meg": {
+      "mode": "scalar",
+      "sensitivity_fT": 7,
+      "shielding_required": true,
+      "status": "OPERATIONAL — REQUIRES PORTABLE SHIELD"
+    },
+    "finger_nv": {
+      "mode": "standard",
+      "status": "OPERATIONAL — BASELINE"
+    }
+  },
+  {
+    "id": "crew_dragon",
+    "era": "today",
+    "name": "SpaceX Crew Dragon",
+    "type": "capsule",
+    "orbit": "LEO to ~1400 km (Polaris Dawn)",
+    "field_uT": 50,
+    "g": 0.0,
+    "comms_s": 0.13,
+    "crew": 4,
+    "risk": "Motion sickness, short duration, higher radiation at ~1400 km",
+    "nasa_hazards": [
+      "space_radiation"
+    ],
+    "heart_opm": {
+      "mode": "scalar",
+      "sensitivity_fT": 15,
+      "shielding_required": true,
+      "status": "OPERATIONAL — EARTH-LIMITED"
+    },
+    "brain_meg": {
+      "mode": "scalar",
+      "sensitivity_fT": 7,
+      "shielding_required": true,
+      "status": "OPERATIONAL — COMPACT CONFIG ONLY"
+    },
+    "finger_nv": {
+      "mode": "standard",
+      "status": "OPERATIONAL — BASELINE"
+    }
+  },
+  {
+    "id": "orion",
+    "era": "today",
+    "name": "Orion / Artemis",
+    "type": "capsule",
+    "orbit": "Cislunar / NRHO",
+    "field_uT": 0.2,
+    "g": 0.0,
+    "comms_s": 1.3,
+    "crew": 4,
+    "risk": "Deep-space radiation, isolation",
+    "nasa_hazards": [
+      "space_radiation",
+      "isolation_confinement",
+      "distance_from_earth"
+    ],
+    "heart_opm": {
+      "mode": "near-SERF",
+      "sensitivity_fT": 2,
+      "shielding_required": false,
+      "status": "ENHANCED — APPROACHING SERF"
+    },
+    "brain_meg": {
+      "mode": "near-SERF",
+      "sensitivity_fT": 1.5,
+      "shielding_required": false,
+      "status": "ENHANCED — SHIELDING OPTIONAL"
+    },
+    "finger_nv": {
+      "mode": "shifted",
+      "status": "CALIBRATING — NOVEL REGIME"
+    }
+  },
+  {
+    "id": "gateway",
+    "era": "today",
+    "name": "Lunar Gateway",
+    "type": "station",
+    "orbit": "NRHO around Moon",
+    "field_uT": 0.1,
+    "g": 0.0,
+    "comms_s": 1.3,
+    "crew": 4,
+    "risk": "Radiation outside magnetosphere, limited supplies",
+    "nasa_hazards": [
+      "space_radiation",
+      "distance_from_earth"
+    ],
+    "note": "UNDER CONSTRUCTION — planned 2028+",
+    "heart_opm": {
+      "mode": "near-SERF",
+      "sensitivity_fT": 1.5,
+      "shielding_required": false,
+      "status": "ENHANCED — NEAR-SERF ACTIVE"
+    },
+    "brain_meg": {
+      "mode": "near-SERF",
+      "sensitivity_fT": 1,
+      "shielding_required": false,
+      "status": "ENHANCED — NO SHIELDING NEEDED"
+    },
+    "finger_nv": {
+      "mode": "shifted",
+      "status": "SHIFTED BASELINE — ENHANCED"
+    }
+  },
+  {
+    "id": "lunar_base",
+    "era": "tomorrow",
+    "name": "Artemis Base Camp",
+    "type": "surface_habitat",
+    "location": "Shackleton Crater rim, lunar south pole",
+    "field_uT": 0.0003,
+    "g": 0.16,
+    "comms_s": 1.3,
+    "crew": 4,
+    "risk": "Lunar dust toxicity, 1/6 g bone and muscle, radiation, thermal extremes",
+    "nasa_hazards": [
+      "space_radiation",
+      "gravity_fields",
+      "hostile_closed_env"
+    ],
+    "heart_opm": {
+      "mode": "near-SERF",
+      "sensitivity_fT": 1.5,
+      "shielding_required": false,
+      "status": "ENHANCED — WATCH CRUSTAL ANOMALIES"
+    },
+    "brain_meg": {
+      "mode": "near-SERF",
+      "sensitivity_fT": 1,
+      "shielding_required": false,
+      "status": "HELMET WORKS IN HAB"
+    },
+    "finger_nv": {
+      "mode": "dust_alert",
+      "status": "CRITICAL USE — LUNAR DUST ROS MONITOR"
+    }
+  },
+  {
+    "id": "mars_transit",
+    "era": "tomorrow",
+    "name": "Mars Transit",
+    "type": "interplanetary_cruise",
+    "duration": "6–9 months",
+    "field_uT": 0.005,
+    "g": 0.0,
+    "comms_s": "240–1320 (4–22 min)",
+    "crew": 6,
+    "risk": "Peak radiation, isolation, deconditioning; no real-time comms",
+    "nasa_hazards": [
+      "space_radiation",
+      "isolation_confinement",
+      "distance_from_earth",
+      "gravity_fields"
+    ],
+    "heart_opm": {
+      "mode": "full-SERF",
+      "sensitivity_fT": 0.1,
+      "shielding_required": false,
+      "status": "PEAK SENSITIVITY (illustrative gain 150x)"
+    },
+    "brain_meg": {
+      "mode": "full-SERF",
+      "sensitivity_fT": 0.05,
+      "shielding_required": false,
+      "status": "NO SHIELDING"
+    },
+    "finger_nv": {
+      "mode": "hypomagnetic",
+      "status": "NOVEL REGIME — CALIBRATION LEARNING"
+    }
+  },
+  {
+    "id": "mars_surface",
+    "era": "tomorrow",
+    "name": "Mars Surface Habitat",
+    "type": "surface_habitat",
+    "location": "Jezero Crater / Valles Marineris region",
+    "field_uT": 0.05,
+    "g": 0.38,
+    "comms_s": "240–1320 (4–22 min)",
+    "crew": 6,
+    "risk": "Perchlorate dust, 0.38 g long-term effects, thin-atmosphere radiation",
+    "nasa_hazards": [
+      "space_radiation",
+      "gravity_fields",
+      "hostile_closed_env",
+      "distance_from_earth"
+    ],
+    "heart_opm": {
+      "mode": "near-SERF",
+      "sensitivity_fT": 1,
+      "shielding_required": false,
+      "status": "ENHANCED — FIELD-PORTABLE MCG"
+    },
+    "brain_meg": {
+      "mode": "near-SERF",
+      "sensitivity_fT": 0.5,
+      "shielding_required": false,
+      "status": "FIELD-PORTABLE BRAIN SCANNING"
+    },
+    "finger_nv": {
+      "mode": "dust_monitoring",
+      "status": "MARTIAN DUST ROS MONITOR"
+    }
+  },
+  {
+    "id": "europa",
+    "era": "tomorrow",
+    "name": "Europa Subsurface Mission",
+    "type": "submarine",
+    "location": "Jupiter moon Europa, under ice shell",
+    "field_uT": 0.4,
+    "field_note": "CORRECTED. Jupiter's field at Europa is ~400 nT (0.4 uT), weaker than Earth's surface (~50 uT). The earlier 420 uT value and '8x stronger than Earth' claim were wrong. Europa's constraints are radiation, ice shielding, pressure and comms delay.",
+    "g": 0.134,
+    "comms_s": "1980–3240 (33–54 min)",
+    "crew": 4,
+    "risk": "Jupiter radiation belts, isolation, cold, pressure, communication blackout",
+    "nasa_hazards": [
+      "space_radiation",
+      "isolation_confinement",
+      "distance_from_earth",
+      "hostile_closed_env"
+    ],
+    "heart_opm": {
+      "mode": "degraded",
+      "sensitivity_fT": 50,
+      "shielding_required": true,
+      "status": "DEGRADED — SHIELDING AND COMPENSATION NEEDED (illustrative)"
+    },
+    "brain_meg": {
+      "mode": "degraded",
+      "sensitivity_fT": 30,
+      "shielding_required": true,
+      "status": "DEGRADED — HEAVY SHIELDING NEEDED (illustrative)"
+    },
+    "finger_nv": {
+      "mode": "astrobiological",
+      "status": "NOVEL USE — NV-DIAMOND FALLBACK"
+    }
+  },
+  {
+    "id": "deep_space",
+    "era": "tomorrow",
+    "name": "Interstellar Precursor",
+    "type": "deep_space_vessel",
+    "location": "Beyond the heliopause (>120 AU)",
+    "field_uT": 0.0005,
+    "g": 0.0,
+    "comms_s": "hours to days",
+    "crew": 4,
+    "risk": "No rescue, no resupply, no real-time comms, full physiological autonomy required",
+    "nasa_hazards": [
+      "space_radiation",
+      "isolation_confinement",
+      "distance_from_earth"
+    ],
+    "heart_opm": {
+      "mode": "theoretical-peak",
+      "sensitivity_fT": 0.01,
+      "status": "THEORETICAL PEAK (illustrative gain 1500x)"
+    },
+    "brain_meg": {
+      "mode": "theoretical-peak",
+      "sensitivity_fT": 0.005,
+      "status": "THEORETICAL MAXIMUM"
+    },
+    "finger_nv": {
+      "mode": "peak",
+      "status": "OPTIMAL ENVIRONMENT"
+    }
+  }
+]

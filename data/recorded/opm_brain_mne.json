@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "fixture": true,
+    "generated_at": "2026-11-15T07:23:28Z",
+    "sources": [],
+    "dataset": "opm_brain_mne",
+    "doi_or_url": "",
+    "licence": "not yet recorded",
+    "accessed": null,
+    "device_type": "opm",
+    "label": ""
+  },
+  "x": {
+    "name": "",
+    "unit": "",
+    "values": []
+  },
+  "series": []
+}

@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "fixture": true,
+    "generated_at": "2026-11-15T07:23:28Z",
+    "sources": []
+  },
+  "locations": [
+    {
+      "id": "iss",
+      "label": "iss",
+      "ambient_field_nT": {
+        "value": null,
+        "unit": "nT",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "field_kind": "none"
+    },
+    {
+      "id": "gateway",
+      "label": "gateway",
+      "ambient_field_nT": {
+        "value": null,
+        "unit": "nT",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "field_kind": "none"
+    },
+    {
+      "id": "lunar_base",
+      "label": "lunar_base",
+      "ambient_field_nT": {
+        "value": null,
+        "unit": "nT",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "field_kind": "none"
+    },
+    {
+      "id": "mars_transit",
+      "label": "mars_transit",
+      "ambient_field_nT": {
+        "value": null,
+        "unit": "nT",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "field_kind": "none"
+    },
+    {
+      "id": "mars_surface",
+      "label": "mars_surface",
+      "ambient_field_nT": {
+        "value": null,
+        "unit": "nT",
+        "source": "fixture",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "fixture: not yet built"
+      },
+      "field_kind": "none"
+    }
+  ]
+}

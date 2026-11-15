@@ -1,0 +1,49 @@
+{
+  "status": "PARTIAL — OSD-352 gene values OK; EEG (ds004902) PENDING",
+  "sources": [
+    "NASA OSDR OSD-352 (GLDS-352)",
+    "OpenNeuro ds004902 (pending)"
+  ],
+  "sensor": "brain_meg",
+  "contrast": "Log2fc_(Ground Control)v(Space Flight)",
+  "genes_tested": 17409,
+  "degs_padj_lt_0_05": 1,
+  "caveat": "Only a few genes pass padj<0.05 in this contrast, so most brain gene values are not significant.",
+  "required_genes": {
+    "BDNF": {
+      "log2fc": 0.037,
+      "padj": 1.0
+    },
+    "TUBB3": {
+      "log2fc": -0.122,
+      "padj": 1.0
+    },
+    "MAP2": {
+      "log2fc": -0.038,
+      "padj": 1.0
+    },
+    "MAPT": {
+      "log2fc": -0.015,
+      "padj": 1.0
+    },
+    "GRIN1": {
+      "log2fc": 0.036,
+      "padj": 1.0
+    },
+    "ARC": {
+      "log2fc": 0.117,
+      "padj": 1.0
+    },
+    "FOS": {
+      "log2fc": 0.387,
+      "padj": 1.0
+    }
+  },
+  "eeg": {
+    "status": "PENDING",
+    "dataset": "ds004902",
+    "subjects": 71,
+    "note": "Full dataset is ~8.9 GB. A 5-subject subset is ~0.6 GB and still needs PSD and drift-score code."
+  },
+  "drift_score": null
+}

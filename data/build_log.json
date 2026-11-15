@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "fixture": true,
+    "generated_at": "2026-11-15T07:23:28Z",
+    "sources": []
+  },
+  "per_sensor": {
+    "opm": [],
+    "nv": [],
+    "qd_renin": [],
+    "cqd_patch": []
+  },
+  "combined": []
+}

@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "fixture": true,
+    "generated_at": "2026-11-15T07:23:28Z",
+    "sources": []
+  },
+  "fetched_at": null,
+  "iss": null,
+  "l1": null,
+  "swarm_asm": null,
+  "iss_cabin": null,
+  "opm_readiness": {},
+  "errors": [
+    "fixture: no live cycle yet"
+  ]
+}

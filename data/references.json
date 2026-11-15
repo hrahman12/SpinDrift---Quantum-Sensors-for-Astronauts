@@ -1,0 +1,84 @@
+[
+  {
+    "claim": "NV-diamond magnetometer detects human cardiac magnetic signals at room temperature",
+    "status": "VERIFIED",
+    "source": "arXiv 2601.18843 (alphaXiv: Human Cardiac Measurements with Diamond Magnetometers, Jan 2026)",
+    "url": "https://www.alphaxiv.org/abs/2601.18843"
+  },
+  {
+    "claim": "Rb scalar OPM measures cardiac fields in unshielded ambient conditions",
+    "status": "VERIFIED",
+    "source": "arXiv 2602.14264 (alphaXiv: Magnetocardiography measurements using an OPM under ambient conditions, Feb 2026)",
+    "url": "https://www.alphaxiv.org/abs/2602.14264"
+  },
+  {
+    "claim": "Wearable OPM-MEG sensor head 12 x 16.5 x 22.5 mm, <7 fT/sqrt(Hz), 130 Hz, 3.5 W per sensor (0.7 W head)",
+    "status": "VERIFIED",
+    "source": "He et al., IEEE Trans Biomed Eng 2026, PMID 42606964, DOI 10.1109/TBME.2026.3724753 (published 17 Aug 2026)",
+    "url": "https://doi.org/10.1109/TBME.2026.3724753"
+  },
+  {
+    "claim": "1147 transcripts significantly regulated in mouse heart after 30 days on ISS; MAPK, PI3K-Akt, GPCR pathways predicted activated",
+    "status": "VERIFIED",
+    "source": "Veliz et al. 2023, Biomolecules, PMID 36830740, DOI 10.3390/biom13020371 (n=3 flight vs 3 ground, female mice)",
+    "url": "https://doi.org/10.3390/biom13020371",
+    "note": "Oxidative-stress transcripts were NOT significantly changed in this paper."
+  },
+  {
+    "claim": "Spaceflight-by-sex interactions for renin and aldosterone in 6-month ISS crews",
+    "status": "VERIFIED",
+    "source": "Hughson et al. 2016, Am J Physiol Heart Circ Physiol, DOI 10.1152/ajpheart.00802.2015",
+    "url": "https://doi.org/10.1152/ajpheart.00802.2015"
+  },
+  {
+    "claim": "Plasma volume significantly decreases after spaceflight",
+    "status": "VERIFIED",
+    "source": "Shi, South & Meck 2004 RCT, PMID 15018291 (placebo group plasma volume decreased after flight)",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/15018291/"
+  },
+  {
+    "claim": "Plasma volume -12% (Norsk 2015)",
+    "status": "NOT_FOUND",
+    "source": "Not located in searches. Remove the number until a source is found."
+  },
+  {
+    "claim": "Renin 4.88x postflight (Skylab)",
+    "status": "NOT_FOUND",
+    "source": "Skylab sources report PRA increases, but no 4.88x figure was found. Timing matters: PRA fell after launch and rose about a week later.",
+    "url": "https://ntrs.nasa.gov/api/citations/19750019656/downloads/19750019656.pdf"
+  },
+  {
+    "claim": "RNFL +8.5% (362 to 393 um) in spaceflight OCT",
+    "status": "NOT_FOUND",
+    "source": "Roshdy et al. 2026 meta-analysis of head-down tilt (analog, not flight) reports RNFLT +2 to +7 um with prolonged HDT. Not the same numbers.",
+    "url": "https://doi.org/10.3357/AMHP.6777.2026"
+  },
+  {
+    "claim": "Spaceflight-associated neuro-ocular syndrome (SANS) exists and is a NASA-listed risk",
+    "status": "VERIFIED",
+    "source": "NASA HRP risks page (Jul 2026) lists SANS; VIIP called the leading risk",
+    "url": "https://www.nasa.gov/hrp/risks/"
+  },
+  {
+    "claim": "Perivascular space and ventricle changes after ~6-month ISS flight",
+    "status": "VERIFIED",
+    "source": "Barisano et al. 2022, PNAS, DOI 10.1073/pnas.2120439119",
+    "url": "https://doi.org/10.1073/pnas.2120439119"
+  },
+  {
+    "claim": "Neutron radiation is about 30% of total ISS radiation",
+    "status": "VERIFIED",
+    "source": "CSA article, 26 Feb 2026 (primary source for this figure)",
+    "url": "https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp"
+  },
+  {
+    "claim": "SERF OPM reaches sub-femtotesla sensitivity; deep-space 0.01 fT",
+    "status": "NOT_FOUND",
+    "source": "Lune corpus had no OPM/SERF papers. Treat 0.01 fT and the 1500x gain as illustrative only."
+  },
+  {
+    "claim": "Jupiter field at Europa about 400 nT (not 420 uT)",
+    "status": "NOT_FOUND",
+    "source": "Corrected from physical knowledge; not checked against a source in this build. Verify with a Galileo magnetometer paper before publishing."
+  }
+]

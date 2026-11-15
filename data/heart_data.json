@@ -1,0 +1,218 @@
+{
+  "status": "OK — OSD-580 (GLDS-573) spaceflight vs ground control, 12 wk",
+  "source": "NASA OSDR OSD-580",
+  "sensor": "heart_opm",
+  "contrast": "Log2fc_(Ground Control & 12 week & On Earth)v(Space Flight & 12 week & On ISS)",
+  "genes_tested": 17947,
+  "degs_padj_lt_0_05": 1374,
+  "degs_up": 275,
+  "degs_down": 1099,
+  "top30_by_abs_log2fc": [
+    {
+      "symbol": "Sec14l3",
+      "log2fc": -26.703,
+      "padj": 2.26e-26
+    },
+    {
+      "symbol": "AU040972",
+      "log2fc": -26.276,
+      "padj": 6.68e-12
+    },
+    {
+      "symbol": "Cyp4a12b",
+      "log2fc": -25.055,
+      "padj": 1.28e-16
+    },
+    {
+      "symbol": "Slc44a4",
+      "log2fc": -23.89,
+      "padj": 5.02e-19
+    },
+    {
+      "symbol": "Bpifa1",
+      "log2fc": -14.757,
+      "padj": 3.14e-11
+    },
+    {
+      "symbol": "Scgb3a2",
+      "log2fc": -14.248,
+      "padj": 3.22e-05
+    },
+    {
+      "symbol": "Scgb1a1",
+      "log2fc": -12.973,
+      "padj": 1.39e-06
+    },
+    {
+      "symbol": "Reg3g",
+      "log2fc": -12.743,
+      "padj": 2.46e-05
+    },
+    {
+      "symbol": "Muc5b",
+      "log2fc": -11.608,
+      "padj": 3.63e-06
+    },
+    {
+      "symbol": "Sult1d1",
+      "log2fc": -11.377,
+      "padj": 7.75e-07
+    },
+    {
+      "symbol": "Fga",
+      "log2fc": -11.219,
+      "padj": 1.79e-08
+    },
+    {
+      "symbol": "Mup22",
+      "log2fc": -11.2,
+      "padj": 1.96e-06
+    },
+    {
+      "symbol": "Serpina1c",
+      "log2fc": -10.972,
+      "padj": 0.000114
+    },
+    {
+      "symbol": "Gc",
+      "log2fc": -10.796,
+      "padj": 1.61e-05
+    },
+    {
+      "symbol": "Fgg",
+      "log2fc": -10.724,
+      "padj": 4.15e-05
+    },
+    {
+      "symbol": "Fgb",
+      "log2fc": -10.588,
+      "padj": 8.07e-06
+    },
+    {
+      "symbol": "Sftpc",
+      "log2fc": -10.476,
+      "padj": 0.00164
+    },
+    {
+      "symbol": "F2",
+      "log2fc": -10.395,
+      "padj": 3.58e-08
+    },
+    {
+      "symbol": "Alb",
+      "log2fc": -10.184,
+      "padj": 2.35e-09
+    },
+    {
+      "symbol": "Cyp2c69",
+      "log2fc": -10.067,
+      "padj": 0.0135
+    },
+    {
+      "symbol": "Fcgbp",
+      "log2fc": -10.014,
+      "padj": 4.34e-07
+    },
+    {
+      "symbol": "Cyp2a5",
+      "log2fc": -9.957,
+      "padj": 6.72e-08
+    },
+    {
+      "symbol": "Serpina1a",
+      "log2fc": -9.936,
+      "padj": 3.37e-07
+    },
+    {
+      "symbol": "Bhmt",
+      "log2fc": -9.917,
+      "padj": 2.91e-08
+    },
+    {
+      "symbol": "Cyp3a41a",
+      "log2fc": -9.763,
+      "padj": 0.00599
+    },
+    {
+      "symbol": "Sftpd",
+      "log2fc": -9.722,
+      "padj": 0.00539
+    },
+    {
+      "symbol": "Nat8f2",
+      "log2fc": -9.704,
+      "padj": 0.000106
+    },
+    {
+      "symbol": "Azgp1",
+      "log2fc": -9.565,
+      "padj": 3.29e-06
+    },
+    {
+      "symbol": "Abcb11",
+      "log2fc": -9.478,
+      "padj": 3.91e-07
+    },
+    {
+      "symbol": "Plg",
+      "log2fc": -9.467,
+      "padj": 5.46e-05
+    }
+  ],
+  "caveat": "Top 30 are dominated by liver, lung and plasma genes (Alb, Fga, Sftpc, Scgb1a1). The table may mix tissues or the heart samples may be contaminated. Verify before use.",
+  "published_reference": {
+    "citation": "Veliz et al. 2023, Biomolecules, PMID 36830740, DOI 10.3390/biom13020371",
+    "url": "https://doi.org/10.3390/biom13020371",
+    "transcripts_reported": 1147,
+    "note": "The paper's count (1147) differs from this contrast (1374). The paper used its own pipeline and contrast; its design is 3 flight vs 3 ground female mice after 30 days on ISS."
+  },
+  "required_genes": {
+    "NPPA": {
+      "log2fc": 0.831,
+      "padj": 0.464
+    },
+    "NPPB": {
+      "log2fc": -2.188,
+      "padj": 0.019
+    },
+    "MYH6": {
+      "log2fc": 0.44,
+      "padj": 0.316
+    },
+    "MYH7": {
+      "log2fc": 0.929,
+      "padj": 0.273
+    },
+    "ACTC1": {
+      "log2fc": 0.059,
+      "padj": 0.914
+    },
+    "SCN5A": {
+      "log2fc": 0.308,
+      "padj": 0.412
+    },
+    "KCNQ1": {
+      "log2fc": 0.171,
+      "padj": 0.505
+    },
+    "RYR2": {
+      "log2fc": 0.224,
+      "padj": 0.595
+    },
+    "ACE": {
+      "log2fc": 0.253,
+      "padj": 0.616
+    },
+    "ACE2": {
+      "log2fc": -0.672,
+      "padj": 0.0214
+    },
+    "AGT": {
+      "log2fc": -0.564,
+      "padj": 0.216
+    },
+    "REN": null,
+    "AGTR1": null
+  },
+  "pathways": "NOT COMPUTED — MAPK / PI3K-Akt / GPCR claims in the spec need a pathway enrichment run"
+}

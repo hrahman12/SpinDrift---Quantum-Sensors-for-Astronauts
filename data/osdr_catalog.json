@@ -1,0 +1,1736 @@
+{
+  "source": "NASA OSDR meta endpoint, OSD-1 to OSD-1300 (keyword filter on titles; IDs above ~1018 mostly unassigned)",
+  "scanned": 1300,
+  "matched": 208,
+  "studies": [
+    {
+      "id": "OSD-2",
+      "title": "Response of human lymphoblastoid cells to HZE (iron ions) or gamma-rays",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-2"
+    },
+    {
+      "id": "OSD-8",
+      "title": "Gravitational and magnetic field variations synergize to cause subtle variations in the global transcriptional state of Arabidopsis in vitro callus cultures",
+      "categories": [
+        "sensor_quantum"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-8"
+    },
+    {
+      "id": "OSD-27",
+      "title": "Transcription profiling of Drosophila exposed to a levitation magnet for different lengths of time",
+      "categories": [
+        "sensor_quantum"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-27"
+    },
+    {
+      "id": "OSD-32",
+      "title": "Effect of microgravity on brain gene expression in mice",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-32"
+    },
+    {
+      "id": "OSD-33",
+      "title": "Gene responses in mouse brain to long-term exposure to microgravity",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-33"
+    },
+    {
+      "id": "OSD-46",
+      "title": "Gamma radiation and HZE treatment of seedlings in Arabidopsis",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-46"
+    },
+    {
+      "id": "OSD-53",
+      "title": "Spaceflight Modulates Gene Expression in Astronauts",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-53"
+    },
+    {
+      "id": "OSD-55",
+      "title": "microRNA expression profiles in human peripheral blood lymphocytes cultured in modeled microgravity",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-55"
+    },
+    {
+      "id": "OSD-56",
+      "title": "Gene expression profiling of human peripheral blood lymphocytes cultured in modeled microgravity",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-56"
+    },
+    {
+      "id": "OSD-59",
+      "title": "RNA-Seq transcriptome analysis of reactive oxygen species gene network in Mizuna plants grown in long-term space flight",
+      "categories": [
+        "sensor_quantum"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-59"
+    },
+    {
+      "id": "OSD-62",
+      "title": "Molecular mechanism of flocculation self-recognition in yeast and its role in mating and survival",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-62"
+    },
+    {
+      "id": "OSD-71",
+      "title": "Immediate Transcriptional Changes in Response to High Dose Radiation Exposure",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-71"
+    },
+    {
+      "id": "OSD-73",
+      "title": "Transcriptome Profiles in Normal Human Bronchial Epithelial Cells after Exposure to gamma-rays and different HZE particles",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-73"
+    },
+    {
+      "id": "OSD-74",
+      "title": "Densely Ionizing Radiation Effects on the Microenvironment Promote Aggressive Trp53 Null Mammary Carcinomas",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-74"
+    },
+    {
+      "id": "OSD-78",
+      "title": "Transcription profiling of human MCF10A cells subjected to ionizing radiation and treatment with transforming growth factor beta-1",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-78"
+    },
+    {
+      "id": "OSD-80",
+      "title": "Response of mammary tissue to high-LET HZE particle (Silicon ions) radiation or low-LET gamma-rays",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-80"
+    },
+    {
+      "id": "OSD-87",
+      "title": "Spaceflight effects on the mouse retina: Histological, gene expression and epigenetic changes after flight on STS-135",
+      "categories": [
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-87"
+    },
+    {
+      "id": "OSD-88",
+      "title": "Age and Space Irradiation Modulate Tumor Progression: Implications for Carcinogenesis Risk",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-88"
+    },
+    {
+      "id": "OSD-89",
+      "title": "Proton Irradiation Impacts Age Driven Modulations of Cancer Progression Influenced by Immune System Transcriptome Modifications from Splenic Tissue",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-89"
+    },
+    {
+      "id": "OSD-92",
+      "title": "Response of the EPI-200 human 3-D skin model to high and low doses of protons",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-92"
+    },
+    {
+      "id": "OSD-93",
+      "title": "Gene expression profiles of irradiated lung tissue in three mouse strains",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-93"
+    },
+    {
+      "id": "OSD-94",
+      "title": "DNA copy number analysis from mice with radiation-induced acute myeloid leukemia",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-94"
+    },
+    {
+      "id": "OSD-97",
+      "title": "Gene-expression profiling of Saccharomyces cerevisiae irradiated by high-LET radiations",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-97"
+    },
+    {
+      "id": "OSD-100",
+      "title": "Rodent Research-1 (RR1) NASA Validation Flight: Mouse eye transcriptomic and epigenomic data",
+      "categories": [
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-100"
+    },
+    {
+      "id": "OSD-109",
+      "title": "Delayed Cardiomyocyte Response to Total Body Particle Radiation Exposure - Identification of Regulatory Gene Network [iron]",
+      "categories": [
+        "heart",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-109"
+    },
+    {
+      "id": "OSD-115",
+      "title": "Gene expression profiling in human fibroblast after low-LET irradiation",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-115"
+    },
+    {
+      "id": "OSD-117",
+      "title": "Delayed Cardiomyocyte Response to Total Body Particle Radiation Exposure - Identification of Regulatory Gene Network [proton]",
+      "categories": [
+        "heart",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-117"
+    },
+    {
+      "id": "OSD-124",
+      "title": "Effect of electromagnetic fields on the chondrogenic differentiation under microgravity conditions",
+      "categories": [
+        "sensor_quantum"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-124"
+    },
+    {
+      "id": "OSD-127",
+      "title": "Global gene expression profiles of cardiac progenitors differentiated from human pluripotent stem cells in 3D culture under simulated microgravity",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-127"
+    },
+    {
+      "id": "OSD-128",
+      "title": "Identification of miRNAs involved in cell response to ionizing radiation and modeled microgravity",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-128"
+    },
+    {
+      "id": "OSD-129",
+      "title": "Gene expression profiling of PBL in response to ionizing radiation and modeled microgravity",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-129"
+    },
+    {
+      "id": "OSD-131",
+      "title": "Proton irradiation augments the reduction in tumor progression observed with advanced age",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-131"
+    },
+    {
+      "id": "OSD-146",
+      "title": "Mouse fecal microbiome after exposure to high LET radiation",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-146"
+    },
+    {
+      "id": "OSD-148",
+      "title": "Expression profiling of murine lung 70 days following exposure to fractionated or acute dose of 1.0 Gy 56Fe- particle irradiation",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-148"
+    },
+    {
+      "id": "OSD-151",
+      "title": "Bystander response to 2.5 Gy of protons in a human 3-dimensional skin model in 16 h after exposure",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-151"
+    },
+    {
+      "id": "OSD-152",
+      "title": "Transcription profiling of human peripheral blood to development gene expression signatures for practical radiation biodosimetry",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-152"
+    },
+    {
+      "id": "OSD-153",
+      "title": "Non-targeted effects of low dose ionizing radiation act via TGF-beta to promote mammary carcinogenesis",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-153"
+    },
+    {
+      "id": "OSD-154",
+      "title": "Low dose ionizing radiation treated lymphoblastoid cells",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-154"
+    },
+    {
+      "id": "OSD-155",
+      "title": "Radiation responses in peripheral white blood cells of smokers and non-smokers",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-155"
+    },
+    {
+      "id": "OSD-156",
+      "title": "Identifying radiation exposure biomarkers from mouse blood transcriptome",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-156"
+    },
+    {
+      "id": "OSD-157",
+      "title": "Gene expression in human peripheral blood 48 hours after exposure to ionizing radiation",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-157"
+    },
+    {
+      "id": "OSD-158",
+      "title": "Exposure to ionizing radiation induced persistent gene expression changes in mouse mammary gland",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-158"
+    },
+    {
+      "id": "OSD-159",
+      "title": "Gene expression in blood of mice with internal exposure to Cs-137",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-159"
+    },
+    {
+      "id": "OSD-160",
+      "title": "Gene expression data from 4T1 irradiated tumors treated with TGFbeta blockade",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-160"
+    },
+    {
+      "id": "OSD-162",
+      "title": "Rodent Research-3-CASIS: Mouse eye transcriptomic and proteomic data",
+      "categories": [
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-162"
+    },
+    {
+      "id": "OSD-174",
+      "title": "Effects of a Closed Space Environment on Gene Expression in Hair Follicles of Astronauts in the International Space Station",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-174"
+    },
+    {
+      "id": "OSD-178",
+      "title": "IMR90 radiation bystander time-course experiment 0.5Gy alpha particle",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-178"
+    },
+    {
+      "id": "OSD-183",
+      "title": "Radiation-induced bystander effects and gene expression in cells deficient for RAD9",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-183"
+    },
+    {
+      "id": "OSD-194",
+      "title": "Rodent Research-3-CASIS: Mouse retina transcriptomic data",
+      "categories": [
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-194"
+    },
+    {
+      "id": "OSD-202",
+      "title": "Low dose (0.04 Gy) irradiation (LDR) and hindlimb unloading (HLU) microgravity in mice: brain transcriptomic and epigenomic data",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-202"
+    },
+    {
+      "id": "OSD-203",
+      "title": "Low dose (0.04 Gy) irradiation (LDR) and hindlimb unloading (HLU) microgravity in mice: retina transcriptomic and epigenomic data",
+      "categories": [
+        "eye_ocular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-203"
+    },
+    {
+      "id": "OSD-210",
+      "title": "Approaches for Surveying Cosmic Radiation Damage in Large Populations of Arabidopsis thaliana Seeds- an Antarctic Example",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-210"
+    },
+    {
+      "id": "OSD-211",
+      "title": "Transcriptomic analysis of spleens from mice subjected to chronic low-dose radiation, hindlimb unloading or a combination of both",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-211"
+    },
+    {
+      "id": "OSD-237",
+      "title": "Transcriptomic analysis of skin from mice subjected to chronic low-dose radiation, hindlimb unloading or a combination of both",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-237"
+    },
+    {
+      "id": "OSD-255",
+      "title": "Spaceflight influences gene expression, photoreceptor integrity, and oxidative stress-related damage in the murine retina",
+      "categories": [
+        "eye_ocular",
+        "sensor_quantum"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-255"
+    },
+    {
+      "id": "OSD-258",
+      "title": "Effects of Spaceflight on Human Induced Pluripotent Stem Cell-Derived Cardiomyocyte Structure and Function",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-258"
+    },
+    {
+      "id": "OSD-266",
+      "title": "Growth rate of mammary cancers arising in irradiated mice is associated with pattern of immune infiltrate",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-266"
+    },
+    {
+      "id": "OSD-270",
+      "title": "Bulk and spatially resolved transcriptional analysis of hearts from mice flown on the RR-3",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-270"
+    },
+    {
+      "id": "OSD-271",
+      "title": "Global gene expression profiling of radiation-induced rat mammary carcinomas",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-271"
+    },
+    {
+      "id": "OSD-275",
+      "title": "Global DNA methylation profiling of radiation-induced rat mammary carcinomas",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-275"
+    },
+    {
+      "id": "OSD-280",
+      "title": "Salivary microbiome sequencing of astronauts",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-280"
+    },
+    {
+      "id": "OSD-285",
+      "title": "Chronic low dose-rate radiation down-regulates transcription related to mitosis and chromosomal movement similar to acute high dose in prostate cells.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-285"
+    },
+    {
+      "id": "OSD-294",
+      "title": "Efficient Identification of Multiple Pathways: RNA-Seq Analysis of Livers from 56Fe Ion Irradiated Mice",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-294"
+    },
+    {
+      "id": "OSD-296",
+      "title": "Transcription profiling of Arabidopsis seedings exposed to UV-B irradiation",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-296"
+    },
+    {
+      "id": "OSD-317",
+      "title": "Galactic cosmic radiation induces stable epigenome alterations relevant to human lung cancer",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-317"
+    },
+    {
+      "id": "OSD-318",
+      "title": "RNA seq of tumors derived from irradiated versus sham hosts transplanted with Trp53 null mammary tissue and fed either Control diet versus Caffeic Acid Phenethyl Ester (CAPE) diet.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-318"
+    },
+    {
+      "id": "OSD-320",
+      "title": "Gamma radiation and HZE treatment of seedlings in Arabidopsis",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-320"
+    },
+    {
+      "id": "OSD-322",
+      "title": "Comparative RNA-Seq transcriptome analyses reveal dynamic time dependent effects of 56Fe, 16O, and 28Si irradiation on the induction of murine hepatocellular carcinoma",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-322"
+    },
+    {
+      "id": "OSD-329",
+      "title": "Transcription profiling of atm mutant, adm mutant and wild type whole plants and roots of Arabidopsis after gamma ray irradiation in a time series",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-329"
+    },
+    {
+      "id": "OSD-334",
+      "title": "miRNA signature detection and countermeasures against HZE radiation exposure for tissue degeneration-Heart tissue",
+      "categories": [
+        "heart",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-334"
+    },
+    {
+      "id": "OSD-335",
+      "title": "miRNA signature detection and countermeasures against HZE radiation exposure for tissue degeneration-Liver tissue",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-335"
+    },
+    {
+      "id": "OSD-336",
+      "title": "miRNA signature detection and countermeasures against HZE radiation exposure for tissue degeneration-Plasma",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-336"
+    },
+    {
+      "id": "OSD-337",
+      "title": "miRNA signature detection and countermeasures against HZE radiation exposure for tissue degeneration-Soleus muscle",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-337"
+    },
+    {
+      "id": "OSD-340",
+      "title": "Mlh1 deficiency increases the risk of hematopoietic malignancy after simulated space radiation exposure",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-340"
+    },
+    {
+      "id": "OSD-342",
+      "title": "Targeting myostatin/activin A protects against skeletal muscle and bone loss during spaceflight [plasma proteomics]",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-342"
+    },
+    {
+      "id": "OSD-344",
+      "title": "Real-time quantitative PCR analysis of human cardiovascular progenitor cells flown aboard the International Space Station",
+      "categories": [
+        "heart",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-344"
+    },
+    {
+      "id": "OSD-347",
+      "title": "Heart Flies - effect of microgravity on heart function in Drosophila",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-347"
+    },
+    {
+      "id": "OSD-352",
+      "title": "Multi-modal transcriptional and chromatin accessibility analysis of brains from mice flown on the RR-3 mission",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-352"
+    },
+    {
+      "id": "OSD-353",
+      "title": "The Effects of Spaceflight Factors on the Human Plasma Proteome, Including Both Real Space Missions and Ground-Based Experiments",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-353"
+    },
+    {
+      "id": "OSD-360",
+      "title": "Effects of low dose space radiation exposures on the splenic metabolome",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-360"
+    },
+    {
+      "id": "OSD-363",
+      "title": "Inflammatory gene expression signatures in idiopathic intracranial hypertension: possible implications in microgravity-induced ICP elevation - CSF",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-363"
+    },
+    {
+      "id": "OSD-364",
+      "title": "Inflammatory gene expression signatures in idiopathic intracranial hypertension: possible implications in microgravity-induced ICP elevation - Plasma",
+      "categories": [
+        "brain_neuro",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-364"
+    },
+    {
+      "id": "OSD-366",
+      "title": "Coalescence of DNA double strand breaks induced by galactic cosmic radiation is modulated by genetics in 15 inbred strains of mice",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-366"
+    },
+    {
+      "id": "OSD-367",
+      "title": "Bystander response to 0.5 Gy of alpha-particles in a human 3-dimensional skin model in 16h after exposure to ionizing radiation",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-367"
+    },
+    {
+      "id": "OSD-368",
+      "title": "Biological response to low dose of alpha-particles in a human 3-dimensional skin model, in 1 and 16h after exposure to ionizing radiation.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-368"
+    },
+    {
+      "id": "OSD-369",
+      "title": "Bystander responses to 0.5Gy of alpha-particles in a human 3-dimensional skin model in 4h after exposure to ionizing radiation",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-369"
+    },
+    {
+      "id": "OSD-374",
+      "title": "Bi-directional and shared epigenomic signatures following proton irradiation",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-374"
+    },
+    {
+      "id": "OSD-397",
+      "title": "Illumina NGS RNA-seq and RRBS Sequencing on Spaceflight Mouse Retina",
+      "categories": [
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-397"
+    },
+    {
+      "id": "OSD-404",
+      "title": "Single cell transcriptional profiling of peripheral blood mononuclear cells (PBMCs) from mice flown on Rodent Research Reference Mission-2 (RRRM-2)",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-404"
+    },
+    {
+      "id": "OSD-410",
+      "title": "Dataset for dose and time-dependent transcriptional response to ionizing radiation exposure.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-410"
+    },
+    {
+      "id": "OSD-426",
+      "title": "Cerium oxide nanoparticle administration to skeletal muscle cells under different gravity and radiation conditions",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-426"
+    },
+    {
+      "id": "OSD-431",
+      "title": "Microgravity and space radiation exert either opposite or synergic effects on single molecular pathways",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-431"
+    },
+    {
+      "id": "OSD-432",
+      "title": "Expression profiling reveals transcriptional regulation by Fbxw7/mTOR pathway in radiation-induced mouse thymic lymphomas",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-432"
+    },
+    {
+      "id": "OSD-435",
+      "title": "Effects of low-dose oxygen ions and protons on cardiac function and structure in male C57BL/6J mice (echocardiogram/ultrasonography)",
+      "categories": [
+        "heart",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-435"
+    },
+    {
+      "id": "OSD-455",
+      "title": "Transcriptomic responses in mouse blood during the first week after in vivo gamma irradiation.",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-455"
+    },
+    {
+      "id": "OSD-479",
+      "title": "The impact of deep space radiation on cognitive performance: From biological sex to biomarkers to countermeasures (Elevated Plus Maze, Novel Object Recognition, Open Field, Radial Arm Water Maze, and Three Chamber Social Isolation/Interaction)",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-479"
+    },
+    {
+      "id": "OSD-483",
+      "title": "small-RNA sequencing of sEV isolated from plasma of astronauts",
+      "categories": [
+        "fluid_vascular",
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-483"
+    },
+    {
+      "id": "OSD-484",
+      "title": "Astronauts plasma-derived exosomes induced gene expression in AC16 cells",
+      "categories": [
+        "fluid_vascular",
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-484"
+    },
+    {
+      "id": "OSD-492",
+      "title": "Effects of heavy particle irradiation and diet on object recognition memory in rats",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-492"
+    },
+    {
+      "id": "OSD-505",
+      "title": "Quantitative proteomic analytic approaches to identify metabolic changes in the medial prefrontal cortex of rats exposed to space radiation",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-505"
+    },
+    {
+      "id": "OSD-514",
+      "title": "Artificial gravity partially protects space-induced neurological deficits in Drosophila melanogaster",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-514"
+    },
+    {
+      "id": "OSD-520",
+      "title": "Changes in DNA Methylation in Arabidopsis thaliana Plants Exposed Over Multiple Generations to Gamma Radiation",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-520"
+    },
+    {
+      "id": "OSD-524",
+      "title": "Ionizing radiation induces transgenerational effects of DNA methylation in zebrafish",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-524"
+    },
+    {
+      "id": "OSD-530",
+      "title": "Cell-free RNA analysis of plasma samples collected from six astronauts in JAXA Cell-Free Epigenome (CFE) Study",
+      "categories": [
+        "fluid_vascular",
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-530"
+    },
+    {
+      "id": "OSD-532",
+      "title": "Space flight mouse plasma cell-free RNA sequencing in Mouse Habitat Unit-1 (MHU-1)",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-532"
+    },
+    {
+      "id": "OSD-536",
+      "title": "Gene expression profiling for spaceflight induced-neuroinflammation in the mouse brain",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-536"
+    },
+    {
+      "id": "OSD-541",
+      "title": "Simulated Microgravity Exerts an Age-Dependent Effect on the Differentiation of Cardiovascular Progenitors Isolated from the Human Heart",
+      "categories": [
+        "heart",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-541"
+    },
+    {
+      "id": "OSD-542",
+      "title": "Effects of 14 days of confinement on blood gene expression profiles in men",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-542"
+    },
+    {
+      "id": "OSD-548",
+      "title": "Balancing apelin and angiotensin-II signaling to reduce heart injury during weightlessness",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-548"
+    },
+    {
+      "id": "OSD-557",
+      "title": "Spaceflight influences gene expression, photoreceptor integrity, and oxidative stress related damage in the murine retina (RR-9)",
+      "categories": [
+        "eye_ocular",
+        "sensor_quantum"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-557"
+    },
+    {
+      "id": "OSD-562",
+      "title": "Bulk RNA sequencing and spatially resolved transcriptional profiling of hippocampi from mice flown on the RRRM-2 mission",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-562"
+    },
+    {
+      "id": "OSD-564",
+      "title": "Bulk RNA sequencing and spatially resolved transcriptional profiling of hippocampi from mice flown on the RR-10 mission",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-564"
+    },
+    {
+      "id": "OSD-566",
+      "title": "Sexual Dimorphism during Integrative Endocrine and Immune Responses to Ionizing Radiation in Mice -- Adrenal data",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-566"
+    },
+    {
+      "id": "OSD-568",
+      "title": "Characterization of mouse ocular responses (Microscopy) to a 35-day (RR-9) spaceflight mission: Evidence of blood-retinal barrier disruption and ocular adaptations",
+      "categories": [
+        "eye_ocular",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-568"
+    },
+    {
+      "id": "OSD-569",
+      "title": "Whole Blood Measurements from the SpaceX Inspiration4 Mission (RNA-seq, epitranscriptome, WGS, clonal hematopoiesis, CBC)",
+      "categories": [
+        "fluid_vascular",
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-569"
+    },
+    {
+      "id": "OSD-570",
+      "title": "SpaceX Inspiration4 PBMC Profiling: snRNA-seq, snATAC-seq, and T-cell and B-cell repertoire profiling",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-570"
+    },
+    {
+      "id": "OSD-571",
+      "title": "SpaceX Inspiration4 Plasma Profiling: Proteomics, EVPs, Metabolomics, cfDNA Sequencing and cfRNA Sequencing",
+      "categories": [
+        "fluid_vascular",
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-571"
+    },
+    {
+      "id": "OSD-572",
+      "title": "SpaceX Inspiration4 Oral, Nasal, and Skin Metagenomic and Metatranscriptomic Microbial Swabs",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-572"
+    },
+    {
+      "id": "OSD-573",
+      "title": "SpaceX Inspiration4 Dragon Capsule Metagenomic and Metatranscriptomic Microbial Swabs",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-573"
+    },
+    {
+      "id": "OSD-574",
+      "title": "SpaceX Inspiration4 Deltoid Skin and Microbiome Data: Spatial Transcriptomics (NanoString GeoMx), Metageomics, and Metatranscriptomics",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-574"
+    },
+    {
+      "id": "OSD-575",
+      "title": "SpaceX Inspiration4 Blood Serum Metabolic Panel and Immune/Cardiac Cytokine Arrays (Comprehensive Metabolic Panel and Multiplex)",
+      "categories": [
+        "heart",
+        "fluid_vascular",
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-575"
+    },
+    {
+      "id": "OSD-577",
+      "title": "3D Human Umbilical Vein Endothelial Cells (HUVECs) irradiated with GCR simulated irradiation with miRNA based countermeasures",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-577"
+    },
+    {
+      "id": "OSD-580",
+      "title": "Transcriptional profiling of heart tissue from mice flown on the RRRM-2 mission",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-580"
+    },
+    {
+      "id": "OSD-583",
+      "title": "Characterization of mouse ocular responses (intraocular pressure) to a 35-day (RR-9) spaceflight mission: Evidence of blood-retinal barrier disruption and ocular adaptations",
+      "categories": [
+        "eye_ocular",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-583"
+    },
+    {
+      "id": "OSD-590",
+      "title": "First transcriptome profiling of D. melanogaster after development in a deep underground low radiation background laboratory",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-590"
+    },
+    {
+      "id": "OSD-591",
+      "title": "Effects of low-dose oxygen ions and protons on cardiac function and structure in male C57BL/6J mice (western blot, histology, and immunohistochemistry)",
+      "categories": [
+        "heart",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-591"
+    },
+    {
+      "id": "OSD-592",
+      "title": "Artificial gravity partially protects space-induced neurological deficits in Drosophila melanogaster (Immunohistochemistry)",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-592"
+    },
+    {
+      "id": "OSD-595",
+      "title": "Artificial gravity partially protects space-induced neurological deficits in Drosophila melanogaster",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-595"
+    },
+    {
+      "id": "OSD-596",
+      "title": "Artificial gravity partially protects space-induced neurological deficits in Drosophila melanogaster (Behavior, Climbing)",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-596"
+    },
+    {
+      "id": "OSD-599",
+      "title": "Transcriptomic Effects on the Mouse Heart Following 30 Days on the International Space Station",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-599"
+    },
+    {
+      "id": "OSD-611",
+      "title": "Postsynaptic density radiation signature following space irradiation",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-611"
+    },
+    {
+      "id": "OSD-612",
+      "title": "Bulk RNA sequencing and single nuclei transcriptomics and epigenomics of brain tissue from mice flown on the RR-10 mission",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-612"
+    },
+    {
+      "id": "OSD-613",
+      "title": "Bulk RNA sequencing and single nuclei transcriptomics and epigenomics of brain tissue from mice flown on the RRRM-2 mission",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-613"
+    },
+    {
+      "id": "OSD-618",
+      "title": "Combined space stressors induce independent behavioral deficits predicted by early peripheral blood monocytes (Behavioral Assays)",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-618"
+    },
+    {
+      "id": "OSD-630",
+      "title": "SpaceX Inspiration4 Stool Metagenome Profiling",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-630"
+    },
+    {
+      "id": "OSD-635",
+      "title": "Spaceflight effects on human vascular smooth muscle cell phenotype and function",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-635"
+    },
+    {
+      "id": "OSD-640",
+      "title": "Combined space stressors induce independent behavioral deficits predicted by early peripheral blood monocytes (flow cytometry)",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-640"
+    },
+    {
+      "id": "OSD-656",
+      "title": "SpaceX Inspiration4 Urine Inflammation Panel (Multiplex, NULISAseq)",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-656"
+    },
+    {
+      "id": "OSD-679",
+      "title": "Head-Down Tilt As a Model for Intracranial and Intraocular Pressures, and Retinal Changes during Spaceflight (Eye, MRI, Optical Coherence Tomography, Tonometry, A-scan)",
+      "categories": [
+        "brain_neuro",
+        "eye_ocular",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-679"
+    },
+    {
+      "id": "OSD-680",
+      "title": "Head-Down Tilt As a Model for Intracranial and Intraocular Pressures, and Retinal Changes during Spaceflight (Optic Nerve, MRI)",
+      "categories": [
+        "brain_neuro",
+        "eye_ocular",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-680"
+    },
+    {
+      "id": "OSD-681",
+      "title": "Head-Down Tilt As a Model for Intracranial and Intraocular Pressures, and Retinal Changes during Spaceflight (Subcutaneous Tissue and Subdural Space, Body Temperature and Intracranial Pressure Biotelemetry)",
+      "categories": [
+        "brain_neuro",
+        "eye_ocular",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-681"
+    },
+    {
+      "id": "OSD-682",
+      "title": "Spaceflight-Induced Gene Expression Profiles in the Mouse Brain Are Attenuated by Treatment with the Antioxidant BuOE - Cornu Ammonis 1",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-682"
+    },
+    {
+      "id": "OSD-685",
+      "title": "Spaceflight-Induced Gene Expression Profiles in the Mouse Brain Are Attenuated by Treatment with the Antioxidant BuOE - Dentate Gyrus",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-685"
+    },
+    {
+      "id": "OSD-687",
+      "title": "SpaceX Inspiration4 T-Cell Histone Modification Profiling (H3K4me1, H3K4me3, H3K27ac)",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-687"
+    },
+    {
+      "id": "OSD-698",
+      "title": "Spaceflight-Induced Gene Expression Profiles in the Mouse Brain Are Attenuated by Treatment with the Antioxidant BuOE - Frontal Cortex",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-698"
+    },
+    {
+      "id": "OSD-699",
+      "title": "Spaceflight-Induced Gene Expression Profiles in the Mouse Brain Are Attenuated by Treatment with the Antioxidant BuOE - Cerebral Cortex",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-699"
+    },
+    {
+      "id": "OSD-715",
+      "title": "Characterization of mouse ocular response to a 35-day spaceflight mission: Evidence of blood-retinal barrier disruption and ocular adaptations - Proteomics data",
+      "categories": [
+        "eye_ocular",
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-715"
+    },
+    {
+      "id": "OSD-719",
+      "title": "Sexual Dimorphism during Integrative Endocrine and Immune Responses to Ionizing Radiation in Mice -- Blood data",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-719"
+    },
+    {
+      "id": "OSD-720",
+      "title": "Long-lasting sex-specific alteration in left ventricular cardiac transcriptome following gamma and simGCRsim radiation",
+      "categories": [
+        "heart",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-720"
+    },
+    {
+      "id": "OSD-738",
+      "title": "Effects of Space Flight on Inflammasome Activation in the Brain of Mice (Brain, Western Blot and ECLIA)",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-738"
+    },
+    {
+      "id": "OSD-751",
+      "title": "Effects of Space Flight on Inflammasome Activation in the Brain of Mice (Cortex; ECLIA)",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-751"
+    },
+    {
+      "id": "OSD-752",
+      "title": "Effects of Space Flight on Inflammasome Activation in the Brain of Mice (Hippocampus; ECLIA)",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-752"
+    },
+    {
+      "id": "OSD-758",
+      "title": "Artificial Gravity Attenuates the Transcriptomic Response to Spaceflight in the Optic Nerve and Retina -- Retina data",
+      "categories": [
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-758"
+    },
+    {
+      "id": "OSD-759",
+      "title": "Artificial Gravity Attenuates the Transcriptomic Response to Spaceflight in the Optic Nerve and Retina -- Optic nerve data",
+      "categories": [
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-759"
+    },
+    {
+      "id": "OSD-776",
+      "title": "The impact of deep space radiation on cognitive performance: From biological sex to biomarkers to countermeasures (Flow Cytometry, Blood)",
+      "categories": [
+        "brain_neuro",
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-776"
+    },
+    {
+      "id": "OSD-777",
+      "title": "The impact of deep space radiation on cognitive performance: From biological sex to biomarkers to countermeasures  (Flow Cytometry, Microglia)",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-777"
+    },
+    {
+      "id": "OSD-778",
+      "title": "The impact of deep space radiation on cognitive performance: From biological sex to biomarkers to countermeasures (Flow Cytometry, Synapse from Hippocampus)",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-778"
+    },
+    {
+      "id": "OSD-782",
+      "title": "Multi-omics profiling reveals ethylene signalling as a key pathway underlying both genetic and epigenetic responses to low-dose ionizing radiation in Arabidopsis",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-782"
+    },
+    {
+      "id": "OSD-792",
+      "title": "Transcriptomic analysis of embryonic mouse hypothalamic N38 cells exposed to high-energy protons and/or simulated microgravity.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-792"
+    },
+    {
+      "id": "OSD-811",
+      "title": "Space microgravity increases expression of genes associated with proliferation and differentiation in human cardiac spheres",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-811"
+    },
+    {
+      "id": "OSD-812",
+      "title": "Simulated microgravity impairs human NK cell cytotoxic activity against space radiation-relevant leukemic cells.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-812"
+    },
+    {
+      "id": "OSD-813",
+      "title": "Impact of near continuous low dose rate neutron irradiation on pregnancy outcomes in mice.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-813"
+    },
+    {
+      "id": "OSD-815",
+      "title": "The ex vivo human translaminar autonomous system to study spaceflight associated neuro-ocular syndrome pathogenesis (Ocular Globe, Photography)",
+      "categories": [
+        "brain_neuro",
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-815"
+    },
+    {
+      "id": "OSD-816",
+      "title": "The ex vivo human translaminar autonomous system to study spaceflight associated neuro-ocular syndrome pathogenesis (Retina, RT-PCR and electroretinography)",
+      "categories": [
+        "brain_neuro",
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-816"
+    },
+    {
+      "id": "OSD-817",
+      "title": "The ex vivo human translaminar autonomous system to study spaceflight associated neuro-ocular syndrome pathogenesis (Optic Nerve, Histology and Microscopy)",
+      "categories": [
+        "brain_neuro",
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-817"
+    },
+    {
+      "id": "OSD-818",
+      "title": "The ex vivo human translaminar autonomous system to study spaceflight associated neuro-ocular syndrome pathogenesis (Culture Media, Western Blot)",
+      "categories": [
+        "brain_neuro",
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-818"
+    },
+    {
+      "id": "OSD-825",
+      "title": "Evaluating sex-specific responses to western diet across the lifespan: impact on cardiac function and transcriptomic signatures in C57BL/6J mice at 530 and 640/750 days of age",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-825"
+    },
+    {
+      "id": "OSD-832",
+      "title": "Effects of 5-Ion Beam Irradiation and Hindlimb Unloading on Metabolic Pathways in Plasma and Brain of Behaviorally Tested WAG/Rij Rats - Plasma data",
+      "categories": [
+        "brain_neuro",
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-832"
+    },
+    {
+      "id": "OSD-833",
+      "title": "Effects of 5-Ion Beam Irradiation and Hindlimb Unloading on Metabolic Pathways in Plasma and Brain of Behaviorally Tested WAG/Rij Rats - Hippocampus data",
+      "categories": [
+        "brain_neuro",
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-833"
+    },
+    {
+      "id": "OSD-834",
+      "title": "Effects of 5-Ion Beam Irradiation and Hindlimb Unloading on Metabolic Pathways in Plasma and Brain of Behaviorally Tested WAG/Rij Rats - Cortex data",
+      "categories": [
+        "brain_neuro",
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-834"
+    },
+    {
+      "id": "OSD-835",
+      "title": "Effects of 5-Ion Beam Irradiation and Hindlimb Unloading on Metabolic Pathways in Plasma and Brain of Behaviorally Tested WAG/Rij Rats",
+      "categories": [
+        "brain_neuro",
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-835"
+    },
+    {
+      "id": "OSD-836",
+      "title": "Effects of photon irradiation in the presence and absence of hindlimb unloading on the behavioral performance and metabolic pathways in the plasma of Fischer rats",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-836"
+    },
+    {
+      "id": "OSD-837",
+      "title": "Effects of 5-ion 6-beam sequential irradiation in the presence and absence of hindlimb or control hindlimb unloading on behavioral performances and plasma metabolic pathways of Fischer 344 rats",
+      "categories": [
+        "fluid_vascular",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-837"
+    },
+    {
+      "id": "OSD-881",
+      "title": "Life long effects of radiation and high fat diet on the mouse right ventricular tissue",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-881"
+    },
+    {
+      "id": "OSD-896",
+      "title": "Deficits in Sustained Attention and Changes in Dopaminergic Protein Levels following Exposure to Proton Radiation Are Related to Basal Dopaminergic Function (Western Blot, Frontal Cortex)",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-896"
+    },
+    {
+      "id": "OSD-897",
+      "title": "Deficits in Sustained Attention and Changes in Dopaminergic Protein Levels following Exposure to Proton Radiation Are Related to Basal Dopaminergic Function (Western Blot, Parietal Cortex)",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-897"
+    },
+    {
+      "id": "OSD-898",
+      "title": "Spaceflight induces oxidative damage to blood‐brain barrier integrity in a mouse model",
+      "categories": [
+        "brain_neuro",
+        "fluid_vascular",
+        "sensor_quantum"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-898"
+    },
+    {
+      "id": "OSD-903",
+      "title": "Longitudinal transcriptomic and epigenetic analysis in astronauts reveals dynamic immune response to spaceflight [RNA-seq]",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-903"
+    },
+    {
+      "id": "OSD-908",
+      "title": "MicroRNAs shape mouse age-independent tissue adaptation to spaceflight via ECM and developmental pathways - Heart data",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-908"
+    },
+    {
+      "id": "OSD-916",
+      "title": "MicroRNAs shape mouse age-independent tissue adaptation to spaceflight via ECM and developmental pathways - Brain data",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-916"
+    },
+    {
+      "id": "OSD-918",
+      "title": "Spaceflight induces systemic effects on extracellular matrix and immune system in different age-stages - Blood data",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-918"
+    },
+    {
+      "id": "OSD-920",
+      "title": "Spaceflight induces systemic effects on extracellular matrix and immune system in different age-stages - Eye data",
+      "categories": [
+        "eye_ocular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-920"
+    },
+    {
+      "id": "OSD-921",
+      "title": "Spaceflight induces systemic effects on extracellular matrix and immune system in different age-stages - Heart atria data",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-921"
+    },
+    {
+      "id": "OSD-922",
+      "title": "Spaceflight induces systemic effects on extracellular matrix and immune system in different age-stages - Heart ventricles data",
+      "categories": [
+        "heart"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-922"
+    },
+    {
+      "id": "OSD-928",
+      "title": "Spaceflight induces systemic effects on extracellular matrix and immune system in different age-stages - Myeloid forebrain data",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-928"
+    },
+    {
+      "id": "OSD-929",
+      "title": "Spaceflight induces systemic effects on extracellular matrix and immune system in different age-stages - Myeloid hippocampus data",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-929"
+    },
+    {
+      "id": "OSD-931",
+      "title": "Spaceflight induces systemic effects on extracellular matrix and immune system in different age-stages - Non-myeloid forebrain data",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-931"
+    },
+    {
+      "id": "OSD-932",
+      "title": "Spaceflight induces systemic effects on extracellular matrix and immune system in different age-stages - Non-myeloid hippocampus data",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-932"
+    },
+    {
+      "id": "OSD-939",
+      "title": "Deficits in Sustained Attention and Changes in Dopaminergic Protein Levels following Exposure to Proton Radiation Are Related to Basal Dopaminergic Function (Rodent Psychomotor Vigilance Test)",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-939"
+    },
+    {
+      "id": "OSD-941",
+      "title": "Spaceflight reshapes Alzheimer's disease–associated molecular programs in human brain organoids",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-941"
+    },
+    {
+      "id": "OSD-943",
+      "title": "Longitudinal transcriptomic and epigenetic analysis in astronauts reveals dynamic immune response to spaceflight [DNA methylation]",
+      "categories": [
+        "astronaut_human"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-943"
+    },
+    {
+      "id": "OSD-964",
+      "title": "BioSentinel: Validating Sensitivity of Yeast Biosensors to Deep Space Relevant Radiation",
+      "categories": [
+        "radiation_space",
+        "sensor_quantum"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-964"
+    },
+    {
+      "id": "OSD-968",
+      "title": "Three-dimensional spatial selectivity of hippocampal neurons during space flight",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-968"
+    },
+    {
+      "id": "OSD-972",
+      "title": "Radiation-Induced Long Noncoding RNAs in a Mouse Model after Whole-Body Irradiation.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-972"
+    },
+    {
+      "id": "OSD-973",
+      "title": "Microarray analysis of differentially expressed genes in the kidneys and testes of mice after long-term irradiation with low-dose-rate gamma-rays- kidney data",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-973"
+    },
+    {
+      "id": "OSD-974",
+      "title": "Microarray analysis of differentially expressed genes in the kidneys and testes of mice after long-term irradiation with low-dose-rate gamma-rays - testis data",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-974"
+    },
+    {
+      "id": "OSD-981",
+      "title": "Bone Marrow Adipose Tissue Is Not Required for Reconstitution of the Immune System Following Irradiation in Male Mice.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-981"
+    },
+    {
+      "id": "OSD-984",
+      "title": "Low-dose Simulated Galactic Cosmic Radiation Exposure After Hindlimb Unloading Has Long-term Impact on Skeletal Muscle Metabolic Proteins",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-984"
+    },
+    {
+      "id": "OSD-992",
+      "title": "Space radiation induces distinct senescent phenotypes: Implications for space travel [scRNA-Seq]",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-992"
+    },
+    {
+      "id": "OSD-993",
+      "title": "Space radiation induces distinct senescent phenotypes: Implications for space travel [bulk RNA-Seq]",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-993"
+    },
+    {
+      "id": "OSD-999",
+      "title": "Sex‐Specific Changes in Brain Organoids from Acute Simulated Galactic Cosmic Radiation are Rescued by Targeted ECM Pathway Stimulation (sex-specific response experiment)",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-999"
+    },
+    {
+      "id": "OSD-1000",
+      "title": "Sex‐Specific Changes in Brain Organoids from Acute Simulated Galactic Cosmic Radiation are Rescued by Targeted ECM Pathway Stimulation (Opto-FGFR-mediated rescue under simGCRsim exposure)",
+      "categories": [
+        "brain_neuro",
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-1000"
+    },
+    {
+      "id": "OSD-1005",
+      "title": "PROtection MEdiated by Antioxidant NanoTEchnOlogy Against Neuronal Damage in Space 2 (PROMETEO 2, Nano Protection)",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-1005"
+    },
+    {
+      "id": "OSD-1008",
+      "title": "Proteomic dataset of MECP2-deficient and wild-type human brain organoids under spaceflight and ground conditions",
+      "categories": [
+        "brain_neuro"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-1008"
+    },
+    {
+      "id": "OSD-1010",
+      "title": "Lacticaseibacillus rhamnosus GG modulates epithelial responses to space-relevant heavy-ion irradiation in a human gut-on-chip",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-1010"
+    },
+    {
+      "id": "OSD-1012",
+      "title": "Impact of Neutron Exposure on Global Gene Expression in a Human Peripheral Blood Model.",
+      "categories": [
+        "fluid_vascular"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-1012"
+    },
+    {
+      "id": "OSD-1014",
+      "title": "Distinct molecular responses of human intestinal organoids to proton and photon radiation.",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-1014"
+    },
+    {
+      "id": "OSD-1018",
+      "title": "Differential Impact of Social Isolation and Space Radiation on Behavior and Motor Learning in Rats",
+      "categories": [
+        "radiation_space"
+      ],
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-1018"
+    }
+  ]
+}

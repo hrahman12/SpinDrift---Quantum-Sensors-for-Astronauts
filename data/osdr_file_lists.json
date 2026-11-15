@@ -1,0 +1,2677 @@
+{
+  "OSD-964": {
+    "file_count": 13,
+    "total_listed": 13,
+    "total_size_MB": 25.4,
+    "files": [
+      {
+        "name": "LSDS-171_AlamarBlue_RawData_Plate4_NSRL22A_GCRSim_wet_Fig3.xlsx",
+        "size_bytes": 248959,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_RawData_Plate4_NSRL22A_GCRSim_wet_Fig3.xlsx"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_RawData_Plate3_Fe56_300MeV_wetdry_hapdip_wt_rad_Fig2.xlsx",
+        "size_bytes": 248015,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_RawData_Plate3_Fe56_300MeV_wetdry_hapdip_wt_rad_Fig2.xlsx"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_RawData_Plate2_NSRL19A_gamma_WT_Fig1.xlsx",
+        "size_bytes": 243521,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_RawData_Plate2_NSRL19A_gamma_WT_Fig1.xlsx"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_RawData_Plate1_NSRL19A_gamma_rad51_Fig1.xlsx",
+        "size_bytes": 243875,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_RawData_Plate1_NSRL19A_gamma_rad51_Fig1.xlsx"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_RawData_Card487_0cGy_Protons_wt_rad51_Fig4.xlsx",
+        "size_bytes": 2099012,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_RawData_Card487_0cGy_Protons_wt_rad51_Fig4.xlsx"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_RawData_Card476_25cGy_Protons_wt_rad51_Fig4.xlsx",
+        "size_bytes": 2096551,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_RawData_Card476_25cGy_Protons_wt_rad51_Fig4.xlsx"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_PlateLayout_Liddell2023.xlsx",
+        "size_bytes": 11293,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_PlateLayout_Liddell2023.xlsx"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_AnalyzedData_Plate4_NSRL22A_GCRSim_wet_Fig3.xlsm",
+        "size_bytes": 3434078,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_AnalyzedData_Plate4_NSRL22A_GCRSim_wet_Fig3.xlsm"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_AnalyzedData_Plate2_NSRL19A_gamma_WT_Fig1.xlsm",
+        "size_bytes": 3198924,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_AnalyzedData_Plate2_NSRL19A_gamma_WT_Fig1.xlsm"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_AnalyzedData_Plate1_NSRL19A_gamma_rad51_Fig1.xlsm",
+        "size_bytes": 3189267,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_AnalyzedData_Plate1_NSRL19A_gamma_rad51_Fig1.xlsm"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_AnalyzedData_Card487_0cGy_Protons_wt_rad51_Fig4.xlsm",
+        "size_bytes": 4195057,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_AnalyzedData_Card487_0cGy_Protons_wt_rad51_Fig4.xlsm"
+      },
+      {
+        "name": "LSDS-171_AlamarBlue_AnalyzedData_Card476_25cGy_Protons_wt_rad51_Fig4.xlsm",
+        "size_bytes": 4152583,
+        "category": "AlamarBlue",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=LSDS-171_AlamarBlue_AnalyzedData_Card476_25cGy_Protons_wt_rad51_Fig4.xlsm"
+      },
+      {
+        "name": "OSD-964_metadata_OSD-964-ISA.zip",
+        "size_bytes": 2040992,
+        "category": "Study Metadata Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-964/download?source=datamanager&file=OSD-964_metadata_OSD-964-ISA.zip"
+      }
+    ]
+  },
+  "OSD-898": {
+    "file_count": 13,
+    "total_listed": 13,
+    "total_size_MB": 1.2,
+    "files": [
+      {
+        "name": "OSD-898_metadata_OSD-898-ISA.zip",
+        "size_bytes": 945322,
+        "category": "Study Metadata Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=OSD-898_metadata_OSD-898-ISA.zip"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_RR-9BrainAPQ4_SUBMITTED.xlsx",
+        "size_bytes": 50775,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_RR-9BrainAPQ4_SUBMITTED.xlsx"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_Mao2020_IHC_Zo_SUBMITTED.xlsx",
+        "size_bytes": 31748,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_Mao2020_IHC_Zo_SUBMITTED.xlsx"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_Mao2020_IHC_PECAM_SUBMITTED.xlsx",
+        "size_bytes": 29315,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_Mao2020_IHC_PECAM_SUBMITTED.xlsx"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_Mao2020_IHC_HNE_SUBMITTED.xlsx",
+        "size_bytes": 29336,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_Mao2020_IHC_HNE_SUBMITTED.xlsx"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_Mao2020_IHC_Zo_TRANSFORMED.csv",
+        "size_bytes": 7303,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_Mao2020_IHC_Zo_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_Mao2020_IHC_PECAM_TRANSFORMED.csv",
+        "size_bytes": 7275,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_Mao2020_IHC_PECAM_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_Mao2020_IHC_HNE_TRANSFORMED.csv",
+        "size_bytes": 4436,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_Mao2020_IHC_HNE_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_Mao2020_IHC_GFAP_TRANSFORMED.csv",
+        "size_bytes": 5056,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_Mao2020_IHC_GFAP_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-162_Immunohistochemistry_Mao2020_IHC_APQ4_TRANSFORMED.csv",
+        "size_bytes": 7686,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_Immunohistochemistry_Mao2020_IHC_APQ4_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-162_microscopy_Mao2020_IHC_TUNEL_SUBMITTED.xlsx",
+        "size_bytes": 34356,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_microscopy_Mao2020_IHC_TUNEL_SUBMITTED.xlsx"
+      },
+      {
+        "name": "LSDS-162_microscopy_Mao2020_IHC_TUNEL_TRANSFORMED.csv",
+        "size_bytes": 6546,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=LSDS-162_microscopy_Mao2020_IHC_TUNEL_TRANSFORMED.csv"
+      },
+      {
+        "name": "OSD-898_dictionary_Mao2020_DataDictionary.csv",
+        "size_bytes": 1119,
+        "category": "Data Dictionary",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-898/download?source=datamanager&file=OSD-898_dictionary_Mao2020_DataDictionary.csv"
+      }
+    ]
+  },
+  "OSD-255": {
+    "file_count": 245,
+    "total_listed": 245,
+    "total_size_MB": 76626.2,
+    "files": [
+      {
+        "name": "OSD-255_metadata_OSD-255-ISA.zip",
+        "size_bytes": 94840,
+        "category": "Study Metadata Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=OSD-255_metadata_OSD-255-ISA.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_software_versions_GLbulkRNAseq.md",
+        "size_bytes": 2833,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_software_versions_GLbulkRNAseq.md"
+      },
+      {
+        "name": "GLDS-255_rna_seq_processing_info_GLbulkRNAseq.zip",
+        "size_bytes": 9711,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_processing_info_GLbulkRNAseq.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_bulkRNASeq_v2_runsheet.csv",
+        "size_bytes": 3171,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_bulkRNASeq_v2_runsheet.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 1006685856,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_raw_multiqc_GLbulkRNAseq_data.zip",
+        "size_bytes": 182482,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_raw_multiqc_GLbulkRNAseq_data.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 933091739,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_raw_multiqc_GLbulkRNAseq.html",
+        "size_bytes": 4891951,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_raw_multiqc_GLbulkRNAseq.html"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 996201044,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 793681539,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 982118137,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 821030022,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 912568708,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 811418499,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_trimmed_multiqc_GLbulkRNAseq_data.zip",
+        "size_bytes": 218629,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_trimmed_multiqc_GLbulkRNAseq_data.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_trimmed_multiqc_GLbulkRNAseq.html",
+        "size_bytes": 4920273,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_trimmed_multiqc_GLbulkRNAseq.html"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 973743234,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4054,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 1018612293,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4038,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4014,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 775941640,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4007,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4003,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 901792451,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4048,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4002,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 803445504,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4024,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4033,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4040,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4003,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4007,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 974507305,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4030,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 4026,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_trimming_report.txt",
+        "size_bytes": 3971,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_trimming_report.txt"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5704676,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 1020799750,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 793928564,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 916271810,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1311468598,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2659392,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 995571038,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 842966984,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 883407942,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2028,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 867047563,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5708580,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 897706145,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 953233029,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2026,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2028,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_align_multiqc_GLbulkRNAseq_data.zip",
+        "size_bytes": 29105,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_align_multiqc_GLbulkRNAseq_data.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2027,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1131971105,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 997503861,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_Log.final.out",
+        "size_bytes": 2026,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_Log.final.out"
+      },
+      {
+        "name": "GLDS-255_rna_seq_align_multiqc_GLbulkRNAseq.html",
+        "size_bytes": 4747585,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_align_multiqc_GLbulkRNAseq.html"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2647008,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 1061685428,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 806329565,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 896255548,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5835078,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 991495505,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 42042451,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 824573466,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 44268197,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 50948978,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1309745355,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_raw.fastq.gz",
+        "size_bytes": 815667062,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2629104,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 878131380,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 851184722,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 39276486,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_read_dist_multiqc_GLbulkRNAseq_data.zip",
+        "size_bytes": 16237,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_read_dist_multiqc_GLbulkRNAseq_data.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5390890,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_read_dist_multiqc_GLbulkRNAseq.html",
+        "size_bytes": 4586168,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_read_dist_multiqc_GLbulkRNAseq.html"
+      },
+      {
+        "name": "GLDS-255_rna_seq_infer_exp_multiqc_GLbulkRNAseq_data.zip",
+        "size_bytes": 4715,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_infer_exp_multiqc_GLbulkRNAseq_data.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 35489809,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_infer_exp_multiqc_GLbulkRNAseq.html",
+        "size_bytes": 4582522,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_infer_exp_multiqc_GLbulkRNAseq.html"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 34457236,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 1038542713,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_geneBody_cov_multiqc_GLbulkRNAseq_data.zip",
+        "size_bytes": 83588,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_geneBody_cov_multiqc_GLbulkRNAseq_data.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 903032435,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_geneBody_cov_multiqc_GLbulkRNAseq.html",
+        "size_bytes": 4619975,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_geneBody_cov_multiqc_GLbulkRNAseq.html"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2641352,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 47895292,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 969738682,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 40878890,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5646440,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 53850035,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 726049602,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10545069,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5590657,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 47498514,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq.genes.results",
+        "size_bytes": 5669720,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932708_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_trimmed.fastq.gz",
+        "size_bytes": 799522902,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_trimmed.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5646820,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 42852977,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10546212,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 50712805,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1001405814,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq.genes.results",
+        "size_bytes": 5670119,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932707_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 40558771,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2629896,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5647278,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_RSEM_count_multiqc_GLbulkRNAseq_data.zip",
+        "size_bytes": 25182,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_RSEM_count_multiqc_GLbulkRNAseq_data.zip"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 46985650,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10546905,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_RSEM_count_multiqc_GLbulkRNAseq.html",
+        "size_bytes": 4608931,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_RSEM_count_multiqc_GLbulkRNAseq.html"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 54346985,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq.genes.results",
+        "size_bytes": 5670575,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932706_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_unmapped.fastq.gz",
+        "size_bytes": 43861967,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_unmapped.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5643721,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 720210083,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10539352,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5519410,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq.genes.results",
+        "size_bytes": 5667029,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932705_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5646176,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1005694383,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "size_bytes": 3480492,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10542966,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2608280,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "size_bytes": 3606664,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq.genes.results",
+        "size_bytes": 5669474,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932704_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "size_bytes": 3625958,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5645703,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10542646,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq.genes.results",
+        "size_bytes": 5668995,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 711750933,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932703_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5832829,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5647869,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_VST_Counts_rRNArm_GLbulkRNAseq.csv",
+        "size_bytes": 6834755,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_VST_Counts_rRNArm_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10549503,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_VST_Counts_GLbulkRNAseq.csv",
+        "size_bytes": 6839290,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_VST_Counts_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq.genes.results",
+        "size_bytes": 5671150,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_Normalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "size_bytes": 6353274,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_Normalized_Counts_rRNArm_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5646757,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "size_bytes": 6356870,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_Normalized_Counts_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10545370,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq.genes.results",
+        "size_bytes": 5670036,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5647114,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1193364547,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10546920,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2712976,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq.genes.results",
+        "size_bytes": 5670401,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_differential_expression_rRNArm_GLbulkRNAseq.csv",
+        "size_bytes": 20030133,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_differential_expression_rRNArm_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5647166,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_differential_expression_GLbulkRNAseq.csv",
+        "size_bytes": 20038430,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_differential_expression_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10546524,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_contrasts_GLbulkRNAseq.csv",
+        "size_bytes": 143,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_contrasts_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq.genes.results",
+        "size_bytes": 5670453,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_SampleTable_GLbulkRNAseq.csv",
+        "size_bytes": 479,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_SampleTable_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5646253,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 881492380,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932702_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10544963,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5669382,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq.genes.results",
+        "size_bytes": 5669537,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5645101,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10541393,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq.genes.results",
+        "size_bytes": 5668377,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1122941020,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5647218,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2638928,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10546436,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq.genes.results",
+        "size_bytes": 5670513,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5647857,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 781677130,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932701_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5814314,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10548192,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq.genes.results",
+        "size_bytes": 5671143,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5647213,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10546893,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq.genes.results",
+        "size_bytes": 5670496,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1214243102,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_rRNArm.genes.results",
+        "size_bytes": 5645051,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_rRNArm.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2647968,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq.isoforms.results",
+        "size_bytes": 10540358,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq.isoforms.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq.genes.results",
+        "size_bytes": 5668340,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq.genes.results"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 847312133,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932700_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5835497,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1334374001,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2647816,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_qc_metrics_GLbulkRNAseq.csv",
+        "size_bytes": 16462,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_qc_metrics_GLbulkRNAseq.csv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 870672977,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932699_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5641665,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1118062940,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_processed_md5sum_GLbulkRNAseq.tsv",
+        "size_bytes": 15860,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_processed_md5sum_GLbulkRNAseq.tsv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2685240,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 799853011,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932698_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5324569,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 984963241,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2657064,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 742074963,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932697_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5799370,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna-seq_raw_md5sum_GLbulkRNAseq.tsv",
+        "size_bytes": 1250,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_raw_md5sum_GLbulkRNAseq.tsv"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1150709212,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2618552,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 779749458,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932696_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5839862,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1367789895,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2642448,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 895922806,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932695_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5817394,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 1224959707,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2687136,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 859174283,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932694_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_SJ.out.tab",
+        "size_bytes": 5472878,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_SJ.out.tab"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_Aligned.toTranscriptome.out.bam",
+        "size_bytes": 990599046,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_Aligned.toTranscriptome.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai",
+        "size_bytes": 2620224,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam.bai"
+      },
+      {
+        "name": "GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam",
+        "size_bytes": 722060343,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_GSM3932693_GLbulkRNAseq_Aligned.sortedByCoord_sorted.out.bam"
+      },
+      {
+        "name": "GLDS-255_rna_seq_ERCC_analysis_GLbulkRNAseq.html",
+        "size_bytes": 1621052,
+        "category": "GeneLab Processed RNA-Seq Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna_seq_ERCC_analysis_GLbulkRNAseq.html"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158512.fastq.gz",
+        "size_bytes": 815667062,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158512.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158522.fastq.gz",
+        "size_bytes": 811418499,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158522.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158523.fastq.gz",
+        "size_bytes": 821030022,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158523.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158524.fastq.gz",
+        "size_bytes": 793681539,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158524.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158516.fastq.gz",
+        "size_bytes": 842966984,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158516.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158515.fastq.gz",
+        "size_bytes": 897706145,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158515.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158520.fastq.gz",
+        "size_bytes": 901792451,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158520.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158517.fastq.gz",
+        "size_bytes": 916271810,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158517.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158519.fastq.gz",
+        "size_bytes": 974507305,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158519.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158526.fastq.gz",
+        "size_bytes": 933091739,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158526.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158518.fastq.gz",
+        "size_bytes": 1020799750,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158518.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158513.fastq.gz",
+        "size_bytes": 991495505,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158513.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158514.fastq.gz",
+        "size_bytes": 1061685428,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158514.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158525.fastq.gz",
+        "size_bytes": 996201044,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158525.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158527.fastq.gz",
+        "size_bytes": 1006685856,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158527.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_SRR9158521.fastq.gz",
+        "size_bytes": 1018612293,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_SRR9158521.fastq.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_GSE131954_DESeq2_RR9_Ground_Ctrl_vs_Flight_DEGs.txt.gz",
+        "size_bytes": 23146,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_GSE131954_DESeq2_RR9_Ground_Ctrl_vs_Flight_DEGs.txt.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_GSE131954_DESeq_RR9_Ground_Ctrl_vs_Flight_All.txt.gz",
+        "size_bytes": 689726,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_GSE131954_DESeq_RR9_Ground_Ctrl_vs_Flight_All.txt.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_GSE131954_HTSeq_RR9_Ground_Ctrl_vs_Flight_SigCounts.txt.gz",
+        "size_bytes": 24514,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_GSE131954_HTSeq_RR9_Ground_Ctrl_vs_Flight_SigCounts.txt.gz"
+      },
+      {
+        "name": "GLDS-255_rna-seq_GSE131954_HTSeq_RR9_Ground_Ctrl_vs_Flight_AllCounts.txt.gz",
+        "size_bytes": 661467,
+        "category": "RNA-Seq",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-255/download?source=datamanager&file=GLDS-255_rna-seq_GSE131954_HTSeq_RR9_Ground_Ctrl_vs_Flight_AllCounts.txt.gz"
+      }
+    ]
+  },
+  "OSD-817": {
+    "file_count": 116,
+    "total_listed": 116,
+    "total_size_MB": 2908.7,
+    "files": [
+      {
+        "name": "OSD-817_metadata_OSD-817-ISA.zip",
+        "size_bytes": 129227,
+        "category": "Study Metadata Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_metadata_OSD-817-ISA.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_Tunel Analysis_SUBMITTED.xlsx",
+        "size_bytes": 11046,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_Tunel+Analysis_SUBMITTED.xlsx"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB Analysis_SUBMITTED.xlsx",
+        "size_bytes": 9419,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB+Analysis_SUBMITTED.xlsx"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_TRANSFORMED.csv",
+        "size_bytes": 427,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_TRANSFORMED.csv",
+        "size_bytes": 457,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_IHC Expression_SUBMITTED.xlsx",
+        "size_bytes": 13133,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_IHC+Expression_SUBMITTED.xlsx"
+      },
+      {
+        "name": "OSD-817_sup_Prism Files.zip",
+        "size_bytes": 729263,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_Prism+Files.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_IHC_OpticNerveHead_TRANSFORMED.csv",
+        "size_bytes": 576,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_IHC_OpticNerveHead_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-135_microscopy_Optic Nerve Axons_12-21-20 Final_SUBMITTED.xlsx",
+        "size_bytes": 41299,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_Optic+Nerve+Axons_12-21-20+Final_SUBMITTED.xlsx"
+      },
+      {
+        "name": "LSDS-135_microscopy_PPD_TRANSFORMED.csv",
+        "size_bytes": 5543,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_PPD_TRANSFORMED.csv"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_42991_OS.zip",
+        "size_bytes": 46958612,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_42991_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_41204 OS GROUP 6 LAM GFAP 4X.zip",
+        "size_bytes": 12855461,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_41204+OS+GROUP+6+LAM+GFAP+4X.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_39652_OS.zip",
+        "size_bytes": 18907762,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_39652_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_39652_OD.zip",
+        "size_bytes": 58006068,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_39652_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_39574_OS.zip",
+        "size_bytes": 57752022,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_39574_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_37718_OD.zip",
+        "size_bytes": 23065201,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_37718_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_37718 OS GROUP 6 LAM GFAP 4X.zip",
+        "size_bytes": 6378486,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_37718+OS+GROUP+6+LAM+GFAP+4X.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_37350_OS.zip",
+        "size_bytes": 29117070,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_37350_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_37350_OD.zip",
+        "size_bytes": 29037681,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_37350_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_34085_OS.zip",
+        "size_bytes": 60658537,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_34085_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_34085_OD.zip",
+        "size_bytes": 62746432,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_34085_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_32115_OS.zip",
+        "size_bytes": 57452503,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_32115_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_32115_OD.zip",
+        "size_bytes": 54135325,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_32115_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_22536_OS.zip",
+        "size_bytes": 54485828,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_22536_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_22536_OD.zip",
+        "size_bytes": 81018431,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_22536_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_22196_OS.zip",
+        "size_bytes": 57817257,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_22196_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_22196_OD.zip",
+        "size_bytes": 58341065,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_22196_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_20779_OS.zip",
+        "size_bytes": 65042883,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_20779_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_20779_OD.zip",
+        "size_bytes": 62911726,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_20779_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_18004_OS.zip",
+        "size_bytes": 56246047,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_18004_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_18004_OD.zip",
+        "size_bytes": 61403345,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_18004_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_17845_OS.zip",
+        "size_bytes": 44643387,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_17845_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_15380_OS.zip",
+        "size_bytes": 45372735,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_15380_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_15380_OD.zip",
+        "size_bytes": 65547553,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_15380_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_15373_OS.zip",
+        "size_bytes": 67060007,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_15373_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_15373_OD.zip",
+        "size_bytes": 61166646,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_15373_OD.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_07346_OS.zip",
+        "size_bytes": 73393017,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_07346_OS.zip"
+      },
+      {
+        "name": "LSDS-135_Immunohistochemistry_07346_OD.zip",
+        "size_bytes": 61698035,
+        "category": "Immunohistochemistry",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_Immunohistochemistry_07346_OD.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_34085 OS 7.zip",
+        "size_bytes": 77065690,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_34085+OS+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_34085 OD 7.zip",
+        "size_bytes": 63429331,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_34085+OD+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_32115 OS 7.zip",
+        "size_bytes": 43230601,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_32115+OS+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_32115 OD 7.zip",
+        "size_bytes": 6160658,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_32115+OD+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_22536 7L.zip",
+        "size_bytes": 52330792,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_22536+7L.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_22196 7L.zip",
+        "size_bytes": 34493830,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_22196+7L.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_22196 7 R.zip",
+        "size_bytes": 45433648,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_22196+7+R.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_20779 R7.zip",
+        "size_bytes": 62869758,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_20779+R7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_20779 L7.zip",
+        "size_bytes": 60789684,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_20779+L7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_18004 L 7.zip",
+        "size_bytes": 17960311,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_18004+L+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_15380 R 7.zip",
+        "size_bytes": 47729830,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_15380+R+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_15380 L.zip",
+        "size_bytes": 14365670,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_15380+L.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_15373 R 7.zip",
+        "size_bytes": 29285777,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_15373+R+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_15373 L7.zip",
+        "size_bytes": 26463043,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_15373+L7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_07346 L 7.zip",
+        "size_bytes": 32522133,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_07346+L+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_TUNEL_07346  R 7.zip",
+        "size_bytes": 26758854,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_TUNEL_07346++R+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_34085 OD 7.zip",
+        "size_bytes": 29228253,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_34085+OD+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_32115 OS 7.zip",
+        "size_bytes": 26878601,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_32115+OS+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_22536 7 L.zip",
+        "size_bytes": 55935641,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_22536+7+L.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_22196 7 L.zip",
+        "size_bytes": 50825602,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_22196+7+L.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_20779 R 7.zip",
+        "size_bytes": 28211084,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_20779+R+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_18004 R 7.zip",
+        "size_bytes": 29106984,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_18004+R+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_15380 R 7.zip",
+        "size_bytes": 31870103,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_15380+R+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_15373 L 7.zip",
+        "size_bytes": 14350091,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_15373+L+7.zip"
+      },
+      {
+        "name": "LSDS-135_immunostaining_CTB_07346 L 7.zip",
+        "size_bytes": 27540823,
+        "category": "Immunostaining",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_immunostaining_CTB_07346+L+7.zip"
+      },
+      {
+        "name": "LSDS-135_microscopy_7346_OS_slide3_3_RGB_RGB.tif",
+        "size_bytes": 4498630,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_7346_OS_slide3_3_RGB_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_7346_OD_slide3_5_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_7346_OD_slide3_5_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_7346_OD_slide3_4_RGB.tif",
+        "size_bytes": 17777646,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_7346_OD_slide3_4_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_7346_OD_slide3_3_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_7346_OD_slide3_3_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_7346_OD_slide3_2_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_7346_OD_slide3_2_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_7346_OD_slide3_1_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_7346_OD_slide3_1_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OS_slide3_6_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OS_slide3_6_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OS_slide3_5_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OS_slide3_5_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OS_slide3_4_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OS_slide3_4_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OS_slide3_3_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OS_slide3_3_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OS_slide3_2_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OS_slide3_2_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OS_slide3_1_1091.tif",
+        "size_bytes": 5972872,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OS_slide3_1_1091.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OD_slide3_6_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OD_slide3_6_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OD_slide3_5_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OD_slide3_5_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OD_slide3_4_RGB.tif",
+        "size_bytes": 5972864,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OD_slide3_4_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OD_slide3_3_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OD_slide3_3_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OD_slide3_2_RGB.tif",
+        "size_bytes": 5972876,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OD_slide3_2_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_34085_OD_slide3_1_RGB.tif",
+        "size_bytes": 5972864,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_34085_OD_slide3_1_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OS_slide3_3_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OS_slide3_3_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OS_slide 3_6_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OS_slide+3_6_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OS_slide 3_5_RGB.tif",
+        "size_bytes": 17777646,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OS_slide+3_5_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OS_slide 3_4_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OS_slide+3_4_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OS_slide 3_2_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OS_slide+3_2_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OS_slide 3_1_RGB.tif",
+        "size_bytes": 17777646,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OS_slide+3_1_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OD_slide3_6_RGB.tif",
+        "size_bytes": 17777646,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OD_slide3_6_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OD_slide3_5_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OD_slide3_5_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OD_slide3_4_RGB.tif",
+        "size_bytes": 17777858,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OD_slide3_4_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OD_slide3_3_RGB.tif",
+        "size_bytes": 17777646,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OD_slide3_3_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OD_slide3_2_RGB.tif",
+        "size_bytes": 17777860,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OD_slide3_2_RGB.tif"
+      },
+      {
+        "name": "LSDS-135_microscopy_32115_OD_slide 3_1_RGB.tif",
+        "size_bytes": 17777646,
+        "category": "Microscopy",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=LSDS-135_microscopy_32115_OD_slide+3_1_RGB.tif"
+      },
+      {
+        "name": "OSD-817_sup_827_Raw_Pressure_Data.zip",
+        "size_bytes": 13388305,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_827_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_827_Processed_Pressure_Data.zip",
+        "size_bytes": 1074933,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_827_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_7346_Raw_Pressure_Data.zip",
+        "size_bytes": 4040354,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_7346_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_7346_Processed_Pressure_Data.zip",
+        "size_bytes": 1471437,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_7346_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_42991_Raw_Pressure_Data.zip",
+        "size_bytes": 2977391,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_42991_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_41204_Raw_Pressure_Data.zip",
+        "size_bytes": 21599203,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_41204_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_41204_Processed_Pressure_Data.zip",
+        "size_bytes": 1074941,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_41204_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_39574_Raw_Pressure_data.zip",
+        "size_bytes": 19000236,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_39574_Raw_Pressure_data.zip"
+      },
+      {
+        "name": "OSD-817_sup_39574_Processed_Pressure_Data.zip",
+        "size_bytes": 1074941,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_39574_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_37718_Raw_Pressure_Data.zip",
+        "size_bytes": 32116642,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_37718_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_37718_Processed_Pressure_Data.zip",
+        "size_bytes": 1074941,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_37718_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_3750_Raw_Pressure_Data.zip",
+        "size_bytes": 29968483,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_3750_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_3750_Processed_Pressure_Data.zip",
+        "size_bytes": 1075319,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_3750_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_32115_Raw_Pressure_Data.zip",
+        "size_bytes": 4910562,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_32115_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_32115_Processed_Pressure_Data.zip",
+        "size_bytes": 1471443,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_32115_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_22196_22536_Raw_Pressure_Data.zip",
+        "size_bytes": 13238216,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_22196_22536_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_22196_22536_Processed_Pressure_Data.zip",
+        "size_bytes": 1471479,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_22196_22536_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_20779_Raw_Pressure_Data.zip",
+        "size_bytes": 2912232,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_20779_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_20779_Processed_Pressure_Data.zip",
+        "size_bytes": 1471443,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_20779_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_18004_Raw_Pressure_Data.zip",
+        "size_bytes": 673584,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_18004_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_18004_Processed_Pressure_Data.zip",
+        "size_bytes": 1471443,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_18004_Processed_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_15373_15380_Raw_Pressure_Data.zip",
+        "size_bytes": 2314360,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_15373_15380_Raw_Pressure_Data.zip"
+      },
+      {
+        "name": "OSD-817_sup_15373_15380_Processed_Pressure_Data.zip",
+        "size_bytes": 1471875,
+        "category": "Supplemental Materials",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-817/download?source=datamanager&file=OSD-817_sup_15373_15380_Processed_Pressure_Data.zip"
+      }
+    ]
+  },
+  "OSD-908": {
+    "file_count": 53,
+    "total_listed": 53,
+    "total_size_MB": 62720.2,
+    "files": [
+      {
+        "name": "OSD-908_metadata_OSD-908-ISA.zip",
+        "size_bytes": 86644,
+        "category": "Study Metadata Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=OSD-908_metadata_OSD-908-ISA.zip"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897914_raw.fastq.gz",
+        "size_bytes": 1360207326,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897914_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897905_raw.fastq.gz",
+        "size_bytes": 1215731733,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897905_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_raw_md5sum_GLsmallRNAseq.txt",
+        "size_bytes": 2971,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_raw_md5sum_GLsmallRNAseq.txt"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897904_raw.fastq.gz",
+        "size_bytes": 888636553,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897904_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897878_raw.fastq.gz",
+        "size_bytes": 1330357262,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897878_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897838_raw.fastq.gz",
+        "size_bytes": 1837521774,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897838_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA_Seq_raw_multiqc_GLsmallRNAseq_report.zip",
+        "size_bytes": 851160,
+        "category": "GeneLab Processed miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA_Seq_raw_multiqc_GLsmallRNAseq_report.zip"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897835_raw.fastq.gz",
+        "size_bytes": 1040381765,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897835_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897794_raw.fastq.gz",
+        "size_bytes": 1701107308,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897794_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897785_raw.fastq.gz",
+        "size_bytes": 856637626,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897785_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897783_raw.fastq.gz",
+        "size_bytes": 1087404530,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897783_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897780_raw.fastq.gz",
+        "size_bytes": 1009527138,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897780_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897767_raw.fastq.gz",
+        "size_bytes": 1405476395,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897767_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897758_raw.fastq.gz",
+        "size_bytes": 1485925405,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897758_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897752_raw.fastq.gz",
+        "size_bytes": 1188311447,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897752_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897742_raw.fastq.gz",
+        "size_bytes": 1543033021,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897742_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897740_raw.fastq.gz",
+        "size_bytes": 914942394,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897740_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897706_raw.fastq.gz",
+        "size_bytes": 1836248625,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897706_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897664_raw.fastq.gz",
+        "size_bytes": 1073210352,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897664_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897647_raw.fastq.gz",
+        "size_bytes": 1233206676,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897647_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897631_raw.fastq.gz",
+        "size_bytes": 1287591732,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897631_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897627_raw.fastq.gz",
+        "size_bytes": 1069762363,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897627_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897571_raw.fastq.gz",
+        "size_bytes": 826165744,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897571_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897567_raw.fastq.gz",
+        "size_bytes": 1109611066,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897567_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897565_raw.fastq.gz",
+        "size_bytes": 1414666773,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897565_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897546_raw.fastq.gz",
+        "size_bytes": 1152870783,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897546_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897539_raw.fastq.gz",
+        "size_bytes": 1179571057,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897539_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897537_raw.fastq.gz",
+        "size_bytes": 1677468018,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897537_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897518_raw.fastq.gz",
+        "size_bytes": 1247915783,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897518_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897514_raw.fastq.gz",
+        "size_bytes": 1766266133,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897514_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897493_raw.fastq.gz",
+        "size_bytes": 1027191857,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897493_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897490_raw.fastq.gz",
+        "size_bytes": 1487564961,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897490_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897489_raw.fastq.gz",
+        "size_bytes": 1025075619,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897489_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897481_raw.fastq.gz",
+        "size_bytes": 617150803,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897481_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897450_raw.fastq.gz",
+        "size_bytes": 1325646649,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897450_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897439_raw.fastq.gz",
+        "size_bytes": 1861797282,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897439_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897419_raw.fastq.gz",
+        "size_bytes": 1368951035,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897419_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897404_raw.fastq.gz",
+        "size_bytes": 1450623526,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897404_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897375_raw.fastq.gz",
+        "size_bytes": 1140110728,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897375_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897374_raw.fastq.gz",
+        "size_bytes": 1433238440,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897374_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897371_raw.fastq.gz",
+        "size_bytes": 1376094635,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897371_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897351_raw.fastq.gz",
+        "size_bytes": 1092242216,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897351_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897347_raw.fastq.gz",
+        "size_bytes": 900604022,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897347_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897342_raw.fastq.gz",
+        "size_bytes": 1205397618,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897342_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897329_raw.fastq.gz",
+        "size_bytes": 1120178102,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897329_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897328_raw.fastq.gz",
+        "size_bytes": 1637634096,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897328_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897319_raw.fastq.gz",
+        "size_bytes": 1017696042,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897319_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897304_raw.fastq.gz",
+        "size_bytes": 992282983,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897304_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897296_raw.fastq.gz",
+        "size_bytes": 1544466951,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897296_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897292_raw.fastq.gz",
+        "size_bytes": 1266945270,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897292_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897268_raw.fastq.gz",
+        "size_bytes": 1191482933,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897268_raw.fastq.gz"
+      },
+      {
+        "name": "GLDS-742_miRNA-Seq_GSM8897238_raw.fastq.gz",
+        "size_bytes": 897128226,
+        "category": "miRNA-Seq Data Files",
+        "url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-908/download?source=datamanager&file=GLDS-742_miRNA-Seq_GSM8897238_raw.fastq.gz"
+      }
+    ]
+  }
+}
