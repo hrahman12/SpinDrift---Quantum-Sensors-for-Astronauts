@@ -5,3 +5,7 @@ public/
 data/literature/raw/
 node_modules/
 **/__pycache__/
+# not needed on the live site: static-copy Lean results, slides, hardware designs
+data/static/
+slides/
+hardware/

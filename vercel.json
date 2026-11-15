@@ -7,7 +7,7 @@
   "functions": {
     "api/index.py": {
       "maxDuration": 30,
-      "includeFiles": "{server/**,lean/SpinDrift.lean,lean/Main.lean,lean/lean-toolchain,lean/SpinDrift/**,lean/.lake/build/bin/**,data/locations.json,data/specs.json,data/nv_heart_derived.json,data/lean_proofs.json,data/live_snapshot.json,data/runs.json,data/combined_sensor.json,data/recorded/opm_brain_mne.json}"
+      "includeFiles": "{server/**,lean/*.lean,lean/lean-toolchain,lean/SpinDrift/**,lean/.lake/build/bin/**,data/*.json,data/recorded/opm_brain_mne.json}"
     }
   },
   "rewrites": [

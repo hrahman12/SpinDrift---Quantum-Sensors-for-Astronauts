@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import urllib.request
 from pathlib import Path
 
@@ -23,7 +24,7 @@ from matplotlib import font_manager  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 DATA, OUT = ROOT / "data", ROOT / "slides" / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
-API = "http://127.0.0.1:8001"
+API = os.environ.get("LEAN_API", "http://127.0.0.1:8001")
 
 # ---------------------------------------------------------------- look (unslop: graphite ramp, one accent)
 BG, SURF, LINE = "#121417", "#1a1d22", "#2a2e35"
@@ -136,11 +137,14 @@ CHECKS = [("opm_brain", "Brain\nOPM"), ("opm_heart", "Heart\nOPM"), ("nv_heart_j
 
 
 def fig_matrix():
-    inputs = {"shielding_factor": 1, "beats_averaged": 47, "snr_required": 3, "build": "jgu", "target": "r_peak", "bandwidth_hz": 30}
+    inputs = {"shielding_factor": 1, "beats_averaged": 47, "snr_required": 3, "build": "jgu", "target": "r_peak", "bandwidth_hz": 30,
+              "renin": 2.0, "bilirubin_isf": 1.3}   # published references (README: Where the references come from)
     rows = []
     for area, s in ORDERED:
         r = post("/api/verdict", {"location": s["id"], "inputs": inputs})
         rows.append((short(s), [r["verdicts"][k]["verdict"] for k, _ in CHECKS]))
+    print("brain OPM works with no shield at:", [n for n, vs in rows if vs[0] == "REQUIREMENTS_MET"])
+    print("brain OPM needs a number at:", [n for n, vs in rows if vs[0] == "NEED_MORE_INFORMATION"])
     code = {"REQUIREMENTS_MET": 0, "NOT_MET": 1, "NEED_MORE_INFORMATION": 2}
     col = [OK, BAD, MISS]
     fig, ax = plt.subplots(figsize=(7.0, 9.4))
@@ -158,7 +162,7 @@ def fig_matrix():
     for k, (lab, c) in enumerate([("works", OK), ("does not work", BAD), ("a number is missing", MISS)]):
         ax.add_patch(plt.Rectangle((k * 2.35, len(rows) + 0.7), 0.4, 0.4, color=c, clip_on=False))
         ax.text(k * 2.35 + 0.55, len(rows) + 0.9, lab, va="center", fontsize=9, color=INK2)
-    save(fig, "f2_lean_verdict_matrix", "Each cell is the output of SpinDrift.verdict (Lean 4) from POST /api/verdict, no shield, 47 heartbeats, signal÷noise 3, 30 Hz.")
+    save(fig, "f2_lean_verdict_matrix", "Each cell is the output of SpinDrift.verdict (Lean 4) from POST /api/verdict: no shield, 47 heartbeats, signal÷noise 3, 30 Hz, renin 2.0 pM, bilirubin 1.3 mg/dL (published references).")
     return rows
 
 
@@ -338,5 +342,71 @@ def fig_brain():
     save(fig, "f9_brain_response", "Response: MNE-Python OPM sample (QuSpin sensors, 8 channels, median-nerve stimulus). Noise: QZFM Gen-3 '<15 fT/√Hz' (upper bound), BW 30 Hz. ISS field: IGRF-14 at the live ISS position.")
 
 
+# ---------------------------------------------------------------- 10. blood and skin: published references against each sensor's limits
+PG_PER_PM = 40.0   # renin at about 40 kDa: 1 pM ≈ 40 pg/mL (README; 37–44 kDa gives the same verdict)
+RENIN_REF = [      # published plasma renin intervals in pg/mL (README: Where the references come from)
+    ("ARUP, upright, over 40", 3.6, 81.6), ("ARUP, upright, under 40", 4.2, 52.2),
+    ("MLabs, upright, over 40", 4.0, 60.0), ("MLabs, upright, under 40", 4.0, 44.0),
+    ("LHSC, standing, ages 19–60", 2.6, 27.7)]
+BILI_REF = [("Cleveland Clinic Labs, adults 18–99", 0.2, 1.3)]   # total bilirubin, mg/dL
+
+
+def fig_references():
+    qd, cqd = SPECS["qd_renin"], SPECS["cqd_patch"]
+    lod_qd = qd["detection_limit"]["value"]                                          # 25 pM, Long et al. 2012
+    lo, hi = [float(x) for x in cqd["range"]["value"].replace("–", "-").split("-")]  # 3–20 mg/dL, SI Table S1
+    lod_cqd = cqd["detection_limit"]["value"]                                        # 0.5 mg/dL, SI Table S1
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12.8, 4.8))
+    for i, (name, a, b) in enumerate(RENIN_REF):
+        a1.plot([a / PG_PER_PM, b / PG_PER_PM], [i, i], color=GREYS[0], lw=6, solid_capstyle="butt")
+        a1.text(a / PG_PER_PM, i + 0.28, name, va="bottom", fontsize=8.5, color=INK2)
+    a1.axvline(lod_qd, color=BAD, lw=2)
+    a1.text(lod_qd * 1.1, len(RENIN_REF) - 0.2, f"sensor's detection limit\n{lod_qd:g} pM (Long et al. 2012)", color=BAD, fontsize=9, va="top")
+    top = max(b for _, _, b in RENIN_REF) / PG_PER_PM
+    a1.annotate("", xy=(lod_qd, -0.8), xytext=(top, -0.8), arrowprops=dict(arrowstyle="<->", color=MUTED))
+    a1.text(math.sqrt(top * lod_qd), -1.25, f"{lod_qd / top:.0f}× gap to the highest reference", ha="center", color=MUTED, fontsize=9)
+    a1.set_xscale("log"); a1.set_xlim(0.04, 200); a1.set_ylim(-1.6, len(RENIN_REF) + 0.3); a1.set_yticks([])
+    a1.set_xlabel("renin in plasma (pM, log scale)"); a1.set_title("Blood: normal renin sits far below the sensor's limit"); mono(a1)
+    a2.axvspan(lo, hi, color=ACC, alpha=0.18, lw=0)
+    a2.text(math.sqrt(lo * hi), 1.6, f"patch's stated range\n{lo:g}–{hi:g} mg/dL (SI Table S1)", ha="center", color=ACC, fontsize=9)
+    a2.axvline(lod_cqd, color=MISS, lw=1.5, ls="--")
+    a2.text(lod_cqd * 1.06, 2.0, f"patch LOD {lod_cqd:g}", color=MISS, fontsize=9, va="top")
+    for name, a, b in BILI_REF:
+        a2.plot([a, b], [1, 1], color=GREYS[0], lw=6, solid_capstyle="butt")
+        a2.text(a, 0.7, f"{name}: {a:g}–{b:g} mg/dL", fontsize=8.5, color=INK2)
+    a2.set_xscale("log"); a2.set_xlim(0.1, 40); a2.set_ylim(0.4, 2.15); a2.set_yticks([])
+    a2.set_xlabel("total bilirubin (mg/dL, log scale)"); a2.set_title("Skin: the adult reference sits below the patch's range"); mono(a2)
+    fig.tight_layout()
+    save(fig, "f10_references_vs_limits", "Renin: ARUP, MLabs and LHSC intervals at 40 pg/mL per pM. Bilirubin: a serum reference used as a proxy for skin fluid. Population references, not measurements of anyone.")
+
+
+# ---------------------------------------------------------------- 11. how the missing numbers fell
+def fig_missing():
+    base = {"shielding_factor": 1, "beats_averaged": 47, "snr_required": 3, "build": "jgu", "target": "r_peak", "bandwidth_hz": 30}
+    steps = [("no renin,\nno bilirubin", base), ("+ renin reference\n2.0 pM", {**base, "renin": 2.0}),
+             ("+ bilirubin reference\n1.3 mg/dL", {**base, "renin": 2.0, "bilirubin_isf": 1.3})]
+    counts = []
+    for _, inp in steps:
+        n = 0
+        for _, s in ORDERED:
+            v = post("/api/verdict", {"location": s["id"], "inputs": inp})["verdicts"]
+            n += sum(v[k]["verdict"] == "NEED_MORE_INFORMATION" for k, _ in CHECKS)
+        counts.append(n)
+    total = len(ORDERED) * len(CHECKS)
+    fig, ax = plt.subplots(figsize=(7.4, 4.6))
+    xs = list(range(len(steps)))
+    ax.bar(xs, counts, color=MISS, width=0.55)
+    for x, c in zip(xs, counts):
+        ax.text(x, c + total * 0.012, f"{c}  ({100 * c / total:.1f}%)", ha="center", color=INK, fontsize=10)
+    ax.axhline(0.05 * total, color=ACC, lw=1.2, ls="--")
+    ax.text(len(steps) - 0.62, 0.05 * total + 1.5, "5% limit", color=ACC, fontsize=9, ha="right")
+    ax.set_xticks(xs, [s[0] for s in steps], fontsize=9)
+    ax.set_ylabel(f"cells that need a number (of {total})"); ax.set_ylim(0, max(counts) * 1.22)
+    ax.set_title(f"Two published references cut the missing cells from {counts[0]} to {counts[-1]}"); ax.grid(axis="y"); mono(ax)
+    save(fig, "f11_missing_cells", f"Lean verdicts from POST /api/verdict at {len(ORDERED)} places × {len(CHECKS)} checks; no shield, 47 heartbeats, signal÷noise 3, 30 Hz.")
+    print("missing cells by step:", counts, "of", total)
+
+
 if __name__ == "__main__":
     fig_field(); fig_matrix(); fig_heartbeat(); fig_beats(); fig_surface3d(); fig_odmr3d(); fig_fret(); fig_ladder(); fig_brain()
+    fig_references(); fig_missing()
