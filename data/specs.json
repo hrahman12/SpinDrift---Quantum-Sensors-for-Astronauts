@@ -1,20 +1,840 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T07:31:04Z",
+    "sources": [
+      "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
+      "OSTI slides, https://www.osti.gov/servlets/purl/3003039",
+      "HSE University listing of the QuSpin spec, https://hse.ru/en/cdm-centre/brain/QZFM_Gen3",
+      "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843",
+      "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+      "ESA Earth Online, ASM overview, https://earth.esa.int/eogateway/instruments/asm/description (accessed 2026-11-15)"
+    ]
   },
-  "opm": {},
+  "opm": {
+    "quantum_effect": {
+      "value": "zero-field resonance of spin-polarized rubidium vapor, single laser beam",
+      "unit": "",
+      "source": "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "The brief's source URL https://quspin.com/products-qzfm/zero-field-magnetometer-description/ returned HTTP 404 on 2026-11-15; the same description ('based on zero-field resonance with a single laser beam', rubidium vapor cell, laser light optically pumps the atoms) is on the technology page."
+    },
+    "sensitivity_dual_axis": {
+      "value": "<15",
+      "unit": "fT/√Hz (3–100 Hz)",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "sensitivity_dual_axis_typical": {
+      "value": "7–10",
+      "unit": "fT/√Hz",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "upgraded from TO_CONFIRM on 2026-11-15: the Gen-3 product page states 'typically 7–10 fT/√Hz'"
+    },
+    "sensitivity_triaxial": {
+      "value": "<23 (typ. ~15, all axes at once)",
+      "unit": "fT/√Hz (3–100 Hz)",
+      "source": "OSTI slides, https://www.osti.gov/servlets/purl/3003039 (slide 23)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "Also stated on the QuSpin Gen-3 product page."
+    },
+    "dynamic_range": {
+      "value": "±5",
+      "unit": "nT",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "sensor_head": {
+      "value": "12.4 × 16.6 × 24.4",
+      "unit": "mm",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "standoff": {
+      "value": "6.5 (vapor-cell center to housing)",
+      "unit": "mm",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "head_power": {
+      "value": "~0.7",
+      "unit": "W",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "total_power": {
+      "value": "5",
+      "unit": "W",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "upgraded from TO_CONFIRM on 2026-11-15: the product page now lists 'Total power consumption Approximately 5 W'; the HSE listing also states 5 W total"
+    },
+    "electronics_size": {
+      "value": "3.1 × 11.0 × 16.5",
+      "unit": "cm",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "upgraded from TO_CONFIRM on 2026-11-15: the product page now lists 'Electronics dimensions 3.1 × 11.0 × 16.5 cm'; matches HSE University listing of the QuSpin spec, https://hse.ru/en/cdm-centre/brain/QZFM_Gen3"
+    },
+    "latency": {
+      "value": "~5",
+      "unit": "ms",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "outputs": {
+      "value": "analog and USB digital",
+      "unit": "",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "Product page footnote: the USB digital output carries one axis at a fixed 200 Hz, for setup and diagnostics; the analog outputs carry the full measurement."
+    },
+    "cable": {
+      "value": "2 ft flexible FPC, then 6.5 m round cable",
+      "unit": "",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "calibration": {
+      "value": "automated internal reference",
+      "unit": "",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "cooling": {
+      "value": "none, room temperature",
+      "unit": "",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "atomic_species": {
+      "value": "rubidium",
+      "unit": "",
+      "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "bandwidth_serf_class": {
+      "value": "80–150 open loop, 350 closed loop",
+      "unit": "Hz",
+      "source": "OSTI slides, https://www.osti.gov/servlets/purl/3003039 (slide 20)",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "Class figure, not the Gen-3 datasheet. Slide 20 lists 80–150 Hz open loop for zero-field SERF OPMs and footnotes the 350 Hz closed-loop figure to FieldLine (Alem et al., Front. Neurosci. 17, 1190310, 2023). The QuSpin technology page states 'Bandwidth of ~150 Hz' for the QZFM."
+    }
+  },
   "nv": {
-    "headline": {},
-    "jgu": {},
-    "zaquant": {},
-    "qant": {}
+    "headline": {
+      "sensitivity_range": {
+        "value": "6–26",
+        "unit": "pT/√Hz",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (abstract)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "sensing_volume": {
+        "value": "<0.5",
+        "unit": "mm³",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (abstract)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "averaging": {
+        "value": "a few hundred to several thousand heartbeats",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (abstract)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "r_peak_average": {
+        "value": 25,
+        "unit": "pT",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 3.1, p. 10)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: p. 10, 'reliable detection of the average 25 pT R-peaks'"
+      },
+      "sensitivity_for_single_beat_snr5": {
+        "value": "~1",
+        "unit": "pT/√Hz",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 3.1, p. 10)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: p. 10, 'with a signal-to-noise ratio of 5 would require a sensitivity of about 1 pT/√Hz'"
+      },
+      "bandwidth_assumed": {
+        "value": 30,
+        "unit": "Hz",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 3.1, p. 10)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: p. 10, 'a bandwidth of approximately 30 Hz' (stored as 30; the paper says approximately); the same sentence gives a single-shot RMS noise floor of 50 pT"
+      },
+      "reference_opm_mapping": {
+        "value": "FieldLine OPM array, two-layer µ-metal shielding, 2.5 cm spacing, ≥5 cm standoff, traces averaged over 100 heartbeats",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 2.2, p. 6)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: p. 6; Fig. 2b shows 47 OPM MCG traces, band-pass 3–30 Hz"
+      },
+      "data_availability": {
+        "value": "available upon reasonable request",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 6, p. 15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: p. 15, 'The noise characterization and MCG analysis data are available upon reasonable request from the authors.'"
+      },
+      "standoff": {
+        "value": "~1 cm (JGU and ZAQuant); Q.ANT: subject lying directly below the sensor, distance not stated",
+        "unit": "cm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (pp. 4 and 6)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "changed from NOT_STATED after reading the full text: p. 4 'approximately 1 cm away from a seated subject's chest' (JGU); p. 6 'sitting ∼1 cm away from the sensor head' (ZAQuant)"
+      },
+      "diamond_supplier": {
+        "value": null,
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "The text does not name a supplier. Two co-authors are at Element Six Global Innovation Centre; the JGU diamond design is in Omar et al., Optics Letters 48, 2512 (2023), doi:10.1364/OL.486998."
+      }
+    },
+    "jgu": {
+      "sensitivity": {
+        "value": 13,
+        "unit": "pT/√Hz",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Table 2, p. 15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: Table 2; averaged between 20 and 30 Hz (p. 4)"
+      },
+      "beats_averaged": {
+        "value": 12000,
+        "unit": "beats",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 2.1, p. 6)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: p. 6, 'The amount of averages for the displayed data were 12000, 300, and 2000'; position B in Fig. 2 used 6,000"
+      },
+      "diamond": {
+        "value": "0.5 × 0.5 mm base, 0.18 mm tall, truncated pyramid",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (p. 4; Table 2)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "laser": {
+        "value": "Coherent Verdi G5",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "detector": {
+        "value": "differential photodiode board",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "model unspecified in source; acknowledgements say Hamamatsu supplied the non-magnetic photodiodes"
+      },
+      "microwave": {
+        "value": "custom PCB antenna",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "'custom made printed circuit board (PCB)'"
+      },
+      "bias_field": {
+        "value": "none; 6.12 kHz modulation field",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "modulation field of µT amplitude along [100]"
+      },
+      "readout": {
+        "value": "Zurich Instruments lock-in",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "model unspecified in source"
+      },
+      "shielding": {
+        "value": "multilayer shielded room",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Table 2, p. 15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "head_size": {
+        "value": "12 mm aluminum housing",
+        "unit": "mm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "'sensor head diameter: 12 mm'"
+      }
+    },
+    "zaquant": {
+      "sensitivity": {
+        "value": 7,
+        "unit": "pT/√Hz",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Table 2, p. 15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: Table 2"
+      },
+      "beats_averaged": {
+        "value": 300,
+        "unit": "beats",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 2.1, p. 6)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: p. 6"
+      },
+      "diamond": {
+        "value": "0.5 × 0.5 × 0.5 mm, pyramidal, CPC-mounted",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15); Table 2",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "laser": {
+        "value": "green laser",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "model unspecified in source"
+      },
+      "detector": {
+        "value": "balanced photodetection",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "model unspecified in source; 695 nm long-pass filter"
+      },
+      "microwave": {
+        "value": "loop antenna after amplification",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "bias_field": {
+        "value": "permanent magnet, ~1 mT",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "readout": {
+        "value": "Zurich Instruments HF2LI",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "shielding": {
+        "value": "single-layer shield",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Table 2, p. 15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "head_size": {
+        "value": null,
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": null
+      }
+    },
+    "qant": {
+      "sensitivity": {
+        "value": 26,
+        "unit": "pT/√Hz",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Table 2, p. 15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: Table 2"
+      },
+      "beats_averaged": {
+        "value": 2000,
+        "unit": "beats",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 2.1, p. 6)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "upgraded from TO_CONFIRM on 2026-11-15: p. 6"
+      },
+      "diamond": {
+        "value": "1 × 1 × 0.5 mm truncated pyramid, ~1.7 ppm NV⁻",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "NV⁻ content by EPR"
+      },
+      "laser": {
+        "value": "Coherent OBIS, fiber-coupled, 100 mW at fiber",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "detector": {
+        "value": "low-noise balanced photodiode board",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "model unspecified in source"
+      },
+      "microwave": {
+        "value": "FPGA-based generation",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "antenna unspecified in source"
+      },
+      "bias_field": {
+        "value": "in-house Halbach ring, ~1 mT",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "readout": {
+        "value": "FPGA controller, USB-C to PC",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "shielding": {
+        "value": "unshielded",
+        "unit": "",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Table 2, p. 15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "head_size": {
+        "value": 1,
+        "unit": "dm³",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "'a sensor head volume of 1 dm3'"
+      }
+    }
   },
-  "qd_renin": {},
-  "cqd_patch": {},
+  "qd_renin": {
+    "quantum_effect": {
+      "value": "quantum confinement in a semiconductor nanocrystal; FRET from quantum-dot donor to Cy5 acceptor",
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "The abstract states the QD-donor / Cy5-acceptor FRET; 'quantum confinement in a semiconductor nanocrystal' is the general physics of quantum dots, not a claim of this paper."
+    },
+    "probe": {
+      "value": "streptavidin-coated quantum dot + multiple biotinylated, Cy5-labeled peptide substrates",
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "mechanism": {
+      "value": "renin cleaves the substrate, Cy5 leaves, FRET signal and Cy5 counts drop",
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "detection_limit": {
+      "value": 25,
+      "unit": "pM",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "readout": {
+      "value": "single-molecule counting by total internal reflection fluorescence (TIRF) microscopy",
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "qd_model_and_emission": {
+      "value": null,
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": null
+    },
+    "linear_range": {
+      "value": null,
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "full text is paywalled"
+    },
+    "assay_time": {
+      "value": null,
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "full text is paywalled"
+    }
+  },
+  "cqd_patch": {
+    "sensing_element": {
+      "value": "dissolving/hydrogel microneedles loaded with fluorescent carbon quantum dots, left in the skin as an invisible tattoo",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "mechanism": {
+      "value": "selective recovery of quenched fluorescence upon the blue light used for jaundice phototherapy",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "analyte": {
+      "value": "bilirubin in skin interstitial fluid",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "readout": {
+      "value": "IoT-integrated wearable optoelectronic reader; minimally invasive, continuous, real-time",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "validation": {
+      "value": "high correlation with blood bilirubin",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "reader_channels": {
+      "value": "440, 470, 510",
+      "unit": "nm",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "full text is paywalled; not checked against the primary source"
+    },
+    "calibration_model": {
+      "value": "ex vivo rat skin",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "full text is paywalled; not checked against the primary source"
+    },
+    "needle_dimensions": {
+      "value": null,
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": null
+    },
+    "detection_limit": {
+      "value": null,
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": null
+    },
+    "range": {
+      "value": null,
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": null
+    },
+    "dot_wavelengths": {
+      "value": null,
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": null
+    },
+    "physics_label": {
+      "value": "carbon dots are fluorescent nanoparticles; their emission is not a spin-based quantum measurement",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "general physics label, not a claim of the paper"
+    }
+  },
   "space_heritage": {
-    "oscar_qube": {},
-    "swarm_asm": {}
+    "oscar_qube": {
+      "principle": {
+        "value": "NV-diamond magnetometer using continuous-wave ODMR",
+        "unit": "",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "the abstract confirms ODMR with NV centres in diamond; 'continuous-wave' is not in the abstract and the APS full text returned HTTP 403 on 2026-11-15, so this is not yet checked"
+      },
+      "form_factor": {
+        "value": "1U (10 × 10 × 10 cm)",
+        "unit": "cm",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "mass": {
+        "value": 420,
+        "unit": "g",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "stated in the paper abstract (the brief pointed to the poster)"
+      },
+      "power": {
+        "value": 5,
+        "unit": "W",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "stated in the paper abstract (the brief pointed to the poster)"
+      },
+      "sensitivity": {
+        "value": "<300",
+        "unit": "nT/√Hz",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "iss_operation": {
+        "value": "ran on the ISS for 10 months in 2021–22",
+        "unit": "",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "the abstract confirms deployment aboard the ISS; duration and years: the APS full text returned HTTP 403 on 2026-11-15, so this is not yet checked"
+      },
+      "measurement_location": {
+        "value": "inside the station, where equipment caused interference",
+        "unit": "",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "the APS full text returned HTTP 403 on 2026-11-15, so this is not yet checked"
+      },
+      "flight_data": {
+        "value": null,
+        "unit": "",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "flight data not public"
+      }
+    },
+    "swarm_asm": {
+      "instrument": {
+        "value": "Absolute Scalar Magnetometer (ASM) on ESA's Swarm satellites",
+        "unit": "",
+        "source": "ESA Earth Online, ASM overview, https://earth.esa.int/eogateway/instruments/asm/description (accessed 2026-11-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "principle": {
+        "value": "optically pumped helium-4 magnetometer",
+        "unit": "",
+        "source": "ESA Earth Online, ASM overview, https://earth.esa.int/eogateway/instruments/asm/description (accessed 2026-11-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "ESA: based on electron spin resonance and the Zeeman effect; an HF discharge excites 4He atoms to the metastable state; linearly polarized pumping light"
+      },
+      "role": {
+        "value": "measures field strength and calibrates the vector magnetometer",
+        "unit": "",
+        "source": "ESA Earth Online, ASM overview, https://earth.esa.int/eogateway/instruments/asm/description (accessed 2026-11-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "charlie_asm": {
+        "value": "The ASM on Swarm Charlie was lost.",
+        "unit": "",
+        "source": "SpinDrift v10 brief",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "not stated on the ESA ASM overview page; needs an ESA source"
+      }
+    }
   }
 }

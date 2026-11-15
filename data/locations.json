@@ -1,77 +1,81 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T07:33:16Z",
+    "sources": [
+      "NOAA SWPC L1 magnetometer",
+      "wheretheiss.at ISS position",
+      "IGRF via ppigrf"
+    ]
   },
   "locations": [
     {
       "id": "iss",
-      "label": "iss",
+      "label": "ISS (low Earth orbit)",
       "ambient_field_nT": {
-        "value": null,
+        "value": 21264.7,
         "unit": "nT",
-        "source": "fixture",
+        "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
         "tag": "calculated",
-        "status": "NOT_YET_EXTRACTED",
-        "as_of": null,
-        "note": "fixture: not yet built"
+        "status": "VERIFIED",
+        "as_of": "2026-11-15T07:33:15Z",
+        "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of"
       },
-      "field_kind": "none"
+      "field_kind": "model"
     },
     {
       "id": "gateway",
-      "label": "gateway",
+      "label": "Lunar Gateway (near-rectilinear halo orbit)",
       "ambient_field_nT": {
         "value": null,
         "unit": "nT",
-        "source": "fixture",
-        "tag": "calculated",
-        "status": "NOT_YET_EXTRACTED",
+        "source": "no cited measured value",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
         "as_of": null,
-        "note": "fixture: not yet built"
+        "note": null
       },
       "field_kind": "none"
     },
     {
       "id": "lunar_base",
-      "label": "lunar_base",
+      "label": "Lunar surface base",
       "ambient_field_nT": {
         "value": null,
         "unit": "nT",
-        "source": "fixture",
-        "tag": "calculated",
-        "status": "NOT_YET_EXTRACTED",
+        "source": "no cited measured value",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
         "as_of": null,
-        "note": "fixture: not yet built"
+        "note": null
       },
       "field_kind": "none"
     },
     {
       "id": "mars_transit",
-      "label": "mars_transit",
+      "label": "Mars transit (interplanetary)",
       "ambient_field_nT": {
-        "value": null,
+        "value": 3.22,
         "unit": "nT",
-        "source": "fixture",
-        "tag": "calculated",
-        "status": "NOT_YET_EXTRACTED",
-        "as_of": null,
-        "note": "fixture: not yet built"
+        "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
+        "tag": "live",
+        "status": "VERIFIED",
+        "as_of": "2026-11-15T07:29:00Z",
+        "note": "fallback: https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
       },
-      "field_kind": "none"
+      "field_kind": "live_feed"
     },
     {
       "id": "mars_surface",
-      "label": "mars_surface",
+      "label": "Mars surface",
       "ambient_field_nT": {
         "value": null,
         "unit": "nT",
-        "source": "fixture",
-        "tag": "calculated",
-        "status": "NOT_YET_EXTRACTED",
+        "source": "no cited measured value",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
         "as_of": null,
-        "note": "fixture: not yet built"
+        "note": null
       },
       "field_kind": "none"
     }

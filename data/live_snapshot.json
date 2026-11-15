@@ -1,16 +1,256 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T07:33:16Z",
+    "sources": [
+      "NOAA SWPC L1 magnetometer",
+      "wheretheiss.at ISS position",
+      "IGRF via ppigrf"
+    ]
   },
-  "fetched_at": null,
-  "iss": null,
-  "l1": null,
+  "fetched_at": "2026-11-15T07:33:16Z",
+  "iss": {
+    "lat": {
+      "value": -46.124405743066,
+      "unit": "deg",
+      "source": "wheretheiss.at, https://api.wheretheiss.at/v1/satellites/25544",
+      "tag": "live",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:33:15Z",
+      "note": null
+    },
+    "lon": {
+      "value": -20.535636468804,
+      "unit": "deg",
+      "source": "wheretheiss.at, https://api.wheretheiss.at/v1/satellites/25544",
+      "tag": "live",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:33:15Z",
+      "note": null
+    },
+    "alt_km": {
+      "value": 437.95228129424,
+      "unit": "km",
+      "source": "wheretheiss.at, https://api.wheretheiss.at/v1/satellites/25544",
+      "tag": "live",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:33:15Z",
+      "note": null
+    },
+    "velocity_kmh": {
+      "value": 27528.076550224,
+      "unit": "km/h",
+      "source": "wheretheiss.at, https://api.wheretheiss.at/v1/satellites/25544",
+      "tag": "live",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:33:15Z",
+      "note": null
+    },
+    "b_total_nT": {
+      "value": 21264.7,
+      "unit": "nT",
+      "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:33:15Z",
+      "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of"
+    },
+    "igrf_generation": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc)"
+  },
+  "l1": {
+    "bt_nT": {
+      "value": 3.22,
+      "unit": "nT",
+      "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
+      "tag": "live",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:29:00Z",
+      "note": "fallback: https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404"
+    },
+    "bx_gsm_nT": {
+      "value": 2.24,
+      "unit": "nT",
+      "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
+      "tag": "live",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:29:00Z",
+      "note": null
+    },
+    "by_gsm_nT": {
+      "value": -0.69,
+      "unit": "nT",
+      "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
+      "tag": "live",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:29:00Z",
+      "note": null
+    },
+    "bz_gsm_nT": {
+      "value": 2.18,
+      "unit": "nT",
+      "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
+      "tag": "live",
+      "status": "VERIFIED",
+      "as_of": "2026-11-15T07:29:00Z",
+      "note": null
+    },
+    "spacecraft": "SOLAR1"
+  },
   "swarm_asm": null,
   "iss_cabin": null,
-  "opm_readiness": {},
+  "opm_readiness": {
+    "iss": {
+      "ambient_nT": {
+        "value": 21264.7,
+        "unit": "nT",
+        "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": "2026-11-15T07:33:15Z",
+        "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of"
+      },
+      "opm_range_nT": {
+        "value": 5,
+        "unit": "nT",
+        "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/",
+        "tag": "datasheet",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "QZFM dynamic range ±5 nT (specs.opm.dynamic_range). QuSpin also states the field at the sensor must be reduced to about 50 nT or below; built-in coils cancel residual fields up to 50 nT."
+      },
+      "shielding_factor": {
+        "value": 4252.94,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": "2026-11-15T07:33:15Z",
+        "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      },
+      "within_range": false
+    },
+    "gateway": {
+      "ambient_nT": {
+        "value": null,
+        "unit": "nT",
+        "source": "no cited measured value",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": null
+      },
+      "opm_range_nT": {
+        "value": 5,
+        "unit": "nT",
+        "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/",
+        "tag": "datasheet",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "QZFM dynamic range ±5 nT (specs.opm.dynamic_range). QuSpin also states the field at the sensor must be reduced to about 50 nT or below; built-in coils cancel residual fields up to 50 nT."
+      },
+      "shielding_factor": {
+        "value": null,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "formula: ambient_nT / opm_range_nT; inputs: gateway.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      },
+      "within_range": null
+    },
+    "lunar_base": {
+      "ambient_nT": {
+        "value": null,
+        "unit": "nT",
+        "source": "no cited measured value",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": null
+      },
+      "opm_range_nT": {
+        "value": 5,
+        "unit": "nT",
+        "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/",
+        "tag": "datasheet",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "QZFM dynamic range ±5 nT (specs.opm.dynamic_range). QuSpin also states the field at the sensor must be reduced to about 50 nT or below; built-in coils cancel residual fields up to 50 nT."
+      },
+      "shielding_factor": {
+        "value": null,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "formula: ambient_nT / opm_range_nT; inputs: lunar_base.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      },
+      "within_range": null
+    },
+    "mars_transit": {
+      "ambient_nT": {
+        "value": 3.22,
+        "unit": "nT",
+        "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
+        "tag": "live",
+        "status": "VERIFIED",
+        "as_of": "2026-11-15T07:29:00Z",
+        "note": "fallback: https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
+      },
+      "opm_range_nT": {
+        "value": 5,
+        "unit": "nT",
+        "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/",
+        "tag": "datasheet",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "QZFM dynamic range ±5 nT (specs.opm.dynamic_range). QuSpin also states the field at the sensor must be reduced to about 50 nT or below; built-in coils cancel residual fields up to 50 nT."
+      },
+      "shielding_factor": {
+        "value": 0.64,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": "2026-11-15T07:29:00Z",
+        "note": "formula: ambient_nT / opm_range_nT; inputs: mars_transit.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      },
+      "within_range": true
+    },
+    "mars_surface": {
+      "ambient_nT": {
+        "value": null,
+        "unit": "nT",
+        "source": "no cited measured value",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": null
+      },
+      "opm_range_nT": {
+        "value": 5,
+        "unit": "nT",
+        "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/",
+        "tag": "datasheet",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "QZFM dynamic range ±5 nT (specs.opm.dynamic_range). QuSpin also states the field at the sensor must be reduced to about 50 nT or below; built-in coils cancel residual fields up to 50 nT."
+      },
+      "shielding_factor": {
+        "value": null,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "formula: ambient_nT / opm_range_nT; inputs: mars_surface.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      },
+      "within_range": null
+    }
+  },
   "errors": [
-    "fixture: no live cycle yet"
+    "VIRES_TOKEN missing"
   ]
 }
