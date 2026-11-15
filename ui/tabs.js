@@ -30,7 +30,7 @@ export function beatChart(d, build, w = 560, h = 230, N = null) {
 }
 function bilirubinChart(w = 560, h = 230) {
   const ds = D.nasa_i4.datasets[0], tps = ds.variables[0].points.map((p) => p.timepoint);
-  const greys = ['#e1e5d6', '#b9c0ab', '#8e9684', '#6f7865'];
+  const greys = ['#1d1d1b', '#b9c0ab', '#8e9684', '#6f7865'];
   const series = ds.variables.map((v, i) => ({ x: v.points.map((_, j) => j), y: v.points.map((p) => p.value.value), color: greys[i], dash: ['', '5 3', '2 2', '8 3'][i] }));
   const pts = ds.variables.map((v, i) => ({ x: v.points.map((_, j) => j), y: v.points.map((p) => p.value.value), color: greys[i], r: 2.5, titles: v.points.map((p) => `${v.name} ${p.timepoint}: ${p.value.value ?? 'unspecified in source'} mg/dL`) }));
   return chart({ w, h, series, points: pts, catLabels: tps, xLabel: 'timepoint (days from launch L- / return R+)', yLabel: 'mg/dL' })
@@ -70,7 +70,7 @@ function blochTool(canvas, getW, onStep) {
     path((t) => [0.5 * Math.sin(t), 0, 0.5 + 0.5 * Math.cos(t)], 'rgba(169,212,140,.45)', [2, 3]);
     ctx.font = '10px "IBM Plex Mono", monospace'; ctx.fillStyle = '#8e9684';
     for (const [v, l] of [[[1.15, 0, 0], 'x'], [[0, 1.15, 0], 'y'], [[0, 0, 1.15], 'z · pump']]) { const [a, b] = pr(...v), [c, d] = pr(...v.map((q) => -q)); ctx.strokeStyle = '#4e5845'; ctx.beginPath(); ctx.moveTo(c, d); ctx.lineTo(a, b); ctx.stroke(); ctx.fillText(l, a + 4, b); }
-    ctx.beginPath(); trail.forEach((p, i) => { const [a, b] = pr(...p); i ? ctx.lineTo(a, b) : ctx.moveTo(a, b); }); ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.stroke();
+    ctx.beginPath(); trail.forEach((p, i) => { const [a, b] = pr(...p); i ? ctx.lineTo(a, b) : ctx.moveTo(a, b); }); ctx.strokeStyle = 'rgba(29,29,27,.35)'; ctx.stroke();
     const den = 1 + w[0] ** 2 + w[1] ** 2 + w[2] ** 2, Pss = [(w[1] + w[2] * w[0]) / den, (-w[0] + w[1] * w[2]) / den, (1 + w[2] ** 2) / den];
     const [sx, sy] = pr(...Pss); ctx.beginPath(); ctx.arc(sx, sy, 6, 0, 2 * Math.PI); ctx.strokeStyle = '#a9d48c'; ctx.stroke();
     const [ox, oy] = pr(0, 0, 0), [px, py] = pr(...P);
@@ -152,10 +152,10 @@ function nvLines(B, thDeg) {
 }
 function levelsSVG({ d, up, dn }) {
   const span = Math.max(40, (up - dn) / 2 + 15), lo = d - span, hi = d + span, Y = (f) => 128 - ((f - lo) / (hi - lo)) * 104;
-  const lvl = (y, col, w2, lab, val, dash) => `<line x1="150" x2="330" y1="${y}" y2="${y}" stroke="${col}" stroke-width="${w2}" ${dash ? 'stroke-dasharray="4 3"' : ''}/><text x="338" y="${y + 4}">${lab}</text><text x="470" y="${y + 4}" style="font-family:var(--mono);fill:#e1e5d6">${val}</text>`;
+  const lvl = (y, col, w2, lab, val, dash) => `<line x1="150" x2="330" y1="${y}" y2="${y}" stroke="${col}" stroke-width="${w2}" ${dash ? 'stroke-dasharray="4 3"' : ''}/><text x="338" y="${y + 4}">${lab}</text><text x="470" y="${y + 4}" style="font-family:var(--mono);fill:#1d1d1b">${val}</text>`;
   return `<svg class="chart" viewBox="0 0 560 205"><text x="8" y="14">³A₂ ground-state spin levels (frequency units; axis broken above m_s = 0)</text>
     ${lvl(Y(d), '#8e9684', 1, 'D (zero field)', `${d} MHz`, true)}${lvl(Y(up), S.col.nv, 2.5, 'm_s = +1', `${up.toFixed(1)} MHz`)}${lvl(Y(dn), S.col.nv, 2.5, 'm_s = −1', `${dn.toFixed(1)} MHz`)}
-    <path d="M140,150 l10,-5 l10,5 l10,-5" stroke="#5c6552" fill="none"/><path d="M140,158 l10,-5 l10,5 l10,-5" stroke="#5c6552" fill="none"/>${lvl(190, '#e1e5d6', 2.5, 'm_s = 0', '0 MHz')}
+    <path d="M140,150 l10,-5 l10,5 l10,-5" stroke="#5c6552" fill="none"/><path d="M140,158 l10,-5 l10,5 l10,-5" stroke="#5c6552" fill="none"/>${lvl(190, '#1d1d1b', 2.5, 'm_s = 0', '0 MHz')}
     <line x1="200" x2="200" y1="190" y2="${Y(dn) + 3}" stroke="${S.col.nv}"/><text x="184" y="175" text-anchor="end">ν−</text><line x1="280" x2="280" y1="190" y2="${Y(up) + 3}" stroke="${S.col.nv}"/><text x="296" y="175">ν+</text>
     <text x="8" y="${Y(d) + 4}">${(up - dn).toFixed(1)} MHz apart</text></svg>`;
 }
@@ -176,8 +176,8 @@ function sweepTool(canvas, getLines) {
     for (let f = Math.ceil(x[0] / 20) * 20; f <= x[x.length - 1]; f += 20) { ctx.beginPath(); ctx.moveTo(X(f), m.t); ctx.lineTo(X(f), H - m.b); ctx.stroke(); ctx.fillText(`${f}`, X(f) - 12, H - 8); }
     const k = Math.floor(((performance.now() - t0) / 3500 % 1) * x.length);
     ctx.lineWidth = 1.6;
-    ctx.strokeStyle = 'rgba(225,229,214,.25)'; ctx.beginPath(); for (let i = k; i < x.length; i++) { i === k ? ctx.moveTo(X(x[i]), Y(y[i])) : ctx.lineTo(X(x[i]), Y(y[i])); } ctx.stroke();
-    ctx.strokeStyle = '#e1e5d6'; ctx.beginPath(); for (let i = 0; i <= k; i++) { i ? ctx.lineTo(X(x[i]), Y(y[i])) : ctx.moveTo(X(x[i]), Y(y[i])); } ctx.stroke();
+    ctx.strokeStyle = 'rgba(29,29,27,.25)'; ctx.beginPath(); for (let i = k; i < x.length; i++) { i === k ? ctx.moveTo(X(x[i]), Y(y[i])) : ctx.lineTo(X(x[i]), Y(y[i])); } ctx.stroke();
+    ctx.strokeStyle = '#1d1d1b'; ctx.beginPath(); for (let i = 0; i <= k; i++) { i ? ctx.lineTo(X(x[i]), Y(y[i])) : ctx.moveTo(X(x[i]), Y(y[i])); } ctx.stroke();
     ctx.strokeStyle = '#a9d48c'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(x[k]), m.t); ctx.lineTo(X(x[k]), H - m.b); ctx.stroke();
     const L = getLines();
     for (const [f, lab] of [[L.dn, 'ν−'], [L.up, 'ν+']]) {
@@ -199,7 +199,7 @@ function odmrBars(res) {
   axes.forEach(([h, i], k) => {
     const x = X0 + 20 + k * gap, tv = num(tru?.[i]), cv = num(cnn?.[i]); const Y = (v) => 160 - (v / mx) * 140;
     if (tv) s += `<rect x="${x}" y="${Y(tv.v)}" width="${bw}" height="${160 - Y(tv.v)}" fill="#8e9684"><title>true ${tv.v} mT</title></rect>`;
-    if (cv) s += `<rect x="${x + bw + 4}" y="${Y(cv.v)}" width="${bw}" height="${160 - Y(cv.v)}" fill="${S.col.nv}"><title>CNN ${cv.v} ± ${cv.e} mT</title></rect><line x1="${x + bw * 1.5 + 4}" x2="${x + bw * 1.5 + 4}" y1="${Y(cv.v - cv.e)}" y2="${Y(cv.v + cv.e)}" stroke="#e1e5d6"/>`;
+    if (cv) s += `<rect x="${x + bw + 4}" y="${Y(cv.v)}" width="${bw}" height="${160 - Y(cv.v)}" fill="${S.col.nv}"><title>CNN ${cv.v} ± ${cv.e} mT</title></rect><line x1="${x + bw * 1.5 + 4}" x2="${x + bw * 1.5 + 4}" y1="${Y(cv.v - cv.e)}" y2="${Y(cv.v + cv.e)}" stroke="#1d1d1b"/>`;
     s += `<text x="${x + bw}" y="176" text-anchor="middle">NV axis ${k + 1}</text>`;
   });
   s += `<text x="8" y="14">|B| projected on the four NV axes (mT) · grey: field used · red: CNN estimate ± spread</text></svg>`;
@@ -213,8 +213,8 @@ function ramseyChart() {
   return `<div class="grid g2"><div>${chart({ w: 560, h: 240, series: [{ x: xs, y: xs.map((p) => Math.cos(p / 2) ** 2), color: '#a9d48c', dash: '4 3' }], points: [{ x: q.points.map((p) => p.phi_rad), y: q.points.map((p) => p.p0), err: q.points.map((p) => 2 * p.binomial_se), color: S.col.nv, r: 4, titles: q.points.map((p) => `φ = ${p.phi_rad.toFixed(3)} rad: ${p.counts['0']}/${p.shots} → P(0) = ${p.p0.toFixed(4)} (theory ${p.p0_theory.toFixed(4)})`) }], xLabel: 'phase φ (rad)', yLabel: 'P(0)', yDomain: [-0.05, 1.05] })}
     ${legend([{ name: 'cos²(φ/2) (theory)', color: '#a9d48c', dash: true }, { name: `measured on ${q.tool} · 4096 shots · ±2 SE`, color: S.col.nv }])}</div>
     <div><svg class="chart" viewBox="0 0 520 120"><line x1="40" x2="500" y1="60" y2="60" stroke="#8e9684"/><text x="8" y="64">|0⟩</text>
-      ${[['H', 110], ['RZ(φ)', 220], ['H', 330]].map(([g, x]) => `<rect x="${x - 30}" y="40" width="60" height="40" fill="#2a2f26" stroke="#a9d48c"/><text x="${x}" y="65" text-anchor="middle" style="fill:#e1e5d6;font-size:13px">${g}</text>`).join('')}
-      <rect x="410" y="40" width="60" height="40" fill="#2a2f26" stroke="#e1e5d6"/><path d="M420,72 q20,-24 40,0" stroke="#e1e5d6" fill="none"/><line x1="440" y1="72" x2="455" y2="48" stroke="#e1e5d6"/><text x="440" y="100" text-anchor="middle">measure</text></svg>
+      ${[['H', 110], ['RZ(φ)', 220], ['H', 330]].map(([g, x]) => `<rect x="${x - 30}" y="40" width="60" height="40" fill="#fffdf6" stroke="#a9d48c"/><text x="${x}" y="65" text-anchor="middle" style="fill:#1d1d1b;font-size:13px">${g}</text>`).join('')}
+      <rect x="410" y="40" width="60" height="40" fill="#fffdf6" stroke="#1d1d1b"/><path d="M420,72 q20,-24 40,0" stroke="#1d1d1b" fill="none"/><line x1="440" y1="72" x2="455" y2="48" stroke="#1d1d1b"/><text x="440" y="100" text-anchor="middle">measure</text></svg>
       <p class="note">${esc(q.mapping)}</p><p class="note">${esc(q.theory)}. Seeds ${q.points[0].seed_simulator}–${q.points[q.points.length - 1].seed_simulator}; circuit depth ${q.circuit_depth}.</p></div></div>`;
 }
 async function nv(el) {
@@ -294,15 +294,15 @@ async function qd(el) {
     for (let i = 0; i < nA; i++) {
       const a = (i / nA) * 2 * Math.PI - Math.PI / 2, x = cx + Math.cos(a) * (28 + rpx), y = cy + Math.sin(a) * (28 + rpx), gone = i < cut;
       arms += `<line x1="${cx + Math.cos(a) * 28}" y1="${cy + Math.sin(a) * 28}" x2="${x}" y2="${y}" stroke="${gone ? '#4e5845' : '#c4cab7'}" stroke-dasharray="${gone ? '3 3' : ''}"/>`;
-      arms += gone ? `<text x="${x}" y="${y + 4}" text-anchor="middle" style="fill:#666e5d;font-size:12px">✕</text>` : `<circle cx="${x}" cy="${y}" r="7" fill="#9b2335" stroke="#e1e5d6"><title>Cy5</title></circle>`;
+      arms += gone ? `<text x="${x}" y="${y + 4}" text-anchor="middle" style="fill:#666e5d;font-size:12px">✕</text>` : `<circle cx="${x}" cy="${y}" r="7" fill="#9b2335" stroke="#1d1d1b"><title>Cy5</title></circle>`;
     }
     $('#qd-probe').innerHTML = `<svg class="chart" viewBox="0 0 460 300"><circle cx="${cx}" cy="${cy}" r="${28 + R0px}" fill="none" stroke="#a9d48c" stroke-dasharray="3 4" opacity=".6"/><text x="${cx + 28 + R0px + 4}" y="${cy - 4}" style="fill:#a9d48c">R₀</text>${arms}
-      <circle cx="${cx}" cy="${cy}" r="28" fill="${S.col.qd}" stroke="#e1e5d6"/><text x="${cx}" y="${cy + 4}" text-anchor="middle" style="fill:#1f231b;font-size:11px">QD</text>
+      <circle cx="${cx}" cy="${cy}" r="28" fill="${S.col.qd}" stroke="#1d1d1b"/><text x="${cx}" y="${cy + 4}" text-anchor="middle" style="fill:#1f231b;font-size:11px">QD</text>
       <text x="8" y="16">streptavidin-coated dot · biotinylated Cy5 peptides (schematic layout, distances to scale in R₀)</text><text x="8" y="290">${n} of ${nA} Cy5 attached · ${cut} cut by renin</text></svg>`;
     $('#qd-ro').innerHTML = readout('FRET efficiency E', E.toFixed(3), '', 'calculated, Eq. 3') + readout('Cy5 left on the dot', String(n), `of ${nA}`, 'the TIRF count falls as renin cuts');
     const xs = ph.x;
-    $('#qd-fret').innerHTML = chart({ w: 1100, h: 220, series: [{ x: xs, y: ph.y, color: S.col.qd }, ...(n > 1 ? [{ x: xs, y: xs.map((x) => n / (n + x ** 6)), color: '#e1e5d6', dash: '5 3' }] : [])], points: [{ x: rr, y: eff.values.map((v) => v / 100), color: '#e1e5d6', r: 3, titles: fig1.x.values.map((p, i) => `${fmtNum(p)} GPa: E ${eff.values[i]}%`) }], vlines: [{ x: r, color: '#a9d48c', dash: '3 3', label: `E = ${E.toFixed(3)}` }], hlines: [{ y: 0.5, color: '#8e9684', dash: '2 4', label: 'E = 1/2 at r = R₀ (Lean fret_half)' }], xLabel: 'r / R₀', yLabel: 'FRET efficiency E', yDomain: [0, 1.05] })
-      + legend([{ name: 'E, one acceptor (physics.json)', color: S.col.qd }, ...(n > 1 ? [{ name: `E, ${n} acceptors (Eq. 3)`, color: '#e1e5d6', dash: true }] : []), { name: 'measured CdTe/CdS points (recorded → calculated r/R₀)', color: '#e1e5d6' }]);
+    $('#qd-fret').innerHTML = chart({ w: 1100, h: 220, series: [{ x: xs, y: ph.y, color: S.col.qd }, ...(n > 1 ? [{ x: xs, y: xs.map((x) => n / (n + x ** 6)), color: '#1d1d1b', dash: '5 3' }] : [])], points: [{ x: rr, y: eff.values.map((v) => v / 100), color: '#1d1d1b', r: 3, titles: fig1.x.values.map((p, i) => `${fmtNum(p)} GPa: E ${eff.values[i]}%`) }], vlines: [{ x: r, color: '#a9d48c', dash: '3 3', label: `E = ${E.toFixed(3)}` }], hlines: [{ y: 0.5, color: '#8e9684', dash: '2 4', label: 'E = 1/2 at r = R₀ (Lean fret_half)' }], xLabel: 'r / R₀', yLabel: 'FRET efficiency E', yDomain: [0, 1.05] })
+      + legend([{ name: 'E, one acceptor (physics.json)', color: S.col.qd }, ...(n > 1 ? [{ name: `E, ${n} acceptors (Eq. 3)`, color: '#1d1d1b', dash: true }] : []), { name: 'measured CdTe/CdS points (recorded → calculated r/R₀)', color: '#1d1d1b' }]);
   };
   $('#qd-n').addEventListener('input', () => { cut = Math.min(cut, +$('#qd-n').value); draw(); }); $('#qd-r').addEventListener('input', draw);
   $('#qd-cut').addEventListener('click', () => { cut = Math.min(+$('#qd-n').value, cut + 1); draw(); });
@@ -331,7 +331,7 @@ async function cqd(el) {
   const draw = () => {
     const sel = uniq[+$('#cqd-ex').value], hits = ex.map((x, i) => [x, em[i]]).filter(([x]) => x === sel);
     $('#cqd-ex-o').textContent = `${sel} nm`;
-    $('#cqd-scatter').innerHTML = chart({ w: 560, h: 240, points: [{ x: ex, y: em, color: S.col.cqd, stroke: '#e1e5d6', r: 3.5, titles: ex.map((x, i) => `excited ${x} nm → emits ${em[i]} nm`) }, { x: hits.map((h) => h[0]), y: hits.map((h) => h[1]), color: '#a9d48c', r: 7 }], vlines: [{ x: sel, color: '#a9d48c', dash: '3 3' }], xLabel: 'excitation wavelength (nm)', yLabel: 'emission maximum (nm)' });
+    $('#cqd-scatter').innerHTML = chart({ w: 560, h: 240, points: [{ x: ex, y: em, color: S.col.cqd, stroke: '#1d1d1b', r: 3.5, titles: ex.map((x, i) => `excited ${x} nm → emits ${em[i]} nm`) }, { x: hits.map((h) => h[0]), y: hits.map((h) => h[1]), color: '#a9d48c', r: 7 }], vlines: [{ x: sel, color: '#a9d48c', dash: '3 3' }], xLabel: 'excitation wavelength (nm)', yLabel: 'emission maximum (nm)' });
     const ems = hits.map((h) => h[1]);
     $('#cqd-ro').innerHTML = readout('records at this excitation', String(hits.length), '', 'recorded') + readout('emission maximum', ems.length ? ems.map((v) => fmtNum(v)).join(' · ') : '—', 'nm', 'measured, per record') + `<p class="note">${esc(men.meta.label)} Point colour is the CIE colour of 439 nm, the most common measured emission.</p>`;
   };

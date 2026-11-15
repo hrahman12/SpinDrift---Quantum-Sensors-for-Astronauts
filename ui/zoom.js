@@ -4,11 +4,8 @@
 // scale bar and a live field-of-view readout, and turns scrolling into descending or ascending one level.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { D, esc, getJSON, lean, fmtNum } from './core.js';
+import { comicify, inkRenderer, comicLights } from './comic.js';
 
 export const CHAINS = {
   brain: { cell: 'cell_neuron.js', quantum: 'q_rb.js' },
@@ -41,16 +38,13 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
   const camera = new THREE.PerspectiveCamera(40, 1, 0.001, 1e6);
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true; controls.enableZoom = false;   // plain scroll descends; pinch or ctrl+scroll zooms
-  const composer = new EffectComposer(renderer);
-  const renderPass = new RenderPass(new THREE.Scene(), camera);
-  const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.55, 0.45, 0.82);
-  composer.addPass(renderPass); composer.addPass(bloom); composer.addPass(new OutputPass());
+  const ink = inkRenderer(renderer, 0.0028);
   let cur = null, lastRO = 0, acc = 0, cooldown = 0, intro = null;
   const tmpA = new THREE.Vector3(), tmpB = new THREE.Vector3();
 
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
-    renderer.setSize(w, h, false); composer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
   }
   new ResizeObserver(resize).observe(canvas);
 
@@ -72,7 +66,8 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
     const built = await mod.build(D);
     close();
     cur = { mod, built, level: mod.LEVEL || {}, labels: [], index, total, name };
-    renderPass.scene = built.scene;
+    if (!built.scene.userData.__comicLit) { comicLights(built.scene); built.scene.userData.__comicLit = true; }
+    comicify(built.scene);
     const cam = built.camera || {};
     camera.fov = cam.fov || 40;
     const target = new THREE.Vector3(...(cam.target || [0, 0, 0])), home = new THREE.Vector3(...(cam.position || [0, 0, 10]));
@@ -94,28 +89,41 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
   }
   function home() { if (cur) intro = { from: camera.position.clone(), to: cur.home.clone(), t: 0 }; }
 
+  // the level card stays short: tag, title, one or two sentences, up to four key numbers, one slider, one source.
+  // Everything else sits behind "More". Values refresh in place, so an open "More" stays open.
+  const roText = (x) => `${typeof x.value === 'number' ? fmtNum(x.value) : x.value ?? '—'}`;
+  const isKey = (x) => (typeof x.value === 'number' || (typeof x.value === 'string' && x.value.length <= 14)) && !/not (yet )?(stated|extracted)/i.test(String(x.value));
+  const roRow = (x, k) => `<div class="mrow" data-ro="${k}" title="${esc([x.tag, x.source].filter(Boolean).join(' · '))}"><span>${esc(x.label)}</span><b>${esc(roText(x))} <small>${esc(x.unit || '')}</small></b></div>`;
+  const ctlRow = (c) => `<div class="ctrl"><div class="row"><span>${esc(c.label)}</span><output data-o="${esc(c.id)}">${esc(fmtNum(+c.value))} ${esc(c.unit || '')}</output></div>
+      <input type="range" data-c="${esc(c.id)}" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.value}"></div>`;
   function drawInfo() {
-    const { built, level } = cur, i = built.info || {};
+    const { built, level } = cur, i = built.info || {}, lines = i.lines || [], ro = built.readouts || [], cs = built.controls || [], src = i.sources || [];
+    const keyIdx = ro.map((x, k) => (isKey(x) ? k : -1)).filter((k) => k >= 0).slice(0, 4), restIdx = ro.map((_, k) => k).filter((k) => !keyIdx.includes(k));
+    const short = lines.slice(0, lines[0] && lines[0].length > 170 ? 1 : 2);
+    const more = lines.slice(short.length);
     hud.info.innerHTML = `<div class="lvl">Level ${cur.index} of ${cur.total} · ${esc(cur.name || LEVEL_NAMES[level.level] || level.level)}</div><h3>${esc(i.title || level.title || '')}</h3>
-      ${(i.lines || []).map((t) => `<p>${esc(t)}</p>`).join('')}
-      ${(i.lean || []).length ? `<div class="lean-row">${i.lean.map((n) => lean(n)).join('')}</div>` : ''}
-      ${(i.sources || []).length ? `<div class="kick" style="margin-top:8px"><span>Sources</span></div><div class="src">${i.sources.map((s) => esc(s)).join('<br>')}</div>` : ''}`;
-  }
-  function drawReadouts() {
-    const r = cur?.built.readouts || [];
-    hud.readouts.innerHTML = r.length ? `<div class="kick"><span>Measured and calculated</span></div>` + r.map((x) => `<div class="mrow" title="${esc([x.tag, x.source].filter(Boolean).join(' · '))}"><span>${esc(x.label)}</span><b>${esc(typeof x.value === 'number' ? fmtNum(x.value) : x.value ?? '—')} <small>${esc(x.unit || '')}</small></b></div>`).join('') : '';
-  }
-  function drawControls() {
-    const cs = cur.built.controls || [];
-    hud.controls.innerHTML = cs.map((c) => `<div class="ctrl"><div class="row"><span>${esc(c.label)}</span><output data-o="${esc(c.id)}">${esc(fmtNum(+c.value))} ${esc(c.unit || '')}</output></div>
-      <input type="range" data-c="${esc(c.id)}" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.value}"></div>`).join('');
-    hud.controls.querySelectorAll('input[data-c]').forEach((inp) => inp.addEventListener('input', () => {
+      ${short.map((t) => `<p>${esc(t)}</p>`).join('')}
+      ${keyIdx.length ? `<div class="key-ro">${keyIdx.map((k) => roRow(ro[k], k)).join('')}</div>` : ''}
+      ${cs[0] ? `<div class="key-ctl">${ctlRow(cs[0])}</div>` : ''}
+      ${src[0] ? `<div class="src one">Source: ${esc(src[0])}${src.length > 1 ? ` (+${src.length - 1} more)` : ''}</div>` : ''}
+      ${more.length || restIdx.length || cs.length > 1 || (i.lean || []).length || src.length > 1 ? `<details class="more"><summary>More ▸</summary>
+        ${more.map((t) => `<p>${esc(t)}</p>`).join('')}
+        ${(i.lean || []).length ? `<div class="lean-row">${i.lean.map((n) => lean(n)).join('')}</div>` : ''}
+        ${restIdx.map((k) => roRow(ro[k], k)).join('')}
+        ${cs.slice(1).map(ctlRow).join('')}
+        ${src.length > 1 ? `<div class="src">${src.map((s) => esc(s)).join('<br>')}</div>` : ''}</details>` : ''}`;
+    hud.info.querySelectorAll('input[data-c]').forEach((inp) => inp.addEventListener('input', () => {
       const c = cs.find((x) => x.id === inp.dataset.c); const v = +inp.value;
-      hud.controls.querySelector(`[data-o="${c.id}"]`).textContent = `${fmtNum(v)} ${c.unit || ''}`;
+      hud.info.querySelector(`[data-o="${c.id}"]`).textContent = `${fmtNum(v)} ${c.unit || ''}`;
       try { c.onInput?.(v); } catch (e) { console.warn(e); }
       drawReadouts();
     }));
   }
+  function drawReadouts() {
+    const ro = cur?.built.readouts || [];
+    hud.info.querySelectorAll('[data-ro]').forEach((el) => { const x = ro[+el.dataset.ro]; if (x) el.querySelector('b').innerHTML = `${esc(roText(x))} <small>${esc(x.unit || '')}</small>`; });
+  }
+  function drawControls() { hud.controls.innerHTML = ''; hud.readouts.innerHTML = ''; }
   function drawGene() {
     const g = cur.built.gene; if (!g || !g.exons?.length) { hud.gene.innerHTML = ''; return; }
     const W = 600, H = 58, x0 = 10, x1 = W - 10, span = g.end - g.start || 1;
@@ -153,7 +161,7 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
     }
     try { cur.built.update?.(dt, t); } catch (e) { console.warn(e); }
     controls.update();
-    composer.render();
+    ink.render(cur.built.scene, camera);
     const w = canvas.clientWidth, h = canvas.clientHeight;
     for (const l of cur.labels) {
       tmpA.copy(l.p).project(camera);

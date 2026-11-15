@@ -38,7 +38,7 @@ function applyPalette() {
   const root = document.documentElement.style;
   const opm = pick('opm'), nv = pick('nv'), cqd = pick('cqd_patch', 439), reader = pick('cqd_patch', 470);
   if (opm) root.setProperty('--opm', opm); if (nv) root.setProperty('--nv', nv); if (cqd) root.setProperty('--cqd', cqd); if (reader) root.setProperty('--reader', reader);
-  S.col = { opm: opm || '#ff0000', nv: nv || '#ff0000', cqd: cqd || '#6200ff', reader: reader || '#002dff', qd: '#9aa08f', ink: '#e1e5d6', dim: '#8e9684' };
+  S.col = { opm: opm || '#ff0000', nv: nv || '#ff0000', cqd: cqd || '#6200ff', reader: reader || '#002dff', qd: '#9aa08f', ink: '#1d1d1b', dim: '#6d6a5f' };
 }
 
 // OPM housing and vapour cell for the body twin, from the exact-spec data (QuSpin Gen-3.0 drawing)
@@ -166,14 +166,14 @@ const stopFov = {};
 async function prefetchStops(site) {
   for (const l of ['cell', 'molecule', 'quantum']) {
     const f = CHAINS[site]?.[l]; if (!f || stopFov[`${site}|${l}`]) continue;
-    try { const m = await import(`./scale/${f}`); const lb = m.LEVEL?.scaleBar?.label; if (lb && !stopFov[`${site}|${l}`]) { stopFov[`${site}|${l}`] = lb; renderRail(); } } catch { /* not built */ }
+    try { const m = await import(`./scale/${f}`); const lb = m.LEVEL?.scaleBar?.label; if (lb && !stopFov[`${site}|${l}`]) { stopFov[`${site}|${l}`] = (lb.match(/^[\d.,]+\s*\S+/) || [lb])[0]; renderRail(); } } catch { /* not built */ }
   }
 }
 function renderRail() {
   if (st.tab) { renderTabRail(); return; }
   const chain = chainFor(st.site), s = SITES.find((x) => x.id === st.site);
   $('#rail').innerHTML = `<div class="rail-site">${esc(s.name)} · ${esc(s.sensor)}</div>
-    ${chain.map((l, i) => `<button data-l="${l}" class="${l === st.level ? 'on' : ''}"><i></i><b>${esc(stopFov[`${st.site}|${l}`] || LV_SCALE[l])}</b><span>${i + 1} · ${esc(LEVEL_NAMES[l])}</span></button>`).join('')}`;
+    ${chain.map((l, i) => `<button data-l="${l}" title="${i + 1} · ${esc(LEVEL_NAMES[l])}" class="${l === st.level ? 'on' : ''}"><i></i><b>${esc(stopFov[`${st.site}|${l}`] || LV_SCALE[l])}</b><span>${i + 1} · ${esc(LEVEL_NAMES[l])}</span></button>`).join('')}`;
   $$('#rail button').forEach((b) => b.addEventListener('click', () => goLevel(b.dataset.l)));
   $('#fov-lvl').textContent = `LEVEL ${chain.indexOf(st.level) + 1} OF ${chain.length} · ${LEVEL_NAMES[st.level].toUpperCase()}`;
 }
@@ -206,12 +206,15 @@ async function organHud(site, picked = null) {
   const where = rows[0]?.anatomical_structures?.slice(-1)[0];
   const ch = chainFor(site);
   $('#hud-info').innerHTML = `<div class="lvl">Level ${ch.indexOf('organ') + 1} of ${ch.length} · Sensor site · cells and genes (HRA ASCT+B)</div><h3>${esc(where ? `${where.label} (${where.id})` : tkey)}</h3>
-    <p><b>${cells.size} cell type${cells.size === 1 ? '' : 's'}:</b> ${[...cells.entries()].slice(0, 8).map(([id, l]) => `${esc(l)} <span class="chip">${esc(id)}</span>`).join(' ')}</p>
-    ${genes.size ? `<p><b>${genes.size} marker genes:</b> <span class="mono">${esc([...genes.keys()].slice(0, 24).join(' · '))}${genes.size > 24 ? ' …' : ''}</span></p>` : ''}
-    ${prots.size ? `<p><b>${prots.size} protein markers:</b> <span class="mono">${esc([...prots.keys()].slice(0, 18).join(' · '))}${prots.size > 18 ? ' …' : ''}</span></p>` : ''}
-    ${ery ? `<p><b>Red cells:</b> ${esc(A.organs.blood?.note || 'not in the HRA blood table')}. Erythroid lineage (bone marrow table): <span class="mono">${esc(eryGenes.slice(0, 10).join(' · '))}</span></p>` : ''}
-    <p class="note">${rows.length} table row${rows.length === 1 ? '' : 's'}${picked?.name ? ` · picked mesh ${esc(picked.name)}` : ''}. Click another organ to look it up; zoom deeper for the cell.</p>
-    <div class="src">${esc(T.table?.name || T.table || '')} ${esc(T.table?.version || '')} · ${esc(A.citation || '')} · ${esc(A.licence || '')}</div>`;
+    <p><b>Cells:</b> ${[...cells.values()].slice(0, 3).map(esc).join(', ')}${cells.size > 3 ? ` +${cells.size - 3}` : ''}</p>
+    ${genes.size ? `<p><b>Genes:</b> ${esc([...genes.keys()].slice(0, 8).join(' · '))}${genes.size > 8 ? ` +${genes.size - 8}` : ''}</p>` : prots.size ? `<p><b>Protein markers:</b> ${esc([...prots.keys()].slice(0, 8).join(' · '))}${prots.size > 8 ? ` +${prots.size - 8}` : ''}</p>` : ''}
+    <div class="src one">Source: Human Reference Atlas ASCT+B tables (CC BY 4.0)</div>
+    <details class="more"><summary>More ▸</summary>
+      <p>${[...cells.entries()].map(([id, l]) => `${esc(l)} <span class="chip">${esc(id)}</span>`).join(' ')}</p>
+      ${genes.size ? `<p>${esc([...genes.keys()].join(' · '))}</p>` : ''}${prots.size ? `<p>${esc([...prots.keys()].join(' · '))}</p>` : ''}
+      ${ery ? `<p><b>Red cells:</b> ${esc(A.organs.blood?.note || 'not in the HRA blood table')}. Erythroid lineage (bone marrow table): ${esc(eryGenes.slice(0, 10).join(' · '))}</p>` : ''}
+      <p class="note">${rows.length} table row${rows.length === 1 ? '' : 's'}${picked?.name ? ` · picked mesh ${esc(picked.name)}` : ''}. Click another organ to look it up.</p>
+      <div class="src">${esc(T.table?.name || (typeof T.table === 'string' ? T.table : ''))} ${esc(T.table?.version || '')} · ${esc(A.citation || '')}</div></details>`;
   $('#hud').hidden = false; $('#hud-readouts').innerHTML = ''; $('#hud-controls').innerHTML = ''; $('#hud-gene').innerHTML = '';
 }
 function flash(text) { const f = $('#flash'); f.innerHTML = `<b>${esc(text)}</b>`; f.classList.add('on'); setTimeout(() => f.classList.remove('on'), 520); }
@@ -288,7 +291,7 @@ async function twinCard(name) {
 const tabStop = {};
 function renderTabRail() {
   const chain = TAB_CHAINS[st.tab];
-  $('#rail').innerHTML = `<div class="rail-site">${esc(TAB_HEAD[st.tab].title.split(':')[0])}</div>${chain.map((s, i) => `<button data-i="${i}" class="${i === st.step ? 'on' : ''}"><i></i><b>${esc(s.fov || tabStop[s.file] || '')}</b><span>${i + 1} · ${esc(s.name)}</span></button>`).join('')}`;
+  $('#rail').innerHTML = `<div class="rail-site">${esc(TAB_HEAD[st.tab].title.split(':')[0])}</div>${chain.map((s, i) => `<button data-i="${i}" title="${i + 1} · ${esc(s.name)}" class="${i === st.step ? 'on' : ''}"><i></i><b>${esc(s.fov || tabStop[s.file] || '')}</b><span>${i + 1} · ${esc(s.name)}</span></button>`).join('')}`;
   $$('#rail button').forEach((b) => b.addEventListener('click', () => goStep(+b.dataset.i)));
   $('#fov-lvl').textContent = `LEVEL ${st.step + 1} OF ${chain.length} · ${chain[st.step].name.toUpperCase()}`;
 }
@@ -315,6 +318,8 @@ function enterTab(tab) {
   $$('.view').forEach((el) => el.classList.toggle('on', el.id === 'view-body'));
   $$('.tb-nav button').forEach((b) => b.classList.toggle('on', b.dataset.view === tab));
   document.body.classList.add('sensor-mode'); $('#go-specs').hidden = false;
+  // pre-fill each micro level's rail label with its scene's scale bar until it has been seen
+  for (const s of TAB_CHAINS[tab]) if (s.file && !tabStop[s.file]) import(`./scale/${s.file}`).then((m) => { const lb = m.LEVEL?.scaleBar?.label; if (lb && !tabStop[s.file]) { tabStop[s.file] = (lb.match(/^[\d.,]+\s*\S+/) || [lb])[0]; if (st.tab) renderTabRail(); } }).catch(() => {});
   setTimeout(() => { twin?.resize(); micro?.resize(); goStep(0); }, 30);
 }
 function exitTab() {
@@ -376,6 +381,26 @@ function sourcesHTML() {
     <h4>Software</h4><ul class="plain"><li>three.js 0.160 (MIT) · IBM Plex Sans and Mono (SIL Open Font License)</li></ul>`;
 }
 
+// the body figure: a clothed comic person, female or male; rebuilt on a fresh canvas when switched
+st.sex = 'male';
+async function makeTwin(onProgress) {
+  const old = $('#twin'), fresh = old.cloneNode(false); old.replaceWith(fresh);
+  $('#labels').innerHTML = ''; $('#leaders').innerHTML = '';
+  twin = await createTwin({ canvas: fresh, labelsEl: $('#labels'), leadersEl: $('#leaders'), sites: SITES.map((s) => ({ id: s.id, name: s.name, sensor: s.sensor })),
+    colors: { opm: S.col.opm, nv: S.col.nv, cqd: S.col.cqd }, opm: opmGeom(), sex: st.sex, onSelect: (id) => pickSite(id, true),
+    onOrganPick: (p) => { if (st.tab) return; if (st.level === 'body') { st.level = 'organ'; renderRail(); } organHud(st.site, p); },
+    onEdge: (d) => step(d === 'in' ? 1 : -1), onProgress });
+  twin.select(st.site);
+  for (const s of SITES) { const vs = verdictFor(s.id); const worst = vs && (vs.find((v) => v.verdict === 'NOT_MET') || vs.find((v) => v.verdict === 'NEED_MORE_INFORMATION') || vs[0]); twin.setVerdict(s.id, worst?.verdict || null); }
+}
+async function setSex(sex) {
+  if (sex === st.sex) return;
+  st.sex = sex; $$('.sex-toggle button').forEach((b) => b.classList.toggle('on', b.dataset.sex === sex));
+  toast(`Switching to the ${sex} figure…`, 1800);
+  await makeTwin();
+  if (st.tab) { const i = st.step; st.step = -1; st.stepReady = false; goStep(Math.max(0, i)); } else goLevel(['body', 'organ'].includes(st.level) ? st.level : 'body');
+}
+
 // ------------------------------------------------------------------ boot
 async function boot() {
   await loadAll();
@@ -384,6 +409,7 @@ async function boot() {
   $('#location').addEventListener('change', (e) => { S.location = e.target.value; checkLean(); });
   $$('.tb-nav button').forEach((b) => b.addEventListener('click', () => (b.dataset.view === 'body' ? exitTab() : enterTab(b.dataset.view))));
   $('#go-specs').addEventListener('click', () => showView(st.tab));
+  $$('.sex-toggle button').forEach((b) => b.addEventListener('click', () => setSex(b.dataset.sex)));
   $('#open-sources').addEventListener('click', () => { $('#sources-body').innerHTML = sourcesHTML(); $('#sources').hidden = false; });
   $('#close-sources').addEventListener('click', () => { $('#sources').hidden = true; });
   setInterval(() => { $('#tb-utc').textContent = new Date().toISOString().slice(11, 19) + ' UTC'; }, 1000);
@@ -399,11 +425,7 @@ async function boot() {
   micro = createMicro({ canvas: $('#micro'), labelsEl: $('#micro-labels'), hud: { info: $('#hud-info'), readouts: $('#hud-readouts'), controls: $('#hud-controls'), gene: $('#hud-gene') }, scaleEl: $('#scalebar'), onEdge: (d) => step(d === 'in' ? 1 : -1),
     onFov: (m, dim) => { if (['cell', 'molecule', 'quantum'].includes(st.level)) setFov(m, dim); } });
   try {
-    twin = await createTwin({ canvas: $('#twin'), labelsEl: $('#labels'), leadersEl: $('#leaders'), sites: SITES.map((s) => ({ id: s.id, name: s.name, sensor: s.sensor })),
-      colors: { opm: S.col.opm, nv: S.col.nv, cqd: S.col.cqd }, opm: opmGeom(), onSelect: (id) => pickSite(id, true),
-      onOrganPick: (p) => { if (st.tab) return; if (st.level === 'body') { st.level = 'organ'; renderRail(); } organHud(st.site, p); },
-      onEdge: (d) => step(d === 'in' ? 1 : -1), onProgress: (f) => { $('#ld-num').textContent = String(55 + Math.round(f * 35)).padStart(2, '0'); } });
-    twin.select(st.site);
+    await makeTwin((f) => { $('#ld-num').textContent = String(55 + Math.round(f * 35)).padStart(2, '0'); });
   } catch (e) { console.error(e); toast(`3D body unavailable: ${e.message}`, 6000); }
   $('#ld-2').classList.add('ok'); $('#ld-3').classList.add('on');
   // scale bar for the body levels
