@@ -19,7 +19,8 @@ const FILES = ['palette', 'specs', 'physics', 'nv_heart_derived', 'nasa_i4', 'si
   'recorded/nv_odmr_zenodo10629041', 'recorded/qd_fret_figshare5468838', 'recorded/cqd_pl_mendeley_cmfbrvrb8y', 'recorded/eeg_brain_ds004902'];
 const OLD_PLACES = { iss: 'ISS · low Earth orbit', gateway: 'Lunar Gateway · NRHO', lunar_base: 'Lunar surface base', mars_transit: 'Mars transit', mars_surface: 'Mars surface' };
 const st = { sensor: 'nv', step: 0, verdicts: null, verdictErr: null, brainPeak: null, sex: 'male', scene: null, labels: false,
-  inputs: { shielding_factor: 1, beats_averaged: 47, snr_required: 3, build: 'jgu', target: 'r_peak', bandwidth_hz: 30, renin: null, bilirubin_isf: null } };
+  // renin 2.0 pM and bilirubin 1.3 mg/dL are published population reference values (README), not measurements of anyone
+  inputs: { shielding_factor: 1, beats_averaged: 47, snr_required: 3, build: 'jgu', target: 'r_peak', bandwidth_hz: 30, renin: 2.0, bilirubin_isf: 1.3 } };
 let twin = null, micro = null, busy = false;
 const sensor = (id = st.sensor) => SENSORS.find((s) => s.id === id);
 const chain = () => DESCENTS[st.sensor];
@@ -177,7 +178,7 @@ async function checkLean(announce = false) {
     st.verdicts = r; st.verdictErr = null;
     if (announce) toast('Lean checked the numbers again.');
     await conditions(); if (my !== checking) return;
-  } catch (e) { if (my !== checking) return; st.verdictErr = 'Lean could not check this spot yet.'; st.verdicts = null; st.cond = null; console.warn(e); }
+  } catch (e) { if (my !== checking) return; st.verdictErr = window.SPINDRIFT_STATIC ? 'This public copy has Lean results for the menu settings and the reference values; other numbers need the live server.' : 'Lean could not check this spot yet.'; st.verdicts = null; st.cond = null; console.warn(e); }
   for (const s of SENSORS) twin?.setVerdict(s.site, mainCard(s.id)?.verdict || null);
   micro?.setEnv(env());
   renderCard(); renderLevel();
@@ -194,8 +195,8 @@ const BIO = {
     { k: 'brain_trials', label: 'Responses averaged', unit: '', ph: () => reqInput('opm_brain', 'opm_snr_brain', 'N')?.value }],
   nv: [{ k: 'target', label: 'Part of the beat', options: [['r_peak', 'big spike (R)'], ['q_wave', 'small dip (Q)']] },
     { k: 'beats_averaged', label: 'Heartbeats averaged', unit: '' }],
-  qd: [{ k: 'renin', label: 'Renin in the sample', unit: 'pM', ph: () => 'not measured' }],
-  cqd: [{ k: 'bilirubin_isf', label: 'Bilirubin in skin fluid', unit: '', ph: () => 'not measured' }],
+  qd: [{ k: 'renin', label: 'Renin (published reference)', unit: 'pM', ph: () => 'not measured' }],
+  cqd: [{ k: 'bilirubin_isf', label: 'Bilirubin (adult reference)', unit: 'mg/dL', ph: () => 'not measured' }],
 };
 const etaNV = (b) => D.specs?.nv?.[b]?.sensitivity?.value ?? null;
 const HWIN = {
@@ -252,7 +253,8 @@ async function conditions() {
   const q = req(nvKey, 'nv_snr'), qL = dec(q?.lhs), qR = dec(q?.rhs);                     // snr²·η²·BW ≤ A²·N
   if (qL !== null && qR) { cond.nv = { beats: Math.max(1, Math.ceil((qL * (I.beats_averaged || 1)) / qR)) }; want.beats_averaged = cond.nv.beats; }
   const b = req('qd_blood', 'qd_renin_above_lod'); cond.qd = { lod: dec(b?.lhs), unit: b?.lhs?.unit || 'pM' };   // LOD ≤ c
-  cond.cqd = { range: null };                                                               // range not in an open source
+  const rng = D.specs?.cqd_patch?.range;                                                    // the patch's stated range (SI Table S1)
+  cond.cqd = { range: rng?.status === 'VERIFIED' ? rng : null };
   st.cond = cond;
   try {
     const r = await postJSON('/api/verdict', { location: S.location, inputs: want });
@@ -297,7 +299,7 @@ function condLine(id) {
   if (id === 'opm') return c.shield ? `Works here with a shield of × ${c.shield.toLocaleString('en-US')} or more.${ok(c.lean)}` : `Needs a shield over × ${Math.round(c.sMin).toLocaleString('en-US')}.`;
   if (id === 'nv') return `Works from ${c.beats.toLocaleString('en-US')} heartbeats averaged.${ok(c.lean)}`;
   if (id === 'qd') return c.lod !== null ? `Works when renin is at least ${fmtNum(c.lod)} ${esc(c.unit)}.` : '';
-  return 'Needs the patch’s detection range, which is not in an open source.';
+  return c.range ? `Works when bilirubin is within ${esc(c.range.value)} ${esc(c.range.unit || '')}, the patch’s stated range.` : 'Needs the patch’s detection range.';
 }
 function wireInputs(root) {
   $$('[data-in]', root).forEach((el) => el.addEventListener('change', () => {
@@ -578,7 +580,7 @@ async function doRun() {
   renderCard(); renderAllInOne(); renderBoard();
 }
 async function poll() {
-  try { S.health = await getJSON('/api/health'); $('#tb-status').classList.add('ok'); $('#tb-status span').textContent = S.health?.public ? 'public · Lean live' : 'live'; }
+  try { S.health = await getJSON('/api/health'); $('#tb-status').classList.add('ok'); $('#tb-status span').textContent = S.health?.static ? 'public copy · stored Lean results' : S.health?.public ? 'public · Lean live' : 'live'; }
   catch { $('#tb-status').classList.remove('ok'); $('#tb-status span').textContent = 'saved data'; }
   try { S.live = await getJSON('/api/live'); } catch { /* snapshot */ }
   try { const L = await getJSON('/api/locations'); if (Array.isArray(L?.places)) D.locations = L; } catch { /* file copy */ }
