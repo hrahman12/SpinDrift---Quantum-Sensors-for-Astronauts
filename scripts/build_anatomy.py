@@ -3,24 +3,37 @@
 Source: Human Reference Atlas (HRA) of the HuBMAP Common Coordinate Framework, release discovered from the HRA API.
 - 3D Reference Object Library, Visible Human Male set (CC BY 4.0): whole-body skin, heart, lungs, left and right
   kidney, brain (Allen human brain reference atlas, mirrored and resized by HRA to fit the Visible Human Male) and
-  the blood vasculature (under 25 MB, so it is downloaded and listed as an optional load).
-- ASCT+B tables (anatomical structures, cell types, biomarkers; CC BY 4.0), latest released version per organ.
+  the blood vasculature (under 25 MB, so it is downloaded and listed as an optional load). -> manifest.json
+- Visible Human Female set (CC BY 4.0, --sex female): whole-body skin, heart, lungs, left and right kidney and brain
+  (the same Allen atlas brain, mirrored and resized by HRA to fit the Visible Human Female). -> manifest_female.json,
+  same structure. The female blood vasculature is not downloaded; only its GLB JSON chunk (node names, accessor
+  bounds) is read by HTTP range request, as evidence for the forearm search.
+- ASCT+B tables (anatomical structures, cell types, biomarkers; CC BY 4.0), latest released version per organ
+  (male build only: the tables are not sex-specific).
 
-Placement: the official HRA API scene for the male reference body (GET /v1/scene?sex=Male) gives one
-transformMatrix per reference organ. For every male organ used here it is the identity: the GLB coordinates already
-are the VHMale body frame (metres, y up, +x = body's left, +z = anterior). Cross-checks recorded in the manifest:
-each organ's CCF "global placement" relative to #VHMale (graph.jsonld) equals its GLB bounding-box minimum, and the
-HRA "united" male assembly (GLB JSON chunk read by HTTP range request). The only change for the app frame is a
-translation in y that puts the lowest skin vertex (the soles) at y = 0.
+Placement: the official HRA API scene for each reference body (GET /v1/scene?sex=Male or ?sex=Female) gives one
+transformMatrix per reference organ. For every organ used here it is the identity: the GLB coordinates already
+are the VHMale or VHFemale body frame (metres, y up, +x = body's left, +z = anterior). Cross-checks recorded in the
+manifest: each organ's CCF "global placement" relative to #VHMale or #VHFemale (graph.jsonld) equals its GLB
+bounding-box minimum, and the HRA "united" assembly of that body (GLB JSON chunk read by HTTP range request). The
+only change for the app frame is a translation in y that puts the lowest skin vertex of that body (the soles) at
+y = 0.
 
 Mount points are computed on the real meshes with numpy (closest point on triangles, Moller-Trumbore ray casting,
-barycentric interpolation of the files' own vertex normals). ASCT+B rows are selected by ontology ID and copied
-as they appear in the tables. Every download is SHA256-hashed and listed in the manifest.
+barycentric interpolation of the files' own vertex normals). The head bounding box (frame.head_bbox_app) is the
+bounding box of the skin vertices above the chin; the chin point is found on the skin's anterior midline profile
+(head_bbox). ASCT+B rows are selected by ontology ID and copied as they appear in the tables. Every download is
+SHA256-hashed and listed in the manifest.
 
-Usage: python -I scripts/build_anatomy.py [--reuse-local] [--no-status]
-  --reuse-local  do not re-download GLB files that already exist in data/anatomy (their SHA256 is recomputed and
-                 the manifest says the local copy was reused). Default: download everything fresh.
-  --no-status    do not append the result lines to STATUS.md (test runs).
+Usage: python -I scripts/build_anatomy.py [--sex male|female|both] [--reuse-local] [--no-status] [--head-bbox-only]
+  --sex             which set to build. male (default): manifest.json and data/bio/asctb.json, as before;
+                    female: manifest_female.json only; both: male, then female.
+  --reuse-local     do not re-download GLB files that already exist in data/anatomy (their SHA256 is recomputed and
+                    the manifest says the local copy was reused). Default: download everything fresh.
+  --no-status       do not append the result lines to STATUS.md (test runs).
+  --head-bbox-only  download nothing: compute frame.head_bbox_app from the local skin and brain GLB files listed in
+                    the existing manifest of that sex (their SHA256 must equal the manifest's), write it into that
+                    manifest and change nothing else in it.
 """
 import argparse
 import csv
@@ -70,6 +83,44 @@ MODELS = [
     ("brain", "brain-male", "organ", "default"),
     ("blood_vasculature", "blood-vasculature-male", "organ", "optional"),
 ]
+MODELS_FEMALE = [
+    ("skin", "skin-female", "skin", "default"),
+    ("heart", "heart-female", "organ", "default"),
+    ("lungs", "lung-female", "organ", "default"),
+    ("kidney_left", "kidney-female-left", "organ", "default"),
+    ("kidney_right", "kidney-female-right", "organ", "default"),
+    ("brain", "brain-female", "organ", "default"),
+]
+# Everything that differs between the two HRA bodies. The node names are the files' own (the female files use
+# VH_F_left_lungs_L, VH_F_left_ventricle and a lower-case Allen_brain_hemisphere_L/R); a missing one stops the build.
+SEXES = {
+    "male": {
+        "label": "Male", "word": "male", "body": "VHMale", "manifest": "manifest.json", "models": MODELS,
+        "scene_url": SCENE_URL, "body_iri": BODY_IRI, "united_base": UNITED_BASE, "united_glb": UNITED_GLB,
+        "names": {"lung_L": "VH_M_lungs_L", "lung_R": "VH_M_lungs_R", "hilum_middle_R": "VH_M_hilum_middle_R",
+                  "heart_lv": "VH_M_heart_left_ventricle", "heart_ra": "VH_M_right_cardiac_atrium",
+                  "hemi_L": "Allen_brain_Hemisphere_L", "hemi_R": "Allen_brain_Hemisphere_R",
+                  "skeletal": "VH_M_skeletal_system"},
+        "vasculature_json_only": None, "united_bbox_check": False, "asctb": True},
+    "female": {
+        "label": "Female", "word": "female", "body": "VHFemale", "manifest": "manifest_female.json",
+        "models": MODELS_FEMALE, "scene_url": f"{API}/scene?sex=Female",
+        "body_iri": "https://purl.humanatlas.io/graph/hra-ccf-body#VHFemale",
+        "united_base": "https://cdn.humanatlas.io/digital-objects/ref-organ/united-female/v1.10",
+        "united_glb": "https://cdn.humanatlas.io/digital-objects/ref-organ/united-female/v1.10/assets/"
+                      "3d-vh-f-united.glb",
+        "names": {"lung_L": "VH_F_left_lungs_L", "lung_R": "VH_F_lungs_R", "hilum_middle_R": "VH_F_hilum_middle_R",
+                  "heart_lv": "VH_F_left_ventricle", "heart_ra": "VH_F_right_cardiac_atrium",
+                  "hemi_L": "Allen_brain_hemisphere_L", "hemi_R": "Allen_brain_hemisphere_R",
+                  "skeletal": "VH_F_skeletal_system"},
+        # not downloaded: only its GLB JSON chunk is read (HTTP range), for the forearm search
+        "vasculature_json_only": "blood-vasculature-female", "united_bbox_check": True, "asctb": False},
+}
+# head bounding box: midline profile rays and the windows that bound the landmark searches (not positions)
+HEAD_RAY_STEP = 0.001          # m between profile rays
+HEAD_PROFILE = (-0.33, 0.06)   # m, profile range in y relative to the brain's lowest point
+HEAD_NOSE_WINDOW = (-0.10, 0.06)   # m, nose-tip search in y relative to the brain's lowest point
+HEAD_NOTCH_DEPTH = 0.25        # m, suprasternal-notch search: this far below the nose tip
 # ontology terms used by the mount and ASCT+B selection rules; their labels are looked up on EBI OLS
 TERMS = ["UBERON:0002703", "UBERON:0002812", "UBERON:0002067", "UBERON:0001384", "UBERON:0000956",
          "UBERON:0002421", "CL:0000746", "CL:0000648", "CL:0000232", "CL:0000764"]
@@ -112,6 +163,13 @@ def get_range(url, start, end, note):
     sha = hashlib.sha256(body).hexdigest()
     _record(url, len(body), sha, 206, byte_range=f"{start}-{end}", note=note)
     return body
+
+
+def glb_json_remote(url):
+    """The JSON chunk of a remote GLB, read by two HTTP range requests (the binary chunk is not downloaded)."""
+    hdr = get_range(url, 0, 19, "GLB header only")
+    _, _, total, clen, _ = struct.unpack_from("<4sIII4s", hdr, 0)
+    return json.loads(get_range(url, 20, 20 + clen - 1, "GLB JSON chunk only")), total
 
 
 def sha256_file(path):
@@ -267,6 +325,47 @@ def local_matrix(n):
     m[:3, :3] = r @ np.diag(n.get("scale", [1, 1, 1]))
     m[:3, 3] = n.get("translation", [0, 0, 0])
     return m
+
+
+def json_mesh_bounds(js, root=None, names=None):
+    """World-space bounds of mesh nodes from a glTF JSON alone: each POSITION accessor's min/max (required by glTF
+    2.0) as 8 box corners through the node's world matrix. root: only that node's subtree; names: only mesh nodes
+    with these names. Returns (min, max, mesh node names used); exact for identity or axis-permuting linear parts,
+    an outer bound otherwise."""
+    nodes = js.get("nodes", [])
+    parent = {c: i for i, n in enumerate(nodes) for c in n.get("children", [])}
+
+    def world(i):
+        chain = []
+        while i is not None:
+            chain.append(i)
+            i = parent.get(i)
+        w = np.eye(4)
+        for j in reversed(chain):
+            w = w @ local_matrix(nodes[j])
+        return w
+
+    todo = [root] if root is not None else list(range(len(nodes)))
+    seen, used, lo, hi = set(), [], np.full(3, np.inf), np.full(3, -np.inf)
+    while todo:
+        i = todo.pop()
+        if i in seen:
+            continue
+        seen.add(i)
+        n = nodes[i]
+        if root is not None:
+            todo.extend(n.get("children", []))
+        if "mesh" not in n or (names is not None and n.get("name") not in names):
+            continue
+        w = world(i)
+        used.append(n.get("name"))
+        for pr in js["meshes"][n["mesh"]]["primitives"]:
+            a = js["accessors"][pr["attributes"]["POSITION"]]
+            mn, mx = a["min"], a["max"]
+            box = np.array([[x, y, z] for x in (mn[0], mx[0]) for y in (mn[1], mx[1]) for z in (mn[2], mx[2])], float)
+            c = box @ w[:3, :3].T + w[:3, 3]
+            lo, hi = np.minimum(lo, c.min(0)), np.maximum(hi, c.max(0))
+    return lo, hi, used
 
 
 class Model:
@@ -500,14 +599,97 @@ def r5(v):
     return [round(float(x), 5) for x in v]
 
 
+def head_bbox(skin, brain):
+    """Head bounding box = bounding box of the skin vertices at or above the chin point (app frame).
+
+    The HRA skin carries no landmarks, so the chin point is found on the skin's anterior midline profile: rays
+    along -z in the plane x = brain centroid x (the HRA brain is a mirrored pair, so its centroid lies on the head's
+    midline), one every HEAD_RAY_STEP in y; the first hit of each ray is the profile point. On that profile the nose
+    tip is the most anterior point near the brain's lowest level, the suprasternal notch is the most posterior point
+    within HEAD_NOTCH_DEPTH below the nose tip, and the chin point is the profile point between them lying farthest
+    in front of the straight line notch-nose tip: the chin's lower corner, where the underside of the chin turns
+    into its front. The windows only bound the searches; a landmark found on a window edge stops the build."""
+    bmin, _ = bbox(brain.V)
+    x0 = float(surface_centroid(brain.V, brain.F)[0][0])
+    lo, hi = bmin[1] + HEAD_PROFILE[0], bmin[1] + HEAD_PROFILE[1]
+    VF = skin.V[skin.F]
+    band = skin.F[(VF[:, :, 1] > lo - 0.01).all(1) & (VF[:, :, 1] < hi + 0.01).all(1)
+                  & (np.abs(VF[:, :, 0] - x0) < 0.06).all(1)]
+    tris = Tris(skin.V, skin.N, band)
+    z_start = float(skin.V[:, 2].max()) + 0.5
+    ys = lo + HEAD_RAY_STEP * np.arange(int(round((hi - lo) / HEAD_RAY_STEP)) + 1)
+    zf = np.full(len(ys), np.nan)
+    back = np.array([0.0, 0.0, -1.0])
+    for i, y in enumerate(ys):
+        k, t, _, _ = tris.cast(np.array([x0, y, z_start]), back)
+        if len(k):
+            zf[i] = z_start - t[0]
+    ok = np.isfinite(zf)
+
+    def pick(mask, fn, what):
+        idx = np.flatnonzero(mask & ok)
+        if len(idx) < 3:
+            raise SystemExit(f"head bbox: no skin profile for the {what} search")
+        j = idx[fn(zf[idx])]
+        if j in (idx[0], idx[-1]):
+            raise SystemExit(f"head bbox: the {what} lies on its search-window edge (y = {ys[j]:.3f} m)")
+        return j
+
+    i_nose = pick((ys >= bmin[1] + HEAD_NOSE_WINDOW[0]) & (ys <= bmin[1] + HEAD_NOSE_WINDOW[1]), np.argmax,
+                  "nose tip")
+    i_notch = pick((ys >= ys[i_nose] - HEAD_NOTCH_DEPTH) & (ys <= ys[i_nose]), np.argmin, "suprasternal notch")
+    J, N = np.array([ys[i_notch], zf[i_notch]]), np.array([ys[i_nose], zf[i_nose]])
+    d = unit(N - J)
+    perp = np.array([-d[1], d[0]])                                # in (y, z); points anterior (+z)
+    if perp[1] < 0:
+        perp = -perp
+    seg = np.flatnonzero((ys > ys[i_notch]) & (ys < ys[i_nose]) & ok)
+    dev = (np.stack([ys[seg], zf[seg]], 1) - J) @ perp
+    i_chin = seg[int(np.argmax(dev))]
+    if dev.max() <= 0 or i_chin in (seg[0], seg[-1]):
+        raise SystemExit("head bbox: no chin corner between the suprasternal notch and the nose tip")
+    y_chin = float(ys[i_chin])
+    P = skin.V[np.unique(skin.F)]                                  # the skin surface's vertices
+    H = P[P[:, 1] >= y_chin]
+    hmin, hmax = H.min(0), H.max(0)
+    pt = lambda i: r6([x0, ys[i], zf[i]])                          # noqa: E731
+    return {
+        "min": r6(hmin), "max": r6(hmax), "center": r6((hmin + hmax) / 2), "size_m": r6(hmax - hmin),
+        "chin_y_m": round(y_chin, 6), "skin_vertices": int(len(H)),
+        "profile_points": {"chin": pt(i_chin), "nose_tip": pt(i_nose), "suprasternal_notch": pt(i_notch),
+                           "chin_in_front_of_notch_nose_line_m": round(float(dev.max()), 5)},
+        "profile": {"plane_x_m": round(x0, 6), "ray_step_m": HEAD_RAY_STEP, "rays": int(len(ys)),
+                    "rays_without_hit": int((~ok).sum()), "y_range_m": r6([ys[0], ys[-1]])},
+        "method": ("Head = the skin vertices with y >= the chin point's y; min, max, center and size of their "
+                   "bounding box. Chin point: on the skin's anterior midline profile (rays along -z in the plane "
+                   "x = brain centroid x, every 1 mm in y, first skin hit; Moller-Trumbore), the point between the "
+                   "suprasternal notch and the nose tip lying farthest in front of the straight line joining them, "
+                   "i.e. the chin's lower corner where the underside of the chin turns into its front. Nose tip = "
+                   "most anterior profile point from 0.10 m below to 0.06 m above the brain's lowest point; "
+                   "suprasternal notch = most posterior profile point within 0.25 m below the nose tip. The landmark "
+                   "names say what the construction finds on this mesh; the HRA skin itself has no landmarks. The "
+                   "cut is horizontal (app frame), so the bounding box also holds the upper back of the neck at "
+                   "chin height; the ears are included."),
+        "tag": "calculated",
+    }
+
+
 # ------------------------------------------------------------------ mounts
 UPPER_LIMB = re.compile(r"humer|radius|ulna|forearm|upper_limb|upper limb|carp|_hand|hand_|brachial_|radial_|"
                         r"(?<!brachio)cephalic_vein|basilic|antebrach|cubital|elbow|wrist", re.I)
 
 
-def compute_mounts(models, cw, terms, evidence):
+def compute_mounts(models, cw, terms, evidence, sx=None, heart_version="v1.3"):
+    sx = sx or SEXES["male"]
+    nm, word = sx["names"], sx["word"]
     skin, brain, heart = models["skin"], models["brain"], models["heart"]
     out = {"frame": "app (metres, y up, feet at y = 0, +z anterior, body's right = -x)", "tag": "calculated"}
+    for key, names in (("lungs", ("lung_L", "lung_R")), ("heart", ("heart_lv", "heart_ra")),
+                       ("brain", ("hemi_L", "hemi_R"))):
+        have = set(models[key].node_names) | {g for p in models[key].node_paths for g in p}
+        lost = [nm[n] for n in names if nm[n] not in have]
+        if lost:
+            raise SystemExit(f"{key}: node(s) {lost} are not in the file; the laterality evidence needs them")
 
     # laterality of the HRA body frame, from paired and unpaired organs whose geometry is not mirrored
     def cen(model, names=None, group=None):
@@ -517,14 +699,14 @@ def compute_mounts(models, cw, terms, evidence):
     lat = {
         "kidney_left_centroid_x": round(float(cen(models["kidney_left"])[0]), 5),
         "kidney_right_centroid_x": round(float(cen(models["kidney_right"])[0]), 5),
-        "lung_L_centroid_x": round(float(cen(models["lungs"], group="VH_M_lungs_L")[0]), 5),
-        "lung_R_centroid_x": round(float(cen(models["lungs"], group="VH_M_lungs_R")[0]), 5),
-        "lung_R_has_middle_lobe_hilum": "VH_M_hilum_middle_R" in models["lungs"].node_names,
-        "heart_left_ventricle_centroid_x": round(float(cen(heart, ["VH_M_heart_left_ventricle"])[0]), 5),
-        "heart_right_atrium_centroid_x": round(float(cen(heart, ["VH_M_right_cardiac_atrium"])[0]), 5),
-        "brain_Hemisphere_L_centroid_x": round(float(cen(brain, group="Allen_brain_Hemisphere_L")[0]), 5),
-        "brain_Hemisphere_R_centroid_x": round(float(cen(brain, group="Allen_brain_Hemisphere_R")[0]), 5),
-        "brain_Hemisphere_L_crosswalk": cw["brain"].get("Allen_brain_Hemisphere_L"),
+        "lung_L_centroid_x": round(float(cen(models["lungs"], group=nm["lung_L"])[0]), 5),
+        "lung_R_centroid_x": round(float(cen(models["lungs"], group=nm["lung_R"])[0]), 5),
+        "lung_R_has_middle_lobe_hilum": nm["hilum_middle_R"] in models["lungs"].node_names,
+        "heart_left_ventricle_centroid_x": round(float(cen(heart, [nm["heart_lv"]])[0]), 5),
+        "heart_right_atrium_centroid_x": round(float(cen(heart, [nm["heart_ra"]])[0]), 5),
+        "brain_Hemisphere_L_centroid_x": round(float(cen(brain, group=nm["hemi_L"])[0]), 5),
+        "brain_Hemisphere_R_centroid_x": round(float(cen(brain, group=nm["hemi_R"])[0]), 5),
+        "brain_Hemisphere_L_crosswalk": cw["brain"].get(nm["hemi_L"]),
     }
     body_right_is_minus_x = (lat["kidney_right_centroid_x"] < 0 < lat["kidney_left_centroid_x"]
                              and lat["lung_R_centroid_x"] < 0 < lat["lung_L_centroid_x"]
@@ -606,12 +788,11 @@ def compute_mounts(models, cw, terms, evidence):
         "target_mesh": {"file_node": target, "uberon": cw["brain"][target]["id"],
                         "crosswalk_label": cw["brain"][target]["label"],
                         "ols_label": terms["UBERON:0002703"]["label"], "side_in_body_frame": "right (-x)",
-                        "parent_hemisphere_node": "Allen_brain_Hemisphere_L" if target.endswith("_L") else
-                        "Allen_brain_Hemisphere_R",
+                        "parent_hemisphere_node": nm["hemi_L"] if target.endswith("_L") else nm["hemi_R"],
                         "label_conflict": (
                             f"The HRA brain file labels this mesh '{target}' and its hemisphere "
-                            f"'{cw['brain'].get('Allen_brain_Hemisphere_L', {}).get('label')}', yet it lies at -x, "
-                            "which is the body's right in the HRA VHMale frame (right kidney, right lung with its "
+                            f"'{cw['brain'].get(nm['hemi_L'], {}).get('label')}', yet it lies at -x, "
+                            f"which is the body's right in the HRA {sx['body']} frame (right kidney, right lung with its "
                             "middle lobe, and the heart's right atrium are at -x; the left ventricle is at +x). HRA "
                             "built this brain by mirroring one Allen hemisphere, so the two sides are mirror copies "
                             "and the geometry cannot settle laterality. The body frame is used; the file label is "
@@ -649,7 +830,7 @@ def compute_mounts(models, cw, terms, evidence):
     n = -n if cflip else n
     out["chest_over_heart"] = {
         "method": ("Heart centroid H = area-weighted mean of the triangle centroids of all heart meshes (HRA heart "
-                   "v1.3). Ray from H along +z (anterior in the HRA body frame); the first skin intersection "
+                   f"{heart_version}). Ray from H along +z (anterior in the HRA body frame); the first skin intersection "
                    "(Moller-Trumbore) is the mount point. Normal = the skin file's vertex normals interpolated at the "
                    "hit, oriented outward (+z side)."),
         "heart_centroid": r6(H), "position": r6(P), "normal": r6(n), "heart_centroid_to_skin_m": round(float(t[0]), 5),
@@ -658,23 +839,28 @@ def compute_mounts(models, cw, terms, evidence):
 
     # (c) right volar forearm: needs real landmarks (bones, vessels); search every HRA source used here for them
     vasc = models.get("blood_vasculature")
+    vj = None if vasc else evidence.get("vasculature_json")     # female: GLB JSON chunk only, not downloaded
     arm_ref = [x["label"] for x in evidence["ref_organs"] if UPPER_LIMB.search(x.get("label", ""))
                or UPPER_LIMB.search(x["object"].get("file_subpath", ""))]
-    arm_vasc = [n for n in (vasc.node_names if vasc else []) if UPPER_LIMB.search(n)]
+    arm_vasc = [n for n in (vasc.node_names if vasc else vj["mesh_nodes"] if vj else []) if UPPER_LIMB.search(n)]
     arm_united = evidence["united"].get("upper_limb_nodes")
     found = bool(arm_ref or arm_vasc or arm_united)
+    ev = {
+        "hra_reference_organs_matching": arm_ref,
+        "blood_vasculature_nodes_matching": arm_vasc,
+        "blood_vasculature_x_extent_m": (r5([vasc.V[:, 0].min(), vasc.V[:, 0].max()]) if vasc else
+                                         vj["x_extent_m"] if vj else None),
+        "skin_x_extent_m": r5([skin.V[:, 0].min(), skin.V[:, 0].max()]),
+        f"united_{word}_nodes_matching": arm_united,
+        f"united_{word}_skeletal_system_children": evidence["united"].get("skeletal_system_children")}
+    if vj:
+        ev["blood_vasculature_source"] = vj["source"]
     out["forearm_right_volar"] = {
         "available": False, "position": None, "normal": None,
         "searched_for": UPPER_LIMB.pattern,
-        "evidence": {
-            "hra_reference_organs_matching": arm_ref,
-            "blood_vasculature_nodes_matching": arm_vasc,
-            "blood_vasculature_x_extent_m": r5([vasc.V[:, 0].min(), vasc.V[:, 0].max()]) if vasc else None,
-            "skin_x_extent_m": r5([skin.V[:, 0].min(), skin.V[:, 0].max()]),
-            "united_male_nodes_matching": arm_united,
-            "united_male_skeletal_system_children": evidence["united"].get("skeletal_system_children")},
-        "reason": ("No upper-limb bone, vessel or landmark exists in the HRA male set (none of the reference organs, "
-                   "blood vasculature nodes or united male assembly nodes match; the vasculature stays within the "
+        "evidence": ev,
+        "reason": (f"No upper-limb bone, vessel or landmark exists in the HRA {word} set (none of the reference organs, "
+                   f"blood vasculature nodes or united {word} assembly nodes match; the vasculature stays within the "
                    "trunk and head). The skin alone has no landmarks, so no point is given."
                    if not found else "Upper-limb structures were found; a landmark method still has to be written "
                    "before a point is given.")}
@@ -877,16 +1063,20 @@ def build_asctb(terms, papers):
     return organs
 
 
-def united_check(root_names):
-    """HRA united male assembly: world transform of each model root, from the GLB JSON chunk only (HTTP range
-    requests; the 241 MB file itself is not downloaded). A cross-check, recorded but not applied."""
-    out = {"url": UNITED_GLB, "landing_page": None, "citation": None, "roots": {}, "note": None}
+def united_check(root_names, sx=None, standalone=None):
+    """HRA united assembly of one body: world transform of each model root, from the GLB JSON chunk only (HTTP range
+    requests; the 241 MB male / 375 MB female file itself is not downloaded). A cross-check, recorded but not
+    applied. standalone (female build): {root name: {"names", "min", "max"}} of the downloaded files, native
+    coordinates; each root's meshes of those names are then also placed through the united file's own transforms
+    (accessor bounds, json_mesh_bounds) and compared with the standalone bounding box. The female skin needs this:
+    in the united female file VH_F_skin carries a rotation and scale."""
+    sx = sx or SEXES["male"]
+    word, glb = sx["word"], sx["united_glb"]
+    out = {"url": glb, "landing_page": None, "citation": None, "roots": {}, "note": None}
     try:
-        page = landing(UNITED_BASE)
+        page = landing(sx["united_base"])
         out["landing_page"], out["citation"], out["doi"] = page["landing_page"], page["citation"], page["doi"]
-        hdr = get_range(UNITED_GLB, 0, 19, "GLB header only")
-        _, _, total, clen, _ = struct.unpack_from("<4sIII4s", hdr, 0)
-        js = json.loads(get_range(UNITED_GLB, 20, 20 + clen - 1, "GLB JSON chunk only"))
+        js, total = glb_json_remote(glb)
         out["glb_total_bytes"] = total
         nodes = js.get("nodes", [])
         parent = {c: i for i, n in enumerate(nodes) for c in n.get("children", [])}
@@ -910,7 +1100,17 @@ def united_check(root_names):
             out["roots"][n["name"]] = {"world_translation_m": r6(world[:3, 3]),
                                        "world_linear_is_identity": bool(np.allclose(world[:3, :3], np.eye(3))),
                                        "descendants_with_own_transform": desc}
-        skel = [i for i, n in enumerate(nodes) if n.get("name") == "VH_M_skeletal_system"]
+            if standalone and n["name"] in standalone:
+                s = standalone[n["name"]]
+                lo, hi, used = json_mesh_bounds(js, root=i, names=s["names"])
+                out["roots"][n["name"]].update({
+                    "world_linear": [r6(row) for row in world[:3, :3]],
+                    "world_bbox_from_accessor_bounds_m": {"min": r6(lo), "max": r6(hi)} if used else None,
+                    "meshes_compared": len(used), "standalone_meshes": len(s["names"]),
+                    "max_abs_diff_vs_standalone_bbox_mm": (round(float(max(np.abs(lo - s["min"]).max(),
+                                                                         np.abs(hi - s["max"]).max()) * 1000), 6)
+                                                           if used else None)})
+        skel = [i for i, n in enumerate(nodes) if n.get("name") == sx["names"]["skeletal"]]
         out["skeletal_system_children"] = ([nodes[c].get("name") for c in nodes[skel[0]].get("children", [])]
                                            if skel else None)
         out["upper_limb_nodes"] = sorted({n.get("name") for n in nodes if UPPER_LIMB.search(n.get("name") or "")})
@@ -918,37 +1118,53 @@ def united_check(root_names):
         moved = {k: v["world_translation_m"] for k, v in out["roots"].items()
                  if any(abs(x) > 0 for x in v["world_translation_m"]) or not v["world_linear_is_identity"]
                  or v["descendants_with_own_transform"]}
-        out["note"] = ("In the HRA united male assembly the roots of the models used here carry no transform"
-                       + (" except " + "; ".join(f"{k} translated by {[round(x * 1000, 3) for x in v]} mm"
-                                                  for k, v in moved.items()) if moved else "") +
+
+        def moved_text(k, t):
+            r = out["roots"][k]
+            mm = [round(x * 1000, 3) for x in t]
+            if r["world_linear_is_identity"]:
+                return f"{k} translated by {mm} mm"
+            d = r.get("max_abs_diff_vs_standalone_bbox_mm")
+            return (f"{k}, which carries a rotation and scale (linear part not the identity) and a translation of "
+                    f"{mm} mm" + ("" if d is None else
+                                  f"; through those transforms the accessor bounds of its {r['meshes_compared']} "
+                                  f"meshes give the standalone file's bounding box to within {d} mm, so the united "
+                                  f"file stores the same geometry in another local frame" if d < 0.01 else
+                                  f"; through those transforms its accessor bounds differ from the standalone "
+                                  f"file's bounding box by up to {d} mm"))
+        out["note"] = (f"In the HRA united {word} assembly the roots of the models used here carry no transform"
+                       + (" except " + "; ".join(moved_text(k, v) for k, v in moved.items()) if moved else "") +
                        ". The HRA API scene, used for the app frame, places every one of them with the identity, "
                        "so the difference is reported, not applied.")
     except Exception as ex:  # noqa: BLE001  (a cross-check only)
-        out["note"] = f"united male cross-check not available: {ex}"
+        out["note"] = f"united {word} cross-check not available: {ex}"
     return out
 
 
 # ------------------------------------------------------------------ main
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--reuse-local", action="store_true")
-    ap.add_argument("--no-status", action="store_true", help="do not append to STATUS.md (test runs)")
-    args = ap.parse_args()
+def build(sx, args):
+    """One HRA reference body: download, place in the app frame, measure, write OUT/<manifest of that sex>. Only the
+    male build also writes data/bio/asctb.json."""
+    DOWNLOADS.clear()
+    label, word, body_iri, scene_url = sx["label"], sx["word"], sx["body_iri"], sx["scene_url"]
     OUT.mkdir(parents=True, exist_ok=True)
 
     ref_organs, _ = get_json(REF_ORGANS_URL)
-    scene, _ = get_json(SCENE_URL)
+    scene, _ = get_json(scene_url)
     scene_tm = {n["reference_organ"]: n.get("transformMatrix") for n in scene
-                if n.get("reference_organ") and n.get("sex") == "Male" and n.get("scenegraph")}
+                if n.get("reference_organ") and n.get("sex") == label and n.get("scenegraph")}
     terms = {t: ols_label(t) for t in TERMS}
     papers = {k: crossref(doi) for k, doi in HRA_PAPERS.items()}
 
-    entries = {}
-    for key, slug, role, load in MODELS:
-        e = [x for x in ref_organs if x["@id"].startswith(f"{PURL_REF}{slug}/") and x.get("sex") == "Male"]
+    def ref_entry(slug):
+        e = [x for x in ref_organs if x["@id"].startswith(f"{PURL_REF}{slug}/") and x.get("sex") == label]
         if len(e) != 1:
             raise SystemExit(f"HRA reference-organs list has {len(e)} entries for {slug}")
-        entries[key] = (e[0], role, load)
+        return e[0]
+
+    entries = {}
+    for key, slug, role, load in sx["models"]:
+        entries[key] = (ref_entry(slug), role, load)
 
     # app frame: HRA scene transform, then a y translation that puts the lowest skin vertex at y = 0
     def scene_matrix(entry):
@@ -964,7 +1180,7 @@ def main():
         head = urllib.request.urlopen(urllib.request.Request(url, headers=UA, method="HEAD"), timeout=60)
         sizes[key] = int(head.headers.get("Content-Length") or 0)
         head.close()
-    if sizes["blood_vasculature"] > VASCULATURE_LIMIT:
+    if sizes.get("blood_vasculature", 0) > VASCULATURE_LIMIT:
         entries.pop("blood_vasculature")
     for key, (e, role, load) in entries.items():
         url = e["object"]["file"]
@@ -993,21 +1209,43 @@ def main():
             models[key] = Model(rec["dest"], A @ S)
         inv = np.linalg.inv(A @ S)                                  # back to native GLB coordinates
         native = models[key].V @ inv[:3, :3].T + inv[:3, 3]
+        rec["native_bbox"] = (native.min(0), native.max(0))
         gp = rec["placement"].get("global")
         rec["ccf_check_mm"] = (float(np.abs(native.min(0) * 1000.0 - np.array(gp["translation"])).max())
-                               if gp and gp["relative_to"] == BODY_IRI and gp["translation_unit"] == "millimeter"
+                               if gp and gp["relative_to"] == body_iri and gp["translation_unit"] == "millimeter"
                                and not any(gp["rotation_deg"]) and gp["scaling"] == [1.0, 1.0, 1.0] else None)
 
-    united = united_check({models[k].root for k in models})
+    united = united_check({models[k].root for k in models}, sx,
+                          {models[k].root: {"names": set(models[k].node_names), "min": rec["native_bbox"][0],
+                                            "max": rec["native_bbox"][1]} for k, rec in records.items()}
+                          if sx.get("united_bbox_check") else None)
+
+    # female: the blood vasculature is not downloaded; its GLB JSON chunk gives node names and accessor bounds
+    vj = None
+    if sx.get("vasculature_json_only"):
+        e = ref_entry(sx["vasculature_json_only"])
+        S, _ = scene_matrix(e)
+        js, total = glb_json_remote(e["object"]["file"])
+        lo, hi, used = json_mesh_bounds(js)
+        vj = {"mesh_nodes": used, "bytes": total,
+              "x_extent_m": r5([lo[0], hi[0]]) if np.allclose(S, np.eye(4)) else None,
+              "source": (f"GLB JSON chunk of {e['object']['file']} ({e['@id']}, {total} bytes, not downloaded), read "
+                         f"by HTTP range requests: the names of its {len(used)} mesh nodes, and the x extent from the "
+                         "POSITION accessor bounds through the node transforms (its HRA scene transform is the "
+                         "identity, and the app frame shifts only y)" if np.allclose(S, np.eye(4)) else
+                         f"GLB JSON chunk of {e['object']['file']}: node names only (its HRA scene transform is not "
+                         "the identity, so no x extent is given)")}
 
     skin = models["skin"]
     skin_tris = Tris(skin.V, skin.N, skin.F)
     body_min, body_max = bbox(skin.V)
-    mounts = compute_mounts(models, cws, terms, {"ref_organs": [x for x in ref_organs if x.get("sex") == "Male"],
-                                                 "united": united})
+    heart_version = re.search(r"/(v[\d.]+)#", entries["heart"][0]["@id"]).group(1)
+    mounts = compute_mounts(models, cws, terms, {"ref_organs": [x for x in ref_organs if x.get("sex") == label],
+                                                 "united": united, "vasculature_json": vj}, sx, heart_version)
+    head = head_bbox(skin, models["brain"])
 
     out_models, credits = {}, []
-    credits.append("Anatomy: Human Reference Atlas (HRA), HuBMAP, 3D Reference Object Library, Visible Human Male "
+    credits.append(f"Anatomy: Human Reference Atlas (HRA), HuBMAP, 3D Reference Object Library, Visible Human {label} "
                    "set, CC BY 4.0. " + papers["hra_3d"]["text"])
     bibl = []
     for key, rec in records.items():
@@ -1043,14 +1281,14 @@ def main():
             "http": rec["http"], "glb": mdl.info,
             "hra_dimensions_mm": [e.get("x_dimension"), e.get("y_dimension"), e.get("z_dimension")],
             "placement": {
-                "body_frame": BODY_IRI,
+                "body_frame": body_iri,
                 "hra_scene_transform_column_major": rec["scene_tm"],
                 "hra_scene_transform_is_identity": bool(np.allclose(np.array(rec["scene_tm"], float),
                                                                     np.eye(4).T.ravel())),
                 "ccf_global_placement": gp, "ccf_object_placement": rec["placement"].get("obj"),
                 "ccf_global_translation_vs_glb_bbox_min_max_abs_diff_mm": (
                     round(rec["ccf_check_mm"], 6) if rec["ccf_check_mm"] is not None else None),
-                "united_male_assembly": united["roots"].get(mdl.root),
+                f"united_{word}_assembly": united["roots"].get(mdl.root),
                 "applied_to_app": "app = (HRA scene transform) then translate y by frame.hra_to_app.translation_m"},
             "bbox_app": {"min": r6(mn), "max": r6(mx)}, "size_m": r6(mx - mn),
             "centroid_app": r6(c),
@@ -1075,44 +1313,51 @@ def main():
                         | {terms["UBERON:0002703"]["label"]})
     file_gyri = sorted({re.sub(r"^Allen_|_[LR]$", "", n) for n in models["brain"].node_names
                         if re.search(r"gyr|lobule|cortex|pole|cuneus|insula|operculum|planum", n)})
+    load_note = "All files are uncompressed GLB (no Draco, no meshopt); three.js GLTFLoader alone loads them."
+    if "blood_vasculature" in records:
+        load_note += (" The blood vasculature is under 25 MB and is downloaded, but loaded only on request to keep "
+                      "the default load near 50 MB.")
+    elif vj:
+        load_note += (f" This set has no optional model: the HRA {word} blood vasculature ({vj['bytes']} bytes) is not "
+                      "part of it and was not downloaded; only its GLB JSON chunk was read (HTTP range requests), "
+                      "for the forearm search.")
     manifest = {
-        "meta": meta(False, [f"HRA API {REF_ORGANS_URL}", f"HRA API {SCENE_URL}",
+        "meta": meta(False, [f"HRA API {REF_ORGANS_URL}", f"HRA API {scene_url}",
                              "HRA CDN digital objects (GLB, crosswalk.csv, graph.jsonld, landing pages), CC BY 4.0",
                              "EBI OLS4 (term labels)", "Crossref (paper metadata)"],
                      sha256={(d["url"] + (f"#bytes={d['byte_range']}" if d.get("byte_range") else "")): d["sha256"]
                              for d in DOWNLOADS}),
         "tag": "recorded",
-        "title": "Human Reference Atlas 3D reference organs (Visible Human Male) in the SpinDrift app frame",
+        "title": f"Human Reference Atlas 3D reference organs (Visible Human {label}) in the SpinDrift app frame",
         "frame": {
             "name": "app", "units": "metre",
             "axes": {"x": "+x = body's left, so the body's right is -x", "y": "up; the lowest skin vertex is y = 0",
                      "z": "+z = anterior"},
-            "source_frame": {"iri": BODY_IRI, "via": SCENE_URL,
+            "source_frame": {"iri": body_iri, "via": scene_url,
                              "axes": "metres, y up, +x body's left, +z anterior (see laterality_evidence)"},
             "hra_to_app": {
                 "translation_m": [0.0, ty, 0.0], "rotation": "none", "scale": 1.0,
                 "matrix_column_major": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0, ty, 0.0, 1],
-                "why": ("The HRA VHMale body frame already has the app's axes (metres, y up, +z anterior, body's "
+                "why": (f"The HRA {sx['body']} body frame already has the app's axes (metres, y up, +z anterior, body's "
                         "right at -x), so no rotation or scaling is applied. Its origin is near mid-body (the skin "
-                        "spans y from -0.913 m to +0.911 m), so y is shifted by the lowest skin vertex to put the "
-                        "soles at y = 0. x and z keep the HRA origin.")},
+                        f"spans y from {-ty:+.3f} m to {float(body_max[1]) - ty:+.3f} m), so y is shifted by the lowest "
+                        "skin vertex to put the soles at y = 0. x and z keep the HRA origin.")},
             "body_height_m": round(float(body_max[1] - body_min[1]), 6),
             "body_bbox_app": {"min": r6(body_min), "max": r6(body_max)},
+            "head_bbox_app": head,
             "laterality_evidence": mounts["laterality_evidence"],
             "cross_checks": {
-                "ccf_global_placements": ("Each organ's CCF global placement relative to #VHMale (graph.jsonld) "
+                "ccf_global_placements": (f"Each organ's CCF global placement relative to #{sx['body']} (graph.jsonld) "
                                           "has no rotation, unit scale, and a translation equal to the GLB "
                                           "bounding-box minimum in mm (max difference per model in "
                                           "models.*.placement)."),
-                "united_male": united},
+                f"united_{word}": united},
         },
         "load": {"default": [k for k, r in records.items() if r["load"] == "default"],
                  "optional": [k for k, r in records.items() if r["load"] == "optional"],
                  "default_bytes": default_bytes, "optional_bytes": optional_bytes,
                  "total_bytes": default_bytes + optional_bytes,
-                 "note": ("All files are uncompressed GLB (no Draco, no meshopt); three.js GLTFLoader alone loads "
-                          "them. The blood vasculature is under 25 MB and is downloaded, but loaded only on request "
-                          "to keep the default load near 50 MB.")},
+                 "note": load_note},
         "materials": ("The app replaces each file material with a plain MeshStandardMaterial that keeps the file's "
                       "base colour, roughness and metalness; the skin gets a translucent neutral material. The files "
                       "hold no textures."),
@@ -1132,20 +1377,26 @@ def main():
         "terms": terms,
         "downloads": DOWNLOADS,
         "not_available": [
-            "Right volar forearm mount: no real landmark in the HRA male set (see mounts.forearm_right_volar).",
+            f"Right volar forearm mount: no real landmark in the HRA {word} set (see mounts.forearm_right_volar).",
             "Upper-limb bones and vessels: no HRA reference organ, vasculature node or united-assembly node matches "
             "(searched as in mounts.forearm_right_volar)."],
     }
-    write_json(OUT / "manifest.json", manifest)
+    write_json(OUT / sx["manifest"], manifest)
 
-    organs = build_asctb(terms, papers)
-    manifest["meta"]["sha256"] = {(d["url"] + (f"#bytes={d['byte_range']}" if d.get("byte_range") else "")):
-                                  d["sha256"] for d in DOWNLOADS}
-    manifest["downloads"] = DOWNLOADS
-    write_json(OUT / "manifest.json", manifest)
+    organs = {}
+    if sx["asctb"]:
+        organs = build_asctb(terms, papers)
+        manifest["meta"]["sha256"] = {(d["url"] + (f"#bytes={d['byte_range']}" if d.get("byte_range") else "")):
+                                      d["sha256"] for d in DOWNLOADS}
+        manifest["downloads"] = DOWNLOADS
+        write_json(OUT / sx["manifest"], manifest)
 
     # ------------------------------------------------------------ summary
+    all_bytes = sum(d["bytes"] for d in DOWNLOADS if d.get("http_status") is not None)
+    print(f"== {label}: {OUT / sx['manifest']}")
     print(f"body height {manifest['frame']['body_height_m']:.4f} m; HRA->app translation y = {ty:.6f} m")
+    print(f"head bbox center {head['center']} size {head['size_m']} (chin y {head['chin_y_m']} m, "
+          f"{head['skin_vertices']} skin vertices)")
     for k, m in out_models.items():
         sl = m["side_label_check"]
         print(f"{k:18s} side suffix _L/_R: {sl['suffix_L_R']['checked']:3d} checked, "
@@ -1155,7 +1406,8 @@ def main():
         print(f"{k:18s} {m['version']:5s} {m['bytes'] / 1e6:6.2f} MB  tris {m['glb']['triangles']:7d}  "
               f"compression {m['glb']['compression']}  centroid {m['centroid_app']}  inside skin "
               f"{m['centroid_inside_skin']}  ccf diff {m['placement']['ccf_global_translation_vs_glb_bbox_min_max_abs_diff_mm']} mm")
-    print(f"default load {default_bytes / 1e6:.2f} MB, optional {optional_bytes / 1e6:.2f} MB")
+    print(f"default load {default_bytes / 1e6:.2f} MB, optional {optional_bytes / 1e6:.2f} MB; "
+          f"all requests of this run {all_bytes / 1e6:.2f} MB ({all_bytes} bytes)")
     sc = manifest["mounts"]["scalp_right_precentral_gyrus"]
     print(f"scalp centre {sc['center']['position']} normal {sc['center']['normal']} "
           f"(gyrus {sc['target_mesh']['file_node']}, side {sc['target_mesh']['side_in_body_frame']})")
@@ -1174,12 +1426,80 @@ def main():
               f"genes {[g['symbol'] for g in (o.get('summary') or {}).get('genes', [])][:12]}")
     if args.no_status:
         return
+    if not sx["asctb"]:
+        log_status(f"data/anatomy/{sx['manifest']}", "done",
+                   f"HRA VH {word} skin+heart+lungs+kidneys+brain, {(default_bytes + optional_bytes) / 1e6:.1f} MB GLB "
+                   f"({all_bytes / 1e6:.1f} MB with metadata), body {manifest['frame']['body_height_m']:.3f} m, head "
+                   f"bbox center {head['center']} size {head['size_m']} m, mounts scalp 3x3 + chest; forearm not "
+                   "available")
+        return
     log_status("data/anatomy", "done",
                f"HRA VH male skin+heart+lungs+kidneys+brain (+vasculature optional), "
                f"{(default_bytes + optional_bytes) / 1e6:.1f} MB, body {manifest['frame']['body_height_m']:.3f} m, "
                f"mounts scalp 3x3 + chest; forearm not available")
     log_status("data/bio/asctb.json", "done",
                "HRA ASCT+B rows: " + ", ".join(f"{k} {o.get('n_rows', 0)}" for k, o in organs.items()))
+
+
+def patch_head_bbox(sx, args):
+    """--head-bbox-only: write frame.head_bbox_app into an existing manifest, computed from the local skin and brain
+    GLB files it lists (SHA256 must equal the manifest's) with the manifest's own placement. Nothing is downloaded and
+    every other value in the manifest stays as it is (the file is re-written with the same JSON settings)."""
+    path = OUT / sx["manifest"]
+    man = json.loads(path.read_text(encoding="utf-8"))
+    files = {}
+    for key in ("skin", "brain"):
+        m = man["models"][key]
+        f = OUT / m["file"]
+        sha = sha256_file(f)
+        if sha != m["sha256"]:
+            raise SystemExit(f"{f.name}: SHA256 {sha} is not the manifest's {m['sha256']}; rebuild instead")
+        files[key] = (f, np.array(m["placement"]["hra_scene_transform_column_major"], float).reshape(4, 4).T, sha)
+    # the same steps as build(): skin through its HRA scene transform, then the y shift; brain through A @ S
+    f, S, _ = files["skin"]
+    skin = Model(f, S)
+    ty = -float(skin.V[:, 1].min())
+    skin.V[:, 1] += ty
+    if ty != man["frame"]["hra_to_app"]["translation_m"][1]:
+        raise SystemExit("the skin's lowest vertex does not give the manifest's y shift; rebuild instead")
+    A = np.eye(4)
+    A[1, 3] = ty
+    f, S, _ = files["brain"]
+    head = head_bbox(skin, Model(f, A @ S))
+    head["computed_from"] = {k: {"file": v[0].name, "sha256": v[2]} for k, v in files.items()}
+    head["added"] = (f"{now_iso()}: added to this manifest (built {man['meta'].get('generated_at')}) by "
+                     "scripts/build_anatomy.py --head-bbox-only from the local files above, whose SHA256 equal "
+                     "models.skin.sha256 and models.brain.sha256; no other value of the manifest was changed")
+    frame = {}
+    for k, v in man["frame"].items():
+        if k != "head_bbox_app":
+            frame[k] = v
+        if k == "body_bbox_app":
+            frame["head_bbox_app"] = head
+    if "head_bbox_app" not in frame:
+        frame["head_bbox_app"] = head
+    man["frame"] = frame
+    write_json(path, man)
+    print(f"== {sx['label']}: {path} frame.head_bbox_app center {head['center']} size {head['size_m']} "
+          f"(chin y {head['chin_y_m']} m)")
+    if not args.no_status:
+        log_status(f"data/anatomy/{sx['manifest']}", "changed",
+                   f"added frame.head_bbox_app ({sx['word']} head: skin vertices above the chin; center "
+                   f"{head['center']} size {head['size_m']} m) from the local GLB files, SHA256 verified; no other "
+                   "value changed")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--sex", choices=("male", "female", "both"), default="male",
+                    help="male (default): manifest.json + data/bio/asctb.json; female: manifest_female.json; both")
+    ap.add_argument("--reuse-local", action="store_true")
+    ap.add_argument("--no-status", action="store_true", help="do not append to STATUS.md (test runs)")
+    ap.add_argument("--head-bbox-only", action="store_true",
+                    help="no download: add frame.head_bbox_app to the existing manifest from its local files")
+    args = ap.parse_args()
+    for s in (("male", "female") if args.sex == "both" else (args.sex,)):
+        (patch_head_bbox if args.head_bbox_only else build)(SEXES[s], args)
 
 
 if __name__ == "__main__":

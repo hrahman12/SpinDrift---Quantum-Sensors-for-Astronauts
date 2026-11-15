@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { D, esc, getJSON, fmtNum, chips } from './core.js';
 import { niceLength } from './zoom.js';
-import { comicify, inkRenderer } from './comic.js';
+import { glowView } from './look.js';
 
 const UNIT_M = { mm: 1e-3, nm: 1e-9, 'µm': 1e-6, m: 1 };
 
@@ -25,7 +25,7 @@ export async function createSensorView(view, side, id) {
   const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 1e6);
   scene.add(new THREE.HemisphereLight(0xe8eddc, 0x1a1d16, 1.1));
   const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(2, 3, 2.5); camera.add(key); scene.add(camera);
-  const ink = inkRenderer(renderer, 0.003);
+  const view = glowView(renderer, scene, camera, { strength: 0.45, threshold: 0.85 });
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true; controls.autoRotate = true; controls.autoRotateSpeed = 0.8;
   let built = null, buildId = S.builds?.[0], selected = null, xray = false, fit = null;
@@ -37,7 +37,7 @@ export async function createSensorView(view, side, id) {
     if (built) { scene.remove(built.root); try { built.dispose?.(); } catch (e) { console.warn(e); } }
     labelsEl.innerHTML = ''; labels.length = 0; selected = null;
     built = mod.build(D, { build: buildId });
-    scene.add(built.root); comicify(built.root);
+    scene.add(built.root);
     for (const c of built.components) for (const m of meshesOf(c.object)) { m.userData.comp = c.id; m.userData.baseOpacity = m.material.opacity ?? 1; m.userData.baseEmissive = m.material.emissive ? m.material.emissive.getHex() : null; }
     for (const l of built.labels || []) {
       const el = document.createElement('div'); el.className = 'sv-label'; el.textContent = l.text; el.dataset.comp = l.component || '';
@@ -109,7 +109,7 @@ export async function createSensorView(view, side, id) {
   view.querySelector(`#sv-spin-${id}`).addEventListener('click', (e) => { controls.autoRotate = !controls.autoRotate; e.target.classList.toggle('on', controls.autoRotate); });
   view.querySelector(`#sv-reset-${id}`).addEventListener('click', () => { if (!fit) return; fly = { from: camera.position.clone(), fromT: controls.target.clone(), to: fit.pos.clone(), toT: fit.target.clone(), t: 0 }; });
 
-  const ro = new ResizeObserver(() => { const w = view.clientWidth, h = view.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); });
+  const ro = new ResizeObserver(() => { const w = view.clientWidth, h = view.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); view.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); });
   ro.observe(view);
   rebuild();
   (function loop() {
@@ -119,7 +119,7 @@ export async function createSensorView(view, side, id) {
       fly.t = Math.min(1, fly.t + 0.04); const k = fly.t < 0.5 ? 2 * fly.t * fly.t : 1 - (-2 * fly.t + 2) ** 2 / 2;
       camera.position.lerpVectors(fly.from, fly.to, k); controls.target.lerpVectors(fly.fromT, fly.toT, k); if (fly.t >= 1) fly = null;
     }
-    controls.update(); ink.render(scene, camera);
+    controls.update(); view.render();
     const w = view.clientWidth, h = view.clientHeight;
     for (const l of labels) {
       tmp.copy(l.p).applyMatrix4(built.root.matrixWorld).project(camera);

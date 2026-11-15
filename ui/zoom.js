@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { D, esc, getJSON, lean, fmtNum } from './core.js';
-import { comicify, inkRenderer, comicLights } from './comic.js';
+import { glowView } from './look.js';
 
 export const CHAINS = {
   brain: { cell: 'cell_neuron.js', quantum: 'q_rb.js' },
@@ -38,13 +38,13 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
   const camera = new THREE.PerspectiveCamera(40, 1, 0.001, 1e6);
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true; controls.enableZoom = false;   // plain scroll descends; pinch or ctrl+scroll zooms
-  const ink = inkRenderer(renderer, 0.0028);
+  const view = glowView(renderer, new THREE.Scene(), camera, { strength: 0.6, threshold: 0.8 });
   let cur = null, lastRO = 0, acc = 0, cooldown = 0, intro = null;
   const tmpA = new THREE.Vector3(), tmpB = new THREE.Vector3();
 
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
-    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false); view.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
   }
   new ResizeObserver(resize).observe(canvas);
 
@@ -66,8 +66,6 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
     const built = await mod.build(D);
     close();
     cur = { mod, built, level: mod.LEVEL || {}, labels: [], index, total, name };
-    if (!built.scene.userData.__comicLit) { comicLights(built.scene); built.scene.userData.__comicLit = true; }
-    comicify(built.scene);
     const cam = built.camera || {};
     camera.fov = cam.fov || 40;
     const target = new THREE.Vector3(...(cam.target || [0, 0, 0])), home = new THREE.Vector3(...(cam.position || [0, 0, 10]));
@@ -161,7 +159,7 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
     }
     try { cur.built.update?.(dt, t); } catch (e) { console.warn(e); }
     controls.update();
-    ink.render(cur.built.scene, camera);
+    view.render(cur.built.scene);
     const w = canvas.clientWidth, h = canvas.clientHeight;
     for (const l of cur.labels) {
       tmpA.copy(l.p).project(camera);

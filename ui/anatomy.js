@@ -1,10 +1,12 @@
 // SpinDrift real anatomy (three.js 0.160). Human Reference Atlas (HRA, HuBMAP Common Coordinate Framework),
-// 3D Reference Object Library, Visible Human Male set, CC BY 4.0: whole-body skin, heart, lungs, left and right
-// kidney, brain (Allen atlas, mirrored and resized by HRA) and, on request, the blood vasculature.
-// Everything comes from /data/anatomy/manifest.json, built by scripts/build_anatomy.py: the files, HRA's own
-// placement of each organ in the VHMale body frame, the app-frame shift, centroids, mount points and credits.
+// 3D Reference Object Library, CC BY 4.0. Visible Human Male set (default): whole-body skin, heart, lungs, left and
+// right kidney, brain (Allen atlas, mirrored and resized by HRA) and, on request, the blood vasculature.
+// Visible Human Female set ({ sex: 'female' }): whole-body skin, heart, lungs, left and right kidney, brain.
+// Everything comes from /data/anatomy/manifest.json (male) or manifest_female.json (female), built by
+// scripts/build_anatomy.py: the files, HRA's own placement of each organ in the VHMale or VHFemale body frame, the
+// app-frame shift, centroids, mount points, the head bounding box (manifest.frame.head_bbox_app) and credits.
 // Nothing is positioned by hand here.
-// APP FRAME: metres, y up, feet (lowest skin vertex) at y = 0, +z anterior, the body's right at -x.
+// APP FRAME: metres, y up, feet (lowest skin vertex of that body) at y = 0, +z anterior, the body's right at -x.
 // The GLB files are uncompressed (no Draco, no meshopt), so GLTFLoader alone reads them.
 // Materials: each file material is replaced by a plain MeshStandardMaterial that keeps the file's own base colour,
 // roughness and metalness (vertex colours ignored; the files hold no textures). The skin's file material is a
@@ -14,6 +16,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 export const ANATOMY_BASE = '/data/anatomy/';
+// manifest per HRA reference body (options.sex)
+export const ANATOMY_MANIFESTS = { male: 'manifest.json', female: 'manifest_female.json' };
 
 async function fetchJson(url) {
   const r = await fetch(url);
@@ -96,20 +100,31 @@ function addModel(result, key, root, manifest) {
 /**
  * Load the HRA anatomy in the app frame.
  * @param {(fraction: number) => void} [onProgress] called with 0..1 over the bytes of the models being loaded
- * @param {object} [options] { baseUrl, include: ['blood_vasculature'], vasculature: true, skinColor, skinOpacity,
- *   manifest }
+ * @param {object} [options] { sex: 'male' | 'female', exclude: ['skin'], baseUrl, include: ['blood_vasculature'],
+ *   vasculature: true, skinColor, skinOpacity, manifest }
+ *   sex: which HRA reference body; 'male' (default) reads manifest.json, 'female' reads manifest_female.json. The two
+ *     are separate bodies (own heights, own feet at y = 0); the female set has no blood vasculature.
+ *   exclude: model keys not to load (also over include / vasculature), e.g. ['skin'] when the app draws its own
+ *     figure. Organs, mounts and the manifest stay as they are; mounts are skin-surface points measured on the HRA
+ *     skin, so credits keep the skin's line. An excluded key can still be loaded later with loadOptional(key).
+ *   manifest: an already loaded manifest object (then sex is not used to fetch one).
  * @returns {Promise<{group: THREE.Group, organs: object, skin: object|null, mounts: object, credits: string[],
  *   manifest: object, nodes: Map<string, THREE.Object3D>, missing: {key: string, error: string}[],
  *   loadOptional: (key: string, onProgress?: (fraction: number) => void) => Promise<object>}>}
  *   organs: { heart, lungs, kidney_left, kidney_right, brain[, blood_vasculature] }, each
- *   { object, centroid: [x, y, z], bbox: {min, max}, label, uberon, version, parts }.
+ *   { object, centroid: [x, y, z], bbox: {min, max}, label, uberon, version, parts }. skin is null when excluded.
  */
 export async function loadAnatomy(onProgress, options = {}) {
   const base = options.baseUrl || ANATOMY_BASE;
-  const manifest = options.manifest || await fetchJson(`${base}manifest.json`);
+  const sex = String(options.sex ?? 'male').toLowerCase();
+  if (!Object.prototype.hasOwnProperty.call(ANATOMY_MANIFESTS, sex)) {
+    throw new Error(`unknown anatomy sex '${options.sex}' (use 'male' or 'female')`);
+  }
+  const manifest = options.manifest || await fetchJson(`${base}${ANATOMY_MANIFESTS[sex]}`);
   const want = new Set(manifest.load.default);
   for (const k of options.include || []) if (manifest.models[k]) want.add(k);
   if (options.vasculature && manifest.models.blood_vasculature) want.add('blood_vasculature');
+  for (const k of options.exclude || []) want.delete(k);
   const keys = [...want];
 
   const group = new THREE.Group();

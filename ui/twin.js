@@ -9,17 +9,17 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { comicify, inkRenderer, comicLights } from './comic.js';
+import { lookLights, glowView } from './look.js';
 import { buildPerson } from './person.js';
-import { slimTransform, deformMesh, bodyModel, dress, hair, evaExtras } from './outfit.js';
+import { slimTransform, deformMesh, bodyModel, dress, hair, faceShell, evaExtras } from './outfit.js';
 
 const REF_H = 1.75;          // reference height for the fallback figure (m)
 const MM = 0.001;
 const VCOL = { REQUIREMENTS_MET: 0xa9d48c, NOT_MET: 0xff6b5b, NEED_MORE_INFORMATION: 0xe9b44c };
 const SIDE = { brain: 1, heart: 1, blood: -1, skin: -1 };
 
-const GROUND = { orbit: 0x34466e, deep_space: 0x2a3148, lunar: 0x9d9b95, mars: 0xc26f3d, earth: 0x9cc77a, antarctic: 0xf4f7f9, arctic: 0x8f8574, desert: 0xd9a066, ocean: 0x3f93b5, steppe: 0xccb37e };
-export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect, onProgress, onEdge, onOrganPick, colors = {}, opm = null, sex = 'male', outfit = 'cabin', backdrop = 'orbit', skinTone = 0xd9a07b }) {
+const GROUND = { orbit: 0x1b2740, deep_space: 0x141a2a, lunar: 0x55544f, mars: 0x5a2e1a, earth: 0x24382c, antarctic: 0x8c9ba6, arctic: 0x4a4438, desert: 0x5c4026, ocean: 0x0f3a4c, steppe: 0x4f4430 };
+export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect, onProgress, onEdge, onOrganPick, colors = {}, opm = null, sex = 'male', outfit = 'cabin', backdrop = 'orbit', skinTone = 0xc99a7a }) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   const scene = new THREE.Scene();
@@ -27,10 +27,10 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
   const controls = new OrbitControls(camera, canvas);
   controls.enablePan = false; controls.enableDamping = true; controls.enableZoom = false;
   controls.minDistance = 0.12; controls.maxDistance = 7;
-  comicLights(scene);
-  const ink = inkRenderer(renderer, 0.0024);
+  lookLights(scene);
+  const view = glowView(renderer, scene, camera, { strength: 0.5, threshold: 0.82 });
 
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(0.7, 96), new THREE.MeshBasicMaterial({ color: GROUND[backdrop] ?? 0xe9dfc2, transparent: true, opacity: 0.85 }));
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(0.7, 96), new THREE.MeshBasicMaterial({ color: GROUND[backdrop] ?? 0x1a2230, transparent: true, opacity: 0.55 }));
   disc.rotation.x = -Math.PI / 2; disc.material.userData.outlineParameters = { visible: false }; scene.add(disc);
   const grid = new THREE.PolarGridHelper(0.7, 12, 7, 96, 0xb9ad8c, 0xd6cba9); grid.position.y = 0.002; scene.add(grid);
 
@@ -60,12 +60,13 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
     headC = hb.getCenter(new THREE.Vector3());
     const { meshes } = dress(body, { outfit, sex });
     const hr = outfit === 'eva' ? null : hair(body, { sex, headCentre: headC });
-    for (const g of [...meshes, hr].filter(Boolean)) { scene.add(g); dressed.push(g); }
+    const face = faceShell(body, { color: skinTone });
+    for (const g of [...meshes, face, hr].filter(Boolean)) { scene.add(g); dressed.push(g); }
     if (outfit === 'eva') {
       const chestY = bb0.min.y + 0.70 * H0, backZ = bb0.min.z * 0.85;
       const ex = evaExtras({ headCentre: headC, headH: hb.max.y - hb.min.y, chestY, backZ }); scene.add(ex); dressed.push(...ex.children);
     }
-    const skinMat = new THREE.MeshLambertMaterial({ color: skinTone });
+    const skinMat = new THREE.MeshStandardMaterial({ color: skinTone, roughness: 0.72, metalness: 0 });
     for (const m of skinMeshes) m.material = skinMat;
     const all = [skinMat, ...dressed.map((d) => d.material)];
     personXray = (on) => { for (const m of all) { m.userData.base ??= { t: m.transparent, o: m.opacity }; m.transparent = on || m.userData.base.t; m.opacity = on ? Math.min(0.25, m.userData.base.o) : m.userData.base.o; m.depthWrite = !on && !m.userData.base.t; m.userData.outlineParameters = { ...(m.userData.outlineParameters || {}), visible: !on }; m.needsUpdate = true; } };
@@ -183,7 +184,7 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
   }
   const forearm = person.points.forearmFront || armSlice((0.630 + 0.485) / 2);
   const elbow = person.points.elbowFront || armSlice(0.630);
-  credits.push('Forearm and elbow sites: the right forearm (between elbow 0.630 H and wrist 0.485 H) and elbow of the comic figure; neither sensor paper specifies a body site.');
+  credits.push('Forearm and elbow sites: the right forearm (between elbow 0.630 H and wrist 0.485 H) and elbow of the figure; neither sensor paper specifies a body site.');
   const markerGeo = new THREE.SphereGeometry(7 * MM, 20, 14);
   if (forearm) { const m = new THREE.Mesh(markerGeo, mat(colors.cqd || 0x6200ff, { emissive: colors.cqd || 0x6200ff, emissiveIntensity: 0.4 })); m.position.copy(forearm.p.clone().add(forearm.n.clone().multiplyScalar(4 * MM))); sensorGroup.add(m); sensors.skin.push(m); L.skin = forearm.p.clone(); }
   if (elbow) { const m = new THREE.Mesh(markerGeo, mat(0x9aa08f, { emissive: 0x9aa08f, emissiveIntensity: 0.3 })); m.position.copy(elbow.p.clone().add(elbow.n.clone().multiplyScalar(4 * MM))); sensorGroup.add(m); sensors.blood.push(m); L.blood = elbow.p.clone(); }
@@ -193,7 +194,6 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
   for (const list of Object.values(sensors)) for (const m of list) m.userData.site = Object.keys(sensors).find((k) => sensors[k] === list);
   sensorGroup.traverse((o) => { if (o.isMesh && !o.userData.site) o.userData.site = null; });
 
-  comicify(scene, { keep: (o) => skinMeshes.includes(o) || dressed.includes(o) });
 
   // ---------------------------------------------------------------- labels and picking
   const labelEls = {};
@@ -266,7 +266,7 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
 
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
-    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); leadersEl.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    renderer.setSize(w, h, false); view.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); leadersEl.setAttribute('viewBox', `0 0 ${w} ${h}`);
   }
   new ResizeObserver(resize).observe(canvas); resize();
 
@@ -286,7 +286,7 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
       const pulse = v === 'NOT_MET' || v === 'NEED_MORE_INFORMATION' ? 0.35 + 0.35 * Math.sin(t * 5) : 0.25;
       for (const m of list) if (m.material.emissive) { m.material.emissive.setHex(col ?? 0x000000); m.material.emissiveIntensity = col ? pulse + (site === selected ? 0.25 : 0) : 0; }
     }
-    ink.render(scene, camera);
+    view.render();
     // labels with leader lines
     const w = canvas.clientWidth, h = canvas.clientHeight; let svg = '';
     const placed = [];

@@ -126,6 +126,71 @@
         0.157767
       ]
     },
+    "head_bbox_app": {
+      "min": [
+        -0.096916,
+        1.602623,
+        -0.097843
+      ],
+      "max": [
+        0.098755,
+        1.824276,
+        0.144259
+      ],
+      "center": [
+        0.000919,
+        1.713449,
+        0.023208
+      ],
+      "size_m": [
+        0.195671,
+        0.221654,
+        0.242102
+      ],
+      "chin_y_m": 1.602621,
+      "skin_vertices": 26037,
+      "profile_points": {
+        "chin": [
+          0.0006,
+          1.602621,
+          0.120819
+        ],
+        "nose_tip": [
+          0.0006,
+          1.676621,
+          0.143285
+        ],
+        "suprasternal_notch": [
+          0.0006,
+          1.518621,
+          0.065882
+        ],
+        "chin_in_front_of_notch_nose_line_m": 0.01238
+      },
+      "profile": {
+        "plane_x_m": 0.0006,
+        "ray_step_m": 0.001,
+        "rays": 391,
+        "rays_without_hit": 0,
+        "y_range_m": [
+          1.339621,
+          1.729621
+        ]
+      },
+      "method": "Head = the skin vertices with y >= the chin point's y; min, max, center and size of their bounding box. Chin point: on the skin's anterior midline profile (rays along -z in the plane x = brain centroid x, every 1 mm in y, first skin hit; Moller-Trumbore), the point between the suprasternal notch and the nose tip lying farthest in front of the straight line joining them, i.e. the chin's lower corner where the underside of the chin turns into its front. Nose tip = most anterior profile point from 0.10 m below to 0.06 m above the brain's lowest point; suprasternal notch = most posterior profile point within 0.25 m below the nose tip. The landmark names say what the construction finds on this mesh; the HRA skin itself has no landmarks. The cut is horizontal (app frame), so the bounding box also holds the upper back of the neck at chin height; the ears are included.",
+      "tag": "calculated",
+      "computed_from": {
+        "skin": {
+          "file": "3d-vh-m-skin.glb",
+          "sha256": "4764602f0866fbdad19382e7f12ba148ee33141677153b556f7238116bc33c2a"
+        },
+        "brain": {
+          "file": "3d-allen-m-brain.glb",
+          "sha256": "c97d7d0b9ff0baebbdec5566fa7b08d789195ef965e0bd04cf743a8d683882db"
+        }
+      },
+      "added": "2026-11-15T11:18:20Z: added to this manifest (built 2026-11-15T10:08:41Z) by scripts/build_anatomy.py --head-bbox-only from the local files above, whose SHA256 equal models.skin.sha256 and models.brain.sha256; no other value of the manifest was changed"
+    },
     "laterality_evidence": {
       "kidney_left_centroid_x": 0.07424,
       "kidney_right_centroid_x": -0.06471,

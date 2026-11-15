@@ -39,7 +39,7 @@ function applyPalette() {
   const root = document.documentElement.style;
   const opm = pick('opm'), nv = pick('nv'), cqd = pick('cqd_patch', 439), reader = pick('cqd_patch', 470);
   if (opm) root.setProperty('--opm', opm); if (nv) root.setProperty('--nv', nv); if (cqd) root.setProperty('--cqd', cqd); if (reader) root.setProperty('--reader', reader);
-  S.col = { opm: opm || '#ff0000', nv: nv || '#ff0000', cqd: cqd || '#6200ff', reader: reader || '#002dff', qd: '#9aa08f', ink: '#1d1d1b', dim: '#6d6a5f' };
+  S.col = { opm: opm || '#ff0000', nv: nv || '#ff0000', cqd: cqd || '#6200ff', reader: reader || '#002dff', qd: '#9aa08f', ink: '#e6ebf2', dim: '#8a93a3' };
 }
 
 // OPM housing and vapour cell for the body twin, from the exact-spec data (QuSpin Gen-3.0 drawing)

@@ -77,18 +77,18 @@ export function garment(body, pick, { offset = 0.006, smooth = 6, color = 0x3f78
   const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); geo.setIndex(tris); geo.computeVertexNormals();
   const N = geo.attributes.normal.array; for (let i = 0; i < pos.length; i++) pos[i] += N[i] * offset;
   taubin(after); geo.attributes.position.needsUpdate = true; geo.computeVertexNormals(); geo.computeBoundingSphere();
-  const mat = new THREE.MeshLambertMaterial({ color });
+  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.8, metalness: 0 });
   const mesh = new THREE.Mesh(geo, mat); mesh.name = name; return mesh;
 }
 
 // scene outfits: what a person would wear there
 export const OUTFITS = {
-  cabin: { label: 'station clothes', top: { male: 0x3f78c4, female: 0xd9645a }, sleeve: 'short', topOff: 0.006, bottom: { male: 0x5b5446, female: 0x34466e }, botOff: 0.008, feet: 0x2a2a28 },
-  field: { label: 'field jacket and boots', top: { male: 0x7c7a4a, female: 0x8a6a4a }, sleeve: 'long', topOff: 0.012, bottom: { male: 0x4b4a3e, female: 0x4b4a3e }, botOff: 0.01, feet: 0x5a4632, bootHy: 0.075 },
-  cold: { label: 'expedition parka', top: { male: 0xd8432f, female: 0xd8432f }, sleeve: 'long', topOff: 0.03, topSmooth: 12, bottom: { male: 0x2c2c33, female: 0x2c2c33 }, botOff: 0.016, feet: 0x1d1d1b, bootHy: 0.09, gloves: 0x1d1d1b },
-  dive: { label: 'wetsuit', suit: { male: 0x1f3b44, female: 0x1f3b44 }, suitOff: 0.003, suitSmooth: 4, feet: 0x1d1d1b },
-  launch: { label: 'launch and entry suit', suit: { male: 0xece8dc, female: 0xece8dc }, suitOff: 0.016, suitSmooth: 10, feet: 0xb9b5a8, bootHy: 0.065, gloves: 0x34466e },
-  eva: { label: 'EVA suit', suit: { male: 0xf2f0ea, female: 0xf2f0ea }, suitOff: 0.045, suitSmooth: 14, feet: 0x8e8b82, bootHy: 0.085, gloves: 0x8e8b82, helmet: true, pack: true },
+  cabin: { label: 'station clothes', top: { male: 0x56708f, female: 0x8f6670 }, sleeve: 'short', topOff: 0.006, bottom: { male: 0x3b4049, female: 0x3a4152 }, botOff: 0.008, feet: 0x22252b },
+  field: { label: 'field jacket and boots', top: { male: 0x5e6250, female: 0x6a5e50 }, sleeve: 'long', topOff: 0.012, bottom: { male: 0x3d3b33, female: 0x3d3b33 }, botOff: 0.01, feet: 0x4a3f33, bootHy: 0.075 },
+  cold: { label: 'expedition parka', top: { male: 0x9a4a3c, female: 0x9a4a3c }, sleeve: 'long', topOff: 0.03, topSmooth: 12, bottom: { male: 0x2c2f36, female: 0x2c2f36 }, botOff: 0.016, feet: 0x1b1d22, bootHy: 0.09, gloves: 0x1b1d22 },
+  dive: { label: 'wetsuit', suit: { male: 0x1d2c33, female: 0x1d2c33 }, suitOff: 0.003, suitSmooth: 4, feet: 0x15191d },
+  launch: { label: 'launch and entry suit', suit: { male: 0xd9d7cf, female: 0xd9d7cf }, suitOff: 0.016, suitSmooth: 10, feet: 0x9a978e, bootHy: 0.065, gloves: 0x3b4a66 },
+  eva: { label: 'EVA suit', suit: { male: 0xe9e7e1, female: 0xe9e7e1 }, suitOff: 0.045, suitSmooth: 14, feet: 0x8a877f, bootHy: 0.085, gloves: 0x8a877f, helmet: true, pack: true },
 };
 
 export function dress(body, { outfit = 'cabin', sex = 'male' }) {
@@ -110,7 +110,13 @@ export function dress(body, { outfit = 'cabin', sex = 'male' }) {
 // hair: a smoothed cap over the scalp (longer down the back for the female figure)
 export function hair(body, { sex = 'male', headCentre }) {
   const { P, cls, hy } = body;
-  return garment(body, (i) => cls[i] === 2 && (hy[i] > 0.935 || (P[3 * i + 2] < headCentre.z - 0.02 && hy[i] > (sex === 'female' ? 0.86 : 0.905))), { offset: sex === 'female' ? 0.011 : 0.007, smooth: 6, color: sex === 'female' ? 0x5a3424 : 0x3b2a20, name: 'hair' });
+  return garment(body, (i) => cls[i] === 2 && (hy[i] > 0.935 || (P[3 * i + 2] < headCentre.z - 0.02 && hy[i] > (sex === 'female' ? 0.86 : 0.905))), { offset: sex === 'female' ? 0.011 : 0.007, smooth: 10, color: sex === 'female' ? 0x3a2c26 : 0x2b2420, name: 'hair' });
+}
+
+// a smooth, featureless head over the real face (no eyes, nose or mouth): a calm mannequin-like head
+export function faceShell(body, { color }) {
+  const { cls } = body;
+  return garment(body, (i) => cls[i] === 2, { offset: 0.0015, smooth: 30, after: 8, color, name: 'head' });
 }
 
 // helmet and life-support backpack for the EVA suit (sizes are a drawing choice)
