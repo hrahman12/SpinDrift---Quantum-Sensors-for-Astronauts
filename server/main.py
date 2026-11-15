@@ -12,15 +12,19 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import threading
+import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import JSONResponse, RedirectResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from server import devices, live
-from server.common import DATA, DEVICES, RECORDED, RECORDED_IDS, LOCATION_IDS, now_iso, read_json, write_json
+from server.common import (DATA, DEVICES, RECORDED, RECORDED_IDS, LOCATION_IDS, ROOT, now_iso, read_json,
+                           write_json)
 
 STATE = live.new_state()
 STREAMABLE = {"opm_brain_mne", "opm_heart_kiel"}
@@ -194,3 +198,51 @@ def sensors_ingest(device: str, body: Ingest, x_spindrift_key: str | None = Head
 @app.get("/api/combined")
 def combined():
     return read_json(DATA / "combined_sensor.json", {})
+
+
+class OdmrRequest(BaseModel):
+    bx: float = 0.0
+    by: float = 0.0
+    bz: float = 0.0
+
+
+_SIM_LOCK = threading.Lock()
+_LAST_SIM = [0.0]
+
+
+@app.post("/api/simulate/odmr")
+def simulate_odmr(body: OdmrRequest):
+    """One real call to the ODMR-Lab online simulator at a field chosen in the UI (mT, each component -4..4).
+    Output is tagged simulated and recorded in simulators.json. One call at a time, at least 8 s apart."""
+    b = (body.bx, body.by, body.bz)
+    if any(not -4.0 <= v <= 4.0 for v in b):
+        raise HTTPException(422, "each field component must be between -4 and 4 mT (the simulator's range)")
+    if not _SIM_LOCK.acquire(blocking=False):
+        raise HTTPException(429, "a simulator call is already running")
+    try:
+        if time.time() - _LAST_SIM[0] < 8:
+            raise HTTPException(429, "please wait a few seconds between simulator calls")
+        from server import odmr
+        res = odmr.solve(b, "odmr_lab_ui_latest")
+        _LAST_SIM[0] = time.time()
+        sims = read_json(DATA / "simulators.json", {})
+        entry = next((e for e in sims.get("nv", []) if e["tool"] == "ODMR-Lab"), None)
+        if entry is not None:
+            entry["results"].append({"run_at": now_iso(), "via": "api", "outputs": {
+                "run": "ui", "label": "UI request", "inputs_used": {"bx": b[0], "by": b[1], "bz": b[2], **res["settings"]},
+                "table": res["table"], "note": res["note"], "plot_file": res["plot_file"], "tag": "simulated",
+                "caveat": res["caveat"]}})
+            write_json(DATA / "simulators.json", sims)
+        return res
+    finally:
+        _SIM_LOCK.release()
+
+
+@app.get("/")
+def root():
+    return RedirectResponse("/ui/")
+
+
+app.mount("/data", StaticFiles(directory=str(DATA)), name="data")
+if (ROOT / "ui").exists():
+    app.mount("/ui", StaticFiles(directory=str(ROOT / "ui"), html=True), name="ui")

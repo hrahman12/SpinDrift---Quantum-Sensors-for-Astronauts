@@ -301,6 +301,68 @@
             "tag": "simulated",
             "caveat": "Simulated spectrum from an online simulator; not a measurement."
           }
+        },
+        {
+          "run_at": "2026-11-15T08:57:31Z",
+          "via": "api",
+          "outputs": {
+            "run": "ui",
+            "label": "UI request",
+            "inputs_used": {
+              "bx": 0.0,
+              "by": 0.0,
+              "bz": 1.0,
+              "contrast": 0.03,
+              "linewidth": 6.0,
+              "photon_log": 6.3,
+              "temp": 300.0,
+              "strain": 2.0,
+              "seed": 0,
+              "run_nlls": false
+            },
+            "table": {
+              "headers": [
+                "estimator",
+                "|B_par| axis1 (mT)",
+                "|B_par| axis2 (mT)",
+                "|B_par| axis3 (mT)",
+                "|B_par| axis4 (mT)",
+                "D shift (MHz)",
+                "E strain (MHz)",
+                "linewidth (MHz)",
+                "latency"
+              ],
+              "data": [
+                [
+                  "true",
+                  "0.5774",
+                  "0.5774",
+                  "0.5774",
+                  "0.5774",
+                  "0.0000",
+                  "2.0000",
+                  "6.0000",
+                  "—"
+                ],
+                [
+                  "CNN estimator",
+                  "0.5765 ± 0.031",
+                  "0.5705 ± 0.023",
+                  "0.5197 ± 0.026",
+                  "0.5074 ± 0.027",
+                  "0.0613 ± 0.046",
+                  "4.3349 ± 2.892",
+                  "6.1237 ± 0.166",
+                  "11.72 ms"
+                ]
+              ],
+              "metadata": null
+            },
+            "note": "**|B|** true 1.0000 mT · CNN 0.9429 mT · error 57.1 µT\n\nThe spectrum fixes the four projection magnitudes, not the Cartesian vector — the sign of each projection is unobservable, so recovering **B** itself needs a known bias field. That is a property of the physics, not of the estimator.",
+            "plot_file": "data/simulator_outputs/odmr_lab_ui_latest.png",
+            "tag": "simulated",
+            "caveat": "Simulated spectrum from an online simulator. Not a measurement."
+          }
         }
       ]
     },
