@@ -428,6 +428,45 @@ ul.plain li { padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 1
 .hw-open { margin-top: 10px; font-size: 12px; color: var(--ink2); }
 .hw-open p { margin: 4px 0; }
 
+/* ---- the Hardware board: four signal chains wired part by part, built up run by run ---- */
+.hw-board { border: 1px solid var(--line); border-radius: 14px; padding: 12px; margin-bottom: 14px; background: #0a110d; position: relative; }
+.hw-board-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font: 12px var(--mono); color: var(--ink2); }
+.hw-board-bar input[type=range] { flex: 1; accent-color: #6fd0c2; }
+.hw-board-bar span { min-width: 280px; }
+#hw-svg svg.board { width: 100%; height: auto; display: block; }
+.board text { font-family: var(--mono); }
+.board .bt { font-size: 22px; fill: #e9ebee; font-family: var(--sans); }
+.board .bs { font-size: 13px; fill: #8b919b; }
+.board .mt { font-size: 18px; fill: #e9ebee; font-family: var(--sans); font-weight: 500; }
+.board .ms { font-size: 12px; fill: #8b919b; }
+.board .vt { font-size: 12.5px; fill: #c9ced6; }
+.board .pl { font-size: 11.5px; fill: #e6e9ec; text-anchor: middle; }
+.board .ps { font-size: 9.5px; fill: #9aa3ad; text-anchor: middle; }
+.board .part.missing .pl, .board .part.missing .ps { fill: #7d838d; }
+.board .tr { cursor: pointer; }
+.board .tr:hover path:not(.hit) { filter: brightness(1.35); }
+.board .photons { animation: flow 1.4s linear infinite; }
+.board .photons.slow { animation-duration: 3.2s; }
+@keyframes flow { to { stroke-dashoffset: -33; } }
+.board .fresh { animation: drawin 900ms ease-out both; }
+@keyframes drawin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.hw-inspect { position: absolute; right: 24px; top: 64px; width: 340px; background: rgba(12, 18, 15, .96); border: 1px solid #3c4a40; border-radius: 12px; padding: 12px 14px; font-size: 12.5px; color: var(--ink2); }
+.hw-inspect b { color: var(--ink); font-weight: 600; }
+.hw-inspect p { margin: 6px 0 0; line-height: 1.45; }
+.hw-inspect .src { color: var(--muted); font: 11px var(--mono); }
+
+/* ---- Unified sensor tab ---- */
+.un-board { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: #0a110d; margin-bottom: 14px; }
+.un-board svg { width: 100%; height: auto; display: block; }
+.un-req { width: 100%; border-collapse: collapse; font-size: 13px; color: var(--ink2); margin-bottom: 14px; }
+.un-req th { text-align: left; font: 500 12px var(--sans); color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--line); text-transform: none; letter-spacing: 0; }
+.un-req td { padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, .05); vertical-align: top; line-height: 1.5; }
+.un-req td b { color: var(--ink); font-weight: 600; }
+.un-req small { color: var(--muted); font-size: 11.5px; }
+.un-req .v-REQUIREMENTS_MET { color: var(--met); } .un-req .v-NOT_MET { color: var(--notmet); } .un-req .v-NEED_MORE_INFORMATION { color: var(--needinfo); }
+.un-notes { font-size: 13px; color: var(--ink2); line-height: 1.55; max-width: 1100px; }
+.un-notes p { margin: 8px 0; }
+
 /* ---- the right column at every depth: the level (while diving), then Lean's four sensor cards ---- */
 #card-level:empty { display: none; }
 #card-level { border: 1px solid color-mix(in oklab, rgba(159, 230, 255, .32), rgba(183, 156, 255, .65) calc(var(--depth, 0) * 100%)); border-radius: 14px; padding: 13px 15px; margin-bottom: 14px; background: rgba(255, 255, 255, .025); }

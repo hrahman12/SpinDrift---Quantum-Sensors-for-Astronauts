@@ -8,6 +8,8 @@ import { createMicro, fovText, scaleLabel, niceLength } from './zoom.js';
 import { createSensorView } from './sensorview.js';
 import { sceneFor } from './outfit.js';
 import { AREAS, LEGACY, areaOf, spotsOf } from './areas.js';
+import { drawBoard, linkInfo } from './board.js';
+import { unifiedHTML } from './unified.js';
 import { SENSORS, DESCENTS } from './story.js';
 import { seesaw, deciding, WORDS, MARK } from './leanphys.js';
 
@@ -492,17 +494,51 @@ function showTab(t, dev) {
   $$('.view').forEach((el) => el.classList.toggle('on', el.id === `view-${t}`));
   $$('#tb-nav button').forEach((b) => b.classList.toggle('on', b.dataset.tab === t));
   if (t === 'hw') { if (dev) hwDev = dev; renderHardware(); }
+  if (t === 'one') renderUnified();
+}
+function renderUnified() {
+  const comb = S.combined || D.combined_sensor || {}, runs = S.runs?.runs || D.runs?.runs || [];
+  $('#view-one').innerHTML = unifiedHTML({ summary: comb.lean_summary, combined: comb, runs, specs: D.specs });
+}
+// the board: every run adds what it measured and what Lean proved; scrub the timeline or play the build
+let boardUpto = null, boardSeen = new Set(), boardMods = null, boardPlay = null;
+function renderBoard() {
+  const host = $('#hw-svg'); if (!host) return;
+  const runs = S.runs?.runs || D.runs?.runs || [];
+  if (boardUpto === null || boardUpto > runs.length - 1) boardUpto = runs.length - 1;
+  const { svg, keys, mods } = drawBoard({ build: st.inputs.build, runs, upto: boardUpto, seen: boardSeen });
+  host.innerHTML = svg; boardSeen = keys; boardMods = mods;
+  const r = runs[boardUpto];
+  $('#hw-step').max = Math.max(0, runs.length - 1); $('#hw-step').value = boardUpto;
+  $('#hw-step-l').textContent = r ? `run ${boardUpto + 1} of ${runs.length} · ${r.environment?.sub_place || r.location_id || r.location} · ${r.lean?.checks ? 'Lean checked' : 'no Lean record'}` : 'no runs yet';
 }
 function renderHardware() {
   const el = $('#view-hw');
   if (!el.dataset.ready) {
     el.dataset.ready = '1';
-    el.innerHTML = `<div class="hw-head"><h2>Hardware</h2><span>the real devices · the all-in-one, built run by run from Lean</span></div>
+    el.innerHTML = `<div class="hw-head"><h2>Hardware</h2><span>the four real devices, wired part by part · each run adds what it measured and what Lean proved</span></div>
+      <section class="hw-board"><div class="hw-board-bar"><button class="ghost" id="hw-play">Play the build</button><input type="range" id="hw-step" min="0" max="0" step="1"><span id="hw-step-l"></span><button class="ghost" id="hw-run">＋ Run here</button></div>
+        <div id="hw-svg"></div><div class="hw-inspect" id="hw-inspect" hidden></div></section>
       <div class="hw-devs">${HW.map(([id, n, k]) => `<button data-dev="${id}"><i class="dotc ${id}"></i><b>${esc(n)}</b><small>${esc(k)}</small></button>`).join('')}</div>
       <div class="hw-main">${HW.map(([id]) => `<div class="hw-pair" id="hwp-${id}" hidden><div class="st-view" id="hwv-${id}"><div class="sv-empty">Loading the exact-spec model…</div></div><aside class="st-side" id="hws-${id}"></aside></div>`).join('')}</div>
       <section class="hw-all" id="hw-all"></section>`;
     $$('#view-hw .hw-devs button').forEach((b) => b.addEventListener('click', () => { hwDev = b.dataset.dev; renderHardware(); }));
+    $('#hw-step').addEventListener('input', (e) => { boardUpto = +e.target.value; renderBoard(); });
+    $('#hw-run').addEventListener('click', doRun);
+    $('#hw-play').addEventListener('click', () => {
+      if (boardPlay) { clearInterval(boardPlay); boardPlay = null; $('#hw-play').textContent = 'Play the build'; return; }
+      const n = (S.runs?.runs || D.runs?.runs || []).length; boardUpto = 0; boardSeen = new Set(); renderBoard(); $('#hw-play').textContent = 'Stop';
+      boardPlay = setInterval(() => { if (boardUpto >= n - 1) { clearInterval(boardPlay); boardPlay = null; $('#hw-play').textContent = 'Play the build'; return; } boardUpto++; renderBoard(); }, 1100);
+    });
+    $('#hw-svg').addEventListener('click', (e) => {
+      const g = e.target.closest('[data-link]'), box = $('#hw-inspect');
+      if (!g) { box.hidden = true; return; }
+      const info = linkInfo(boardMods, g.dataset.link); if (!info) return;
+      box.hidden = false;
+      box.innerHTML = `<b>${esc(info.title)}</b>${info.lines.map((t) => `<p>${esc(t)}</p>`).join('')}${info.src ? `<p class="src">${esc(info.src)}</p>` : ''}`;
+    });
   }
+  renderBoard();
   $$('#view-hw .hw-devs button').forEach((b) => b.classList.toggle('on', b.dataset.dev === hwDev));
   for (const [id] of HW) $(`#hwp-${id}`).hidden = id !== hwDev;
   if (!hwBuilt[hwDev]) {
@@ -522,12 +558,11 @@ function renderAllInOne() {
   const COND = { shielding_factor_needed: 'shield needed', heartbeats_needed: 'heartbeats needed' };
   const leanRows = Object.entries(checks).map(([k, x]) => [CHECK[k] || k, { works: x.works, not_met: x.does_not_work, needs_info: x.needs_a_number,
     strictest: x.strictest?.value ? `${COND[x.strictest.condition] || x.strictest.condition}: ${vText(x.strictest.value)} · ${spotName(x.strictest.location_id)}` : null }]);
-  box.innerHTML = `<div class="hw-all-head"><h3>All-in-one</h3><span>v${esc(comb.version ?? 0)} · ${runs.length} runs</span><button class="ghost" id="hw-run">＋ Run at ${esc(whereText())}</button></div>
+  box.innerHTML = `<div class="hw-all-head"><h3>Every fact the runs added</h3><span>all-in-one v${esc(comb.version ?? 0)} · ${runs.length} runs</span></div>
     <div class="hw-runs">${runs.slice(-14).map((r) => `<span class="chip" title="${esc(r.run_id || '')}">${esc(r.location?.sub_place || r.location?.id || r.location || '')}</span>`).join('') || '<span class="na">no runs yet</span>'}</div>
     ${leanRows.length ? `<div class="hw-lean">${leanRows.map(([k, x]) => `<div class="hw-lrow"><b>${esc(k)}</b><span><i class="v-REQUIREMENTS_MET">✓ ${x.works?.length ?? 0}</i> · <i class="v-NOT_MET">✗ ${x.not_met?.length ?? 0}</i> · <i class="v-NEED_MORE_INFORMATION">? ${x.needs_info?.length ?? 0}</i> places</span>${x.strictest ? `<em>${esc(x.strictest)}</em>` : ''}</div>`).join('')}</div>` : ''}
     <div class="hw-comps">${Object.entries(comb.components || {}).map(([name, c]) => { const f = (c.facts || []).filter((x) => x.value?.tag !== 'simulated'); if (!f.length) return ''; return `<div class="hw-comp"><b>${esc(name)}</b>${f.slice(-4).map((x) => `<div class="hw-fact"><span>${esc(x.fact)}</span><em>${esc(vText(x.value))}</em></div>`).join('')}${f.length > 4 ? `<small>+${f.length - 4} more</small>` : ''}</div>`; }).join('')}</div>
     ${(comb.open_questions || []).length ? `<div class="hw-open"><b>Still open</b>${comb.open_questions.map((q) => `<p>${esc(q)}</p>`).join('')}</div>` : ''}`;
-  $('#hw-run').addEventListener('click', doRun);
 }
 
 // ------------------------------------------------------------------ runs, polling, sources
@@ -536,12 +571,14 @@ async function doRun() {
   try {
     const j = await postJSON('/api/run', { location: S.location, role: 'crew', inputs: st.inputs });   // the same numbers Lean is using on the cards
     S.combined = j.combined; S.runs = await getJSON('/api/runs').catch(() => S.runs);
+    boardUpto = null;          // jump to the newest run: its parts and proofs draw in
     toast(`${j.run.run_id}: ${j.run.adds_to_combined.length} facts added to the all-in-one.`, 5000);
-  } catch (e) { toast(`Run failed: ${e.message}`, 6000); }
-  renderCard(); renderAllInOne();
+  } catch (e) { toast(/503/.test(e.message) ? 'New runs are recorded by the local SpinDrift server. This public page shows the stored runs.' : `Run failed: ${e.message}`, 6000); }
+  if (btn) { btn.disabled = false; btn.textContent = '＋ Run here'; }
+  renderCard(); renderAllInOne(); renderBoard();
 }
 async function poll() {
-  try { S.health = await getJSON('/api/health'); $('#tb-status').classList.add('ok'); $('#tb-status span').textContent = 'live'; }
+  try { S.health = await getJSON('/api/health'); $('#tb-status').classList.add('ok'); $('#tb-status span').textContent = S.health?.public ? 'public · Lean live' : 'live'; }
   catch { $('#tb-status').classList.remove('ok'); $('#tb-status span').textContent = 'saved data'; }
   try { S.live = await getJSON('/api/live'); } catch { /* snapshot */ }
   try { const L = await getJSON('/api/locations'); if (Array.isArray(L?.places)) D.locations = L; } catch { /* file copy */ }
