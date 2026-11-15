@@ -136,7 +136,7 @@ function renderCard() {
       <div class="note" style="margin-top:4px">Missing or unconfirmed inputs never become a pass or a fail: Lean answers “need more information”. Sensor colour on the body is this verdict, not health.</div></div>
     <div class="footer-text">${esc(FOOTER)}</div>`;
   $$('#card .srow').forEach((el) => el.addEventListener('click', (e) => { if (e.target.closest('[data-tab]')) return; pickSite(el.dataset.site, true); }));
-  $$('#card [data-tab]').forEach((b) => b.addEventListener('click', () => showView(b.dataset.tab)));
+  $$('#card [data-tab]').forEach((b) => b.addEventListener('click', () => enterTab(b.dataset.tab)));
   $$('#card [data-why]').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); st.why = { ...(st.why || {}), [b.dataset.why]: !st.why?.[b.dataset.why] }; renderCard(); }));
   $$('#card .inputs input, #card .inputs select').forEach((el) => el.addEventListener('change', () => { st.inputs = readInputs(); checkLean(); }));
   $('#btn-check').addEventListener('click', () => { st.inputs = readInputs(); checkLean(true); });
@@ -170,6 +170,7 @@ async function prefetchStops(site) {
   }
 }
 function renderRail() {
+  if (st.tab) { renderTabRail(); return; }
   const chain = chainFor(st.site), s = SITES.find((x) => x.id === st.site);
   $('#rail').innerHTML = `<div class="rail-site">${esc(s.name)} · ${esc(s.sensor)}</div>
     ${chain.map((l, i) => `<button data-l="${l}" class="${l === st.level ? 'on' : ''}"><i></i><b>${esc(stopFov[`${st.site}|${l}`] || LV_SCALE[l])}</b><span>${i + 1} · ${esc(LEVEL_NAMES[l])}</span></button>`).join('')}`;
@@ -182,7 +183,7 @@ function setFov(metres, dimLabel) {
   if (metres === null) { [num, unit] = [dimLabel.split(' ')[0], dimLabel.split(' ').slice(1).join(' ')]; } else ({ num, unit } = fovText(metres));
   const key = `${num}${unit}`; if (key === fovShown) return; fovShown = key;
   $('#fov-num').textContent = num; $('#fov-unit').textContent = unit;
-  if (st.level && !st.levelFovSet?.[`${st.site}|${st.level}`] && metres !== null) {
+  if (!st.tab && st.level && !st.levelFovSet?.[`${st.site}|${st.level}`] && metres !== null) {
     st.levelFovSet = { ...(st.levelFovSet || {}), [`${st.site}|${st.level}`]: true };
     setTimeout(() => { stopFov[`${st.site}|${st.level}`] = `${$('#fov-num').textContent} ${$('#fov-unit').textContent}`; renderRail(); }, 1300);
   }
@@ -234,10 +235,96 @@ async function goLevel(level) {
   }
 }
 function step(dir) {
+  if (st.tab) { goStep(st.step + dir); return; }
   const chain = chainFor(st.site), i = chain.indexOf(st.level), j = Math.max(0, Math.min(chain.length - 1, i + dir));
   if (j !== i) goLevel(chain[j]);
 }
+
+// ------------------------------------------------------------------ sensor tabs: one descent per sensor, starting
+// with the sensor in contact with the body part it reads (body twin views), then the cell, molecule and quantum scenes
+const TAB_CHAINS = {
+  opm: [{ twin: 'opm_grid', fov: '30 cm', name: 'Sensors on the head' }, { twin: 'opm_contact', fov: '5.5 cm', name: 'One sensor on the scalp' },
+    { file: 's_sensor.js?id=opm', name: 'The sensor' }, { file: 'cell_neuron.js', name: 'The neuron it hears' }, { file: 'q_rb.js', name: 'Rubidium atom' }],
+  nv: [{ twin: 'chest', fov: '30 cm', name: 'Sensors on the chest' }, { twin: 'nv_contact', fov: '5 cm', name: 'NV head at the chest' },
+    { file: 's_sensor.js?id=nv&build=jgu', name: 'The diamond' }, { file: 'cell_cardiomyocyte.js', name: 'Heart muscle cell' },
+    { file: 'mol_nav15.js', name: 'Nav1.5 and its gene' }, { file: 'q_nv.js', name: 'NV centre' }],
+  qd: [{ twin: 'kidneys', fov: '36 cm', name: 'Where renin is made' }, { file: 'cell_rbc.js', name: 'Blood plasma' },
+    { file: 's_sensor.js?id=qd', name: 'The probe' }, { file: 'mol_renin.js', name: 'Renin and its gene' }, { file: 'q_qd.js', name: 'Energy transfer' }],
+  cqd: [{ twin: 'forearm', fov: '16 cm', name: 'Patch on the forearm' }, { file: 'cell_skin.js', name: 'Skin layers' },
+    { file: 'mol_bilirubin.js', name: 'Bilirubin and its gene' }, { file: 'q_cqd.js', name: 'Carbon dot' }],
+};
+const vget = (k) => st.verdicts?.verdicts?.[k];
+const vrow = (k, label) => { const v = vget(k); return v ? { label: `Lean verdict · ${label}`, value: v.verdict.replace(/_/g, ' ').toLowerCase(), unit: '', tag: 'Lean', source: v.reason } : null; };
+const voRow = (label, x) => (x ? { label, value: x.value ?? 'not stated', unit: x.unit || '', tag: x.tag, source: x.source } : null);
+async function twinCard(name) {
+  if (!('anatomy/manifest' in D)) D['anatomy/manifest'] = await getJSON('/data/anatomy/manifest.json').catch(() => null);
+  const man = D['anatomy/manifest'], sp = D.specs || {}, opm = D['sensor_parts/opm']?.components, live = S.live || D.live_snapshot || {};
+  const amb = live.opm_readiness?.[S.location]?.ambient_nT;
+  const pts = man?.mounts?.scalp_right_precentral_gyrus?.points || [];
+  const dk = pts[0] && Object.keys(pts[0]).find((k) => /depth|to_cortex|to_gyrus|to_brain/i.test(k) && typeof pts[0][k] === 'number');
+  const depth = dk ? pts.map((p) => p[dk] * 1000) : null;
+  const C = {
+    opm_grid: { title: 'Nine OPMs over the right precentral gyrus', lines: ['QuSpin QZFM Gen-3 heads on a 3 × 3 grid, about 25 mm apart, on the Human Reference Atlas scalp over the precentral gyrus (UBERON:0002703): the layout of the nine-sensor MNE OPM recording.', 'Scroll to descend to one sensor touching the scalp.'],
+      rows: [voRow('ambient field here', amb), voRow('field the coils can null', sp.opm?.field_compensation_max), vrow('opm_brain', 'brain')], src: ['HRA Visible Human male (CC BY 4.0)', 'MNE-Python OPM sample', 'QuSpin QZFM Gen-3'] },
+    opm_contact: { title: 'One sensor touching the scalp', lines: ['The housing (seen through) stands on the skin; its rubidium cell sits just above the skin face, and the cortex lies a few millimetres below.', 'The magnetic field of the neurons crosses the scalp and reaches the cell.'],
+      rows: [voRow('housing height (Gen-3.0 drawing)', opm?.housing?.size?.y), voRow('cell centre above the skin face', opm?.cell?.centre?.y ? { ...opm.cell.centre.y, value: +(opm.cell.centre.y.value + opm.housing.size.y.value / 2).toFixed(2) } : null),
+        depth ? { label: 'scalp to cortex in this model', value: `${Math.min(...depth).toFixed(1)}–${Math.max(...depth).toFixed(1)}`, unit: 'mm', tag: 'calculated', source: 'HRA meshes (data/anatomy/manifest.json)' } : null], src: ['QuSpin Gen-3.0 dimension drawing', 'HRA brain and skin'] },
+    chest: { title: 'Sensors over the heart', lines: ['A 2 × 2 OPM array at 3 cm spacing (Kiel Cardio Database layout) and the JGU NV-diamond head sit on the chest over the real heart of the Visible Human.', 'Scroll to descend to the NV head at the skin.'],
+      rows: [man?.mounts?.chest_over_heart?.heart_centroid_to_skin_m ? { label: 'heart centre to skin', value: +(man.mounts.chest_over_heart.heart_centroid_to_skin_m * 1000).toFixed(1), unit: 'mm', tag: 'calculated', source: 'HRA heart and skin meshes' } : null, vrow('opm_heart', 'OPM heart'), vrow('nv_heart_jgu', 'NV (JGU)')], src: ['HRA Visible Human male', 'Kiel Cardio Database', 'Omar et al., arXiv 2601.18843'] },
+    nv_contact: { title: 'NV head about 1 cm from the skin', lines: ['The JGU head’s Ø12 mm front face (the only published housing size) faces the chest; the heart’s field reaches the diamond inside.', 'Scroll to descend into the diamond.'],
+      rows: [voRow('JGU noise density', sp.nv?.jgu?.sensitivity), voRow('bandwidth used', sp.nv?.headline?.bandwidth_assumed), vrow('nv_heart_jgu', 'R-peak, JGU')], src: ['Omar et al., arXiv 2601.18843'] },
+    kidneys: { title: 'Renin comes from the kidneys', lines: ['Juxtaglomerular granular cells in the kidney make renin (HRA ASCT+B: CL:0000648 → REN). The quantum-dot assay reads renin in drawn blood, on a TIRF microscope.', 'Scroll to descend into the blood.'],
+      rows: [voRow('assay detection limit', sp.qd_renin?.detection_limit), vrow('qd_blood', 'blood renin')], src: ['HRA kidneys and ASCT+B kidney v1.8', 'Long et al., Anal. Chem. 84, 8846 (2012)'] },
+    forearm: { title: 'Carbon-dot patch on the forearm', lines: ['The microneedle patch leaves carbon dots in the skin; their glow tracks bilirubin under blue light. The site is shown on the right forearm: the paper names no body site, and its needle dimensions are not in an accessible source.', 'Scroll to descend into the skin.'],
+      rows: [vrow('cqd_skin', 'skin bilirubin')], src: ['Tabatabaee et al., ACS Nano 18, 28012 (2024)', 'HRA skin'] },
+  }[name];
+  const chain = TAB_CHAINS[st.tab], i = chain.findIndex((s) => s.twin === name);
+  $('#hud-info').innerHTML = `<div class="lvl">Level ${i + 1} of ${chain.length} · ${esc(chain[i].name)}</div><h3>${esc(C.title)}</h3>${C.lines.map((t) => `<p>${esc(t)}</p>`).join('')}
+    <div class="kick" style="margin-top:8px"><span>Sources</span></div><div class="src">${C.src.map(esc).join('<br>')}</div>`;
+  const rows = C.rows.filter(Boolean);
+  $('#hud-readouts').innerHTML = rows.length ? `<div class="kick"><span>Measured and calculated</span></div>${rows.map((x) => `<div class="mrow" title="${esc([x.tag, x.source].filter(Boolean).join(' · '))}"><span>${esc(x.label)}</span><b>${esc(typeof x.value === 'number' ? fmtNum(x.value) : x.value)} <small>${esc(x.unit)}</small></b></div>`).join('')}` : '';
+  $('#hud-controls').innerHTML = ''; $('#hud-gene').innerHTML = ''; $('#hud').hidden = false;
+}
+const tabStop = {};
+function renderTabRail() {
+  const chain = TAB_CHAINS[st.tab];
+  $('#rail').innerHTML = `<div class="rail-site">${esc(TAB_HEAD[st.tab].title.split(':')[0])}</div>${chain.map((s, i) => `<button data-i="${i}" class="${i === st.step ? 'on' : ''}"><i></i><b>${esc(s.fov || tabStop[s.file] || '')}</b><span>${i + 1} · ${esc(s.name)}</span></button>`).join('')}`;
+  $$('#rail button').forEach((b) => b.addEventListener('click', () => goStep(+b.dataset.i)));
+  $('#fov-lvl').textContent = `LEVEL ${st.step + 1} OF ${chain.length} · ${chain[st.step].name.toUpperCase()}`;
+}
+async function goStep(i) {
+  const chain = TAB_CHAINS[st.tab]; if (!chain) return;
+  i = Math.max(0, Math.min(chain.length - 1, i));
+  if (i === st.step && st.stepReady) return;
+  const s = chain[i], dir = i >= st.step ? 'in' : 'out';
+  if (s.twin) {
+    micro?.close(); $('#stage').classList.remove('deep');
+    st.step = i; st.level = 'organ'; st.stepReady = true;
+    twin?.view(s.twin); await twinCard(s.twin);
+  } else {
+    try {
+      await micro.openFile(s.file, { dir, index: i + 1, total: chain.length, name: s.name });
+      st.step = i; st.level = 'cell'; st.stepReady = true; $('#stage').classList.add('deep'); $('#hud').hidden = false;
+      setTimeout(() => { tabStop[s.file] = `${$('#fov-num').textContent} ${$('#fov-unit').textContent}`; if (st.tab) renderTabRail(); }, 1400);
+    } catch (e) { console.warn(e); toast(`This level is not available (${e.message}).`, 5000); return; }
+  }
+  renderTabRail();
+}
+function enterTab(tab) {
+  st.tab = tab; st.step = -1; st.stepReady = false; st.site = SITES.find((x) => x.tab === tab).id;
+  $$('.view').forEach((el) => el.classList.toggle('on', el.id === 'view-body'));
+  $$('.tb-nav button').forEach((b) => b.classList.toggle('on', b.dataset.view === tab));
+  document.body.classList.add('sensor-mode'); $('#go-specs').hidden = false;
+  setTimeout(() => { twin?.resize(); micro?.resize(); goStep(0); }, 30);
+}
+function exitTab() {
+  st.tab = null; document.body.classList.remove('sensor-mode'); $('#go-specs').hidden = true;
+  $$('.view').forEach((el) => el.classList.toggle('on', el.id === 'view-body'));
+  $$('.tb-nav button').forEach((b) => b.classList.toggle('on', b.dataset.view === 'body'));
+  setTimeout(() => { twin?.resize(); micro?.resize(); goLevel('body'); }, 30);
+}
 function pickSite(site, focus) {
+  if (st.tab) return;
   st.site = site; S.system = site; prefetchStops(site);
   twin?.select(site, { focus: focus && st.level !== 'body' ? true : focus });
   if (st.level !== 'body' && st.level !== 'organ') goLevel('organ'); else { st.level = focus ? 'organ' : st.level; renderRail(); if (focus) organHud(site); }
@@ -269,9 +356,10 @@ async function showView(v) {
   if (v === 'body' || built[v]) return;
   built[v] = true;
   const el = $(`#view-${v}`), h = TAB_HEAD[v];
-  el.innerHTML = `<div class="st-head"><div><div class="kick"><span>${esc(h.kick)}</span></div><h2>${esc(h.title)}</h2><div class="note">${h.sub}</div></div><div class="pills">${h.pills()}</div></div>
+  el.innerHTML = `<button class="ghost" data-back="${v}" style="margin-bottom:10px">← Back to the descent</button><div class="st-head"><div><div class="kick"><span>${esc(h.kick)}</span></div><h2>${esc(h.title)}</h2><div class="note">${h.sub}</div></div><div class="pills">${h.pills()}</div></div>
     <div class="st-main"><div class="st-view" id="sv-${v}"><div class="sv-empty">Loading the exact-spec model…</div></div><aside class="st-side" id="ss-${v}"></aside></div>
     <div class="st-below" id="sb-${v}"></div>`;
+  el.querySelector('[data-back]').addEventListener('click', () => enterTab(v));
   try { await createSensorView($(`#sv-${v}`), $(`#ss-${v}`), v); }
   catch (e) { console.warn(e); $(`#sv-${v}`).innerHTML = `<div class="sv-empty">The exact-spec 3D model for this sensor is being built from its documented dimensions.<br><br><span class="src">${esc(e.message)}</span></div>`; $(`#ss-${v}`).innerHTML = '<p class="note">Component list appears with the model.</p>'; }
   try { await tabBelow(v, $(`#sb-${v}`)); } catch (e) { console.error(e); $(`#sb-${v}`).innerHTML = `<div class="box">Could not render: ${esc(e.message)}</div>`; }
@@ -294,7 +382,8 @@ async function boot() {
   applyPalette();
   S.location = $('#location').value;
   $('#location').addEventListener('change', (e) => { S.location = e.target.value; checkLean(); });
-  $$('.tb-nav button').forEach((b) => b.addEventListener('click', () => showView(b.dataset.view)));
+  $$('.tb-nav button').forEach((b) => b.addEventListener('click', () => (b.dataset.view === 'body' ? exitTab() : enterTab(b.dataset.view))));
+  $('#go-specs').addEventListener('click', () => showView(st.tab));
   $('#open-sources').addEventListener('click', () => { $('#sources-body').innerHTML = sourcesHTML(); $('#sources').hidden = false; });
   $('#close-sources').addEventListener('click', () => { $('#sources').hidden = true; });
   setInterval(() => { $('#tb-utc').textContent = new Date().toISOString().slice(11, 19) + ' UTC'; }, 1000);
@@ -312,7 +401,7 @@ async function boot() {
   try {
     twin = await createTwin({ canvas: $('#twin'), labelsEl: $('#labels'), leadersEl: $('#leaders'), sites: SITES.map((s) => ({ id: s.id, name: s.name, sensor: s.sensor })),
       colors: { opm: S.col.opm, nv: S.col.nv, cqd: S.col.cqd }, opm: opmGeom(), onSelect: (id) => pickSite(id, true),
-      onOrganPick: (p) => { if (st.level === 'body') { st.level = 'organ'; renderRail(); } organHud(st.site, p); },
+      onOrganPick: (p) => { if (st.tab) return; if (st.level === 'body') { st.level = 'organ'; renderRail(); } organHud(st.site, p); },
       onEdge: (d) => step(d === 'in' ? 1 : -1), onProgress: (f) => { $('#ld-num').textContent = String(55 + Math.round(f * 35)).padStart(2, '0'); } });
     twin.select(st.site);
   } catch (e) { console.error(e); toast(`3D body unavailable: ${e.message}`, 6000); }

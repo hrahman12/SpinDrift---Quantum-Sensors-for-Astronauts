@@ -61,14 +61,17 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
   }
 
   // dir 'in' starts wide and descends into the scene; 'out' starts close and pulls back
-  async function open(site, level, { dir = 'in', index = 0, total = 0 } = {}) {
+  async function open(site, level, opts = {}) {
     const file = CHAINS[site]?.[level];
     if (!file) throw new Error(`no ${level} scene for ${site}`);
+    return openFile(file, opts);
+  }
+  async function openFile(file, { dir = 'in', index = 0, total = 0, name = '' } = {}) {
     const mod = await import(`./scale/${file}`);
     for (const p of mod.DATA || []) if (!(p in D)) D[p] = await getJSON(`/data/${p}.json`).catch(() => null);
-    const built = mod.build(D);
+    const built = await mod.build(D);
     close();
-    cur = { mod, built, level: mod.LEVEL || {}, labels: [], index, total };
+    cur = { mod, built, level: mod.LEVEL || {}, labels: [], index, total, name };
     renderPass.scene = built.scene;
     const cam = built.camera || {};
     camera.fov = cam.fov || 40;
@@ -93,7 +96,7 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
 
   function drawInfo() {
     const { built, level } = cur, i = built.info || {};
-    hud.info.innerHTML = `<div class="lvl">Level ${cur.index} of ${cur.total} · ${esc(LEVEL_NAMES[level.level] || level.level)}</div><h3>${esc(i.title || level.title || '')}</h3>
+    hud.info.innerHTML = `<div class="lvl">Level ${cur.index} of ${cur.total} · ${esc(cur.name || LEVEL_NAMES[level.level] || level.level)}</div><h3>${esc(i.title || level.title || '')}</h3>
       ${(i.lines || []).map((t) => `<p>${esc(t)}</p>`).join('')}
       ${(i.lean || []).length ? `<div class="lean-row">${i.lean.map((n) => lean(n)).join('')}</div>` : ''}
       ${(i.sources || []).length ? `<div class="kick" style="margin-top:8px"><span>Sources</span></div><div class="src">${i.sources.map((s) => esc(s)).join('<br>')}</div>` : ''}`;
@@ -179,5 +182,5 @@ export function createMicro({ canvas, labelsEl, hud, scaleEl, onEdge, onFov }) {
     if (t - lastRO > 0.25) { lastRO = t; if (cur.built.readouts?.length) drawReadouts(); }
   })();
 
-  return { open, close, resize, home, get current() { return cur; } };
+  return { open, openFile, close, resize, home, get current() { return cur; } };
 }

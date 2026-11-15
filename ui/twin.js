@@ -134,7 +134,8 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
       const p = chest.p.clone().add(tx.clone().multiplyScalar((dx - 0.5) * 30 * MM)).add(ty.clone().multiplyScalar((dy - 0.5) * 30 * MM));
       const s = fromOutside(L.heart, p.clone().sub(L.heart)); if (s) addOpm('heart', s, chest.p.clone().add(new THREE.Vector3(0.25, -0.3, 0.45)));
     }
-    const nvL = 12 * MM, nvR = 6 * MM;
+    // JGU head: only the Ø12 mm front face is published (housing length is not), so a 1 mm-thick face disc is drawn
+    const nvL = 1 * MM, nvR = 6 * MM;
     const nvPos = chest.p.clone().add(ty.clone().multiplyScalar(-65 * MM));
     const sNv = fromOutside(L.heart, nvPos.clone().sub(L.heart)) || { p: nvPos, n: chest.n };
     const nv = new THREE.Mesh(new THREE.CylinderGeometry(nvR, nvR, nvL, 28), mat(0xa9adb0, { metalness: 0.8, roughness: 0.3 }));
@@ -292,5 +293,43 @@ export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect,
     leadersEl.innerHTML = svg;
   })();
 
-  return { select, resetView, setVerdict, unitsPerPixel, fieldOfView, resize, credits, organs, hasAnatomy: !!anat, get focused() { return focused; } };
+  // ---------------------------------------------------------------- sensor-tab descent: frame a sensor in contact
+  // with the body at a set field of view (visible height in metres); x-ray the housings to show the cell inside
+  const tanH = () => Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const wp = (m) => m.getWorldPosition(new THREE.Vector3());
+  const avg = (list) => list.reduce((a, m) => a.add(wp(m)), new THREE.Vector3()).divideScalar(list.length || 1);
+  const opmCentre = sensors.brain[4] || sensors.brain[0];
+  const scalpN = opmCentre ? new THREE.Vector3(0, 1, 0).applyQuaternion(opmCentre.parent.quaternion).normalize() : new THREE.Vector3(-0.7, 0.7, 0);
+  const sideOf = (n) => new THREE.Vector3().crossVectors(n, Math.abs(n.y) > 0.9 ? new THREE.Vector3(0, 0, 1) : up).normalize();
+  const VIEWS2 = {};
+  if (sensors.brain.length) {
+    VIEWS2.opm_grid = { site: 'brain', fov: 0.30, target: avg(sensors.brain), dir: scalpN.clone().add(new THREE.Vector3(0, 0.15, 0.35)) };
+    const skinPt = wp(opmCentre).sub(scalpN.clone().multiplyScalar(OG.h * MM / 2));
+    VIEWS2.opm_contact = { site: 'brain', fov: 0.055, target: skinPt.clone().sub(scalpN.clone().multiplyScalar(0.004)), dir: sideOf(scalpN).add(scalpN.clone().multiplyScalar(0.35)), xray: true };
+  }
+  if (chest) {
+    VIEWS2.chest = { site: 'heart', fov: 0.30, target: chest.p.clone(), dir: chest.n.clone().add(new THREE.Vector3(0.3, 0.15, 0)) };
+    const nvMesh = sensors.heart.find((m) => m.geometry?.type === 'CylinderGeometry');
+    if (nvMesh) { const nvN = new THREE.Vector3(0, 1, 0).applyQuaternion(nvMesh.quaternion); VIEWS2.nv_contact = { site: 'heart', fov: 0.05, target: wp(nvMesh).sub(nvN.clone().multiplyScalar(0.008)), dir: sideOf(nvN).add(nvN.clone().multiplyScalar(0.3)) }; }
+  }
+  const kid = [org('kidney_left'), org('kidney_right')].filter(Boolean);
+  if (kid.length) VIEWS2.kidneys = { site: 'blood', fov: 0.36, target: kid.reduce((a, v) => a.add(v), new THREE.Vector3()).divideScalar(kid.length), dir: new THREE.Vector3(0, 0.12, 1) };
+  if (L.skin) VIEWS2.forearm = { site: 'skin', fov: 0.16, target: L.skin.clone(), dir: (forearm?.n || new THREE.Vector3(0, 0, 1)).clone().add(new THREE.Vector3(-0.3, 0.1, 0)) };
+  const housings = sensors.brain.concat(sensors.heart.filter((m) => m.geometry?.type === 'BoxGeometry'));
+  function setXray(on) { for (const m of housings) { m.material.transparent = on; m.material.opacity = on ? 0.28 : 1; m.material.depthWrite = !on; } }
+  function view(name) {
+    const v = VIEWS2[name]; if (!v) return false;
+    selected = v.site; focused = v.site; focusOrgans(v.site);
+    const dist = v.fov / (2 * tanH());
+    camera.near = Math.max(0.0002, dist / 60); camera.updateProjectionMatrix();
+    controls.minDistance = dist * 0.15; controls.maxDistance = Math.max(7, dist * 6);
+    fly = { from: camera.position.clone(), fromT: controls.target.clone(), to: v.target.clone().add(v.dir.clone().normalize().multiplyScalar(dist)), toT: v.target.clone(), t: 0 };
+    setXray(!!v.xray);
+    return true;
+  }
+  function views() { return Object.keys(VIEWS2); }
+  const baseResetView = resetView;
+  function resetAll() { camera.near = 0.003; camera.updateProjectionMatrix(); controls.minDistance = 0.12; controls.maxDistance = 7; setXray(false); baseResetView(); }
+
+  return { select, resetView: resetAll, setVerdict, unitsPerPixel, fieldOfView, resize, credits, organs, view, views, setXray, hasAnatomy: !!anat, get focused() { return focused; } };
 }
