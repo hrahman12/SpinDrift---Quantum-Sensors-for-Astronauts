@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpinDrift · Quantum crew health</title>
+  <title>SpinDrift · every signal a theorem</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script type="importmap">
     { "imports": {
@@ -18,40 +18,27 @@
   <!-- loader: the percentage is the real share of files loaded -->
   <div id="loader">
     <div class="ld-box">
-      <div class="ld-brand"><span class="ld-mark">◎</span><div><b>SPINDRIFT</b><small>QUANTUM CREW HEALTH</small></div></div>
+      <div class="ld-brand"><b class="wordmark">SpinDrift</b><small>⊢ every signal a theorem</small></div>
       <div class="ld-pct"><span id="ld-num">00</span><small>%</small></div>
       <ol class="ld-steps">
         <li id="ld-1"><span>01</span>Real data files</li>
-        <li id="ld-2"><span>02</span>Anatomy and sensors</li>
-        <li id="ld-3"><span>03</span>Lean checker</li>
+        <li id="ld-2"><span>02</span>The astronaut and the sensors</li>
+        <li id="ld-3"><span>03</span>Lean, the maths referee</li>
       </ol>
     </div>
   </div>
 
   <header class="topbar">
-    <div class="tb-brand"><span class="ld-mark">◎</span><div><b>SPINDRIFT</b><small>QUANTUM CREW HEALTH</small></div></div>
-    <nav class="tb-nav" role="tablist">
-      <button data-view="body" class="on">Body</button>
-      <button data-view="opm"><i class="dotc opm"></i>OPM</button>
-      <button data-view="nv"><i class="dotc nv"></i>NV diamond</button>
-      <button data-view="qd"><i class="dotc qd"></i>Quantum dot</button>
-      <button data-view="cqd"><i class="dotc cqd"></i>Carbon dots</button>
-    </nav>
+    <div class="tb-brand"><b class="wordmark">SpinDrift</b><small>⊢ every signal a theorem</small></div>
     <div class="tb-mission">
+      <select id="place" class="bare" title="Place" hidden></select>
+      <select id="location" class="bare" title="Exact spot"></select>
       <span class="sex-toggle" title="Body figure: female or male"><button data-sex="female" title="Female" aria-label="Female">♀</button><button data-sex="male" class="on" title="Male" aria-label="Male">♂</button></span>
-      <select id="location" class="bare" title="Mission location: sets the live ambient field">
-        <option value="iss">ISS · low Earth orbit</option>
-        <option value="gateway">Lunar Gateway · NRHO</option>
-        <option value="lunar_base">Lunar surface base</option>
-        <option value="mars_transit">Mars transit</option>
-        <option value="mars_surface">Mars surface</option>
-      </select>
-      <span class="tb-clock"><b>RUN</b> <span id="tb-runs">000</span> <small id="tb-utc">--:--:-- UTC</small></span>
-      <span class="tb-status" id="tb-status"><i></i><span>Server</span></span>
+      <span class="tb-status" id="tb-status"><i></i><span>server</span></span>
     </div>
   </header>
 
-  <!-- BODY: the giant quantum-sensor body, zoomable from 1 m to below 1 nm -->
+  <!-- ONE PAGE: the astronaut; tap a sensor or scroll to dive to the quantum level -->
   <main class="view on" id="view-body">
     <div class="stage" id="stage">
       <canvas id="twin"></canvas>
@@ -59,20 +46,14 @@
       <svg id="leaders"></svg>
       <div id="labels"></div>
       <div id="micro-labels"></div>
-      <div class="fov" id="fov"><div class="fov-n"><b id="fov-num">—</b><span id="fov-unit"></span></div><small>FIELD OF VIEW · <span id="fov-lvl">LEVEL 1</span></small></div>
-      <div class="rail" id="rail"></div>
+      <div class="fov" id="fov"><div class="fov-n"><b id="fov-num">2.00</b><span id="fov-unit">m</span></div><small>FIELD OF VIEW · <span id="fov-lvl">LEVEL 1</span></small></div>
+      <div id="rail-wrap"></div>
       <div class="hud" id="hud" hidden>
-        <div class="level-card" id="level-card">
-          <div class="hud-info" id="hud-info"></div>
-          <div class="hud-readouts" id="hud-readouts"></div>
-          <div class="hud-controls" id="hud-controls"></div>
-        </div>
+        <div class="level-card" id="level-card"></div>
         <div class="hud-gene" id="hud-gene"></div>
       </div>
       <div class="scalebar" id="scalebar"><i></i><span>1 m</span></div>
-      <div class="descend" id="descend"><button id="go-up" title="Up one level ([ or ↑)">↑</button><span>Scroll to descend</span><button id="go-down" title="Down one level (] or ↓)">↓</button><button class="linkish" id="go-src">Data sources</button><button class="linkish" id="go-specs" hidden>Specs and physics</button></div>
-      <div class="stage-hint" id="stage-hint">Drag to turn · pinch or ctrl+scroll to zoom within a level</div>
-      <div class="flash" id="flash"></div>
+      <div class="descend" id="descend"><button id="go-up" title="Up one level (↑)">↑</button><span>Scroll to dive</span><button id="go-down" title="Down one level (↓)">↓</button><button class="linkish" id="go-labels">Labels</button><button class="linkish" id="go-src">Sources</button></div>
     </div>
     <aside class="card" id="card"></aside>
   </main>
@@ -83,7 +64,7 @@
   <section class="view page sensor-tab" id="view-cqd"></section>
 
   <footer class="statusline">
-    <span>PROTOTYPE · EVERY VALUE SOURCED AND TAGGED · LEAN DECIDES THE VERDICTS · NOT DIAGNOSTIC</span>
+    <span>EVERY VALUE SOURCED · LEAN DECIDES · NOT DIAGNOSTIC</span>
     <button class="linkish" id="open-sources">SOURCES AND CREDITS ›</button>
   </footer>
 

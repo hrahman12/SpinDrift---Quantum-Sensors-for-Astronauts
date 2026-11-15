@@ -51,13 +51,81 @@ export function bodyModel(skinMeshes, { H, y0, cx = 0 }) {
   return { P, I, n, cls, hy: hyA, H, y0, cx };
 }
 
+// A clothed figure shows no anatomy between the legs. Below the height where the legs separate, the body surface is
+// three pieces: two legs and what hangs between them. That middle piece is folded up flat against the body, and the
+// front of the lower trunk is kept no further forward than the thighs beside it. The same moves are applied to the
+// welded model (so garments grow from the tidy shape) and to the skin meshes underneath.
+export function tuck(body, skinMeshes) {
+  const { P, I, n, cls, hy, H, y0, cx } = body;
+  let zmin = Infinity, zmax = -Infinity;
+  for (let i = 0; i < n; i++) if (cls[i] === 0 && hy[i] > 0.45 && hy[i] < 0.55) { const z = P[3 * i + 2]; if (z < zmin) zmin = z; if (z > zmax) zmax = z; }
+  const zMid = (zmin + zmax) / 2, SL = 0.004, occ = new Set();
+  for (let i = 0; i < n; i++) if (cls[i] === 0 && Math.abs(P[3 * i] - cx) < 0.006 * H && P[3 * i + 2] < zMid) occ.add(Math.floor((hy[i] * H) / SL));
+  let kGap = null; for (let k = Math.floor((0.53 * H) / SL); k > Math.floor((0.40 * H) / SL); k--) if (!occ.has(k)) { kGap = k; break; }
+  if (kGap === null) return 0;
+  const hyCut = ((kGap + 1) * SL) / H - 0.002;
+  // connected pieces of the surface below the cut
+  const par = new Int32Array(n).fill(-1), find = (a) => { while (par[a] >= 0) a = par[a]; return a; };
+  const below = (i) => cls[i] === 0 && hy[i] < hyCut;
+  const uni = (a, b) => { a = find(a); b = find(b); if (a === b) return; if (par[a] > par[b]) [a, b] = [b, a]; par[a] += par[b]; par[b] = a; };
+  for (let t3 = 0; t3 < I.length; t3 += 3) { const a = I[t3], b = I[t3 + 1], c = I[t3 + 2]; if (below(a) && below(b) && below(c)) { uni(a, b); uni(b, c); } }
+  const comp = new Map();
+  for (let i = 0; i < n; i++) if (below(i)) { const r = find(i); let c = comp.get(r); if (!c) comp.set(r, c = { size: 0, sx: 0, top: 0 }); c.size++; c.sx += P[3 * i]; if (hy[i] > c.top) c.top = hy[i]; }
+  const legs = [...comp.entries()].sort((a, b) => b[1].size - a[1].size).slice(0, 2).map((e) => e[0]);
+  // the level of the front surface just beside the middle (a ring 5.5 to 9 cm from the midline), per centimetre of height
+  const ringZ = new Map(), bin = (h) => Math.round((h * H) / 0.01), side = new Map();
+  for (let i = 0; i < n; i++) { if (cls[i] !== 0 || hy[i] < hyCut - 0.02 || hy[i] > 0.56) continue; const ax = Math.abs(P[3 * i] - cx), z = P[3 * i + 2]; if (ax > 0.03 * H && ax < 0.05 * H && z > zMid) { const k = bin(hy[i]); if (!ringZ.has(k)) ringZ.set(k, []); ringZ.get(k).push(z); } }
+  for (const [k, zs] of ringZ) { zs.sort((p, q) => p - q); side.set(k, zs[Math.floor(zs.length * 0.5)]); }
+  // blend the middle of the front smoothly into the surface around it: every vertex there takes the average
+  // height (z) of its neighbours, repeated until the patch is a smooth membrane held by its edges
+  const inC = new Uint8Array(n), C = [];
+  for (let i = 0; i < n; i++) if (cls[i] === 0 && hy[i] >= hyCut - 0.012 && hy[i] <= 0.515 && Math.abs(P[3 * i] - cx) < 0.042 * H && P[3 * i + 2] > zMid) { inC[i] = 1; C.push(i); }
+  const nbr = new Map(); for (const i of C) nbr.set(i, new Set());
+  for (let t3 = 0; t3 < I.length; t3 += 3) { const a = I[t3], b = I[t3 + 1], c = I[t3 + 2]; if (inC[a]) { nbr.get(a).add(b); nbr.get(a).add(c); } if (inC[b]) { nbr.get(b).add(a); nbr.get(b).add(c); } if (inC[c]) { nbr.get(c).add(a); nbr.get(c).add(b); } }
+  const old = new Map(); for (const i of C) old.set(i, [P[3 * i], P[3 * i + 1], P[3 * i + 2]]);
+  const lists = C.map((i) => [i, [...nbr.get(i)]]);
+  // nothing hangs below the line where the legs join: fold the middle of the front up to that line
+  const yLift = y0 + (hyCut + 0.04) * H;
+  for (const i of C) if (Math.abs(P[3 * i] - cx) < 0.032 * H && P[3 * i + 1] < yLift) P[3 * i + 1] = yLift - (yLift - P[3 * i + 1]) * 0.08;
+  // first bring anything that sticks out down to the level of the surface beside it, then relax (over-relaxation, so it converges)
+  for (const i of C) { const cap = side.get(bin(hy[i])) ?? side.get(bin(hy[i]) + 1) ?? side.get(bin(hy[i]) - 1); if (cap !== undefined && Math.abs(P[3 * i] - cx) < 0.03 * H && P[3 * i + 2] > cap) P[3 * i + 2] = cap; }
+  for (let it = 0; it < 1500; it++) for (const [i, ns] of lists) { if (!ns.length) continue; let s = 0; for (const j of ns) s += P[3 * j + 2]; const z = P[3 * i + 2]; P[3 * i + 2] = z + 1.8 * (s / ns.length - z); }
+  const moves = new Map(), key = (x, y, z) => `${Math.round(x * 1e4)},${Math.round(y * 1e4)},${Math.round(z * 1e4)}`;
+  for (const i of C) { const o3 = old.get(i); if (Math.abs(o3[2] - P[3 * i + 2]) > 1e-5 || Math.abs(o3[1] - P[3 * i + 1]) > 1e-5) moves.set(key(o3[0], o3[1], o3[2]), [P[3 * i], P[3 * i + 1], P[3 * i + 2]]); }
+  if (!moves.size) return 0;
+  const v = new THREE.Vector3();
+  for (const m of skinMeshes) {
+    m.updateMatrixWorld(true);
+    const pos = m.geometry.attributes.position, mw = m.matrixWorld, inv = mw.clone().invert(); let touched = false;
+    for (let i = 0; i < pos.count; i++) {
+      v.fromBufferAttribute(pos, i).applyMatrix4(mw); const to = moves.get(key(v.x, v.y, v.z)); if (!to) continue;
+      v.set(to[0], to[1], to[2]).applyMatrix4(inv); pos.setXYZ(i, v.x, v.y, v.z); touched = true;
+    }
+    if (touched) { pos.needsUpdate = true; m.geometry.computeVertexNormals(); }
+  }
+  return moves.size;
+}
+
 // cut a region, smooth it, offset it along its normals
-export function garment(body, pick, { offset = 0.006, smooth = 6, color = 0x3f78c4, after = 2, name = 'garment' }) {
+export function garment(body, pick, { offset = 0.006, smooth = 6, color = 0x3f78c4, after = 2, name = 'garment', melt = 0, flatFront = null }) {
   const { P, I, n } = body, sel = new Int32Array(n).fill(-1);
   let m = 0; for (let i = 0; i < n; i++) if (pick(i)) sel[i] = m++;
   const tris = []; for (let t = 0; t < I.length; t += 3) { const a = sel[I[t]], b = sel[I[t + 1]], c = sel[I[t + 2]]; if (a >= 0 && b >= 0 && c >= 0) tris.push(a, b, c); }
   if (!tris.length) return null;
   const pos = new Float32Array(m * 3); for (let i = 0; i < n; i++) if (sel[i] >= 0) { const j = sel[i] * 3; pos[j] = P[3 * i]; pos[j + 1] = P[3 * i + 1]; pos[j + 2] = P[3 * i + 2]; }
+  if (flatFront) {      // clothes hang flat at the front: between the legs the cloth lies no further forward than the thighs beside it
+    const [lo, hi] = flatFront, { H, cx, hy } = body, side = new Map(), bin = (i) => Math.round((hy[i] * H) / 0.01);
+    for (let i = 0; i < n; i++) {
+      if (sel[i] < 0 || hy[i] < lo - 0.01 || hy[i] > hi + 0.01) continue;
+      const ax = Math.abs(P[3 * i] - cx);
+      if (ax > 0.05 * H && ax < 0.09 * H) { const k = bin(i); side.set(k, Math.max(side.get(k) ?? -Infinity, P[3 * i + 2])); }
+    }
+    for (let i = 0; i < n; i++) {
+      if (sel[i] < 0 || hy[i] < lo || hy[i] > hi || Math.abs(P[3 * i] - cx) >= 0.05 * H) continue;
+      const cap = side.get(bin(i)); const j = sel[i] * 3 + 2;
+      if (cap !== undefined && pos[j] > cap) pos[j] = cap;
+    }
+  }
   // adjacency (CSR) inside the region
   const deg = new Uint32Array(m); for (let t = 0; t < tris.length; t += 3) { deg[tris[t]] += 2; deg[tris[t + 1]] += 2; deg[tris[t + 2]] += 2; }
   const off = new Uint32Array(m + 1); for (let i = 0; i < m; i++) off[i + 1] = off[i] + deg[i];
@@ -73,6 +141,7 @@ export function garment(body, pick, { offset = 0.006, smooth = 6, color = 0x3f78
     pos.set(tmp);
   };
   const taubin = (k) => { for (let it = 0; it < k; it++) { step(0.5); step(-0.53); } };
+  for (let it = 0; it < melt; it++) step(0.5);     // plain smoothing: melts small features (nose, ears, folds) away
   taubin(smooth);
   const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); geo.setIndex(tris); geo.computeVertexNormals();
   const N = geo.attributes.normal.array; for (let i = 0; i < pos.length; i++) pos[i] += N[i] * offset;
@@ -96,11 +165,11 @@ export function dress(body, { outfit = 'cabin', sex = 'male' }) {
   const add = (g) => { if (g) out.push(g); };
   const isHand = (i) => cls[i] === 1 && hy[i] < 0.485;
   if (O.suit) {
-    add(garment(body, (i) => cls[i] !== 2 && hy[i] < 0.86 && hy[i] >= (O.bootHy || 0.045) && !isHand(i), { offset: O.suitOff, smooth: O.suitSmooth, color: O.suit[sex], name: O.label }));
+    add(garment(body, (i) => cls[i] !== 2 && hy[i] < 0.86 && hy[i] >= (O.bootHy || 0.045) && !isHand(i), { offset: O.suitOff, smooth: O.suitSmooth, melt: 12, flatFront: [0.40, 0.535], color: O.suit[sex], name: O.label }));
   } else {
     const shirt = (i) => cls[i] !== 2 && hy[i] < 0.86 && ((cls[i] === 0 && hy[i] >= 0.515) || (cls[i] === 1 && hy[i] >= (O.sleeve === 'long' ? 0.49 : 0.63)));
     add(garment(body, shirt, { offset: O.topOff, smooth: O.topSmooth || 7, color: O.top[sex], name: O.label }));
-    add(garment(body, (i) => cls[i] === 0 && hy[i] < 0.54 && hy[i] >= (O.bootHy || 0.045), { offset: O.botOff, smooth: 10, color: O.bottom[sex], name: 'trousers' }));
+    add(garment(body, (i) => cls[i] === 0 && hy[i] < 0.54 && hy[i] >= (O.bootHy || 0.045), { offset: O.botOff + 0.02, smooth: 4, melt: 30, color: O.bottom[sex], name: 'trousers' }));
   }
   add(garment(body, (i) => cls[i] === 0 && hy[i] < (O.bootHy || 0.05), { offset: 0.007, smooth: 5, color: O.feet, name: 'shoes' }));
   if (O.gloves) add(garment(body, isHand, { offset: 0.006, smooth: 4, color: O.gloves, name: 'gloves' }));
@@ -110,13 +179,14 @@ export function dress(body, { outfit = 'cabin', sex = 'male' }) {
 // hair: a smoothed cap over the scalp (longer down the back for the female figure)
 export function hair(body, { sex = 'male', headCentre }) {
   const { P, cls, hy } = body;
-  return garment(body, (i) => cls[i] === 2 && (hy[i] > 0.935 || (P[3 * i + 2] < headCentre.z - 0.02 && hy[i] > (sex === 'female' ? 0.86 : 0.905))), { offset: sex === 'female' ? 0.011 : 0.007, smooth: 10, color: sex === 'female' ? 0x3a2c26 : 0x2b2420, name: 'hair' });
+  // the top of the head, and the back and sides down to the neck; never the face
+  return garment(body, (i) => cls[i] === 2 && (hy[i] > 0.972 || (P[3 * i + 2] < headCentre.z + 0.012 && hy[i] > (sex === 'female' ? 0.87 : 0.925))), { offset: sex === 'female' ? 0.012 : 0.008, smooth: 6, melt: 10, color: sex === 'female' ? 0x3a2c26 : 0x2b2420, name: 'hair' });
 }
 
 // a smooth, featureless head over the real face (no eyes, nose or mouth): a calm mannequin-like head
 export function faceShell(body, { color }) {
   const { cls } = body;
-  return garment(body, (i) => cls[i] === 2, { offset: 0.0015, smooth: 30, after: 8, color, name: 'head' });
+  return garment(body, (i) => cls[i] === 2, { offset: 0.006, smooth: 4, melt: 70, after: 4, color, name: 'head' });
 }
 
 // helmet and life-support backpack for the EVA suit (sizes are a drawing choice)

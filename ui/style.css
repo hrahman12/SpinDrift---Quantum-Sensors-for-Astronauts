@@ -324,3 +324,69 @@ ul.plain li { padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 1
   #view-body.on { grid-template-columns: 1fr; grid-template-rows: 62vh auto; overflow-y: auto; }
   .card { border-left: none; border-top: 1px solid var(--line); }
 }
+
+/* ================= banner look: navy, lavender to cyan, "every signal a theorem" ================= */
+:root { --bg: #080a1c; --bg2: #0e1230; --panel: rgba(13, 16, 40, .74); --panel2: rgba(17, 21, 50, .84); --acc: #9fe6ff; --acc2: #b79cff; --acc-bg: rgba(159, 230, 255, .08);
+  --ink: #f3f1ea; --ink2: #c7cbe0; --muted: #8b90b4; --dim: #5c6188; --met: #86e3a1; --notmet: #ff8a7a; --needinfo: #f5c96a; }
+.wordmark { font: 800 22px/1.05 var(--sans); letter-spacing: -.02em; background: linear-gradient(90deg, #f4f1ea 0%, #f4f1ea 36%, #b79cff 64%, #8fe3ff 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; display: block; }
+.tb-brand, .ld-brand { flex-direction: column; align-items: flex-start; gap: 2px; }
+.tb-brand small, .ld-brand small { font: 500 10px var(--mono); letter-spacing: .03em; color: var(--muted); }
+.ld-brand .wordmark { font-size: 36px; }
+.topbar, .statusline { background: rgba(8, 10, 28, .86); }
+.card { background: #090b20; }
+/* the stage: the place's tint at body level; deeper, the field shifts from blue to violet */
+.stage:not(.at-body) { background: radial-gradient(ellipse at 50% 42%, color-mix(in oklab, #1b2358, #3a1a66 calc(var(--depth, 0) * 100%)) 0%, #0a0d26 58%, #05061a 100%); }
+.fov-n b { background: linear-gradient(90deg, #f4f1ea 25%, #cdb6ff 70%, #9fe6ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* sensor chips and the rail of exact scales */
+#rail-wrap { position: absolute; left: 28px; top: 136px; z-index: 5; display: flex; flex-direction: column; gap: 16px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; max-width: 250px; }
+.chips button { display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, .03); border: 1px solid var(--line2); color: var(--muted); font: 500 11.5px var(--sans); padding: 3px 9px; border-radius: 12px; cursor: pointer; }
+.chips button.on { color: var(--ink); border-color: var(--acc2); background: rgba(183, 156, 255, .12); }
+#rail-wrap .rail { position: static; }
+.rail button.on i { background: var(--acc2); border-color: var(--acc2); box-shadow: 0 0 10px var(--acc2); }
+
+/* the level card: plain words first */
+.level-card { border-color: color-mix(in oklab, rgba(159, 230, 255, .32), rgba(183, 156, 255, .65) calc(var(--depth, 0) * 100%)); }
+.level-card .lvl { font: 500 10px var(--mono); letter-spacing: .18em; color: var(--acc2); text-transform: uppercase; margin-bottom: 6px; }
+.level-card h3 { font: 700 21px/1.22 var(--sans); margin: 0 0 8px; letter-spacing: -.015em; }
+.level-card p { margin: 7px 0; color: var(--ink2); font-size: 14px; line-height: 1.58; }
+.level-card p.qb { border-left: 2px solid var(--acc2); padding-left: 10px; color: var(--ink); }
+.level-card p.here-line, .card .here-line { font-size: 12.5px; background: rgba(159, 230, 255, .06); border-radius: 9px; padding: 8px 10px; }
+.level-card details.more p { font-size: 12.5px; }
+.mini { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--ink2); margin-top: 9px; }
+.mini select, .mini input { width: 132px; background: rgba(255, 255, 255, .05); border: 1px solid var(--line2); color: var(--ink); font: 12px var(--mono); padding: 5px 8px; border-radius: 8px; }
+.descend .linkish.on { color: var(--acc2); }
+
+/* physical Lean: the seesaw */
+.seesaw.sm { width: 104px; flex: none; }
+.seesaw.lg { width: 100%; max-width: 250px; display: block; margin: 0 auto; }
+.lean-phys { border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px 10px; margin-top: 10px; background: rgba(0, 0, 0, .2); }
+.ss-legs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 11.5px; color: var(--muted); }
+.ss-legs div:last-child { text-align: right; }
+.ss-legs b { display: block; font: 500 12.5px var(--mono); color: var(--ink); }
+.level-card p.ss-say { font-size: 13.5px; font-weight: 600; margin: 8px 0 3px; }
+.level-card p.ss-rule { font-size: 11px; color: var(--dim); margin: 0; }
+
+/* the card on the body level: the theorem box from the banner */
+.theorem { border: 1px solid rgba(183, 156, 255, .45); border-radius: 12px; padding: 13px 15px; background: linear-gradient(180deg, rgba(183, 156, 255, .09), rgba(143, 227, 255, .04)); }
+.th-tag { font: 500 12.5px var(--mono); color: var(--ink2); margin-bottom: 8px; }
+.th-code { font: 500 13px/1.75 var(--mono); color: var(--ink); }
+.th-code .kw { color: #c9a8ff; font-weight: 600; }
+.th-code .ty, .th-code .here { color: #8fe3ff; }
+.th-code .w { background: none; border: none; border-bottom: 1px dashed var(--line2); color: var(--ink); font: inherit; cursor: pointer; padding: 0 1px; }
+.th-code .w sup { font-size: 9px; margin-left: 1px; }
+.v-REQUIREMENTS_MET { color: var(--met) !important; } .v-NOT_MET { color: var(--notmet) !important; } .v-NEED_MORE_INFORMATION { color: var(--needinfo) !important; }
+.th-sub { font: 500 12px var(--sans); color: var(--muted); margin-top: 8px; }
+.card-say { font-size: 13px; color: var(--ink2); margin: 12px 2px; line-height: 1.55; }
+.srow .s-main { display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; }
+.srow .s-site { letter-spacing: 0; text-transform: none; font: 11px var(--sans); }
+.srow .s-verdict { font-size: 12px; margin-top: 7px; color: var(--muted); line-height: 1.45; }
+.srow .s-val .na { font-size: 14px; letter-spacing: 0; }
+.srow.on { border-color: rgba(183, 156, 255, .55); background: rgba(183, 156, 255, .07); }
+.card details.more { margin-top: 14px; }
+
+/* once the dive starts the card hides and the stage takes the whole page, at any width */
+.sensor-mode #view-body.on { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.sensor-mode #view-body.on .stage { min-height: 100%; }

@@ -25,7 +25,7 @@ export async function createSensorView(view, side, id) {
   const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 1e6);
   scene.add(new THREE.HemisphereLight(0xe8eddc, 0x1a1d16, 1.1));
   const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(2, 3, 2.5); camera.add(key); scene.add(camera);
-  const view = glowView(renderer, scene, camera, { strength: 0.45, threshold: 0.85 });
+  const glow = glowView(renderer, scene, camera, { strength: 0.45, threshold: 0.85 });
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true; controls.autoRotate = true; controls.autoRotateSpeed = 0.8;
   let built = null, buildId = S.builds?.[0], selected = null, xray = false, fit = null;
@@ -109,7 +109,7 @@ export async function createSensorView(view, side, id) {
   view.querySelector(`#sv-spin-${id}`).addEventListener('click', (e) => { controls.autoRotate = !controls.autoRotate; e.target.classList.toggle('on', controls.autoRotate); });
   view.querySelector(`#sv-reset-${id}`).addEventListener('click', () => { if (!fit) return; fly = { from: camera.position.clone(), fromT: controls.target.clone(), to: fit.pos.clone(), toT: fit.target.clone(), t: 0 }; });
 
-  const ro = new ResizeObserver(() => { const w = view.clientWidth, h = view.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); view.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); });
+  const ro = new ResizeObserver(() => { const w = view.clientWidth, h = view.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); glow.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); });
   ro.observe(view);
   rebuild();
   (function loop() {
@@ -119,7 +119,7 @@ export async function createSensorView(view, side, id) {
       fly.t = Math.min(1, fly.t + 0.04); const k = fly.t < 0.5 ? 2 * fly.t * fly.t : 1 - (-2 * fly.t + 2) ** 2 / 2;
       camera.position.lerpVectors(fly.from, fly.to, k); controls.target.lerpVectors(fly.fromT, fly.toT, k); if (fly.t >= 1) fly = null;
     }
-    controls.update(); view.render();
+    controls.update(); glow.render();
     const w = view.clientWidth, h = view.clientHeight;
     for (const l of labels) {
       tmp.copy(l.p).applyMatrix4(built.root.matrixWorld).project(camera);
