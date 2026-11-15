@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:13:20Z",
+    "generated_at": "2026-11-15T08:20:59Z",
     "sources": [
       "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)"
     ],

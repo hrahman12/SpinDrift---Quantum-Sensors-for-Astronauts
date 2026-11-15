@@ -1,11 +1,13 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:17:24Z",
+    "generated_at": "2026-11-15T08:22:56Z",
     "sources": [
       "NOAA SWPC L1 magnetometer",
       "wheretheiss.at ISS position",
-      "IGRF via ppigrf"
+      "IGRF via ppigrf",
+      "Dyal, Parkin & Daily (1973), 'Surface magnetometer experiments: Internal lunar properties', Proc. Lunar Sci. Conf. 4th, 2925-2945, Table 2 p. 2930 (1 gamma = 1 nT); cross-check Dyal, Parkin & Daily (1974), Rev. Geophys. 12, 568, doi:10.1029/RG012i004p00568 (abstract)",
+      "Johnson et al. (2020), 'Crustal and time-varying magnetic fields at the InSight landing site on Mars', Nature Geoscience 13, 199-204, doi:10.1038/s41561-020-0537-x, p. 200 and Table 1"
     ]
   },
   "locations": [
@@ -13,13 +15,18 @@
       "id": "iss",
       "label": "ISS (low Earth orbit)",
       "ambient_field_nT": {
-        "value": 41442.7,
+        "value": 41457.1,
         "unit": "nT",
         "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
         "tag": "calculated",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:17:17Z",
-        "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of"
+        "as_of": "2026-11-15T08:22:53Z",
+        "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of",
+        "components_enu_nT": [
+          -1094.3,
+          18854.0,
+          -36905.5
+        ]
       },
       "field_kind": "model"
     },
@@ -29,11 +36,11 @@
       "ambient_field_nT": {
         "value": null,
         "unit": "nT",
-        "source": "no cited measured value",
-        "tag": "published_spec",
+        "source": "no measurement from a near-rectilinear halo orbit",
+        "tag": "recorded",
         "status": "NOT_STATED",
         "as_of": null,
-        "note": null
+        "note": "No magnetometer has measured an NRHO (CAPSTONE carried none). Nearest published: ARTEMIS lunar-orbit magnetotail-lobe average about 10 nT (Kamaletdinov et al., JGR Space Physics 129, e2023JA032130, Fig. 5f); the Gateway is in the solar wind most of each orbit and in the magnetotail 5-6 days per lunar orbit (Dandouras et al. 2023, Front. Astron. Space Sci. 10:1120302)."
       },
       "field_kind": "none"
     },
@@ -41,27 +48,27 @@
       "id": "lunar_base",
       "label": "Lunar surface base",
       "ambient_field_nT": {
-        "value": null,
+        "value": 38,
         "unit": "nT",
-        "source": "no cited measured value",
-        "tag": "published_spec",
-        "status": "NOT_STATED",
+        "source": "Dyal, Parkin & Daily (1973), 'Surface magnetometer experiments: Internal lunar properties', Proc. Lunar Sci. Conf. 4th, 2925-2945, Table 2 p. 2930 (1 gamma = 1 nT); cross-check Dyal, Parkin & Daily (1974), Rev. Geophys. 12, 568, doi:10.1029/RG012i004p00568 (abstract)",
+        "tag": "recorded",
+        "status": "VERIFIED",
         "as_of": null,
-        "note": null
+        "note": "Apollo 12 ALSEP lunar surface magnetometer, 38 ± 2 nT (deployed Nov 1969). Rule: median of the three stationary ALSEP sites (Apollo 15: 3.4 ± 2.9, Apollo 12: 38 ± 2, Apollo 16: 234 ± 3 nT). Measured sites range 3.4-327 nT (Apollo 16 Site 13); planned south-polar bases have no surface measurement."
       },
-      "field_kind": "none"
+      "field_kind": "published"
     },
     {
       "id": "mars_transit",
       "label": "Mars transit (interplanetary)",
       "ambient_field_nT": {
-        "value": 3.3,
+        "value": 3.03,
         "unit": "nT",
         "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
         "tag": "live",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:13:00Z",
-        "note": "fallback: https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
+        "as_of": "2026-11-15T08:18:00Z",
+        "note": "brief URLs failed (https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404); they were retired by NWS SCN 26-21 (https://www.weather.gov/media/notification/pdf_2026/scn26-21_Data_Format_Changes_Impacting_SWPC_Products.pdf) and replaced by this official /json/rtsw/ file; newest row with active=true; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
       },
       "field_kind": "live_feed"
     },
@@ -69,15 +76,15 @@
       "id": "mars_surface",
       "label": "Mars surface",
       "ambient_field_nT": {
-        "value": null,
+        "value": 2013,
         "unit": "nT",
-        "source": "no cited measured value",
-        "tag": "published_spec",
-        "status": "NOT_STATED",
+        "source": "Johnson et al. (2020), 'Crustal and time-varying magnetic fields at the InSight landing site on Mars', Nature Geoscience 13, 199-204, doi:10.1038/s41561-020-0537-x, p. 200 and Table 1",
+        "tag": "recorded",
+        "status": "VERIFIED",
         "as_of": null,
-        "note": null
+        "note": "InSight lander magnetometer, average surface field 2,013 ± 53 nT (mean over sols 14-299, 20:00-04:00 local time); about ten times stronger than predicted from orbit."
       },
-      "field_kind": "none"
+      "field_kind": "published"
     }
   ]
 }

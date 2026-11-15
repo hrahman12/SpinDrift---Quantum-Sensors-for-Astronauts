@@ -1,14 +1,14 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T07:46:26Z",
+    "generated_at": "2026-11-15T08:20:48Z",
     "sources": [
       "Zenodo 10629041, doi:10.5281/zenodo.10629041"
     ],
     "dataset": "Data for 'Determining Strain Components in a Diamond Waveguide from Zero-Field ODMR Spectra of NV- Center Ensembles' (Alam et al.), Zenodo 10629041",
     "doi_or_url": "https://doi.org/10.5281/zenodo.10629041",
     "licence": "CC BY 4.0",
-    "accessed": "2026-11-15T07:46:26Z",
+    "accessed": "2026-11-15T08:20:48Z",
     "device_type": "nv",
     "label": "Real NV-diamond ODMR spectra (lab sample, not the heart sensor).",
     "paper": "Phys. Rev. Applied 22, 024055 (2024), doi:10.1103/PhysRevApplied.22.024055",

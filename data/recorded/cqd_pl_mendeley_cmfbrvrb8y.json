@@ -1,14 +1,14 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T07:46:31Z",
+    "generated_at": "2026-11-15T08:20:48Z",
     "sources": [
       "Mendeley Data doi:10.17632/cmfbrvrb8y.1"
     ],
     "dataset": "Cui, 'Public data and representative code for literature-reconstructed carbon-dot photoluminescence prediction' (Mendeley Data, v1, July 2026), external_measurement_level_records.csv",
     "doi_or_url": "https://doi.org/10.17632/cmfbrvrb8y.1",
     "licence": "CC BY 4.0",
-    "accessed": "2026-11-15T07:46:31Z",
+    "accessed": "2026-11-15T08:20:48Z",
     "device_type": "cqd",
     "label": "General carbon-dot data, not the patch.",
     "file": "Supplementary_Public_Data_and_Code_for_Carbon_Dot_PL_Prediction/data/external_validation/external_measurement_level_records.csv",

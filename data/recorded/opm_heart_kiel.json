@@ -1,14 +1,14 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T07:49:51Z",
+    "generated_at": "2026-11-15T08:20:42Z",
     "sources": [
       "Kiel Cardio Database v1.0.0, PhysioNet, doi:10.13026/q6r2-zz68"
     ],
     "dataset": "Kiel Cardio Database v1.0.0 (PhysioNet)",
     "doi_or_url": "https://doi.org/10.13026/q6r2-zz68",
     "licence": "CC BY-SA 4.0 (LICENSE.txt in the dataset)",
-    "accessed": "2026-11-15T07:49:51Z",
+    "accessed": "2026-11-15T08:20:42Z",
     "device_type": "opm",
     "label": "Recorded on Earth with real QuSpin OPM sensors. Not an astronaut.",
     "record": "data/subject1_preprocessed_trial03",

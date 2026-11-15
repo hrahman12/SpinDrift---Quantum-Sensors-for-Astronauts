@@ -94,3 +94,95 @@ Format: `<ISO time> <agent> <file or feed> <done|failed|changed> <note>`
 2026-11-15T08:17:58Z claude-code ISS cabin done Lightstreamer ISSLIVE items USLAB000058/59/53/55 live; units TO_CONFIRM (ISS-Mimic labels vs spreadsheet); TimeStamp = day-of-year*24 + hour
 2026-11-15T08:17:58Z claude-code server on port 8001 changed the copy of server.main started by Codex on port 8001 still runs the old code and rewrites live_snapshot.json without radiation/cabin every 60 s; restart it to load the new endpoints
 2026-11-15T08:18:12Z claude-code data/specs.json changed space_heritage.swarm_asm.charlie_asm TO_CONFIRM -> VERIFIED (ESA IDEAS+ weekly reports wk45/46 2014; DTU release notes): lost 5 Nov 2014
+2026-11-15T08:20:42Z claude-code data/recorded/opm_heart_kiel.json done data/subject1_preprocessed_trial03, 8 channels, 12000 samples at 200 Hz, pT from the header; sha256 verified
+2026-11-15T08:20:48Z claude-code data/recorded/opm_brain_mne.json done 8 of 9 OPM channels, 15000 samples at 250 Hz (from 1000 Hz), fT; evoked from 201 of 201 median-nerve epochs
+2026-11-15T08:20:48Z claude-code data/recorded/nv_odmr_zenodo10629041.json done Raw_data.txt md5 verified; 201 frequencies 2820.0-2920.0 MHz; positions [1, 24, 47] + mean; CC BY 4.0
+2026-11-15T08:20:48Z claude-code data/recorded/qd_fret_figshare5468838.json done deposit has no numeric spectra/decay curves; used the published Table S1 (5 pressures: QD and QD-Rh101 emission intensity, FRET efficiency) from the CC BY 4.0 supplement, md5 verified
+2026-11-15T08:20:48Z claude-code data/recorded/cqd_pl_mendeley_cmfbrvrb8y.json done zip sha256 verified; deposit has no PL spectra, so used the 23 first-hand external measurement records (excitation nm vs measured emission max nm); CC BY 4.0
+2026-11-15T08:20:54Z claude-code data/recorded/eeg_brain_ds004902.json done ds004902 sub-01 eyes-closed EEG, NS and SD sessions (CC0, md5 ETag verified); alpha 8-12 Hz power NS 13.330, SD 10.263 uV^2/Hz (occipital mean)
+2026-11-15T08:20:54Z claude-code data/nasa_i4.json done OSD-575 CMP sha256 verified; total bilirubin 27 numeric values for 4 crew codes; renin and aldosterone not found in open I4 data
+2026-11-15T08:20:56Z claude-code data/hrp.json done five hazards quoted word for word from https://www.nasa.gov/hrp/hazards/
+2026-11-15T08:20:56Z claude-code data/nv_heart_derived.json done 47 beats averaged on ch0 Sensor 0 -Y, R-peak -43.1 pT; jgu 71.2 pT / SNR 38.46, zaquant 38.34 pT / SNR 11.29, qant 142.41 pT / SNR 7.85
+2026-11-15T08:20:56Z claude-code data/physics.json done nv_odmr_lines (D VERIFIED, gamma TO_CONFIRM), opm_zero_field (Lorentzian, QuSpin + Sulai Eq. B2), qd_fret_vs_distance (FRET-Calc Eq. 2) plotted; cqd_quenching not plotted
+2026-11-15T08:20:56Z claude-code data/build_log.json done 23 per-sensor and 10 combined facts; per-location shielding factors from the latest live snapshot
+2026-11-15T08:20:57Z claude-code data/clinical_card.json done 5 locations, 14 rows each
+2026-11-15T08:21:06Z claude-code data/palette.json done colours calculated from cited wavelengths (795, 695, 439, 470 nm; 1083 nm IR has none); table check at 450/555/600 nm: largest difference 0.0000; beyond 700 nm the CIE chromaticity stays at x 0.7347, y 0.2653 (deep red)
+2026-11-15T08:21:06Z claude-code data/assets.json done 20 openly licensed real images (Kiel CC BY-SA 4.0, arXiv 2601.18843 CC BY 4.0, figshare CC BY 4.0, ODMR-Lab outputs)
+2026-11-15T08:21:06Z claude-code data/device_map.json done physics <-> biology pairing per device for the UI
+
+## Final report (2026-11-15T08:22:29Z)
+
+### Files and value objects by tag/status
+- assets.json: no value objects
+- build_log.json: calculated/NOT_YET_EXTRACTED 1, calculated/VERIFIED 8, datasheet/VERIFIED 5, published_spec/NOT_STATED 9, published_spec/NOT_YET_EXTRACTED 1, published_spec/TO_CONFIRM 1, published_spec/VERIFIED 8
+- clinical_card.json: calculated/NOT_YET_EXTRACTED 3, calculated/VERIFIED 78, live/NOT_YET_EXTRACTED 4, live/TO_CONFIRM 2, live/VERIFIED 6, published_spec/VERIFIED 40, recorded/NOT_STATED 6, recorded/VERIFIED 2
+- combined_sensor.json: calculated/VERIFIED 25, datasheet/VERIFIED 7, published_spec/TO_CONFIRM 1, published_spec/VERIFIED 13, recorded/VERIFIED 6, simulated/VERIFIED 2
+- device_map.json: no value objects
+- hrp.json: no value objects
+- live_snapshot.json: calculated/NOT_YET_EXTRACTED 3, calculated/VERIFIED 4, datasheet/VERIFIED 5, live/VERIFIED 9, published_spec/NOT_STATED 3
+- locations.json: calculated/VERIFIED 1, live/VERIFIED 1, published_spec/NOT_STATED 3
+- nasa_i4.json: recorded/NOT_STATED 1, recorded/VERIFIED 27
+- nv_heart_derived.json: calculated/VERIFIED 21, published_spec/VERIFIED 3
+- palette.json: calculated/NOT_STATED 2, calculated/TO_CONFIRM 1, calculated/VERIFIED 3, published_spec/NOT_STATED 1, published_spec/TO_CONFIRM 1, published_spec/VERIFIED 3, recorded/VERIFIED 1
+- physics.json: datasheet/TO_CONFIRM 1, datasheet/VERIFIED 1, published_spec/TO_CONFIRM 1, published_spec/VERIFIED 3
+- published_points.json: no value objects
+- recorded/cqd_pl_mendeley_cmfbrvrb8y.json: no value objects
+- recorded/eeg_brain_ds004902.json: no value objects
+- recorded/nv_odmr_zenodo10629041.json: no value objects
+- recorded/opm_brain_mne.json: no value objects
+- recorded/opm_heart_kiel.json: no value objects
+- recorded/qd_fret_figshare5468838.json: no value objects
+- runs.json: calculated/VERIFIED 53, datasheet/VERIFIED 9, published_spec/TO_CONFIRM 1, published_spec/VERIFIED 23, recorded/VERIFIED 16, simulated/VERIFIED 10
+- simulators.json: published_spec/TO_CONFIRM 5, published_spec/VERIFIED 9, simulated/VERIFIED 8
+- specs.json: datasheet/VERIFIED 15, published_spec/NOT_STATED 4, published_spec/NOT_YET_EXTRACTED 6, published_spec/TO_CONFIRM 6, published_spec/VERIFIED 58
+
+### TO_CONFIRM items (specs, physics, palette, simulators)
+- specs.json.opm.bandwidth_serf_class: '80–150 open loop, 350 closed loop' Hz: Class figure, not the Gen-3 datasheet. Slide 20 lists 80–150 Hz open loop for zero-field SERF OPMs and footnotes the 350 Hz closed-loop figure to Fiel
+- specs.json.cqd_patch.reader_channels: '440, 470, 510' nm: full text is paywalled; not checked against the primary source
+- specs.json.cqd_patch.calibration_model: 'ex vivo rat skin' : full text is paywalled; not checked against the primary source
+- specs.json.space_heritage.oscar_qube.principle: 'NV-diamond magnetometer using continuous-wave ODMR' : the abstract confirms ODMR with NV centres in diamond; 'continuous-wave' is not in the abstract and the APS full text returned HTTP 403 on 2026-11-15,
+- specs.json.space_heritage.oscar_qube.iss_operation: 'ran on the ISS for 10 months in 2021–22' : the abstract confirms deployment aboard the ISS; duration and years: the APS full text returned HTTP 403 on 2026-11-15, so this is not yet checked
+- specs.json.space_heritage.oscar_qube.measurement_location: 'inside the station, where equipment caused interference' : the APS full text returned HTTP 403 on 2026-11-15, so this is not yet checked
+- physics.json.nv_odmr_lines.inputs[1]: 28.025 MHz/mT: Barry et al. give g_e ≈ 2.003, i.e. gamma ≈ 28.03 MHz/mT; 28.025 MHz/mT is the brief's value (free-electron g = 2.0023, also used by ODMR-Lab). The tw
+- physics.json.opm_zero_field.inputs[1]: '~30' nT: 'typically about 30 nT wide'; QuSpin does not say whether this is the full or the half width
+- palette.json.colours[3].wavelength: 470 nm: 
+- palette.json.colours[3].colour: '#002dff' sRGB hex: formula: CIE 1931 colour-matching table -> XYZ -> linear sRGB, negatives clipped, scaled to full brightness, sRGB gamma; inputs: Patch reader channel 
+- simulators.json.nv[1].inputs[1].value: 2870 MHz: room-temperature value
+- simulators.json.nv[1].inputs[2].value: 28.025 MHz/mT: 
+- simulators.json.opm[0].inputs[2].value: '~30' nT: 'typically about 30 nT wide'; whether this is the full or half width is not stated
+- simulators.json.opm[1].inputs[1].value: 6.998 Hz/nT: QuSpin states 6.998 Hz per nT for its QTFM rubidium magnetometer
+- simulators.json.cqd_patch[0].inputs[0].value: '440, 470, 510' nm: full text paywalled
+
+### Upgraded or corrected from primary sources
+- data/specs.json changed upgraded to VERIFIED from primary sources: opm.sensitivity_dual_axis_typical, opm.total_power, opm.electronics_size (QuSpin Gen-3 product page); nv.headline r_peak_average, sensitivity_for_single_beat_snr5, bandwidth_assumed, reference_opm_mapping, data_availability and per-build sensitivity/beats_averaged (arXiv 2601.18843 PDF)
+- data/specs.json changed nv.headline.standoff NOT_STATED -> '~1 cm (JGU, ZAQuant)' from the full text pp. 4 and 6; opm.quantum_effect source moved to https://quspin.com/technology/ because the brief's URL returns HTTP 404
+- data/specs.json changed space_heritage.oscar_qube mass 420 g and power 5 W sourced from the paper abstract (Crossref, CC BY 4.0); '10 months 2021-22', 'continuous-wave' and 'station interference' stay TO_CONFIRM because the APS full text returns 403
+- data/specs.json changed space_heritage.swarm_asm.charlie_asm TO_CONFIRM -> VERIFIED (ESA IDEAS+ weekly reports wk45/46 2014; DTU release notes): lost 5 Nov 2014
+
+### Feeds (latest snapshot 2026-11-15T08:21:30Z)
+- NOAA L1: ok, 3.13 nT from SOLAR1 (brief URLs retired by NWS SCN 26-21; /json/rtsw/ replacement used)
+- ISS position + IGRF-14: ok, 41613.2 nT
+- GOES protons: not in snapshot
+- ISS cabin (Lightstreamer ISSLIVE): not in snapshot
+- Swarm ASM: null: VIRES_TOKEN missing
+
+### Failures logged
+- Swarm ASM failed VIRES_TOKEN missing; swarm_asm is null until the user sets the env var (free registration at vires.services)
+
+### Simulator results
+- opm / SimuFísica Bloch Equation Generator: 0 result(s): awaiting simulator run
+- opm / DRCMR Bloch Simulator: 0 result(s): awaiting simulator run
+- nv / ODMR-Lab: 2 result(s) (api, api)
+- nv / SimOS Virtual Lab: 0 result(s): awaiting simulator run
+- qd_renin / nanoHUB Quantum Dot Lab: 0 result(s): awaiting simulator run
+- qd_renin / FRET-Calc: 0 result(s): awaiting simulator run
+- cqd_patch / MCX Cloud: 0 result(s): awaiting simulator run
+- runs so far: 2; combined sensor version 2, 54 bricks
+
+### Still to do by a person
+- Swarm ASM: register free at https://vires.services, then set the environment variable VIRES_TOKEN before starting the server (never commit it).
+- Manual simulator runs (browser): SimOS Virtual Lab, SimuFísica Bloch Equation Generator, DRCMR Bloch Simulator, FRET-Calc, nanoHUB Quantum Dot Lab (free account), MCX Cloud; paste results through POST /api/simulators/{device}.
+- Published data points from the paywalled renin (doi:10.1021/ac302284s) and patch (doi:10.1021/acsnano.4c06191) papers, each with figure and page.
+- TO_CONFIRM items above (APS full text of the OSCAR-QUBE paper; CQD reader channels; QuSpin resonance width full vs half; ISS cabin units).
+- Restart the server on port 8001 (started by Codex with the old code) so it serves the new endpoints.
+- Real instruments: if one becomes available, set SPINDRIFT_INGEST_KEY and post readings to /api/sensors/{device}/ingest; until then every device shows 'No physical instrument connected'.

@@ -1,13 +1,13 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:17:57Z",
+    "generated_at": "2026-11-15T08:20:56Z",
     "sources": [
       "data/specs.json",
       "data/live_snapshot.json",
       "ODMR-Lab app.py"
     ],
-    "live_snapshot_fetched_at": "2026-11-15T08:17:24Z"
+    "live_snapshot_fetched_at": "2026-11-15T08:20:42Z"
   },
   "per_sensor": {
     "opm": [
@@ -359,12 +359,12 @@
     {
       "fact": "Field reduction the OPM needs at iss (latest live snapshot)",
       "value": {
-        "value": 8289.96,
+        "value": 8332.62,
         "unit": "×",
         "source": "SpinDrift calculation",
         "tag": "calculated",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:17:19Z",
+        "as_of": "2026-11-15T08:20:39Z",
         "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
       }
     },
@@ -395,12 +395,12 @@
     {
       "fact": "Field reduction the OPM needs at mars_transit (latest live snapshot)",
       "value": {
-        "value": 0.66,
+        "value": 0.63,
         "unit": "×",
         "source": "SpinDrift calculation",
         "tag": "calculated",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:13:00Z",
+        "as_of": "2026-11-15T08:16:00Z",
         "note": "formula: ambient_nT / opm_range_nT; inputs: mars_transit.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
       }
     },

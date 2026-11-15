@@ -1,14 +1,14 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T07:46:29Z",
+    "generated_at": "2026-11-15T08:20:48Z",
     "sources": [
       "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1)"
     ],
     "dataset": "Li et al., 'Förster resonance energy transfer outpaces Auger recombination in CdTe/CdS quantum dots-rhodamine101 molecules system upon compression', supplementary document",
     "doi_or_url": "https://doi.org/10.6084/m9.figshare.c.5468838.v1",
     "licence": "CC BY 4.0 (figshare article 15067392; also on the paper's cover page)",
-    "accessed": "2026-11-15T07:46:29Z",
+    "accessed": "2026-11-15T08:20:48Z",
     "device_type": "qd",
     "label": "CdTe/CdS quantum dots, not the renin sensor.",
     "paper": "Optics Express 29(17), 27171 (2021), doi:10.1364/OE.434341",

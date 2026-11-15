@@ -1,14 +1,14 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:06:38Z",
+    "generated_at": "2026-11-15T08:20:53Z",
     "sources": [
       "OpenNeuro ds004902 v1.0.8, doi:10.18112/openneuro.ds004902.v1.0.8"
     ],
     "dataset": "A Resting-state EEG Dataset for Sleep Deprivation (Xiang, Fan, Bai, Lv, Lei), OpenNeuro ds004902, sub-01, eyes closed",
     "doi_or_url": "https://doi.org/10.18112/openneuro.ds004902.v1.0.8",
     "licence": "CC0",
-    "accessed": "2026-11-15T08:06:38Z",
+    "accessed": "2026-11-15T08:20:53Z",
     "device_type": "eeg",
     "label": "Recorded on Earth with conventional EEG electrodes (not a quantum sensor). Not an astronaut.",
     "sample_rate_hz": 250.0,

@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:17:57Z",
+    "generated_at": "2026-11-15T08:20:57Z",
     "sources": [
       "data/locations.json",
       "data/live_snapshot.json",
@@ -215,12 +215,12 @@
         "label": "Tumour risk: space radiation",
         "device": "environment",
         "reading": {
-          "value": 0.2621,
+          "value": 0.2176,
           "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
           "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
           "tag": "live",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:05:00Z",
+          "as_of": "2026-11-15T08:10:00Z",
           "note": "5-minute average"
         },
         "supporting": [
@@ -230,7 +230,7 @@
             "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
             "tag": "calculated",
             "status": "VERIFIED",
-            "as_of": "2026-11-15T08:05:00Z",
+            "as_of": "2026-11-15T08:10:00Z",
             "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
           }
         ],
@@ -300,13 +300,18 @@
       {
         "label": "OPM: ambient magnetic field here",
         "reading": {
-          "value": 41442.7,
+          "value": 41663.1,
           "unit": "nT",
           "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
           "tag": "calculated",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:17:17Z",
-          "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of"
+          "as_of": "2026-11-15T08:20:39Z",
+          "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of",
+          "components_enu_nT": [
+            -2354.8,
+            19965.4,
+            -36491.8
+          ]
         },
         "evidence": "SOURCED",
         "review_note": "Field from IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at."
@@ -314,16 +319,16 @@
       {
         "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
         "reading": {
-          "value": 8289.96,
+          "value": 8332.62,
           "unit": "×",
           "source": "SpinDrift calculation",
           "tag": "calculated",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:17:19Z",
+          "as_of": "2026-11-15T08:20:39Z",
           "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
         },
         "evidence": "EARTH_ONLY",
-        "review_note": "OPM needs about 8,290× field reduction here."
+        "review_note": "OPM needs about 8,333× field reduction here."
       },
       {
         "label": "OPM: inside ±5 nT range",
@@ -342,7 +347,7 @@
       {
         "label": "NV: own bias field against the ambient field",
         "reading": {
-          "value": 24.1,
+          "value": 24.0,
           "unit": "×",
           "source": "SpinDrift calculation",
           "tag": "calculated",
@@ -699,12 +704,12 @@
         "label": "Tumour risk: space radiation",
         "device": "environment",
         "reading": {
-          "value": 0.2621,
+          "value": 0.2176,
           "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
           "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
           "tag": "live",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:05:00Z",
+          "as_of": "2026-11-15T08:10:00Z",
           "note": "5-minute average"
         },
         "supporting": [
@@ -714,7 +719,7 @@
             "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
             "tag": "calculated",
             "status": "VERIFIED",
-            "as_of": "2026-11-15T08:05:00Z",
+            "as_of": "2026-11-15T08:10:00Z",
             "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
           }
         ],
@@ -776,11 +781,11 @@
         "reading": {
           "value": null,
           "unit": "nT",
-          "source": "no cited measured value",
-          "tag": "published_spec",
+          "source": "no measurement from a near-rectilinear halo orbit",
+          "tag": "recorded",
           "status": "NOT_STATED",
           "as_of": null,
-          "note": null
+          "note": "No magnetometer has measured an NRHO (CAPSTONE carried none). Nearest published: ARTEMIS lunar-orbit magnetotail-lobe average about 10 nT (Kamaletdinov et al., JGR Space Physics 129, e2023JA032130, Fig. 5f); the Gateway is in the solar wind most of each orbit and in the magnetotail 5-6 days per lunar orbit (Dandouras et al. 2023, Front. Astron. Space Sci. 10:1120302)."
         },
         "evidence": "TO_CONFIRM",
         "review_note": "No cited measured field for this location yet."
@@ -1173,12 +1178,12 @@
         "label": "Tumour risk: space radiation",
         "device": "environment",
         "reading": {
-          "value": 0.2621,
+          "value": 0.2176,
           "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
           "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
           "tag": "live",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:05:00Z",
+          "as_of": "2026-11-15T08:10:00Z",
           "note": "5-minute average"
         },
         "supporting": [
@@ -1188,7 +1193,7 @@
             "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
             "tag": "calculated",
             "status": "VERIFIED",
-            "as_of": "2026-11-15T08:05:00Z",
+            "as_of": "2026-11-15T08:10:00Z",
             "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
           }
         ],
@@ -1248,16 +1253,16 @@
       {
         "label": "OPM: ambient magnetic field here",
         "reading": {
-          "value": null,
+          "value": 38,
           "unit": "nT",
-          "source": "no cited measured value",
-          "tag": "published_spec",
-          "status": "NOT_STATED",
+          "source": "Dyal, Parkin & Daily (1973), 'Surface magnetometer experiments: Internal lunar properties', Proc. Lunar Sci. Conf. 4th, 2925-2945, Table 2 p. 2930 (1 gamma = 1 nT); cross-check Dyal, Parkin & Daily (1974), Rev. Geophys. 12, 568, doi:10.1029/RG012i004p00568 (abstract)",
+          "tag": "recorded",
+          "status": "VERIFIED",
           "as_of": null,
-          "note": null
+          "note": "Apollo 12 ALSEP lunar surface magnetometer, 38 ± 2 nT (deployed Nov 1969). Rule: median of the three stationary ALSEP sites (Apollo 15: 3.4 ± 2.9, Apollo 12: 38 ± 2, Apollo 16: 234 ± 3 nT). Measured sites range 3.4-327 nT (Apollo 16 Site 13); planned south-polar bases have no surface measurement."
         },
-        "evidence": "TO_CONFIRM",
-        "review_note": "No cited measured field for this location yet."
+        "evidence": "SOURCED",
+        "review_note": "Field from Dyal, Parkin & Daily (1973), 'Surface magnetometer experiments: Internal lunar properties', Proc. Lunar Sci. Conf. 4th, 2925-2945, Table 2 p. 2930 (1 gamma = 1 nT); cross-check Dyal, Parkin & Daily (1974), Rev. Geophys. 12, 568, doi:10.1029/RG012i004p00568 (abstract)."
       },
       {
         "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
@@ -1276,11 +1281,11 @@
       {
         "label": "OPM: inside ±5 nT range",
         "reading": {
-          "value": null,
+          "value": "no",
           "unit": "",
           "source": "SpinDrift calculation",
           "tag": "calculated",
-          "status": "NOT_YET_EXTRACTED",
+          "status": "VERIFIED",
           "as_of": null,
           "note": "formula: ambient_nT <= 5; inputs: lunar_base.ambient_nT"
         },
@@ -1290,15 +1295,15 @@
       {
         "label": "NV: own bias field against the ambient field",
         "reading": {
-          "value": null,
+          "value": 26315.8,
           "unit": "×",
           "source": "SpinDrift calculation",
           "tag": "calculated",
-          "status": "NOT_YET_EXTRACTED",
+          "status": "VERIFIED",
           "as_of": null,
           "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, lunar_base.ambient_nT"
         },
-        "evidence": "TO_CONFIRM",
+        "evidence": "EARTH_ONLY",
         "review_note": "The ZAQuant and Q.ANT builds bring their own ~1 mT bias, so ambient field strength doesn't stop them; the JGU build ran at zero bias in a multilayer shield."
       },
       {
@@ -1647,12 +1652,12 @@
         "label": "Tumour risk: space radiation",
         "device": "environment",
         "reading": {
-          "value": 0.2621,
+          "value": 0.2176,
           "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
           "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
           "tag": "live",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:05:00Z",
+          "as_of": "2026-11-15T08:10:00Z",
           "note": "5-minute average"
         },
         "supporting": [
@@ -1662,7 +1667,7 @@
             "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
             "tag": "calculated",
             "status": "VERIFIED",
-            "as_of": "2026-11-15T08:05:00Z",
+            "as_of": "2026-11-15T08:10:00Z",
             "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
           }
         ],
@@ -1722,13 +1727,13 @@
       {
         "label": "OPM: ambient magnetic field here",
         "reading": {
-          "value": 3.3,
+          "value": 3.17,
           "unit": "nT",
           "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
           "tag": "live",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:13:00Z",
-          "note": "fallback: https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
+          "as_of": "2026-11-15T08:16:00Z",
+          "note": "brief URLs failed (https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404); they were retired by NWS SCN 26-21 (https://www.weather.gov/media/notification/pdf_2026/scn26-21_Data_Format_Changes_Impacting_SWPC_Products.pdf) and replaced by this official /json/rtsw/ file; newest row with active=true; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
         },
         "evidence": "SOURCED",
         "review_note": "Field from NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json."
@@ -1736,12 +1741,12 @@
       {
         "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
         "reading": {
-          "value": 0.66,
+          "value": 0.63,
           "unit": "×",
           "source": "SpinDrift calculation",
           "tag": "calculated",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:13:00Z",
+          "as_of": "2026-11-15T08:16:00Z",
           "note": "formula: ambient_nT / opm_range_nT; inputs: mars_transit.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
         },
         "evidence": "EARTH_ONLY",
@@ -1764,7 +1769,7 @@
       {
         "label": "NV: own bias field against the ambient field",
         "reading": {
-          "value": 303030.3,
+          "value": 315457.4,
           "unit": "×",
           "source": "SpinDrift calculation",
           "tag": "calculated",
@@ -2121,12 +2126,12 @@
         "label": "Tumour risk: space radiation",
         "device": "environment",
         "reading": {
-          "value": 0.2621,
+          "value": 0.2176,
           "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
           "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
           "tag": "live",
           "status": "VERIFIED",
-          "as_of": "2026-11-15T08:05:00Z",
+          "as_of": "2026-11-15T08:10:00Z",
           "note": "5-minute average"
         },
         "supporting": [
@@ -2136,7 +2141,7 @@
             "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
             "tag": "calculated",
             "status": "VERIFIED",
-            "as_of": "2026-11-15T08:05:00Z",
+            "as_of": "2026-11-15T08:10:00Z",
             "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
           }
         ],
@@ -2196,16 +2201,16 @@
       {
         "label": "OPM: ambient magnetic field here",
         "reading": {
-          "value": null,
+          "value": 2013,
           "unit": "nT",
-          "source": "no cited measured value",
-          "tag": "published_spec",
-          "status": "NOT_STATED",
+          "source": "Johnson et al. (2020), 'Crustal and time-varying magnetic fields at the InSight landing site on Mars', Nature Geoscience 13, 199-204, doi:10.1038/s41561-020-0537-x, p. 200 and Table 1",
+          "tag": "recorded",
+          "status": "VERIFIED",
           "as_of": null,
-          "note": null
+          "note": "InSight lander magnetometer, average surface field 2,013 ± 53 nT (mean over sols 14-299, 20:00-04:00 local time); about ten times stronger than predicted from orbit."
         },
-        "evidence": "TO_CONFIRM",
-        "review_note": "No cited measured field for this location yet."
+        "evidence": "SOURCED",
+        "review_note": "Field from Johnson et al. (2020), 'Crustal and time-varying magnetic fields at the InSight landing site on Mars', Nature Geoscience 13, 199-204, doi:10.1038/s41561-020-0537-x, p. 200 and Table 1."
       },
       {
         "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
@@ -2224,11 +2229,11 @@
       {
         "label": "OPM: inside ±5 nT range",
         "reading": {
-          "value": null,
+          "value": "no",
           "unit": "",
           "source": "SpinDrift calculation",
           "tag": "calculated",
-          "status": "NOT_YET_EXTRACTED",
+          "status": "VERIFIED",
           "as_of": null,
           "note": "formula: ambient_nT <= 5; inputs: mars_surface.ambient_nT"
         },
@@ -2238,15 +2243,15 @@
       {
         "label": "NV: own bias field against the ambient field",
         "reading": {
-          "value": null,
+          "value": 496.8,
           "unit": "×",
           "source": "SpinDrift calculation",
           "tag": "calculated",
-          "status": "NOT_YET_EXTRACTED",
+          "status": "VERIFIED",
           "as_of": null,
           "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, mars_surface.ambient_nT"
         },
-        "evidence": "TO_CONFIRM",
+        "evidence": "EARTH_ONLY",
         "review_note": "The ZAQuant and Q.ANT builds bring their own ~1 mT bias, so ambient field strength doesn't stop them; the JGU build ran at zero bias in a multilayer shield."
       },
       {

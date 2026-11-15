@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:12:04Z",
+    "generated_at": "2026-11-15T08:21:06Z",
     "sources": [
       "PhysioNet Kiel Cardio Database",
       "arXiv 2601.18843",
@@ -202,6 +202,30 @@
       "attribution": "Li et al., Optics Express 29(17) 27171 (2021), supplementary document, CC BY 4.0",
       "changes": "extracted, resized to 488x502",
       "label": "Real quantum dots under the electron microscope (CdTe/CdS, not the renin sensor)."
+    },
+    {
+      "id": "sim_odmr_lab_run-0001-baf9",
+      "file": "data/simulator_outputs/odmr_lab_run-0001-baf9.png",
+      "title": "ODMR-Lab output odmr_lab_run-0001-baf9",
+      "device": "nv",
+      "kind": "simulator_output",
+      "source_url": "https://huggingface.co/spaces/jeorgexyz/odmr-lab",
+      "licence": "MIT (simulator)",
+      "attribution": "ODMR-Lab by jeorgexyz",
+      "changes": "none",
+      "label": "Simulated spectrum from an online simulator (its legend says 'measured'; it is simulated)."
+    },
+    {
+      "id": "sim_odmr_lab_run-0002-ff3e",
+      "file": "data/simulator_outputs/odmr_lab_run-0002-ff3e.png",
+      "title": "ODMR-Lab output odmr_lab_run-0002-ff3e",
+      "device": "nv",
+      "kind": "simulator_output",
+      "source_url": "https://huggingface.co/spaces/jeorgexyz/odmr-lab",
+      "licence": "MIT (simulator)",
+      "attribution": "ODMR-Lab by jeorgexyz",
+      "changes": "none",
+      "label": "Simulated spectrum from an online simulator (its legend says 'measured'; it is simulated)."
     },
     {
       "id": "sim_odmr_lab_run_A",
