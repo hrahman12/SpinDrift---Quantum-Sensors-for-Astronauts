@@ -1,5 +1,7 @@
 # SpinDrift
 
+<img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/b8b6746f-ae7a-4488-89a2-f7e0ad822dcf" />
+
 **Quantum sensors for astronauts, with a proof checker as the referee.**
 
 SpinDrift asks one question about four quantum sensors: does each one work at a real place in space, and under which conditions? Lean 4 makes the decision from sourced numbers. A missing number never decides; it is shown as missing.
