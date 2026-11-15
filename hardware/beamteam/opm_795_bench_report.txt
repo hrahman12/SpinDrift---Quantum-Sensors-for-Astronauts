@@ -1,0 +1,188 @@
+design=opm_795_bench passed=True score=99.99999991168934
+metrics: {"delivered_fraction": 0.9999999823378672, "delivered_mw": 9.999999823378673, "dumped_mw": 0.0, "input_mw": 10.0, "n_elements": 5.0, "n_segments": 5.0, "stray_mw": 0.0, "target.PD_H.min_power_mw": 4.999999911689336, "target.PD_V.min_power_mw": 4.999999911689336}
+  [info] target element=PD_H segment=None value=4.999999911689336 limit=0.1 :: met: PD_H: 5.000 mW (need ≥ 0.100)
+  [info] target element=PD_V segment=None value=4.999999911689336 limit=0.1 :: met: PD_V: 5.000 mW (need ≥ 0.100)
+placed elements:
+  QWP1 (quarter_wave_plate) placed=True position=(60.0, 60.0) power_out_mw=None error=None
+  CELL1 (vapor_cell) placed=True position=(120.0, 60.0) power_out_mw=None error=None
+  PBS1 (pbs) placed=True position=(180.0, 60.0) power_out_mw=None error=None
+  PD_H (photodiode) placed=True position=(220.0, 60.0) power_out_mw=4.999999911689336 error=None
+  PD_V (photodiode) placed=True position=(180.0, 100.0) power_out_mw=4.999999911689336 error=None
+branches: ['L1', 'L1.t', 'L1.r']
+bom keys: ['design', 'hardware', 'plate', 'printed', 'purchased', 'totals']
+{
+ "design": "opm_795_bench",
+ "purchased": [
+  {
+   "part_number": "GC19075-RB",
+   "description": "Rb reference vapor cell, \u00d819 x 75 mm \u2014 Rb-87 vapour cell, 3 x 3 x 3 mm",
+   "vendor": "Thorlabs",
+   "qty": 1,
+   "unit_price_usd": 750.0,
+   "url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=GC19075-RB",
+   "element_ids": [
+    "CELL1"
+   ],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "KM100CP",
+   "description": "kinematic mount for 10 mm cubes \u2014 Analyser PBS",
+   "vendor": "Thorlabs",
+   "qty": 1,
+   "unit_price_usd": 70.0,
+   "url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100CP",
+   "element_ids": [
+    "PBS1"
+   ],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "PBS052",
+   "description": "10 mm polarizing beamsplitter cube, 620-1000 nm \u2014 Analyser PBS",
+   "vendor": "Thorlabs",
+   "qty": 1,
+   "unit_price_usd": 260.0,
+   "url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=PBS052",
+   "element_ids": [
+    "PBS1"
+   ],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "PDA36A2",
+   "description": "Si amplified switchable-gain photodetector \u00d7 2: PD_H, PD_V",
+   "vendor": "Thorlabs",
+   "qty": 2,
+   "unit_price_usd": 360.0,
+   "url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=PDA36A2",
+   "element_ids": [
+    "PD_H",
+    "PD_V"
+   ],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "RSP05",
+   "description": "rotation mount, \u00d81/2\" optics \u2014 Circular polarization, lambda/4\u2026",
+   "vendor": "Thorlabs",
+   "qty": 1,
+   "unit_price_usd": 95.0,
+   "url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=RSP05",
+   "element_ids": [
+    "QWP1"
+   ],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "WPQ05M-795",
+   "description": "\u00d81/2\" zero-order quarter-wave plate, 795 nm \u2014 Circular polarization, lambda/4\u2026",
+   "vendor": "Thorlabs",
+   "qty": 1,
+   "unit_price_usd": 290.0,
+   "url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=WPQ05M-795",
+   "element_ids": [
+    "QWP1"
+   ],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "LASER-795",
+   "description": "laser, 795 nm, 10 mW \u2014 795 nm laser",
+   "vendor": "",
+   "qty": 1,
+   "unit_price_usd": null,
+   "url": null,
+   "element_ids": [
+    "L1"
+   ],
+   "price_note": "light source: quote separately, not in total"
+  }
+ ],
+ "hardware": [
+  {
+   "part_number": "SH25S050",
+   "description": "1/4-20 x 1/2\" cap screw (25 pack -> per piece)",
+   "vendor": "Thorlabs",
+   "qty": 15,
+   "unit_price_usd": 0.4,
+   "url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=SH25S050",
+   "element_ids": [],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "SH8S100",
+   "description": "8-32 x 1\" cap screw (per piece)",
+   "vendor": "Thorlabs",
+   "qty": 5,
+   "unit_price_usd": 0.3,
+   "url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=SH8S100",
+   "element_ids": [],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "DOWEL-2x8",
+   "description": "\u00d82 x 8 mm steel dowel pin (per piece)",
+   "vendor": "McMaster-Carr",
+   "qty": 10,
+   "unit_price_usd": 0.15,
+   "url": null,
+   "element_ids": [],
+   "price_note": "estimate"
+  },
+  {
+   "part_number": "M3x25+NUT",
+   "description": "M3 x 25 mm cap screw + nut (tile lap joints)",
+   "vendor": "McMaster-Carr",
+   "qty": 3,
+   "unit_price_usd": 0.2,
+   "url": null,
+   "element_ids": [],
+   "price_note": "estimate"
+  }
+ ],
+ "printed": [
+  {
+   "name": "baseplate_r1c1",
+   "file": "stl/baseplate_r1c1.stl",
+   "volume_cm3": 536.7,
+   "est_print_h": 14.4,
+   "est_filament_g": 214.0,
+   "notes": "PLA, 20 % infill, 3 walls, print flat (top up). 5 keyed element sites, 15 table holes; half-lap tile, 3 M3 joint bolts in total"
+  },
+  {
+   "name": "baseplate_r1c2",
+   "file": "stl/baseplate_r1c2.stl",
+   "volume_cm3": 572.0,
+   "est_print_h": 15.3,
+   "est_filament_g": 228.0,
+   "notes": "PLA, 20 % infill, 3 walls, print flat (top up). 5 keyed element sites, 15 table holes; half-lap tile, 3 M3 joint bolts in total"
+  }
+ ],
+ "plate": {
+  "width_mm": 300.0,
+  "height_mm": 150.0,
+  "thickness_mm": 25.4,
+  "table_holes": 15,
+  "element_sites": 5,
+  "pin_holes": 10,
+  "tiles": 2,
+  "joint_bolts": 3,
+  "element_ids": [
+   "QWP1",
+   "CELL1",
+   "PBS1",
+   "PD_H",
+   "PD_V"
+  ]
+ },
+ "totals": {
+  "purchased_parts": 8,
+  "hardware_parts": 33,
+  "printed_parts": 2,
+  "est_cost_usd": 2194.6,
+  "est_print_h": 29.7,
+  "est_filament_g": 442.0,
+  "price_note": "list-price estimates, USD, excluding lasers; verify with vendors"
+ }
+}

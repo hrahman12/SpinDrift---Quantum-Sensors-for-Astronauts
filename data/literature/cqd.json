@@ -1,0 +1,2519 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T22:10:09Z",
+    "sources": [
+      "arXiv API http://export.arxiv.org/api/query (Atom; search_query, start, max_results=1000, sortBy=submittedDate, sortOrder=ascending; one request every 3.2 s; User-Agent 'SpinDrift-literature-builder/1.0 (NASA Space Apps 2026 entry; arXiv API and NCBI E-utilities only)')",
+      "NCBI E-utilities https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi (db=pubmed, retmax=10000) and https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi (POST, rettype=medline, 400 PMIDs per request; tool=SpinDrift-literature-builder, no e-mail; at most one request every 0.4 s)",
+      "Device's own paper: Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285); abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)",
+      "arxiv query 'carbon_dots': abs:\"carbon dots\" OR abs:\"carbon quantum dots\" OR abs:\"carbon nanodots\" OR abs:\"carbon dot\" OR abs:\"carbon quantum dot\"",
+      "arxiv query 'graphene_quantum_dots': abs:\"graphene quantum dots\"",
+      "arxiv query 'microneedle': abs:microneedle OR abs:microneedles",
+      "arxiv query 'as7341': abs:AS7341",
+      "arxiv query 'wearable_fluorescence': abs:wearable AND abs:fluorescence",
+      "pubmed query 'carbon_dots_fluorescence_sensor': (\"carbon dots\"[tiab] OR \"carbon quantum dots\"[tiab]) AND fluorescen*[tiab] AND (sensor*[tiab] OR sensing[tiab] OR probe*[tiab] OR detection[tiab])",
+      "pubmed query 'carbon_dots_bilirubin': (\"carbon dots\"[tiab] OR \"carbon quantum dots\"[tiab] OR \"carbon dot\"[tiab]) AND bilirubin[tiab]",
+      "pubmed query 'microneedle_fluorescence': microneedle*[tiab] AND fluorescen*[tiab]",
+      "pubmed query 'hydrogel_microneedle': microneedle*[tiab] AND (hydrogel*[tiab] OR GelMA[tiab] OR \"gelatin methacryl*\"[tiab])",
+      "pubmed query 'gelma_microneedle': microneedle*[tiab] AND GelMA[tiab]",
+      "pubmed query 'microneedle_sensor': microneedle*[tiab] AND (sensor*[tiab] OR sensing[tiab] OR biosensor*[tiab])",
+      "pubmed query 'wearable_fluorescence_reader': wearable[tiab] AND fluorescen*[tiab] AND (reader[tiab] OR smartphone[tiab] OR optoelectronic[tiab] OR device[tiab])",
+      "pubmed query 'as7341': AS7341[tiab]",
+      "pubmed query 'bilirubin_skin_sensor': bilirubin[tiab] AND (wearable[tiab] OR transcutaneous[tiab] OR skin[tiab]) AND (sensor*[tiab] OR optical[tiab] OR fluorescen*[tiab])",
+      "pubmed query 'tattoo_sensor': tattoo[tiab] AND (sensor*[tiab] OR fluorescen*[tiab])",
+      "pubmed query 'microneedle_array_patch': microneedle*[tiab] AND (array*[tiab] OR patch*[tiab])",
+      "pubmed query 'microneedle_geometry': microneedle*[tiab] AND (height*[tiab] OR length*[tiab] OR pitch[tiab] OR \"tip radius\"[tiab] OR \"base diameter\"[tiab] OR \"base width\"[tiab])"
+    ],
+    "about": "Hardware numbers stated in the device's own paper, each with its paper id and exact sentence. Parameters the paper does not state are NOT_FOUND. The literature harvest (official APIs only) is kept for counts: other papers' values are not written until the user asks to 'add typical'.",
+    "policy": "values only from the device's own paper (coordinator instruction, 15 Nov 2026); NOT_FOUND parameters carry value objects with status NOT_STATED and value null",
+    "own_paper": {
+      "id": "PMID:39356285",
+      "doi": "10.1021/acsnano.4c06191",
+      "paper": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024)",
+      "access": "abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)",
+      "record_in_harvest": true,
+      "full_texts": [
+        {
+          "file": "SPINDRIFT_CACHE/sensor-parts/nn4c06191_si_001.pdf",
+          "url": "https://ndownloader.figshare.com/files/49568629",
+          "label": "Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0)",
+          "read": true,
+          "sha256": "4bbda143b5cd4b2111451e4bd0a4c4fec320c2c915ec952dd7d9fccae4ee32b6",
+          "pages": 13
+        }
+      ]
+    },
+    "queries": [
+      {
+        "source": "arxiv",
+        "id": "carbon_dots",
+        "query": "abs:\"carbon dots\" OR abs:\"carbon quantum dots\" OR abs:\"carbon nanodots\" OR abs:\"carbon dot\" OR abs:\"carbon quantum dot\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 37,
+        "fetched": 37,
+        "new_unique": 37,
+        "in_corpus": 37
+      },
+      {
+        "source": "arxiv",
+        "id": "graphene_quantum_dots",
+        "query": "abs:\"graphene quantum dots\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 270,
+        "fetched": 270,
+        "new_unique": 270,
+        "in_corpus": 270
+      },
+      {
+        "source": "arxiv",
+        "id": "microneedle",
+        "query": "abs:microneedle OR abs:microneedles",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 13,
+        "fetched": 13,
+        "new_unique": 13,
+        "in_corpus": 13
+      },
+      {
+        "source": "arxiv",
+        "id": "as7341",
+        "query": "abs:AS7341",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 1,
+        "fetched": 1,
+        "new_unique": 1,
+        "in_corpus": 1
+      },
+      {
+        "source": "arxiv",
+        "id": "wearable_fluorescence",
+        "query": "abs:wearable AND abs:fluorescence",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 1,
+        "fetched": 1,
+        "new_unique": 1,
+        "in_corpus": 1
+      },
+      {
+        "source": "pubmed",
+        "id": "carbon_dots_fluorescence_sensor",
+        "query": "(\"carbon dots\"[tiab] OR \"carbon quantum dots\"[tiab]) AND fluorescen*[tiab] AND (sensor*[tiab] OR sensing[tiab] OR probe*[tiab] OR detection[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 4740,
+        "fetched": 4740,
+        "records_returned_by_efetch": 4740,
+        "new_unique": 4739,
+        "in_corpus": 4739
+      },
+      {
+        "source": "pubmed",
+        "id": "carbon_dots_bilirubin",
+        "query": "(\"carbon dots\"[tiab] OR \"carbon quantum dots\"[tiab] OR \"carbon dot\"[tiab]) AND bilirubin[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 20,
+        "fetched": 20,
+        "records_returned_by_efetch": 20,
+        "new_unique": 4,
+        "in_corpus": 20
+      },
+      {
+        "source": "pubmed",
+        "id": "microneedle_fluorescence",
+        "query": "microneedle*[tiab] AND fluorescen*[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 334,
+        "fetched": 334,
+        "records_returned_by_efetch": 334,
+        "new_unique": 330,
+        "in_corpus": 334
+      },
+      {
+        "source": "pubmed",
+        "id": "hydrogel_microneedle",
+        "query": "microneedle*[tiab] AND (hydrogel*[tiab] OR GelMA[tiab] OR \"gelatin methacryl*\"[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 1131,
+        "fetched": 1131,
+        "records_returned_by_efetch": 1131,
+        "new_unique": 1080,
+        "in_corpus": 1131
+      },
+      {
+        "source": "pubmed",
+        "id": "gelma_microneedle",
+        "query": "microneedle*[tiab] AND GelMA[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 128,
+        "fetched": 128,
+        "records_returned_by_efetch": 128,
+        "new_unique": 0,
+        "in_corpus": 128
+      },
+      {
+        "source": "pubmed",
+        "id": "microneedle_sensor",
+        "query": "microneedle*[tiab] AND (sensor*[tiab] OR sensing[tiab] OR biosensor*[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 848,
+        "fetched": 848,
+        "records_returned_by_efetch": 848,
+        "new_unique": 652,
+        "in_corpus": 848
+      },
+      {
+        "source": "pubmed",
+        "id": "wearable_fluorescence_reader",
+        "query": "wearable[tiab] AND fluorescen*[tiab] AND (reader[tiab] OR smartphone[tiab] OR optoelectronic[tiab] OR device[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 102,
+        "fetched": 102,
+        "records_returned_by_efetch": 102,
+        "new_unique": 90,
+        "in_corpus": 102
+      },
+      {
+        "source": "pubmed",
+        "id": "as7341",
+        "query": "AS7341[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 13,
+        "fetched": 13,
+        "records_returned_by_efetch": 13,
+        "new_unique": 13,
+        "in_corpus": 13
+      },
+      {
+        "source": "pubmed",
+        "id": "bilirubin_skin_sensor",
+        "query": "bilirubin[tiab] AND (wearable[tiab] OR transcutaneous[tiab] OR skin[tiab]) AND (sensor*[tiab] OR optical[tiab] OR fluorescen*[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 81,
+        "fetched": 81,
+        "records_returned_by_efetch": 81,
+        "new_unique": 80,
+        "in_corpus": 81
+      },
+      {
+        "source": "pubmed",
+        "id": "tattoo_sensor",
+        "query": "tattoo[tiab] AND (sensor*[tiab] OR fluorescen*[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 153,
+        "fetched": 153,
+        "records_returned_by_efetch": 153,
+        "new_unique": 148,
+        "in_corpus": 153
+      },
+      {
+        "source": "pubmed",
+        "id": "microneedle_array_patch",
+        "query": "microneedle*[tiab] AND (array*[tiab] OR patch*[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 3411,
+        "fetched": 3411,
+        "records_returned_by_efetch": 3411,
+        "new_unique": 2423,
+        "in_corpus": 3411
+      },
+      {
+        "source": "pubmed",
+        "id": "microneedle_geometry",
+        "query": "microneedle*[tiab] AND (height*[tiab] OR length*[tiab] OR pitch[tiab] OR \"tip radius\"[tiab] OR \"base diameter\"[tiab] OR \"base width\"[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 641,
+        "fetched": 641,
+        "records_returned_by_efetch": 641,
+        "new_unique": 246,
+        "in_corpus": 641
+      }
+    ],
+    "counts": {
+      "arxiv_records": 322,
+      "pubmed_records": 9805,
+      "merged_by_doi": 2,
+      "total_unique_records": 10127,
+      "records_with_abstract": 10069,
+      "records_read_by_the_rules": 10127,
+      "own_paper_values_written": 9,
+      "parameters_found": 6,
+      "parameters_not_found": 19,
+      "other_paper_values_not_written": 2736,
+      "records_naming_AS7341": 14
+    },
+    "dedup": "by arXiv id, PMID and DOI (case-insensitive); a record found again keeps its first copy",
+    "extraction": "Text is normalised (LaTeX, Unicode and MEDLINE spellings of units, √Hz, °C, ×, ±, µ) on a copy that maps back to the original, so each quote and sentence is exact (whitespace runs collapsed; a PDF line break keeps its hyphen). A number counts only when its unit and the words next to it name the parameter (RULES in scripts/build_literature.py); bounds such as 'below', 'respectively' lists, areas or volumes where a length is meant, and values outside each parameter's plausible_range are rejected. In the device's own paper both ends of a stated range are kept.",
+    "rejected_in_own_paper": {},
+    "rejected_in_harvest": {
+      "cd_excitation_nm": {
+        "a range, not a value": 6,
+        "a bound, not a value": 63,
+        "excluded by the words next to it": 8,
+        "part of a 'respectively' list": 18
+      },
+      "cd_size_nm": {
+        "a range, not a value": 25,
+        "part of a 'respectively' list": 3,
+        "outside the plausible range": 4,
+        "a bound, not a value": 1
+      },
+      "cd_emission_nm": {
+        "part of a 'respectively' list": 43,
+        "excluded by the words next to it": 5,
+        "outside the plausible range": 6,
+        "a range, not a value": 4
+      },
+      "cd_quantum_yield_pct": {
+        "part of a 'respectively' list": 18,
+        "a range, not a value": 4
+      },
+      "mn_height_um": {
+        "excluded by the words next to it": 42,
+        "part of a 'respectively' list": 4,
+        "a range, not a value": 26,
+        "a bound, not a value": 3,
+        "outside the plausible range": 7,
+        "an area or volume, not a length": 1
+      },
+      "mn_patch_area_mm2": {
+        "not an area": 28,
+        "dimensions not usable for this parameter": 3,
+        "a bound, not a value": 2,
+        "excluded by the words next to it": 3
+      },
+      "mn_patch_side_mm": {
+        "an area or volume, not a length": 18,
+        "a bound, not a value": 2,
+        "a list": 4
+      },
+      "reader_channel_nm": {
+        "outside the plausible range": 1,
+        "a range, not a value": 2
+      },
+      "mn_base_width_um": {
+        "a range, not a value": 3,
+        "dimensions not usable for this parameter": 1,
+        "excluded by the words next to it": 4,
+        "part of a 'respectively' list": 1
+      },
+      "mn_tip_diameter_um": {
+        "outside the plausible range": 1,
+        "part of a 'respectively' list": 1,
+        "a range, not a value": 1
+      },
+      "mn_array_n": {
+        "not a square array": 10
+      },
+      "bilirubin_lod_um": {
+        "part of a 'respectively' list": 1
+      },
+      "led_wavelength_nm": {
+        "a range, not a value": 1,
+        "outside the plausible range": 2
+      },
+      "mn_count": {
+        "a name or label, not a count": 1,
+        "outside the plausible range": 1
+      },
+      "mn_patch_diameter_mm": {
+        "outside the plausible range": 2
+      },
+      "mn_tip_radius_um": {
+        "a range, not a value": 2
+      }
+    },
+    "raw_files": [
+      {
+        "file": "data/literature/raw/arxiv/cqd__as7341__08e8b225__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3AAS7341&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "573332124e26c4edae6782d1947643cba3a9ef32643f5332fa3796d23c74f128",
+        "sha256_gz": "8b1bc6c24984f197755117e57a031ae670eb2f1d0bef44f273ddf050a4f028ac",
+        "bytes": 2674,
+        "fetched": "2026-11-15T21:07:58Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/cqd__carbon_dots__9494195b__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22carbon+dots%22+OR+abs%3A%22carbon+quantum+dots%22+OR+abs%3A%22carbon+nanodots%22+OR+abs%3A%22carbon+dot%22+OR+abs%3A%22carbon+quantum+dot%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "a99277e09d9f18d567f7228c220ad86382782d1a65d8c53f75472ff9f49ff089",
+        "sha256_gz": "c55a15507611f639aa5bee558bbf636179d91603eb54590615117cceb71623b4",
+        "bytes": 94066,
+        "fetched": "2026-11-15T21:07:46Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/cqd__graphene_quantum_dots__4cde7f91__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22graphene+quantum+dots%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "517f7e3e02efab59b3fb80d2a098fdfd780657444ae705bf07c4e95ffd15d98e",
+        "sha256_gz": "3b4a15fd9960ade9cc976e4caa843426445a55495b923ac3158e8a38e551ac04",
+        "bytes": 573707,
+        "fetched": "2026-11-15T21:07:50Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/cqd__microneedle__7a86d57b__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3Amicroneedle+OR+abs%3Amicroneedles&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "fb8362b6a5edcfcf526c7413a84cf2805d37651bc2cd5ac19994888f122d2327",
+        "sha256_gz": "83e58a3a12f9ec12e6cfe56213a93267cce1b360c507f987d057a2e7f5183fde",
+        "bytes": 33014,
+        "fetched": "2026-11-15T21:07:54Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/cqd__wearable_fluorescence__2e0945da__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3Awearable+AND+abs%3Afluorescence&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "3f5674b90b8ed9ec2b231bb4d7400728f82ec455d1beaec0f5f14920ab763736",
+        "sha256_gz": "dfe861521e53cdbb2fd44339a2b1b0cc750c95061c03246a79c4f155e30da41f",
+        "bytes": 4404,
+        "fetched": "2026-11-15T21:08:02Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__as7341__d6540aa1__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=AS7341%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "7e9cb0b8fc213a0ded6cb31d2d7b8778664e31eaf6ba2a021c39372d5979fc18",
+        "sha256_gz": "d23b4afa5fdc05547e70179d1fbb2015981eb288174bd32622162372b783add9",
+        "bytes": 471,
+        "fetched": "2026-11-15T21:08:07Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__bilirubin_skin_sensor__be20125c__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=bilirubin%5Btiab%5D+AND+%28wearable%5Btiab%5D+OR+transcutaneous%5Btiab%5D+OR+skin%5Btiab%5D%29+AND+%28sensor%2A%5Btiab%5D+OR+optical%5Btiab%5D+OR+fluorescen%2A%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "fb553757a8334592ce9ec79d229021337605fc1f9b32bf7cb06f8102ced41444",
+        "sha256_gz": "2bc5f585d49f5c38b05b2d7edab43531301f3d0ac4a79277c479d6298da73018",
+        "bytes": 1405,
+        "fetched": "2026-11-15T21:08:08Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__carbon_dots_bilirubin__a31ce033__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%22carbon+dots%22%5Btiab%5D+OR+%22carbon+quantum+dots%22%5Btiab%5D+OR+%22carbon+dot%22%5Btiab%5D%29+AND+bilirubin%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "7847404dfcf283c0584444e56fd71f8e23e04fd36a76d745595f409b89bf8f02",
+        "sha256_gz": "0526aeb44b445d46fb17db71b90b4fb0641f09d6080dc043a5f89f1209c762c4",
+        "bytes": 666,
+        "fetched": "2026-11-15T21:08:03Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__carbon_dots_fluorescence_sensor__660298a3__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%22carbon+dots%22%5Btiab%5D+OR+%22carbon+quantum+dots%22%5Btiab%5D%29+AND+fluorescen%2A%5Btiab%5D+AND+%28sensor%2A%5Btiab%5D+OR+sensing%5Btiab%5D+OR+probe%2A%5Btiab%5D+OR+detection%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "df62b4fced684cec903d79846897342336963663ef201b1c630484c0031b6008",
+        "sha256_gz": "7f97e4f073edb64db16952d64528a265f618b1145c2785539ff33160b35f6d05",
+        "bytes": 52686,
+        "fetched": "2026-11-15T21:08:02Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__26381697-29369443__n400__9607e625.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "26381697",
+          "last": "29369443"
+        },
+        "sha256": "ee296186eaa052c8d24cd40882bafdea96b2158de05ab0754a400a6aaf14b65e",
+        "sha256_gz": "ef7681de966f37a782f9279f0f28a9fd753be679f64a6fa9e3215dd2bf4e4c0d",
+        "bytes": 1595985,
+        "fetched": "2026-11-15T21:08:15Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__26418306-31678387__n400__8ee1562c.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "26418306",
+          "last": "31678387"
+        },
+        "sha256": "73ad3218dbf8e3e9d5af2f6a8bc660420b3627db18dd12c201dc09f50a332fcb",
+        "sha256_gz": "948a4197a62db9f3c85aff2632baac648d55d72f4a9ca8b94d6a58b48d0c08fe",
+        "bytes": 1726443,
+        "fetched": "2026-11-15T21:34:23Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__283427-26349391__n400__f5cc17af.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "283427",
+          "last": "26349391"
+        },
+        "sha256": "dcecf1f4d94f661b3b2da48c35b7286bf5260c51d3313e43f7e3a8b169eab1e7",
+        "sha256_gz": "6de8e945664f6123d2c0c6d859c267fd83abdbbe376c82861831977160ca8b0a",
+        "bytes": 1302395,
+        "fetched": "2026-11-15T21:08:11Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__29375544-30927703__n400__312d2a2e.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "29375544",
+          "last": "30927703"
+        },
+        "sha256": "2cfa280cf8a05c6a6bb2a03572d137b40e1fc1ca94d3d49aece1daa820e9c4d9",
+        "sha256_gz": "65f02619d7ea5287c0c1fe5d5b97450a33f1a240c1f0373ffd0cf339c401e86a",
+        "bytes": 1586412,
+        "fetched": "2026-11-15T21:08:17Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__30940582-32106943__n400__c110744d.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "30940582",
+          "last": "32106943"
+        },
+        "sha256": "0ab8f5e4d4ba40f41c01fe6998824c3e8fdb1635f674a09a2f5542c49e86eefe",
+        "sha256_gz": "202de3e5aca71d9c470e0e3b44f81c0d0bf2f13d0a1f1ae36b87d22dc32be999",
+        "bytes": 1641669,
+        "fetched": "2026-11-15T21:08:21Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__31682039-35316785__n400__84635ee6.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "31682039",
+          "last": "35316785"
+        },
+        "sha256": "1bd707fd2ee058eaf803a2270c30f91b64d3080e70bbe186bd61451cafca3c42",
+        "sha256_gz": "912eb53489400bebb49f197a50a90ed2355ab96601953862efa9a9f4dbc3ace9",
+        "bytes": 1765210,
+        "fetched": "2026-11-15T21:34:26Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__32106962-33241794__n400__d53e9afb.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "32106962",
+          "last": "33241794"
+        },
+        "sha256": "45b7c6f1126da494e91f2e3ca8f5e2b6d75cb70c3181b9da1e939a28922079e1",
+        "sha256_gz": "e36b56e5275c43b3a36d75c3d72ab3f256a7fda59943be0be97de9ae2a0b29b3",
+        "bytes": 1569209,
+        "fetched": "2026-11-15T21:08:23Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__33244820-34666320__n400__0bf80abd.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "33244820",
+          "last": "34666320"
+        },
+        "sha256": "503f8c45c2d57ba183f784e8888b840440b103c3cfd95d7011ae465e97a52d94",
+        "sha256_gz": "1c415287049e259f269280c47efec82f261ad9d4324bc29633f48eb259d61de3",
+        "bytes": 1654465,
+        "fetched": "2026-11-15T21:08:26Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__34668082-35539707__n400__dc17dc5a.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "34668082",
+          "last": "35539707"
+        },
+        "sha256": "5c2c97ff7b7f77a8ee75009baa1695326f94f95db48d53e4df9db85169b610df",
+        "sha256_gz": "90ad419464197fea23f37a821f73d8c9bb79f6f816ae5e5c944269bab6ce2e6e",
+        "bytes": 1668080,
+        "fetched": "2026-11-15T21:08:30Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__35329513-37874613__n400__12c47023.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "35329513",
+          "last": "37874613"
+        },
+        "sha256": "70d480f61d3403c22ed576399ed0df41cac5559052bb8af41d0f51119ba9b668",
+        "sha256_gz": "5b267948d659b86231852191e97dd69202b7ffe045bfe90f1754be644493fc06",
+        "bytes": 1910301,
+        "fetched": "2026-11-15T21:34:29Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__35540082-36431418__n400__fb519bf6.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "35540082",
+          "last": "36431418"
+        },
+        "sha256": "740b8e3cd107dee4c7eb1fe7762d58ac1e14effcf29298eb69d3cb518c650319",
+        "sha256_gz": "ee03acc360eecf86ca3e9dd044366ad16d13524b8fd4d250e96e1415a04951d0",
+        "bytes": 1684896,
+        "fetched": "2026-11-15T21:08:33Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__36432118-37311616__n400__017d2ca2.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "36432118",
+          "last": "37311616"
+        },
+        "sha256": "95474e0c37a9129e7cef56305145741c8a167d2779bbad0061bb4cf24a1d75da",
+        "sha256_gz": "f90c93a89e38b2309bb1267ac0750d85d4f7c7dbf6c6195e1ce4126e2be28767",
+        "bytes": 1791834,
+        "fetched": "2026-11-15T21:08:36Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__37314534-38173863__n400__3302d1b2.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "37314534",
+          "last": "38173863"
+        },
+        "sha256": "f5fc646546c2869d1e4fef98e8daf25994a64f041144bc77d59380a482381e6b",
+        "sha256_gz": "de48bbe1dc7456bda87baea3b8794b3a554b972235754dc3fec528bbfabb630e",
+        "bytes": 1739630,
+        "fetched": "2026-11-15T21:08:39Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__37891392-39996632__n400__9c5eb1e5.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "37891392",
+          "last": "39996632"
+        },
+        "sha256": "4d32eb26a3693b74639cb4e640045068820104ccffee1b8ac3ff952684014c80",
+        "sha256_gz": "b6068e584f8c83f6ae74377f6f13e7ab751e064f537f39b5cfefe37b2aded9d3",
+        "bytes": 2047910,
+        "fetched": "2026-11-15T21:34:33Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__38174288-38909562__n400__3ecba0d0.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "38174288",
+          "last": "38909562"
+        },
+        "sha256": "71c5d64e007b2a7cdde1ede61bce993f94d7a44533b0019e59614429bcc5b9a2",
+        "sha256_gz": "107c6c22d58523419ec45c2484874b8ec3d8f447d4e9eddb0d7576e596893cdb",
+        "bytes": 1810664,
+        "fetched": "2026-11-15T21:08:43Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__38911833-39638463__n400__a9e183e4.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "38911833",
+          "last": "39638463"
+        },
+        "sha256": "ab4897ab4d303c34c3cccf0f5e3dfc8d0bf3a005b84ffa8070fb3051e0cb75b2",
+        "sha256_gz": "195238faa6d8303266102b1d7dbeb415d8df3da11797e8d14fcbe92682083f91",
+        "bytes": 1830971,
+        "fetched": "2026-11-15T21:08:46Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__39644372-40247337__n400__b949870b.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "39644372",
+          "last": "40247337"
+        },
+        "sha256": "187a19067a47811dee6b817feb97d13849efddd35bac4dfd8b763e4d5479ea1f",
+        "sha256_gz": "2f7d55659f0f01a645cf4165b5866c0c9fd366365c2ba22d8838da3db57ccf7d",
+        "bytes": 1851181,
+        "fetched": "2026-11-15T21:08:49Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__39997030-41825123__n400__6d21eb20.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "39997030",
+          "last": "41825123"
+        },
+        "sha256": "e5fa9cee67f735a18e36ea4f56cb9fe63a7a4bcd08ca3dc44d09ec8e8c56edab",
+        "sha256_gz": "6f65c7eec9b2d931691c41cdd3aa1e4952842d0327d0de52157bab98b2fb5032",
+        "bytes": 2098991,
+        "fetched": "2026-11-15T21:34:36Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__40248139-40870703__n400__35440954.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "40248139",
+          "last": "40870703"
+        },
+        "sha256": "438647eb6bcfd310c59da0c10fe6fc3cc2605448fc40d667c5098169c89cd03c",
+        "sha256_gz": "e59e31a0210ee59621ece87fe2cd755afce0f0eab0a68b1c00c938d5d2c7cd1c",
+        "bytes": 1885541,
+        "fetched": "2026-11-15T21:08:53Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__40870999-41427182__n400__af36e1e9.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "40870999",
+          "last": "41427182"
+        },
+        "sha256": "fd82598ad9c4adf738feaac503b1af067850a86e93d1233eff46d677d10ff0a0",
+        "sha256_gz": "1d816f53a6410ccd35d878e2259e9bd21ceafde14d93f0c0f62b33baef8e6054",
+        "bytes": 1888053,
+        "fetched": "2026-11-15T21:08:56Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__41428586-42029179__n400__cdba1238.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "41428586",
+          "last": "42029179"
+        },
+        "sha256": "737dcf680b37f22c2c7561881893a6ec7f7d152bacfd62a00b764217c5384659",
+        "sha256_gz": "d7edac905fcd850cbbef31684adadb9b939e77387552364f9468d1a56bda6ab8",
+        "bytes": 1903383,
+        "fetched": "2026-11-15T21:08:59Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__41832625-43025504__n269__404191f9.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 269,
+          "first": "41832625",
+          "last": "43025504"
+        },
+        "sha256": "fd183eab2911c999828a8df4b27298e782ec8e7154f86eb6b785cda487b97110",
+        "sha256_gz": "24efbc9c141e4cb5f39d477153603aeb20b39272a24944aa34c6da1e5c7e771f",
+        "bytes": 1445016,
+        "fetched": "2026-11-15T21:34:38Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__42031753-42607404__n400__a8562311.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "42031753",
+          "last": "42607404"
+        },
+        "sha256": "7d0df59abc28dd6a6429043b4e4f8ced3fa3145b9b2e6b0fc6d1c3a27dad819c",
+        "sha256_gz": "66d56e332e5736d24242d71930f180de27f7609f8cc107e3404a5073f54f746b",
+        "bytes": 2017942,
+        "fetched": "2026-11-15T21:09:02Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__42607464-43034397__n338__2ecbccfa.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 338,
+          "first": "42607464",
+          "last": "43034397"
+        },
+        "sha256": "c1b2a28c223ab6d390a05d9d8025519ad55d1cbbc853b9ceb868611c5de189ff",
+        "sha256_gz": "6dabd31927543b94ac7b8381e631706400d5dc650178eb98424543cfa42b16a7",
+        "bytes": 1651229,
+        "fetched": "2026-11-15T21:09:05Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__efetch__611003-26407702__n400__92087001.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "611003",
+          "last": "26407702"
+        },
+        "sha256": "bca004c27e825ae1669ffdfa00d71b8f56245eac86cb26e904c1088289bc2c7a",
+        "sha256_gz": "309620ae53852e7caa6fc16fd5c07eb3d367406f5d0255e02802bb0c3f8704b4",
+        "bytes": 1396359,
+        "fetched": "2026-11-15T21:34:20Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__gelma_microneedle__1c7c84a9__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=microneedle%2A%5Btiab%5D+AND+GelMA%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "1eca77019e8e5cf155f88bf6a142a02dd356d432740c043823acef8476f08603",
+        "sha256_gz": "1f23258ced92c834e73437f0bb1cbacf60d40beba6f98dd7982517e14591da19",
+        "bytes": 1774,
+        "fetched": "2026-11-15T21:08:05Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__hydrogel_microneedle__1d310b16__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=microneedle%2A%5Btiab%5D+AND+%28hydrogel%2A%5Btiab%5D+OR+GelMA%5Btiab%5D+OR+%22gelatin+methacryl%2A%22%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "92e71e307a4b967ce556bbfa63afe6870fa7c2da0364191da4280f7aff9fa997",
+        "sha256_gz": "16df148608177050811f79412dcdc2ad0a1b50b432cd94c6e99bd3246b7974b1",
+        "bytes": 12886,
+        "fetched": "2026-11-15T21:08:04Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__microneedle_array_patch__c8bacae9__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=microneedle%2A%5Btiab%5D+AND+%28array%2A%5Btiab%5D+OR+patch%2A%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "ec1768f1f59dcfd6d1a497f7361ce91dd1c14d1f78487bfae717b6d318c2ad40",
+        "sha256_gz": "5c88744a9d923fdb173f2eaa9fb36b32641eba5259bc138b97632a07d77b8ed9",
+        "bytes": 37911,
+        "fetched": "2026-11-15T21:34:14Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__microneedle_fluorescence__8140f13e__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=microneedle%2A%5Btiab%5D+AND+fluorescen%2A%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "c3ee7a2b5ef9e8461e756bc8bfcfd8603dd42c4bce36d48588836c7dfd1fbfc2",
+        "sha256_gz": "2824950997d10f599173ab8fa1decf003bb05d6da20db0c3fbebf676320b4770",
+        "bytes": 4035,
+        "fetched": "2026-11-15T21:08:04Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__microneedle_geometry__4245dc7b__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=microneedle%2A%5Btiab%5D+AND+%28height%2A%5Btiab%5D+OR+length%2A%5Btiab%5D+OR+pitch%5Btiab%5D+OR+%22tip+radius%22%5Btiab%5D+OR+%22base+diameter%22%5Btiab%5D+OR+%22base+width%22%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "0377eb6290ea7b1edf44ead19714fbd557fe918506cb828ab58265b640b05da2",
+        "sha256_gz": "a3ef38bcf917a137e669f2a51d764a8be7e8cabf1428d1d2c82d107b1eeb7a2d",
+        "bytes": 7567,
+        "fetched": "2026-11-15T21:34:14Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__microneedle_sensor__58282677__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=microneedle%2A%5Btiab%5D+AND+%28sensor%2A%5Btiab%5D+OR+sensing%5Btiab%5D+OR+biosensor%2A%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "d3faecfd1bf10b1510458a52be44964f40329c86ad182a6754034511d2409854",
+        "sha256_gz": "5846b49d678f9e28e8a1133f6ad1021e862ec9d3e8f5df3e1ea771133b22838e",
+        "bytes": 9759,
+        "fetched": "2026-11-15T21:08:06Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__tattoo_sensor__5c048a12__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=tattoo%5Btiab%5D+AND+%28sensor%2A%5Btiab%5D+OR+fluorescen%2A%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "17b5171fb3443237b1c63a21278d5f427cab29b12d365502feb1d994de38721e",
+        "sha256_gz": "233b46fbc9e12f3e0de11cdce51f0762bb8479905c6469b7ea23a63987c6c02d",
+        "bytes": 2082,
+        "fetched": "2026-11-15T21:08:09Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/cqd__wearable_fluorescence_reader__8b331177__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=wearable%5Btiab%5D+AND+fluorescen%2A%5Btiab%5D+AND+%28reader%5Btiab%5D+OR+smartphone%5Btiab%5D+OR+optoelectronic%5Btiab%5D+OR+device%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "b96afe69c2d05e15009e0be4ac21c93abd2e2a1ca5c97a055f749915a7b4e33c",
+        "sha256_gz": "e4223eb1f2248550f7a7de49480f14b4cd44755d2625387afaea01983dc1d438",
+        "bytes": 1625,
+        "fetched": "2026-11-15T21:08:07Z"
+      }
+    ],
+    "raw_cache": "data/literature/raw/ (gzip of the exact response bytes; see raw/manifest.json); not in git (over 20 MB) and not in the public build"
+  },
+  "parameters": {
+    "cd_size_nm": {
+      "label": "Carbon-dot size (stated or TEM diameter; not hydrodynamic)",
+      "unit": "nm",
+      "plausible_range": [
+        0.5,
+        30
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 221,
+        "n_records": 218,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "cd_hydrodynamic_size_nm": {
+      "label": "Carbon-dot hydrodynamic size (DLS)",
+      "unit": "nm",
+      "plausible_range": [
+        0.5,
+        500
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 0,
+        "n_records": 0,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "cd_excitation_nm": {
+      "label": "Carbon-dot excitation wavelength",
+      "unit": "nm",
+      "plausible_range": [
+        200,
+        900
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 365.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.cd_excitation_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 365.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.cd_excitation_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 365.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.cd_excitation_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 365.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.cd_excitation_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 365.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.cd_excitation_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 365.0,
+          "unit": "nm",
+          "quote": "(A and B) HRTEM images, (C) FL spectra (excitation at 365 nm), and (D) DLS analysis",
+          "sentence": "(A and B) HRTEM images, (C) FL spectra (excitation at 365 nm), and (D) DLS analysis of the synthesized CQDs.",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 4, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 4
+        }
+      ],
+      "other_papers": {
+        "n_values": 466,
+        "n_records": 445,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "cd_emission_nm": {
+      "label": "Carbon-dot emission wavelength",
+      "unit": "nm",
+      "plausible_range": [
+        200,
+        900
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 792,
+        "n_records": 633,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "cd_quantum_yield_pct": {
+      "label": "Carbon-dot fluorescence quantum yield",
+      "unit": "%",
+      "plausible_range": [
+        0.1,
+        100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "%",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "%",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "%",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "%",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "%",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 794,
+        "n_records": 773,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_height_um": {
+      "label": "Microneedle height",
+      "unit": "µm",
+      "plausible_range": [
+        50,
+        3000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 257,
+        "n_records": 197,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_base_width_um": {
+      "label": "Microneedle base width or base diameter",
+      "unit": "µm",
+      "plausible_range": [
+        20,
+        2000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 39,
+        "n_records": 34,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_tip_radius_um": {
+      "label": "Microneedle tip radius",
+      "unit": "µm",
+      "plausible_range": [
+        0.2,
+        100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 10,
+        "n_records": 8,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_tip_diameter_um": {
+      "label": "Microneedle tip diameter",
+      "unit": "µm",
+      "plausible_range": [
+        0.5,
+        200
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 19,
+        "n_records": 19,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_pitch_um": {
+      "label": "Microneedle pitch (centre-to-centre or tip-to-tip)",
+      "unit": "µm",
+      "plausible_range": [
+        50,
+        5000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 7,
+        "n_records": 7,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_array_n": {
+      "label": "Square microneedle array, needles per side (n of n × n)",
+      "unit": "needles per side",
+      "plausible_range": [
+        2,
+        100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "needles per side",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "needles per side",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "needles per side",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "needles per side",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "needles per side",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 41,
+        "n_records": 41,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_count": {
+      "label": "Needles per patch",
+      "unit": "needles",
+      "plausible_range": [
+        4,
+        20000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "needles",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "needles",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "needles",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "needles",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "needles",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 48,
+        "n_records": 46,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_patch_side_mm": {
+      "label": "Square patch or array side",
+      "unit": "mm",
+      "plausible_range": [
+        2,
+        100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 4,
+        "n_records": 4,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_patch_diameter_mm": {
+      "label": "Circular patch diameter",
+      "unit": "mm",
+      "plausible_range": [
+        2,
+        100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 2,
+        "n_records": 2,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_patch_area_mm2": {
+      "label": "Patch or array area, as stated (an area, not a shape)",
+      "unit": "mm²",
+      "plausible_range": [
+        1,
+        10000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "mm²",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "mm²",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "mm²",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "mm²",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "mm²",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 15,
+        "n_records": 15,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "mn_backing_thickness_um": {
+      "label": "Backing (base) layer thickness",
+      "unit": "µm",
+      "plausible_range": [
+        10,
+        5000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 2,
+        "n_records": 2,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "led_wavelength_nm": {
+      "label": "LED wavelength",
+      "unit": "nm",
+      "plausible_range": [
+        250,
+        1100
+      ],
+      "status": "FOUND",
+      "n": 2,
+      "median": {
+        "value": 430.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 2 values in parameters.led_wavelength_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 398.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 2 values in parameters.led_wavelength_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 462.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 2 values in parameters.led_wavelength_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 390.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 2 values in parameters.led_wavelength_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 470.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 2 values in parameters.led_wavelength_nm.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 390.0,
+          "unit": "nm",
+          "quote": "~ 11.9 Bluetooth module ~ 3.4 SMD LED chip 390 nm ~ 2.9 SMD LED chip 470",
+          "sentence": "met, purple: not mentioned Smart optoelectronic reader components Price (€) multi-spectral sensor AS7341 ~ 11.7 AVR microcontroller ATmega328 ~ 11.9 Bluetooth module ~ 3.4 SMD LED chip 390 nm ~ 2.9 SMD LED chip 470 nm ~ 1.8 rechargeable Li-ion polymer battery ~ 4.2×2 battery charging module ~ 7.1 quartz glass ~ 2 plastic materials (ABS) ~ 0.2 Total ~49.4",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 11, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 11,
+          "note": "sentence: exact excerpt, the number sits in table or figure text rather than in a sentence"
+        },
+        {
+          "value": 470.0,
+          "unit": "nm",
+          "quote": "~ 3.4 SMD LED chip 390 nm ~ 2.9 SMD LED chip 470 nm ~ 1.8 rechargeable",
+          "sentence": "mentioned Smart optoelectronic reader components Price (€) multi-spectral sensor AS7341 ~ 11.7 AVR microcontroller ATmega328 ~ 11.9 Bluetooth module ~ 3.4 SMD LED chip 390 nm ~ 2.9 SMD LED chip 470 nm ~ 1.8 rechargeable Li-ion polymer battery ~ 4.2×2 battery charging module ~ 7.1 quartz glass ~ 2 plastic materials (ABS) ~ 0.2 Total ~49.4",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 11, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 11,
+          "note": "sentence: exact excerpt, the number sits in table or figure text rather than in a sentence"
+        }
+      ],
+      "other_papers": {
+        "n_values": 4,
+        "n_records": 3,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "reader_channel_nm": {
+      "label": "Optical channel wavelength of the reader's spectral sensor",
+      "unit": "nm",
+      "plausible_range": [
+        300,
+        1000
+      ],
+      "status": "FOUND",
+      "n": 3,
+      "median": {
+        "value": 470.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: median of the n = 3 values in parameters.reader_channel_nm.values (the device's own paper, PMID:39356285)"
+      },
+      "p10": {
+        "value": 446.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 3 values in parameters.reader_channel_nm.values (the device's own paper, PMID:39356285)"
+      },
+      "p90": {
+        "value": 502.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 3 values in parameters.reader_channel_nm.values (the device's own paper, PMID:39356285)"
+      },
+      "min": {
+        "value": 440.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: minimum of the n = 3 values in parameters.reader_channel_nm.values (the device's own paper, PMID:39356285)"
+      },
+      "max": {
+        "value": 510.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: maximum of the n = 3 values in parameters.reader_channel_nm.values (the device's own paper, PMID:39356285)"
+      },
+      "values": [
+        {
+          "value": 440.0,
+          "unit": "nm",
+          "quote": "rat skin using the developed SWTS at 440 nm, 470 nm, and 510 nm reader’s optical channels.",
+          "sentence": "Calibration curves for ex vivo fluorimetric detection of BIL in rat skin using the developed SWTS at 440 nm, 470 nm, and 510 nm reader’s optical channels.",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 9, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 9,
+          "note": "earlier item of a list that names the parameter once"
+        },
+        {
+          "value": 470.0,
+          "unit": "nm",
+          "quote": "tattoo sensor recorded at the reader’s 470 nm optical channel, which are wirelessly",
+          "sentence": "In order to quantify and calculate the ISF’s BIL concentration, the FL intensities/analytical signals (S0 and S1) of the tattoo sensor recorded at the reader’s 470 nm optical channel, which are wirelessly transmitted by the reader’s IoT module to a smartphone, are replaced in the equation of y = 35.304x - 26.04, where x is the ISF’s BIL concentration (mg dL-1) and y is the analytical signal (ΔS=(S1-S0)).",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 3, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 3
+        },
+        {
+          "value": 510.0,
+          "unit": "nm",
+          "quote": "developed SWTS at 440 nm, 470 nm, and 510 nm reader’s optical channels.",
+          "sentence": "Calibration curves for ex vivo fluorimetric detection of BIL in rat skin using the developed SWTS at 440 nm, 470 nm, and 510 nm reader’s optical channels.",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 9, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 9
+        }
+      ],
+      "other_papers": {
+        "n_values": 5,
+        "n_records": 4,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "bilirubin_lod_um": {
+      "label": "Bilirubin detection limit (molar units)",
+      "unit": "µM",
+      "plausible_range": [
+        1e-06,
+        10000.0
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 4,
+        "n_records": 4,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "bilirubin_lod_mg_dl": {
+      "label": "Bilirubin detection limit (mass units)",
+      "unit": "mg/dL",
+      "plausible_range": [
+        1e-05,
+        100
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 0.5,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.bilirubin_lod_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 0.5,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.bilirubin_lod_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 0.5,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.bilirubin_lod_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 0.5,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.bilirubin_lod_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 0.5,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.bilirubin_lod_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 0.5,
+          "unit": "mg/dL",
+          "quote": "fluorimetric/ nanotattoo-based smart wearable sensor interstitial fluid 3-20 mg dL-1 0.5 mg dL-1 Yes Yes Our sensor",
+          "sentence": "fluorimetric/ nanotattoo-based smart wearable sensor interstitial fluid 3-20 mg dL-1 0.5 mg dL-1 Yes Yes Our sensor",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 10, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 10,
+          "note": "Table S1, row 'Our sensor' (this patch): 'LOD' column"
+        }
+      ],
+      "other_papers": {
+        "n_values": 0,
+        "n_records": 0,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "bilirubin_range_low_um": {
+      "label": "Bilirubin linear range, low end",
+      "unit": "µM",
+      "plausible_range": [
+        0,
+        10000.0
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 3,
+        "n_records": 2,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "bilirubin_range_high_um": {
+      "label": "Bilirubin linear range, high end",
+      "unit": "µM",
+      "plausible_range": [
+        1e-06,
+        100000.0
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µM",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 3,
+        "n_records": 2,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "bilirubin_range_low_mg_dl": {
+      "label": "Bilirubin linear range, low end (mass units)",
+      "unit": "mg/dL",
+      "plausible_range": [
+        0,
+        100
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 3.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.bilirubin_range_low_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 3.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.bilirubin_range_low_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 3.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.bilirubin_range_low_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 3.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.bilirubin_range_low_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 3.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.bilirubin_range_low_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 3.0,
+          "unit": "mg/dL",
+          "quote": "fluorimetric/ nanotattoo-based smart wearable sensor interstitial fluid 3-20 mg dL-1 0.5 mg dL-1 Yes Yes Our sensor",
+          "sentence": "fluorimetric/ nanotattoo-based smart wearable sensor interstitial fluid 3-20 mg dL-1 0.5 mg dL-1 Yes Yes Our sensor",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 10, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 10,
+          "note": "Table S1, row 'Our sensor' (this patch): low end of the 'linear range' column"
+        }
+      ],
+      "other_papers": {
+        "n_values": 0,
+        "n_records": 0,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "bilirubin_range_high_mg_dl": {
+      "label": "Bilirubin linear range, high end (mass units)",
+      "unit": "mg/dL",
+      "plausible_range": [
+        0.0001,
+        200
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 20.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.bilirubin_range_high_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 20.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.bilirubin_range_high_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 20.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.bilirubin_range_high_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 20.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.bilirubin_range_high_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 20.0,
+        "unit": "mg/dL",
+        "source": "SpinDrift calculation from 1 record (data/literature/cqd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.bilirubin_range_high_mg_dl.values (the device's own paper, PMID:39356285); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 20.0,
+          "unit": "mg/dL",
+          "quote": "fluorimetric/ nanotattoo-based smart wearable sensor interstitial fluid 3-20 mg dL-1 0.5 mg dL-1 Yes Yes Our sensor",
+          "sentence": "fluorimetric/ nanotattoo-based smart wearable sensor interstitial fluid 3-20 mg dL-1 0.5 mg dL-1 Yes Yes Our sensor",
+          "id": "PMID:39356285",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (figshare 27153931, CC BY-NC 4.0), p. 10, https://ndownloader.figshare.com/files/49568629",
+          "year": 2024,
+          "page": 10,
+          "note": "Table S1, row 'Our sensor' (this patch): high end of the 'linear range' column"
+        }
+      ],
+      "other_papers": {
+        "n_values": 0,
+        "n_records": 0,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "quartz_window_thickness_mm": {
+      "label": "Quartz window thickness",
+      "unit": "mm",
+      "plausible_range": [
+        0.05,
+        10
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "mm",
+        "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, ACS Nano 18, 28012 (2024) (PMID:39356285)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open Supporting Information read; the main text is paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 0,
+        "n_records": 0,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    }
+  }
+}

@@ -1,0 +1,1352 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T22:09:34Z",
+    "sources": [
+      "arXiv API http://export.arxiv.org/api/query (Atom; search_query, start, max_results=1000, sortBy=submittedDate, sortOrder=ascending; one request every 3.2 s; User-Agent 'SpinDrift-literature-builder/1.0 (NASA Space Apps 2026 entry; arXiv API and NCBI E-utilities only)')",
+      "NCBI E-utilities https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi (db=pubmed, retmax=10000) and https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi (POST, rettype=medline, 400 PMIDs per request; tool=SpinDrift-literature-builder, no e-mail; at most one request every 0.4 s)",
+      "Device's own paper: Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565); abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)",
+      "arxiv query 'quantum_dot_fret': abs:\"quantum dot\" AND (abs:\"energy transfer\" OR abs:FRET)",
+      "arxiv query 'fret': abs:FRET",
+      "arxiv query 'single_molecule_fret': abs:\"single-molecule\" AND abs:FRET",
+      "arxiv query 'tirf': abs:\"total internal reflection fluorescence\" OR abs:TIRF",
+      "arxiv query 'cy5': abs:Cy5",
+      "arxiv query 'quantum_dots_bio': abs:\"quantum dots\" AND (abs:biological OR abs:imaging OR abs:biosensing OR abs:bioimaging)",
+      "arxiv query 'single_molecule_fluorescence': abs:\"single molecule\" AND abs:fluorescence",
+      "pubmed query 'quantum_dot_fret': \"quantum dot*\"[tiab] AND (FRET[tiab] OR \"fluorescence resonance energy transfer\"[tiab] OR \"Forster resonance energy transfer\"[tiab] OR \"Förster resonance energy transfer\"[tiab])",
+      "pubmed query 'protease_quantum_dot_fret': \"quantum dot*\"[tiab] AND protease*[tiab] AND (FRET[tiab] OR \"energy transfer\"[tiab])",
+      "pubmed query 'single_quantum_dot_nanosensor': \"single quantum dot\"[tiab] AND (nanosensor*[tiab] OR sensor*[tiab] OR detection[tiab])",
+      "pubmed query 'tirf_single_molecule': (TIRF[tiab] OR \"total internal reflection fluorescence\"[tiab]) AND \"single molecule*\"[tiab]",
+      "pubmed query 'tirf_penetration_depth': (TIRF[tiab] OR \"total internal reflection fluorescence\"[tiab]) AND (\"penetration depth\"[tiab] OR evanescent[tiab])",
+      "pubmed query 'cy5_fret': Cy5[tiab] AND FRET[tiab]",
+      "pubmed query 'quantum_dot_cy5': \"quantum dot*\"[tiab] AND Cy5[tiab]",
+      "pubmed query 'quantum_dot_biosensor': \"quantum dot*\"[tiab] AND (biosensor*[tiab] OR nanosensor*[tiab] OR nanoprobe*[tiab]) AND fluorescen*[tiab]",
+      "pubmed query 'forster_radius': \"Forster distance\"[tiab] OR \"Forster radius\"[tiab] OR \"Förster distance\"[tiab] OR \"Förster radius\"[tiab]",
+      "pubmed query 'streptavidin_quantum_dot': streptavidin[tiab] AND \"quantum dot*\"[tiab]",
+      "pubmed query 'renin_fluorogenic': renin[tiab] AND (\"quantum dot*\"[tiab] OR FRET[tiab] OR fluorogenic[tiab])"
+    ],
+    "about": "Hardware numbers stated in the device's own paper, each with its paper id and exact sentence. Parameters the paper does not state are NOT_FOUND. The literature harvest (official APIs only) is kept for counts: other papers' values are not written until the user asks to 'add typical'.",
+    "policy": "values only from the device's own paper (coordinator instruction, 15 Nov 2026); NOT_FOUND parameters carry value objects with status NOT_STATED and value null",
+    "own_paper": {
+      "id": "PMID:23003565",
+      "doi": "10.1021/ac302284s",
+      "paper": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012)",
+      "access": "abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)",
+      "record_in_harvest": true,
+      "full_texts": []
+    },
+    "queries": [
+      {
+        "source": "arxiv",
+        "id": "quantum_dot_fret",
+        "query": "abs:\"quantum dot\" AND (abs:\"energy transfer\" OR abs:FRET)",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 111,
+        "fetched": 111,
+        "new_unique": 111,
+        "in_corpus": 111
+      },
+      {
+        "source": "arxiv",
+        "id": "fret",
+        "query": "abs:FRET",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 249,
+        "fetched": 249,
+        "new_unique": 233,
+        "in_corpus": 248
+      },
+      {
+        "source": "arxiv",
+        "id": "single_molecule_fret",
+        "query": "abs:\"single-molecule\" AND abs:FRET",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 61,
+        "fetched": 61,
+        "new_unique": 0,
+        "in_corpus": 61
+      },
+      {
+        "source": "arxiv",
+        "id": "tirf",
+        "query": "abs:\"total internal reflection fluorescence\" OR abs:TIRF",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 48,
+        "fetched": 48,
+        "new_unique": 48,
+        "in_corpus": 48
+      },
+      {
+        "source": "arxiv",
+        "id": "cy5",
+        "query": "abs:Cy5",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 8,
+        "fetched": 8,
+        "new_unique": 5,
+        "in_corpus": 8
+      },
+      {
+        "source": "arxiv",
+        "id": "quantum_dots_bio",
+        "query": "abs:\"quantum dots\" AND (abs:biological OR abs:imaging OR abs:biosensing OR abs:bioimaging)",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 288,
+        "fetched": 288,
+        "new_unique": 273,
+        "in_corpus": 288
+      },
+      {
+        "source": "arxiv",
+        "id": "single_molecule_fluorescence",
+        "query": "abs:\"single molecule\" AND abs:fluorescence",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 375,
+        "fetched": 375,
+        "new_unique": 326,
+        "in_corpus": 375
+      },
+      {
+        "source": "pubmed",
+        "id": "quantum_dot_fret",
+        "query": "\"quantum dot*\"[tiab] AND (FRET[tiab] OR \"fluorescence resonance energy transfer\"[tiab] OR \"Forster resonance energy transfer\"[tiab] OR \"Förster resonance energy transfer\"[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 1319,
+        "fetched": 1319,
+        "records_returned_by_efetch": 1319,
+        "new_unique": 1314,
+        "in_corpus": 1319
+      },
+      {
+        "source": "pubmed",
+        "id": "protease_quantum_dot_fret",
+        "query": "\"quantum dot*\"[tiab] AND protease*[tiab] AND (FRET[tiab] OR \"energy transfer\"[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 59,
+        "fetched": 59,
+        "records_returned_by_efetch": 59,
+        "new_unique": 4,
+        "in_corpus": 59
+      },
+      {
+        "source": "pubmed",
+        "id": "single_quantum_dot_nanosensor",
+        "query": "\"single quantum dot\"[tiab] AND (nanosensor*[tiab] OR sensor*[tiab] OR detection[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 76,
+        "fetched": 76,
+        "records_returned_by_efetch": 76,
+        "new_unique": 42,
+        "in_corpus": 76
+      },
+      {
+        "source": "pubmed",
+        "id": "tirf_single_molecule",
+        "query": "(TIRF[tiab] OR \"total internal reflection fluorescence\"[tiab]) AND \"single molecule*\"[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 842,
+        "fetched": 842,
+        "records_returned_by_efetch": 842,
+        "new_unique": 834,
+        "in_corpus": 842
+      },
+      {
+        "source": "pubmed",
+        "id": "tirf_penetration_depth",
+        "query": "(TIRF[tiab] OR \"total internal reflection fluorescence\"[tiab]) AND (\"penetration depth\"[tiab] OR evanescent[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 219,
+        "fetched": 219,
+        "records_returned_by_efetch": 219,
+        "new_unique": 168,
+        "in_corpus": 219
+      },
+      {
+        "source": "pubmed",
+        "id": "cy5_fret",
+        "query": "Cy5[tiab] AND FRET[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 379,
+        "fetched": 379,
+        "records_returned_by_efetch": 379,
+        "new_unique": 306,
+        "in_corpus": 379
+      },
+      {
+        "source": "pubmed",
+        "id": "quantum_dot_cy5",
+        "query": "\"quantum dot*\"[tiab] AND Cy5[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 105,
+        "fetched": 105,
+        "records_returned_by_efetch": 105,
+        "new_unique": 35,
+        "in_corpus": 105
+      },
+      {
+        "source": "pubmed",
+        "id": "quantum_dot_biosensor",
+        "query": "\"quantum dot*\"[tiab] AND (biosensor*[tiab] OR nanosensor*[tiab] OR nanoprobe*[tiab]) AND fluorescen*[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 1543,
+        "fetched": 1543,
+        "records_returned_by_efetch": 1543,
+        "new_unique": 1279,
+        "in_corpus": 1543
+      },
+      {
+        "source": "pubmed",
+        "id": "forster_radius",
+        "query": "\"Forster distance\"[tiab] OR \"Forster radius\"[tiab] OR \"Förster distance\"[tiab] OR \"Förster radius\"[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 269,
+        "fetched": 269,
+        "records_returned_by_efetch": 269,
+        "new_unique": 227,
+        "in_corpus": 269
+      },
+      {
+        "source": "pubmed",
+        "id": "streptavidin_quantum_dot",
+        "query": "streptavidin[tiab] AND \"quantum dot*\"[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 444,
+        "fetched": 444,
+        "records_returned_by_efetch": 444,
+        "new_unique": 365,
+        "in_corpus": 444
+      },
+      {
+        "source": "pubmed",
+        "id": "renin_fluorogenic",
+        "query": "renin[tiab] AND (\"quantum dot*\"[tiab] OR FRET[tiab] OR fluorogenic[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 59,
+        "fetched": 59,
+        "records_returned_by_efetch": 59,
+        "new_unique": 58,
+        "in_corpus": 59
+      }
+    ],
+    "counts": {
+      "arxiv_records": 996,
+      "pubmed_records": 4632,
+      "merged_by_doi": 19,
+      "total_unique_records": 5628,
+      "records_with_abstract": 5620,
+      "records_read_by_the_rules": 5628,
+      "own_paper_values_written": 1,
+      "parameters_found": 1,
+      "parameters_not_found": 10,
+      "other_paper_values_not_written": 836
+    },
+    "dedup": "by arXiv id, PMID and DOI (case-insensitive); a record found again keeps its first copy",
+    "extraction": "Text is normalised (LaTeX, Unicode and MEDLINE spellings of units, √Hz, °C, ×, ±, µ) on a copy that maps back to the original, so each quote and sentence is exact (whitespace runs collapsed; a PDF line break keeps its hyphen). A number counts only when its unit and the words next to it name the parameter (RULES in scripts/build_literature.py); bounds such as 'below', 'respectively' lists, areas or volumes where a length is meant, and values outside each parameter's plausible_range are rejected. In the device's own paper both ends of a stated range are kept.",
+    "rejected_in_own_paper": {},
+    "rejected_in_harvest": {
+      "qd_emission_nm": {
+        "outside the plausible range": 14,
+        "part of a 'respectively' list": 1,
+        "a range, not a value": 1
+      },
+      "detection_limit_nm": {
+        "a range, not a value": 7,
+        "outside the plausible range": 21,
+        "part of a 'respectively' list": 29
+      },
+      "forster_radius_qd_nm": {
+        "a range, not a value": 4,
+        "outside the plausible range": 1
+      },
+      "qd_diameter_nm": {
+        "part of a 'respectively' list": 1,
+        "excluded by the words next to it": 1,
+        "a range, not a value": 5,
+        "outside the plausible range": 1
+      },
+      "fret_efficiency_pct": {
+        "part of a 'respectively' list": 2,
+        "a bound, not a value": 2,
+        "a range, not a value": 1
+      },
+      "excitation_wavelength_nm": {
+        "excluded by the words next to it": 1,
+        "a bound, not a value": 2,
+        "a range, not a value": 1,
+        "outside the plausible range": 3,
+        "part of a 'respectively' list": 1
+      },
+      "tirf_penetration_depth_nm": {
+        "a range, not a value": 2,
+        "outside the plausible range": 1
+      },
+      "forster_radius_other_nm": {
+        "outside the plausible range": 1
+      }
+    },
+    "raw_files": [
+      {
+        "file": "data/literature/raw/arxiv/qd__cy5__07108e51__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3ACy5&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "0353af889b6e810167214bf8659c233a5d206dce2c87368c59f9883e784504d0",
+        "sha256_gz": "8a7984dc705c4198a1682c6009e56a366203b517d29ea7ee38ca6775f7e6dcd5",
+        "bytes": 21347,
+        "fetched": "2026-11-15T21:06:50Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/qd__fret__2e7ffbff__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3AFRET&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "db3b352d9b7ca59a69f6189bded770727bd4b0df34eafd6b8ec1e54c4746185c",
+        "sha256_gz": "04052f285213b3238822441e4dd91a5b2db825936e9c89f52d56665685b79a79",
+        "bytes": 595849,
+        "fetched": "2026-11-15T21:06:35Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/qd__quantum_dot_fret__923c3fe0__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22quantum+dot%22+AND+%28abs%3A%22energy+transfer%22+OR+abs%3AFRET%29&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "f26111ca52d035aa73cd7355e48132191c213470a7a3c9c36848859dfe2e29ce",
+        "sha256_gz": "79c3ba7ee5e1a0d4c26fceacb8b53572cc372bd600da9bcdfd966b8ac5812733",
+        "bytes": 246470,
+        "fetched": "2026-11-15T21:06:31Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/qd__quantum_dots_bio__1a5a529b__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22quantum+dots%22+AND+%28abs%3Abiological+OR+abs%3Aimaging+OR+abs%3Abiosensing+OR+abs%3Abioimaging%29&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "b41717afa7c4414961335c99fd4caaec790ab8a450870969da2c87a92760bc1e",
+        "sha256_gz": "5b604e3137b179731f05e694cbff5a7b403a39e824496529fa489a297f41353a",
+        "bytes": 718318,
+        "fetched": "2026-11-15T21:06:55Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/qd__single_molecule_fluorescence__be61eced__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22single+molecule%22+AND+abs%3Afluorescence&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "989545709468e3ea7f67cb7c222aa2ca0df2eb96efbf3e2d91cf857b59d0893b",
+        "sha256_gz": "2ffc0d12b82634328d06b9855cf79a39231cbf73000bee32dcdc5a0044ef6f5e",
+        "bytes": 877820,
+        "fetched": "2026-11-15T21:07:01Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/qd__single_molecule_fret__232ba9ed__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22single-molecule%22+AND+abs%3AFRET&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "4399ce248cfa643576576002f52fff5bd20d2b8a8ec1152724e242dcac89156f",
+        "sha256_gz": "679827e18ea93f3181ecfbf35a0674fda9e300cef7e26c1b9f59a5a3d97c7396",
+        "bytes": 155048,
+        "fetched": "2026-11-15T21:06:40Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/qd__tirf__d0b722d3__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22total+internal+reflection+fluorescence%22+OR+abs%3ATIRF&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "65c67c616df77835de0aa485b697c73568dda85deb1043937050ee58969f6200",
+        "sha256_gz": "1585fb7c8055c0ffb8227e6d08597082a03f441fcbfdab999ea6e9743190a4a3",
+        "bytes": 126795,
+        "fetched": "2026-11-15T21:06:45Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__cy5_fret__4d76b646__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=Cy5%5Btiab%5D+AND+FRET%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "eb0d8fe50489e3a3cdd5926ddeedcbcd9719a345323d00e70d1d6138a430b167",
+        "sha256_gz": "f5b7144181051cc1db3f0c084c4f90d7ff947c8117c63b093d4fa36c2fba444f",
+        "bytes": 4523,
+        "fetched": "2026-11-15T21:07:05Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__16012-17951758__n400__d58fd242.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "16012",
+          "last": "17951758"
+        },
+        "sha256": "0ac0dccc05fddc5dbc44e09952d4f6257293d735dd8eeae9573c3389fde3d174",
+        "sha256_gz": "e12980107d980770dfd003216d1fa4a061fe1cb97a97cf154e7fba0783bab800",
+        "bytes": 1180303,
+        "fetched": "2026-11-15T21:07:11Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__17956097-20852777__n400__933b5337.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "17956097",
+          "last": "20852777"
+        },
+        "sha256": "09fbb5bcb083f8f17eabf51f22b52343f5bb0b0441e778a60b8abb46b3ff689a",
+        "sha256_gz": "6189f710b99f8ce168fb2995f3f4d481c8738a8f8f4bac0360ec7c7034542886",
+        "bytes": 1199717,
+        "fetched": "2026-11-15T21:07:14Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__20856985-23215487__n400__e59ab6e6.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "20856985",
+          "last": "23215487"
+        },
+        "sha256": "5ccaafd665655ed08bc4577ce99d65974613a49ac4c2b0f232248ff11e59817b",
+        "sha256_gz": "0be7976b143aea3a8d0c4b25d5c8f1299591e98c18d9126e98c83f2e479e1253",
+        "bytes": 1220162,
+        "fetched": "2026-11-15T21:07:16Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__23225635-25383133__n400__fa4ec4c5.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "23225635",
+          "last": "25383133"
+        },
+        "sha256": "4511cae41d0f1b648bc9dc959b159006eacb8c6fde1f1fd3c4277e2ddb92bbd1",
+        "sha256_gz": "06ad211c5e96aa8a245f912eee4965d06d7609dd222397a771bde0146f579a2c",
+        "bytes": 1355230,
+        "fetched": "2026-11-15T21:07:19Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__25383700-27474280__n400__92bd4ab6.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "25383700",
+          "last": "27474280"
+        },
+        "sha256": "ee486c80323a98921d8708adf68dce2000c39d8cfa3477be2f64069e1ab2754f",
+        "sha256_gz": "95b220f467f2c6889cb322ebd64bc669362d4783b116a5e99a3fa42798fffb43",
+        "bytes": 1533741,
+        "fetched": "2026-11-15T21:07:22Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__27476056-29641435__n400__3daccaf0.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "27476056",
+          "last": "29641435"
+        },
+        "sha256": "9e03ace4ab466220aab28afb05678fbef4cacef73cf4cdfd1f6b293b0943dc38",
+        "sha256_gz": "742ea72a5543870ba67b776d32b7475bbbf446344e85544aad78bb6379a7c83d",
+        "bytes": 1578449,
+        "fetched": "2026-11-15T21:07:25Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__29651055-31828260__n400__deebf7b0.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "29651055",
+          "last": "31828260"
+        },
+        "sha256": "a77e6b8e27b24cd170ce3fd11dd6a1c7d1ec7254fe980e4f8ae0247a5ef17f49",
+        "sha256_gz": "e8fe5a47c84d4bb5829812e85e766c27ea95e8b093cc3f89876b7be4672c2ee2",
+        "bytes": 1619051,
+        "fetched": "2026-11-15T21:07:28Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__31836924-33992893__n400__fb560e73.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "31836924",
+          "last": "33992893"
+        },
+        "sha256": "578a2eea2bf933495b47d5ebf114f949bcb9b0c493e432bce0d71aedab9c3def",
+        "sha256_gz": "3bce449c7f058b0f7886cf8578de8949fb53acc47990e522a951a3616759f27d",
+        "bytes": 1617188,
+        "fetched": "2026-11-15T21:07:31Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__34008599-36190289__n400__ac081639.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "34008599",
+          "last": "36190289"
+        },
+        "sha256": "58792b2053b49f921d4996531870d1a210bcb9c94c189c6a4f760a4391538d0c",
+        "sha256_gz": "5b0e768b80e3d69853638a1bc6ecdc3049eaef8518f0e15211423729ffa10733",
+        "bytes": 1686803,
+        "fetched": "2026-11-15T21:07:35Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__36191812-38620669__n400__41f17921.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "36191812",
+          "last": "38620669"
+        },
+        "sha256": "df959355d2394d33600f298ae52b4846d9aae4c9c94d702fbc32aa85533bef9b",
+        "sha256_gz": "97e18556ac969005f2df1895d9b73d7055cfadbfa8b3e6efd4b967b9a5a12bf2",
+        "bytes": 1710120,
+        "fetched": "2026-11-15T21:07:38Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__38623952-41483226__n400__479b575e.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "38623952",
+          "last": "41483226"
+        },
+        "sha256": "211bb4cf61b38dfc3a0c7fb63a579bd024ab11160b319b3e34e8d217c63bff66",
+        "sha256_gz": "9d4cf21ce08df43c811af1bd400202c54779196574045832bf65ebdea1f7e937",
+        "bytes": 1783623,
+        "fetched": "2026-11-15T21:07:41Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__efetch__41512980-43023006__n250__9a41a937.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 250,
+          "first": "41512980",
+          "last": "43023006"
+        },
+        "sha256": "e0e09fb7dd82d7c76d645de90782c77b50d4a13c5ec535e6e748c0edfc109f77",
+        "sha256_gz": "336f215eeff6b1a25bf621cf6b15dcecfc1985d622c19c03e3e0c1a5311db5ae",
+        "bytes": 1168395,
+        "fetched": "2026-11-15T21:07:44Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__forster_radius__8a6e8389__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22Forster+distance%22%5Btiab%5D+OR+%22Forster+radius%22%5Btiab%5D+OR+%22F%C3%B6rster+distance%22%5Btiab%5D+OR+%22F%C3%B6rster+radius%22%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "937a1768c496010a17ac54fd29d674b71258f5528c0afd6d2c298858b5d36170",
+        "sha256_gz": "2f9e0fd7ed174f3090ffb2223665ba39d76f2328d02b0a59f6d2d4eab74c83c6",
+        "bytes": 3405,
+        "fetched": "2026-11-15T21:07:07Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__protease_quantum_dot_fret__c98d0ada__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22quantum+dot%2A%22%5Btiab%5D+AND+protease%2A%5Btiab%5D+AND+%28FRET%5Btiab%5D+OR+%22energy+transfer%22%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "fa72d39755e3a606dbfa638bdfdcaec039c805f1af5a7ba7971b35c501fcf198",
+        "sha256_gz": "c28a6ce1be8317c1865cbce6038c0b0563f1a4845c4d2c6ac294d46186a0762d",
+        "bytes": 1087,
+        "fetched": "2026-11-15T21:07:02Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__quantum_dot_biosensor__eb2efe8c__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22quantum+dot%2A%22%5Btiab%5D+AND+%28biosensor%2A%5Btiab%5D+OR+nanosensor%2A%5Btiab%5D+OR+nanoprobe%2A%5Btiab%5D%29+AND+fluorescen%2A%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "8d770927c60113ca459d3d35a353da8ca1db906b80103f5ed0ea4e820d041ae2",
+        "sha256_gz": "92f40f0522022c1014c1835c4731602cc1fe9a9736951009065004afd25aaf1d",
+        "bytes": 17453,
+        "fetched": "2026-11-15T21:07:06Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__quantum_dot_cy5__57c8f12b__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22quantum+dot%2A%22%5Btiab%5D+AND+Cy5%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "082145282ef886fd237fd83dec78b78f8cf31cd9adccc3fe1d7b754f109871bc",
+        "sha256_gz": "d9aad1400dae1f1e3f45b6af35777b3d87e39894507191817f683ec7f0bdb82f",
+        "bytes": 1519,
+        "fetched": "2026-11-15T21:07:05Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__quantum_dot_fret__0c32442a__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22quantum+dot%2A%22%5Btiab%5D+AND+%28FRET%5Btiab%5D+OR+%22fluorescence+resonance+energy+transfer%22%5Btiab%5D+OR+%22Forster+resonance+energy+transfer%22%5Btiab%5D+OR+%22F%C3%B6rster+resonance+energy+transfer%22%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "6310cf2d17afe5a1abda80de88f424fe01ddc7f02c04a7bc6059c86286180b92",
+        "sha256_gz": "fb811aa955c6f3c6a8c47f272842ef6a259867549713dde40246d3c0ffb2cbd2",
+        "bytes": 15054,
+        "fetched": "2026-11-15T21:07:01Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__renin_fluorogenic__e6435bc8__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=renin%5Btiab%5D+AND+%28%22quantum+dot%2A%22%5Btiab%5D+OR+FRET%5Btiab%5D+OR+fluorogenic%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "4d5e057b6d61754be1c34a2381d94101e6a92c7ea2a576461dbe98c885ba1780",
+        "sha256_gz": "6d2a5d24f3c3fc3b43ca4bf50bd937467968a1afaef8d80820804b2a0c6e8692",
+        "bytes": 1062,
+        "fetched": "2026-11-15T21:07:08Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__single_quantum_dot_nanosensor__8176364a__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22single+quantum+dot%22%5Btiab%5D+AND+%28nanosensor%2A%5Btiab%5D+OR+sensor%2A%5Btiab%5D+OR+detection%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "342f0e9ad7f939a53968156f133daee562f2b346d2433e443264e28faa426ab6",
+        "sha256_gz": "8468fa95499c612f0e3c71d5660556337fb3708802aad493cdee74aff47e0bbe",
+        "bytes": 1278,
+        "fetched": "2026-11-15T21:07:03Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__streptavidin_quantum_dot__7a9fbd21__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=streptavidin%5Btiab%5D+AND+%22quantum+dot%2A%22%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "99bd051cdd26e20b4f41ef8af11893db706bef589a6d21775c981541c842ddec",
+        "sha256_gz": "b5141cc1ca353d28a39b8cc0e67169f2b500ca66672badc62b5ef0848550f85d",
+        "bytes": 5257,
+        "fetched": "2026-11-15T21:07:07Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__tirf_penetration_depth__fdf8438a__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28TIRF%5Btiab%5D+OR+%22total+internal+reflection+fluorescence%22%5Btiab%5D%29+AND+%28%22penetration+depth%22%5Btiab%5D+OR+evanescent%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "235fd834b05f04b2496ac6f3407e507b713be1014b18c80d32c9a4907b960587",
+        "sha256_gz": "22f079e807c32f64fd2a5c68bd11640f82385d3d77859d2f0354db70a5ebc6d0",
+        "bytes": 2863,
+        "fetched": "2026-11-15T21:07:04Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/qd__tirf_single_molecule__7d9d6b14__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28TIRF%5Btiab%5D+OR+%22total+internal+reflection+fluorescence%22%5Btiab%5D%29+AND+%22single+molecule%2A%22%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "f5008454a4a0348efef241d1b940dda5a325767106ea8af68b0963312d0764bd",
+        "sha256_gz": "21f36b324f050a2ed734ce111c4be9eaddef36a91cf7d8961e40249b73af1aaf",
+        "bytes": 9691,
+        "fetched": "2026-11-15T21:07:03Z"
+      }
+    ],
+    "raw_cache": "data/literature/raw/ (gzip of the exact response bytes; see raw/manifest.json); not in git (over 20 MB) and not in the public build"
+  },
+  "parameters": {
+    "qd_emission_nm": {
+      "label": "Quantum-dot emission wavelength (product names such as QD605 are read as their emission maximum in nm)",
+      "unit": "nm",
+      "plausible_range": [
+        400,
+        900
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 143,
+        "n_records": 97,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "qd_diameter_nm": {
+      "label": "Quantum-dot diameter (core or core/shell; not hydrodynamic)",
+      "unit": "nm",
+      "plausible_range": [
+        1,
+        30
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 13,
+        "n_records": 12,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "qd_hydrodynamic_diameter_nm": {
+      "label": "Quantum-dot hydrodynamic diameter (DLS)",
+      "unit": "nm",
+      "plausible_range": [
+        2,
+        200
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 0,
+        "n_records": 0,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "forster_radius_qd_nm": {
+      "label": "Förster radius R0, sentences that name a quantum-dot donor",
+      "unit": "nm",
+      "plausible_range": [
+        1,
+        15
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 8,
+        "n_records": 8,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "forster_radius_other_nm": {
+      "label": "Förster radius R0, other donor-acceptor pairs",
+      "unit": "nm",
+      "plausible_range": [
+        1,
+        15
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 37,
+        "n_records": 33,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "acceptor_emission_nm": {
+      "label": "Acceptor dye emission wavelength (Cy5 and others; dye noted)",
+      "unit": "nm",
+      "plausible_range": [
+        450,
+        900
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 4,
+        "n_records": 3,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "excitation_wavelength_nm": {
+      "label": "Excitation wavelength",
+      "unit": "nm",
+      "plausible_range": [
+        250,
+        1100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 52,
+        "n_records": 47,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "tirf_penetration_depth_nm": {
+      "label": "TIRF evanescent-field penetration depth",
+      "unit": "nm",
+      "plausible_range": [
+        20,
+        1000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 7,
+        "n_records": 6,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "detection_limit_nm": {
+      "label": "Detection limit (molar units)",
+      "unit": "nM",
+      "plausible_range": [
+        1e-06,
+        1000000.0
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 0.025,
+        "unit": "nM",
+        "source": "SpinDrift calculation from 1 record (data/literature/qd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.detection_limit_nm.values (the device's own paper, PMID:23003565); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 0.025,
+        "unit": "nM",
+        "source": "SpinDrift calculation from 1 record (data/literature/qd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.detection_limit_nm.values (the device's own paper, PMID:23003565); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 0.025,
+        "unit": "nM",
+        "source": "SpinDrift calculation from 1 record (data/literature/qd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.detection_limit_nm.values (the device's own paper, PMID:23003565); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 0.025,
+        "unit": "nM",
+        "source": "SpinDrift calculation from 1 record (data/literature/qd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.detection_limit_nm.values (the device's own paper, PMID:23003565); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 0.025,
+        "unit": "nM",
+        "source": "SpinDrift calculation from 1 record (data/literature/qd.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.detection_limit_nm.values (the device's own paper, PMID:23003565); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 0.025,
+          "unit": "nM",
+          "quote": "and high sensitivity with a detection limit of 25 pM.",
+          "sentence": "This single-QD-based nanosensor can measure not only the renin concentration, but also the enzymatic velocity and the Michaelis-Menten kinetic parameters, and has significant advantages of simplicity, low cost with minimum sample consumption, and high sensitivity with a detection limit of 25 pM.",
+          "id": "PMID:23003565",
+          "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012), abstract; NCBI PubMed record PMID 23003565 (abstract), https://pubmed.ncbi.nlm.nih.gov/23003565/, doi:10.1021/ac302284s",
+          "year": 2012
+        }
+      ],
+      "other_papers": {
+        "n_values": 540,
+        "n_records": 482,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "fret_efficiency_pct": {
+      "label": "FRET efficiency",
+      "unit": "%",
+      "plausible_range": [
+        0.5,
+        100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "%",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "%",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "%",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "%",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "%",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 32,
+        "n_records": 32,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "cover_glass_thickness_um": {
+      "label": "Cover glass thickness",
+      "unit": "µm",
+      "plausible_range": [
+        50,
+        2000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "µm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "µm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "µm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "µm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "µm",
+        "source": "Long, Zhang, Zhang & Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84, 8846 (2012) (PMID:23003565)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract only: the full text and Supporting Information are paywalled (pubs.acs.org)) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 0,
+        "n_records": 0,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    }
+  }
+}

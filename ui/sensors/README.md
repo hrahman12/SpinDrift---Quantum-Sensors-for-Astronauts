@@ -99,18 +99,22 @@ Undocumented, not drawn:
 
 ## CQD: carbon-dot microneedle patch, Tabatabaee et al., ACS Nano 18, 28012 (2024) (mm)
 
-**Nothing is drawn.** The needle count, shape, height, base width, pitch, patch size and backing layer are in the
-paywalled main text: pubs.acs.org returned 403 to the build, and OpenAlex and FreiDok list no open copy. The open
-Supporting Information (figshare 27153931, CC BY-NC 4.0) states none of them; its Fig. S3 shows microscope images
-with 500 µm scale bars, and sizes are not measured off images.
+**Only the reader's AS7341 package is drawn.** The needle count, shape, height, base width, pitch, patch size and
+backing layer are in the paywalled main text: pubs.acs.org returned 403 to the build, and OpenAlex and FreiDok list
+no open copy. The open Supporting Information (figshare 27153931, CC BY-NC 4.0) states none of them; its Fig. S3
+shows microscope images with 500 µm scale bars, and sizes are not measured off images.
 
-What the SI does document is kept in `cqd.json -> documented`:
+| Component | Size | Position | Source |
+|---|---|---|---|
+| AS7341 spectral sensor package | 3.1 × 2.0 × 1.0 mm (length along x, height along y, width along z) | at the origin, a display position: where it sits in the reader is not documented, and the label says so | ams-OSRAM AS7341 product page; the part is named in SI Table S3 |
+
+What else the SI documents is kept in `cqd.json -> documented` and listed with the undocumented parts:
 
 * GelMA needle material (Table S2, Fig. S3).
 * Reader parts (Table S3): AS7341 sensor, ATmega328, Bluetooth, 390/470 nm SMD LEDs, two Li-ion batteries, quartz
-  glass and ABS. The AS7341 package (3.1 × 2.0 × 1.0 mm, ams-OSRAM) is known, but its position in the reader is
-  not.
+  glass and ABS.
 * Reader channels 440/470/510 nm (Fig. S10).
 * CQD DLS 1–12 nm (Fig. S1).
 
-The module returns an empty `root` and the full `undocumented` list.
+The patch's own bilirubin numbers (SI Table S1, row "Our sensor": linear range 3-20 mg dL-1, LOD 0.5 mg dL-1) are
+in `data/literature/cqd.json` with the exact row text. They are not geometry, so nothing is drawn from them.

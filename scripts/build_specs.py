@@ -190,8 +190,15 @@ def cqd_patch():
         "reader_channels": p("440, 470, 510", "nm", CQD, "TO_CONFIRM", tc),
         "calibration_model": p("ex vivo rat skin", "", CQD, "TO_CONFIRM", tc),
         "needle_dimensions": missing("", CQD, "published_spec", "NOT_YET_EXTRACTED"),
-        "detection_limit": missing("", CQD, "published_spec", "NOT_YET_EXTRACTED"),
-        "range": missing("", CQD, "published_spec", "NOT_YET_EXTRACTED"),
+        "detection_limit": p(0.5, "mg/dL", "Tabatabaee et al. (2024), Supporting Information, Table S1, page S10, "
+                             "row 'Our sensor' (doi:10.1021/acsnano.4c06191; file nn4c06191_si_001.pdf, figshare "
+                             "27153931, read 2026-11-15)",
+                             note="LOD 0.5 mg dL-1 for bilirubin in interstitial fluid, from the same row."),
+        "range": p("3–20", "mg/dL", "Tabatabaee et al. (2024), Supporting Information, Table S1, page S10, "
+                   "row 'Our sensor' (doi:10.1021/acsnano.4c06191; file nn4c06191_si_001.pdf, figshare "
+                   "27153931, read 2026-11-15)",
+                   note="Linear range 3-20 mg dL-1 in interstitial fluid, from the same row; the calibration on "
+                        "p. S3 uses the same unit."),
         "dot_wavelengths": missing("", CQD, "published_spec", "NOT_YET_EXTRACTED"),
         "physics_label": p("carbon dots are fluorescent nanoparticles; their emission is not a spin-based quantum "
                            "measurement", "", CQD, note="general physics label, not a claim of the paper"),

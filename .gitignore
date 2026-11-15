@@ -20,3 +20,5 @@ lean/.lake/
 
 # Vercel build output (scripts/vercel_build.sh)
 public/
+# literature-builder raw API cache (scripts/build_literature.py; over 20 MB)
+data/literature/raw/

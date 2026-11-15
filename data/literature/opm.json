@@ -1,0 +1,1006 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T22:09:00Z",
+    "sources": [
+      "arXiv API http://export.arxiv.org/api/query (Atom; search_query, start, max_results=1000, sortBy=submittedDate, sortOrder=ascending; one request every 3.2 s; User-Agent 'SpinDrift-literature-builder/1.0 (NASA Space Apps 2026 entry; arXiv API and NCBI E-utilities only)')",
+      "NCBI E-utilities https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi (db=pubmed, retmax=10000) and https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi (POST, rettype=medline, 400 PMIDs per request; tool=SpinDrift-literature-builder, no e-mail; at most one request every 0.4 s)",
+      "Device's own paper: Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941); abstract and the open arXiv full text read",
+      "arxiv query 'optically_pumped_magnetometer': abs:\"optically pumped\" AND abs:magnetometer",
+      "arxiv query 'atomic_alkali_magnetometer': abs:magnetomet* AND (abs:atomic OR abs:alkali OR abs:rubidium OR abs:cesium OR abs:caesium OR abs:potassium OR abs:\"vapor cell\" OR abs:\"vapour cell\")",
+      "arxiv query 'serf': abs:SERF OR abs:\"spin-exchange relaxation-free\" OR abs:\"spin exchange relaxation free\"",
+      "arxiv query 'zero_field_magnetometer': abs:\"zero-field\" AND abs:magnetomet*",
+      "arxiv query 'vapour_cell': abs:\"vapor cell\" OR abs:\"vapour cell\" OR abs:\"vapor cells\" OR abs:\"vapour cells\"",
+      "arxiv query 'rubidium_vapour_cell': abs:rubidium AND (abs:\"vapor cell\" OR abs:\"vapour cell\")",
+      "arxiv query 'opm_meg': abs:magnetoencephalography",
+      "arxiv query 'magnetocardiography': abs:magnetocardiography",
+      "pubmed query 'optically_pumped_magnetometer': \"optically pumped\"[tiab] AND magnetomet*[tiab]",
+      "pubmed query 'opm_meg': (OPM[tiab] OR \"optically pumped\"[tiab]) AND (magnetoencephalography[tiab] OR MEG[tiab])",
+      "pubmed query 'magnetocardiography_opm': magnetocardiography[tiab] AND (\"optically pumped\"[tiab] OR OPM[tiab] OR atomic[tiab])",
+      "pubmed query 'atomic_magnetometer_serf': \"atomic magnetometer*\"[tiab] OR SERF[tiab]",
+      "pubmed query 'vapour_cell': \"vapor cell\"[tiab] OR \"vapour cell\"[tiab] OR \"vapor cells\"[tiab] OR \"vapour cells\"[tiab]"
+    ],
+    "about": "Hardware numbers stated in the device's own paper, each with its paper id and exact sentence. Parameters the paper does not state are NOT_FOUND. The literature harvest (official APIs only) is kept for counts: other papers' values are not written until the user asks to 'add typical'.",
+    "policy": "values only from the device's own paper (coordinator instruction, 15 Nov 2026); NOT_FOUND parameters carry value objects with status NOT_STATED and value null",
+    "own_paper": {
+      "id": "arXiv:2408.02941",
+      "doi": null,
+      "paper": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json)",
+      "access": "abstract and the open arXiv full text read",
+      "record_in_harvest": true,
+      "full_texts": [
+        {
+          "file": "SPINDRIFT_CACHE/sensor-parts/arxiv-2408.02941v3.pdf",
+          "url": "https://arxiv.org/pdf/2408.02941v3",
+          "label": "arXiv PDF v3",
+          "read": true,
+          "sha256": "11cc0868d007c44e030cf7230d1b468c02834a800e3b6f962752bfb8f10a1ed5",
+          "pages": 15
+        }
+      ]
+    },
+    "queries": [
+      {
+        "source": "arxiv",
+        "id": "optically_pumped_magnetometer",
+        "query": "abs:\"optically pumped\" AND abs:magnetometer",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 178,
+        "fetched": 178,
+        "new_unique": 178,
+        "in_corpus": 178
+      },
+      {
+        "source": "arxiv",
+        "id": "atomic_alkali_magnetometer",
+        "query": "abs:magnetomet* AND (abs:atomic OR abs:alkali OR abs:rubidium OR abs:cesium OR abs:caesium OR abs:potassium OR abs:\"vapor cell\" OR abs:\"vapour cell\")",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 735,
+        "fetched": 735,
+        "new_unique": 621,
+        "in_corpus": 735
+      },
+      {
+        "source": "arxiv",
+        "id": "serf",
+        "query": "abs:SERF OR abs:\"spin-exchange relaxation-free\" OR abs:\"spin exchange relaxation free\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 71,
+        "fetched": 71,
+        "new_unique": 27,
+        "in_corpus": 71
+      },
+      {
+        "source": "arxiv",
+        "id": "zero_field_magnetometer",
+        "query": "abs:\"zero-field\" AND abs:magnetomet*",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 110,
+        "fetched": 110,
+        "new_unique": 81,
+        "in_corpus": 110
+      },
+      {
+        "source": "arxiv",
+        "id": "vapour_cell",
+        "query": "abs:\"vapor cell\" OR abs:\"vapour cell\" OR abs:\"vapor cells\" OR abs:\"vapour cells\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 607,
+        "fetched": 607,
+        "new_unique": 499,
+        "in_corpus": 607
+      },
+      {
+        "source": "arxiv",
+        "id": "rubidium_vapour_cell",
+        "query": "abs:rubidium AND (abs:\"vapor cell\" OR abs:\"vapour cell\")",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 145,
+        "fetched": 145,
+        "new_unique": 0,
+        "in_corpus": 145
+      },
+      {
+        "source": "arxiv",
+        "id": "opm_meg",
+        "query": "abs:magnetoencephalography",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 235,
+        "fetched": 235,
+        "new_unique": 210,
+        "in_corpus": 235
+      },
+      {
+        "source": "arxiv",
+        "id": "magnetocardiography",
+        "query": "abs:magnetocardiography",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 23,
+        "fetched": 23,
+        "new_unique": 6,
+        "in_corpus": 23
+      },
+      {
+        "source": "pubmed",
+        "id": "optically_pumped_magnetometer",
+        "query": "\"optically pumped\"[tiab] AND magnetomet*[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 449,
+        "fetched": 449,
+        "records_returned_by_efetch": 449,
+        "new_unique": 423,
+        "in_corpus": 449
+      },
+      {
+        "source": "pubmed",
+        "id": "opm_meg",
+        "query": "(OPM[tiab] OR \"optically pumped\"[tiab]) AND (magnetoencephalography[tiab] OR MEG[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 283,
+        "fetched": 283,
+        "records_returned_by_efetch": 283,
+        "new_unique": 17,
+        "in_corpus": 283
+      },
+      {
+        "source": "pubmed",
+        "id": "magnetocardiography_opm",
+        "query": "magnetocardiography[tiab] AND (\"optically pumped\"[tiab] OR OPM[tiab] OR atomic[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 68,
+        "fetched": 68,
+        "records_returned_by_efetch": 68,
+        "new_unique": 21,
+        "in_corpus": 68
+      },
+      {
+        "source": "pubmed",
+        "id": "atomic_magnetometer_serf",
+        "query": "\"atomic magnetometer*\"[tiab] OR SERF[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 495,
+        "fetched": 495,
+        "records_returned_by_efetch": 495,
+        "new_unique": 360,
+        "in_corpus": 495
+      },
+      {
+        "source": "pubmed",
+        "id": "vapour_cell",
+        "query": "\"vapor cell\"[tiab] OR \"vapour cell\"[tiab] OR \"vapor cells\"[tiab] OR \"vapour cells\"[tiab]",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 477,
+        "fetched": 477,
+        "records_returned_by_efetch": 477,
+        "new_unique": 298,
+        "in_corpus": 477
+      }
+    ],
+    "counts": {
+      "arxiv_records": 1622,
+      "pubmed_records": 1119,
+      "merged_by_doi": 194,
+      "total_unique_records": 2741,
+      "records_with_abstract": 2714,
+      "records_read_by_the_rules": 2131,
+      "own_paper_values_written": 3,
+      "parameters_found": 3,
+      "parameters_not_found": 6,
+      "other_paper_values_not_written": 189
+    },
+    "dedup": "by arXiv id, PMID and DOI (case-insensitive); a record found again keeps its first copy",
+    "extraction": "Text is normalised (LaTeX, Unicode and MEDLINE spellings of units, √Hz, °C, ×, ±, µ) on a copy that maps back to the original, so each quote and sentence is exact (whitespace runs collapsed; a PDF line break keeps its hyphen). A number counts only when its unit and the words next to it name the parameter (RULES in scripts/build_literature.py); bounds such as 'below', 'respectively' lists, areas or volumes where a length is meant, and values outside each parameter's plausible_range are rejected. In the device's own paper both ends of a stated range are kept.",
+    "rejected_in_own_paper": {},
+    "rejected_in_harvest": {
+      "opm_sensitivity_ft": {
+        "excluded by the words next to it": 17,
+        "a range, not a value": 5,
+        "outside the plausible range": 4
+      },
+      "opm_bandwidth_hz": {
+        "excluded by the words next to it": 7,
+        "outside the plausible range": 1
+      },
+      "opm_laser_wavelength_nm": {
+        "outside the plausible range": 1
+      },
+      "opm_cell_size_mm": {
+        "an area or volume, not a length": 8
+      },
+      "opm_head_size_mm": {
+        "an area or volume, not a length": 1
+      }
+    },
+    "raw_files": [
+      {
+        "file": "data/literature/raw/arxiv/opm__atomic_alkali_magnetometer__6f1d140e__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3Amagnetomet%2A+AND+%28abs%3Aatomic+OR+abs%3Aalkali+OR+abs%3Arubidium+OR+abs%3Acesium+OR+abs%3Acaesium+OR+abs%3Apotassium+OR+abs%3A%22vapor+cell%22+OR+abs%3A%22vapour+cell%22%29&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "abc2cbb12315dc574fa4166d97e05e8d97b836317a3540a9629d750772ecb15f",
+        "sha256_gz": "424b22e0266411c1ee651c692c337b57792904276e2f980851d394743141d7cc",
+        "bytes": 1700714,
+        "fetched": "2026-11-15T21:04:48Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/opm__magnetocardiography__e818ec57__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3Amagnetocardiography&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "d83e21da04e2590bb13fcd15ae5f26d02ea2875c5222f01618e55f73c58c6824",
+        "sha256_gz": "bc84ef8a9fb79365dff48f6d3c95df7cb468619cee13210f9b9988433c4a070f",
+        "bytes": 56820,
+        "fetched": "2026-11-15T21:05:13Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/opm__opm_meg__28de78a3__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3Amagnetoencephalography&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "a2def88981309face4c922d049f57073dcf5d4dfe8b16d241ec8b5d53ab7c442",
+        "sha256_gz": "ff99ed684bd35bc7103f1279b23c070023513c9788cf0c24c49d6b65f3a594ba",
+        "bytes": 577172,
+        "fetched": "2026-11-15T21:05:08Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/opm__optically_pumped_magnetometer__c4e0cf8d__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22optically+pumped%22+AND+abs%3Amagnetometer&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "983c0d16c74a2301a1ceaf7f0d7cb39c955e9ce6bc16e56bb19ab54489ac4696",
+        "sha256_gz": "fe9bdb32fc2e9bb7ec001c3b94ad9594aee70e24c34d651dc4dccea9c97fc869",
+        "bytes": 428626,
+        "fetched": "2026-11-15T21:04:42Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/opm__rubidium_vapour_cell__50a9980b__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3Arubidium+AND+%28abs%3A%22vapor+cell%22+OR+abs%3A%22vapour+cell%22%29&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "23b025030672fd0de099e4aebed480377face2ac007acc3ad8c51d863d12a8f8",
+        "sha256_gz": "fb502d7a069eb8dc367757342a74ffa405c69a6e3ae9e5cc4b4f677eecb398e5",
+        "bytes": 311488,
+        "fetched": "2026-11-15T21:05:04Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/opm__serf__6325ffed__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3ASERF+OR+abs%3A%22spin-exchange+relaxation-free%22+OR+abs%3A%22spin+exchange+relaxation+free%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "7a70aa803b357a79ffb1794a57decb3ce12d16036af455923d62990d31776d9d",
+        "sha256_gz": "e7cae09dd90af1360e6156912c83dca64abbe25667d79eb65c4031a4d4c6f621",
+        "bytes": 153069,
+        "fetched": "2026-11-15T21:04:51Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/opm__vapour_cell__8facb11f__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22vapor+cell%22+OR+abs%3A%22vapour+cell%22+OR+abs%3A%22vapor+cells%22+OR+abs%3A%22vapour+cells%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "1028424482e0618bfcdf229567031ebcc7a0efd08413d34efada4a89faf5b3cd",
+        "sha256_gz": "1f5ff3de091cb398e013ae40822e9c4de855e55f979fa7c4f7ee209d8167afc1",
+        "bytes": 1315233,
+        "fetched": "2026-11-15T21:05:00Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/opm__zero_field_magnetometer__25a126ae__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22zero-field%22+AND+abs%3Amagnetomet%2A&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "a7824308c20e579163d8aa925df3e7da117dbd6c983f7d5eb9d4bbd52742b9d4",
+        "sha256_gz": "a45672107c401f2c82201fbc2439d463f97f877cae3c9ce300bd0dff0255cc8a",
+        "bytes": 277285,
+        "fetched": "2026-11-15T21:04:55Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__atomic_magnetometer_serf__52b0b980__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22atomic+magnetometer%2A%22%5Btiab%5D+OR+SERF%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "da1e6b861184d84047061b5c9a662ba84d14eb0b83c75485decda04e1c55b803",
+        "sha256_gz": "07a77726b1d4ccc9d426e3e43e81c42f02c924654da4a12b9b6ad4cc5aa99e61",
+        "bytes": 5813,
+        "fetched": "2026-11-15T21:05:15Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__efetch__2054299-29035875__n400__955f35cf.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "2054299",
+          "last": "29035875"
+        },
+        "sha256": "4a2a4bf438c2443a56dda3b0456334dfcc8dc56dc980ef321b0fef2e5f319e47",
+        "sha256_gz": "5da918cfbed11d3759d2ed3b8594ad1c99d1c2950c3a3d00e7b1dd1534326098",
+        "bytes": 899281,
+        "fetched": "2026-11-15T21:05:19Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__efetch__29041560-37015668__n400__fad4b888.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "29041560",
+          "last": "37015668"
+        },
+        "sha256": "3b0eca37597c841704d116487dde672b03f1b048de01125b65c42cd0fab875f7",
+        "sha256_gz": "b46c7b20dfd7338890e9e7a438582d695a60c9e94e5051d6e1b3915c1fd06382",
+        "bytes": 1374948,
+        "fetched": "2026-11-15T21:05:21Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__efetch__37040782-41935746__n400__ac053674.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "37040782",
+          "last": "41935746"
+        },
+        "sha256": "5c4711cb7ab67c5d6f3a0205dc1a9bdd9e2bce62ce9637322fb060e0ecc6a266",
+        "sha256_gz": "8dd24c15dc582006867ef60c657393905dbd22746a7142c620fe300ebe2630c6",
+        "bytes": 1744325,
+        "fetched": "2026-11-15T21:05:24Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__efetch__41946814-43009203__n113__a925048d.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 113,
+          "first": "41946814",
+          "last": "43009203"
+        },
+        "sha256": "815b5777f0225a275f89491de36be704a644e9b672bda347f83079bc833f5743",
+        "sha256_gz": "d2c5710f8314a0ba2e05f0d2ddb459de09b9143e1ea1607c59bfdb3f3b84f187",
+        "bytes": 565158,
+        "fetched": "2026-11-15T21:05:26Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__magnetocardiography_opm__59b91501__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=magnetocardiography%5Btiab%5D+AND+%28%22optically+pumped%22%5Btiab%5D+OR+OPM%5Btiab%5D+OR+atomic%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "273bb0541b6b788958cc81b61eb81af7bbe1b53a5e313bbde960cdda5394fb83",
+        "sha256_gz": "4091a4f0cede0f26433d0402c4ea68400fe02e7994b4466bfb45fe08f3158a66",
+        "bytes": 1189,
+        "fetched": "2026-11-15T21:05:15Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__opm_meg__b1eae147__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28OPM%5Btiab%5D+OR+%22optically+pumped%22%5Btiab%5D%29+AND+%28magnetoencephalography%5Btiab%5D+OR+MEG%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "3e7fd6fc12a92e8e1dbe8a436008b4b6fa4e17450875038b524d22170059135e",
+        "sha256_gz": "6f6e34dc83087ea5355e5917afdcf9712e13771516e4a9fa739eeddfe03fcf4c",
+        "bytes": 3558,
+        "fetched": "2026-11-15T21:05:14Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__optically_pumped_magnetometer__0ccf1c46__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22optically+pumped%22%5Btiab%5D+AND+magnetomet%2A%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "58c276f4e2a4d1dfc59cc6e2a9d2f9714d8ad2f310b6ac2a21f6159f80294d9f",
+        "sha256_gz": "65352f210d542084556b030ef4ef2874fee67ed28cb575de026a25f21d1e660e",
+        "bytes": 5315,
+        "fetched": "2026-11-15T21:05:13Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/opm__vapour_cell__f2f328b6__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22vapor+cell%22%5Btiab%5D+OR+%22vapour+cell%22%5Btiab%5D+OR+%22vapor+cells%22%5Btiab%5D+OR+%22vapour+cells%22%5Btiab%5D&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "a12d2a0c1e52415d6b2320da3c0fe190f127c1727ff44255a821374fb6ed4372",
+        "sha256_gz": "b4835d5e394ad227306a2328a98ea714c4cbaebe1e739b5988b92ff53098b7e7",
+        "bytes": 5669,
+        "fetched": "2026-11-15T21:05:16Z"
+      }
+    ],
+    "raw_cache": "data/literature/raw/ (gzip of the exact response bytes; see raw/manifest.json); not in git (over 20 MB) and not in the public build"
+  },
+  "parameters": {
+    "opm_cell_size_mm": {
+      "label": "Vapour cell size: the largest stated edge, length or diameter",
+      "unit": "mm",
+      "plausible_range": [
+        0.1,
+        100
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 3.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.opm_cell_size_mm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 3.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.opm_cell_size_mm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 3.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.opm_cell_size_mm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 3.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.opm_cell_size_mm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 3.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.opm_cell_size_mm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 3.0,
+          "unit": "mm",
+          "quote": "optics reflects the light into a 3 × 3 × 3 mm cell containing 87Rb vapor",
+          "sentence": "Internal optics reflects the light into a 3 × 3 × 3 mm cell containing 87Rb vapor heated to approximately 150 ◦C.",
+          "id": "arXiv:2408.02941",
+          "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json), arXiv PDF v3, p. 3, https://arxiv.org/pdf/2408.02941v3",
+          "year": 2024,
+          "page": 3,
+          "note": "largest of the stated dimensions 3 × 3 × 3 mm"
+        }
+      ],
+      "other_papers": {
+        "n_values": 18,
+        "n_records": 18,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "opm_cell_temperature_c": {
+      "label": "Vapour cell operating temperature",
+      "unit": "°C",
+      "plausible_range": [
+        15,
+        300
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 150.0,
+        "unit": "°C",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.opm_cell_temperature_c.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 150.0,
+        "unit": "°C",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.opm_cell_temperature_c.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 150.0,
+        "unit": "°C",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.opm_cell_temperature_c.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 150.0,
+        "unit": "°C",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.opm_cell_temperature_c.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 150.0,
+        "unit": "°C",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.opm_cell_temperature_c.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 150.0,
+          "unit": "°C",
+          "quote": "a 3 × 3 × 3 mm cell containing 87Rb vapor heated to approximately 150 ◦C.",
+          "sentence": "Internal optics reflects the light into a 3 × 3 × 3 mm cell containing 87Rb vapor heated to approximately 150 ◦C.",
+          "id": "arXiv:2408.02941",
+          "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json), arXiv PDF v3, p. 3, https://arxiv.org/pdf/2408.02941v3",
+          "year": 2024,
+          "page": 3
+        }
+      ],
+      "other_papers": {
+        "n_values": 8,
+        "n_records": 8,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "opm_laser_wavelength_nm": {
+      "label": "Pump or probe laser wavelength",
+      "unit": "nm",
+      "plausible_range": [
+        300,
+        2000
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 795.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.opm_laser_wavelength_nm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 795.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.opm_laser_wavelength_nm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 795.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.opm_laser_wavelength_nm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 795.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.opm_laser_wavelength_nm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 795.0,
+        "unit": "nm",
+        "source": "SpinDrift calculation from 1 record (data/literature/opm.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.opm_laser_wavelength_nm.values (the device's own paper, arXiv:2408.02941); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 795.0,
+          "unit": "nm",
+          "quote": "of a QZFM is a circularly polarized 795 nm laser resonant with the D1 transition",
+          "sentence": "Background At the heart of a QZFM is a circularly polarized 795 nm laser resonant with the D1 transition of 87Rb.",
+          "id": "arXiv:2408.02941",
+          "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json), arXiv PDF v3, p. 3, https://arxiv.org/pdf/2408.02941v3",
+          "year": 2024,
+          "page": 3
+        }
+      ],
+      "other_papers": {
+        "n_values": 16,
+        "n_records": 15,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "opm_sensitivity_ft": {
+      "label": "Magnetic sensitivity (noise floor) of the magnetometer",
+      "unit": "fT/√Hz",
+      "plausible_range": [
+        0.01,
+        100000.0
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "fT/√Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "fT/√Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "fT/√Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "fT/√Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "fT/√Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 105,
+        "n_records": 96,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "opm_bandwidth_hz": {
+      "label": "Magnetometer bandwidth (upper end when a band is given)",
+      "unit": "Hz",
+      "plausible_range": [
+        0.5,
+        1000000.0
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "Hz",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 31,
+        "n_records": 28,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "opm_head_size_mm": {
+      "label": "Sensor head size: the largest stated outer dimension",
+      "unit": "mm",
+      "plausible_range": [
+        3,
+        300
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "mm",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "mm",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "mm",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "mm",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "mm",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 3,
+        "n_records": 3,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "opm_power_consumption_w": {
+      "label": "Electrical power consumption (or heater power)",
+      "unit": "W",
+      "plausible_range": [
+        0.001,
+        100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "W",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "W",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "W",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "W",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "W",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 3,
+        "n_records": 3,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "opm_laser_power_mw": {
+      "label": "Pump or probe laser power",
+      "unit": "mW",
+      "plausible_range": [
+        0.0001,
+        10000.0
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "mW",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "mW",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "mW",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "mW",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "mW",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 2,
+        "n_records": 2,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "opm_dynamic_range_nt": {
+      "label": "Dynamic range (a value written ±X is kept as X)",
+      "unit": "nT",
+      "plausible_range": [
+        0.05,
+        10000000.0
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nT",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nT",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nT",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nT",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nT",
+        "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941 (the QuSpin QZFM paper used by data/sensor_parts/opm.json) (arXiv:2408.02941)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 3,
+        "n_records": 3,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    }
+  }
+}

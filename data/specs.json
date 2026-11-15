@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T10:16:35Z",
+    "generated_at": "2026-11-15T22:13:19Z",
     "sources": [
       "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
       "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
@@ -696,22 +696,22 @@
       "note": null
     },
     "detection_limit": {
-      "value": null,
-      "unit": "",
-      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "value": 0.5,
+      "unit": "mg/dL",
+      "source": "Tabatabaee et al. (2024), Supporting Information, Table S1, page S10, row 'Our sensor' (doi:10.1021/acsnano.4c06191; file nn4c06191_si_001.pdf, figshare 27153931, read 2026-11-15)",
       "tag": "published_spec",
-      "status": "NOT_YET_EXTRACTED",
+      "status": "VERIFIED",
       "as_of": null,
-      "note": null
+      "note": "LOD 0.5 mg dL-1 for bilirubin in interstitial fluid, from the same row."
     },
     "range": {
-      "value": null,
-      "unit": "",
-      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "value": "3–20",
+      "unit": "mg/dL",
+      "source": "Tabatabaee et al. (2024), Supporting Information, Table S1, page S10, row 'Our sensor' (doi:10.1021/acsnano.4c06191; file nn4c06191_si_001.pdf, figshare 27153931, read 2026-11-15)",
       "tag": "published_spec",
-      "status": "NOT_YET_EXTRACTED",
+      "status": "VERIFIED",
       "as_of": null,
-      "note": null
+      "note": "Linear range 3-20 mg dL-1 in interstitial fluid, from the same row; the calibration on p. S3 uses the same unit."
     },
     "dot_wavelengths": {
       "value": null,

@@ -1,0 +1,74 @@
+{
+  "name": "opm_795_bench",
+  "description": "Brain OPM optical bench at the Rb-87 D1 line (795 nm). Circular light crosses a 3 mm Rb vapour cell and a PBS sends the two polarisations to a balanced pair of photodiodes. Traced by BEAMTEAM; not a built device.",
+  "baseplate": {
+    "width_mm": 300.0,
+    "height_mm": 150.0,
+    "thickness_mm": 25.4,
+    "optical_height_mm": 12.7,
+    "grid_mm": 25.4
+  },
+  "sources": [
+    {
+      "id": "L1",
+      "label": "795 nm laser (Rb-87 D1 line, as in the QZFM source)",
+      "part_number": null,
+      "position": [30.0, 60.0],
+      "direction_deg": 0.0,
+      "wavelength_nm": 795.0,
+      "power_mw": 10.0,
+      "waist_mm": 0.5,
+      "polarization": "H"
+    }
+  ],
+  "elements": [
+    {
+      "id": "QWP1",
+      "type": "quarter_wave_plate",
+      "label": "Circular polarization, lambda/4 at 45 deg",
+      "part_number": null,
+      "beam": "L1",
+      "distance_mm": 30.0,
+      "fast_axis_deg": 45.0
+    },
+    {
+      "id": "CELL1",
+      "type": "vapor_cell",
+      "label": "Rb-87 vapour cell, 3 x 3 x 3 mm",
+      "part_number": null,
+      "beam": "L1",
+      "distance_mm": 60.0,
+      "aperture_mm": 3.0
+    },
+    {
+      "id": "PBS1",
+      "type": "pbs",
+      "label": "Analyser PBS: H to arm H, V to arm V",
+      "part_number": "PBS052",
+      "beam": "L1",
+      "distance_mm": 60.0,
+      "out_direction_deg": 90.0
+    },
+    {
+      "id": "PD_H",
+      "type": "photodiode",
+      "label": "Balanced arm H",
+      "part_number": "PDA36A2",
+      "beam": "L1.t",
+      "distance_mm": 40.0
+    },
+    {
+      "id": "PD_V",
+      "type": "photodiode",
+      "label": "Balanced arm V",
+      "part_number": "PDA36A2",
+      "beam": "L1.r",
+      "distance_mm": 40.0
+    }
+  ],
+  "targets": [
+    {"element_id": "PD_H", "kind": "min_power_mw", "value": 0.1},
+    {"element_id": "PD_V", "kind": "min_power_mw", "value": 0.1}
+  ],
+  "notes": "BEAMTEAM traces the beam path and power only. It does not model Faraday rotation, the magnetic signal or cell absorption; those come from the Lean-checked sensor model and the QZFM paper (arXiv 2408.02941). Laser power (10 mW), waist (0.5 mm) and the 0.1 mW targets are design choices, not sourced. Element spacing is 40 mm or more so the mounts do not overlap the beam or each other. Part numbers left null (laser, waveplate, cell) need vendor parts before the BOM is final. PBS052 and PDA36A2 are the parts used in BEAMTEAM's rb_sas example."
+}

@@ -1,0 +1,1196 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T22:09:11Z",
+    "sources": [
+      "arXiv API http://export.arxiv.org/api/query (Atom; search_query, start, max_results=1000, sortBy=submittedDate, sortOrder=ascending; one request every 3.2 s; User-Agent 'SpinDrift-literature-builder/1.0 (NASA Space Apps 2026 entry; arXiv API and NCBI E-utilities only)')",
+      "NCBI E-utilities https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi (db=pubmed, retmax=10000) and https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi (POST, rettype=medline, 400 PMIDs per request; tool=SpinDrift-literature-builder, no e-mail; at most one request every 0.4 s)",
+      "Device's own paper: Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843); abstract and the open arXiv full text read",
+      "arxiv query 'nitrogen_vacancy': abs:\"nitrogen-vacancy\"",
+      "arxiv query 'nv_centre': abs:\"NV center\" OR abs:\"NV centers\" OR abs:\"NV centre\" OR abs:\"NV centres\"",
+      "arxiv query 'nv_ensemble': abs:\"NV ensemble\" OR abs:\"NV ensembles\" OR abs:\"ensemble of NV\"",
+      "arxiv query 'diamond_magnetometry': abs:\"diamond magnetometer\" OR abs:\"diamond magnetometry\" OR abs:\"diamond magnetometers\"",
+      "arxiv query 'magnetometry_nv_diamond': abs:magnetomet* AND (abs:\"nitrogen-vacancy\" OR abs:NV OR abs:diamond)",
+      "arxiv query 'odmr': abs:ODMR OR abs:\"optically detected magnetic resonance\"",
+      "arxiv query 'magnetocardiography_diamond': abs:magnetocardiography AND abs:diamond",
+      "pubmed query 'nitrogen_vacancy_sensing': nitrogen-vacancy[tiab] AND (magnetometry[tiab] OR magnetometer*[tiab] OR sensing[tiab])",
+      "pubmed query 'diamond_magnetometry': diamond[tiab] AND (magnetometry[tiab] OR magnetometer*[tiab])"
+    ],
+    "about": "Hardware numbers stated in the device's own paper, each with its paper id and exact sentence. Parameters the paper does not state are NOT_FOUND. The literature harvest (official APIs only) is kept for counts: other papers' values are not written until the user asks to 'add typical'.",
+    "policy": "values only from the device's own paper (coordinator instruction, 15 Nov 2026); NOT_FOUND parameters carry value objects with status NOT_STATED and value null",
+    "own_paper": {
+      "id": "arXiv:2601.18843",
+      "doi": null,
+      "paper": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0)",
+      "access": "abstract and the open arXiv full text read",
+      "record_in_harvest": true,
+      "full_texts": [
+        {
+          "file": "SPINDRIFT_CACHE/sensor-parts/arxiv-2601.18843v1.pdf",
+          "url": "https://arxiv.org/pdf/2601.18843v1",
+          "label": "arXiv PDF v1",
+          "read": true,
+          "sha256": "a04de181c0a91f6ac6f7bf02a0ee97ab3b957292bac636e6e315e519218824c5",
+          "pages": 21
+        }
+      ]
+    },
+    "queries": [
+      {
+        "source": "arxiv",
+        "id": "nitrogen_vacancy",
+        "query": "abs:\"nitrogen-vacancy\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 2722,
+        "fetched": 2722,
+        "new_unique": 2720,
+        "in_corpus": 2720
+      },
+      {
+        "source": "arxiv",
+        "id": "nv_centre",
+        "query": "abs:\"NV center\" OR abs:\"NV centers\" OR abs:\"NV centre\" OR abs:\"NV centres\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 1770,
+        "fetched": 1770,
+        "new_unique": 343,
+        "in_corpus": 1769
+      },
+      {
+        "source": "arxiv",
+        "id": "nv_ensemble",
+        "query": "abs:\"NV ensemble\" OR abs:\"NV ensembles\" OR abs:\"ensemble of NV\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 173,
+        "fetched": 173,
+        "new_unique": 3,
+        "in_corpus": 173
+      },
+      {
+        "source": "arxiv",
+        "id": "diamond_magnetometry",
+        "query": "abs:\"diamond magnetometer\" OR abs:\"diamond magnetometry\" OR abs:\"diamond magnetometers\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 43,
+        "fetched": 43,
+        "new_unique": 15,
+        "in_corpus": 43
+      },
+      {
+        "source": "arxiv",
+        "id": "magnetometry_nv_diamond",
+        "query": "abs:magnetomet* AND (abs:\"nitrogen-vacancy\" OR abs:NV OR abs:diamond)",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 560,
+        "fetched": 560,
+        "new_unique": 45,
+        "in_corpus": 560
+      },
+      {
+        "source": "arxiv",
+        "id": "odmr",
+        "query": "abs:ODMR OR abs:\"optically detected magnetic resonance\"",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 431,
+        "fetched": 431,
+        "new_unique": 172,
+        "in_corpus": 430
+      },
+      {
+        "source": "arxiv",
+        "id": "magnetocardiography_diamond",
+        "query": "abs:magnetocardiography AND abs:diamond",
+        "endpoint": "http://export.arxiv.org/api/query",
+        "reported_total": 4,
+        "fetched": 4,
+        "new_unique": 0,
+        "in_corpus": 4
+      },
+      {
+        "source": "pubmed",
+        "id": "nitrogen_vacancy_sensing",
+        "query": "nitrogen-vacancy[tiab] AND (magnetometry[tiab] OR magnetometer*[tiab] OR sensing[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 723,
+        "fetched": 723,
+        "records_returned_by_efetch": 723,
+        "new_unique": 461,
+        "in_corpus": 723
+      },
+      {
+        "source": "pubmed",
+        "id": "diamond_magnetometry",
+        "query": "diamond[tiab] AND (magnetometry[tiab] OR magnetometer*[tiab])",
+        "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        "reported_total": 248,
+        "fetched": 248,
+        "records_returned_by_efetch": 248,
+        "new_unique": 19,
+        "in_corpus": 248
+      }
+    ],
+    "counts": {
+      "arxiv_records": 3298,
+      "pubmed_records": 480,
+      "merged_by_doi": 279,
+      "total_unique_records": 3778,
+      "records_with_abstract": 3778,
+      "records_read_by_the_rules": 3576,
+      "own_paper_values_written": 14,
+      "parameters_found": 9,
+      "parameters_not_found": 2,
+      "other_paper_values_not_written": 187
+    },
+    "dedup": "by arXiv id, PMID and DOI (case-insensitive); a record found again keeps its first copy",
+    "extraction": "Text is normalised (LaTeX, Unicode and MEDLINE spellings of units, √Hz, °C, ×, ±, µ) on a copy that maps back to the original, so each quote and sentence is exact (whitespace runs collapsed; a PDF line break keeps its hyphen). A number counts only when its unit and the words next to it name the parameter (RULES in scripts/build_literature.py); bounds such as 'below', 'respectively' lists, areas or volumes where a length is meant, and values outside each parameter's plausible_range are rejected. In the device's own paper both ends of a stated range are kept.",
+    "rejected_in_own_paper": {
+      "nv_sensitivity_pt": {
+        "excluded by the words next to it": 2,
+        "cited from another paper (a reference follows the number)": 1
+      },
+      "nv_mw_frequency_ghz": {
+        "outside the plausible range": 3
+      }
+    },
+    "rejected_in_harvest": {
+      "nv_diamond_size_mm": {
+        "outside the plausible range": 11,
+        "a bound, not a value": 1,
+        "an area or volume, not a length": 1,
+        "excluded by the words next to it": 1
+      },
+      "nv_sensitivity_pt": {
+        "excluded by the words next to it": 20,
+        "a range, not a value": 3,
+        "outside the plausible range": 1
+      },
+      "nv_laser_wavelength_nm": {
+        "a range, not a value": 2,
+        "a bound, not a value": 4,
+        "outside the plausible range": 2
+      },
+      "nv_mw_frequency_ghz": {
+        "outside the plausible range": 27,
+        "a range, not a value": 10,
+        "part of a 'respectively' list": 1,
+        "excluded by the words next to it": 11
+      },
+      "nv_bias_field_mt": {
+        "outside the plausible range": 1,
+        "a range, not a value": 1
+      },
+      "nv_diamond_thickness_mm": {
+        "outside the plausible range": 1
+      },
+      "nv_nitrogen_ppm": {
+        "a range, not a value": 2,
+        "a bound, not a value": 1
+      },
+      "nv_laser_power_mw": {
+        "a bound, not a value": 2,
+        "excluded by the words next to it": 3
+      },
+      "nv_density_ppm": {
+        "a range, not a value": 1
+      },
+      "nv_standoff_mm": {
+        "a range, not a value": 1
+      }
+    },
+    "raw_files": [
+      {
+        "file": "data/literature/raw/arxiv/nv__diamond_magnetometry__2c6f970a__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22diamond+magnetometer%22+OR+abs%3A%22diamond+magnetometry%22+OR+abs%3A%22diamond+magnetometers%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "ab76d86f52eb5844e4d52ec7f44607d5bf39c077ae48fce26b632a38806b4b1a",
+        "sha256_gz": "86cbf388627a7bea76698f68ea1d61da682e204e186342a23a9a5ce25bf8f6d8",
+        "bytes": 108688,
+        "fetched": "2026-11-15T21:06:07Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__magnetocardiography_diamond__9fe34fdf__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3Amagnetocardiography+AND+abs%3Adiamond&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "d4c8e3f153b1eb7ab1edb76bd5d2e10b0381d8ca0b876e384a65c53d9c2a77d1",
+        "sha256_gz": "4776cfd5b5f5ad8ccd96d51602d29c87d00706285104cc6543a4170580f813f4",
+        "bytes": 12989,
+        "fetched": "2026-11-15T21:06:22Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__magnetometry_nv_diamond__30bdc52e__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3Amagnetomet%2A+AND+%28abs%3A%22nitrogen-vacancy%22+OR+abs%3ANV+OR+abs%3Adiamond%29&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "ce466c90e36003bca8c60a0cc723990ec29596d4cc339af5202be6f841c57b9f",
+        "sha256_gz": "0528b1590a6ba24db4015308317b8f093dcb54dd0f8536a9f12902523b381b2a",
+        "bytes": 1374131,
+        "fetched": "2026-11-15T21:06:13Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__nitrogen_vacancy__3ee9a729__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22nitrogen-vacancy%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "556474eae515d9d829db5424b5772dca21b3fb74309481d157fcb9069a839016",
+        "sha256_gz": "89a76099f767aec715c105b33c8fb72f0d708104c715ad9597977449c1c86240",
+        "bytes": 2212340,
+        "fetched": "2026-11-15T21:05:30Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__nitrogen_vacancy__3ee9a729__start01000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22nitrogen-vacancy%22&start=1000&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "2fa0298e65ac198aecfaa705f038c95045690cf07a139c2e97196e43ba44c36c",
+        "sha256_gz": "642c3aa3db17df420c059c91a88d8a7a4a6c0506030dda6dee603f181c8dfd2c",
+        "bytes": 2410689,
+        "fetched": "2026-11-15T21:05:37Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__nitrogen_vacancy__3ee9a729__start02000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22nitrogen-vacancy%22&start=2000&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "b7054dea10a643f5359aee228d9f63e7c21b8d8ce3e557b8da09c493c403287b",
+        "sha256_gz": "774a251ca96d03a0050079c9fcfc6e48806411cfd3571db7916b887c66e54e69",
+        "bytes": 1772229,
+        "fetched": "2026-11-15T21:05:43Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__nv_centre__01b44fe9__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22NV+center%22+OR+abs%3A%22NV+centers%22+OR+abs%3A%22NV+centre%22+OR+abs%3A%22NV+centres%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "8964ec38904738cf0c0474afe84cea78f0120edd9c1cbec3ce3773e50af1993b",
+        "sha256_gz": "fa2776c89cb4dfbeb17c1fb2c4190ebab1e1c776de3c997931cb03f19e8cbed0",
+        "bytes": 2305595,
+        "fetched": "2026-11-15T21:05:50Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__nv_centre__01b44fe9__start01000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22NV+center%22+OR+abs%3A%22NV+centers%22+OR+abs%3A%22NV+centre%22+OR+abs%3A%22NV+centres%22&start=1000&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "ad9873e4ccc2324db61cfcec2421c78df9e547c1a7923fe7b77461eb1930ee5f",
+        "sha256_gz": "64514370c2c34211fc0bc65281e4ce2c8ba345924d37d80f72963d3ee435676a",
+        "bytes": 1866890,
+        "fetched": "2026-11-15T21:05:57Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__nv_ensemble__9dbf8984__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3A%22NV+ensemble%22+OR+abs%3A%22NV+ensembles%22+OR+abs%3A%22ensemble+of+NV%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "c0167ed815b2bf8c469a31e9cd1659e209dbe4030e408914901254fb77ef46e1",
+        "sha256_gz": "cf9abed801f277eb1624b047bae491a4e8bc7c454b1e24a5dde9818f4260262e",
+        "bytes": 422497,
+        "fetched": "2026-11-15T21:06:01Z"
+      },
+      {
+        "file": "data/literature/raw/arxiv/nv__odmr__cdd27607__start00000.atom.xml.gz",
+        "service": "arXiv API",
+        "method": "GET",
+        "url": "http://export.arxiv.org/api/query?search_query=abs%3AODMR+OR+abs%3A%22optically+detected+magnetic+resonance%22&start=0&max_results=1000&sortBy=submittedDate&sortOrder=ascending",
+        "pmids": null,
+        "sha256": "18160ad1f069b236699d46a1dc4b34199e680736c0ee4715acc3eabf4ab696f0",
+        "sha256_gz": "c079ad2030d2157ce4e9cc16b6a362c498937846625a6380cc00154bedb28e20",
+        "bytes": 1075853,
+        "fetched": "2026-11-15T21:06:18Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/nv__diamond_magnetometry__0c431db6__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=diamond%5Btiab%5D+AND+%28magnetometry%5Btiab%5D+OR+magnetometer%2A%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "93f6d78193b027d7b44843f0f7608153815ae9b029a95e452c22f97c9dc36d34",
+        "sha256_gz": "0982a21ca2e277d6c9adad1e02ec09a159866a0ed48dc4ddfb667834d68b6ea5",
+        "bytes": 3135,
+        "fetched": "2026-11-15T21:06:23Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/nv__efetch__15269763-36630151__n400__8c693138.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 400,
+          "first": "15269763",
+          "last": "36630151"
+        },
+        "sha256": "1721594e34e01e125ea7c48faa2527e96a68720db6dbe03a509ba0862497d449",
+        "sha256_gz": "9d2990e0f6f48de20ee547cabf2d0071716e45afbfab12e06304f801a3e0199b",
+        "bytes": 1426136,
+        "fetched": "2026-11-15T21:06:26Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/nv__efetch__36638251-43025541__n357__44e06c7c.medline.txt.gz",
+        "service": "NCBI E-utilities efetch",
+        "method": "POST",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+        "pmids": {
+          "n": 357,
+          "first": "36638251",
+          "last": "43025541"
+        },
+        "sha256": "a92c69df5259f8cac461a6dcfbb9f9ebadcb5204f316b31d69b90b0c3acfe6af",
+        "sha256_gz": "5885babcc3601ce0ccdbe17ca14ea6d2b66c46cb05e66778096050ce8eb5b85d",
+        "bytes": 1554829,
+        "fetched": "2026-11-15T21:06:30Z"
+      },
+      {
+        "file": "data/literature/raw/pubmed/nv__nitrogen_vacancy_sensing__33da2b56__esearch.json.gz",
+        "service": "NCBI E-utilities esearch",
+        "method": "GET",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=nitrogen-vacancy%5Btiab%5D+AND+%28magnetometry%5Btiab%5D+OR+magnetometer%2A%5Btiab%5D+OR+sensing%5Btiab%5D%29&retmax=10000&retmode=json&tool=SpinDrift-literature-builder",
+        "pmids": null,
+        "sha256": "5abda248c469739686fad27c51f62c0db2f97981bdadd3f17f4c5f0610cf698b",
+        "sha256_gz": "a3ccefa18ad070a855fc5b1181d06c36c21e4eb9500adfd38b0fd4f8b134d17a",
+        "bytes": 8400,
+        "fetched": "2026-11-15T21:06:22Z"
+      }
+    ],
+    "raw_cache": "data/literature/raw/ (gzip of the exact response bytes; see raw/manifest.json); not in git (over 20 MB) and not in the public build"
+  },
+  "parameters": {
+    "nv_diamond_size_mm": {
+      "label": "Diamond size: the largest stated edge",
+      "unit": "mm",
+      "plausible_range": [
+        0.01,
+        30
+      ],
+      "status": "FOUND",
+      "n": 2,
+      "median": {
+        "value": 0.75,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 2 values in parameters.nv_diamond_size_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 0.55,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 2 values in parameters.nv_diamond_size_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 0.95,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 2 values in parameters.nv_diamond_size_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 0.5,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 2 values in parameters.nv_diamond_size_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 1.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 2 values in parameters.nv_diamond_size_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 0.5,
+          "unit": "mm",
+          "quote": "Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3",
+          "sentence": "Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 15, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 15,
+          "note": "Table 2 (p. 15), row 'Diamond dimension (w x l x h)', column JGU: largest of w × l × h; also Table 2 (p. 15), row 'Diamond dimension (w x l x h)', column ZAQuant: largest of w × l × h: 'Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3'"
+        },
+        {
+          "value": 1.0,
+          "unit": "mm",
+          "quote": "control, microwave generation, and a diamond (1 mm × 1 mm × 500 µm) with a truncated",
+          "sentence": "The sensor system integrates an field-programmable gate array (FPGA) for control, microwave generation, and a diamond (1 mm × 1 mm × 500 µm) with a truncated pyramid geometry containing approximately 1.7 ppm NV–, as determined by electron paramagnetic resonance (EPR) spectroscopy.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 14, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 14,
+          "note": "largest of the stated dimensions 1 mm × 1 mm × 500 µm; also Table 2 (p. 15), row 'Diamond dimension (w x l x h)', column Q.Ant: largest of w × l × h: 'Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3'"
+        }
+      ],
+      "other_papers": {
+        "n_values": 4,
+        "n_records": 4,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_diamond_thickness_mm": {
+      "label": "Diamond plate thickness",
+      "unit": "mm",
+      "plausible_range": [
+        0.005,
+        5
+      ],
+      "status": "FOUND",
+      "n": 2,
+      "median": {
+        "value": 0.34,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 2 values in parameters.nv_diamond_thickness_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 0.212,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 2 values in parameters.nv_diamond_thickness_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 0.468,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 2 values in parameters.nv_diamond_thickness_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 0.18,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 2 values in parameters.nv_diamond_thickness_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 0.5,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 2 values in parameters.nv_diamond_thickness_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 0.18,
+          "unit": "mm",
+          "quote": "Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3",
+          "sentence": "Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 15, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 15,
+          "note": "Table 2 (p. 15), row 'Diamond dimension (w x l x h)', column JGU: h of w × l × h"
+        },
+        {
+          "value": 0.5,
+          "unit": "mm",
+          "quote": "Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3",
+          "sentence": "Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 15, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 15,
+          "note": "Table 2 (p. 15), row 'Diamond dimension (w x l x h)', column ZAQuant: h of w × l × h; also Table 2 (p. 15), row 'Diamond dimension (w x l x h)', column Q.Ant: h of w × l × h: 'Diamond dimension (w x l x h) 0.5 × 0.5 × 0.18 mm3 0.5 × 0.5 × 0.5 mm3 1 × 1 × 0.5 mm3'"
+        }
+      ],
+      "other_papers": {
+        "n_values": 1,
+        "n_records": 1,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_density_ppm": {
+      "label": "NV density",
+      "unit": "ppm",
+      "plausible_range": [
+        1e-05,
+        100
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 1.7,
+        "unit": "ppm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.nv_density_ppm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 1.7,
+        "unit": "ppm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_density_ppm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 1.7,
+        "unit": "ppm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_density_ppm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 1.7,
+        "unit": "ppm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.nv_density_ppm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 1.7,
+        "unit": "ppm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.nv_density_ppm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 1.7,
+          "unit": "ppm",
+          "quote": "geometry containing approximately 1.7 ppm NV–, as determined by",
+          "sentence": "The sensor system integrates an field-programmable gate array (FPGA) for control, microwave generation, and a diamond (1 mm × 1 mm × 500 µm) with a truncated pyramid geometry containing approximately 1.7 ppm NV–, as determined by electron paramagnetic resonance (EPR) spectroscopy.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 14, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 14
+        }
+      ],
+      "other_papers": {
+        "n_values": 6,
+        "n_records": 5,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_nitrogen_ppm": {
+      "label": "Nitrogen concentration [N]",
+      "unit": "ppm",
+      "plausible_range": [
+        0.001,
+        1000
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "ppm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "ppm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "ppm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "ppm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "ppm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 11,
+        "n_records": 8,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_laser_wavelength_nm": {
+      "label": "Excitation (pump) laser wavelength",
+      "unit": "nm",
+      "plausible_range": [
+        400,
+        1100
+      ],
+      "status": "NOT_FOUND",
+      "n": 0,
+      "median": {
+        "value": null,
+        "unit": "nm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p10": {
+        "value": null,
+        "unit": "nm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "p90": {
+        "value": null,
+        "unit": "nm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "min": {
+        "value": null,
+        "unit": "nm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "max": {
+        "value": null,
+        "unit": "nm",
+        "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0) (arXiv:2601.18843)",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "NOT_FOUND: no sentence of the device's own paper (abstract and the open arXiv full text read) states this parameter; values from other papers are not used"
+      },
+      "values": [],
+      "other_papers": {
+        "n_values": 44,
+        "n_records": 40,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_laser_power_mw": {
+      "label": "Excitation laser power",
+      "unit": "mW",
+      "plausible_range": [
+        0.001,
+        100000.0
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 100.0,
+        "unit": "mW",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.nv_laser_power_mw.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 100.0,
+        "unit": "mW",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_laser_power_mw.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 100.0,
+        "unit": "mW",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_laser_power_mw.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 100.0,
+        "unit": "mW",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.nv_laser_power_mw.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 100.0,
+        "unit": "mW",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.nv_laser_power_mw.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 100.0,
+          "unit": "mW",
+          "quote": "OBIS laser from Coherent provided 100 mW of power at the fiber output was",
+          "sentence": "A fiber-coupled OBIS laser from Coherent provided 100 mW of power at the fiber output was used to pump the sensing diamond.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 14, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 14
+        }
+      ],
+      "other_papers": {
+        "n_values": 8,
+        "n_records": 8,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_mw_frequency_ghz": {
+      "label": "Microwave / spin-resonance frequency",
+      "unit": "GHz",
+      "plausible_range": [
+        0.5,
+        40
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 2.87,
+        "unit": "GHz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.nv_mw_frequency_ghz.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 2.87,
+        "unit": "GHz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_mw_frequency_ghz.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 2.87,
+        "unit": "GHz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_mw_frequency_ghz.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 2.87,
+        "unit": "GHz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.nv_mw_frequency_ghz.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 2.87,
+        "unit": "GHz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.nv_mw_frequency_ghz.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 2.87,
+          "unit": "GHz",
+          "quote": "The central microwave frequency at 2.87 GHz was mixed with a 2.16",
+          "sentence": "The central microwave frequency at 2.87 GHz was mixed with a 2.16 MHz radio frequency signal to address all hyperfine level, enhancing resonance contrast and improving sensitivity.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 14, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 14
+        }
+      ],
+      "other_papers": {
+        "n_values": 15,
+        "n_records": 15,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_sensitivity_pt": {
+      "label": "Magnetic sensitivity",
+      "unit": "pT/√Hz",
+      "plausible_range": [
+        0.001,
+        100000000.0
+      ],
+      "status": "FOUND",
+      "n": 4,
+      "median": {
+        "value": 10.0,
+        "unit": "pT/√Hz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: median of the n = 4 values in parameters.nv_sensitivity_pt.values (the device's own paper, arXiv:2601.18843)"
+      },
+      "p10": {
+        "value": 6.3,
+        "unit": "pT/√Hz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 4 values in parameters.nv_sensitivity_pt.values (the device's own paper, arXiv:2601.18843)"
+      },
+      "p90": {
+        "value": 22.1,
+        "unit": "pT/√Hz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 4 values in parameters.nv_sensitivity_pt.values (the device's own paper, arXiv:2601.18843)"
+      },
+      "min": {
+        "value": 6.0,
+        "unit": "pT/√Hz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: minimum of the n = 4 values in parameters.nv_sensitivity_pt.values (the device's own paper, arXiv:2601.18843)"
+      },
+      "max": {
+        "value": 26.0,
+        "unit": "pT/√Hz",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: maximum of the n = 4 values in parameters.nv_sensitivity_pt.values (the device's own paper, arXiv:2601.18843)"
+      },
+      "values": [
+        {
+          "value": 6.0,
+          "unit": "pT/√Hz",
+          "quote": "room-temperature NV sensors exhibit sensitivities of 6-26 pT/Hz^(1/2) with active sensing",
+          "sentence": "The compact room-temperature NV sensors exhibit sensitivities of 6-26 pT/Hz^(1/2) with active sensing volumes below 0.5 mm^3, defining the performance level of the demonstrated MCG measurements.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), abstract; arXiv API record arXiv:2601.18843 (abstract), https://arxiv.org/abs/2601.18843",
+          "year": 2026,
+          "note": "the two ends of the stated range 6-26 pT/√Hz"
+        },
+        {
+          "value": 7.0,
+          "unit": "pT/√Hz",
+          "quote": "Sensitivity 13 pT/ √ Hz 7 pT/ √ Hz 26 pT/ √ Hz",
+          "sentence": "Sensitivity 13 pT/ √ Hz 7 pT/ √ Hz 26 pT/ √ Hz",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 15, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 15,
+          "note": "Table 2 (p. 15), row 'Sensitivity', column ZAQuant"
+        },
+        {
+          "value": 13.0,
+          "unit": "pT/√Hz",
+          "quote": "A magnetic sensitive noise level of 13 pT/ √ Hz (averaged between 20 Hz",
+          "sentence": "A magnetic sensitive noise level of 13 pT/ √ Hz (averaged between 20 Hz and 30 Hz) was achieved in the magnetically shielded room [comp.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 4, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 4,
+          "note": "also Table 2 (p. 15), row 'Sensitivity', column JGU: 'Sensitivity 13 pT/ √ Hz 7 pT/ √ Hz 26 pT/ √ Hz'"
+        },
+        {
+          "value": 26.0,
+          "unit": "pT/√Hz",
+          "quote": "room-temperature NV sensors exhibit sensitivities of 6-26 pT/Hz^(1/2) with active sensing",
+          "sentence": "The compact room-temperature NV sensors exhibit sensitivities of 6-26 pT/Hz^(1/2) with active sensing volumes below 0.5 mm^3, defining the performance level of the demonstrated MCG measurements.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), abstract; arXiv API record arXiv:2601.18843 (abstract), https://arxiv.org/abs/2601.18843",
+          "year": 2026,
+          "note": "the two ends of the stated range 6-26 pT/√Hz; also Table 2 (p. 15), row 'Sensitivity', column Q.Ant: 'Sensitivity 13 pT/ √ Hz 7 pT/ √ Hz 26 pT/ √ Hz'"
+        }
+      ],
+      "other_papers": {
+        "n_values": 78,
+        "n_records": 73,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_bias_field_mt": {
+      "label": "Bias (static) magnetic field",
+      "unit": "mT",
+      "plausible_range": [
+        0.01,
+        3000
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 1.0,
+        "unit": "mT",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.nv_bias_field_mt.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 1.0,
+        "unit": "mT",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_bias_field_mt.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 1.0,
+        "unit": "mT",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_bias_field_mt.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 1.0,
+        "unit": "mT",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.nv_bias_field_mt.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 1.0,
+        "unit": "mT",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.nv_bias_field_mt.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 1.0,
+          "unit": "mT",
+          "quote": "orientations in the diamond lattice, a bias field of approximately 1 mT was applied via a",
+          "sentence": "To resolve all four NV-resonance pairs corresponding to the four NV orientations in the diamond lattice, a bias field of approximately 1 mT was applied via a in-house fabricated Halbach ring.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 14, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 14,
+          "note": "also Table 2 (p. 15), row 'Magnetic bias', column ZAQuant: 'Magnetic bias Zero DC bias 1 mT bias 1 mT bias'; also Table 2 (p. 15), row 'Magnetic bias', column Q.Ant: 'Magnetic bias Zero DC bias 1 mT bias 1 mT bias'"
+        }
+      ],
+      "other_papers": {
+        "n_values": 13,
+        "n_records": 13,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_standoff_mm": {
+      "label": "Sensor-to-subject standoff (macroscopic, 0.1 mm and above)",
+      "unit": "mm",
+      "plausible_range": [
+        0.1,
+        200
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 10.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.nv_standoff_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 10.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_standoff_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 10.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_standoff_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 10.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.nv_standoff_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 10.0,
+        "unit": "mm",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.nv_standoff_mm.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 10.0,
+          "unit": "mm",
+          "quote": "sensor was positioned approximately 1 cm away from a seated subject’s chest, leaving 4",
+          "sentence": "During data collection, the sensor was positioned approximately 1 cm away from a seated subject’s chest, leaving 4",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 4, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 4,
+          "note": "the sentence continues on p. 5"
+        }
+      ],
+      "other_papers": {
+        "n_values": 1,
+        "n_records": 1,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    },
+    "nv_collection_efficiency_pct": {
+      "label": "Photon collection efficiency",
+      "unit": "%",
+      "plausible_range": [
+        0.01,
+        100
+      ],
+      "status": "FOUND",
+      "n": 1,
+      "median": {
+        "value": 40.0,
+        "unit": "%",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: median of the n = 1 values in parameters.nv_collection_efficiency_pct.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p10": {
+        "value": 40.0,
+        "unit": "%",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 10th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_collection_efficiency_pct.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "p90": {
+        "value": 40.0,
+        "unit": "%",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: 90th percentile (numpy.percentile, linear interpolation) of the n = 1 values in parameters.nv_collection_efficiency_pct.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "min": {
+        "value": 40.0,
+        "unit": "%",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: minimum of the n = 1 values in parameters.nv_collection_efficiency_pct.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "max": {
+        "value": 40.0,
+        "unit": "%",
+        "source": "SpinDrift calculation from 1 record (data/literature/nv.json)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: maximum of the n = 1 values in parameters.nv_collection_efficiency_pct.values (the device's own paper, arXiv:2601.18843); fewer than 3 values, to confirm"
+      },
+      "values": [
+        {
+          "value": 40.0,
+          "unit": "%",
+          "quote": "miniaturized optical design collected diamond fluorescence with an estimated efficiency of roughly 40 %, as determined from",
+          "sentence": "A sophisticated miniaturized optical design collected diamond fluorescence with an estimated efficiency of roughly 40 %, as determined from optical simulations.",
+          "id": "arXiv:2601.18843",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (CC BY 4.0), arXiv PDF v1, p. 14, https://arxiv.org/pdf/2601.18843v1",
+          "year": 2026,
+          "page": 14
+        }
+      ],
+      "other_papers": {
+        "n_values": 6,
+        "n_records": 5,
+        "note": "matches in other harvested papers; their values are not written (the device's own paper only, until the user asks to 'add typical')"
+      }
+    }
+  }
+}
