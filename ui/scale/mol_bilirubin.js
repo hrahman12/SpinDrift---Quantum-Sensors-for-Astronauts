@@ -11,8 +11,26 @@ export const LEVEL = { id: 'mol_bilirubin', site: 'skin', level: 'molecule', tit
 const CPK = { C: '#909090', N: '#3050f8', O: '#ff0d0d', H: '#ffffff' };      // as in ui/mol3d.js (and PubChem's CPK list)
 const BOND_R = 0.11, DOUBLE_R = 0.075, DOUBLE_OFF = 0.13;                     // display radii of bond sticks (angstrom)
 const fmt = (x, d = 1) => Number(x).toLocaleString('en-US', { maximumFractionDigits: d });
+const unit = (v) => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; };
 
-export function build(D) {
+// one readout row for the chosen place's radiation note (this scene does not read magnetic fields)
+function radiationRow(readouts) {
+  const row = { label: 'Radiation here', plain: 'Radiation here', value: '', unit: '', tag: 'from the chosen place', source: '' };
+  return (env) => {
+    const text = typeof env?.radiation === 'string' ? env.radiation.trim() : '';
+    const at = readouts.indexOf(row);
+    if (!text) { if (at >= 0) readouts.splice(at, 1); return; }
+    row.value = text; row.source = [env.location?.place, env.location?.sub_place].filter(Boolean).join(' · ');
+    if (at < 0) readouts.push(row);
+  };
+}
+// keeps the first info line in step with the view that is shown (labels stay as built: the host reads them once)
+function viewLine(info, views) {
+  const lines = info.lines.slice();
+  return (name) => { info.lines.length = 0; if (name) info.lines.push(`In this view: ${views[name].note}`); info.lines.push(...lines); };
+}
+
+export function build(D, opts = {}) {
   const mol = D['molecules/bilirubin_cid5280352'];
   const g = D['bio/genes']?.genes?.UGT1A1;
   const els = D['bio/elements']?.elements || {};
@@ -23,8 +41,10 @@ export function build(D) {
   const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(0.4, 0.8, 1); scene.add(key);
   const fill = new THREE.DirectionalLight(0xffffff, 0.5); fill.position.set(-0.6, -0.5, -0.7); scene.add(fill);
   if (!mol?.atoms?.length) {
-    return { scene, camera: { position: [0, 0, 60], target: [0, 0, 0], fov: 40 }, labels: [], readouts: [],
-      info: { title: 'Bilirubin not loaded', lines: ['data/molecules/bilirubin_cid5280352.json did not load; run scripts/build_molecules.py.'], sources: [], lean: [] }, update() {}, dispose() {} };
+    const readouts = [], msg = 'data/molecules/bilirubin_cid5280352.json did not load; run scripts/build_molecules.py.';
+    return { scene, camera: { position: [0, 0, 60], target: [0, 0, 0], fov: 40 }, labels: [], readouts,
+      info: { title: 'Bilirubin not loaded', lines: [msg], sources: [], lean: [] },
+      views: { whole: { target: [0, 0, 0], dir: [0, 0, 1], note: msg } }, setView() {}, setEnv: radiationRow(readouts), update() {}, dispose() {} };
   }
   const at = mol.atoms.map((a) => new THREE.Vector3(a[1], a[2], a[3]));
   const c0 = new THREE.Vector3(); at.forEach((p) => c0.add(p)); c0.divideScalar(at.length); at.forEach((p) => p.sub(c0));
@@ -110,10 +130,21 @@ export function build(D) {
     onInput: (v) => { frac = v / 100; atomMeshes.forEach((m, i) => m.scale.setScalar((vdw(elem[i]) ?? 1.5) * frac)); sizeRO.value = v; },
   }];
 
+  // ---- view: the whole molecule around the centroid of its atoms
+  const views = { whole: { target: [0, 0, 0], dir: unit([0.2, 0.25, 1]),
+    note: `The whole bilirubin molecule, centred on the centroid of its ${at.length} atoms; its two farthest atoms are ${fmt(dmax, 2)} ${ANG} apart (calculated from the PubChem conformer), so it fits inside a 2.50 nm (25 ${ANG}) view.` } };
+  const showLine = viewLine(info, views);
+  const setView = (name) => showLine(Object.prototype.hasOwnProperty.call(views, name) ? name : null);   // the same content in every view
+  const PLAIN = { 'Formula': 'Atoms in it', 'Molecular weight': 'Weight per mole', 'Atoms C / H / N / O': 'Atoms by element', 'Largest atom–atom distance': 'Length of the molecule', 'Atom size': 'Atom size drawn', 'UGT1A1 exons': 'Gene pieces' };   // plain words for the card
+  for (const r of readouts) if (!r.plain && PLAIN[r.label]) r.plain = PLAIN[r.label];
+  const setEnv = radiationRow(readouts);
+  if (opts.env) setEnv(opts.env);
+  if (opts.view !== undefined) setView(opts.view);
+
   return {
     scene,
     camera: { position: cpos.toArray(), target: [0, 0, 0], fov: 40 },
-    labels, info, readouts, controls, gene,
+    labels, info, readouts, controls, gene, views, setView, setEnv,
     update() {},
     dispose() {
       scene.traverse((o) => { o.geometry?.dispose?.(); const mt = o.material; (Array.isArray(mt) ? mt : mt ? [mt] : []).forEach((x) => x.dispose?.()); });

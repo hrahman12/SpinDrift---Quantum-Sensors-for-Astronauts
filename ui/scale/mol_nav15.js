@@ -1,5 +1,5 @@
 // Molecule level, heart (NV + OPM): the cardiac sodium channel Nav1.5 (gene SCN5A). C-alpha trace of RCSB PDB 8VYJ
-// (full-length human Nav1.5, cryo-EM, CC0) from data/bio/nav15_8vyj.json, coloured by UniProt Q14524 membrane topology,
+// (full-length human Nav1.5, electron-microscopy structure, CC0) from data/bio/nav15_8vyj.json, coloured by UniProt Q14524 membrane topology,
 // plus the SCN5A exon structure from Ensembl (data/bio/genes.json). Scene units: angstrom.
 import * as THREE from 'three';
 
@@ -39,8 +39,26 @@ function traceMeshes(pts, ca, colourOf, mat) {
   return out;
 }
 const fmt = (x, d = 0) => Number(x).toLocaleString('en-US', { maximumFractionDigits: d });
+const unit = (v) => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; };
 
-export function build(D) {
+// one readout row for the chosen place's radiation note (this scene does not read magnetic fields)
+function radiationRow(readouts) {
+  const row = { label: 'Radiation here', plain: 'Radiation here', value: '', unit: '', tag: 'from the chosen place', source: '' };
+  return (env) => {
+    const text = typeof env?.radiation === 'string' ? env.radiation.trim() : '';
+    const at = readouts.indexOf(row);
+    if (!text) { if (at >= 0) readouts.splice(at, 1); return; }
+    row.value = text; row.source = [env.location?.place, env.location?.sub_place].filter(Boolean).join(' · ');
+    if (at < 0) readouts.push(row);
+  };
+}
+// keeps the first info line in step with the view that is shown (labels stay as built: the host reads them once)
+function viewLine(info, views) {
+  const lines = info.lines.slice();
+  return (name) => { info.lines.length = 0; if (name) info.lines.push(`In this view: ${views[name].note}`); info.lines.push(...lines); };
+}
+
+export function build(D, opts = {}) {
   const nav = D['bio/nav15_8vyj'];
   const g = D['bio/genes']?.genes?.SCN5A;
   const scene = new THREE.Scene();
@@ -49,8 +67,10 @@ export function build(D) {
   const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(0.4, 0.8, 1); scene.add(key);
   const fill = new THREE.DirectionalLight(0xffffff, 0.5); fill.position.set(-0.6, -0.5, -0.7); scene.add(fill);
   if (!nav?.ca?.length) {
-    return { scene, camera: { position: [0, 0, 250], target: [0, 0, 0], fov: 40 }, labels: [], readouts: [],
-      info: { title: 'Nav1.5 structure not loaded', lines: ['data/bio/nav15_8vyj.json did not load; run scripts/build_bio.py.'], sources: [], lean: [] }, update() {}, dispose() {} };
+    const readouts = [], msg = 'data/bio/nav15_8vyj.json did not load; run scripts/build_bio.py.';
+    return { scene, camera: { position: [0, 0, 250], target: [0, 0, 0], fov: 40 }, labels: [], readouts,
+      info: { title: 'Nav1.5 structure not loaded', lines: [msg], sources: [], lean: [] },
+      views: { whole: { target: [0, 0, 0], dir: [0, 0, 1], note: msg } }, setView() {}, setEnv: radiationRow(readouts), update() {}, dispose() {} };
   }
   // ---- coordinates: centred on the transmembrane residues and turned so the calculated membrane normal points up
   const ca = nav.ca;
@@ -101,7 +121,7 @@ export function build(D) {
   const info = {
     title: `Nav1.5 · PDB ${nav.pdb_id} · gene SCN5A`,
     lines: [
-      `Human Nav1.5, full length, cryo-EM at ${nav.resolution_A} ${ANG} (PDB ${nav.pdb_id}; Biswas et al. 2025), reported in the open state. C-alpha trace of the ${fmt(nav.n_residues)} modelled residues of ${fmt(nav.sequence_length)}; gaps are unmodelled regions.`,
+      `Human Nav1.5, full length, electron-microscopy structure at ${nav.resolution_A} ${ANG} (PDB ${nav.pdb_id}; Biswas et al. 2025), reported in the open state. C-alpha trace of the ${fmt(nav.n_residues)} modelled residues of ${fmt(nav.sequence_length)}; gaps are unmodelled regions.`,
       'Colours follow UniProt Q14524 topology: transmembrane helices green, the four pore-forming loops bright, extracellular parts grey, cytoplasmic parts dark.',
       `Turned so the calculated membrane normal (mean direction of the 24 transmembrane segments, cytoplasm to outside) points up; the transmembrane residues span ${span ? fmt(span, 1) : '?'} ${ANG} along it (calculated, not a membrane thickness).`,
       site ? `IFM motif (Ile${site.uniprot_positions[0]}–Phe${site.uniprot_positions[1]}–Met${site.uniprot_positions[2]}): “Isoleucine-Phenylalanine-Methionine (IFM) motif in the linker between D III and D IV”, crucial for fast inactivation (Biswas et al. 2025); found here by sequence search.` : '',
@@ -125,10 +145,24 @@ export function build(D) {
     g ? { label: 'Protein (transcript)', value: g.translation?.length_aa, unit: 'aa', tag: 'recorded', source: g.translation?.id } : null,
   ].filter(Boolean);
 
+  // ---- view: the centre of the box around the modelled C-alpha atoms (the channel is taller than a 10 nm view)
+  const lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
+  for (const p of pts) p.toArray().forEach((v, k) => { lo[k] = Math.min(lo[k], v); hi[k] = Math.max(hi[k], v); });
+  const size = hi.map((v, k) => v - lo[k]);
+  const views = { whole: { target: lo.map((v, k) => (v + hi[k]) / 2), dir: unit([0.35, 0.12, 1]),
+    note: `The whole modelled channel, centred on the box around its C-alpha atoms: ${fmt(size[0])} ${ANG} across, ${fmt(size[1])} ${ANG} along the membrane normal and ${fmt(size[2])} ${ANG} deep (calculated).${size[1] > 100 ? ` A 10.0 nm view is 100 ${ANG} tall, so the far ends of the extracellular and cytoplasmic parts reach past the frame.` : ''}` } };
+  const showLine = viewLine(info, views);
+  const setView = (name) => showLine(Object.prototype.hasOwnProperty.call(views, name) ? name : null);   // the same content in every view
+  const PLAIN = { 'Structure': 'Structure file', 'Resolution': 'Sharpness of the map', 'Modelled residues': 'Building blocks seen', 'Helix residues (file)': 'Coiled parts', 'TM residue span': 'Part across the membrane', 'SCN5A exons': 'Gene pieces', 'Protein (transcript)': 'Protein length' };   // plain words for the card
+  for (const r of readouts) if (!r.plain && PLAIN[r.label]) r.plain = PLAIN[r.label];
+  const setEnv = radiationRow(readouts);
+  if (opts.env) setEnv(opts.env);
+  if (opts.view !== undefined) setView(opts.view);
+
   return {
     scene,
     camera: { position: cpos.toArray(), target: [0, 0, 0], fov: 40 },
-    labels, info, readouts, gene,
+    labels, info, readouts, gene, views, setView, setEnv,
     update() {},
     dispose() {
       scene.traverse((o) => { o.geometry?.dispose?.(); const mt = o.material; (Array.isArray(mt) ? mt : mt ? [mt] : []).forEach((x) => x.dispose?.()); });

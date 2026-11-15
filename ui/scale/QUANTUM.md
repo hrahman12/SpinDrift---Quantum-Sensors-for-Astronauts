@@ -87,6 +87,42 @@ layers, atom size. No Lean theorem applies.
 - The patch dots' lattice fringes and size; the quenching/recovery model, its kinetics and its brightness levels; the
   dots' surface groups.
 
+## The descent: views, setEnv, motion (build called with opts.view)
+
+With `opts.view` each quantum scene builds a descent version with no sliders: `setEnv(env)` sets every state, and the
+motion is real motion, slowed by a printed factor (time is scaled, amplitudes never are). Without options the scenes
+above are unchanged.
+
+- **q_rb** (gas 10.0 nm, atom 2.50 nm, spin 500 pm). The 5s valence electron as 4,200 points sampled from the
+  Coulomb-approximation density r^(2n*) e^(−2r/(n* a0)) (Bates & Damgaard 1949; n* = 1.8048 from Steck's ionization
+  limit and CODATA R∞; core electrons not drawn). 40 atoms' spins drawn from one point: each is set along the light when
+  pumped, then turns about the field at the atoms until pumped again (ages from a deterministic e^−a sample); their
+  average is Sulai's P*. The field at the atoms is max(0, env.B_at_sensor_nT − 50 nT): QuSpin's on-board coils cancel
+  up to 50 nT, the same limit Lean's card checks. w = field ÷ 15 nT, the half width of QuSpin's "FWHM ≈ 30 nT" zero-field
+  resonance. Light let through = 1/(1 + w²). Zero-field pumping of the 8 ground sublevels from Steck's line strengths
+  (3-j/6-j symbols, checked against Tables 15 and 18 to 3×10⁻¹³). Larmor 6.996 Hz/nT (F = 2).
+- **q_nv** (lattice 2.50 nm, pair 500 pm). Atoms jiggle with diamond's measured Uiso = 0.001710 Å² at 293 K (COD 2300702)
+  at the Einstein frequency that reproduces it, 25.41 THz (calculated), shown 3.2×10¹³ times slower. The other three
+  <111> NV directions; the ODMR spectrum (four directions, ¹⁴N triplet 2.16 MHz, ZAQuant linewidth 200 kHz, depth
+  normalised) with a sweeping microwave; the optical cycle (532 nm in, 637 nm out, the 1042 nm singlet path from
+  m_s = ±1, Barry et al.); heartbeat 25 pT against the noise after N beats (single-beat noise ÷ √N). env.B_nT moves the
+  lines and turns the spin at γB (slowed 2×10⁶).
+- **q_qd** (default, dimensionless). The hop: excitation envelopes of dot and dye in units of the dot's lifetime (not
+  stated), E = 1/(1 + (r/R₀)⁶) at r = R₀ (display); the leash is cut only when env.inputs.renin_pM ≥ env.lod_renin_pM.
+- **q_cqd** (dot 10.0 nm, lattice 2.50 nm, ring 500 pm). The electron steps up 3.369 eV (368 nm) and drops 2.824 eV
+  giving 439 nm light (the same Mendeley records); quenched when a bilirubin value is entered, recovering under blue
+  light. Graphite's displacement parameters have no stated temperature, so its atoms are drawn at rest.
+- **q_nucleus** (`?id=rb87|n14`, nucleus 10.0 fm). One sphere at the measured rms charge radius (Angeli & Marinova 2013
+  via the IAEA radii file, cross-checked against the IAEA Live Chart), the 2I + 1 orientation cones, the measured magnetic
+  dipole and quadrupole moments, and the spin turning at the real Larmor rate for the place (⁸⁷Rb: with the electron,
+  6.996 Hz per nT left at the atoms, slowed 10⁵; ¹⁴N: 3.0763 MHz/T, slowed 100).
+
+New entries in `quantum_constants.json` (all read from the fetched files, SHA256 in `meta.sha256`, derived values
+cross-checked in Wolfram Language under `checks.motion`): `codata` (μN/h, R∞, a0, u from NIST), `si` (exact h, k, e, c),
+`motion` (diamond Uiso and Einstein frequency; graphite U without temperature), `nv_optics`, `rb87.ionization_limit`,
+`rb87.atomic_mass_kg`, `rb87.valence_*`, `rb87.thermal_mean_speed` (321 m/s), `opm_model.zero_field_fwhm/hwhm`,
+`nuclei.*.magnetic_dipole/electric_quadrupole/larmor_*`.
+
 ## Note for the host
 
 `q_qd.js` sets `LEVEL.unit = 'R₀'` and `LEVEL.dimensionless = true`. `ui/zoom.js` draws an SI scale bar from

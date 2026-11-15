@@ -281,7 +281,7 @@ function needRows(card) {
     } else if (r.id === 'cqd_range_low') {
       const hi = all.find((x) => x.id === 'cqd_range_high'), c = inp(r, 'c_bilirubin'), lo = n(inp(r, 'range_low')), up = n(inp(hi, 'range_high'));
       name = 'bilirubin in skin fluid'; have = n(c) !== null ? `${fmtNum(n(c))} ${c.unit || ''}` : 'not measured';
-      need = lo !== null && up !== null ? `${fmtNum(lo)} to ${fmtNum(up)}` : 'patch range not public';
+      need = lo !== null && up !== null ? `${fmtNum(lo)} to ${fmtNum(up)}` : 'range not public';
       holds = r.holds === false || hi?.holds === false ? false : r.holds === true && hi?.holds === true ? true : null;
     } else { name = r.id; have = r.lhs?.decimal ?? '?'; need = `≤ ${r.rhs?.decimal ?? '?'}`; }
     const v = holds === true ? 'REQUIREMENTS_MET' : holds === false ? 'NOT_MET' : 'NEED_MORE_INFORMATION';

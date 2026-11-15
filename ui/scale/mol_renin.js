@@ -38,6 +38,24 @@ function traceMeshes(pts, ca, colourOf, mat) {
 }
 const fmt = (x, d = 0) => Number(x).toLocaleString('en-US', { maximumFractionDigits: d });
 const cap = (s) => s.charAt(0) + s.slice(1).toLowerCase();
+const unit = (v) => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; };
+
+// one readout row for the chosen place's radiation note (this scene does not read magnetic fields)
+function radiationRow(readouts) {
+  const row = { label: 'Radiation here', plain: 'Radiation here', value: '', unit: '', tag: 'from the chosen place', source: '' };
+  return (env) => {
+    const text = typeof env?.radiation === 'string' ? env.radiation.trim() : '';
+    const at = readouts.indexOf(row);
+    if (!text) { if (at >= 0) readouts.splice(at, 1); return; }
+    row.value = text; row.source = [env.location?.place, env.location?.sub_place].filter(Boolean).join(' · ');
+    if (at < 0) readouts.push(row);
+  };
+}
+// keeps the first info line in step with the view that is shown (labels stay as built: the host reads them once)
+function viewLine(info, views) {
+  const lines = info.lines.slice();
+  return (name) => { info.lines.length = 0; if (name) info.lines.push(`In this view: ${views[name].note}`); info.lines.push(...lines); };
+}
 
 // "Sielecki AR et al., Science 243:1346 (1989), PubMed 2493678" from the PDB JRNL records kept in the JSON
 function pdbCitation(j) {
@@ -51,7 +69,7 @@ function pdbCitation(j) {
   return `${author} et al., ${journal}${pmid ? `, PubMed ${pmid}` : ''}`;
 }
 
-export function build(D) {
+export function build(D, opts = {}) {
   const ren = D['molecules/renin_2ren'];
   const g = D['bio/genes']?.genes?.REN;
   const qd = D.specs?.qd_renin;
@@ -61,8 +79,10 @@ export function build(D) {
   const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(0.4, 0.8, 1); scene.add(key);
   const fill = new THREE.DirectionalLight(0xffffff, 0.5); fill.position.set(-0.6, -0.5, -0.7); scene.add(fill);
   if (!ren?.ca?.length) {
-    return { scene, camera: { position: [0, 0, 120], target: [0, 0, 0], fov: 40 }, labels: [], readouts: [],
-      info: { title: 'Renin structure not loaded', lines: ['data/molecules/renin_2ren.json did not load; run scripts/build_molecules.py.'], sources: [], lean: [] }, update() {}, dispose() {} };
+    const readouts = [], msg = 'data/molecules/renin_2ren.json did not load; run scripts/build_molecules.py.';
+    return { scene, camera: { position: [0, 0, 120], target: [0, 0, 0], fov: 40 }, labels: [], readouts,
+      info: { title: 'Renin structure not loaded', lines: [msg], sources: [], lean: [] },
+      views: { whole: { target: [0, 0, 0], dir: [0, 0, 1], note: msg } }, setView() {}, setEnv: radiationRow(readouts), update() {}, dispose() {} };
   }
   const ca = ren.ca;
   const c0 = new THREE.Vector3(); ca.forEach((r) => c0.add(new THREE.Vector3(r[3], r[4], r[5]))); c0.divideScalar(ca.length);
@@ -107,10 +127,22 @@ export function build(D) {
     g ? { label: 'REN exons', value: g.n_exons, unit: '', tag: 'recorded', source: `Ensembl ${D['bio/genes'].ensembl_release}` } : null,
     qd?.detection_limit?.value ? { label: 'Sensor detection limit', value: qd.detection_limit.value, unit: qd.detection_limit.unit, tag: qd.detection_limit.tag, source: 'Long et al. 2012' } : null,
   ].filter(Boolean);
+
+  // ---- view: the whole molecule around the centroid of its C-alpha atoms
+  const views = { whole: { target: [0, 0, 0], dir: unit([0.25, 0.2, 1]),
+    note: `The whole renin molecule, centred on the centroid of its C-alpha atoms; the farthest one is ${fmt(maxR, 1)} ${ANG} from it (calculated), so the molecule fits inside a 10.0 nm (100 ${ANG}) view.` } };
+  const showLine = viewLine(info, views);
+  const setView = (name) => showLine(Object.prototype.hasOwnProperty.call(views, name) ? name : null);   // the same content in every view
+  const PLAIN = { 'Structure': 'Structure file', 'Resolution': 'Sharpness of the map', 'Residues (C-alpha)': 'Building blocks', 'Helix / strand residues': 'Coils / sheets', 'REN exons': 'Gene pieces', 'Sensor detection limit': 'Smallest renin the test sees' };   // plain words for the card
+  for (const r of readouts) if (!r.plain && PLAIN[r.label]) r.plain = PLAIN[r.label];
+  const setEnv = radiationRow(readouts);
+  if (opts.env) setEnv(opts.env);
+  if (opts.view !== undefined) setView(opts.view);
+
   return {
     scene,
     camera: { position: cpos.toArray(), target: [0, 0, 0], fov: 40 },
-    labels, info, readouts, gene,
+    labels, info, readouts, gene, views, setView, setEnv,
     update() {},
     dispose() {
       scene.traverse((o) => { o.geometry?.dispose?.(); const mt = o.material; (Array.isArray(mt) ? mt : mt ? [mt] : []).forEach((x) => x.dispose?.()); });

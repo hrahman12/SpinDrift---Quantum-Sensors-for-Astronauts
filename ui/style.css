@@ -464,10 +464,10 @@ canvas.mini-live { display: inline-block; vertical-align: middle; }
 .srow > .s-site { margin-top: 1px; }
 .s-need:empty { display: none; }
 .s-need { margin-top: 7px; border-top: 1px solid rgba(255, 255, 255, .06); padding-top: 5px; }
-.nrow { display: grid; grid-template-columns: 1.15fr auto auto 14px; gap: 8px; align-items: baseline; font-size: 12px; padding: 2px 0; }
+.nrow { display: grid; grid-template-columns: minmax(0, 1.2fr) auto minmax(0, 1fr) 14px; gap: 8px; align-items: baseline; font-size: 12px; padding: 2px 0; }
 .nrow span { color: var(--muted); }
-.nrow b { font: 600 12px var(--mono); color: var(--ink); text-align: right; }
-.nrow i { font: 11.5px var(--mono); font-style: normal; color: var(--ink2); white-space: nowrap; }
+.nrow b { font: 600 12px var(--mono); color: var(--ink); text-align: right; white-space: nowrap; }
+.nrow i { font: 11.5px var(--mono); font-style: normal; color: var(--ink2); text-align: right; }
 .nrow em { font-style: normal; font-weight: 700; text-align: center; }
 .nrow em.v-REQUIREMENTS_MET { color: var(--met); } .nrow em.v-NOT_MET { color: var(--notmet); } .nrow em.v-NEED_MORE_INFORMATION { color: var(--needinfo); }
 .srow .s-cond, .s-cond { font-size: 12px; color: var(--ink2); margin: 3px 0 0; line-height: 1.45; }

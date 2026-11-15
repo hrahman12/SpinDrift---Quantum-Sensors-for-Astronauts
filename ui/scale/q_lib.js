@@ -163,11 +163,71 @@ export function voRow(label, v, { value, unit } = {}) {
   return { label, value: shown, unit: unit ?? v.unit ?? '', tag: `${v.tag}${st}`, source: v.source || '' };
 }
 
-// what a scene returns when its data did not load: an empty stage that says why
-export function missingScene(title, message) {
+// ---------------------------------------------------------------- deterministic sequences, pixel dots, thermal jiggle
+// Halton low-discrepancy sequence: evenly spread, repeatable numbers in [0, 1) (never Math.random)
+export const halton = (i, b) => { let f = 1, r = 0; while (i > 0) { f /= b; r += f * (i % b); i = Math.floor(i / b); } return r; };
+// a set of round dots of constant pixel size (a marker, never a size) whose positions, colours and brightness can
+// change every frame
+export function dots(T, n, px, { additive = true } = {}) {
+  const geo = T.add(new THREE.BufferGeometry());
+  const pos = new Float32Array(n * 3), col = new Float32Array(n * 3).fill(1), alp = new Float32Array(n).fill(1);
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3).setUsage(THREE.DynamicDrawUsage));
+  geo.setAttribute('aColor', new THREE.BufferAttribute(col, 3).setUsage(THREE.DynamicDrawUsage));
+  geo.setAttribute('aAlpha', new THREE.BufferAttribute(alp, 1).setUsage(THREE.DynamicDrawUsage));
+  const dpr = Math.min(2, (typeof window !== 'undefined' && window.devicePixelRatio) || 1);
+  const mat = T.add(new THREE.ShaderMaterial({
+    uniforms: { uSize: { value: px * dpr } },
+    vertexShader: 'attribute vec3 aColor; attribute float aAlpha; varying vec3 vC; varying float vA; uniform float uSize;\nvoid main(){ vC = aColor; vA = aAlpha; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); gl_PointSize = uSize; }',
+    fragmentShader: 'varying vec3 vC; varying float vA;\nvoid main(){ float r = length(gl_PointCoord - 0.5); if (r > 0.5) discard; float a = (1.0 - smoothstep(0.12, 0.5, r)) * vA; gl_FragColor = vec4(vC * a, a); }',
+    blending: additive ? THREE.AdditiveBlending : THREE.NormalBlending, depthWrite: false, transparent: true,
+  }));
+  const points = new THREE.Points(geo, mat); points.frustumCulled = false;
+  return { points, pos, col, alp, geo, flush() { for (const k of ['position', 'aColor', 'aAlpha']) geo.attributes[k].needsUpdate = true; } };
+}
+// Thermal jiggle in the Einstein model: every atom oscillates along each axis at one frequency with amplitude
+// sqrt(2 <u^2>), so its mean-square displacement per direction is the measured <u^2>. Phases come from Halton
+// sequences (bases 2, 3, 5): the motion is repeatable. Returns (atom index, phase in rad, Vector3 out).
+export function jiggle(rms) {
+  const A = Math.SQRT2 * rms;
+  return (i, phase, out) => out.set(A * Math.sin(phase + 2 * Math.PI * halton(i + 1, 2)),
+    A * Math.sin(phase + 2 * Math.PI * halton(i + 1, 3)), A * Math.sin(phase + 2 * Math.PI * halton(i + 1, 5)));
+}
+// "3×10¹³" for a slow-down factor, and the screen time it stands for
+export const timesText = (s) => sci(s, s >= 100 ? 1 : 2).replace('.0×', '×');
+export const num = (v) => (v && typeof v.value === 'number' && Number.isFinite(v.value) ? v.value : null);
+export const plainNum = (x, d = 3) => (x === null || x === undefined || !Number.isFinite(x) ? '—'
+  : Math.abs(x) >= 1e4 ? Math.round(x).toLocaleString('en-US') : +x.toPrecision(d) + '');
+
+// ---------------------------------------------------------------- views and the chosen place (scene contract)
+export const unit3 = (v) => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; };
+export const hasView = (views, name) => Object.prototype.hasOwnProperty.call(views, name);
+// keeps the first info line in step with the view that is shown (labels stay as built: the host reads them once)
+export function viewLine(info, views) {
+  const lines = info.lines.slice();
+  return (name) => { info.lines.length = 0; if (name) info.lines.push(`In this view: ${views[name].note}`); info.lines.push(...lines); };
+}
+// "At <place · spot>" for readout sources
+export const placeText = (env) => [env?.location?.place, env?.location?.sub_place].filter(Boolean).join(' · ');
+// one readout row for the chosen place's radiation note, kept last in the list and removed when the place has none
+// (for the scenes that do not read magnetic fields)
+export function radiationRow(readouts) {
+  const row = { label: 'radiation here', plain: 'Radiation here', value: '', unit: '', tag: 'from the chosen place', source: '' };
+  return (env) => {
+    const text = typeof env?.radiation === 'string' ? env.radiation.trim() : '';
+    const at = readouts.indexOf(row);
+    if (!text) { if (at >= 0) readouts.splice(at, 1); return; }
+    row.value = text; row.source = placeText(env);
+    if (at < 0) readouts.push(row);
+  };
+}
+
+// what a scene returns when its data did not load: an empty stage that says why (every asked-for view points at it)
+export function missingScene(title, message, viewNames = ['default']) {
   const scene = new THREE.Scene(); scene.background = null; addLights(scene);
-  return { scene, camera: { position: [0, 0, 10], target: [0, 0, 0], fov: 40 }, labels: [], readouts: [], controls: [],
-    info: { title, lines: [message], sources: [], lean: [] }, update() {}, dispose() {} };
+  const readouts = [], views = {};
+  for (const n of viewNames) views[n] = { target: [0, 0, 0], dir: [0, 0, 1], note: message };
+  return { scene, camera: { position: [0, 0, 10], target: [0, 0, 0], fov: 40 }, labels: [], readouts, controls: [],
+    info: { title, lines: [message], sources: [], lean: [] }, views, setView() {}, setEnv() {}, update() {}, dispose() {} };
 }
 export const NO_CONSTANTS = 'data/quantum_constants.json did not load; run python scripts/build_quantum_constants.py.';
 

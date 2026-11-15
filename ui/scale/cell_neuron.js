@@ -1,6 +1,7 @@
 // Cell level, brain (OPM): a real human neocortical layer 2/3 pyramidal neuron, NeuroMorpho.Org 107146
 // (Tamas archive, Fig1b_140312-1rm6_pyr; Molnar et al., eLife 2016). Every coordinate and radius is the reconstruction's own, in micrometres.
 // The only change is a rotation that turns the apical dendrite upward. Impulse timing is illustrative (no sourced velocity).
+// Views: tree (the dendritic tree around the soma) and dendrite (one real dendrite sample 100-200 µm from the soma).
 import * as THREE from 'three';
 
 const UM = 'µm';
@@ -19,6 +20,25 @@ function shuffle(a, r) { for (let i = a.length - 1; i > 0; i--) { const j = Math
 const srgb = (hex) => { const n = parseInt(hex.slice(1), 16); return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; };
 const num = (v) => (v && typeof v.value === 'number' ? v.value : null);
 const fmt = (x, d = 0) => Number(x).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d });
+// which dendrite sample the 1.00 µm view frames (µm): path length from the soma, largest diameter, samples kept each side
+const DEND_VIEW = { from: 100, to: 200, aim: 150, maxDiameter: 0.6, run: 10 };
+
+// one readout row for the chosen place's radiation note (this scene does not read magnetic fields)
+function radiationRow(readouts) {
+  const row = { label: 'Radiation here', plain: 'Radiation here', value: '', unit: '', tag: 'from the chosen place', source: '' };
+  return (env) => {
+    const text = typeof env?.radiation === 'string' ? env.radiation.trim() : '';
+    const at = readouts.indexOf(row);
+    if (!text) { if (at >= 0) readouts.splice(at, 1); return; }
+    row.value = text; row.source = [env.location?.place, env.location?.sub_place].filter(Boolean).join(' · ');
+    if (at < 0) readouts.push(row);
+  };
+}
+// keeps the first info line in step with the view that is shown (labels stay as built: the host reads them once)
+function viewLine(info, views) {
+  const lines = info.lines.slice();
+  return (name) => { info.lines.length = 0; if (name) info.lines.push(`In this view: ${views[name].note}`); info.lines.push(...lines); };
+}
 
 // round, constant-pixel-size markers (no textures): circle drawn in the fragment shader
 function markerMaterial(px) {
@@ -31,11 +51,13 @@ function markerMaterial(px) {
 }
 
 function emptyScene(scene, msg) {
+  const readouts = [], v = { target: [0, 0, 0], dir: [0, 0, 1], note: msg };
   return { scene, camera: { position: [0, 0, 600], target: [0, 0, 0], fov: 40 }, labels: [],
-    info: { title: 'Neuron reconstruction not loaded', lines: [msg], sources: [], lean: [] }, readouts: [], update() {}, dispose() {} };
+    info: { title: 'Neuron reconstruction not loaded', lines: [msg], sources: [], lean: [] }, readouts,
+    views: { tree: v, dendrite: { ...v } }, setView() {}, setEnv: radiationRow(readouts), update() {}, dispose() {} };
 }
 
-export function build(D) {
+export function build(D, opts = {}) {
   const N = D['bio/neuron_107146'];
   const cells = D['bio/cells'];
   const scene = new THREE.Scene();
@@ -62,15 +84,57 @@ export function build(D) {
   for (let i = 0; i < n; i++) if (par[i] >= 0 && typ[i] !== 1) segs.push(i);
   const typeCol = { 2: new THREE.Color(COL.axon), 3: new THREE.Color(COL.basal), 4: new THREE.Color(COL.apical) };
 
+  // ---- children, and the path length of every sample from the soma centre along the parent links (calculated)
+  const kids = new Uint16Array(n), firstChild = new Int32Array(n).fill(-1);
+  for (let i = 0; i < n; i++) if (par[i] >= 0) kids[par[i]]++;
+  for (let i = n - 1; i >= 0; i--) if (par[i] >= 0) firstChild[par[i]] = i;
+  const pathLen = new Float64Array(n).fill(-1);
+  for (let i = 0; i < n; i++) {
+    const chain = []; let j = i;
+    while (pathLen[j] < 0) { if (par[j] < 0 || typ[j] === 1) { pathLen[j] = 0; break; } chain.push(j); j = par[j]; }
+    for (let k = chain.length - 1; k >= 0; k--) {
+      const c = chain[k], p = par[c];
+      pathLen[c] = pathLen[p] + Math.hypot(P[c * 3] - P[p * 3], P[c * 3 + 1] - P[p * 3 + 1], P[c * 3 + 2] - P[p * 3 + 2]);
+    }
+  }
+  // ---- the sample the 1.00 µm view frames: a real dendrite sample 100-200 µm of path from the soma centre, not a
+  // branch point, thin enough for both of its edges to fit in the view, nearest to 150 µm (apical dendrite first)
+  const pick = (types, maxDia) => {
+    let best = -1, bd = Infinity;
+    for (let i = 0; i < n; i++) {
+      if (types.indexOf(typ[i]) < 0 || kids[i] !== 1 || par[i] < 0 || typ[par[i]] === 1) continue;
+      const d = pathLen[i];
+      if (d < DEND_VIEW.from || d > DEND_VIEW.to || 2 * rad[i] > maxDia + 1e-6) continue;
+      const e = Math.abs(d - DEND_VIEW.aim);
+      if (e < bd) { bd = e; best = i; }
+    }
+    return best;
+  };
+  let dend = pick([4], DEND_VIEW.maxDiameter);
+  if (dend < 0) dend = pick([3, 4], DEND_VIEW.maxDiameter);
+  if (dend < 0) dend = pick([3, 4], Infinity);
+  // the unbranched run of samples through it (soma side first): these segments get a round, finer tube in the views
+  const run = [];
+  if (dend >= 0) {
+    const up = [];
+    for (let j = par[dend], k = 0; k < DEND_VIEW.run && j >= 0 && typ[j] !== 1; k++, j = par[j]) up.push(j);
+    run.push(...up.reverse(), dend);
+    for (let c = firstChild[dend], k = 0; k < DEND_VIEW.run && c >= 0; k++, c = firstChild[c]) run.push(c);
+  }
+  const inRun = new Uint8Array(n);
+  for (let m = 1; m < run.length; m++) inRun[run[m]] = 1;
+  segs.sort((x, y) => inRun[x] - inRun[y] || x - y);       // the run's segments last, so a draw range can leave them out
+
   // ---- tubes at the reconstructed radius (one merged geometry; 6-sided frustum per SWC segment)
   const R = 6;
   const pos = new Float32Array(segs.length * 2 * R * 3), nor = new Float32Array(pos.length), col = new Float32Array(pos.length);
   const idx = new Uint32Array(segs.length * R * 6);
   const a = new THREE.Vector3(), b = new THREE.Vector3(), u = new THREE.Vector3(), e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), w = new THREE.Vector3();
   const UP = new THREE.Vector3(0, 1, 0), XA = new THREE.Vector3(1, 0, 0);
-  let vp = 0, ip = 0;
+  let vp = 0, ip = 0, ipRun = -1;
   for (const i of segs) {
     const p = par[i];
+    if (ipRun < 0 && inRun[i]) ipRun = ip;
     a.fromArray(P, p * 3); b.fromArray(P, i * 3);
     u.subVectors(b, a); const len = u.length(); if (len < 1e-6) continue;
     u.divideScalar(len);
@@ -100,6 +164,29 @@ export function build(D) {
   tubeGeo.setIndex(new THREE.BufferAttribute(idx.subarray(0, ip), 1));
   tubeGeo.computeBoundingSphere();
   scene.add(new THREE.Mesh(tubeGeo, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.6, metalness: 0.02 })));
+  if (ipRun < 0) ipRun = ip;
+
+  // ---- the same run as a round tube (40 sides, a sphere of the sample's radius at each joint), shown in the views in
+  // place of its 6-sided segments. Built around the framed sample so that the 1 µm view keeps its precision.
+  const fine = new THREE.Group();
+  fine.visible = false;
+  if (dend >= 0) {
+    fine.position.fromArray(P, dend * 3);
+    const fmat = new THREE.MeshStandardMaterial({ color: (typeCol[typ[dend]] || typeCol[3]).getHex(), roughness: 0.6, metalness: 0.02 });
+    for (let m = 0; m < run.length; m++) {
+      const i = run[m];
+      b.fromArray(P, i * 3).sub(fine.position);
+      const ball = new THREE.Mesh(new THREE.SphereGeometry(rad[i], 28, 18), fmat);
+      ball.position.copy(b); fine.add(ball);
+      if (m === 0) continue;
+      a.fromArray(P, run[m - 1] * 3).sub(fine.position);
+      u.subVectors(b, a); const len = u.length(); if (len < 1e-6) continue;
+      const seg = new THREE.Mesh(new THREE.CylinderGeometry(rad[i], rad[run[m - 1]], len, 40, 1, true), fmat);
+      seg.quaternion.setFromUnitVectors(UP, u.divideScalar(len)); seg.position.addVectors(a, b).multiplyScalar(0.5);
+      fine.add(seg);
+    }
+  }
+  scene.add(fine);
 
   // ---- 1-pixel lines along the same branches, so sub-micrometre axons stay visible when zoomed out
   const lp = new Float32Array(segs.length * 6), lc = new Float32Array(segs.length * 6);
@@ -118,8 +205,6 @@ export function build(D) {
   scene.add(new THREE.Mesh(new THREE.SphereGeometry(somaR, 36, 24), new THREE.MeshStandardMaterial({ color: COL.soma, roughness: 0.5 })));
 
   // ---- impulse markers along real paths: dendrite tips -> soma, soma -> axon tips (illustrative timing)
-  const kids = new Uint16Array(n);
-  for (let i = 0; i < n; i++) if (par[i] >= 0) kids[par[i]]++;
   const tipsD = [], tipsA = [];
   for (let i = 0; i < n; i++) if (!kids[i]) { if (typ[i] === 3 || typ[i] === 4) tipsD.push(i); else if (typ[i] === 2) tipsA.push(i); }
   const rand = rng(107146);
@@ -164,6 +249,31 @@ export function build(D) {
   const dist = (maxR / Math.tan(THREE.MathUtils.degToRad(20))) * 0.8;
   const cdir = new THREE.Vector3(0.2, 0.14, 1).normalize().multiplyScalar(dist);
 
+  // ---- views. tree: the centre of the box around all dendrite samples, so a 600 µm view holds the dendritic tree and
+  // the soma. dendrite: the chosen sample, seen at right angles to the branch.
+  const camDir = new THREE.Vector3(0.2, 0.14, 1).normalize();
+  const lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
+  for (let i = 0; i < n; i++) if (typ[i] === 3 || typ[i] === 4) for (let k = 0; k < 3; k++) { lo[k] = Math.min(lo[k], P[i * 3 + k]); hi[k] = Math.max(hi[k], P[i * 3 + k]); }
+  const treeT = Number.isFinite(lo[0]) ? lo.map((v, k) => (v + hi[k]) / 2) : [0, 0, 0];
+  const typeName = (t) => (N.type_codes?.[t] || { 3: 'basal dendrite', 4: 'apical dendrite' }[t] || 'dendrite');
+  const views = {
+    tree: { target: treeT, dir: camDir.toArray(),
+      note: Number.isFinite(lo[1])
+        ? `The dendritic tree and the soma. The view is centred on the box around all dendrite samples, which is ${fmt(hi[0] - lo[0])} ${UM} wide and ${fmt(hi[1] - lo[1])} ${UM} tall (calculated); the axon runs on beyond the frame.`
+        : 'The soma and the branches around it.' },
+    dendrite: { target: [0, 0, 0], dir: camDir.toArray(), note: 'No dendrite sample lies 100–200 µm from the soma in this file, so the view stays on the soma.' },
+  };
+  if (dend >= 0) {
+    const c = firstChild[dend] >= 0 ? firstChild[dend] : dend;
+    u.fromArray(P, c * 3).sub(a.fromArray(P, par[dend] * 3)).normalize();          // local branch direction (parent to child)
+    w.copy(camDir).addScaledVector(u, -camDir.dot(u));                              // the usual camera direction, made perpendicular
+    if (w.length() < 0.05 || Math.abs(w.clone().normalize().y) > 0.98) w.crossVectors(u, Math.abs(u.y) < 0.9 ? UP : XA);
+    w.normalize();
+    views.dendrite = { target: [P[dend * 3], P[dend * 3 + 1], P[dend * 3 + 2]], dir: w.toArray(),
+      note: `SWC sample ${S[dend][0]} (row ${dend + 1} of ${fmt(n)}), ${typeName(typ[dend])}, radius ${S[dend][5]} ${UM} as traced, ${fmt(pathLen[dend], 1)} ${UM} along the tree from the soma centre (calculated). The camera looks at right angles to the branch. Rule: the apical-dendrite sample nearest to ${DEND_VIEW.aim} ${UM} of path among those ${DEND_VIEW.from}–${DEND_VIEW.to} ${UM} out that are not branch points and are at most ${DEND_VIEW.maxDiameter} ${UM} across, so that both edges fit in a 1.00 ${UM} view. ${run.length} samples of this branch are drawn as a round tube with a sphere of the sample's radius at each joint; spines are not in the reconstruction.` };
+    if (opts.view !== undefined) labels.push({ position: views.dendrite.target.slice(), text: `Dendrite sample ${S[dend][0]}: radius ${S[dend][5]} ${UM}, ${fmt(pathLen[dend], 0)} ${UM} from the soma` });
+  }
+
   // ---- text
   const lens = N.length_um_by_type || {}, mor = N.morphometry_neuromorpho || {};
   const ref = N.reference || {};
@@ -195,11 +305,32 @@ export function build(D) {
     { label: 'Width × height × depth', value: `${fmt(mor.width || 0)} × ${fmt(mor.height || 0)} × ${fmt(mor.depth || 0)}`, unit: UM, tag: 'recorded', source: 'NeuroMorpho.Org morphometry' },
     { label: 'Impulse timing', value: 'illustrative', unit: '', tag: 'no sourced velocity', source: 'display only' },
   ];
+  if (dend >= 0 && opts.view !== undefined) {
+    readouts.push(
+      { label: 'Branch in the 1 µm view', value: `sample ${S[dend][0]}`, unit: '', tag: 'recorded', source: `${typeName(typ[dend])}, row ${dend + 1} of the SWC samples` },
+      { label: 'Its radius', value: S[dend][5], unit: UM, tag: 'recorded', source: src },
+      { label: 'Its distance from the soma, along the tree', value: Number(pathLen[dend].toFixed(1)), unit: UM, tag: 'calculated', source: 'sum of segment lengths to the soma centre' },
+    );
+  }
+
+  // ---- views: a named view shows the framed run as the round tube and leaves its 6-sided segments out
+  const showLine = viewLine(info, views);
+  function setView(name) {
+    const named = Object.prototype.hasOwnProperty.call(views, name);
+    fine.visible = named && dend >= 0;
+    tubeGeo.setDrawRange(0, fine.visible ? ipRun : Infinity);
+    showLine(named ? name : null);
+  }
+  const PLAIN = { 'SWC samples': 'Traced points', 'Total length': 'All branches end to end', 'Apical / basal / axon': 'Main, side and output branches', 'Soma radius': 'Cell body radius', 'Branch points': 'Places it branches', 'Width × height × depth': 'Cell size', 'Impulse timing': 'Signal timing', 'Branch in the 1 µm view': 'Branch shown', 'Its radius': 'Branch radius', 'Its distance from the soma, along the tree': 'Distance from the cell body' };   // plain words for the card
+  for (const r of readouts) if (!r.plain && PLAIN[r.label]) r.plain = PLAIN[r.label];
+  const setEnv = radiationRow(readouts);
+  if (opts.env) setEnv(opts.env);
+  if (opts.view !== undefined) setView(opts.view);
 
   return {
     scene,
     camera: { position: [cdir.x, cdir.y, cdir.z], target: [0, 0, 0], fov: 40 },
-    labels, info, readouts,
+    labels, info, readouts, views, setView, setEnv,
     update(dt, t) {
       for (let m = 0; m < imps.length; m++) {
         const it = imps[m], period = it.total / SPEED + it.pause;

@@ -40,6 +40,23 @@ export function build(D) {
 Labels are in scene coordinates (they do not move), so no labelled object is animated. Each module is self-contained
 (no shared helper file) and degrades to an explanatory empty scene if its data file is missing.
 
+### Views, setView and setEnv (the descent)
+
+`build(D, { view, env })` also returns `views: { name: { target, dir, note } }` (scene units; `dir` is the unit vector
+from the target to the camera), `setView(name)` (cheap: shows or hides what belongs to a view; the host builds a file
+once and calls it on every move between its views) and `setEnv(env)`. With no options every scene is exactly as before.
+There are no physics sliders in the descent: every state comes from `setEnv(env)`. The cell and molecule scenes only add
+a "Radiation here" row when `env.radiation` is present. Readouts carry a short `plain` label for the card.
+
+| file | views (field of view) | what the view frames |
+|---|---|---|
+| `cell_neuron.js` | tree (600 µm), dendrite (1.00 µm) | the box around all dendrite samples; SWC sample 1732 (apical dendrite, radius 0.24 µm, 150.0 µm of path from the soma), camera at right angles to the branch, 21 samples redrawn as a round tube |
+| `cell_cardiomyocyte.js` | cell (600 µm), sarcomere (1.00 µm) | the 141 µm cell among copies of itself joined end to end (arrangement illustrative); sarcomere 38 of 74 between two Z-lines |
+| `cell_rbc.js` | drop (5.00 mm), slice (600 µm), edge (1.00 µm) | a 5 mm cube of whole blood (605,000,000 red cells, calculated) with the 1 µL unit cube and the haematocrit column; a 1,400 × 720 µm slice one cell thick with all 12,519 cells the count gives (Halton positions, illustrative); the rim of the central cell |
+| `cell_skin.js` | full (5.00 mm), top (600 µm), dots (1.00 µm) | the 1.69 mm of skin; the top layers; 180 carbon-dot specks sized over the 1–12 nm DLS range (count, positions and depth illustrative) |
+| `mol_nav15.js`, `mol_renin.js` | whole (10.0 nm) | the whole molecule |
+| `mol_bilirubin.js` | whole (2.50 nm) | the whole molecule |
+
 ## Data: `scripts/build_bio.py` -> `data/bio/`
 
 Run `python scripts/build_bio.py` (about two minutes; network). It uses only official endpoints, records the SHA256 of
@@ -117,7 +134,7 @@ Data: `bio/cells`, `palette`.
 
 ### `mol_nav15.js` (heart, Å)
 Data: `bio/nav15_8vyj`, `bio/genes`.
-- RCSB PDB 8VYJ, full-length human Nav1.5, cryo-EM 3.6 Å, 1,395 of 2,016 residues modelled: Biswas R et al., PNAS
+- RCSB PDB 8VYJ, full-length human Nav1.5, electron-microscopy structure, 3.6 Å, 1,395 of 2,016 residues modelled: Biswas R et al., PNAS
   2025;122:e2416181122, doi:10.1073/pnas.2416181122 (PMC12107192). PDB numbering checked against UniProt Q14524 (all 1,395 match).
 - Colour by UniProt topology (transmembrane, pore-forming loop, extracellular, cytoplasmic); labels for repeats I-IV at
   the centroid of their transmembrane residues; the IFM motif (Ile1485-Phe1486-Met1487) located by sequence search of the
