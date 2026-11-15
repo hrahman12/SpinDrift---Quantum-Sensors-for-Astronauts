@@ -2,7 +2,9 @@
 
 Project: SpinDrift, NASA Space Apps 2026, team Brain Freeze. Challenge: "Create Health Monitoring Software for Astronauts on Space Missions." **Quantum sensing is the product.** Four real devices: an optically pumped magnetometer (OPM, QuSpin QZFM Gen-3: brain and heart fields), an NV-diamond magnetometer (three published builds: JGU, ZAQuant, Q.ANT: heart field), a quantum-dot renin nanosensor (blood), and a carbon quantum-dot microneedle patch (skin bilirubin).
 
-Claude Code has finished the data and the server. You own `/app` only. Rebuild the UI from this prompt; keep any code of yours that already meets it.
+Claude Code has finished the data and the server. You own `/app` only.
+
+**First, get rid of the current UI.** Delete the existing interface in `/app`: `index.html`, `main.js`, every `*-view.mjs` (anatomy-view, mission-view, object-view), `places.mjs`, `reference-library.mjs`, `simulator-directory.mjs`, `sensor-live.mjs`, `style.css`, `mission.css`, `immersive.css`, and the `assets/`, `research/` and `vendor/` folders if only the old UI uses them. Then build a new UI from scratch from this prompt. Do not carry over the old layout, components, styling, colours or 3D views. You may keep the tooling, which is not UI: `serve.py`, `config.json` (keep `serverUrl` at `http://localhost:8001`), `contract.mjs` (the validator), `/app/tests` and `LIVE_INSTRUMENT_CONTRACT.md`, updating them where this prompt differs.
 
 ## 1. Rules (override anything else)
 1. Real only. Every number, curve, waveform, image and colour on the page comes from `/data` or the server. No generated waveforms, sample spectra, placeholder charts, mock numbers, random noise, decorative curves or illustrative data shapes. Schematic diagrams may show parts and labels only, never a data shape.
@@ -15,7 +17,7 @@ Claude Code has finished the data and the server. You own `/app` only. Rebuild t
 
 ## 2. Running it
 - Data: `python build_all.py` (rebuilds every file, then `scripts/validate.py`; currently 0 problems).
-- Server: `uvicorn server.main:app --port 8001`. Port 8000 is taken on this machine by a static `python -m http.server 8000`. **Restart the 8001 server you started earlier**: it is still running old code, lacks the new endpoints below, and rewrites `live_snapshot.json` without the `radiation` and `iss_cabin` fields every minute.
+- Server: `uvicorn server.main:app --port 8001` (already running with the current code; Claude Code restarted it). Port 8000 is taken on this machine by a static `python -m http.server 8000`. If you restart the server, run it from the repo root.
 - Contract: `contract/schema.md` (v10, word for word) plus the additive changes logged in `STATUS.md` and summarised in section 7 below.
 
 ## 3. The idea the page must make obvious
@@ -70,7 +72,7 @@ From `/api/live` (poll 5 s) and `/api/sensors/live`: ISS position and IGRF field
 
 ## 5. Look: different from every competitor
 `C:\Users\Rahma\Downloads\competitor_websites.csv` lists 68 other entries for this challenge. SpinDrift must not look like any of them. A review of their sites found these shared patterns. **Do not use any of them as a visual element or layout idea:**
-- 3D body twins or rotatable anatomy models, including thermal/cyan "view modes" and organ callouts (Astronaut Health Intelligence Platform, Space6ix, Vitruvio, Vista, AstroVitals, AstroMed, HELIOS, ASTRA, AURA-EIMO, Crew Health Monitor, cheeseOS, Haoma, BEKUR-Aegis). Replace any `anatomy-view` 3D body with the real Kiel photo of the OPMs on a person (`assets.json`), or a flat line schematic of sensor placement with parts and labels only.
+- 3D body twins or rotatable anatomy models, including thermal/cyan "view modes" and organ callouts (Astronaut Health Intelligence Platform, Space6ix, Vitruvio, Vista, AstroVitals, AstroMed, HELIOS, ASTRA, AURA-EIMO, Crew Health Monitor, cheeseOS, Haoma, BEKUR-Aegis). To show where a sensor sits, use the real Kiel photo of the OPMs on a person (`assets.json`) or a flat line schematic of sensor placement with parts and labels only.
 - Grids of vitals tiles with green/amber/red status, readiness or early-warning scores (NEWS2), triage levels, anomaly indices, gauges and rings.
 - Personal-baseline bands, digital-twin projection cones and "day the threshold is crossed" forecasts; day-by-day 180-day mission simulations with seeded synthetic crews.
 - ECG-paper grids and oscilloscope styling (25 mm/s, pink grid, pleth sweeps: HELIOS, AURA-EIMO) and spacesuit or visor HUD overlays (HELIOS, AURA-EIMO, Health Signal, Arasaka EVA).
@@ -89,6 +91,7 @@ SpinDrift's own visual language, built only from what is real:
 - **Charts**: plot only arrays from the files and endpoints; axis labels and units from the files; no smoothing or interpolation beyond the data; legends name the dataset and its tag.
 
 ## 6. Acceptance checks
+- None of the old UI remains: its files are deleted and no old layout, component, style or 3D view was carried over (only the tooling listed at the top is kept).
 - `scripts/validate.py` shows 0 problems, and your `contract.mjs` validator accepts every file and endpoint response.
 - Search `/app` for hard-coded numbers that also exist in `/data`: none.
 - With the server stopped, the app shows the last good `live_snapshot.json` and says the server is offline; recorded, calculated and simulated content still renders from `/data`.

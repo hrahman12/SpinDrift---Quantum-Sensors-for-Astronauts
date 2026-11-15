@@ -51,6 +51,18 @@ def _parse_time(s: str) -> datetime:
     return dt.replace(tzinfo=timezone.utc)
 
 
+def _json(r):
+    """Parse a NOAA JSON response. Some SWPC files arrive as the complete JSON array followed by NUL padding
+    (seen on 2026-11-15); the padding is ignored and reported. Returns (object, note or None)."""
+    text = r.text
+    stripped = text.rstrip("\x00 \t\r\n")
+    pad = len(text) - len(stripped)
+    import json as _j
+    obj = _j.loads(stripped)
+    return obj, (f"the file had {pad} trailing padding bytes (NUL) after the complete JSON array; they were ignored"
+                 if pad and "\x00" in text[len(stripped):] else None)
+
+
 def _num(x):
     try:
         v = float(x)
@@ -69,7 +81,7 @@ def fetch_l1():
             if r.status_code != 200:
                 errors.append(f"{url} HTTP {r.status_code}")
                 continue
-            rows = r.json()
+            rows, pad_note = _json(r)
         except Exception as e:  # network or JSON error
             errors.append(f"{url} {type(e).__name__}: {e}")
             continue
@@ -95,6 +107,8 @@ def fetch_l1():
         note = None if url == NOAA_URLS[0] else (
             ("brief URLs failed (" + "; ".join(errors) + "); they were retired by " + SCN_26_21 +
              " and replaced by this official /json/rtsw/ file; newest row with active=true") if errors else None)
+        if pad_note:
+            note = f"{note}; {pad_note}" if note else pad_note
         out = {
             "bt_nT": vo(_num(newest["bt"]), "nT", src, "live", "VERIFIED", as_of, note),
             "bx_gsm_nT": _vo_or_missing(newest.get("bx_gsm"), src, as_of),
@@ -159,7 +173,7 @@ def fetch_goes():
         r = requests.get(GOES_URL, headers=UA, timeout=TIMEOUT)
         if r.status_code != 200:
             return None, f"GOES protons HTTP {r.status_code}"
-        rows = r.json()
+        rows, pad_note = _json(r)
     except Exception as e:
         return None, f"GOES protons {type(e).__name__}: {e}"
     src = f"NOAA SWPC GOES primary integral protons, {GOES_URL}"
@@ -170,7 +184,8 @@ def fetch_goes():
             return None, f"GOES protons: no {energy} rows"
         newest = max(recs, key=lambda x: _parse_time(x["time_tag"]))
         out[key] = vo(round(_num(newest["flux"]), 4), "pfu (protons cm^-2 s^-1 sr^-1)", src, "live", "VERIFIED",
-                      _iso(_parse_time(newest["time_tag"])), "5-minute average")
+                      _iso(_parse_time(newest["time_tag"])),
+                      "5-minute average" + (f"; {pad_note}" if pad_note else ""))
         out["satellite"] = f"GOES-{newest.get('satellite')}"
     f10 = out["flux_ge10MeV_pfu"]
     level = 0

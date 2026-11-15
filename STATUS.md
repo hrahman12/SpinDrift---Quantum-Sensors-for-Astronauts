@@ -186,3 +186,6 @@ Format: `<ISO time> <agent> <file or feed> <done|failed|changed> <note>`
 - TO_CONFIRM items above (APS full text of the OSCAR-QUBE paper; CQD reader channels; QuSpin resonance width full vs half; ISS cabin units).
 - Restart the server on port 8001 (started by Codex with the old code) so it serves the new endpoints.
 - Real instruments: if one becomes available, set SPINDRIFT_INGEST_KEY and post readings to /api/sensors/{device}/ingest; until then every device shows 'No physical instrument connected'.
+2026-11-15T08:27:43Z claude-code server on port 8001 changed restarted by Claude Code at the user's request: the stale process (old code) was stopped and the current server.main now runs on 8001; it writes locations.json and live_snapshot.json with the measured lunar/Mars fields, radiation and ISS cabin data
+2026-11-15T08:27:43Z claude-code NOAA SWPC feeds changed GOES (and RTSW) responses arrived as the complete JSON array followed by NUL padding; the parser now ignores trailing NUL padding and records it in the VO note
+2026-11-15T08:27:43Z claude-code contract/CODEX_PROMPT.md changed Codex is told to delete its current UI and build a new one from scratch, keeping only tooling (serve.py, config.json, contract.mjs, tests)
