@@ -32,9 +32,15 @@ export function sentence(req) {
     const by = ratio && ratio >= 1.05 ? ` (${big(ratio)} times ${req.holds ? 'more than needed' : 'too much'})` : '';
     return req.holds ? `${P.good}${P.squared && ratio ? ` The signal is ${big(ratio)} times what is needed.` : ''}` : `${P.bad}${P.squared ? (ratio ? ` It would need to be ${big(ratio)} times stronger.` : '') : by} ${P.fix}`.trim();
   }
-  const miss = (req.missing || []).map((m) => (typeof m === 'string' ? m : m.symbol || m.id || '')).filter(Boolean);
-  return `A number is missing${miss.length ? ` (${miss.slice(0, 2).join(', ')})` : ''}, so Lean will not guess.`;
+  const miss = [...new Set((req.missing || []).map((m) => (typeof m === 'string' ? m : m.symbol || m.id || '')).filter(Boolean))].map((s) => MISSING[s] || s);
+  if (!miss.length) return 'A number is missing, so Lean will not guess.';
+  return `Lean needs ${miss.length === 1 ? 'one more number' : `${['', '', 'two', 'three'][miss.length] || miss.length} more numbers`}: ${miss.join('; ')}. It will not guess.`;
 }
+// the missing numbers in plain words (keys are the symbols the checker reports)
+const MISSING = { c_renin: 'how much renin is in the sample', c_bilirubin: 'how much bilirubin is in the skin fluid',
+  range_low: 'the smallest amount the patch can read (its paper is not open to read)', range_high: 'the largest amount the patch can read (its paper is not open to read)',
+  LOD: 'the smallest amount the test can see', B_ambient: 'the magnetic field at this spot', B_comp: 'how much field the sensor’s coils can cancel', S: 'the shield',
+  snr: 'how clear the signal must be', 'η': 'how sensitive the sensor is', BW: 'the sensor’s bandwidth', A: 'the size of the signal', N: 'how many beats were averaged' };
 
 // the seesaw; size 'sm' for the card rows, 'lg' for the level card
 export function seesaw(req, verdict, { size = 'lg' } = {}) {

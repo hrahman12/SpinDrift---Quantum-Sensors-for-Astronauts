@@ -1,7 +1,7 @@
 # ui/sensors: documented 3D sensor models
 
 One module per sensor tab. Each draws the **exact** sensor to scale, but only the parts whose size and position
-are published (CryoLean rule: "draws only parts whose size is in the datasheet, to scale in millimetres with
+are published (rule: "draws only parts whose size is in the datasheet, to scale in millimetres with
 labels ... Undocumented parts are not drawn"). Everything else is returned in `undocumented` with the reason.
 
 ```

@@ -15,15 +15,30 @@ Values were checked on 2026-11-15 against:
 - the periodictable package's transcription of Cordero et al. 2008 (covalent radii; the article is paywalled).
 A Wolfram Language run (recorded below in WOLFRAM) cross-checks the derived numbers; this script recomputes each one
 and stops if Python and Wolfram disagree.
+
+Nuclei (ui/scale/q_nucleus.js), the one part of this script that uses the network: the root-mean-square charge radii
+of 87Rb and 14N are read at build time from the IAEA Nuclear Data Section's nuclear charge radii database
+(https://www-nds.iaea.org/radii/charge_radii.csv; Angeli & Marinova, At. Data Nucl. Data Tables 99, 69 (2013)) and
+cross-checked against the IAEA Live Chart of Nuclides API, whose guide names Angeli & Marinova 2013 as the source of
+its charge-radius field; the 14N spin is the API's J-pi (ENSDF). The 2.16 MHz 14N hyperfine splitting of the NV
+centre is checked as a quote in the arXiv full texts of Omar et al. and Barry et al. The SHA256 of every file received
+is recorded. If a fetch fails, the values of the last successful run are kept as they were (with their own SHA256 and
+fetch time); if there is none, the entry is null and the nucleus scene draws nothing.
 """
+import csv
+import hashlib
+import html
+import io
 import json
 import math
 import random
+import re
 import sys
+import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from server.common import DATA, RECORDED, calc, log_status, meta, missing, read_json, vo, write_json  # noqa: E402
+from server.common import DATA, RECORDED, calc, log_status, meta, missing, now_iso, read_json, vo, write_json  # noqa: E402
 
 OUT = DATA / "quantum_constants.json"
 ACCESSED = "2026-11-15"
@@ -56,6 +71,19 @@ TABATABAEE = ("Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible
               "doi:10.1021/acsnano.4c06191")
 PERIODICTABLE = ("values as transcribed in the periodictable Python package, periodictable/covalent_radius.py "
                  "(https://sources.debian.org/src/python-periodictable/2.0.2-1/periodictable/covalent_radius.py)")
+ANGELI = ("Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. "
+          "Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006")
+IAEA_RADII = "IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/"
+IAEA_RADII_CSV = "https://www-nds.iaea.org/radii/charge_radii.csv"
+IAEA_LIVECHART = "https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides={}"
+IAEA_GUIDE = "https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html"
+IAEA_UA = "Livechart/1.0"   # the user agent the IAEA API guide tells automated clients to send
+OMAR_HTML = "https://arxiv.org/html/2601.18843v1"
+BARRY_HTML = "https://arxiv.org/html/1903.08176v2"
+NUCLIDES = {
+    "rb87": {"z": 37, "a": 87, "symbol": "Rb", "api": "87rb", "name": "rubidium-87", "site": "brain"},
+    "n14": {"z": 7, "a": 14, "symbol": "N", "api": "14n", "name": "nitrogen-14", "site": "heart"},
+}
 
 # Wolfram Language cross-check, run through the Wolfram MCP connector (WolframLanguageEvaluator) on 2026-11-15.
 WOLFRAM_CODE = (
@@ -91,6 +119,44 @@ WOLFRAM = {
     "gslac_mT": 102.4085637823372,
     "graphite": [3.3555, 1.4225910632832381, 2.133886594924857],
 }
+# Second Wolfram Language run (same connector, 2026-11-15) for the nucleus scene. Its inputs are the radii the IAEA
+# file gave on that day; if a later fetch returns other radii the ratios are recomputed here and marked as not
+# cross-checked.
+WOLFRAM_NUCLEI_CODE = (
+    "rRb = 4.1989; rN = 2.5582; a = 3.56715; tilt[i_] := ArcCos[i/Sqrt[i (i + 1)]]/Degree;\n"
+    "<| rb87_vdw_over_rms -> (3.03*10^5)/rRb, n14_covalent_over_rms -> (0.71*10^5)/rN,\n"
+    "   n14_nv_distance_over_rms -> (Sqrt[3]/4 a 10^5)/rN, spin_tilt_I_3_2_deg -> N[tilt[3/2], 16],\n"
+    "   spin_length_I_3_2 -> N[Sqrt[(3/2)(5/2)], 16], spin_tilt_I_1_deg -> N[tilt[1], 16],\n"
+    "   spin_length_I_1 -> N[Sqrt[2], 16], n14_hyperfine_lines -> 2*1 + 1 |>")
+WOLFRAM_NUCLEI_INPUTS = {"rb87": 4.1989, "n14": 2.5582}
+# Third Wolfram Language run (same connector, 2026-11-15) for the motion and light values; inputs are the values the
+# fetched files gave on that day (checked only while they are unchanged).
+WOLFRAM_MOTION_CODE = (
+    "hbar = 6.62607015*^-34/(2 Pi); kB = 1.380649*^-23; u = 1.66053906892*^-27;\n"
+    "w = w /. FindRoot[hbar/(2 12 u w) Coth[hbar w/(2 kB 293)] == 0.00171*^-20, {w, 1.5*^14}, WorkingPrecision -> 30];\n"
+    "nstar = Sqrt[10973731.568157/100/33690.80480]; a0 = 5.29177210544*^-11;\n"
+    "<| diamond_einstein_THz -> w/(2 Pi)/10^12, n_star -> nstar, r_mp_nm -> nstar^2 a0 10^9,\n"
+    "   r_mean_nm -> nstar (2 nstar + 1)/2 a0 10^9, v_mean_ms -> Sqrt[8 kB (150 + 273.15)/(Pi 1.44316089500*^-25)],\n"
+    "   n14_larmor_MHz_T -> 0.403573 7.6225932188, rb87_larmor_mu_MHz_T -> 2.75129/1.5 7.6225932188,\n"
+    "   rb87_larmor_gI_MHz_T -> 0.0009951414 13996.2449171, hc_eV_nm -> 6.62607015*^-34 299792458/1.602176634*^-19 10^9 |>")
+WOLFRAM_MOTION_INPUTS = {"diamond_u_iso": 0.00171, "diamond_temperature": 293.0, "ionization_limit": 33690.8048,
+                         "rydberg": 10973731.568157, "bohr_radius": 5.29177210544e-11, "atomic_mass_kg": 1.44316089500e-25,
+                         "atomic_mass_constant": 1.66053906892e-27, "n14_mu": 0.403573, "rb87_mu": 2.75129,
+                         "nuclear_magneton_over_h": 7.6225932188}
+WOLFRAM_MOTION = {"diamond_einstein_THz": 25.408173782846, "n_star": 1.8047683805871455, "r_mp_nm": 0.1723630140321242,
+                  "r_mean_nm": 0.22011512889798007, "v_mean_ms": 321.07130622778715,
+                  "n14_larmor_MHz_T": 3.0762728130907724, "rb87_larmor_mu_MHz_T": 13.981309664634834,
+                  "rb87_larmor_gI_MHz_T": 13.92824276154578, "hc_eV_nm": 1239.8419843320025}
+WOLFRAM_NUCLEI = {
+    "rb87_vdw_over_rms": 72161.75665055134,
+    "n14_covalent_over_rms": 27753.889453522013,
+    "n14_nv_distance_over_rms": 60379.22209189392,
+    "spin_tilt_I_3_2_deg": 39.23152048359226,
+    "spin_length_I_3_2": 1.9364916731037085,
+    "spin_tilt_I_1_deg": 45.0,
+    "spin_length_I_1": 1.4142135623730951,
+    "n14_hyperfine_lines": 3,
+}
 
 
 def rnd(x, n=10):
@@ -112,6 +178,528 @@ def agree(name, mine, theirs, rel=1e-9):
         return
     if not math.isclose(mine, theirs, rel_tol=rel, abs_tol=1e-12):
         raise SystemExit(f"{name}: python {mine!r} != wolfram {theirs!r}")
+
+
+# ---------------------------------------------------------------------------------------------------- downloads
+FETCHED = {}        # url -> {"sha256", "fetched", "bytes"} of the bytes received in this run
+FETCH_ERRORS = {}   # url -> error text
+RAW = {}            # url -> bytes received in this run (so a page is read once)
+
+
+def fetch(url, user_agent=None, timeout=90):
+    """One GET. Returns the bytes, or None after recording the error. A refusal is recorded, never worked around."""
+    if url in RAW:
+        return RAW[url]
+    headers = {"User-Agent": user_agent} if user_agent else {}
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=timeout) as r:
+            body = r.read()
+    except Exception as e:  # noqa: BLE001 - a failed fetch keeps the last verified values or leaves the entry null
+        FETCH_ERRORS[url] = f"{type(e).__name__}: {e}"
+        return None
+    FETCHED[url] = {"sha256": hashlib.sha256(body).hexdigest(), "fetched": now_iso(), "bytes": len(body)}
+    RAW[url] = body
+    return body
+
+
+def plain(raw):
+    """Readable text of an HTML page: scripts, styles, TeX annotations and tags removed, whitespace collapsed."""
+    t = raw.decode("utf-8", "replace")
+    t = re.sub(r"(?is)<annotation-xml\b.*?</annotation-xml>", " ", t)
+    t = re.sub(r"(?is)<(script|style|annotation)\b.*?</\1>", " ", t)
+    t = re.sub(r"(?s)<[^>]+>", " ", t)
+    return re.sub(r"\s+", " ", html.unescape(t))
+
+
+def at(url):
+    f = FETCHED[url]
+    return f"{url} (SHA256 {f['sha256']}, fetched {f['fetched']})"
+
+
+def spin_from_jp(jp):
+    """'3/2-' -> 1.5, '1+' -> 1.0 (ENSDF J-pi of a firmly assigned ground state)."""
+    m = re.fullmatch(r"(\d+)(?:/(\d+))?[+-]", (jp or "").strip())
+    return int(m.group(1)) / int(m.group(2) or 1) if m else None
+
+
+def verified(v):
+    return isinstance(v, dict) and v.get("status") == "VERIFIED" and v.get("value") is not None
+
+
+# ---------------------------------------------------------------------------------------------- motion and light
+# Sources read at build time for the moving parts of the deepest scenes (thermal vibration, Larmor precession, the
+# rubidium valence electron, the NV optical cycle, the OPM's resonance width). Each value is parsed from the file
+# received; a failed fetch keeps the last verified value, else the entry is null and the scene does not animate it.
+NIST_URL = "https://physics.nist.gov/cgi-bin/cuu/Value?{}"
+WEB_UA = "Mozilla/5.0 (compatible; SpinDrift data build script)"
+STECK_PDF = "https://steck.us/alkalidata/rubidium87numbers.pdf"
+COD_CIF = "https://www.crystallography.net/cod/{}.cif"
+QUSPIN_URL = "https://quspin.com/technology/"
+H_SI, K_SI, E_SI, C_SI = 6.62607015e-34, 1.380649e-23, 1.602176634e-19, 299792458.0
+SI_EXACT = ("SI defining constants, exact since 20 May 2019 (BIPM, The International System of Units, 9th ed., 2019): "
+            "h = 6.626 070 15 x 10^-34 J s, k = 1.380 649 x 10^-23 J/K, e = 1.602 176 634 x 10^-19 C, "
+            "c = 299 792 458 m/s")
+BATES = ("Bates & Damgaard, 'The calculation of the absolute strengths of spectral lines', Phil. Trans. R. Soc. "
+         "Lond. A 242, 101-122 (1949), doi:10.1098/rsta.1949.0006 (Coulomb approximation)")
+KEPT = []           # entries kept from the last successful run because a fetch failed
+
+
+def keep_or_missing(prev, key, unit, source, why):
+    if verified(prev):
+        KEPT.append(key)
+        return prev
+    return missing(unit, source, status="NOT_YET_EXTRACTED", note=f"not read in this run ({why}); not drawn")
+
+
+def nist_value(prev, key, code, name, unit):
+    url = NIST_URL.format(code)
+    raw = fetch(url, WEB_UA)
+    m = re.search(r"Numerical value\s+([0-9][0-9 ]*(?:\.[0-9 ]*)?)(\.\.\.)?\s*(?:x\s*10\s*(-?\s*\d+))?\s+(.{1,24}?)\s+"
+                  r"Standard uncertainty\s+(\(exact\)|[0-9][0-9 .]*)", plain(raw)) if raw else None
+    if not m:
+        return keep_or_missing(prev, f"codata.{key}", unit, f"{CODATA}, '{name}', {url}",
+                               FETCH_ERRORS.get(url, "value not found on the page"))
+    val = float(m.group(1).replace(" ", "")) * 10 ** int((m.group(3) or "0").replace(" ", ""))
+    return vo(float(f"{val:.15g}"), unit, f"{CODATA}, '{name}': '{re.sub(r'\s+', ' ', m.group(0))}', {at(url)}",
+              note="exact by definition" if m.group(5) == "(exact)" else None)
+
+
+def einstein_omega(u2_m2, mass_kg, T):
+    """Angular frequency of a quantum harmonic oscillator whose mean-square displacement per direction is u2 at T:
+    <u^2> = hbar / (2 m w) coth(hbar w / (2 k T)), solved by bisection (the right side falls with w)."""
+    hbar = H_SI / (2 * math.pi)
+    f = lambda w: hbar / (2 * mass_kg * w) / math.tanh(hbar * w / (2 * K_SI * T)) - u2_m2  # noqa: E731
+    lo, hi = 1e10, 1e16
+    for _ in range(200):
+        mid = math.sqrt(lo * hi)
+        lo, hi = (mid, hi) if f(mid) > 0 else (lo, mid)
+    return math.sqrt(lo * hi)
+
+
+def build_extra(prev, rb87, opm_model, specs):
+    """New blocks: codata (more constants), si (exact), motion (thermal vibration), rb87 additions (valence electron,
+    thermal speed), opm_model additions (resonance width), nv_optics (the NV optical cycle)."""
+    prev = prev or {}
+    pc, pr, po, pm, pn = (prev.get(k) or {} for k in ("codata", "rb87", "opm_model", "motion", "nv_optics"))
+    # ------------------------------------------------------------------ CODATA 2022 (NIST pages) and exact SI values
+    codata = {
+        "nuclear_magneton_over_h": nist_value(pc.get("nuclear_magneton_over_h"), "nuclear_magneton_over_h", "munshhz",
+                                              "nuclear magneton in MHz/T", "MHz/T"),
+        "rydberg": nist_value(pc.get("rydberg"), "rydberg", "ryd", "Rydberg constant", "m^-1"),
+        "bohr_radius": nist_value(pc.get("bohr_radius"), "bohr_radius", "bohrrada0", "Bohr radius", "m"),
+        "atomic_mass_constant": nist_value(pc.get("atomic_mass_constant"), "atomic_mass_constant", "ukg",
+                                           "atomic mass constant", "kg"),
+    }
+    si = {"h": vo(H_SI, "J s", SI_EXACT, note="exact"), "k": vo(K_SI, "J/K", SI_EXACT, note="exact"),
+          "e": vo(E_SI, "C", SI_EXACT, note="exact"), "c": vo(C_SI, "m/s", SI_EXACT, note="exact")}
+    si["hc_eV_nm"] = calc(rnd(H_SI * C_SI / E_SI * 1e9, 15), "eV nm", [si["h"], si["c"], si["e"]],
+                          "h c / e (photon energy in eV = this / wavelength in nm)", ["si.h", "si.c", "si.e"])
+
+    # ------------------------------------------------------------------ Steck rev. 2.3.4 PDF: ionization limit, mass
+    raw = fetch(STECK_PDF)
+    text = ""
+    if raw:
+        try:
+            import pypdf  # noqa: PLC0415 - only this step needs it
+            pdf = pypdf.PdfReader(io.BytesIO(raw))
+            text = re.sub(r"\s+", " ", " ".join((p.extract_text() or "") for p in pdf.pages[:30]))
+        except Exception as e:  # noqa: BLE001
+            FETCH_ERRORS[STECK_PDF] = f"PDF text not read: {type(e).__name__}: {e}"
+    m_ei = re.search(r"Ionization Limit EI ([\d ]+\.[\d ]+)\(\d+\) cm−1", text)
+    m_ma = re.search(r"Atomic Mass m ([\d ]+\.[\d ]+)\(\d+\) u ([\d ]+\.[\d ]+)\(\d+\) × 10−25 kg", text)
+    why = FETCH_ERRORS.get(STECK_PDF, "the quote was not found in the PDF text")
+    E_I = (vo(float(m_ei.group(1).replace(" ", "")), "cm^-1", f"{STECK}, Table 2 (Rubidium 87 Physical Properties): "
+              f"'{m_ei.group(0)}', read from {at(STECK_PDF)}") if m_ei else
+           keep_or_missing(pr.get("ionization_limit"), "rb87.ionization_limit", "cm^-1", f"{STECK}, Table 2", why))
+    mass = (vo(float(m_ma.group(2).replace(" ", "")) * 1e-25, "kg", f"{STECK}, Table 2: '{m_ma.group(0)}', read from "
+               f"{at(STECK_PDF)}") if m_ma else
+            keep_or_missing(pr.get("atomic_mass_kg"), "rb87.atomic_mass_kg", "kg", f"{STECK}, Table 2", why))
+    rb_add = {"ionization_limit": E_I, "atomic_mass_kg": mass}
+    # the valence 5s electron in the Coulomb approximation: radial density r^2 R(r)^2 ∝ r^(2 n*) e^(-2 r / (n* a0))
+    R_inf, a0 = codata["rydberg"], codata["bohr_radius"]
+    ok = all(v["value"] is not None for v in (E_I, R_inf, a0))
+    n_star = math.sqrt(R_inf["value"] / 100 / E_I["value"]) if ok else None
+    rb_add["valence_n_star"] = calc(rnd(n_star) if ok else None, "", [R_inf, E_I],
+                                    "effective principal quantum number n* = sqrt(R_inf / E_I), both in cm^-1",
+                                    ["codata.rydberg", "rb87.ionization_limit"],
+                                    note_extra="the reduced-mass Rydberg of 87Rb differs from R_inf by 6 parts per "
+                                               "million, which changes n* by 3 ppm (not applied)")
+    rb_add["valence_density_model"] = vo(
+        "radial probability density of the 5s valence electron, P(r) ∝ r^(2n*) exp(-2r / (n* a0)): the leading term "
+        "of the Coulomb-approximation wavefunction outside the ion core", "", BATES, tag="calculated",
+        note="the core region (36 inner electrons, inner nodes of the 5s orbital) is not modelled; spherically "
+             "symmetric (an s state)")
+    rb_add["valence_r_most_probable"] = calc(rnd(n_star ** 2 * a0["value"] * 1e9) if ok else None, "nm",
+                                             [rb_add["valence_n_star"], a0], "peak of P(r): r = n*^2 a0",
+                                             ["rb87.valence_n_star", "codata.bohr_radius"])
+    rb_add["valence_r_mean"] = calc(rnd(n_star * (2 * n_star + 1) / 2 * a0["value"] * 1e9) if ok else None, "nm",
+                                    [rb_add["valence_n_star"], a0], "mean of P(r): <r> = n*(2n* + 1)/2 a0",
+                                    ["rb87.valence_n_star", "codata.bohr_radius"])
+    T_cell = opm_model["cell_temperature"]
+    okv = mass["value"] is not None
+    rb_add["thermal_mean_speed"] = calc(
+        rnd(math.sqrt(8 * K_SI * (T_cell["value"] + 273.15) / (math.pi * mass["value"]))) if okv else None, "m/s",
+        [si["k"], T_cell, mass], "mean speed of a vapour atom sqrt(8 k T / (pi m)) at the cell temperature",
+        ["si.k", "opm_model.cell_temperature", "rb87.atomic_mass_kg"],
+        note_extra="Maxwell-Boltzmann mean speed; in the buffer gas the atom changes direction at every collision")
+
+    # ------------------------------------------------------------------ QuSpin: zero-field resonance width
+    raw = fetch(QUSPIN_URL, WEB_UA)
+    qt = plain(raw) if raw else ""
+    m_w = re.search(r"FWHM ≈ (\d+) nT", qt)
+    m_t = re.search(r"typically about \d+ nT wide", qt)
+    m_p = re.search(r"a perpendicular field changes the cell’s transparency", qt)
+    if m_w:
+        fwhm = vo(float(m_w.group(1)), "nT", f"{QUSPIN_TECH}: figure label 'ZF resonance (photodetector output) "
+                  f"{m_w.group(0)}'{'; text: ' + repr(m_t.group(0)) if m_t else ''}; read from {at(QUSPIN_URL)}",
+                  tag="datasheet", note="full width at half maximum of the zero-field resonance (Lorentzian)")
+    else:
+        fwhm = keep_or_missing(po.get("zero_field_fwhm"), "opm_model.zero_field_fwhm", "nT", QUSPIN_TECH,
+                               FETCH_ERRORS.get(QUSPIN_URL, "'FWHM ≈ … nT' not found on the page"))
+    opm_add = {"zero_field_fwhm": fwhm,
+               "zero_field_hwhm": calc(fwhm["value"] / 2 if fwhm["value"] is not None else None, "nT", [fwhm],
+                                       "half width = FWHM / 2 (Lorentzian)", ["opm_model.zero_field_fwhm"],
+                                       note_extra="the field scale of Sulai's dimensionless w = Omega/Gamma' "
+                                                  "(Lean opm_half_width: the resonance is at half height at w = 1)"),
+               "transparency": (vo("a perpendicular field changes the cell's transparency", "", f"{QUSPIN_TECH}, "
+                                   f"figure text; read from {at(QUSPIN_URL)}", tag="datasheet") if m_p else
+                                keep_or_missing(po.get("transparency"), "opm_model.transparency", "", QUSPIN_TECH,
+                                                "the sentence was not found on the page"))}
+
+    # ------------------------------------------------------------------ thermal vibration (COD CIFs)
+    motion = {}
+    url_d = COD_CIF.format("2300702")
+    raw = fetch(url_d, WEB_UA)
+    t = raw.decode("utf-8", "replace") if raw else ""
+    m_u = re.search(r"^C1\s+C\s+0\.12500\s+0\.12500\s+0\.12500\s+1\.000\s+Uiso\s+([\d.]+)\((\d+)\)", t, re.M)
+    m_T = re.search(r"_diffrn_ambient_temperature\s+([\d.]+)", t)
+    if m_u and m_T:
+        motion["diamond_u_iso"] = vo(float(m_u.group(1)), "Å^2", f"{COD_HOUBEN}: atom site C1, "
+                                     f"'{m_u.group(0)}', '_diffrn_ambient_temperature {m_T.group(1)}', {at(url_d)}",
+                                     note=f"isotropic mean-square displacement per direction at {m_T.group(1)} K "
+                                          f"(± 0.00000{m_u.group(2)} Å²)")
+        motion["diamond_temperature"] = vo(float(m_T.group(1)), "K", f"{COD_HOUBEN}, {at(url_d)}")
+    else:
+        motion["diamond_u_iso"] = keep_or_missing(pm.get("diamond_u_iso"), "motion.diamond_u_iso", "Å^2", COD_HOUBEN,
+                                                  FETCH_ERRORS.get(url_d, "Uiso not found in the CIF"))
+        motion["diamond_temperature"] = keep_or_missing(pm.get("diamond_temperature"), "motion.diamond_temperature",
+                                                        "K", COD_HOUBEN, "not found")
+    U, Td, mu = motion["diamond_u_iso"], motion["diamond_temperature"], codata["atomic_mass_constant"]
+    okd = all(v["value"] is not None for v in (U, Td, mu))
+    motion["diamond_rms_displacement"] = calc(rnd(math.sqrt(U["value"])) if okd else None, "Å", [U],
+                                              "root-mean-square displacement per direction = sqrt(Uiso)",
+                                              ["motion.diamond_u_iso"])
+    w_e = einstein_omega(U["value"] * 1e-20, 12 * mu["value"], Td["value"]) if okd else None
+    motion["diamond_einstein_frequency"] = calc(
+        rnd(w_e / (2 * math.pi) / 1e12) if okd else None, "THz", [U, Td, mu, si["h"], si["k"]],
+        "frequency nu = omega / 2pi of a carbon-12 atom (12 u) vibrating as a quantum harmonic oscillator whose "
+        "mean-square displacement hbar/(2 m omega) coth(hbar omega/(2 k T)) equals the measured Uiso at the measured T",
+        ["motion.diamond_u_iso", "motion.diamond_temperature", "codata.atomic_mass_constant", "si.h", "si.k"],
+        note_extra="Einstein model: one frequency for every atom; the real crystal vibrates in many modes. The scenes "
+                   "use it as the rate of the drawn jiggle and keep the measured amplitude")
+    url_g = COD_CIF.format("9011577")
+    raw = fetch(url_g, WEB_UA)
+    t = raw.decode("utf-8", "replace") if raw else ""
+    rows = re.findall(r"^(C[12])\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*$", t, re.M)
+    if rows:
+        motion["graphite_u_aniso"] = vo({r[0]: {"U11": float(r[1]), "U22": float(r[2]), "U33": float(r[3]),
+                                                "U12": float(r[4]), "U13": float(r[5]), "U23": float(r[6])} for r in rows},
+                                        "Å^2", f"{COD_GRAPHITE}: _atom_site_aniso_U_11 ... _U_23 rows "
+                                        f"{'; '.join(' '.join(r) for r in rows)}, {at(url_g)}",
+                                        note="anisotropic displacement parameters: U33 is along c (out of the layers)")
+        has_T = re.search(r"_(?:diffrn_ambient|cell_measurement)_temperature\s+([\d.]+)", t)
+        motion["graphite_temperature"] = (vo(float(has_T.group(1)), "K", f"{COD_GRAPHITE}, {at(url_g)}") if has_T else
+                                          missing("K", f"{COD_GRAPHITE}, {at(url_g)}", note="the CIF states no "
+                                                  "measurement temperature, so no vibration frequency can be calculated "
+                                                  "from these amplitudes: the graphite atoms are drawn at rest"))
+    else:
+        motion["graphite_u_aniso"] = keep_or_missing(pm.get("graphite_u_aniso"), "motion.graphite_u_aniso", "Å^2",
+                                                     COD_GRAPHITE, FETCH_ERRORS.get(url_g, "U rows not found"))
+        motion["graphite_temperature"] = pm.get("graphite_temperature") or missing("K", COD_GRAPHITE)
+
+    # ------------------------------------------------------------------ the NV optical cycle (Barry; Omar)
+    bt, ot = plain(RAW[BARRY_HTML]) if BARRY_HTML in RAW else "", plain(RAW[OMAR_HTML]) if OMAR_HTML in RAW else ""
+
+    def quote(prev_v, key, txt, url, pattern, value, unit, where, note=None):
+        m = re.search(pattern, txt)
+        if m:
+            return vo(value(m) if callable(value) else value, unit, f"{where}: '{m.group(0)}' (found in {at(url)})",
+                      note=note)
+        return keep_or_missing(prev_v, f"nv_optics.{key}", unit, where, FETCH_ERRORS.get(url, "quote not found"))
+    nvo = {
+        "green_excitation": quote(pn.get("green_excitation"), "green_excitation", bt, BARRY_HTML,
+                                  r"a single free-running 532 nm solid-state laser is sufficient", 532, "nm",
+                                  f"{BARRY}, Sec. I", note="the usual green pump; Omar et al. do not state the "
+                                  "wavelength of the heart builds' lasers"),
+        "zpl": quote(pn.get("zpl"), "zpl", bt, BARRY_HTML, r"zero phonon line \(ZPL\) at 637 nm", 637, "nm",
+                     f"{BARRY}, Sec. on readout", note="the NV- zero-phonon line; the red glow spreads to longer "
+                     "wavelengths (the ZAQuant build filters above 695 nm, palette.json)"),
+        "singlet_ir": quote(pn.get("singlet_ir"), "singlet_ir", bt, BARRY_HTML, r"1 E ↔ 1 A 1 transition at 1042 nm",
+                            1042, "nm", f"{BARRY}, Sec. on infrared absorption readout"),
+        "singlet_lifetime": quote(pn.get("singlet_lifetime"), "singlet_lifetime", bt, BARRY_HTML,
+                                  r"lifetime ∼ 140 − 220 ns at room temperature", "140–220", "ns",
+                                  f"{BARRY}, Sec. on infrared absorption readout", note="lifetime of the 1E singlet"),
+        "isc": quote(pn.get("isc"), "isc", bt, BARRY_HTML,
+                     r"spin-state-dependent intersystem crossing \[[^\]]*\] produces both spin-state-dependent "
+                     r"fluorescence contrast and optical spin initialization into the NV - center’s m s = 0 ground state",
+                     "the spin-dependent intersystem crossing gives both the fluorescence contrast and the optical "
+                     "initialization into m_s = 0", "", f"{BARRY}, Sec. I"),
+        "zaquant_linewidth": quote(pn.get("zaquant_linewidth"), "zaquant_linewidth", ot, OMAR_HTML,
+                                   r"magnetic resonance linewidth \(ZAQuant sensor: ∼ 200 kHz\)", 200, "kHz",
+                                   "Omar et al., arXiv 2601.18843v1, Sec. 2", note="about 200 kHz; JGU and Q.ANT "
+                                   "linewidths are not stated"),
+    }
+    hc = si["hc_eV_nm"]
+    for key in ("green_excitation", "zpl", "singlet_ir"):
+        v = nvo[key]
+        nvo[f"{key}_eV"] = calc(rnd(hc["value"] / v["value"], 6) if v["value"] is not None else None, "eV", [hc, v],
+                                "photon energy = hc / wavelength", ["si.hc_eV_nm", f"nv_optics.{key}"])
+    return {"codata": codata, "si": si, "rb87": rb_add, "opm_model": opm_add, "motion": motion, "nv_optics": nvo}
+
+
+def build_nuclei(prev, rb87, radii, n_v, specs):
+    """The 87Rb and 14N nuclei for ui/scale/q_nucleus.js, plus the NV centre's 14N hyperfine entries.
+
+    Returns (nuclei block, entries to add under "nv", checks). Nothing here is typed in except the 2.16 MHz that the
+    project's NV data already cites, and that value is VERIFIED only if its quote is found in the fetched paper.
+    """
+    prev_n = (prev or {}).get("nuclei") or {}
+    prev_nv = (prev or {}).get("nv") or {}
+    kept = []
+
+    # ------------------------------------------------------------------ IAEA: charge radii file, API guide
+    raw_csv = fetch(IAEA_RADII_CSV, IAEA_UA)
+    rows = list(csv.DictReader(io.StringIO(raw_csv.decode("utf-8-sig", "replace")))) if raw_csv else []
+    raw_guide = fetch(IAEA_GUIDE, IAEA_UA)
+    provenance = {"what": "the Live Chart API guide names the source of the API's charge-radius field", "guide": IAEA_GUIDE,
+                  "radius_field_source_code": None, "source_code_AM": None, "checked": bool(raw_guide)}
+    if raw_guide:
+        g = raw_guide.decode("utf-8", "replace")
+        f_m = re.search(r"var gs_fields\s*=\s*\((.*?)\)\.split", g, re.S)
+        s_m = re.search(r"var gs_src\s*=\s*\[(.*?)\]", g, re.S)
+        if f_m and s_m:
+            fields = [x.strip() for x in "".join(re.findall(r'"([^"]*)"', f_m.group(1))).split(",")]
+            srcs = re.findall(r"'([^']*)'", s_m.group(1))
+            if "radius" in fields and fields.index("radius") < len(srcs):
+                provenance["radius_field_source_code"] = srcs[fields.index("radius")]
+            codes, last = {}, ""
+            for fld, s in zip(fields, srcs):        # the guide marks "same source as above" with a ditto sign
+                s = html.unescape(s).strip()
+                last = last if s in ("”", '"') else s
+                codes[fld] = last
+            provenance["field_sources"] = codes
+        am = re.search(r"AM: I\.Angeli, K\.P\. Marinova, Atomic Data and Nuclear Data Tables 99 \(2013\) DOI:\S+", plain(raw_guide))
+        provenance["source_code_AM"] = am.group(0) if am else None
+        ns = re.search(r"NS: Table of Recommended Nuclear Magnetic Dipole Moments.{0,400}?indc-nds-0833", plain(raw_guide))
+        provenance["source_code_NS"] = ns.group(0) if ns else None
+    guide_ok = provenance["radius_field_source_code"] == "AM" and bool(provenance["source_code_AM"])
+
+    # ------------------------------------------------------------------ NV 14N hyperfine: quotes in the arXiv full texts
+    jgu_src = specs["nv"]["jgu"]["microwave"]["source"]
+    quote = ("The central microwave frequency at 2.87 GHz was mixed with a 2.16 MHz radio frequency signal to address "
+             "all hyperfine level")
+    raw_omar = fetch(OMAR_HTML)
+    omar_found = bool(raw_omar and re.search(r"2\.87\s*GHz was mixed with a\s+2\.16\s*MHz radio frequency signal to "
+                                             r"address all hyperfine level", plain(raw_omar)))
+    hfs_note = ("the three 14N hyperfine lines (m_I = -1, 0, +1) of an NV resonance lie this far apart, so mixing the "
+                "microwave with this frequency drives all three; the same statement is the 'microwave drive' fact in "
+                "data/combined_sensor.json and data/runs.json")
+    if omar_found:
+        n14_hfs = vo(2.16, "MHz", f"{jgu_src}, JGU sensor: '{quote}'; quote found in {at(OMAR_HTML)}", note=hfs_note)
+    elif verified(prev_nv.get("n14_hyperfine_splitting")):
+        n14_hfs = prev_nv["n14_hyperfine_splitting"]
+        kept.append("nv.n14_hyperfine_splitting")
+    else:
+        why = FETCH_ERRORS.get(OMAR_HTML, "the quote was not found in the fetched text")
+        n14_hfs = vo(2.16, "MHz", f"{jgu_src}, JGU sensor: '{quote}'", status="TO_CONFIRM",
+                     note=f"{hfs_note}; not checked against the paper in this run ({why})")
+
+    raw_barry = fetch(BARRY_HTML)
+    barry_text = plain(raw_barry) if raw_barry else ""
+    row_m = re.search(r"14\s*N axial magnetic hyperfine constant\s*(.*?)\s*15\s*N axial magnetic hyperfine constant", barry_text)
+    entries = re.findall(r"([±−+-]?)\s*(\d+\.\d+)\s*±\s*(\d+\.\d+)\s*MHz", row_m.group(1)) if row_m else []
+    a_par = "; ".join(f"{s}{v} ± {u}" for s, v, u in entries)
+    if entries and ("−", "2.162", "0.002") in entries:
+        n14_apar = vo(a_par, "MHz", f"{BARRY}, Table 16 of the arXiv version ('Compiled constants for the electronic "
+                      f"ground state of the NV- center in diamond'), row '14N axial magnetic hyperfine constant' "
+                      f"(A_parallel); read from {at(BARRY_HTML)}",
+                      note="the values the table compiles from five references, in the table's order and with its signs; "
+                           "the most precise, −2.162 ± 0.002 MHz, has the magnitude 2.16 MHz that the JGU sensor mixes in")
+    elif verified(prev_nv.get("n14_axial_hyperfine_constants")):
+        n14_apar = prev_nv["n14_axial_hyperfine_constants"]
+        kept.append("nv.n14_axial_hyperfine_constants")
+    else:
+        n14_apar = missing("MHz", f"{BARRY}, table of NV ground-state constants", status="NOT_YET_EXTRACTED",
+                           note=f"not read in this run ({FETCH_ERRORS.get(BARRY_HTML, 'the table row was not found')})")
+    barry_spin = bool(re.search(r"14\s*N nuclear spin I\s*=\s*1\b", barry_text))
+
+    # ------------------------------------------------------------------ one block per nuclide
+    out, ratios = {}, {}
+    for key, nd in NUCLIDES.items():
+        row = next((r for r in rows if r.get("z") == str(nd["z"]) and r.get("a") == str(nd["a"])), None)
+        api_url = IAEA_LIVECHART.format(nd["api"])
+        raw_api = fetch(api_url, IAEA_UA)
+        api = next(iter(csv.DictReader(io.StringIO(raw_api.decode("latin-1")))), None) if raw_api else None
+        ok_row = bool(row) and row.get("symbol") == nd["symbol"] and row.get("n") == str(nd["a"] - nd["z"])
+        try:
+            R, dR = (float(row["radius_val"]), float(row["radius_unc"])) if ok_row else (None, None)
+        except (TypeError, ValueError):
+            R = dR = None
+        if not (R and R > 0 and dR and dR > 0):
+            if verified((prev_n.get(key) or {}).get("rms_charge_radius")):
+                out[key] = prev_n[key]                       # last successful run, with its own SHA256 and fetch time
+                kept.append(f"nuclei.{key}")
+                continue
+            why = FETCH_ERRORS.get(IAEA_RADII_CSV, f"no usable row for z={nd['z']}, a={nd['a']} in the file")
+            gone = missing("fm", f"{ANGELI}; {IAEA_RADII}", status="NOT_YET_EXTRACTED",
+                           note=f"not fetched ({why}); the scene draws no sphere without this value")
+            out[key] = {"id": key, "name": nd["name"], "symbol": nd["symbol"], "site": nd["site"],
+                        "rms_charge_radius": gone}
+            continue
+
+        csv_src = (f"{ANGELI}, as served by the {IAEA_RADII}: file {at(IAEA_RADII_CSV)}, row z={row['z']}, "
+                   f"symbol={row['symbol']}, n={row['n']}, a={row['a']}: radius_val={row['radius_val']}, "
+                   f"radius_unc={row['radius_unc']}")
+        api_same = None
+        if api and (api.get("radius") or "").strip():
+            api_same = (api["z"] == row["z"] and api["n"] == row["n"] and float(api["radius"]) == R
+                        and float(api["unc_r"]) == dR)
+            if not api_same:
+                raise SystemExit(f"{key}: IAEA radii file ({R} ± {dR} fm) and Live Chart API ({api['radius']} ± "
+                                 f"{api['unc_r']} fm) disagree")
+        status = "VERIFIED" if api_same else "TO_CONFIRM"
+        cross = (f"cross-check: the IAEA Live Chart of Nuclides API, {at(api_url)}, gives radius {api['radius']} ± "
+                 f"{api['unc_r']} fm for z={api['z']}, n={api['n']}"
+                 + (f", and its guide ({IAEA_GUIDE}) gives the source of that field as '{provenance['source_code_AM']}'"
+                    if guide_ok else "")
+                 if api_same else f"cross-check with the Live Chart API not done ({FETCH_ERRORS.get(api_url, 'no radius in its answer')})")
+        R_vo = vo(R, "fm", csv_src, status=status,
+                  note=f"root-mean-square nuclear charge radius R = <r^2>^(1/2), ± {row['radius_unc']} fm; {cross}. "
+                       "The database's HTML page answers automated requests with a browser check; it was not read and "
+                       "the check was not bypassed. The nucleus has no sharp surface: this is the rms radius of its "
+                       "charge distribution.")
+        dR_vo = vo(dR, "fm", csv_src, status=status, note="uncertainty of the rms charge radius as tabulated (radius_unc)")
+        Z = vo(int(row["z"]), "", csv_src, note="number of protons")
+        N = vo(int(row["n"]), "", csv_src, note="number of neutrons")
+        A = vo(int(row["a"]), "", csv_src, note="mass number A = Z + N")
+
+        jp = ((api or {}).get("jp") or "").strip()
+        if jp:
+            jp_src = (f"IAEA Live Chart of Nuclides API, {at(api_url)}, field jp = '{jp}' (J-pi; source ENSDF per "
+                      f"{IAEA_GUIDE}); ENSDF evaluation by {api.get('ENSDFauthors', '?')}, publication cut-off "
+                      f"{api.get('ENSDFpublicationcut-off', '?')}, as stated in the row")
+            jp_vo = vo(jp, "", jp_src, note="ground-state spin and parity")
+        else:
+            jp_vo = missing("", f"IAEA Live Chart of Nuclides API, {api_url}", status="NOT_YET_EXTRACTED",
+                            note=f"not fetched ({FETCH_ERRORS.get(api_url, 'no jp in its answer')})")
+        if key == "rb87":
+            I = rb87["nuclear_spin"]                         # Steck Table 2
+            if jp and spin_from_jp(jp) != I["value"]:
+                raise SystemExit(f"87Rb: Steck I = {I['value']} but ENSDF J-pi = {jp}")
+        elif jp and spin_from_jp(jp) is not None:
+            I = vo(spin_from_jp(jp), "", jp_src,
+                   note=f"nuclear spin I read from the ground-state J-pi = {jp}"
+                        + (f"; also {BARRY}, Fig. 12 caption of the arXiv version: 'The three peaks arise from hyperfine "
+                           f"interactions associated with the NV- center's 14N nuclear spin I = 1' (found in "
+                           f"{at(BARRY_HTML)})" if barry_spin else ""))
+        else:
+            I = missing("", f"IAEA Live Chart of Nuclides API, {api_url}", status="NOT_YET_EXTRACTED",
+                        note="the J-pi of the ground state was not fetched")
+        i = I["value"]
+        tilt = calc(rnd(math.degrees(math.acos(i / math.sqrt(i * (i + 1))))) if i else None, "°", [I],
+                    "vector model of the state m_I = I: tilt from the axis = arccos(I / sqrt(I(I+1)))",
+                    [f"nuclei.{key}.nuclear_spin"], note_extra="a semiclassical picture; the scene's arrow uses it")
+        length = calc(rnd(math.sqrt(i * (i + 1))) if i else None, "", [I], "|I| = sqrt(I(I+1)) (units of hbar)",
+                      [f"nuclei.{key}.nuclear_spin"])
+        block = {"id": key, "name": nd["name"], "symbol": nd["symbol"], "site": nd["site"], "protons": Z, "neutrons": N,
+                 "mass_number": A, "rms_charge_radius": R_vo, "rms_charge_radius_uncertainty": dR_vo,
+                 "spin_parity": jp_vo, "nuclear_spin": I, "spin_tilt": tilt, "spin_length": length}
+        # measured moments, from the same Live Chart row (the guide names their sources)
+        fsrc = provenance.get("field_sources") or {}
+        for fld, unc, unit, what in (("magnetic_dipole", "unc_md", "μN", "nuclear magnetic dipole moment, in nuclear magnetons"),
+                                     ("electric_quadrupole", "unc_eq", "b", "spectroscopic electric quadrupole moment, in barn")):
+            val = ((api or {}).get(fld) or "").strip()
+            try:
+                num_val = float(val)
+            except ValueError:
+                num_val = None
+            if num_val is not None:
+                block[fld] = vo(num_val, unit, f"IAEA Live Chart of Nuclides API, {at(api_url)}, field {fld} = {val} ± "
+                                f"{(api.get(unc) or '?').strip()} (source code '{fsrc.get(fld, '?')}' in the API guide"
+                                + (f": {provenance['source_code_NS']}" if provenance.get("source_code_NS") else "") + ")",
+                                note=what)
+            else:
+                block[fld] = missing(unit, f"IAEA Live Chart of Nuclides API, {api_url}", status="NOT_YET_EXTRACTED",
+                                     note=f"{what}: not fetched")
+        if key == "rb87":
+            ratios["rb87_vdw_over_rms"] = rnd(rb87["vdw_radius"]["value"] * 1e5 / R)
+            block["atom_over_nucleus"] = calc(
+                ratios["rb87_vdw_over_rms"], "", [rb87["vdw_radius"], R_vo],
+                "van der Waals radius / rms charge radius, with 1 Å = 1e5 fm", ["rb87.vdw_radius", "nuclei.rb87.rms_charge_radius"],
+                note_extra="how many times larger the atom drawn in q_rb is than this sphere")
+            block["hyperfine"] = {
+                "what": "coupling of the nuclear spin I to the spin of the outer electron (J = 1/2) in the 5²S1/2 ground state",
+                "splitting": rb87["ground_hfs_splitting"], "constant_A": rb87["ground_hfs_constant_A"],
+                "levels": calc("F = 1 and F = 2", "", [I], "F runs from |I - J| to I + J with J = 1/2",
+                               ["rb87.nuclear_spin"], note_extra="the two ground levels of Steck Fig. 3"),
+            }
+        else:
+            ratios["n14_covalent_over_rms"] = rnd(radii["nitrogen"]["value"] * 1e5 / R)
+            ratios["n14_nv_distance_over_rms"] = rnd(n_v["value"] * 1e5 / R)
+            block["atom_over_nucleus"] = calc(
+                ratios["n14_covalent_over_rms"], "", [radii["nitrogen"], R_vo],
+                "covalent radius / rms charge radius, with 1 Å = 1e5 fm", ["radii.nitrogen", "nuclei.n14.rms_charge_radius"],
+                note_extra="how many times larger the nitrogen atom's covalent radius (q_nv) is than this sphere")
+            block["nv_distance_over_nucleus"] = calc(
+                ratios["n14_nv_distance_over_rms"], "", [n_v, R_vo],
+                "N-V distance (ideal lattice sites) / rms charge radius, with 1 Å = 1e5 fm",
+                ["nv.n_v_distance", "nuclei.n14.rms_charge_radius"])
+            block["hyperfine"] = {
+                "what": "coupling of the 14N nuclear spin to the NV centre's electron spin (ground state)",
+                "splitting": n14_hfs, "axial_constants": n14_apar,
+                "lines": calc(int(2 * i + 1) if i else None, "", [I], "2I + 1 values of m_I", ["nuclei.n14.nuclear_spin"],
+                              note_extra="each NV resonance splits into this many lines"),
+            }
+        out[key] = block
+
+    # ------------------------------------------------------------------ Python against the recorded Wolfram run
+    checked, skipped = [], []
+    for key in NUCLIDES:
+        b = out[key]
+        if f"nuclei.{key}" in kept or not b.get("spin_tilt"):
+            continue
+        suffix = "I_3_2" if key == "rb87" else "I_1"
+        if b["spin_tilt"]["value"] is not None:
+            agree(f"spin_tilt_{suffix}_deg", b["spin_tilt"]["value"], WOLFRAM_NUCLEI[f"spin_tilt_{suffix}_deg"])
+            agree(f"spin_length_{suffix}", b["spin_length"]["value"], WOLFRAM_NUCLEI[f"spin_length_{suffix}"])
+            checked += [f"spin_tilt_{suffix}_deg", f"spin_length_{suffix}"]
+        names = [n for n in ratios if n.startswith(key)]
+        if b["rms_charge_radius"]["value"] == WOLFRAM_NUCLEI_INPUTS[key]:
+            for n in names:
+                agree(n, ratios[n], WOLFRAM_NUCLEI[n])
+            checked += names
+        else:
+            skipped += names                                 # the IAEA value changed since the Wolfram run
+    lines = ((out.get("n14") or {}).get("hyperfine") or {}).get("lines")
+    if lines and lines["value"] is not None:
+        agree("n14_hyperfine_lines", lines["value"], WOLFRAM_NUCLEI["n14_hyperfine_lines"])
+        checked.append("n14_hyperfine_lines")
+
+    used = [IAEA_RADII_CSV, IAEA_GUIDE, OMAR_HTML, BARRY_HTML] + [IAEA_LIVECHART.format(nd["api"]) for nd in NUCLIDES.values()]
+    files = {u: FETCHED[u] for u in used if u in FETCHED}
+    for u, f in (prev_n.get("source_files") or {}).items():   # files behind values kept from the last successful run
+        if kept and u not in files:
+            files[u] = dict(f, kept_from_previous_run=True)
+    out["source_files"] = files
+    out["fetch_errors"] = {u: e for u, e in FETCH_ERRORS.items() if u in used}
+    out["kept_from_previous_run"] = kept
+    out["provenance"] = provenance
+    out["not_drawn"] = ("Individual protons and neutrons are not drawn: their arrangement inside a nucleus is not a "
+                        "measured geometry. The scene draws one sphere at the rms charge radius.")
+    checks = {"tool": "Wolfram Language (WolframLanguageEvaluator via the Wolfram MCP connector), run 2026-11-15",
+              "code": WOLFRAM_NUCLEI_CODE, "wolfram_inputs_fm": WOLFRAM_NUCLEI_INPUTS, "wolfram_output": WOLFRAM_NUCLEI,
+              "python_agrees_on": checked, "not_cross_checked": skipped, "tag": "calculated"}
+    return out, {"n14_hyperfine_splitting": n14_hfs, "n14_axial_hyperfine_constants": n14_apar}, checks
 
 
 def main():
@@ -370,6 +958,34 @@ def main():
                note="used only for diagrams, axes, labels and for elements whose emission colour is not cited; never "
                     "as a wavelength colour")
 
+    # ------------------------------------------------------------------ nuclei (fetched: IAEA charge radii, ENSDF spin)
+    prev_all = read_json(OUT)
+    nuclei, nv_n14, nuclei_checks = build_nuclei(prev_all, rb87, radii, n_v, specs)
+    nv.update(nv_n14)
+    # ------------------------------------------------------------------ motion, light and more constants (fetched)
+    extra = build_extra(prev_all, rb87, opm_model, specs)
+    rb87.update(extra["rb87"])
+    opm_model.update(extra["opm_model"])
+    codata_more, si_exact, motion, nv_optics = extra["codata"], extra["si"], extra["motion"], extra["nv_optics"]
+    # Larmor frequencies of the two nuclei (the rate a field turns a nuclear spin)
+    muN = codata_more["nuclear_magneton_over_h"]
+    for key in NUCLIDES:
+        b = nuclei[key]
+        if "magnetic_dipole" not in b:
+            continue
+        mu, I_n = b["magnetic_dipole"], b["nuclear_spin"]
+        okl = mu["value"] is not None and I_n["value"] and muN["value"] is not None
+        b["larmor_free_nucleus"] = calc(rnd(abs(mu["value"]) / I_n["value"] * muN["value"]) if okl else None, "MHz/T",
+                                        [mu, I_n, muN], "gamma/2pi = |mu| / (I h) = |mu / mu_N| / I x mu_N/h",
+                                        [f"nuclei.{key}.magnetic_dipole", f"nuclei.{key}.nuclear_spin",
+                                         "codata.nuclear_magneton_over_h"],
+                                        note_extra="a bare nucleus; in an atom or crystal the electrons change what it "
+                                                   "feels (see the scene)")
+    nuclei["rb87"]["larmor_with_electron_F2"] = rb87["zeeman_F2_per_nT"]   # in the atom the nucleus turns with F = 2
+    nuclei["rb87"]["larmor_steck_gI"] = calc(rnd(abs(gI["value"]) * mub_h["value"] / 1e6), "MHz/T", [gI, mub_h],
+                                             "|g_I| mu_B / h (Steck's g_I, which is given for the nucleus in the atom)",
+                                             ["rb87.g_I", "electron.bohr_magneton_over_h"])
+
     # ------------------------------------------------------------------ self-checks (Python vs Wolfram, physics)
     rng = random.Random(2026)
     worst = 0.0
@@ -403,7 +1019,31 @@ def main():
     agree("fret_inverse", [p["r_over_R0"]["value"] for p in points], WOLFRAM["fret_inverse"], rel=1e-7)
     agree("gslac_mT", gslac["value"], WOLFRAM["gslac_mT"])
     agree("graphite", [d002["value"], cc_g["value"], d100["value"]], WOLFRAM["graphite"])
+    # motion and light: Python against the recorded Wolfram run, while the fetched inputs are the ones it used
+    now_in = {"diamond_u_iso": motion["diamond_u_iso"]["value"], "diamond_temperature": motion["diamond_temperature"]["value"],
+              "ionization_limit": rb87["ionization_limit"]["value"], "rydberg": codata_more["rydberg"]["value"],
+              "bohr_radius": codata_more["bohr_radius"]["value"], "atomic_mass_kg": rb87["atomic_mass_kg"]["value"],
+              "atomic_mass_constant": codata_more["atomic_mass_constant"]["value"],
+              "n14_mu": nuclei["n14"].get("magnetic_dipole", {}).get("value"),
+              "rb87_mu": nuclei["rb87"].get("magnetic_dipole", {}).get("value"),
+              "nuclear_magneton_over_h": muN["value"]}
+    motion_same = all(now_in[k] is not None and math.isclose(now_in[k], v, rel_tol=1e-12) for k, v in WOLFRAM_MOTION_INPUTS.items())
+    if motion_same:
+        agree("diamond_einstein_THz", motion["diamond_einstein_frequency"]["value"], WOLFRAM_MOTION["diamond_einstein_THz"], rel=1e-8)
+        agree("n_star", rb87["valence_n_star"]["value"], WOLFRAM_MOTION["n_star"])
+        agree("r_mp_nm", rb87["valence_r_most_probable"]["value"], WOLFRAM_MOTION["r_mp_nm"])
+        agree("r_mean_nm", rb87["valence_r_mean"]["value"], WOLFRAM_MOTION["r_mean_nm"])
+        agree("v_mean_ms", rb87["thermal_mean_speed"]["value"], WOLFRAM_MOTION["v_mean_ms"])
+        agree("n14_larmor_MHz_T", nuclei["n14"]["larmor_free_nucleus"]["value"], WOLFRAM_MOTION["n14_larmor_MHz_T"])
+        agree("rb87_larmor_mu_MHz_T", nuclei["rb87"]["larmor_free_nucleus"]["value"], WOLFRAM_MOTION["rb87_larmor_mu_MHz_T"])
+        agree("rb87_larmor_gI_MHz_T", nuclei["rb87"]["larmor_steck_gI"]["value"], WOLFRAM_MOTION["rb87_larmor_gI_MHz_T"])
+        agree("hc_eV_nm", si_exact["hc_eV_nm"]["value"], WOLFRAM_MOTION["hc_eV_nm"], rel=1e-12)
+    checks_motion = {"tool": "Wolfram Language (WolframLanguageEvaluator via the Wolfram MCP connector), run 2026-11-15",
+                     "code": WOLFRAM_MOTION_CODE, "wolfram_inputs": WOLFRAM_MOTION_INPUTS, "wolfram_output": WOLFRAM_MOTION,
+                     "python_agrees": motion_same, "tag": "calculated",
+                     "note": None if motion_same else "a fetched input changed since the Wolfram run: not cross-checked"}
     checks = {
+        "motion": checks_motion,
         "tool": "Wolfram Language (WolframLanguageEvaluator via the Wolfram MCP connector), run 2026-11-15",
         "code": WOLFRAM_CODE, "wolfram_output": WOLFRAM,
         "python_agrees": True,
@@ -411,17 +1051,31 @@ def main():
                                "symbolic": WOLFRAM["steady_state_residual"]},
         "nv_splitting": {"what": "|(nu+ - nu-) - 2 gamma B| and |(nu+ + nu-)/2 - D| for B = 0 to 5 mT in 0.01 mT steps",
                          "max_residual_MHz": split_worst, "lean": ["nv_splitting", "nv_centre"]},
+        "nuclei": nuclei_checks,
         "tag": "calculated",
     }
 
+    files = {**nuclei["source_files"], **{u: dict(f) for u, f in FETCHED.items()}}
+    nuclei["fetch_errors"] = dict(FETCH_ERRORS)
+    nuclei["kept_from_previous_run"] = nuclei["kept_from_previous_run"] + KEPT
     obj = {
         "meta": meta(False, [STECK, CODATA, HOLLOWAY, COD_RILEY, COD_HOUBEN, COD_GRAPHITE, BARRY, SULAI, MANTINA,
                              CORDERO, GRIFFITHS, LONG, TABATABAEE, QUSPIN_TECH, fret_in["source"],
-                             fret_rec["meta"]["sources"][0]],
+                             fret_rec["meta"]["sources"][0],
+                             f"{ANGELI}, from the {IAEA_RADII} (file {IAEA_RADII_CSV})",
+                             f"IAEA Live Chart of Nuclides API, {IAEA_LIVECHART.format('<nuclide>')} (guide: {IAEA_GUIDE})",
+                             specs["nv"]["jgu"]["microwave"]["source"].split(" (Section")[0] + f", full text {OMAR_HTML}",
+                             f"{STECK} (PDF {STECK_PDF})", f"{CODATA}: {NIST_URL.format('<code>')}",
+                             f"{COD_HOUBEN} and {COD_GRAPHITE}: CIF files {COD_CIF.format('<id>')}",
+                             f"{QUSPIN_TECH}", BATES, SI_EXACT],
                      accessed=ACCESSED, used_by=["ui/scale/q_nv.js", "ui/scale/q_rb.js", "ui/scale/q_qd.js",
-                                                 "ui/scale/q_cqd.js"]),
+                                                 "ui/scale/q_cqd.js", "ui/scale/q_nucleus.js"],
+                     sha256={u: f["sha256"] for u, f in files.items()}, fetched={u: f["fetched"] for u, f in files.items()},
+                     fetch_errors=nuclei["fetch_errors"]),
         "electron": electron, "diamond": diamond, "nv": nv, "rb87": rb87, "opm_model": opm_model, "qd": qd,
-        "graphite": graphite, "cqd": cqd, "radii": radii, "cpk_colours": cpk, "theme_colours": theme, "checks": checks,
+        "graphite": graphite, "cqd": cqd, "radii": radii, "cpk_colours": cpk, "theme_colours": theme, "nuclei": nuclei,
+        "codata": codata_more, "si": si_exact, "motion": motion, "nv_optics": nv_optics,
+        "checks": checks,
         "note": "Values with tag calculated carry their formula and inputs. Display choices made by the scenes (slow-down "
                 "factors, magnified level spacings, sphere-size fractions, arrow lengths) are not constants and are "
                 "stated in each scene's info panel.",
@@ -435,9 +1089,21 @@ def main():
           f"r_vdW {r_vdw['value']} Å, spacing at 1e14 cm^-3 {spacing['value']} nm")
     print(f"  graphite a {a_g['value']} c {c_g['value']} -> d002 {d002['value']} C-C {cc_g['value']} d100 {d100['value']} Å")
     print(f"  checks: Bloch residual max {worst:.2e}; splitting residual max {split_worst:.2e} MHz; Python = Wolfram")
+    nuc_txt = []
+    for key in NUCLIDES:
+        r, s = nuclei[key]["rms_charge_radius"], nuclei[key].get("nuclear_spin") or {}
+        nuc_txt.append(f"{key} R = {r['value']} fm ({r['status']}), I = {s.get('value')}")
+    hfs14 = nv["n14_hyperfine_splitting"]
+    print(f"  nuclei (IAEA charge radii, Angeli & Marinova 2013): {'; '.join(nuc_txt)}; NV 14N hyperfine "
+          f"{hfs14['value']} MHz ({hfs14['status']})")
+    if nuclei["kept_from_previous_run"]:
+        print(f"  kept from the last successful run (fetch failed): {', '.join(nuclei['kept_from_previous_run'])}")
+    for u, e in nuclei["fetch_errors"].items():
+        print(f"  fetch failed: {u}: {e}")
     log_status("data/quantum_constants.json", "done", f"{n_vo} value objects for the quantum scenes (Steck rev 2.3.4, "
                "CODATA 2022, Holloway 1991, COD graphite/diamond, Barry, Sulai, Mantina); Bloch residual "
-               f"{worst:.1e}, Python = Wolfram")
+               f"{worst:.1e}, Python = Wolfram; nuclei from the IAEA charge radii file: {'; '.join(nuc_txt)}"
+               + (f"; fetch errors: {len(nuclei['fetch_errors'])}" if nuclei["fetch_errors"] else ""))
 
 
 def _walk(o):

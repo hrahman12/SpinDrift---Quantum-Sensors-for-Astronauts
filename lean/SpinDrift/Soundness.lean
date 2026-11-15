@@ -3,7 +3,7 @@ import SpinDrift.Checker
 What each verdict of `SpinDrift.verdict` means, proved in Lean 4 (core only, no Mathlib).
 
 The specification below (`Denotes`, `Holds`, `Violated`, `Missing`) is written from the meaning of a requirement, not
-from the executable checker; the theorems tie the two together (CryoLean pattern): `verdict_met_iff` (met iff every
+from the executable checker; the theorems tie the two together (missing data never decides): `verdict_met_iff` (met iff every
 requirement holds), `verdict_notMet_sound` (not met implies a requirement with every input present is violated) and
 `verdict_needInfo_sound` (need more information implies nothing is violated and some input is missing). Missing data
 never becomes a pass or a fail (`missing_never_decides`, `missing_never_passes_or_fails`).

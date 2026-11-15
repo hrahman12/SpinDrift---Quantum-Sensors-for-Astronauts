@@ -5,7 +5,7 @@ import { createScope, openStream, rPeaks } from './scope.js';
 
 const instPill = (dev) => S.sensors?.sensors?.[dev]?.connected ? pill('instrument', 'connected', 'ok') : pill('instrument', 'not connected', 'off');
 export const TAB_HEAD = {
-  opm: { kick: 'Sensor 01 · brain and heart', title: 'QuSpin QZFM Gen-3 optically pumped magnetometer', sub: 'Rubidium vapour at zero field (SERF): a laser spin-polarises the atoms and a magnetic field tips them. No cryogenics.', pills: () => instPill('opm') + pill('data', 'recorded replay', 'rec') },
+  opm: { kick: 'Sensor 01 · brain and heart', title: 'QuSpin QZFM Gen-3 optically pumped magnetometer', sub: 'Rubidium vapour at zero field (SERF): a laser spin-polarises the atoms and a magnetic field tips them.', pills: () => instPill('opm') + pill('data', 'recorded replay', 'rec') },
   nv: { kick: 'Sensor 02 · heart', title: 'NV-diamond magnetometers: JGU, ZAQuant and Q.ANT builds', sub: 'Spin-1 defects in diamond read with green light and microwaves (Omar et al., arXiv 2601.18843).', pills: () => instPill('nv') + pill('simulator', 'ODMR-Lab', 'sim') },
   qd: { kick: 'Sensor 03 · blood', title: 'Quantum-dot renin nanosensor', sub: 'Quantum dot → peptide → Cy5 FRET probe; renin cuts the peptide; single molecules counted by TIRF microscopy (Long et al., Anal. Chem. 84, 8846, 2012).', pills: () => instPill('qd_renin') + pill('readout', 'lab TIRF microscope', 'off') },
   cqd: { kick: 'Sensor 04 · skin', title: 'Carbon-dot microneedle patch', sub: 'Carbon quantum dots left in the skin by microneedles; fluorescence tracks bilirubin under blue light; IoT reader (Tabatabaee et al., ACS Nano 18, 28012, 2024).', pills: () => instPill('cqd_patch') + pill('flight', 'has not flown', 'off') },

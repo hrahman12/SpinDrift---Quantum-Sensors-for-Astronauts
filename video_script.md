@@ -14,10 +14,10 @@
 
 - **[4–8s]**  
   **Visual:** Quick callout labels illuminate each sensor on the silhouette:  
-  - Chest: `QuSpin QZFM OPM (⁸⁷Rb, <15 fT/√Hz, no cryogenics; NV alt 6–26 pT/√Hz)`  
+  - Chest: `QuSpin QZFM OPM (⁸⁷Rb, <15 fT/√Hz; NV alt 6–26 pT/√Hz)`  
   - Head: `Miniaturized OPM-MEG helmet (12 × 16.5 × 22.5 mm, <7 fT/√Hz, 130 Hz, 0.7 W, 49–128 ch)`  
   - Finger: `NV-diamond T₁ relaxometry (532 nm / 637–800 nm, 5.3 × 10⁻¹³ M/√Hz)`  
-  **Voiceover:** "Three quantum sensors. Chest. Head. Finger. No electrodes. No cryogenics. No blood draws."
+  **Voiceover:** "Three quantum sensors. Chest. Head. Finger. No electrodes. No blood draws."
 
 - **[8–13s]**  
   **Visual:** UI era toggle shows `TODAY` with `ISS` selected. All three sensors glow green with baseline LEO status and OSDR/OpenNeuro dataset citations in the footer (`OSD-580`, `OSD-352`, `ds004902`, `Inspiration4`).  

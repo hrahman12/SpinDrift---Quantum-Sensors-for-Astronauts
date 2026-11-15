@@ -1,14 +1,14 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T09:02:05Z",
+    "generated_at": "2026-11-15T19:53:57Z",
     "sources": [
       "data/runs.json"
     ],
-    "last_run": "run-0004-4d99"
+    "last_run": "run-0009-3752"
   },
-  "version": 4,
-  "runs_counted": 4,
+  "version": 9,
+  "runs_counted": 9,
   "components": {
     "magnetic shielding": {
       "facts": [
@@ -66,6 +66,118 @@
             "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
           },
           "from_run": "run-0003-41d9",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM field reduction needed at iss_hotspots.saa",
+          "value": {
+            "value": 3764.4,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-16T16:24:50Z",
+            "note": "formula: ambient_nT / opm_range_nT; inputs: locations.iss_hotspots.saa.B_total_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM field reduction needed at gateway.halo",
+          "value": {
+            "value": 0.74,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-10T13:57:18Z",
+            "note": "formula: ambient_nT / opm_range_nT; inputs: locations.gateway.halo.B_total_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+          },
+          "from_run": "run-0006-af2e",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM shielding factor needed at earth_analog.concordia (Lean opm_field_nulled: B_ambient / B_comp)",
+          "value": {
+            "value": 1248.1,
+            "unit": "×",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:44:10Z",
+            "note": "formula: S_needed = B_ambient / B_comp = S × lhs / rhs, with lhs = B_ambient and rhs = B_comp × S the two sides Lean computed for opm_field_nulled (B_ambient ≤ B_comp × S); inputs: locations.earth_analog.concordia.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor; exact value 624049/500; independent of the shield entered (S cancels); a value below 1 means the field is under the on-board coils' compensation limit, and QuSpin still operates the OPM in a shielded or compensated environment"
+          },
+          "from_run": "run-0007-9544",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM field reduction needed at earth_analog.concordia",
+          "value": {
+            "value": 12480.98,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:44:10Z",
+            "note": "formula: ambient_nT / opm_range_nT; inputs: locations.earth_analog.concordia.B_total_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+          },
+          "from_run": "run-0007-9544",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM shielding factor needed at iss.destiny (Lean opm_field_nulled: B_ambient / B_comp)",
+          "value": {
+            "value": 815.716,
+            "unit": "×",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:45:04Z",
+            "note": "formula: S_needed = B_ambient / B_comp = S × lhs / rhs, with lhs = B_ambient and rhs = B_comp × S the two sides Lean computed for opm_field_nulled (B_ambient ≤ B_comp × S); inputs: locations.iss.destiny.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor; exact value 203929/250; independent of the shield entered (S cancels); a value below 1 means the field is under the on-board coils' compensation limit, and QuSpin still operates the OPM in a shielded or compensated environment"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM field reduction needed at iss.destiny",
+          "value": {
+            "value": 8157.16,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:45:04Z",
+            "note": "formula: ambient_nT / opm_range_nT; inputs: locations.iss.destiny.B_total_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+          },
+          "from_run": "run-0008-7a47",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM shielding factor needed at iss.destiny (Lean opm_field_nulled: B_ambient / B_comp)",
+          "value": {
+            "value": 1002.34,
+            "unit": "×",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:53:46Z",
+            "note": "formula: S_needed = B_ambient / B_comp = S × lhs / rhs, with lhs = B_ambient and rhs = B_comp × S the two sides Lean computed for opm_field_nulled (B_ambient ≤ B_comp × S); inputs: locations.iss.destiny.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor; exact value 50117/50; independent of the shield entered (S cancels); a value below 1 means the field is under the on-board coils' compensation limit, and QuSpin still operates the OPM in a shielded or compensated environment"
+          },
+          "from_run": "run-0009-3752",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM field reduction needed at iss.destiny",
+          "value": {
+            "value": 10023.4,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:53:46Z",
+            "note": "formula: ambient_nT / opm_range_nT; inputs: locations.iss.destiny.B_total_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+          },
+          "from_run": "run-0009-3752",
           "device": "opm"
         }
       ],
@@ -127,6 +239,146 @@
             "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, iss.ambient_nT"
           },
           "from_run": "run-0003-41d9",
+          "device": "nv"
+        },
+        {
+          "fact": "NV bias against the ambient field at iss_hotspots.saa",
+          "value": {
+            "value": 53.1,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-16T16:24:50Z",
+            "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, locations.iss_hotspots.saa.B_total_nT"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "NV line shift from the background field at iss_hotspots.saa (28.025 MHz/mT × |B|)",
+          "value": {
+            "value": 0.52748655,
+            "unit": "MHz",
+            "source": "SpinDrift calculation; 28.025 MHz/mT is the electron gyromagnetic ratio gamma_e/2pi (CODATA 2022, 28 024.951 3861 MHz/T, rounded to five digits; data/quantum_constants.json electron.gyromagnetic_ratio_over_2pi)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-16T16:24:50Z",
+            "note": "formula: 28.025 MHz/mT x |B|; inputs: iss_hotspots.saa.B_total_nT; |B| in mT = nT x 1e-6; shift of one NV resonance line for a field along the NV axis (the two lines separate by twice this)"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "NV bias against the ambient field at gateway.halo",
+          "value": {
+            "value": 270855.9,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-10T13:57:18Z",
+            "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, locations.gateway.halo.B_total_nT"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "NV line shift from the background field at gateway.halo (28.025 MHz/mT × |B|)",
+          "value": {
+            "value": 0.000103468,
+            "unit": "MHz",
+            "source": "SpinDrift calculation; 28.025 MHz/mT is the electron gyromagnetic ratio gamma_e/2pi (CODATA 2022, 28 024.951 3861 MHz/T, rounded to five digits; data/quantum_constants.json electron.gyromagnetic_ratio_over_2pi)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-10T13:57:18Z",
+            "note": "formula: 28.025 MHz/mT x |B|; inputs: gateway.halo.B_total_nT; |B| in mT = nT x 1e-6; shift of one NV resonance line for a field along the NV axis (the two lines separate by twice this)"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "NV bias against the ambient field at earth_analog.concordia",
+          "value": {
+            "value": 16.0,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:44:10Z",
+            "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, locations.earth_analog.concordia.B_total_nT"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "NV line shift from the background field at earth_analog.concordia (28.025 MHz/mT × |B|)",
+          "value": {
+            "value": 1.748897322,
+            "unit": "MHz",
+            "source": "SpinDrift calculation; 28.025 MHz/mT is the electron gyromagnetic ratio gamma_e/2pi (CODATA 2022, 28 024.951 3861 MHz/T, rounded to five digits; data/quantum_constants.json electron.gyromagnetic_ratio_over_2pi)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:44:10Z",
+            "note": "formula: 28.025 MHz/mT x |B|; inputs: earth_analog.concordia.B_total_nT; |B| in mT = nT x 1e-6; shift of one NV resonance line for a field along the NV axis (the two lines separate by twice this)"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "NV bias against the ambient field at iss.destiny",
+          "value": {
+            "value": 24.5,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:45:04Z",
+            "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, locations.iss.destiny.B_total_nT"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "NV line shift from the background field at iss.destiny (28.025 MHz/mT × |B|)",
+          "value": {
+            "value": 1.143022045,
+            "unit": "MHz",
+            "source": "SpinDrift calculation; 28.025 MHz/mT is the electron gyromagnetic ratio gamma_e/2pi (CODATA 2022, 28 024.951 3861 MHz/T, rounded to five digits; data/quantum_constants.json electron.gyromagnetic_ratio_over_2pi)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:45:04Z",
+            "note": "formula: 28.025 MHz/mT x |B|; inputs: iss.destiny.B_total_nT; |B| in mT = nT x 1e-6; shift of one NV resonance line for a field along the NV axis (the two lines separate by twice this)"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "NV bias against the ambient field at iss.destiny",
+          "value": {
+            "value": 20.0,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:53:46Z",
+            "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, locations.iss.destiny.B_total_nT"
+          },
+          "from_run": "run-0009-3752",
+          "device": "nv"
+        },
+        {
+          "fact": "NV line shift from the background field at iss.destiny (28.025 MHz/mT × |B|)",
+          "value": {
+            "value": 1.404528925,
+            "unit": "MHz",
+            "source": "SpinDrift calculation; 28.025 MHz/mT is the electron gyromagnetic ratio gamma_e/2pi (CODATA 2022, 28 024.951 3861 MHz/T, rounded to five digits; data/quantum_constants.json electron.gyromagnetic_ratio_over_2pi)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:53:46Z",
+            "note": "formula: 28.025 MHz/mT x |B|; inputs: iss.destiny.B_total_nT; |B| in mT = nT x 1e-6; shift of one NV resonance line for a field along the NV axis (the two lines separate by twice this)"
+          },
+          "from_run": "run-0009-3752",
           "device": "nv"
         }
       ],
@@ -469,6 +721,468 @@
           },
           "from_run": "run-0004-4d99",
           "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 5",
+          "value": {
+            "value": 64.05,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0005-b3c8.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 5",
+          "value": {
+            "value": 5.88,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0005-b3c8.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 5",
+          "value": {
+            "value": 18.8,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0005-b3c8.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 5",
+          "value": {
+            "value": 1.73,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0005-b3c8.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 5",
+          "value": {
+            "value": 13.07,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0005-b3c8.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 5",
+          "value": {
+            "value": 1.2,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0005-b3c8.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 6",
+          "value": {
+            "value": 31.88,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0006-af2e.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 6",
+          "value": {
+            "value": 3.83,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0006-af2e.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 6",
+          "value": {
+            "value": 9.36,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0006-af2e.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 6",
+          "value": {
+            "value": 1.12,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0006-af2e.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 6",
+          "value": {
+            "value": 6.51,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0006-af2e.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 6",
+          "value": {
+            "value": 0.78,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0006-af2e.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU build heartbeats needed for SNR 5 on the r_peak (Lean nv_snr)",
+          "value": {
+            "value": 69,
+            "unit": "beats",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: N_needed = ceil(lhs / A²), with lhs = snr² · η² · BW the left side Lean computed for nv_snr (snr² · η² · BW ≤ A² · N); inputs: inputs.snr_required, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT; lhs / A² = 105625000/1550883 ≈ 68.1064; the inequality holds for N ≥ that value, so 69 is the smallest whole number of heartbeats; target r_peak; the nv_snr requirement has no location term"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQuant build heartbeats needed for SNR 5 on the r_peak (Lean nv_snr)",
+          "value": {
+            "value": 20,
+            "unit": "beats",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: N_needed = ceil(lhs / A²), with lhs = snr² · η² · BW the left side Lean computed for nv_snr (snr² · η² · BW ≤ A² · N); inputs: inputs.snr_required, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT; lhs / A² = 30625000/1550883 ≈ 19.7468; the inequality holds for N ≥ that value, so 20 is the smallest whole number of heartbeats; target r_peak; the nv_snr requirement has no location term"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "Q.ANT build heartbeats needed for SNR 5 on the r_peak (Lean nv_snr)",
+          "value": {
+            "value": 273,
+            "unit": "beats",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: N_needed = ceil(lhs / A²), with lhs = snr² · η² · BW the left side Lean computed for nv_snr (snr² · η² · BW ≤ A² · N); inputs: inputs.snr_required, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT; lhs / A² = 422500000/1550883 ≈ 272.425; the inequality holds for N ≥ that value, so 273 is the smallest whole number of heartbeats; target r_peak; the nv_snr requirement has no location term"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 7",
+          "value": {
+            "value": 40.86,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0007-9544.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 7",
+          "value": {
+            "value": 4.23,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0007-9544.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 7",
+          "value": {
+            "value": 12.0,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0007-9544.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 7",
+          "value": {
+            "value": 1.24,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0007-9544.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 7",
+          "value": {
+            "value": 8.34,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0007-9544.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 7",
+          "value": {
+            "value": 0.86,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0007-9544.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 8",
+          "value": {
+            "value": 40.49,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0008-7a47.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 8",
+          "value": {
+            "value": 4.23,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0008-7a47.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 8",
+          "value": {
+            "value": 11.89,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0008-7a47.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 8",
+          "value": {
+            "value": 1.24,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0008-7a47.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 8",
+          "value": {
+            "value": 8.27,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0008-7a47.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 8",
+          "value": {
+            "value": 0.86,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0008-7a47.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 9",
+          "value": {
+            "value": 56.54,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0009-3752.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0009-3752",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 9",
+          "value": {
+            "value": 5.34,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0009-3752.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0009-3752",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 9",
+          "value": {
+            "value": 16.6,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0009-3752.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0009-3752",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 9",
+          "value": {
+            "value": 1.57,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0009-3752.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0009-3752",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 9",
+          "value": {
+            "value": 11.54,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0009-3752.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0009-3752",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 9",
+          "value": {
+            "value": 1.09,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0009-3752.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0009-3752",
+          "device": "nv"
         }
       ],
       "status": "sourced"
@@ -572,6 +1286,76 @@
           },
           "from_run": "run-0004-4d99",
           "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 5",
+          "value": {
+            "value": "excited at 323 nm, emits at 409 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 5 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 6",
+          "value": {
+            "value": "excited at 368 nm, emits at 439 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 6 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 7",
+          "value": {
+            "value": "excited at 381 nm, emits at 439 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 7 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0007-9544",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 8",
+          "value": {
+            "value": "excited at 381 nm, emits at 439 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 8 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 9",
+          "value": {
+            "value": "excited at 353 nm, emits at 433 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 9 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0009-3752",
+          "device": "cqd_patch"
         }
       ],
       "status": "sourced"
@@ -660,6 +1444,76 @@
             "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
           },
           "from_run": "run-0003-41d9",
+          "device": "nv"
+        },
+        {
+          "fact": "ODMR-Lab run at iss_hotspots.saa: field estimated from the simulated NV spectrum",
+          "value": {
+            "value": 0.9293,
+            "unit": "mT",
+            "source": "ODMR-Lab /solve, https://huggingface.co/spaces/jeorgexyz/odmr-lab (online simulator, MIT licence)",
+            "tag": "simulated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "nv"
+        },
+        {
+          "fact": "ODMR-Lab run at gateway.halo: field estimated from the simulated NV spectrum",
+          "value": {
+            "value": 0.9429,
+            "unit": "mT",
+            "source": "ODMR-Lab /solve, https://huggingface.co/spaces/jeorgexyz/odmr-lab (online simulator, MIT licence)",
+            "tag": "simulated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "nv"
+        },
+        {
+          "fact": "ODMR-Lab run at earth_analog.concordia: field estimated from the simulated NV spectrum",
+          "value": {
+            "value": 0.8619,
+            "unit": "mT",
+            "source": "ODMR-Lab /solve, https://huggingface.co/spaces/jeorgexyz/odmr-lab (online simulator, MIT licence)",
+            "tag": "simulated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "ODMR-Lab run at iss.destiny: field estimated from the simulated NV spectrum",
+          "value": {
+            "value": 0.902,
+            "unit": "mT",
+            "source": "ODMR-Lab /solve, https://huggingface.co/spaces/jeorgexyz/odmr-lab (online simulator, MIT licence)",
+            "tag": "simulated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "ODMR-Lab run at iss.destiny: field estimated from the simulated NV spectrum",
+          "value": {
+            "value": 0.8795,
+            "unit": "mT",
+            "source": "ODMR-Lab /solve, https://huggingface.co/spaces/jeorgexyz/odmr-lab (online simulator, MIT licence)",
+            "tag": "simulated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
+          },
+          "from_run": "run-0009-3752",
           "device": "nv"
         }
       ],
@@ -819,6 +1673,34 @@
             "note": "formula: r/R0 = (1/E - 1)^(1/6) (Förster, FRET-Calc Eq. 2); inputs: recorded.qd_fret_figshare5468838"
           },
           "from_run": "run-0004-4d99",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Measured QD -> dye FRET efficiency at 0.9 GPa",
+          "value": {
+            "value": 68.5,
+            "unit": "%",
+            "source": "figshare c.5468838 Table S1 (CdTe/CdS -> rhodamine 101, CC BY 4.0)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "at 0.9 GPa; CdTe/CdS quantum dots, not the renin sensor"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Donor-acceptor distance implied at 0.9 GPa",
+          "value": {
+            "value": 0.879,
+            "unit": "r/R0",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: r/R0 = (1/E - 1)^(1/6) (Förster, FRET-Calc Eq. 2); inputs: recorded.qd_fret_figshare5468838"
+          },
+          "from_run": "run-0005-b3c8",
           "device": "qd_renin"
         }
       ],
@@ -1021,6 +1903,188 @@
           },
           "from_run": "run-0004-4d99",
           "device": "cqd_patch"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 5: R-peak",
+          "value": {
+            "value": -41.63,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial05, ch2 Sensor 1 -Y, sensor at [ -2  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 46 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial05 (sha256 fabe686800ef...)"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 5: Q wave",
+          "value": {
+            "value": 3.82,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial05, ch2 Sensor 1 -Y, sensor at [ -2  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 30.0 ms before R, QRS 110.0 ms; inputs: data/subject1_preprocessed_trial05"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "opm"
+        },
+        {
+          "fact": "Inspiration4 total bilirubin at R+45",
+          "value": {
+            "value": "C001 NA, C002 0.5, C003 0.7, C004 0.7",
+            "unit": "mg/dL",
+            "source": "NASA OSDR OSD-575 (Inspiration4 CMP, total bilirubin)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "timepoint R+45 (days from launch L- or return R+); drawn on the ground"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 6: R-peak",
+          "value": {
+            "value": -20.72,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial06, ch5 Sensor 2 X, sensor at [-14  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 46 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial06 (sha256 1d71d926cf07...)"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 6: Q wave",
+          "value": {
+            "value": 2.49,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial06, ch5 Sensor 2 X, sensor at [-14  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 25.0 ms before R, QRS 105.0 ms; inputs: data/subject1_preprocessed_trial06"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "opm"
+        },
+        {
+          "fact": "Inspiration4 total bilirubin at R+82",
+          "value": {
+            "value": "C001 1.2, C002 0.5, C003 0.5, C004 1.0",
+            "unit": "mg/dL",
+            "source": "NASA OSDR OSD-575 (Inspiration4 CMP, total bilirubin)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "timepoint R+82 (days from launch L- or return R+); drawn on the ground"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 7: R-peak",
+          "value": {
+            "value": -26.56,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial07, ch5 Sensor 2 X, sensor at [-11  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 43 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial07 (sha256 f9e4409c372e...)"
+          },
+          "from_run": "run-0007-9544",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 7: Q wave",
+          "value": {
+            "value": 2.75,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial07, ch5 Sensor 2 X, sensor at [-11  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 30.0 ms before R, QRS 105.0 ms; inputs: data/subject1_preprocessed_trial07"
+          },
+          "from_run": "run-0007-9544",
+          "device": "opm"
+        },
+        {
+          "fact": "Inspiration4 total bilirubin at R+194",
+          "value": {
+            "value": "C001 0.8, C002 0.3, C003 0.3, C004 0.5",
+            "unit": "mg/dL",
+            "source": "NASA OSDR OSD-575 (Inspiration4 CMP, total bilirubin)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "timepoint R+194 (days from launch L- or return R+); drawn on the ground"
+          },
+          "from_run": "run-0007-9544",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 8: R-peak",
+          "value": {
+            "value": -26.32,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial08, ch0 Sensor 0 -Y, sensor at [ -5  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 46 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial08 (sha256 566713d201c6...)"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 8: Q wave",
+          "value": {
+            "value": 2.75,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial08, ch0 Sensor 0 -Y, sensor at [ -5  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 25.0 ms before R, QRS 105.0 ms; inputs: data/subject1_preprocessed_trial08"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 9: R-peak",
+          "value": {
+            "value": -36.75,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial09, ch0 Sensor 0 -Y, sensor at [ -2  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 44 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial09 (sha256 ae40150cf2b9...)"
+          },
+          "from_run": "run-0009-3752",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 9: Q wave",
+          "value": {
+            "value": 3.47,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial09, ch0 Sensor 0 -Y, sensor at [ -2  17 -11] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 25.0 ms before R, QRS 105.0 ms; inputs: data/subject1_preprocessed_trial09"
+          },
+          "from_run": "run-0009-3752",
+          "device": "opm"
         }
       ],
       "status": "sourced"
@@ -1193,11 +2257,847 @@
         }
       ],
       "status": "sourced"
+    },
+    "environment": {
+      "facts": [
+        {
+          "fact": "Background magnetic field at iss_hotspots.saa (ISS orbit hotspots · South Atlantic Anomaly pass)",
+          "value": {
+            "value": 18822.0,
+            "unit": "nT",
+            "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); position from SGP4 on the CelesTrak TLE for NORAD 25544",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-16T16:24:50Z",
+            "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss_hotspots.saa.lat, iss_hotspots.saa.lon, iss_hotspots.saa.alt_km, iss_hotspots.saa.as_of"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "environment"
+        },
+        {
+          "fact": "Background field at iss_hotspots.saa (ISS orbit hotspots · South Atlantic Anomaly pass) as a fraction of Earth's surface field (IGRF at Johnson Space Center)",
+          "value": {
+            "value": 0.410724,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-16T16:24:50Z",
+            "note": "formula: |B| / IGRF |B| at Johnson Space Center; inputs: iss_hotspots.saa.B_total_nT, meta.reference.earth_surface_nT (earth_flight.jsc)"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "environment"
+        },
+        {
+          "fact": "Radiation context at iss_hotspots.saa (ISS orbit hotspots · South Atlantic Anomaly pass)",
+          "value": {
+            "value": "South Atlantic Anomaly: a local depression of Earth's magnetic field (Stassinopoulos, Xapsos & Stauffer 2015). The NASA memorandum studies it in relation to the trapped Van Allen belt proton population and maps the integral proton flux contours and the peak proton flux position inside it; trapped-proton exposure in low Earth orbit is modelled in this region (Golightly et al. 2001).",
+            "unit": "",
+            "source": "Stassinopoulos, Xapsos & Stauffer (2015), 'Forty-Year Drift and Change of the SAA', NASA/TM-2015-217547, https://ntrs.nasa.gov/citations/20160003393; Golightly, Weyland, Johnson & Semones (2001), 'Twenty Years of Radiation Measurements in Low-Earth Orbit', NASA JSC-CN-6928, https://ntrs.nasa.gov/citations/20100029831 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "published context for the location; the quantum-dot and carbon-dot sensors receive the location only through this"
+          },
+          "from_run": "run-0005-b3c8",
+          "device": "environment"
+        },
+        {
+          "fact": "Background magnetic field at gateway.halo (Lunar Gateway · HALO (Habitation and Logistics Outpost))",
+          "value": {
+            "value": 3.692,
+            "unit": "nT",
+            "source": "NASA CDAWeb dataset THC_L2_FGM (THEMIS-C (ARTEMIS P2) fluxgate magnetometer, spin-resolution FGS), file thc_l2_fgm_20261110_v01.cdf (sha256 14429c0b5b6e92f7..., https://cdaweb.gsfc.nasa.gov/sp_phys/data/themis/thc/l2/fgm/2026/thc_l2_fgm_20261110_v01.cdf), listed through cdasws",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": "2026-11-10T13:57:18Z",
+            "note": "last good-quality spin-resolution sample of the most recent file; the file holds 12096 good samples from 2026-11-10T00:08:44Z to 2026-11-10T13:57:18Z with |B| between 0.49 and 5.37 nT (median 4.00 nT); at that time the probe was 60.5 Earth radii from Earth at GSE (58.4, 14.9, -5.3) Earth radii (CDAWeb dataset THC_OR_SSC), sunward of Earth (GSE x positive), so not in the magnetotail"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "environment"
+        },
+        {
+          "fact": "Background field at gateway.halo (Lunar Gateway · HALO (Habitation and Logistics Outpost)) as a fraction of Earth's surface field (IGRF at Johnson Space Center)",
+          "value": {
+            "value": 8.05649e-05,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-10T13:57:18Z",
+            "note": "formula: |B| / IGRF |B| at Johnson Space Center; inputs: gateway.halo.B_total_nT, meta.reference.earth_surface_nT (earth_flight.jsc)"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "environment"
+        },
+        {
+          "fact": "Radiation context at gateway.halo (Lunar Gateway · HALO (Habitation and Logistics Outpost))",
+          "value": {
+            "value": "Beyond low Earth orbit, outside the protection of Earth's magnetic field: NASA states that space radiation there may place astronauts at significant risk. On the Artemis I lunar mission, interplanetary cosmic-ray dose equivalent rates inside the heavily shielded Orion were as much as 60% lower than earlier observations (George et al. 2024).",
+            "unit": "",
+            "source": "NASA, 'Why Space Radiation Matters', https://www.nasa.gov/missions/analog-field-testing/why-space-radiation-matters/ (accessed 2026-11-15); George et al. (2024), 'Space radiation measurements during the Artemis I lunar mission', Nature 634, 48-52, doi:10.1038/s41586-024-07927-7 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "published context for the location; the quantum-dot and carbon-dot sensors receive the location only through this"
+          },
+          "from_run": "run-0006-af2e",
+          "device": "environment"
+        },
+        {
+          "fact": "Background magnetic field at earth_analog.concordia (Earth analog sites · Concordia station (Antarctica))",
+          "value": {
+            "value": 62404.9,
+            "unit": "nT",
+            "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); coordinates: Institut polaire français, 'Concordia station', https://institut-polaire.fr/antarctica/concordia-station/ (accessed 2026-11-15)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:44:10Z",
+            "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, height and date; inputs: earth_analog.concordia.coords, date 2026-11-15T19:44:10Z"
+          },
+          "from_run": "run-0007-9544",
+          "device": "environment"
+        },
+        {
+          "fact": "Background field at earth_analog.concordia (Earth analog sites · Concordia station (Antarctica)) as a fraction of Earth's surface field (IGRF at Johnson Space Center)",
+          "value": {
+            "value": 1.36177,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:44:10Z",
+            "note": "formula: |B| / IGRF |B| at Johnson Space Center; inputs: earth_analog.concordia.B_total_nT, meta.reference.earth_surface_nT (earth_flight.jsc)"
+          },
+          "from_run": "run-0007-9544",
+          "device": "environment"
+        },
+        {
+          "fact": "Radiation context at earth_analog.concordia (Earth analog sites · Concordia station (Antarctica))",
+          "value": {
+            "value": "Earth's surface: life on Earth is protected from the full impact of solar and cosmic radiation by the planet's magnetic field and atmosphere (NASA).",
+            "unit": "",
+            "source": "NASA, 'Why Space Radiation Matters', https://www.nasa.gov/missions/analog-field-testing/why-space-radiation-matters/ (accessed 2026-11-15)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "published context for the location; the quantum-dot and carbon-dot sensors receive the location only through this"
+          },
+          "from_run": "run-0007-9544",
+          "device": "environment"
+        },
+        {
+          "fact": "Background magnetic field at iss.destiny (International Space Station · Destiny)",
+          "value": {
+            "value": 40785.8,
+            "unit": "nT",
+            "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:45:04Z",
+            "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "environment"
+        },
+        {
+          "fact": "Background field at iss.destiny (International Space Station · Destiny) as a fraction of Earth's surface field (IGRF at Johnson Space Center)",
+          "value": {
+            "value": 0.890007,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:45:04Z",
+            "note": "formula: |B| / IGRF |B| at Johnson Space Center; inputs: iss.destiny.B_total_nT, meta.reference.earth_surface_nT (earth_flight.jsc)"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "environment"
+        },
+        {
+          "fact": "Radiation context at iss.destiny (International Space Station · Destiny)",
+          "value": {
+            "value": "Low Earth orbit: the published radiation data from the International Space Station come from an orbit protected by heavy shielding and Earth's magnetic field (George et al. 2024). Trapped-proton exposure in low Earth orbit is modelled in the South Atlantic Anomaly region (Golightly et al. 2001). The live GOES proton flux and NOAA storm level are in /api/live (radiation).",
+            "unit": "",
+            "source": "George et al. (2024), 'Space radiation measurements during the Artemis I lunar mission', Nature 634, 48-52, doi:10.1038/s41586-024-07927-7 (abstract); Golightly, Weyland, Johnson & Semones (2001), 'Twenty Years of Radiation Measurements in Low-Earth Orbit', NASA JSC-CN-6928, https://ntrs.nasa.gov/citations/20100029831 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "published context for the location; the quantum-dot and carbon-dot sensors receive the location only through this"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "environment"
+        },
+        {
+          "fact": "Background magnetic field at iss.destiny (International Space Station · Destiny)",
+          "value": {
+            "value": 50117.0,
+            "unit": "nT",
+            "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:53:46Z",
+            "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of"
+          },
+          "from_run": "run-0009-3752",
+          "device": "environment"
+        },
+        {
+          "fact": "Background field at iss.destiny (International Space Station · Destiny) as a fraction of Earth's surface field (IGRF at Johnson Space Center)",
+          "value": {
+            "value": 1.09363,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:53:46Z",
+            "note": "formula: |B| / IGRF |B| at Johnson Space Center; inputs: iss.destiny.B_total_nT, meta.reference.earth_surface_nT (earth_flight.jsc)"
+          },
+          "from_run": "run-0009-3752",
+          "device": "environment"
+        }
+      ],
+      "status": "sourced"
+    },
+    "measurability (Lean)": {
+      "facts": [
+        {
+          "fact": "Lean verdict, QuSpin QZFM Gen-3 optically pumped magnetometer (brain: somatosensory evoked field) at earth_analog.concordia",
+          "value": {
+            "value": "NOT_MET",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 2 requirement(s) (opm_field_nulled, opm_snr_brain); inputs: locations.earth_analog.concordia.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor, inputs.snr_required, specs.opm.sensitivity_dual_axis, inputs.bandwidth_hz, recorded.opm_brain_mne.evoked.peak_abs_fT, recorded.opm_brain_mne.evoked.n_epochs; deciding requirement opm_field_nulled (first requirement violated): B_ambient ≤ B_comp × S, lhs 624049/10 (62404.9 nT), rhs 50/1 (50 nT), holds False; decided 2026-11-15T19:44:41Z"
+          },
+          "from_run": "run-0007-9544",
+          "device": "opm"
+        },
+        {
+          "fact": "Lean verdict, QuSpin QZFM Gen-3 optically pumped magnetometer (heart: magnetocardiogram) at earth_analog.concordia",
+          "value": {
+            "value": "NOT_MET",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 2 requirement(s) (opm_field_nulled, opm_snr_heart); inputs: locations.earth_analog.concordia.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor, inputs.snr_required, specs.opm.sensitivity_dual_axis, inputs.bandwidth_hz, nv_heart_derived.averaged_beat.r_peak_pT, inputs.beats_averaged; deciding requirement opm_field_nulled (first requirement violated): B_ambient ≤ B_comp × S, lhs 624049/10 (62404.9 nT), rhs 50/1 (50 nT), holds False; decided 2026-11-15T19:44:41Z"
+          },
+          "from_run": "run-0007-9544",
+          "device": "opm"
+        },
+        {
+          "fact": "Lean verdict, NV-diamond magnetometer, JGU build (Omar et al. 2026) (heart: magnetocardiogram) at earth_analog.concordia",
+          "value": {
+            "value": "REQUIREMENTS_MET",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 1 requirement(s) (nv_snr); inputs: inputs.snr_required, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT, inputs.beats_averaged; deciding requirement nv_snr (requirement with the smallest margin rhs / lhs): snr² · η² · BW ≤ A² · N, lhs 126750/1 (126750 pT²), rhs 4652649/25 (186106 pT²), holds True; decided 2026-11-15T19:44:41Z"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "Lean verdict, NV-diamond magnetometer, ZAQuant build (Omar et al. 2026) (heart: magnetocardiogram) at earth_analog.concordia",
+          "value": {
+            "value": "REQUIREMENTS_MET",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 1 requirement(s) (nv_snr); inputs: inputs.snr_required, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT, inputs.beats_averaged; deciding requirement nv_snr (requirement with the smallest margin rhs / lhs): snr² · η² · BW ≤ A² · N, lhs 36750/1 (36750 pT²), rhs 4652649/25 (186106 pT²), holds True; decided 2026-11-15T19:44:41Z"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "Lean verdict, NV-diamond magnetometer, Q.ANT build (Omar et al. 2026) (heart: magnetocardiogram) at earth_analog.concordia",
+          "value": {
+            "value": "NOT_MET",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 1 requirement(s) (nv_snr); inputs: inputs.snr_required, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT, inputs.beats_averaged; deciding requirement nv_snr (first requirement violated): snr² · η² · BW ≤ A² · N, lhs 507000/1 (507000 pT²), rhs 4652649/25 (186106 pT²), holds False; decided 2026-11-15T19:44:41Z"
+          },
+          "from_run": "run-0007-9544",
+          "device": "nv"
+        },
+        {
+          "fact": "Lean verdict, quantum-dot renin nanosensor (Long et al. 2012) (blood: renin concentration) at earth_analog.concordia",
+          "value": {
+            "value": "NEED_MORE_INFORMATION",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 1 requirement(s) (qd_renin_above_lod); inputs: specs.qd_renin.detection_limit, inputs.renin; deciding requirement qd_renin_above_lod (first requirement with a missing input): LOD ≤ c_renin, lhs 25/1 (25 pM), rhs missing, holds None, missing c_renin; decided 2026-11-15T19:44:41Z"
+          },
+          "from_run": "run-0007-9544",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Lean verdict, carbon-dot microneedle bilirubin patch (Tabatabaee et al. 2024) (skin: bilirubin in interstitial fluid) at earth_analog.concordia",
+          "value": {
+            "value": "NEED_MORE_INFORMATION",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 2 requirement(s) (cqd_range_low, cqd_range_high); inputs: specs.cqd_patch.range, inputs.bilirubin_isf; deciding requirement cqd_range_low (first requirement with a missing input): range_low ≤ c_bilirubin, lhs missing, rhs missing, holds None, missing range_low, c_bilirubin; decided 2026-11-15T19:44:41Z"
+          },
+          "from_run": "run-0007-9544",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Lean verdict, QuSpin QZFM Gen-3 optically pumped magnetometer (brain: somatosensory evoked field) at iss.destiny",
+          "value": {
+            "value": "NOT_MET",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 2 requirement(s) (opm_field_nulled, opm_snr_brain); inputs: locations.iss.destiny.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor, inputs.snr_required, specs.opm.sensitivity_dual_axis, specs.opm.bandwidth_serf_class, recorded.opm_brain_mne.evoked.peak_abs_fT, recorded.opm_brain_mne.evoked.n_epochs; deciding requirement opm_field_nulled (first requirement violated): B_ambient ≤ B_comp × S, lhs 203929/5 (40785.8 nT), rhs 50/1 (50 nT), holds False; decided 2026-11-15T19:45:06Z"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "opm"
+        },
+        {
+          "fact": "Lean verdict, QuSpin QZFM Gen-3 optically pumped magnetometer (heart: magnetocardiogram) at iss.destiny",
+          "value": {
+            "value": "NOT_MET",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 2 requirement(s) (opm_field_nulled, opm_snr_heart); inputs: locations.iss.destiny.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor, inputs.snr_required, specs.opm.sensitivity_dual_axis, specs.opm.bandwidth_serf_class, nv_heart_derived.averaged_beat.r_peak_pT, inputs.beats_averaged; deciding requirement opm_field_nulled (first requirement violated): B_ambient ≤ B_comp × S, lhs 203929/5 (40785.8 nT), rhs 50/1 (50 nT), holds False; decided 2026-11-15T19:45:06Z"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "opm"
+        },
+        {
+          "fact": "Lean verdict, NV-diamond magnetometer, JGU build (Omar et al. 2026) (heart: magnetocardiogram) at iss.destiny",
+          "value": {
+            "value": "NEED_MORE_INFORMATION",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 1 requirement(s) (nv_snr); inputs: inputs.snr_required, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT, inputs.beats_averaged; deciding requirement nv_snr (first requirement with a missing input): snr² · η² · BW ≤ A² · N, lhs missing, rhs missing, holds None, missing snr, N; decided 2026-11-15T19:45:06Z"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "Lean verdict, NV-diamond magnetometer, ZAQuant build (Omar et al. 2026) (heart: magnetocardiogram) at iss.destiny",
+          "value": {
+            "value": "NEED_MORE_INFORMATION",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 1 requirement(s) (nv_snr); inputs: inputs.snr_required, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT, inputs.beats_averaged; deciding requirement nv_snr (first requirement with a missing input): snr² · η² · BW ≤ A² · N, lhs missing, rhs missing, holds None, missing snr, N; decided 2026-11-15T19:45:06Z"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "Lean verdict, NV-diamond magnetometer, Q.ANT build (Omar et al. 2026) (heart: magnetocardiogram) at iss.destiny",
+          "value": {
+            "value": "NEED_MORE_INFORMATION",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 1 requirement(s) (nv_snr); inputs: inputs.snr_required, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT, inputs.beats_averaged; deciding requirement nv_snr (first requirement with a missing input): snr² · η² · BW ≤ A² · N, lhs missing, rhs missing, holds None, missing snr, N; decided 2026-11-15T19:45:06Z"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "nv"
+        },
+        {
+          "fact": "Lean verdict, quantum-dot renin nanosensor (Long et al. 2012) (blood: renin concentration) at iss.destiny",
+          "value": {
+            "value": "NEED_MORE_INFORMATION",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 1 requirement(s) (qd_renin_above_lod); inputs: specs.qd_renin.detection_limit, inputs.renin; deciding requirement qd_renin_above_lod (first requirement with a missing input): LOD ≤ c_renin, lhs 25/1 (25 pM), rhs missing, holds None, missing c_renin; decided 2026-11-15T19:45:06Z"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Lean verdict, carbon-dot microneedle bilirubin patch (Tabatabaee et al. 2024) (skin: bilirubin in interstitial fluid) at iss.destiny",
+          "value": {
+            "value": "NEED_MORE_INFORMATION",
+            "unit": "",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean), binary sha256 6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift.verdict over 2 requirement(s) (cqd_range_low, cqd_range_high); inputs: specs.cqd_patch.range, inputs.bilirubin_isf; deciding requirement cqd_range_low (first requirement with a missing input): range_low ≤ c_bilirubin, lhs missing, rhs missing, holds None, missing range_low, c_bilirubin; decided 2026-11-15T19:45:06Z"
+          },
+          "from_run": "run-0008-7a47",
+          "device": "cqd_patch"
+        }
+      ],
+      "status": "sourced"
     }
   },
   "open_questions": [
     "NV, quantum-dot readout and patch-reader power are unspecified in their sources.",
     "The OPM needs a field of a few nT while the NV builds carry ~1 mT: how far apart, or how shielded, must they sit in one unit?",
     "The renin readout needs a TIRF microscope; no wearable quantum-dot renin reader exists in the source."
-  ]
+  ],
+  "lean_summary": {
+    "generated_at": "2026-11-15T19:53:57Z",
+    "runs_total": 9,
+    "runs_with_lean": 3,
+    "legend": {
+      "works": "REQUIREMENTS_MET",
+      "does_not_work": "NOT_MET",
+      "needs_a_number": "NEED_MORE_INFORMATION (a number is missing or unconfirmed)"
+    },
+    "lists_use": "the latest Lean verdict at each place",
+    "rule": "deciding requirement: for NOT_MET the first requirement Lean found violated with every input present; for NEED_MORE_INFORMATION the first requirement with a missing input; for REQUIREMENTS_MET the requirement with the smallest margin rhs / lhs (the tightest one). The rule only chooses which requirement to show: every holds value and every verdict is Lean's output.",
+    "by_device": {
+      "opm": [
+        "opm_brain",
+        "opm_heart"
+      ],
+      "nv": [
+        "nv_heart_jgu",
+        "nv_heart_zaquant",
+        "nv_heart_qant"
+      ],
+      "qd_renin": [
+        "qd_blood"
+      ],
+      "cqd_patch": [
+        "cqd_skin"
+      ]
+    },
+    "checks": {
+      "opm_brain": {
+        "device": "opm",
+        "sensor": "QuSpin QZFM Gen-3 optically pumped magnetometer",
+        "signal": "brain: somatosensory evoked field",
+        "works": [],
+        "does_not_work": [
+          "earth_analog.concordia",
+          "iss.destiny"
+        ],
+        "needs_a_number": [],
+        "by_location": {
+          "earth_analog.concordia": {
+            "place": "Earth analog sites",
+            "sub_place": "Concordia station (Antarctica)",
+            "runs": 1,
+            "verdicts_seen": {
+              "NOT_MET": 1
+            },
+            "latest_verdict": "NOT_MET",
+            "latest_run": "run-0007-9544",
+            "latest_at": "2026-11-15T19:44:41Z",
+            "deciding_requirement": "opm_field_nulled",
+            "missing": []
+          },
+          "iss.destiny": {
+            "place": "International Space Station",
+            "sub_place": "Destiny",
+            "runs": 2,
+            "verdicts_seen": {
+              "NOT_MET": 2
+            },
+            "latest_verdict": "NOT_MET",
+            "latest_run": "run-0009-3752",
+            "latest_at": "2026-11-15T19:53:47Z",
+            "deciding_requirement": "opm_field_nulled",
+            "missing": []
+          }
+        },
+        "strictest": {
+          "condition": "shielding_factor_needed",
+          "location_id": "earth_analog.concordia",
+          "run_id": "run-0007-9544",
+          "value": {
+            "value": 1248.1,
+            "unit": "×",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:44:10Z",
+            "note": "formula: largest shielding_factor_needed over the runs with a Lean result; inputs: runs.run-0007-9544.lean.checks.opm_brain.conditions.shielding_factor_needed; seen at earth_analog.concordia in run-0007-9544; that value: formula: S_needed = B_ambient / B_comp = S × lhs / rhs, with lhs = B_ambient and rhs = B_comp × S the two sides Lean computed for opm_field_nulled (B_ambient ≤ B_comp × S); inputs: locations.earth_analog.concordia.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor; exact value 624049/500; independent of the shield entered (S cancels); a value below 1 means the field is under the on-board coils' compensation limit, and QuSpin still operates the OPM in a shielded or compensated environment"
+          }
+        }
+      },
+      "opm_heart": {
+        "device": "opm",
+        "sensor": "QuSpin QZFM Gen-3 optically pumped magnetometer",
+        "signal": "heart: magnetocardiogram",
+        "works": [],
+        "does_not_work": [
+          "earth_analog.concordia",
+          "iss.destiny"
+        ],
+        "needs_a_number": [],
+        "by_location": {
+          "earth_analog.concordia": {
+            "place": "Earth analog sites",
+            "sub_place": "Concordia station (Antarctica)",
+            "runs": 1,
+            "verdicts_seen": {
+              "NOT_MET": 1
+            },
+            "latest_verdict": "NOT_MET",
+            "latest_run": "run-0007-9544",
+            "latest_at": "2026-11-15T19:44:41Z",
+            "deciding_requirement": "opm_field_nulled",
+            "missing": []
+          },
+          "iss.destiny": {
+            "place": "International Space Station",
+            "sub_place": "Destiny",
+            "runs": 2,
+            "verdicts_seen": {
+              "NOT_MET": 2
+            },
+            "latest_verdict": "NOT_MET",
+            "latest_run": "run-0009-3752",
+            "latest_at": "2026-11-15T19:53:47Z",
+            "deciding_requirement": "opm_field_nulled",
+            "missing": []
+          }
+        },
+        "strictest": {
+          "condition": "shielding_factor_needed",
+          "location_id": "earth_analog.concordia",
+          "run_id": "run-0007-9544",
+          "value": {
+            "value": 1248.1,
+            "unit": "×",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T19:44:10Z",
+            "note": "formula: largest shielding_factor_needed over the runs with a Lean result; inputs: runs.run-0007-9544.lean.checks.opm_heart.conditions.shielding_factor_needed; seen at earth_analog.concordia in run-0007-9544; that value: formula: S_needed = B_ambient / B_comp = S × lhs / rhs, with lhs = B_ambient and rhs = B_comp × S the two sides Lean computed for opm_field_nulled (B_ambient ≤ B_comp × S); inputs: locations.earth_analog.concordia.B_total_nT, specs.opm.field_compensation_max, inputs.shielding_factor; exact value 624049/500; independent of the shield entered (S cancels); a value below 1 means the field is under the on-board coils' compensation limit, and QuSpin still operates the OPM in a shielded or compensated environment"
+          }
+        }
+      },
+      "nv_heart_jgu": {
+        "device": "nv",
+        "sensor": "NV-diamond magnetometer, JGU build (Omar et al. 2026)",
+        "signal": "heart: magnetocardiogram",
+        "works": [
+          "earth_analog.concordia"
+        ],
+        "does_not_work": [],
+        "needs_a_number": [
+          "iss.destiny"
+        ],
+        "by_location": {
+          "earth_analog.concordia": {
+            "place": "Earth analog sites",
+            "sub_place": "Concordia station (Antarctica)",
+            "runs": 1,
+            "verdicts_seen": {
+              "REQUIREMENTS_MET": 1
+            },
+            "latest_verdict": "REQUIREMENTS_MET",
+            "latest_run": "run-0007-9544",
+            "latest_at": "2026-11-15T19:44:41Z",
+            "deciding_requirement": "nv_snr",
+            "missing": []
+          },
+          "iss.destiny": {
+            "place": "International Space Station",
+            "sub_place": "Destiny",
+            "runs": 2,
+            "verdicts_seen": {
+              "NEED_MORE_INFORMATION": 2
+            },
+            "latest_verdict": "NEED_MORE_INFORMATION",
+            "latest_run": "run-0009-3752",
+            "latest_at": "2026-11-15T19:53:47Z",
+            "deciding_requirement": "nv_snr",
+            "missing": [
+              {
+                "symbol": "snr",
+                "id": "inputs.snr_required"
+              },
+              {
+                "symbol": "N",
+                "id": "inputs.beats_averaged"
+              }
+            ]
+          }
+        },
+        "strictest": {
+          "condition": "heartbeats_needed",
+          "location_id": "earth_analog.concordia",
+          "run_id": "run-0007-9544",
+          "value": {
+            "value": 69,
+            "unit": "beats",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: largest heartbeats_needed over the runs with a Lean result; inputs: runs.run-0007-9544.lean.checks.nv_heart_jgu.conditions.heartbeats_needed; seen at earth_analog.concordia in run-0007-9544; that value: formula: N_needed = ceil(lhs / A²), with lhs = snr² · η² · BW the left side Lean computed for nv_snr (snr² · η² · BW ≤ A² · N); inputs: inputs.snr_required, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT; lhs / A² = 105625000/1550883 ≈ 68.1064; the inequality holds for N ≥ that value, so 69 is the smallest whole number of heartbeats; target r_peak; the nv_snr requirement has no location term"
+          }
+        }
+      },
+      "nv_heart_zaquant": {
+        "device": "nv",
+        "sensor": "NV-diamond magnetometer, ZAQuant build (Omar et al. 2026)",
+        "signal": "heart: magnetocardiogram",
+        "works": [
+          "earth_analog.concordia"
+        ],
+        "does_not_work": [],
+        "needs_a_number": [
+          "iss.destiny"
+        ],
+        "by_location": {
+          "earth_analog.concordia": {
+            "place": "Earth analog sites",
+            "sub_place": "Concordia station (Antarctica)",
+            "runs": 1,
+            "verdicts_seen": {
+              "REQUIREMENTS_MET": 1
+            },
+            "latest_verdict": "REQUIREMENTS_MET",
+            "latest_run": "run-0007-9544",
+            "latest_at": "2026-11-15T19:44:41Z",
+            "deciding_requirement": "nv_snr",
+            "missing": []
+          },
+          "iss.destiny": {
+            "place": "International Space Station",
+            "sub_place": "Destiny",
+            "runs": 2,
+            "verdicts_seen": {
+              "NEED_MORE_INFORMATION": 2
+            },
+            "latest_verdict": "NEED_MORE_INFORMATION",
+            "latest_run": "run-0009-3752",
+            "latest_at": "2026-11-15T19:53:47Z",
+            "deciding_requirement": "nv_snr",
+            "missing": [
+              {
+                "symbol": "snr",
+                "id": "inputs.snr_required"
+              },
+              {
+                "symbol": "N",
+                "id": "inputs.beats_averaged"
+              }
+            ]
+          }
+        },
+        "strictest": {
+          "condition": "heartbeats_needed",
+          "location_id": "earth_analog.concordia",
+          "run_id": "run-0007-9544",
+          "value": {
+            "value": 20,
+            "unit": "beats",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: largest heartbeats_needed over the runs with a Lean result; inputs: runs.run-0007-9544.lean.checks.nv_heart_zaquant.conditions.heartbeats_needed; seen at earth_analog.concordia in run-0007-9544; that value: formula: N_needed = ceil(lhs / A²), with lhs = snr² · η² · BW the left side Lean computed for nv_snr (snr² · η² · BW ≤ A² · N); inputs: inputs.snr_required, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT; lhs / A² = 30625000/1550883 ≈ 19.7468; the inequality holds for N ≥ that value, so 20 is the smallest whole number of heartbeats; target r_peak; the nv_snr requirement has no location term"
+          }
+        }
+      },
+      "nv_heart_qant": {
+        "device": "nv",
+        "sensor": "NV-diamond magnetometer, Q.ANT build (Omar et al. 2026)",
+        "signal": "heart: magnetocardiogram",
+        "works": [],
+        "does_not_work": [
+          "earth_analog.concordia"
+        ],
+        "needs_a_number": [
+          "iss.destiny"
+        ],
+        "by_location": {
+          "earth_analog.concordia": {
+            "place": "Earth analog sites",
+            "sub_place": "Concordia station (Antarctica)",
+            "runs": 1,
+            "verdicts_seen": {
+              "NOT_MET": 1
+            },
+            "latest_verdict": "NOT_MET",
+            "latest_run": "run-0007-9544",
+            "latest_at": "2026-11-15T19:44:41Z",
+            "deciding_requirement": "nv_snr",
+            "missing": []
+          },
+          "iss.destiny": {
+            "place": "International Space Station",
+            "sub_place": "Destiny",
+            "runs": 2,
+            "verdicts_seen": {
+              "NEED_MORE_INFORMATION": 2
+            },
+            "latest_verdict": "NEED_MORE_INFORMATION",
+            "latest_run": "run-0009-3752",
+            "latest_at": "2026-11-15T19:53:47Z",
+            "deciding_requirement": "nv_snr",
+            "missing": [
+              {
+                "symbol": "snr",
+                "id": "inputs.snr_required"
+              },
+              {
+                "symbol": "N",
+                "id": "inputs.beats_averaged"
+              }
+            ]
+          }
+        },
+        "strictest": {
+          "condition": "heartbeats_needed",
+          "location_id": "earth_analog.concordia",
+          "run_id": "run-0007-9544",
+          "value": {
+            "value": 273,
+            "unit": "beats",
+            "source": "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean); SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: largest heartbeats_needed over the runs with a Lean result; inputs: runs.run-0007-9544.lean.checks.nv_heart_qant.conditions.heartbeats_needed; seen at earth_analog.concordia in run-0007-9544; that value: formula: N_needed = ceil(lhs / A²), with lhs = snr² · η² · BW the left side Lean computed for nv_snr (snr² · η² · BW ≤ A² · N); inputs: inputs.snr_required, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, nv_heart_derived.averaged_beat.r_peak_pT; lhs / A² = 422500000/1550883 ≈ 272.425; the inequality holds for N ≥ that value, so 273 is the smallest whole number of heartbeats; target r_peak; the nv_snr requirement has no location term"
+          }
+        }
+      },
+      "qd_blood": {
+        "device": "qd_renin",
+        "sensor": "quantum-dot renin nanosensor (Long et al. 2012)",
+        "signal": "blood: renin concentration",
+        "works": [],
+        "does_not_work": [],
+        "needs_a_number": [
+          "earth_analog.concordia",
+          "iss.destiny"
+        ],
+        "by_location": {
+          "earth_analog.concordia": {
+            "place": "Earth analog sites",
+            "sub_place": "Concordia station (Antarctica)",
+            "runs": 1,
+            "verdicts_seen": {
+              "NEED_MORE_INFORMATION": 1
+            },
+            "latest_verdict": "NEED_MORE_INFORMATION",
+            "latest_run": "run-0007-9544",
+            "latest_at": "2026-11-15T19:44:41Z",
+            "deciding_requirement": "qd_renin_above_lod",
+            "missing": [
+              {
+                "symbol": "c_renin",
+                "id": "inputs.renin"
+              }
+            ]
+          },
+          "iss.destiny": {
+            "place": "International Space Station",
+            "sub_place": "Destiny",
+            "runs": 2,
+            "verdicts_seen": {
+              "NEED_MORE_INFORMATION": 2
+            },
+            "latest_verdict": "NEED_MORE_INFORMATION",
+            "latest_run": "run-0009-3752",
+            "latest_at": "2026-11-15T19:53:47Z",
+            "deciding_requirement": "qd_renin_above_lod",
+            "missing": [
+              {
+                "symbol": "c_renin",
+                "id": "inputs.renin"
+              }
+            ]
+          }
+        },
+        "strictest": null
+      },
+      "cqd_skin": {
+        "device": "cqd_patch",
+        "sensor": "carbon-dot microneedle bilirubin patch (Tabatabaee et al. 2024)",
+        "signal": "skin: bilirubin in interstitial fluid",
+        "works": [],
+        "does_not_work": [],
+        "needs_a_number": [
+          "earth_analog.concordia",
+          "iss.destiny"
+        ],
+        "by_location": {
+          "earth_analog.concordia": {
+            "place": "Earth analog sites",
+            "sub_place": "Concordia station (Antarctica)",
+            "runs": 1,
+            "verdicts_seen": {
+              "NEED_MORE_INFORMATION": 1
+            },
+            "latest_verdict": "NEED_MORE_INFORMATION",
+            "latest_run": "run-0007-9544",
+            "latest_at": "2026-11-15T19:44:41Z",
+            "deciding_requirement": "cqd_range_low",
+            "missing": [
+              {
+                "symbol": "range_low",
+                "id": "specs.cqd_patch.range"
+              },
+              {
+                "symbol": "c_bilirubin",
+                "id": "inputs.bilirubin_isf"
+              }
+            ]
+          },
+          "iss.destiny": {
+            "place": "International Space Station",
+            "sub_place": "Destiny",
+            "runs": 2,
+            "verdicts_seen": {
+              "NEED_MORE_INFORMATION": 2
+            },
+            "latest_verdict": "NEED_MORE_INFORMATION",
+            "latest_run": "run-0009-3752",
+            "latest_at": "2026-11-15T19:53:47Z",
+            "deciding_requirement": "cqd_range_low",
+            "missing": [
+              {
+                "symbol": "range_low",
+                "id": "specs.cqd_patch.range"
+              },
+              {
+                "symbol": "c_bilirubin",
+                "id": "inputs.bilirubin_isf"
+              }
+            ]
+          }
+        },
+        "strictest": null
+      }
+    }
+  }
 }

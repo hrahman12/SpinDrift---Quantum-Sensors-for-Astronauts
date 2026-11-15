@@ -14,7 +14,7 @@
   },
   "sensor_environment_physics": {
     "serf_opm_relationship": "SERF operation improves as ambient magnetic field drops: QuSpin QZFM and miniaturized OPM-MEG sensors require near-zero local fields (<50 nT residual) to eliminate spin-exchange relaxation. In LEO (~25-65 uT), heavy shielding or active triaxial nulling is required and orbital field gradients add noise; in cislunar, Mars transit, and deep space (nT to sub-nT ambient fields), shielding mass and compensation noise drop and OPMs reach peak sensitivity. At Europa, Jupiter's ~420 uT ambient field overwhelms standard SERF dynamic range and degrades OPM sensitivity.",
-    "nv_diamond_relationship": "NV-diamond T1 relaxometry (532 nm excitation, 637-800 nm readout) and the NV-diamond cardiac magnetometer alternative operate across strong ambient magnetic fields without cryogenic cooling or SERF zero-field lock, preserving monitoring resilience at Europa (~420 uT) when OPM channels degrade."
+    "nv_diamond_relationship": "NV-diamond T1 relaxometry (532 nm excitation, 637-800 nm readout) and the NV-diamond cardiac magnetometer alternative operate across strong ambient magnetic fields at room temperature without a SERF zero-field lock, preserving monitoring resilience at Europa (~420 uT) when OPM channels degrade."
   },
   "aggregation_rules": {
     "per_sensor_status": "Worst status among all biomarkers mapped to that sensor (red > amber > green).",
@@ -140,7 +140,7 @@
   "sensors": {
     "chest_heart": {
       "device": "QuSpin QZFM OPM",
-      "device_specs": "87Rb vapor cell, <15 fT/sqrt(Hz), domino-sized, no cryogenics",
+      "device_specs": "87Rb vapor cell, <15 fT/sqrt(Hz), domino-sized",
       "alt_device": "NV-diamond cardiac magnetometer",
       "alt_device_specs": "12 mm head, 6-26 pT/sqrt(Hz), measured real human hearts (arXiv 2601.18843, Jan 2026)",
       "biomarkers": [
@@ -205,7 +205,7 @@
     },
     "head_brain": {
       "device": "OPM-MEG helmet (2026 miniaturized)",
-      "device_specs": "12 x 16.5 x 22.5 mm per sensor, <7 fT/sqrt(Hz), 130 Hz bandwidth, 0.7 W per head; 49 to 128 channels (FieldLine HEDscan class); wearable, non-cryogenic",
+      "device_specs": "12 x 16.5 x 22.5 mm per sensor, <7 fT/sqrt(Hz), 130 Hz bandwidth, 0.7 W per head; 49 to 128 channels (FieldLine HEDscan class); wearable",
       "biomarkers": [
         {
           "id": "alpha_power",

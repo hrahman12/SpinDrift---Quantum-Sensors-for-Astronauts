@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T09:58:08Z",
+    "generated_at": "2026-11-15T19:35:56Z",
     "sources": [
       "Lean 4 theorem prover, https://lean-lang.org (core library only, no Mathlib)",
       "lean/SpinDrift/Physics.lean (this repository)",
@@ -22,12 +22,12 @@
     },
     {
       "file": "lean/SpinDrift/Checker.lean",
-      "sha256": "90e53c27124c8f8b28fe4b479bd823d8e413b3f0875c4a31d373b735cc070689",
+      "sha256": "2def464ac94b66e7e944573c6c52823c38fc43fb8b3aabc3a31c1d5303b3f628",
       "theorems": 0
     },
     {
       "file": "lean/SpinDrift/Soundness.lean",
-      "sha256": "7940fd6199fb3392363a7fed389d31c1f9d8e6f2f35dd14294427d6ea3bcdd91",
+      "sha256": "fd09bb25abde4a01c865c79f2066bc9ecb2f837cd6e8d2520dea373c6659a63d",
       "theorems": 38
     }
   ],
@@ -55,7 +55,7 @@
       "lean/SpinDrift/Physics.lean",
       "lean/SpinDrift/Soundness.lean"
     ],
-    "source_sha256": "8f1933191748494e5a1f1fcc87d161bd6e98d7cdcfba1e9d257dbb33f9cf844d",
+    "source_sha256": "10277b1127110d858766c59cad8e94d77c8dc6ad6d6368af07b2fb5267c04474",
     "selftest": "pass",
     "input_format": "lines 'check <id>' and 'req <id> <factors> <= <factors>'; factor n/d, n or ?",
     "theorems": [

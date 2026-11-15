@@ -16,6 +16,11 @@ pillow==12.2.0
 matplotlib==3.11.2
 # IGRF field model at the live ISS position
 ppigrf==2.1.0
+# location engine: SGP4 orbit propagation of CelesTrak TLEs (Tiangong, ISS track), NASA CDAWeb file listings
+# (ARTEMIS lunar-orbit magnetometer, OMNI storm archive) and reading their CDF files
+sgp4==2.27
+cdasws==1.8.18
+cdflib==1.3.16
 # clients for real online services
 gradio_client==2.7.2
 viresclient==0.16.0

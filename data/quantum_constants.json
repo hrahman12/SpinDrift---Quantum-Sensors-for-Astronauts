@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T10:12:13Z",
+    "generated_at": "2026-11-15T19:57:02Z",
     "sources": [
       "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata",
       "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15)",
@@ -18,15 +18,58 @@
       "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41), 28012-28025 (2024), doi:10.1021/acsnano.4c06191",
       "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
       "Benatto et al., 'FRET-Calc: A Free Software and Web Server for Förster Resonance Energy Transfer Calculation', Comput. Phys. Commun. (2023), doi:10.1016/j.cpc.2023.108715, arXiv 2311.15476, Eq. (2)",
-      "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1)"
+      "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1)",
+      "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, from the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/ (file https://www-nds.iaea.org/radii/charge_radii.csv)",
+      "IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=<nuclide> (guide: https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html)",
+      "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843, full text https://arxiv.org/html/2601.18843v1",
+      "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata (PDF https://steck.us/alkalidata/rubidium87numbers.pdf)",
+      "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15): https://physics.nist.gov/cgi-bin/cuu/Value?<code>",
+      "Crystallography Open Database entry 2300702 (Houben et al., J. Appl. Cryst. 56, 633 (2023), doi:10.1107/S1600576723002819) and Crystallography Open Database entry 9011577 (Trucano & Chen, 'Structure of graphite by neutron diffraction', Nature 258, 136 (1975), doi:10.1038/258136a0): CIF files https://www.crystallography.net/cod/<id>.cif",
+      "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
+      "Bates & Damgaard, 'The calculation of the absolute strengths of spectral lines', Phil. Trans. R. Soc. Lond. A 242, 101-122 (1949), doi:10.1098/rsta.1949.0006 (Coulomb approximation)",
+      "SI defining constants, exact since 20 May 2019 (BIPM, The International System of Units, 9th ed., 2019): h = 6.626 070 15 x 10^-34 J s, k = 1.380 649 x 10^-23 J/K, e = 1.602 176 634 x 10^-19 C, c = 299 792 458 m/s"
     ],
     "accessed": "2026-11-15",
     "used_by": [
       "ui/scale/q_nv.js",
       "ui/scale/q_rb.js",
       "ui/scale/q_qd.js",
-      "ui/scale/q_cqd.js"
-    ]
+      "ui/scale/q_cqd.js",
+      "ui/scale/q_nucleus.js"
+    ],
+    "sha256": {
+      "https://www-nds.iaea.org/radii/charge_radii.csv": "683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6",
+      "https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html": "61398b9133eb0fa23eca765337ef8970d6137894fdf3dc0dd60e55dce347cc15",
+      "https://arxiv.org/html/2601.18843v1": "0f25da5e393bb0785f7baa7dd307071f6db5f8be8c56dedefd000fe4fbdbfff4",
+      "https://arxiv.org/html/1903.08176v2": "ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a",
+      "https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=87rb": "8c5941d3b8508090b1d83127c1a18f249507791ce1a3c9f573e4b976936fd5c4",
+      "https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=14n": "f5501c63f3b07102953c813e33c4811eca8b408f7f57abe5c6fa6fb2c41eb62b",
+      "https://physics.nist.gov/cgi-bin/cuu/Value?munshhz": "5b392f79a8c42487080ca274acffc87421fa75dbe8b282b1f2add306c4c2238f",
+      "https://physics.nist.gov/cgi-bin/cuu/Value?ryd": "1b381be647b5d0007d971667063a563bbcdbac4bb2e12072905a8af5fb19117b",
+      "https://physics.nist.gov/cgi-bin/cuu/Value?bohrrada0": "2ebc3d078ed14fdb79d8c05f32832174865f33bb9b73006ae9867e2de5677c71",
+      "https://physics.nist.gov/cgi-bin/cuu/Value?ukg": "cc07a862dd0ca1a2651d99d0fe126f19ca011838f9a34830cc4959749f7b8836",
+      "https://steck.us/alkalidata/rubidium87numbers.pdf": "0d7ecd708e44ad950db280cbf980b16090660646f5e530e544ae78ccd6385c3b",
+      "https://quspin.com/technology/": "4102c6a4b935f03e29661425f8dba29aaf573d8f6966a233abc15be8235d4367",
+      "https://www.crystallography.net/cod/2300702.cif": "8ac7ddff65131f7f940a5d94f598f93012a152495b3f154b4c9ed536412af8ea",
+      "https://www.crystallography.net/cod/9011577.cif": "35d1661c3131acc9b1c33dad65358d094b93105d6aae711465ac4352ae809748"
+    },
+    "fetched": {
+      "https://www-nds.iaea.org/radii/charge_radii.csv": "2026-11-15T19:56:53Z",
+      "https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html": "2026-11-15T19:56:54Z",
+      "https://arxiv.org/html/2601.18843v1": "2026-11-15T19:56:54Z",
+      "https://arxiv.org/html/1903.08176v2": "2026-11-15T19:56:54Z",
+      "https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=87rb": "2026-11-15T19:56:55Z",
+      "https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=14n": "2026-11-15T19:56:56Z",
+      "https://physics.nist.gov/cgi-bin/cuu/Value?munshhz": "2026-11-15T19:56:56Z",
+      "https://physics.nist.gov/cgi-bin/cuu/Value?ryd": "2026-11-15T19:56:56Z",
+      "https://physics.nist.gov/cgi-bin/cuu/Value?bohrrada0": "2026-11-15T19:56:56Z",
+      "https://physics.nist.gov/cgi-bin/cuu/Value?ukg": "2026-11-15T19:56:56Z",
+      "https://steck.us/alkalidata/rubidium87numbers.pdf": "2026-11-15T19:56:57Z",
+      "https://quspin.com/technology/": "2026-11-15T19:57:00Z",
+      "https://www.crystallography.net/cod/2300702.cif": "2026-11-15T19:57:01Z",
+      "https://www.crystallography.net/cod/9011577.cif": "2026-11-15T19:57:02Z"
+    },
+    "fetch_errors": {}
   },
   "electron": {
     "g_factor": {
@@ -239,6 +282,24 @@
       "status": "VERIFIED",
       "as_of": null,
       "note": "formula: |<S>| = sqrt(1/2 + 1/4) (units of hbar); inputs: nv.spin_operators, nv.ramsey"
+    },
+    "n14_hyperfine_splitting": {
+      "value": 2.16,
+      "unit": "MHz",
+      "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15), JGU sensor: 'The central microwave frequency at 2.87 GHz was mixed with a 2.16 MHz radio frequency signal to address all hyperfine level'; quote found in https://arxiv.org/html/2601.18843v1 (SHA256 0f25da5e393bb0785f7baa7dd307071f6db5f8be8c56dedefd000fe4fbdbfff4, fetched 2026-11-15T19:56:54Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "the three 14N hyperfine lines (m_I = -1, 0, +1) of an NV resonance lie this far apart, so mixing the microwave with this frequency drives all three; the same statement is the 'microwave drive' fact in data/combined_sensor.json and data/runs.json"
+    },
+    "n14_axial_hyperfine_constants": {
+      "value": "±2.32 ± 0.01; 2.30 ± 0.02; −2.14 ± 0.07; −2.166 ± 0.01; −2.162 ± 0.002",
+      "unit": "MHz",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Table 16 of the arXiv version ('Compiled constants for the electronic ground state of the NV- center in diamond'), row '14N axial magnetic hyperfine constant' (A_parallel); read from https://arxiv.org/html/1903.08176v2 (SHA256 ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a, fetched 2026-11-15T19:56:54Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "the values the table compiles from five references, in the table's order and with its signs; the most precise, −2.162 ± 0.002 MHz, has the magnitude 2.16 MHz that the JGU sensor mixes in"
     }
   },
   "rb87": {
@@ -630,6 +691,69 @@
       "status": "VERIFIED",
       "as_of": null,
       "note": "formula: 3.03 Å = 0.303 nm; inputs: rb87.vdw_radius"
+    },
+    "ionization_limit": {
+      "value": 33690.8048,
+      "unit": "cm^-1",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 2 (Rubidium 87 Physical Properties): 'Ionization Limit EI 33 690.804 80(20) cm−1', read from https://steck.us/alkalidata/rubidium87numbers.pdf (SHA256 0d7ecd708e44ad950db280cbf980b16090660646f5e530e544ae78ccd6385c3b, fetched 2026-11-15T19:56:57Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "atomic_mass_kg": {
+      "value": 1.4431608950000002e-25,
+      "unit": "kg",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 2: 'Atomic Mass m 86.909 180 520(15) u 1.443 160 895 00(50) × 10−25 kg', read from https://steck.us/alkalidata/rubidium87numbers.pdf (SHA256 0d7ecd708e44ad950db280cbf980b16090660646f5e530e544ae78ccd6385c3b, fetched 2026-11-15T19:56:57Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "valence_n_star": {
+      "value": 1.804768381,
+      "unit": "",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: effective principal quantum number n* = sqrt(R_inf / E_I), both in cm^-1; inputs: codata.rydberg, rb87.ionization_limit; the reduced-mass Rydberg of 87Rb differs from R_inf by 6 parts per million, which changes n* by 3 ppm (not applied)"
+    },
+    "valence_density_model": {
+      "value": "radial probability density of the 5s valence electron, P(r) ∝ r^(2n*) exp(-2r / (n* a0)): the leading term of the Coulomb-approximation wavefunction outside the ion core",
+      "unit": "",
+      "source": "Bates & Damgaard, 'The calculation of the absolute strengths of spectral lines', Phil. Trans. R. Soc. Lond. A 242, 101-122 (1949), doi:10.1098/rsta.1949.0006 (Coulomb approximation)",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "the core region (36 inner electrons, inner nodes of the 5s orbital) is not modelled; spherically symmetric (an s state)"
+    },
+    "valence_r_most_probable": {
+      "value": 0.172363014,
+      "unit": "nm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: peak of P(r): r = n*^2 a0; inputs: rb87.valence_n_star, codata.bohr_radius"
+    },
+    "valence_r_mean": {
+      "value": 0.2201151289,
+      "unit": "nm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: mean of P(r): <r> = n*(2n* + 1)/2 a0; inputs: rb87.valence_n_star, codata.bohr_radius"
+    },
+    "thermal_mean_speed": {
+      "value": 321.0713062,
+      "unit": "m/s",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: mean speed of a vapour atom sqrt(8 k T / (pi m)) at the cell temperature; inputs: si.k, opm_model.cell_temperature, rb87.atomic_mass_kg; Maxwell-Boltzmann mean speed; in the buffer gas the atom changes direction at every collision"
     }
   },
   "opm_model": {
@@ -704,6 +828,33 @@
       "status": "VERIFIED",
       "as_of": null,
       "note": "QuSpin does not state the isotope; the scene uses 87Rb constants from Steck"
+    },
+    "zero_field_fwhm": {
+      "value": 30.0,
+      "unit": "nT",
+      "source": "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15): figure label 'ZF resonance (photodetector output) FWHM ≈ 30 nT'; text: 'typically about 30 nT wide'; read from https://quspin.com/technology/ (SHA256 4102c6a4b935f03e29661425f8dba29aaf573d8f6966a233abc15be8235d4367, fetched 2026-11-15T19:57:00Z)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "full width at half maximum of the zero-field resonance (Lorentzian)"
+    },
+    "zero_field_hwhm": {
+      "value": 15.0,
+      "unit": "nT",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: half width = FWHM / 2 (Lorentzian); inputs: opm_model.zero_field_fwhm; the field scale of Sulai's dimensionless w = Omega/Gamma' (Lean opm_half_width: the resonance is at half height at w = 1)"
+    },
+    "transparency": {
+      "value": "a perpendicular field changes the cell's transparency",
+      "unit": "",
+      "source": "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15), figure text; read from https://quspin.com/technology/ (SHA256 4102c6a4b935f03e29661425f8dba29aaf573d8f6966a233abc15be8235d4367, fetched 2026-11-15T19:57:00Z)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
     }
   },
   "qd": {
@@ -1116,7 +1267,704 @@
     "as_of": null,
     "note": "used only for diagrams, axes, labels and for elements whose emission colour is not cited; never as a wavelength colour"
   },
+  "nuclei": {
+    "rb87": {
+      "id": "rb87",
+      "name": "rubidium-87",
+      "symbol": "Rb",
+      "site": "brain",
+      "protons": {
+        "value": 37,
+        "unit": "",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=37, symbol=Rb, n=50, a=87: radius_val=4.1989, radius_unc=0.0021",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "number of protons"
+      },
+      "neutrons": {
+        "value": 50,
+        "unit": "",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=37, symbol=Rb, n=50, a=87: radius_val=4.1989, radius_unc=0.0021",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "number of neutrons"
+      },
+      "mass_number": {
+        "value": 87,
+        "unit": "",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=37, symbol=Rb, n=50, a=87: radius_val=4.1989, radius_unc=0.0021",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "mass number A = Z + N"
+      },
+      "rms_charge_radius": {
+        "value": 4.1989,
+        "unit": "fm",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=37, symbol=Rb, n=50, a=87: radius_val=4.1989, radius_unc=0.0021",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "root-mean-square nuclear charge radius R = <r^2>^(1/2), ± 0.0021 fm; cross-check: the IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=87rb (SHA256 8c5941d3b8508090b1d83127c1a18f249507791ce1a3c9f573e4b976936fd5c4, fetched 2026-11-15T19:56:55Z), gives radius 4.1989 ± 0.0021 fm for z=37, n=50, and its guide (https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html) gives the source of that field as 'AM: I.Angeli, K.P. Marinova, Atomic Data and Nuclear Data Tables 99 (2013) DOI:10.1016/j.adt.2011.12.006'. The database's HTML page answers automated requests with a browser check; it was not read and the check was not bypassed. The nucleus has no sharp surface: this is the rms radius of its charge distribution."
+      },
+      "rms_charge_radius_uncertainty": {
+        "value": 0.0021,
+        "unit": "fm",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=37, symbol=Rb, n=50, a=87: radius_val=4.1989, radius_unc=0.0021",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "uncertainty of the rms charge radius as tabulated (radius_unc)"
+      },
+      "spin_parity": {
+        "value": "3/2-",
+        "unit": "",
+        "source": "IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=87rb (SHA256 8c5941d3b8508090b1d83127c1a18f249507791ce1a3c9f573e4b976936fd5c4, fetched 2026-11-15T19:56:55Z), field jp = '3/2-' (J-pi; source ENSDF per https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html); ENSDF evaluation by T.D. Johnson and W.D. Kulp(a), publication cut-off 27-Jul-2015, as stated in the row",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "ground-state spin and parity"
+      },
+      "nuclear_spin": {
+        "value": 1.5,
+        "unit": "",
+        "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 2 (Rubidium 87 Physical Properties), p. 17: nuclear spin I = 3/2",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "spin_tilt": {
+        "value": 39.23152048,
+        "unit": "°",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: vector model of the state m_I = I: tilt from the axis = arccos(I / sqrt(I(I+1))); inputs: nuclei.rb87.nuclear_spin; a semiclassical picture; the scene's arrow uses it"
+      },
+      "spin_length": {
+        "value": 1.936491673,
+        "unit": "",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: |I| = sqrt(I(I+1)) (units of hbar); inputs: nuclei.rb87.nuclear_spin"
+      },
+      "magnetic_dipole": {
+        "value": 2.75129,
+        "unit": "μN",
+        "source": "IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=87rb (SHA256 8c5941d3b8508090b1d83127c1a18f249507791ce1a3c9f573e4b976936fd5c4, fetched 2026-11-15T19:56:55Z), field magnetic_dipole = 2.75129 ± 0.00008 (source code 'S' in the API guide: NS: Table of Recommended Nuclear Magnetic Dipole Moments: Part I - Long-lived States indc-nds-0794 , and Table of Recommended Nuclear Magnetic Dipole Moments - Part II, Short-lived States indc-nds-0816 , and Table of Nuclear Electric Quadrupole Moments indc-nds-0833)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "nuclear magnetic dipole moment, in nuclear magnetons"
+      },
+      "electric_quadrupole": {
+        "value": 0.1335,
+        "unit": "b",
+        "source": "IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=87rb (SHA256 8c5941d3b8508090b1d83127c1a18f249507791ce1a3c9f573e4b976936fd5c4, fetched 2026-11-15T19:56:55Z), field electric_quadrupole = 0.1335 ± 0.0005 (source code 'S' in the API guide: NS: Table of Recommended Nuclear Magnetic Dipole Moments: Part I - Long-lived States indc-nds-0794 , and Table of Recommended Nuclear Magnetic Dipole Moments - Part II, Short-lived States indc-nds-0816 , and Table of Nuclear Electric Quadrupole Moments indc-nds-0833)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "spectroscopic electric quadrupole moment, in barn"
+      },
+      "atom_over_nucleus": {
+        "value": 72161.75665,
+        "unit": "",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: van der Waals radius / rms charge radius, with 1 Å = 1e5 fm; inputs: rb87.vdw_radius, nuclei.rb87.rms_charge_radius; how many times larger the atom drawn in q_rb is than this sphere"
+      },
+      "hyperfine": {
+        "what": "coupling of the nuclear spin I to the spin of the outer electron (J = 1/2) in the 5²S1/2 ground state",
+        "splitting": {
+          "value": 6.83468261090429,
+          "unit": "GHz",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Fig. 3 (D1 transition hyperfine structure), p. 27: 6.834 682 610 904 290(90) GHz between F = 1 and F = 2",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "constant_A": {
+          "value": 3.417341305452145,
+          "unit": "GHz",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 5 (D Transition Hyperfine Structure Constants), p. 19: A(5²S1/2) = h x 3.417 341 305 452 145(45) GHz",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "levels": {
+          "value": "F = 1 and F = 2",
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: F runs from |I - J| to I + J with J = 1/2; inputs: rb87.nuclear_spin; the two ground levels of Steck Fig. 3"
+        }
+      },
+      "larmor_free_nucleus": {
+        "value": 13.98130966,
+        "unit": "MHz/T",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: gamma/2pi = |mu| / (I h) = |mu / mu_N| / I x mu_N/h; inputs: nuclei.rb87.magnetic_dipole, nuclei.rb87.nuclear_spin, codata.nuclear_magneton_over_h; a bare nucleus; in an atom or crystal the electrons change what it feels (see the scene)"
+      },
+      "larmor_with_electron_F2": {
+        "value": 6.995832833,
+        "unit": "Hz/nT",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: Delta nu between adjacent m_F = g_F mu_B B / h (Steck Eq. 24); inputs: rb87.g_F_F2_exact, electron.bohr_magneton_over_h; Steck Fig. 3 prints 0.70 MHz/G = 7.0 Hz/nT"
+      },
+      "larmor_steck_gI": {
+        "value": 13.92824276,
+        "unit": "MHz/T",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: |g_I| mu_B / h (Steck's g_I, which is given for the nucleus in the atom); inputs: rb87.g_I, electron.bohr_magneton_over_h"
+      }
+    },
+    "n14": {
+      "id": "n14",
+      "name": "nitrogen-14",
+      "symbol": "N",
+      "site": "heart",
+      "protons": {
+        "value": 7,
+        "unit": "",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=7, symbol=N, n=7, a=14: radius_val=2.5582, radius_unc=0.0070",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "number of protons"
+      },
+      "neutrons": {
+        "value": 7,
+        "unit": "",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=7, symbol=N, n=7, a=14: radius_val=2.5582, radius_unc=0.0070",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "number of neutrons"
+      },
+      "mass_number": {
+        "value": 14,
+        "unit": "",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=7, symbol=N, n=7, a=14: radius_val=2.5582, radius_unc=0.0070",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "mass number A = Z + N"
+      },
+      "rms_charge_radius": {
+        "value": 2.5582,
+        "unit": "fm",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=7, symbol=N, n=7, a=14: radius_val=2.5582, radius_unc=0.0070",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "root-mean-square nuclear charge radius R = <r^2>^(1/2), ± 0.0070 fm; cross-check: the IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=14n (SHA256 f5501c63f3b07102953c813e33c4811eca8b408f7f57abe5c6fa6fb2c41eb62b, fetched 2026-11-15T19:56:56Z), gives radius 2.5582 ± 0.0070 fm for z=7, n=7, and its guide (https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html) gives the source of that field as 'AM: I.Angeli, K.P. Marinova, Atomic Data and Nuclear Data Tables 99 (2013) DOI:10.1016/j.adt.2011.12.006'. The database's HTML page answers automated requests with a browser check; it was not read and the check was not bypassed. The nucleus has no sharp surface: this is the rms radius of its charge distribution."
+      },
+      "rms_charge_radius_uncertainty": {
+        "value": 0.007,
+        "unit": "fm",
+        "source": "Angeli & Marinova, 'Table of experimental nuclear ground state charge radii: An update', At. Data Nucl. Data Tables 99, 69-95 (2013), doi:10.1016/j.adt.2011.12.006, as served by the IAEA Nuclear Data Section, nuclear charge radii database, https://www-nds.iaea.org/radii/: file https://www-nds.iaea.org/radii/charge_radii.csv (SHA256 683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6, fetched 2026-11-15T19:56:53Z), row z=7, symbol=N, n=7, a=14: radius_val=2.5582, radius_unc=0.0070",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "uncertainty of the rms charge radius as tabulated (radius_unc)"
+      },
+      "spin_parity": {
+        "value": "1+",
+        "unit": "",
+        "source": "IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=14n (SHA256 f5501c63f3b07102953c813e33c4811eca8b408f7f57abe5c6fa6fb2c41eb62b, fetched 2026-11-15T19:56:56Z), field jp = '1+' (J-pi; source ENSDF per https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html); ENSDF evaluation by F. AJZENBERG-SELOVE, publication cut-off 1-JUL-1990, as stated in the row",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "ground-state spin and parity"
+      },
+      "nuclear_spin": {
+        "value": 1.0,
+        "unit": "",
+        "source": "IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=14n (SHA256 f5501c63f3b07102953c813e33c4811eca8b408f7f57abe5c6fa6fb2c41eb62b, fetched 2026-11-15T19:56:56Z), field jp = '1+' (J-pi; source ENSDF per https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html); ENSDF evaluation by F. AJZENBERG-SELOVE, publication cut-off 1-JUL-1990, as stated in the row",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "nuclear spin I read from the ground-state J-pi = 1+; also Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Fig. 12 caption of the arXiv version: 'The three peaks arise from hyperfine interactions associated with the NV- center's 14N nuclear spin I = 1' (found in https://arxiv.org/html/1903.08176v2 (SHA256 ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a, fetched 2026-11-15T19:56:54Z))"
+      },
+      "spin_tilt": {
+        "value": 45.0,
+        "unit": "°",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: vector model of the state m_I = I: tilt from the axis = arccos(I / sqrt(I(I+1))); inputs: nuclei.n14.nuclear_spin; a semiclassical picture; the scene's arrow uses it"
+      },
+      "spin_length": {
+        "value": 1.414213562,
+        "unit": "",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: |I| = sqrt(I(I+1)) (units of hbar); inputs: nuclei.n14.nuclear_spin"
+      },
+      "magnetic_dipole": {
+        "value": 0.403573,
+        "unit": "μN",
+        "source": "IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=14n (SHA256 f5501c63f3b07102953c813e33c4811eca8b408f7f57abe5c6fa6fb2c41eb62b, fetched 2026-11-15T19:56:56Z), field magnetic_dipole = 0.403573 ± 0.000002 (source code 'S' in the API guide: NS: Table of Recommended Nuclear Magnetic Dipole Moments: Part I - Long-lived States indc-nds-0794 , and Table of Recommended Nuclear Magnetic Dipole Moments - Part II, Short-lived States indc-nds-0816 , and Table of Nuclear Electric Quadrupole Moments indc-nds-0833)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "nuclear magnetic dipole moment, in nuclear magnetons"
+      },
+      "electric_quadrupole": {
+        "value": 0.02044,
+        "unit": "b",
+        "source": "IAEA Live Chart of Nuclides API, https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=14n (SHA256 f5501c63f3b07102953c813e33c4811eca8b408f7f57abe5c6fa6fb2c41eb62b, fetched 2026-11-15T19:56:56Z), field electric_quadrupole = 0.02044 ± 0.00003 (source code 'S' in the API guide: NS: Table of Recommended Nuclear Magnetic Dipole Moments: Part I - Long-lived States indc-nds-0794 , and Table of Recommended Nuclear Magnetic Dipole Moments - Part II, Short-lived States indc-nds-0816 , and Table of Nuclear Electric Quadrupole Moments indc-nds-0833)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "spectroscopic electric quadrupole moment, in barn"
+      },
+      "atom_over_nucleus": {
+        "value": 27753.88945,
+        "unit": "",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: covalent radius / rms charge radius, with 1 Å = 1e5 fm; inputs: radii.nitrogen, nuclei.n14.rms_charge_radius; how many times larger the nitrogen atom's covalent radius (q_nv) is than this sphere"
+      },
+      "nv_distance_over_nucleus": {
+        "value": 60379.22211,
+        "unit": "",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: N-V distance (ideal lattice sites) / rms charge radius, with 1 Å = 1e5 fm; inputs: nv.n_v_distance, nuclei.n14.rms_charge_radius"
+      },
+      "hyperfine": {
+        "what": "coupling of the 14N nuclear spin to the NV centre's electron spin (ground state)",
+        "splitting": {
+          "value": 2.16,
+          "unit": "MHz",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15), JGU sensor: 'The central microwave frequency at 2.87 GHz was mixed with a 2.16 MHz radio frequency signal to address all hyperfine level'; quote found in https://arxiv.org/html/2601.18843v1 (SHA256 0f25da5e393bb0785f7baa7dd307071f6db5f8be8c56dedefd000fe4fbdbfff4, fetched 2026-11-15T19:56:54Z)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "the three 14N hyperfine lines (m_I = -1, 0, +1) of an NV resonance lie this far apart, so mixing the microwave with this frequency drives all three; the same statement is the 'microwave drive' fact in data/combined_sensor.json and data/runs.json"
+        },
+        "axial_constants": {
+          "value": "±2.32 ± 0.01; 2.30 ± 0.02; −2.14 ± 0.07; −2.166 ± 0.01; −2.162 ± 0.002",
+          "unit": "MHz",
+          "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Table 16 of the arXiv version ('Compiled constants for the electronic ground state of the NV- center in diamond'), row '14N axial magnetic hyperfine constant' (A_parallel); read from https://arxiv.org/html/1903.08176v2 (SHA256 ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a, fetched 2026-11-15T19:56:54Z)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "the values the table compiles from five references, in the table's order and with its signs; the most precise, −2.162 ± 0.002 MHz, has the magnitude 2.16 MHz that the JGU sensor mixes in"
+        },
+        "lines": {
+          "value": 3,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: 2I + 1 values of m_I; inputs: nuclei.n14.nuclear_spin; each NV resonance splits into this many lines"
+        }
+      },
+      "larmor_free_nucleus": {
+        "value": 3.076272813,
+        "unit": "MHz/T",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: gamma/2pi = |mu| / (I h) = |mu / mu_N| / I x mu_N/h; inputs: nuclei.n14.magnetic_dipole, nuclei.n14.nuclear_spin, codata.nuclear_magneton_over_h; a bare nucleus; in an atom or crystal the electrons change what it feels (see the scene)"
+      }
+    },
+    "source_files": {
+      "https://www-nds.iaea.org/radii/charge_radii.csv": {
+        "sha256": "683d028dae93235376ddf7a345f736561ee7c0dba070091912c034bdf740eee6",
+        "fetched": "2026-11-15T19:56:53Z",
+        "bytes": 28869
+      },
+      "https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html": {
+        "sha256": "61398b9133eb0fa23eca765337ef8970d6137894fdf3dc0dd60e55dce347cc15",
+        "fetched": "2026-11-15T19:56:54Z",
+        "bytes": 46596
+      },
+      "https://arxiv.org/html/2601.18843v1": {
+        "sha256": "0f25da5e393bb0785f7baa7dd307071f6db5f8be8c56dedefd000fe4fbdbfff4",
+        "fetched": "2026-11-15T19:56:54Z",
+        "bytes": 187280
+      },
+      "https://arxiv.org/html/1903.08176v2": {
+        "sha256": "ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a",
+        "fetched": "2026-11-15T19:56:54Z",
+        "bytes": 2054543
+      },
+      "https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=87rb": {
+        "sha256": "8c5941d3b8508090b1d83127c1a18f249507791ce1a3c9f573e4b976936fd5c4",
+        "fetched": "2026-11-15T19:56:55Z",
+        "bytes": 827
+      },
+      "https://nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=14n": {
+        "sha256": "f5501c63f3b07102953c813e33c4811eca8b408f7f57abe5c6fa6fb2c41eb62b",
+        "fetched": "2026-11-15T19:56:56Z",
+        "bytes": 782
+      }
+    },
+    "fetch_errors": {},
+    "kept_from_previous_run": [],
+    "provenance": {
+      "what": "the Live Chart API guide names the source of the API's charge-radius field",
+      "guide": "https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html",
+      "radius_field_source_code": "AM",
+      "source_code_AM": "AM: I.Angeli, K.P. Marinova, Atomic Data and Nuclear Data Tables 99 (2013) DOI:10.1016/j.adt.2011.12.006",
+      "checked": true,
+      "field_sources": {
+        "z": "",
+        "n": "",
+        "symbol": "",
+        "radius": "AM",
+        "unc_r": "",
+        "abundance": "N",
+        "unc_a": "",
+        "energy_shift": "ENSDF",
+        "energy": "ENSDF",
+        "unc_e": "ENSDF",
+        "ripl_shift": "RIPL",
+        "jp": "ENSDF",
+        "half_life": "ENSDF",
+        "operator_hl": "ENSDF",
+        "unc_hl": "ENSDF",
+        "unit_hl": "ENSDF",
+        "half_life_sec": "ENSDF",
+        "unc_hls": "ENSDF",
+        "decay_{1 2 3}": "ENSDF",
+        "decay_{1 2 3}_%": "ENSDF",
+        "unc_{1 2 3}": "ENSDF",
+        "isospin": "ENSDF",
+        "magnetic_dipole": "S",
+        "unc_md": "S",
+        "electric_quadrupole": "S",
+        "unc_eq": "S",
+        "qbm": "AME",
+        "unc_qb": "AME",
+        "qbm_n": "AME",
+        "unc_qbmn": "AME",
+        "qa": "AME",
+        "unc_qa": "AME",
+        "qec": "AME",
+        "unc_qec": "AME",
+        "sn": "AME",
+        "unc_sn": "AME",
+        "sp": "AME",
+        "unc_sp": "AME",
+        "binding": "AME",
+        "unc_ba": "AME",
+        "atomic_mass": "AME",
+        "unc_am": "AME",
+        "mass excess": "AME",
+        "unc_me": "AME",
+        "me_systematics": "AME",
+        "discovery": "N"
+      },
+      "source_code_NS": "NS: Table of Recommended Nuclear Magnetic Dipole Moments: Part I - Long-lived States indc-nds-0794 , and Table of Recommended Nuclear Magnetic Dipole Moments - Part II, Short-lived States indc-nds-0816 , and Table of Nuclear Electric Quadrupole Moments indc-nds-0833"
+    },
+    "not_drawn": "Individual protons and neutrons are not drawn: their arrangement inside a nucleus is not a measured geometry. The scene draws one sphere at the rms charge radius."
+  },
+  "codata": {
+    "nuclear_magneton_over_h": {
+      "value": 7.6225932188,
+      "unit": "MHz/T",
+      "source": "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15), 'nuclear magneton in MHz/T': 'Numerical value 7.622 593 2188 MHz T -1 Standard uncertainty 0.000 000 0024 ', https://physics.nist.gov/cgi-bin/cuu/Value?munshhz (SHA256 5b392f79a8c42487080ca274acffc87421fa75dbe8b282b1f2add306c4c2238f, fetched 2026-11-15T19:56:56Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "rydberg": {
+      "value": 10973731.568157,
+      "unit": "m^-1",
+      "source": "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15), 'Rydberg constant': 'Numerical value 10 973 731.568 157 m -1 Standard uncertainty 0.000 012 ', https://physics.nist.gov/cgi-bin/cuu/Value?ryd (SHA256 1b381be647b5d0007d971667063a563bbcdbac4bb2e12072905a8af5fb19117b, fetched 2026-11-15T19:56:56Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "bohr_radius": {
+      "value": 5.29177210544e-11,
+      "unit": "m",
+      "source": "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15), 'Bohr radius': 'Numerical value 5.291 772 105 44 x 10 -11 m Standard uncertainty 0.000 000 000 82 ', https://physics.nist.gov/cgi-bin/cuu/Value?bohrrada0 (SHA256 2ebc3d078ed14fdb79d8c05f32832174865f33bb9b73006ae9867e2de5677c71, fetched 2026-11-15T19:56:56Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "atomic_mass_constant": {
+      "value": 1.66053906892e-27,
+      "unit": "kg",
+      "source": "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15), 'atomic mass constant': 'Numerical value 1.660 539 068 92 x 10 -27 kg Standard uncertainty 0.000 000 000 52 ', https://physics.nist.gov/cgi-bin/cuu/Value?ukg (SHA256 cc07a862dd0ca1a2651d99d0fe126f19ca011838f9a34830cc4959749f7b8836, fetched 2026-11-15T19:56:56Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    }
+  },
+  "si": {
+    "h": {
+      "value": 6.62607015e-34,
+      "unit": "J s",
+      "source": "SI defining constants, exact since 20 May 2019 (BIPM, The International System of Units, 9th ed., 2019): h = 6.626 070 15 x 10^-34 J s, k = 1.380 649 x 10^-23 J/K, e = 1.602 176 634 x 10^-19 C, c = 299 792 458 m/s",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "exact"
+    },
+    "k": {
+      "value": 1.380649e-23,
+      "unit": "J/K",
+      "source": "SI defining constants, exact since 20 May 2019 (BIPM, The International System of Units, 9th ed., 2019): h = 6.626 070 15 x 10^-34 J s, k = 1.380 649 x 10^-23 J/K, e = 1.602 176 634 x 10^-19 C, c = 299 792 458 m/s",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "exact"
+    },
+    "e": {
+      "value": 1.602176634e-19,
+      "unit": "C",
+      "source": "SI defining constants, exact since 20 May 2019 (BIPM, The International System of Units, 9th ed., 2019): h = 6.626 070 15 x 10^-34 J s, k = 1.380 649 x 10^-23 J/K, e = 1.602 176 634 x 10^-19 C, c = 299 792 458 m/s",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "exact"
+    },
+    "c": {
+      "value": 299792458.0,
+      "unit": "m/s",
+      "source": "SI defining constants, exact since 20 May 2019 (BIPM, The International System of Units, 9th ed., 2019): h = 6.626 070 15 x 10^-34 J s, k = 1.380 649 x 10^-23 J/K, e = 1.602 176 634 x 10^-19 C, c = 299 792 458 m/s",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "exact"
+    },
+    "hc_eV_nm": {
+      "value": 1239.841984332,
+      "unit": "eV nm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: h c / e (photon energy in eV = this / wavelength in nm); inputs: si.h, si.c, si.e"
+    }
+  },
+  "motion": {
+    "diamond_u_iso": {
+      "value": 0.00171,
+      "unit": "Å^2",
+      "source": "Crystallography Open Database entry 2300702 (Houben et al., J. Appl. Cryst. 56, 633 (2023), doi:10.1107/S1600576723002819): atom site C1, 'C1 C 0.12500 0.12500 0.12500 1.000 Uiso 0.001710(4)', '_diffrn_ambient_temperature 293', https://www.crystallography.net/cod/2300702.cif (SHA256 8ac7ddff65131f7f940a5d94f598f93012a152495b3f154b4c9ed536412af8ea, fetched 2026-11-15T19:57:01Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "isotropic mean-square displacement per direction at 293 K (± 0.000004 Å²)"
+    },
+    "diamond_temperature": {
+      "value": 293.0,
+      "unit": "K",
+      "source": "Crystallography Open Database entry 2300702 (Houben et al., J. Appl. Cryst. 56, 633 (2023), doi:10.1107/S1600576723002819), https://www.crystallography.net/cod/2300702.cif (SHA256 8ac7ddff65131f7f940a5d94f598f93012a152495b3f154b4c9ed536412af8ea, fetched 2026-11-15T19:57:01Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "diamond_rms_displacement": {
+      "value": 0.04135214626,
+      "unit": "Å",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: root-mean-square displacement per direction = sqrt(Uiso); inputs: motion.diamond_u_iso"
+    },
+    "diamond_einstein_frequency": {
+      "value": 25.40817378,
+      "unit": "THz",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: frequency nu = omega / 2pi of a carbon-12 atom (12 u) vibrating as a quantum harmonic oscillator whose mean-square displacement hbar/(2 m omega) coth(hbar omega/(2 k T)) equals the measured Uiso at the measured T; inputs: motion.diamond_u_iso, motion.diamond_temperature, codata.atomic_mass_constant, si.h, si.k; Einstein model: one frequency for every atom; the real crystal vibrates in many modes. The scenes use it as the rate of the drawn jiggle and keep the measured amplitude"
+    },
+    "graphite_u_aniso": {
+      "value": {
+        "C1": {
+          "U11": 0.0031,
+          "U22": 0.0031,
+          "U33": 0.016,
+          "U12": 0.00155,
+          "U13": 0.0,
+          "U23": 0.0
+        },
+        "C2": {
+          "U11": 0.0031,
+          "U22": 0.0031,
+          "U33": 0.017,
+          "U12": 0.00155,
+          "U13": 0.0,
+          "U23": 0.0
+        }
+      },
+      "unit": "Å^2",
+      "source": "Crystallography Open Database entry 9011577 (Trucano & Chen, 'Structure of graphite by neutron diffraction', Nature 258, 136 (1975), doi:10.1038/258136a0): _atom_site_aniso_U_11 ... _U_23 rows C1 0.00310 0.00310 0.01600 0.00155 0.00000 0.00000; C2 0.00310 0.00310 0.01700 0.00155 0.00000 0.00000, https://www.crystallography.net/cod/9011577.cif (SHA256 35d1661c3131acc9b1c33dad65358d094b93105d6aae711465ac4352ae809748, fetched 2026-11-15T19:57:02Z)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "anisotropic displacement parameters: U33 is along c (out of the layers)"
+    },
+    "graphite_temperature": {
+      "value": null,
+      "unit": "K",
+      "source": "Crystallography Open Database entry 9011577 (Trucano & Chen, 'Structure of graphite by neutron diffraction', Nature 258, 136 (1975), doi:10.1038/258136a0), https://www.crystallography.net/cod/9011577.cif (SHA256 35d1661c3131acc9b1c33dad65358d094b93105d6aae711465ac4352ae809748, fetched 2026-11-15T19:57:02Z)",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": "the CIF states no measurement temperature, so no vibration frequency can be calculated from these amplitudes: the graphite atoms are drawn at rest"
+    }
+  },
+  "nv_optics": {
+    "green_excitation": {
+      "value": 532,
+      "unit": "nm",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. I: 'a single free-running 532 nm solid-state laser is sufficient' (found in https://arxiv.org/html/1903.08176v2 (SHA256 ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a, fetched 2026-11-15T19:56:54Z))",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "the usual green pump; Omar et al. do not state the wavelength of the heart builds' lasers"
+    },
+    "zpl": {
+      "value": 637,
+      "unit": "nm",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. on readout: 'zero phonon line (ZPL) at 637 nm' (found in https://arxiv.org/html/1903.08176v2 (SHA256 ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a, fetched 2026-11-15T19:56:54Z))",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "the NV- zero-phonon line; the red glow spreads to longer wavelengths (the ZAQuant build filters above 695 nm, palette.json)"
+    },
+    "singlet_ir": {
+      "value": 1042,
+      "unit": "nm",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. on infrared absorption readout: '1 E ↔ 1 A 1 transition at 1042 nm' (found in https://arxiv.org/html/1903.08176v2 (SHA256 ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a, fetched 2026-11-15T19:56:54Z))",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "singlet_lifetime": {
+      "value": "140–220",
+      "unit": "ns",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. on infrared absorption readout: 'lifetime ∼ 140 − 220 ns at room temperature' (found in https://arxiv.org/html/1903.08176v2 (SHA256 ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a, fetched 2026-11-15T19:56:54Z))",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "lifetime of the 1E singlet"
+    },
+    "isc": {
+      "value": "the spin-dependent intersystem crossing gives both the fluorescence contrast and the optical initialization into m_s = 0",
+      "unit": "",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. I: 'spin-state-dependent intersystem crossing [ 168 , 169 ] produces both spin-state-dependent fluorescence contrast and optical spin initialization into the NV - center’s m s = 0 ground state' (found in https://arxiv.org/html/1903.08176v2 (SHA256 ef33f2355e7caba8a4549b8db7509d2a3299395a28d81485595ebb960844f03a, fetched 2026-11-15T19:56:54Z))",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "zaquant_linewidth": {
+      "value": 200,
+      "unit": "kHz",
+      "source": "Omar et al., arXiv 2601.18843v1, Sec. 2: 'magnetic resonance linewidth (ZAQuant sensor: ∼ 200 kHz)' (found in https://arxiv.org/html/2601.18843v1 (SHA256 0f25da5e393bb0785f7baa7dd307071f6db5f8be8c56dedefd000fe4fbdbfff4, fetched 2026-11-15T19:56:54Z))",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "about 200 kHz; JGU and Q.ANT linewidths are not stated"
+    },
+    "green_excitation_eV": {
+      "value": 2.33053,
+      "unit": "eV",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: photon energy = hc / wavelength; inputs: si.hc_eV_nm, nv_optics.green_excitation"
+    },
+    "zpl_eV": {
+      "value": 1.94638,
+      "unit": "eV",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: photon energy = hc / wavelength; inputs: si.hc_eV_nm, nv_optics.zpl"
+    },
+    "singlet_ir_eV": {
+      "value": 1.18987,
+      "unit": "eV",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: photon energy = hc / wavelength; inputs: si.hc_eV_nm, nv_optics.singlet_ir"
+    }
+  },
   "checks": {
+    "motion": {
+      "tool": "Wolfram Language (WolframLanguageEvaluator via the Wolfram MCP connector), run 2026-11-15",
+      "code": "hbar = 6.62607015*^-34/(2 Pi); kB = 1.380649*^-23; u = 1.66053906892*^-27;\nw = w /. FindRoot[hbar/(2 12 u w) Coth[hbar w/(2 kB 293)] == 0.00171*^-20, {w, 1.5*^14}, WorkingPrecision -> 30];\nnstar = Sqrt[10973731.568157/100/33690.80480]; a0 = 5.29177210544*^-11;\n<| diamond_einstein_THz -> w/(2 Pi)/10^12, n_star -> nstar, r_mp_nm -> nstar^2 a0 10^9,\n   r_mean_nm -> nstar (2 nstar + 1)/2 a0 10^9, v_mean_ms -> Sqrt[8 kB (150 + 273.15)/(Pi 1.44316089500*^-25)],\n   n14_larmor_MHz_T -> 0.403573 7.6225932188, rb87_larmor_mu_MHz_T -> 2.75129/1.5 7.6225932188,\n   rb87_larmor_gI_MHz_T -> 0.0009951414 13996.2449171, hc_eV_nm -> 6.62607015*^-34 299792458/1.602176634*^-19 10^9 |>",
+      "wolfram_inputs": {
+        "diamond_u_iso": 0.00171,
+        "diamond_temperature": 293.0,
+        "ionization_limit": 33690.8048,
+        "rydberg": 10973731.568157,
+        "bohr_radius": 5.29177210544e-11,
+        "atomic_mass_kg": 1.443160895e-25,
+        "atomic_mass_constant": 1.66053906892e-27,
+        "n14_mu": 0.403573,
+        "rb87_mu": 2.75129,
+        "nuclear_magneton_over_h": 7.6225932188
+      },
+      "wolfram_output": {
+        "diamond_einstein_THz": 25.408173782846,
+        "n_star": 1.8047683805871455,
+        "r_mp_nm": 0.1723630140321242,
+        "r_mean_nm": 0.22011512889798007,
+        "v_mean_ms": 321.07130622778715,
+        "n14_larmor_MHz_T": 3.0762728130907724,
+        "rb87_larmor_mu_MHz_T": 13.981309664634834,
+        "rb87_larmor_gI_MHz_T": 13.92824276154578,
+        "hc_eV_nm": 1239.8419843320025
+      },
+      "python_agrees": true,
+      "tag": "calculated",
+      "note": null
+    },
     "tool": "Wolfram Language (WolframLanguageEvaluator via the Wolfram MCP connector), run 2026-11-15",
     "code": "w = {wx, wy, wz}; z = {0, 0, 1}; P = (z + Cross[w, z] + (w . z) w)/(1 + w . w);\nsx = {{0,1,0},{1,0,1},{0,1,0}}/Sqrt[2]; sy = {{0,-I,0},{I,0,-I},{0,I,0}}/Sqrt[2]; sz = DiagonalMatrix[{1,0,-1}];\npsi = {Exp[-I ph], 1, 0}/Sqrt[2];  (* basis m = +1, 0, -1 *)\nex[m_] := FullSimplify[Conjugate[psi] . m . psi, Element[ph, Reals]];\na = 3.56715; gJ = 2.002331070; gI = -0.0009951414;\ngF[F_] := gJ (F(F+1) - 15/4 + 3/4)/(2F(F+1)) + gI (F(F+1) + 15/4 - 3/4)/(2F(F+1));\n<| steady_state_residual -> FullSimplify[z - P + Cross[w, P]], spin1_expectation_S -> {ex[sx], ex[sy], ex[sz]},\n   spin_tilt_deg -> ArcCos[(1/2)/Sqrt[3/4]]/Degree, spin_length -> Sqrt[3/4], diamond_bond_A -> Sqrt[3]/4 a,\n   tetrahedral_angle_deg -> ArcCos[-1/3]/Degree, gF2 -> gF[2], gF1 -> gF[1], zeeman_F2_Hz_per_nT -> gF[2] 13.9962449171,\n   gamma_barry_MHz_per_mT -> 2.003 13.9962449171, gamma_vs_codata -> (28.025 - 28.0249513861)/28.0249513861,\n   hfs_2A_GHz -> 2 3.417341305452145, rb_spacing_nm -> (10^14)^(-1/3) 10^7,\n   fret_inverse -> (1/{0.461, 0.502, 0.55, 0.621, 0.685} - 1)^(1/6), gslac_mT -> 2870/28.025,\n   graphite -> {6.711/2, 2.464/Sqrt[3], 2.464 Sqrt[3]/2} |>",
     "wolfram_output": {
@@ -1160,6 +2008,36 @@
         "nv_splitting",
         "nv_centre"
       ]
+    },
+    "nuclei": {
+      "tool": "Wolfram Language (WolframLanguageEvaluator via the Wolfram MCP connector), run 2026-11-15",
+      "code": "rRb = 4.1989; rN = 2.5582; a = 3.56715; tilt[i_] := ArcCos[i/Sqrt[i (i + 1)]]/Degree;\n<| rb87_vdw_over_rms -> (3.03*10^5)/rRb, n14_covalent_over_rms -> (0.71*10^5)/rN,\n   n14_nv_distance_over_rms -> (Sqrt[3]/4 a 10^5)/rN, spin_tilt_I_3_2_deg -> N[tilt[3/2], 16],\n   spin_length_I_3_2 -> N[Sqrt[(3/2)(5/2)], 16], spin_tilt_I_1_deg -> N[tilt[1], 16],\n   spin_length_I_1 -> N[Sqrt[2], 16], n14_hyperfine_lines -> 2*1 + 1 |>",
+      "wolfram_inputs_fm": {
+        "rb87": 4.1989,
+        "n14": 2.5582
+      },
+      "wolfram_output": {
+        "rb87_vdw_over_rms": 72161.75665055134,
+        "n14_covalent_over_rms": 27753.889453522013,
+        "n14_nv_distance_over_rms": 60379.22209189392,
+        "spin_tilt_I_3_2_deg": 39.23152048359226,
+        "spin_length_I_3_2": 1.9364916731037085,
+        "spin_tilt_I_1_deg": 45.0,
+        "spin_length_I_1": 1.4142135623730951,
+        "n14_hyperfine_lines": 3
+      },
+      "python_agrees_on": [
+        "spin_tilt_I_3_2_deg",
+        "spin_length_I_3_2",
+        "rb87_vdw_over_rms",
+        "spin_tilt_I_1_deg",
+        "spin_length_I_1",
+        "n14_covalent_over_rms",
+        "n14_nv_distance_over_rms",
+        "n14_hyperfine_lines"
+      ],
+      "not_cross_checked": [],
+      "tag": "calculated"
     },
     "tag": "calculated"
   },

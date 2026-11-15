@@ -4,7 +4,7 @@
                   exon coordinates, translation; protein function from UniProt.
 - neuron_<id>.json NeuroMorpho.Org neuron 107146, a human neocortical layer 2/3 pyramidal cell (Tamas lab; Molnar et al.,
                   eLife 2016, Figure 1B). Standardised (CNG) SWC samples in micrometres with type codes and parent links.
-- nav15_<pdb>.json RCSB PDB 8VYJ, full-length human Nav1.5 (cryo-EM): C-alpha trace in the shape of
+- nav15_<pdb>.json RCSB PDB 8VYJ, full-length human Nav1.5 (electron microscopy): C-alpha trace in the shape of
                   data/molecules/renin_2ren.json, plus UniProt Q14524 repeats, membrane segments and pore loops.
 - cells.json      cardiomyocyte, red-blood-cell (Evans and Fung 1972) and skin-layer values as value objects. Each literature
                   value is checked against the downloaded source text; a value that cannot be found there is TO_CONFIRM.

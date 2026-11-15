@@ -6,12 +6,12 @@ import { $, $$, esc, D, S, fmtNum, toast, getJSON, postJSON, lean } from './core
 import { createTwin } from './twin.js';
 import { createMicro, fovText, scaleLabel, niceLength } from './zoom.js';
 import { createSensorView } from './sensorview.js';
-import { tabBelow, TAB_HEAD } from './tabs.js';
 import { sceneFor } from './outfit.js';
+import { AREAS, LEGACY, areaOf, spotsOf } from './areas.js';
 import { SENSORS, DESCENTS } from './story.js';
-import { seesaw, deciding, sentence, WORDS, MARK } from './leanphys.js';
+import { seesaw, deciding, WORDS, MARK } from './leanphys.js';
 
-const FOOTER = 'Live: space magnetic-field feeds (NOAA L1 magnetometer; ISS position with the IGRF model). Near-live: an optically pumped magnetometer in orbit (ESA Swarm). Recorded: real OPM brain and heart data, NV, quantum-dot and carbon-dot lab data, and Inspiration4 astronaut lab data from NASA OSDR. Simulated: online simulators, labelled. No public live feed exists from these sensors on a human in space. Not diagnostic.';
+const FOOTER = 'Live: space magnetic-field feeds (NOAA L1 magnetometer; ISS position with the IGRF model). Near-live: an optically pumped magnetometer in orbit (ESA Swarm). Recorded: real OPM brain and heart data, NV, quantum-dot and carbon-dot lab data, and Inspiration4 astronaut lab data from NASA OSDR. No public live feed exists from these sensors on a human in space. Not diagnostic.';
 const FILES = ['palette', 'specs', 'physics', 'nv_heart_derived', 'nasa_i4', 'simulators', 'build_log', 'live_snapshot', 'runs', 'combined_sensor',
   'lean_proofs', 'math_checks', 'quantum_circuits', 'qbio_facts', 'sensor_parts/opm',
   'recorded/nv_odmr_zenodo10629041', 'recorded/qd_fret_figshare5468838', 'recorded/cqd_pl_mendeley_cmfbrvrb8y', 'recorded/eeg_brain_ds004902'];
@@ -57,12 +57,18 @@ function setupPlaces() {
     selP.hidden = true; selS.innerHTML = Object.entries(OLD_PLACES).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
     S.location = selS.value; return;
   }
+  // ten areas, each with its own clothes and scene; the second menu lists the real exact spots inside the area
   selP.hidden = false;
-  const grp = (g) => P.filter((p) => p.group === g).map((p) => `<option value="${esc(p.id)}">${esc(p.name || p.id)}</option>`).join('');
-  selP.innerHTML = `<optgroup label="Today">${grp('today')}</optgroup><optgroup label="Tomorrow">${grp('tomorrow')}</optgroup>`;
-  const fill = () => { const p = P.find((x) => x.id === selP.value) || P[0]; selS.innerHTML = (p.sub_places || []).map((s) => `<option value="${esc(s.id)}">${esc(s.sub_place || s.id)}</option>`).join(''); };
-  const keep = subPlace(S.location);
-  if (keep) { selP.value = S.location.split('.')[0]; fill(); selS.value = S.location; } else { fill(); S.location = selS.value; }
+  selP.innerHTML = AREAS.map((a) => `<option value="${a.id}">${esc(a.name)}</option>`).join('');
+  const fill = () => {
+    const a = AREAS.find((x) => x.id === selP.value) || AREAS[0], spots = spotsOf(a, P);
+    const multi = new Set(spots.map((s) => s.id.split('.')[0])).size > 1;
+    selS.innerHTML = spots.map((s) => `<option value="${esc(s.id)}">${esc(multi ? `${s.place_name} · ${s.sub_place}` : s.sub_place || s.id)}</option>`).join('');
+  };
+  const keep = subPlace(S.location) ? S.location : LEGACY[S.location] || null;
+  selP.value = areaOf(keep || 'iss.destiny').id; fill();
+  if (keep && [...selS.options].some((o) => o.value === keep)) selS.value = keep;
+  S.location = selS.value;
   selP.onchange = () => { fill(); selS.dispatchEvent(new Event('change')); };
 }
 const whereText = () => { const s = subPlace(); return s ? `${s.place_name || s.place} · ${s.sub_place}` : (OLD_PLACES[S.location] || S.location); };
@@ -77,7 +83,10 @@ function env() {
   return { location: { id: S.location, place: s?.place_name || s?.place || OLD_PLACES[S.location] || S.location, sub_place: s?.sub_place || '', body: s?.body || '' },
     B_nT: B, B_tag: Bvo?.tag || null, B_status: Bvo?.status || null, B_source: Bvo?.source || null, shielding_factor: shield,
     B_at_sensor_nT: B !== null ? B / shield : null, nv_zeeman_shift_MHz: zee,
-    radiation: E?.radiation_context?.text || s?.radiation_context?.text || null, verdicts };
+    radiation: E?.radiation_context?.text || s?.radiation_context?.text || null, verdicts,
+    // the same four numbers as the Lean cards, so every scene can answer to them
+    inputs: { shielding_factor: shield, beats_averaged: st.inputs.beats_averaged, renin_pM: st.inputs.renin, bilirubin_isf: st.inputs.bilirubin_isf },
+    lod_renin_pM: st.cond?.qd?.lod ?? null };
 }
 
 // ------------------------------------------------------------------ key readouts (all from data files)
@@ -90,11 +99,69 @@ function keyReadout(site) {
 }
 async function loadBrainPeak() {
   try {
-    const ev = (await getJSON('/data/recorded/opm_brain_mne.json')).evoked; let best = 0;
+    const j = await getJSON('/data/recorded/opm_brain_mne.json'), ev = j.evoked; let best = 0;
     ev.series.forEach((s) => s.values.forEach((v) => { if (Math.abs(v) > best) best = Math.abs(v); }));
     st.brainPeak = { value: best }; renderCard(); renderLevel();
+    // the live brain trace: one raw OPM channel, played back in real time, with a 1 s running mean taken out
+    const fs = j.meta?.sample_rate_hz || 250, raw = j.series?.[0]?.values || [], k = Math.round(fs), hp = new Float32Array(raw.length);
+    let acc = 0; for (let i = 0; i < raw.length; i++) { acc += raw[i]; if (i >= k) acc -= raw[i - k]; hp[i] = raw[i] - acc / Math.min(i + 1, k); }
+    LIVE.brain = { v: hp, fs, name: j.series?.[0]?.name };
   } catch (e) { console.warn(e); }
 }
+
+// ------------------------------------------------------------------ tiny live traces beside each sensor (real recordings)
+// brain: a raw OPM channel (MNE OPM sample) played back in real time · heart: the averaged OPM heartbeat of the Kiel
+// recording, repeated, with its Q wave marked · blood: red cells streaming past (a picture, no numbers) · skin: a real
+// astronaut's bilirubin across the Inspiration4 time points (NASA OSDR), stepped through
+const LIVE = { brain: null, heart: null, skin: null };
+function prepLive() {
+  const ab = D.nv_heart_derived?.averaged_beat;
+  if (ab?.pT?.length) {
+    const sign = (ab.r_peak_pT?.value ?? 1) < 0 ? -1 : 1, v = ab.pT.map((x) => x * sign), qt = -(ab.q_wave_ms_before_r ?? 0) / 1000;
+    let qi = 0; ab.t_s.forEach((t, i) => { if (Math.abs(t - qt) < Math.abs(ab.t_s[qi] - qt)) qi = i; });
+    LIVE.heart = { v, dt: (ab.t_s[1] - ab.t_s[0]) || 0.005, qi };
+  }
+  const pts = (D.nasa_i4?.datasets?.[0]?.variables?.[0]?.points || []).filter((p) => typeof p.value?.value === 'number');
+  if (pts.length) LIVE.skin = { v: pts.map((p) => p.value.value), tp: pts.map((p) => p.timepoint), unit: pts[0].value.unit || 'mg/dL' };
+}
+const LIVE_TITLE = { brain: 'Live: a raw brain recording from real OPM sensors (MNE OPM sample), played back in real time',
+  heart: 'Live: the averaged heartbeat from real OPM chest sensors (Kiel Cardio Database); yellow dot = Q wave',
+  blood: 'Red blood cells streaming past (a picture: no numbers)', skin: 'A real astronaut’s bilirubin across the Inspiration4 time points (NASA OSDR)' };
+const liveCol = (site) => ({ brain: S.col?.opm, heart: S.col?.nv, blood: '#d0473c', skin: S.col?.cqd }[site] || '#9fe6ff');
+function drawLive(cv, site, t) {
+  const g = cv.getContext('2d'), W = cv.width, H = cv.height; g.clearRect(0, 0, W, H);
+  g.lineWidth = Math.max(1, W / 90); g.strokeStyle = liveCol(site); g.fillStyle = liveCol(site); g.lineJoin = 'round';
+  const line = (vals, lo, hi) => { g.beginPath(); vals.forEach((y, i) => { const X = (i / (vals.length - 1)) * W, Y = H - 3 - ((y - lo) / (hi - lo || 1)) * (H - 6); i ? g.lineTo(X, Y) : g.moveTo(X, Y); }); g.stroke(); };
+  if (site === 'brain' && LIVE.brain) {                 // 3 s window scrolling at the recording's own pace
+    const { v, fs } = LIVE.brain, n = Math.round(3 * fs), end = Math.floor((t * fs) % (v.length - n)) + n, win = Array.from(v.subarray(end - n, end));
+    let lo = Infinity, hi = -Infinity; for (const y of win) { if (y < lo) lo = y; if (y > hi) hi = y; }
+    line(win.filter((_, i) => i % 2 === 0), lo, hi);
+  } else if (site === 'heart' && LIVE.heart) {          // two beats in view, the window slides at real time
+    const { v, dt, qi } = LIVE.heart, per = v.length, n = per * 2, off = Math.floor((t / dt) % per), win = [];
+    for (let i = 0; i < n; i++) win.push(v[(off + i) % per]);
+    const lo = Math.min(...v), hi = Math.max(...v); line(win, lo, hi);
+    for (let i = 0; i < n; i++) if ((off + i) % per === qi) { const X = (i / (n - 1)) * W, Y = H - 3 - ((win[i] - lo) / (hi - lo || 1)) * (H - 6); g.beginPath(); g.arc(X, Y, Math.max(1.6, W / 60), 0, 7); g.fillStyle = '#ffd36e'; g.fill(); }
+  } else if (site === 'blood') {                        // red cells streaming through a vessel
+    g.globalAlpha = 0.25; g.fillRect(0, H * 0.18, W, H * 0.64); g.globalAlpha = 1;
+    for (let i = 0; i < 9; i++) { const X = ((i / 9) * W + t * W * 0.18 + (i % 3) * 7) % (W + 10) - 5, Y = H * (0.32 + 0.36 * (((i * 37) % 10) / 10)); g.beginPath(); g.ellipse(X, Y, W / 28, H / 7, 0.3, 0, 7); g.fill(); }
+  } else if (site === 'skin' && LIVE.skin) {            // the astronaut's bilirubin, one time point every 1.5 s
+    const { v } = LIVE.skin, lo = Math.min(...v) * 0.9, hi = Math.max(...v) * 1.1, k = Math.floor(t / 1.5) % v.length;
+    line(v, lo, hi); const X = (k / (v.length - 1 || 1)) * W, Y = H - 3 - ((v[k] - lo) / (hi - lo || 1)) * (H - 6);
+    g.beginPath(); g.arc(X, Y, Math.max(1.8, W / 50), 0, 7); g.fill();
+  }
+}
+function attachLive() {        // a tiny canvas inside each body label (the labels are rebuilt with every figure)
+  $$('#labels .twin-label').forEach((el) => {
+    if (el.querySelector('canvas.mini-live')) return;
+    const c = document.createElement('canvas'); c.className = 'mini-live'; c.width = 168; c.height = 40; c.dataset.live = el.dataset.site; el.appendChild(c);
+  });
+}
+(function liveLoop() {
+  requestAnimationFrame(liveLoop);
+  if (document.hidden) return;
+  const t = performance.now() / 1000;
+  for (const cv of document.querySelectorAll('canvas.mini-live')) if (cv.offsetParent !== null) drawLive(cv, cv.dataset.live, t);
+})();
 
 // ------------------------------------------------------------------ Lean verdicts
 const cardsFor = (id) => { const v = st.verdicts?.verdicts; if (!v) return []; return sensor(id).verdicts.map((k) => k.replace('{build}', st.inputs.build)).map((k) => ({ key: k, ...v[k] })).filter((x) => x.verdict); };
@@ -107,25 +174,128 @@ async function checkLean(announce = false) {
     if (my !== checking) return;
     st.verdicts = r; st.verdictErr = null;
     if (announce) toast('Lean checked the numbers again.');
-  } catch (e) { if (my !== checking) return; st.verdictErr = `Lean checker unavailable (${e.message})`; st.verdicts = null; }
+    await conditions(); if (my !== checking) return;
+  } catch (e) { if (my !== checking) return; st.verdictErr = 'Lean could not check this spot yet.'; st.verdicts = null; st.cond = null; console.warn(e); }
   for (const s of SENSORS) twin?.setVerdict(s.site, mainCard(s.id)?.verdict || null);
   micro?.setEnv(env());
   renderCard(); renderLevel();
 }
 
 // ------------------------------------------------------------------ the one card (body level)
-function inputsHTML() {
-  const I = st.inputs, U = st.verdicts?.input_units || {};
-  return `<details class="more"><summary>Change the numbers</summary>
-    <div class="inp"><span>Magnetic shield<small>how many times it weakens the field · 1 = none</small></span><select data-in="shielding_factor">${[1, 10, 100, 1000, 10000, 100000].map((v) => `<option value="${v}" ${v === I.shielding_factor ? 'selected' : ''}>× ${v.toLocaleString('en-US')}</option>`).join('')}</select></div>
-    <div class="inp"><span>Heartbeats averaged<small>the real recording has 47</small></span><input data-in="beats_averaged" type="number" min="1" max="100000" step="1" value="${I.beats_averaged ?? ''}"></div>
-    <div class="inp"><span>How clear the signal must be<small>signal ÷ noise</small></span><input data-in="snr_required" type="number" min="0.1" step="0.1" value="${I.snr_required ?? ''}"></div>
-    <div class="inp"><span>Diamond sensor build</span><select data-in="build">${[['jgu', 'JGU'], ['zaquant', 'ZAQuant'], ['qant', 'Q.ANT']].map(([b, n]) => `<option value="${b}" ${b === I.build ? 'selected' : ''}>${n}</option>`).join('')}</select></div>
-    <div class="inp"><span>Part of the heartbeat</span><select data-in="target"><option value="r_peak" ${I.target !== 'q_wave' ? 'selected' : ''}>big spike (R)</option><option value="q_wave" ${I.target === 'q_wave' ? 'selected' : ''}>small dip (Q)</option></select></div>
-    <div class="inp"><span>Brain sensor bandwidth<small>Hz, between 3 and 100</small></span><input data-in="bandwidth_hz" type="number" min="1" max="100" step="1" value="${I.bandwidth_hz ?? ''}"></div>
-    <div class="inp"><span>Renin in the blood<small>${esc((U.renin || 'pM').split(',')[0])} · empty = not measured</small></span><input data-in="renin" type="number" min="0" step="any" placeholder="not measured" value="${I.renin ?? ''}"></div>
-    <div class="inp"><span>Bilirubin in skin fluid<small>${/not yet extracted/.test(U.bilirubin_isf || '') ? 'the paper’s unit is not extracted yet' : esc(U.bilirubin_isf || '')} · empty = not measured</small></span><input data-in="bilirubin_isf" type="number" min="0" step="any" placeholder="not measured" value="${I.bilirubin_isf ?? ''}"></div>
-    <div class="btnrow"><button class="ghost" id="btn-run">＋ Do a real run here</button></div></details>`;
+// Lean takes four numbers you can change, one per sensor; everything else comes from the data files and the place.
+const SHIELDS = [1, 10, 100, 1000, 10000, 100000, 1000000];
+// Each card has two sides: the body (biology numbers) on the left, the sensor hardware on the right, each hardware
+// setting with a tiny picture that changes with it. An empty box means "use the recorded or published value".
+const reqInput = (key, rid, sym) => st.verdicts?.verdicts?.[key]?.requirements?.find((r) => r.id === rid)?.inputs?.find((x) => x.symbol === sym);
+const BIO = {
+  opm: [{ k: 'brain_signal_fT', label: 'Brain signal', unit: 'fT', ph: () => reqInput('opm_brain', 'opm_snr_brain', 'A')?.value },
+    { k: 'brain_trials', label: 'Responses averaged', unit: '', ph: () => reqInput('opm_brain', 'opm_snr_brain', 'N')?.value }],
+  nv: [{ k: 'target', label: 'Part of the beat', options: [['r_peak', 'big spike (R)'], ['q_wave', 'small dip (Q)']] },
+    { k: 'beats_averaged', label: 'Heartbeats averaged', unit: '' }],
+  qd: [{ k: 'renin', label: 'Renin in the sample', unit: 'pM', ph: () => 'not measured' }],
+  cqd: [{ k: 'bilirubin_isf', label: 'Bilirubin in skin fluid', unit: '', ph: () => 'not measured' }],
+};
+const etaNV = (b) => D.specs?.nv?.[b]?.sensitivity?.value ?? null;
+const HWIN = {
+  opm: [{ k: 'shielding_factor', label: 'Magnetic shield', options: SHIELDS.map((v) => [v, `× ${v.toLocaleString('en-US')}`]), vis: (v) => shieldSvg(+v) },
+    { k: 'bandwidth_hz', label: 'Bandwidth', unit: 'Hz', vis: (v) => bandSvg(+v) }],
+  nv: [{ k: 'build', label: 'Diamond build', options: [['jgu', 'JGU'], ['zaquant', 'ZAQuant'], ['qant', 'Q.ANT']], vis: (v) => buildSvg(v) },
+    { k: 'nv_bandwidth_hz', label: 'Bandwidth', unit: 'Hz', ph: () => D.specs?.nv?.headline?.bandwidth_assumed?.value, vis: (v) => bandSvg(+v || D.specs?.nv?.headline?.bandwidth_assumed?.value || 30) }],
+  qd: [{ fixed: 'Read by a TIRF microscope (fixed by the paper)', vis: () => tirfSvg() }],
+  cqd: [{ fixed: 'Reader light 440 · 470 · 510 nm (fixed by the paper)', vis: () => ledSvg([440, 470, 510]) }],
+};
+function field(f) {
+  const v = st.inputs[f.k];
+  if (f.options) return `<select data-in="${f.k}">${f.options.map(([o, t]) => `<option value="${o}" ${String(o) === String(v) ? 'selected' : ''}>${esc(t)}</option>`).join('')}</select>`;
+  const ph = f.ph?.(); return `<input data-in="${f.k}" type="number" min="0" step="any" value="${v ?? ''}" placeholder="${esc(ph === undefined || ph === null ? '' : typeof ph === 'number' ? fmtNum(ph) : ph)}">`;
+}
+function sidesFor(id) {
+  const bio = BIO[id].map((f) => `<label class="fld"><span>${esc(f.label)}${f.unit ? ` <small>${esc(f.unit)}</small>` : ''}</span>${field(f)}</label>`).join('');
+  const hw = HWIN[id].map((f) => (f.fixed ? `<div class="fld fixed">${f.vis()}<span>${esc(f.fixed)}</span></div>`
+    : `<label class="fld">${f.vis(st.inputs[f.k] ?? f.ph?.())}<span>${esc(f.label)}${f.unit ? ` <small>${esc(f.unit)}</small>` : ''}</span>${field(f)}</label>`)).join('');
+  return `<div class="s-sides" data-stop><div class="side"><div class="side-h">Body</div>${bio}</div><div class="side hw"><div class="side-h">Sensor</div>${hw}</div></div>`;
+}
+// tiny pictures for the hardware side
+function shieldSvg(S) {      // one wall per factor of ten of shielding
+  const n = Math.max(0, Math.min(6, Math.round(Math.log10(S || 1)))); let w = '';
+  for (let i = n - 1; i >= 0; i--) { const dx = 4 + i * 3, dy = 3 + i * 1.8; w += `<rect x="${24 - 5 - dx}" y="${14 - 4 - dy}" width="${10 + 2 * dx}" height="${8 + 2 * dy}" rx="2" fill="none" stroke="#9fb3c8" stroke-opacity="${0.95 - i * 0.12}"/>`; }
+  return `<svg viewBox="0 0 48 28" class="hwv">${w}<rect x="19" y="10" width="10" height="8" rx="1.5" fill="#eef0e8"/><rect x="22.5" y="12.5" width="3" height="3" fill="var(--opm)"/></svg>`;
+}
+function bandSvg(bw) {       // the band the sensor listens to: wider bandwidth lets in more noise
+  const x = 6 + 32 * Math.min(1, Math.max(0, Math.log10(Math.max(1, bw || 1)) / 2));
+  return `<svg viewBox="0 0 48 28" class="hwv"><path d="M3 23 H45" stroke="#4a5266"/><path d="M3 8 H${x.toFixed(1)} C ${(x + 4).toFixed(1)} 8 ${(x + 5).toFixed(1)} 23 ${(x + 9).toFixed(1)} 23 H45" fill="none" stroke="#9fe6ff" stroke-width="1.6"/><text x="${Math.min(x, 34).toFixed(1)}" y="6" style="font:6px var(--mono);fill:#8a93a3">${esc(fmtNum(+bw))}</text></svg>`;
+}
+function buildSvg(b) {       // the diamond and its noise (sensitivity from Omar et al., Table 2): a shorter bar is quieter
+  const e = etaNV(b), L = e ? Math.min(30, (e / 26) * 30) : 0;
+  return `<svg viewBox="0 0 48 28" class="hwv"><path d="M9 7 l5 7 -5 7 -5 -7 z" fill="#c9d6e3" stroke="#e8f0f8" stroke-width=".6"/><circle cx="9" cy="14" r="1.2" fill="var(--nv)"/><rect x="17" y="12" width="${L.toFixed(1)}" height="4" rx="1" fill="#e9b44c"/><text x="17" y="9" style="font:6px var(--mono);fill:#8a93a3">${e ? `${e} pT/√Hz` : 'not stated'}</text></svg>`;
+}
+function tirfSvg() {         // total internal reflection: light skims the glass and lights only molecules on its surface
+  return '<svg viewBox="0 0 48 28" class="hwv"><path d="M4 9 H44" stroke="#c9d6e3"/><path d="M16 26 L20 13 H28 L32 26 Z" fill="#59647a"/><path d="M6 20 L24 9 L42 20" fill="none" stroke="#7fe3d0" stroke-width="1.2"/><circle cx="20" cy="7" r="1.6" fill="#ff6a4d"/><circle cx="28" cy="7" r="1.6" fill="#ff6a4d"/></svg>';
+}
+function wlColor(nm) {       // visible wavelength to a display colour (a common piecewise approximation)
+  let r = 0, g = 0, b = 0;
+  if (nm < 440) { r = (440 - nm) / 60; b = 1; } else if (nm < 490) { g = (nm - 440) / 50; b = 1; } else if (nm < 510) { g = 1; b = (510 - nm) / 20; } else if (nm < 580) { r = (nm - 510) / 70; g = 1; } else if (nm < 645) { r = 1; g = (645 - nm) / 65; } else r = 1;
+  return `rgb(${Math.round(255 * r)},${Math.round(255 * g)},${Math.round(255 * b)})`;
+}
+function ledSvg(list) { return `<svg viewBox="0 0 48 28" class="hwv">${list.map((nm, i) => `<circle cx="${10 + i * 14}" cy="13" r="4.5" fill="${wlColor(nm)}"/><text x="${10 + i * 14}" y="25" text-anchor="middle" style="font:5.5px var(--mono);fill:#8a93a3">${nm}</text>`).join('')}</svg>`; }
+// Under what condition each sensor works here: Lean's own inequality rearranged for the one number you control,
+// then sent back to Lean with that number to confirm.
+async function conditions() {
+  const v = st.verdicts?.verdicts; if (!v) { st.cond = null; return; }
+  const req = (key, id) => (v[key]?.requirements || []).find((r) => r.id === id);
+  const dec = (x) => { const n = parseFloat(x?.decimal); return Number.isFinite(n) ? n : null; };
+  const I = st.inputs, want = { ...I }, cond = {}, nvKey = `nv_heart_${I.build}`;
+  const f = req('opm_brain', 'opm_field_nulled'), fL = dec(f?.lhs), fR = dec(f?.rhs);     // B ≤ B_comp × S
+  if (fL !== null && fR) { const sMin = (fL * (I.shielding_factor || 1)) / fR; cond.opm = { sMin, shield: SHIELDS.find((x) => x >= sMin) ?? null }; if (cond.opm.shield) want.shielding_factor = cond.opm.shield; }
+  const q = req(nvKey, 'nv_snr'), qL = dec(q?.lhs), qR = dec(q?.rhs);                     // snr²·η²·BW ≤ A²·N
+  if (qL !== null && qR) { cond.nv = { beats: Math.max(1, Math.ceil((qL * (I.beats_averaged || 1)) / qR)) }; want.beats_averaged = cond.nv.beats; }
+  const b = req('qd_blood', 'qd_renin_above_lod'); cond.qd = { lod: dec(b?.lhs), unit: b?.lhs?.unit || 'pM' };   // LOD ≤ c
+  cond.cqd = { range: null };                                                               // range not in an open source
+  st.cond = cond;
+  try {
+    const r = await postJSON('/api/verdict', { location: S.location, inputs: want });
+    if (cond.opm) cond.opm.lean = r.verdicts?.opm_brain?.verdict;
+    if (cond.nv) cond.nv.lean = r.verdicts?.[nvKey]?.verdict;
+  } catch { /* the rearranged number still shows, without Lean's confirmation */ }
+}
+// the exact values Lean compared for one sensor: what it has here against what it needs, with units
+function needRows(card) {
+  if (!card) return '';
+  const all = card.requirements || [], inp = (r, sym) => r?.inputs?.find((x) => x.symbol === sym);
+  // a factor's number: its value, or else the exact fraction Lean was given (for example '<15 fT/√Hz' is sent as 15/1)
+  const n = (x) => { if (typeof x?.value === 'number' && Number.isFinite(x.value)) return x.value; const m = /^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/.exec(String(x?.lean_factor ?? '')); return m ? +m[1] / +m[2] : null; };
+  const p3 = (v) => fmtNum(+v.toPrecision(3));
+  const rows = [];
+  for (const r of all) {
+    if (r.id === 'cqd_range_high') continue;              // shown together with the low end below
+    let name, have, need, holds = r.holds;
+    if (r.id === 'opm_field_nulled') {
+      const B = n(inp(r, 'B_ambient')), C = n(inp(r, 'B_comp')), S = n(inp(r, 'S'));
+      name = 'field at the sensor'; have = B !== null && S ? `${p3(B / S)} nT` : 'not known'; need = C !== null ? `≤ ${fmtNum(C)} nT` : '≤ ?';
+    } else if (/snr/.test(r.id)) {
+      const A = n(inp(r, 'A')), N = n(inp(r, 'N')), e = n(inp(r, 'η')), BW = n(inp(r, 'BW')), s = n(inp(r, 'snr'));
+      name = 'signal ÷ noise'; have = A !== null && N !== null && e && BW ? p3((Math.abs(A) * Math.sqrt(N)) / (e * Math.sqrt(BW))) : 'not known'; need = s !== null ? `≥ ${fmtNum(s)}` : '≥ ?';
+    } else if (r.id === 'qd_renin_above_lod') {
+      const L = inp(r, 'LOD'), c = inp(r, 'c_renin');
+      name = 'renin in the sample'; have = n(c) !== null ? `${fmtNum(n(c))} ${c.unit || ''}` : 'not measured'; need = n(L) !== null ? `≥ ${fmtNum(n(L))} ${L.unit || ''}` : '≥ ?';
+    } else if (r.id === 'cqd_range_low') {
+      const hi = all.find((x) => x.id === 'cqd_range_high'), c = inp(r, 'c_bilirubin'), lo = n(inp(r, 'range_low')), up = n(inp(hi, 'range_high'));
+      name = 'bilirubin in skin fluid'; have = n(c) !== null ? `${fmtNum(n(c))} ${c.unit || ''}` : 'not measured';
+      need = lo !== null && up !== null ? `${fmtNum(lo)} to ${fmtNum(up)}` : 'patch range not public';
+      holds = r.holds === false || hi?.holds === false ? false : r.holds === true && hi?.holds === true ? true : null;
+    } else { name = r.id; have = r.lhs?.decimal ?? '?'; need = `≤ ${r.rhs?.decimal ?? '?'}`; }
+    const v = holds === true ? 'REQUIREMENTS_MET' : holds === false ? 'NOT_MET' : 'NEED_MORE_INFORMATION';
+    rows.push(`<div class="nrow"><span>${esc(name)}</span><b>${esc(have)}</b><i>${esc(need)}</i><em class="v-${v}">${MARK[v]}</em></div>`);
+  }
+  return rows.join('');
+}
+function condLine(id) {
+  const c = st.cond?.[id], ok = (x) => (x === 'REQUIREMENTS_MET' ? ' <span class="lean-ok">Lean ✓</span>' : '');
+  if (!c) return '';
+  if (id === 'opm') return c.shield ? `Works here with a shield of × ${c.shield.toLocaleString('en-US')} or more.${ok(c.lean)}` : `Needs a shield over × ${Math.round(c.sMin).toLocaleString('en-US')}.`;
+  if (id === 'nv') return `Works from ${c.beats.toLocaleString('en-US')} heartbeats averaged.${ok(c.lean)}`;
+  if (id === 'qd') return c.lod !== null ? `Works when renin is at least ${fmtNum(c.lod)} ${esc(c.unit)}.` : '';
+  return 'Needs the patch’s detection range, which is not in an open source.';
 }
 function wireInputs(root) {
   $$('[data-in]', root).forEach((el) => el.addEventListener('change', () => {
@@ -141,20 +311,27 @@ function renderCard() {
   const rows = SENSORS.map((s) => {
     const r = keyReadout(s.site), c = mainCard(s.id), req = deciding(c);
     return `<div class="srow ${st.sensor === s.id ? 'on' : ''}" data-sensor="${s.id}">
-      <div class="s-head"><span class="s-name"><i class="dotc ${s.color}"></i>${esc(s.name)}</span><span class="s-site">${esc(s.kind)}</span></div>
+      <div class="s-head"><span class="s-name"><i class="dotc ${s.color}"></i>${esc(s.name)}</span><canvas class="mini-live" data-live="${s.site}" width="150" height="36" title="${esc(LIVE_TITLE[s.site])}"></canvas></div>
+      <div class="s-site">${esc(s.kind)}</div>
       <div class="s-main"><div><div class="s-val">${r.value === null || r.value === undefined ? '<span class="na">no value</span>' : `<span>${esc(fmtNum(r.value))}</span><small>${esc(r.unit || '')}</small>`}</div><div class="s-lbl">${esc(r.label)}</div></div>
         ${c ? seesaw(req, c.verdict, { size: 'sm' }) : ''}</div>
-      <div class="s-verdict ${c ? `v-${c.verdict}` : ''}">${c ? `${MARK[c.verdict]} ${esc(WORDS[c.verdict])} · ${esc(sentence(req))}` : esc(st.verdictErr || 'Lean is checking…')}</div></div>`;
-  }).join('');
-  $('#card').innerHTML = `<div class="theorem"><div class="th-tag">⊢ every signal a theorem</div>
+      <div class="s-verdict ${c ? `v-${c.verdict}` : ''}">${c ? `${MARK[c.verdict]} ${esc(WORDS[c.verdict])}` : esc(st.verdictErr || 'Lean is checking…')}</div>
+      <div class="s-need">${needRows(c)}</div>
+      <div class="s-cond">${condLine(s.id)}</div>
+      ${sidesFor(s.id)}</div>`;
+  });
+  if (st.step > 0) { const k = SENSORS.findIndex((s) => s.id === st.sensor); if (k > 0) rows.unshift(...rows.splice(k, 1)); }   // diving: your sensor's card first
+  $('#card-lean').innerHTML = `<div class="lean-head">What Lean says<span>${esc(whereText())}</span></div>
+    <div class="theorem"><div class="th-tag">⊢ every signal a theorem</div>
       <div class="th-code"><span class="kw">theorem</span> monitor (${SENSORS.map(word).join(' ')} : <span class="ty">Sensor</span>)<br>&nbsp;&nbsp;at <span class="here">${esc(whereText())}</span></div>
       <div class="th-sub">Lean × Quantum × Astrobiology</div></div>
-    <p class="card-say">Here the background magnetic field is <b>${E.B_nT === null ? 'not known' : `${fmtNum(E.B_nT)} nT`}</b>${E.B_tag ? ` <span class="chip">${esc(E.B_tag)}</span>` : ''}. Lean, a maths referee, checks what each sensor can measure in this spot. Tap a sensor to dive in.</p>
-    ${rows}${inputsHTML()}
-    <div class="footer-text">${runs} real runs · combined sensor v${esc(comb.version ?? 0)} · ${esc(FOOTER)}</div>`;
-  $$('#card [data-sensor]').forEach((el) => el.addEventListener('click', () => { selectSensor(el.dataset.sensor); goStep(1); }));
+    <p class="card-say">Field here <b>${E.B_nT === null ? 'not known' : `${fmtNum(E.B_nT)} nT`}</b>${E.B_tag ? ` <span class="chip">${esc(E.B_tag)}</span>` : ''} · Lean checks each sensor · tap one to dive.</p>
+    ${rows.join('')}
+    <div class="footer-text">${runs} runs · all-in-one v${esc(comb.version ?? 0)} · <button class="linkish" id="go-hw">Hardware ›</button></div>`;
+  $$('#card .srow').forEach((el) => el.addEventListener('click', (e) => { if (e.target.closest('[data-stop]')) return; selectSensor(el.dataset.sensor); goStep(1); }));
+  $$('#card .th-code [data-sensor]').forEach((el) => el.addEventListener('click', () => { selectSensor(el.dataset.sensor); goStep(1); }));
   wireInputs($('#card'));
-  $('#btn-run')?.addEventListener('click', doRun);
+  $('#go-hw')?.addEventListener('click', () => showTab('hw'));
 }
 
 // ------------------------------------------------------------------ the rail and the big field-of-view number
@@ -201,17 +378,8 @@ function brainRatio(E) {
   const r = E.B_nT !== null ? (E.B_nT * 1e6) / p : null;
   return `<p>Thousands of cells firing together make a field of about ${fmtNum(+p.toPrecision(3))} fT at the scalp${r ? `: about <b>${bigNum(r)} times weaker</b> than the background field at ${esc(E.location.place)}` : ''}.</p>`;
 }
-const isKey = (x) => (typeof x.value === 'number' || (typeof x.value === 'string' && x.value.length <= 14)) && !/not (yet )?(stated|extracted)/i.test(String(x.value));
 const roText = (x) => `${typeof x.value === 'number' ? fmtNum(x.value) : x.value ?? '—'}`;
-const roRow = (x, k) => `<div class="mrow" data-ro="${k}" title="${esc([x.tag, x.source].filter(Boolean).join(' · '))}"><span>${esc(x.label)}</span><b>${esc(roText(x))} <small>${esc(x.unit || '')}</small></b></div>`;
-const ctlRow = (c) => `<div class="ctrl"><div class="row"><span>${esc(c.label)}</span><output data-o="${esc(c.id)}">${esc(fmtNum(+c.value))} ${esc(c.unit || '')}</output></div><input type="range" data-c="${esc(c.id)}" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.value}"></div>`;
-function quickInput() {         // one number to play with, right where it matters
-  const I = st.inputs;
-  if (st.sensor === 'opm') return `<label class="mini">Shield <select data-in="shielding_factor">${[1, 10, 100, 1000, 10000, 100000].map((v) => `<option value="${v}" ${v === I.shielding_factor ? 'selected' : ''}>× ${v.toLocaleString('en-US')}</option>`).join('')}</select></label>`;
-  if (st.sensor === 'nv') return `<label class="mini">Heartbeats averaged <input data-in="beats_averaged" type="number" min="1" max="100000" value="${I.beats_averaged ?? ''}"></label>`;
-  if (st.sensor === 'qd') return `<label class="mini">Renin in the sample (pM) <input data-in="renin" type="number" min="0" step="any" placeholder="not measured" value="${I.renin ?? ''}"></label>`;
-  return `<label class="mini">Bilirubin in skin fluid <input data-in="bilirubin_isf" type="number" min="0" step="any" placeholder="not measured" value="${I.bilirubin_isf ?? ''}"></label>`;
-}
+const roRow = (x, k) => `<div class="mrow" data-ro="${k}" title="${esc([x.label, x.tag, x.source].filter(Boolean).join(' · '))}"><span>${esc(x.plain || x.label)}</span><b>${esc(roText(x))} <small>${esc(x.plainUnit ?? x.unit ?? '')}</small></b></div>`;
 function cellsGenes(site) {     // real cell types and marker genes for this tissue (Human Reference Atlas tables)
   const A = D['bio/asctb']; if (A === undefined) { getJSON('/data/bio/asctb.json').catch(() => null).then((j) => { D['bio/asctb'] = j; renderLevel(); }); return ''; }
   const T = A?.organs?.[{ brain: 'brain', heart: 'heart', blood: 'kidney', skin: 'skin' }[site]]; if (!T) return '';
@@ -223,41 +391,32 @@ function cellsGenes(site) {     // real cell types and marker genes for this tis
 }
 const TWIN_SRC = { opm_contact: 'QuSpin QZFM Gen-3 dimension drawing; Human Reference Atlas body, brain and scalp positions (CC BY 4.0); MNE-Python OPM recording layout', opm_cell: 'QuSpin QZFM Gen-3 dimension drawing (cell position); cell size from Zhao et al., arXiv 2408.02941 (to confirm)',
   nv_contact: 'Omar et al., arXiv 2601.18843 (JGU build: 12 mm head face, about 1 cm from the chest); Human Reference Atlas heart position', elbow: 'Long et al., Anal. Chem. 84, 8846 (2012): lab assay on drawn blood; the draw site is shown at the elbow (the paper names none)', forearm: 'Tabatabaee et al., ACS Nano 18, 28012 (2024); the patch site is shown on the forearm (the paper names none); needle sizes are not in an open source' };
+// what you are looking at, in the right column above Lean's cards. No sliders of its own: the scene answers to the
+// place and to the same four numbers as the Lean cards below it.
 function renderLevel() {
-  const ch = chain(), i = st.step, lv = ch[i];
-  $('#hud').hidden = i === 0; if (i === 0 || !lv) return;
+  const ch = chain(), i = st.step, lv = ch[i], box = $('#card-level');
+  $('#hud').hidden = i === 0;
+  if (i === 0 || !lv) { box.innerHTML = ''; drawGene(null); return; }
   const E = env(), cur = micro?.current, built = lv.file && cur?.file === fileOf(lv) ? cur.built : null;
-  const ro = built?.readouts || [], cs = built?.controls || [], info = built?.info || {};
-  const keyIdx = ro.map((x, k) => (isKey(x) ? k : -1)).filter((k) => k >= 0).slice(0, 3), restIdx = ro.map((_, k) => k).filter((k) => !keyIdx.includes(k));
-  const c = lv.lean ? mainCard(st.sensor) : null;
-  const open = $('#level-card details.more')?.open;
-  $('#level-card').innerHTML = `<div class="lvl">Level ${i + 1} of ${ch.length} · ${lv.fov ? esc(scaleLabel(lv.fov)) : 'no ruler at this level'}</div><h3>${esc(lv.title)}</h3>
+  const ro = (built?.readouts || []).map((x, k) => [x, k]).filter(([x]) => x.tag !== 'simulated'), info = built?.info || {};
+  const open = box.querySelector('details.more')?.open;
+  box.innerHTML = `<div class="lvl">Level ${i + 1} of ${ch.length} · ${lv.fov ? esc(scaleLabel(lv.fov)) : 'no ruler at this level'}</div><h3>${esc(lv.title)}</h3>
     ${lv.say.map((t) => `<p>${esc(t)}</p>`).join('')}${lv.brainRatio ? brainRatio(E) : ''}
     ${lv.qb ? `<p class="qb">${esc(lv.qb)}</p>` : ''}
     ${lv.env ? hereLine(lv.env, E) : ''}
-    ${c ? `${seesaw(deciding(c), c.verdict)}${quickInput()}` : lv.lean ? `<p class="here-line">${esc(st.verdictErr || 'Lean is checking…')}</p>` : ''}
-    ${lv.control && cs[0] ? ctlRow(cs[0]) : ''}
     <details class="more" ${open ? 'open' : ''}><summary>More</summary>
-      ${keyIdx.map((k) => roRow(ro[k], k)).join('')}${restIdx.map((k) => roRow(ro[k], k)).join('')}
-      ${cs.slice(lv.control ? 1 : 0).map(ctlRow).join('')}
+      ${ro.map(([x, k]) => roRow(x, k)).join('')}
       ${lv.cells ? cellsGenes(sensor().site) : ''}
       ${(info.lines || []).map((t) => `<p>${esc(t)}</p>`).join('')}
       ${(info.lean || []).length ? `<div class="lean-row">${info.lean.map((n) => lean(n)).join('')}</div>` : ''}
       <div class="src">${[lv.src, lv.twin ? TWIN_SRC[lv.twin] : null, ...(info.sources || [])].filter(Boolean).map(esc).join('<br>')}</div>
-      <div class="btnrow"><button class="ghost" id="go-specs">Full specs and physics</button></div></details>`;
-  $$('#level-card input[data-c]').forEach((inp) => inp.addEventListener('input', () => {
-    const ctl = cs.find((x) => x.id === inp.dataset.c), v = +inp.value; if (!ctl) return;
-    $(`#level-card [data-o="${ctl.id}"]`).textContent = `${fmtNum(v)} ${ctl.unit || ''}`;
-    try { ctl.onInput?.(v); } catch (e) { console.warn(e); }
-    refreshReadouts();
-  }));
-  wireInputs($('#level-card'));
+      <div class="btnrow"><button class="ghost" id="go-specs">This device on the Hardware tab</button></div></details>`;
   $('#go-specs')?.addEventListener('click', () => showView(st.sensor));
   drawGene(built?.gene);
 }
 function refreshReadouts() {
   const ro = micro?.current?.built?.readouts || [];
-  $$('#level-card [data-ro]').forEach((el) => { const x = ro[+el.dataset.ro]; if (x) el.querySelector('b').innerHTML = `${esc(roText(x))} <small>${esc(x.unit || '')}</small>`; });
+  $$('#card-level [data-ro]').forEach((el) => { const x = ro[+el.dataset.ro]; if (x) el.querySelector('b').innerHTML = `${esc(roText(x))} <small>${esc(x.plainUnit ?? x.unit ?? '')}</small>`; });
 }
 function drawGene(g) {
   const el = $('#hud-gene'); if (!g || !g.exons?.length) { el.innerHTML = ''; return; }
@@ -286,12 +445,12 @@ async function goStep(i, { force = false } = {}) {
       const cur = await micro.show({ ...lv, file: fileOf(lv) }, { dir, env: env(), depth });
       if (cur) { $('#stage').classList.add('deep'); st.step = i; }
     }
-  } catch (e) { console.warn(e); toast(`This level is still being built (${e.message}).`, 5000); if (ch[st.step]?.twin) twin?.view(ch[st.step].twin); }
+  } catch (e) { console.warn(e); fovTween = null; toast(`This level is still being built (${e.message}).`, 5000); if (ch[st.step]?.twin) twin?.view(ch[st.step].twin); }
   busy = false;
   document.body.classList.toggle('sensor-mode', st.step > 0);
-  $('#stage').style.setProperty('--depth', (st.step / (ch.length - 1)).toFixed(3));
+  for (const el of [$('#stage'), $('#card')]) el.style.setProperty('--depth', (st.step / (ch.length - 1)).toFixed(3));
   $('#stage').classList.toggle('at-body', st.step === 0);
-  renderRail(); renderLevel();
+  renderRail(); renderLevel(); renderCard();
 }
 const step = (d) => goStep(st.step + d);
 function selectSensor(id) {
@@ -303,13 +462,13 @@ function selectSensor(id) {
 // ------------------------------------------------------------------ the figure: dressed for the place, female or male
 async function makeTwin(onProgress) {
   const old = $('#twin'), fresh = old.cloneNode(false); old.replaceWith(fresh);
-  $('#labels').innerHTML = ''; $('#leaders').innerHTML = '';
+  $('#labels').innerHTML = ''; $('#leaders').innerHTML = ''; $('#twin-notes').innerHTML = '';
   const sc = sceneFor(S.location); st.scene = sc; $('#stage').dataset.bg = sc.backdrop;
-  twin = await createTwin({ canvas: fresh, labelsEl: $('#labels'), leadersEl: $('#leaders'), sites: SENSORS.map((s) => ({ id: s.site, name: s.name, sensor: s.kind })),
+  twin = await createTwin({ canvas: fresh, labelsEl: $('#labels'), leadersEl: $('#leaders'), notesEl: $('#twin-notes'), sites: SENSORS.map((s) => ({ id: s.site, name: s.name, sensor: s.kind })),
     colors: { opm: S.col.opm, nv: S.col.nv, cqd: S.col.cqd }, opm: opmGeom(), sex: st.sex, outfit: sc.outfit, backdrop: sc.backdrop,
     onSelect: (site) => { const s = SENSORS.find((x) => x.site === site); if (s) { selectSensor(s.id); goStep(1); } },
     onEdge: (d) => step(d === 'in' ? 1 : -1), onProgress });
-  twin.select(sensor().site);
+  twin.select(sensor().site); attachLive();
   for (const s of SENSORS) twin.setVerdict(s.site, mainCard(s.id)?.verdict || null);
   const lv = chain()[st.step]; if (lv?.twin) twin.view(lv.twin, { instant: true });
 }
@@ -325,15 +484,61 @@ async function onPlaceChange() {
   if (twin && (sc.outfit !== st.scene?.outfit || sc.backdrop !== st.scene?.backdrop)) await makeTwin();
 }
 
-// ------------------------------------------------------------------ runs, polling, the detailed specs pages, sources
+// ------------------------------------------------------------------ tabs: "Does it work?" and "Hardware"
+let hwDev = 'opm';
+const HW = [['opm', 'Brain sensor', 'QuSpin QZFM Gen-3'], ['nv', 'Heart sensor', 'NV diamond · JGU, ZAQuant, Q.ANT'], ['qd', 'Blood sensor', 'quantum-dot renin probe'], ['cqd', 'Skin sensor', 'carbon-dot patch']];
+const hwBuilt = {};
+function showTab(t, dev) {
+  $$('.view').forEach((el) => el.classList.toggle('on', el.id === `view-${t}`));
+  $$('#tb-nav button').forEach((b) => b.classList.toggle('on', b.dataset.tab === t));
+  if (t === 'hw') { if (dev) hwDev = dev; renderHardware(); }
+}
+function renderHardware() {
+  const el = $('#view-hw');
+  if (!el.dataset.ready) {
+    el.dataset.ready = '1';
+    el.innerHTML = `<div class="hw-head"><h2>Hardware</h2><span>the real devices · the all-in-one, built run by run from Lean</span></div>
+      <div class="hw-devs">${HW.map(([id, n, k]) => `<button data-dev="${id}"><i class="dotc ${id}"></i><b>${esc(n)}</b><small>${esc(k)}</small></button>`).join('')}</div>
+      <div class="hw-main">${HW.map(([id]) => `<div class="hw-pair" id="hwp-${id}" hidden><div class="st-view" id="hwv-${id}"><div class="sv-empty">Loading the exact-spec model…</div></div><aside class="st-side" id="hws-${id}"></aside></div>`).join('')}</div>
+      <section class="hw-all" id="hw-all"></section>`;
+    $$('#view-hw .hw-devs button').forEach((b) => b.addEventListener('click', () => { hwDev = b.dataset.dev; renderHardware(); }));
+  }
+  $$('#view-hw .hw-devs button').forEach((b) => b.classList.toggle('on', b.dataset.dev === hwDev));
+  for (const [id] of HW) $(`#hwp-${id}`).hidden = id !== hwDev;
+  if (!hwBuilt[hwDev]) {
+    const id = hwDev;
+    hwBuilt[id] = createSensorView($(`#hwv-${id}`), $(`#hws-${id}`), id)
+      .catch((e) => { console.warn(e); $(`#hwv-${id}`).innerHTML = `<div class="sv-empty">The exact-spec model could not be drawn.<br><span class="src">${esc(e.message)}</span></div>`; });
+  }
+  renderAllInOne();
+}
+// the all-in-one: every run adds the facts it measured or Lean decided at that spot; nothing here is typed in by hand
+const vText = (v) => (v && typeof v === 'object' && 'value' in v ? `${typeof v.value === 'number' ? fmtNum(v.value) : v.value ?? '—'}${v.unit && typeof v.value === 'number' ? ` ${v.unit}` : ''}` : String(v ?? '—'));
+function renderAllInOne() {
+  const box = $('#hw-all'); if (!box) return;
+  const comb = S.combined || D.combined_sensor || {}, runs = S.runs?.runs || D.runs?.runs || [];
+  const checks = comb.lean_summary?.checks || {}, spotName = (id) => subPlace(id)?.sub_place || id;
+  const CHECK = { opm_brain: 'Brain · OPM', opm_heart: 'Heart · OPM', nv_heart_jgu: 'Heart · NV JGU', nv_heart_zaquant: 'Heart · NV ZAQuant', nv_heart_qant: 'Heart · NV Q.ANT', qd_blood: 'Blood · quantum dot', cqd_skin: 'Skin · carbon dots' };
+  const COND = { shielding_factor_needed: 'shield needed', heartbeats_needed: 'heartbeats needed' };
+  const leanRows = Object.entries(checks).map(([k, x]) => [CHECK[k] || k, { works: x.works, not_met: x.does_not_work, needs_info: x.needs_a_number,
+    strictest: x.strictest?.value ? `${COND[x.strictest.condition] || x.strictest.condition}: ${vText(x.strictest.value)} · ${spotName(x.strictest.location_id)}` : null }]);
+  box.innerHTML = `<div class="hw-all-head"><h3>All-in-one</h3><span>v${esc(comb.version ?? 0)} · ${runs.length} runs</span><button class="ghost" id="hw-run">＋ Run at ${esc(whereText())}</button></div>
+    <div class="hw-runs">${runs.slice(-14).map((r) => `<span class="chip" title="${esc(r.run_id || '')}">${esc(r.location?.sub_place || r.location?.id || r.location || '')}</span>`).join('') || '<span class="na">no runs yet</span>'}</div>
+    ${leanRows.length ? `<div class="hw-lean">${leanRows.map(([k, x]) => `<div class="hw-lrow"><b>${esc(k)}</b><span><i class="v-REQUIREMENTS_MET">✓ ${x.works?.length ?? 0}</i> · <i class="v-NOT_MET">✗ ${x.not_met?.length ?? 0}</i> · <i class="v-NEED_MORE_INFORMATION">? ${x.needs_info?.length ?? 0}</i> places</span>${x.strictest ? `<em>${esc(x.strictest)}</em>` : ''}</div>`).join('')}</div>` : ''}
+    <div class="hw-comps">${Object.entries(comb.components || {}).map(([name, c]) => { const f = (c.facts || []).filter((x) => x.value?.tag !== 'simulated'); if (!f.length) return ''; return `<div class="hw-comp"><b>${esc(name)}</b>${f.slice(-4).map((x) => `<div class="hw-fact"><span>${esc(x.fact)}</span><em>${esc(vText(x.value))}</em></div>`).join('')}${f.length > 4 ? `<small>+${f.length - 4} more</small>` : ''}</div>`; }).join('')}</div>
+    ${(comb.open_questions || []).length ? `<div class="hw-open"><b>Still open</b>${comb.open_questions.map((q) => `<p>${esc(q)}</p>`).join('')}</div>` : ''}`;
+  $('#hw-run').addEventListener('click', doRun);
+}
+
+// ------------------------------------------------------------------ runs, polling, sources
 async function doRun() {
-  const btn = $('#btn-run'); btn.disabled = true; btn.textContent = 'Running…';
+  const btn = $('#hw-run'); if (btn) { btn.disabled = true; btn.textContent = 'Running…'; }
   try {
-    const j = await postJSON('/api/run', { location: S.location, role: 'crew' });
+    const j = await postJSON('/api/run', { location: S.location, role: 'crew', inputs: st.inputs });   // the same numbers Lean is using on the cards
     S.combined = j.combined; S.runs = await getJSON('/api/runs').catch(() => S.runs);
-    toast(`${j.run.run_id}: ${j.run.adds_to_combined.length} new real facts added to the combined sensor.`, 5000);
+    toast(`${j.run.run_id}: ${j.run.adds_to_combined.length} facts added to the all-in-one.`, 5000);
   } catch (e) { toast(`Run failed: ${e.message}`, 6000); }
-  renderCard();
+  renderCard(); renderAllInOne();
 }
 async function poll() {
   try { S.health = await getJSON('/api/health'); $('#tb-status').classList.add('ok'); $('#tb-status span').textContent = 'live'; }
@@ -342,20 +547,7 @@ async function poll() {
   try { const L = await getJSON('/api/locations'); if (Array.isArray(L?.places)) D.locations = L; } catch { /* file copy */ }
   try { S.combined = await getJSON('/api/combined'); S.runs = await getJSON('/api/runs'); } catch { /* files */ }
 }
-const built = {};
-async function showView(v) {
-  $$('.view').forEach((el) => el.classList.toggle('on', el.id === `view-${v}`));
-  if (v === 'body' || built[v]) return;
-  built[v] = true;
-  const el = $(`#view-${v}`), h = TAB_HEAD[v];
-  el.innerHTML = `<button class="ghost" data-back style="margin-bottom:10px">← Back to the dive</button><div class="st-head"><div><div class="kick"><span>${esc(h.kick)}</span></div><h2>${esc(h.title)}</h2><div class="note">${h.sub}</div></div><div class="pills">${h.pills()}</div></div>
-    <div class="st-main"><div class="st-view" id="sv-${v}"><div class="sv-empty">Loading the exact-spec model…</div></div><aside class="st-side" id="ss-${v}"></aside></div>
-    <div class="st-below" id="sb-${v}"></div>`;
-  el.addEventListener('click', (e) => { if (e.target.closest('[data-back]')) showView('body'); });
-  try { await createSensorView($(`#sv-${v}`), $(`#ss-${v}`), v); }
-  catch (e) { console.warn(e); $(`#sv-${v}`).innerHTML = `<div class="sv-empty">The exact-spec model could not be drawn.<br><span class="src">${esc(e.message)}</span></div>`; }
-  try { await tabBelow(v, $(`#sb-${v}`)); } catch (e) { console.error(e); $(`#sb-${v}`).innerHTML = `<div class="box">Could not render: ${esc(e.message)}</div>`; }
-}
+const showView = (v) => (v === 'body' ? showTab('body') : showTab('hw', v));   // a sensor's specs live on the Hardware tab
 function sourcesHTML() {
   const rec = ['nv_odmr_zenodo10629041', 'qd_fret_figshare5468838', 'cqd_pl_mendeley_cmfbrvrb8y', 'eeg_brain_ds004902'];
   return `<p>${esc(FOOTER)}</p>
@@ -370,8 +562,9 @@ function sourcesHTML() {
 // ------------------------------------------------------------------ boot
 async function boot() {
   await loadAll();
-  applyPalette(); setupPlaces();
+  applyPalette(); setupPlaces(); prepLive();
   $('#location').addEventListener('change', onPlaceChange);
+  $$('#tb-nav button').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab)));
   $$('.sex-toggle button').forEach((b) => b.addEventListener('click', () => setSex(b.dataset.sex)));
   $('#open-sources').addEventListener('click', () => { $('#sources-body').innerHTML = sourcesHTML(); $('#sources').hidden = false; });
   $('#go-src').addEventListener('click', () => $('#open-sources').click());

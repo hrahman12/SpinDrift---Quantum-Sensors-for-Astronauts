@@ -14,6 +14,19 @@ What a run does (nothing is invented):
 - Links between devices (field clash, optical readouts, readout hardware, power), each a VO.
 Static facts (specs) are added to the combined sensor once; facts from each run's new real data are added every
 run. A device with nothing new records "no new data this run".
+
+Location: a run happens at one sub-place of data/locations.json (server/locations.py; the five older ids map to
+sub-places). The run record carries `location` (the id as sent), `location_id` (the sub-place id) and `environment`
+(the sub-place's value objects: background field, vector, NV line shift, ratio to Earth's surface, OPM range check,
+radiation context), and the environment facts are stacked onto the combined sensor with the rest.
+
+Lean: every run also asks the Lean checker (server/verdict.py) whether each sensor can measure its body signal at the
+run's location, with the inputs sent in the run request (the same inputs as POST /api/verdict; none sent = the
+defaults, shield factor 1 and every other number missing). The run record keeps, per sensor, the verdict, the deciding
+requirement (id, exact sides with units, holds, missing symbols, inputs) and two conditions computed from Lean's sides:
+the shielding factor the OPM needs (B_ambient / B_comp, from opm_field_nulled) and the heartbeats the NV needs (from
+nv_snr). The verdicts and conditions are stacked onto the combined sensor, and lean_summary() summarises all runs: per
+sensor, where Lean said it works, does not work or needs a number, and the strictest condition seen.
 """
 from __future__ import annotations
 
@@ -22,12 +35,16 @@ import math
 import secrets
 import threading
 
+from server import locations as loc_engine
 from server import odmr, realdata
-from server.common import DATA, DEVICES, RECORDED, calc, meta, missing, now_iso, read_json, vo, write_json
+from server.common import DATA, DEVICES, RECORDED, calc, meta, now_iso, read_json, vo, write_json
 
 LOCK = threading.Lock()
 COMPONENTS = ["magnetic shielding", "field separation", "magnetic sensitivity", "optical readout", "microwave drive",
-              "chemistry readout", "body signals (recorded)", "power", "size", "data link"]
+              "chemistry readout", "body signals (recorded)", "power", "size", "data link", "environment",
+              "measurability (Lean)"]
+VERDICT_LISTS = {"REQUIREMENTS_MET": "works", "NOT_MET": "does_not_work", "NEED_MORE_INFORMATION": "needs_a_number"}
+CONDITION_COMPONENT = {"shielding_factor_needed": "magnetic shielding", "heartbeats_needed": "magnetic sensitivity"}
 NV_SRC = "Omar et al., arXiv 2601.18843 (2026)"
 QS = "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/"
 INSIGHT_ENU = (1168.0, -1353.0, 925.0)  # east, north, up from Johnson et al. 2020 Table 1 (N -1353, E 1168, Down -925)
@@ -47,30 +64,93 @@ def _empty_combined():
             "components": {c: {"facts": [], "status": "open"} for c in COMPONENTS}, "open_questions": []}
 
 
-def _ambient_vector_nT(location, live, locs):
-    """(east, north, up) in nT for the ODMR-Lab input, with a note on where it came from."""
-    if location == "iss" and (live.get("iss") or {}).get("b_total_nT", {}).get("components_enu_nT"):
-        b = live["iss"]["b_total_nT"]
-        return tuple(b["components_enu_nT"]), f"IGRF at the ISS position ({b['as_of']}), east/north/up"
-    if location == "mars_transit" and live.get("l1"):
-        l1 = live["l1"]
-        comp = [l1[k]["value"] for k in ("bx_gsm_nT", "by_gsm_nT", "bz_gsm_nT")]
-        if all(c is not None for c in comp):
-            return tuple(comp), f"NOAA L1 field GSM x/y/z ({l1['bt_nT']['as_of']}, spacecraft {l1.get('spacecraft')})"
-    if location == "mars_surface":
-        return INSIGHT_ENU, "InSight measured surface field (Johnson et al. 2020, Table 1), east/north/up"
-    amb = next((l["ambient_field_nT"] for l in locs if l["id"] == location), None)
-    if amb and isinstance(amb.get("value"), (int, float)):
+def _ambient_vector_nT(place):
+    """(x, y, z) in nT for the ODMR-Lab input, with a note on where it came from: the sub-place's field vector in
+    its own frame (NED, body-fixed or GSE), mapped onto the simulator's x, y, z as given (app_default orientation)."""
+    vec = place.get("B_vector_nT") or {}
+    comps = [vec.get(k) for k in ("x", "y", "z")]
+    if all(loc_engine.is_number(c) for c in comps):
+        return tuple(float(c) for c in comps), (f"{vec.get('frame')} field vector of {place['id']} ({vec.get('axes')}; "
+                                                f"{vec.get('source')}, {vec.get('as_of') or 'no time stamp'})")
+    amb = place["B_total_nT"]
+    if loc_engine.is_number(amb.get("value")):
         return (0.0, 0.0, float(amb["value"])), f"{amb['source']} (magnitude only; direction app_default +z)"
-    return (0.0, 0.0, 0.0), "no measured field for this location; bias only"
+    return (0.0, 0.0, 0.0), "no sourced field for this location; bias only"
 
 
-def execute(location: str, role: str, live: dict) -> dict:
+def execute(location: str, role: str, live: dict, place: dict | None = None, inputs: dict | None = None) -> dict:
+    """`location` is the id as sent (a sub-place id or one of the five older ids); `place` is its sub-place,
+    refreshed by the server (read from the built file when not given); `inputs` are the verdict inputs for the Lean
+    check (POST /api/verdict inputs; None or empty = the defaults)."""
+    place = place or loc_engine.get(None, location)
+    if place is None:
+        raise ValueError(f"unknown location id {location!r}")
     with LOCK:
-        return _execute(location, role, live or {})
+        return _execute(location, role, live or {}, place, inputs or {})
 
 
-def _execute(location, role, live):
+def _lean_at(location: str, place: dict, inputs: dict, errors: list) -> dict:
+    """The Lean verdicts at the run's location, as kept in the run record (server.verdict.lean_record)."""
+    from server import verdict
+    try:
+        resp = verdict.build(location, inputs, None, location_origin="user_input", place=place)
+        return verdict.lean_record(resp)
+    except Exception as e:  # Lean unavailable or refused the input: the run goes on, the record says why
+        errors.append(f"Lean checker: {type(e).__name__}: {e}")
+        return {"decided_at": None, "error": f"{type(e).__name__}: {e}", "checks": None, "inputs_given": inputs}
+
+
+def lean_summary(all_runs: list[dict]) -> dict:
+    """Across every run with a Lean result: per sensor check, the places where Lean said it works, does not work or
+    needs a number (latest verdict at each place), and the strictest condition seen (largest OPM shielding factor
+    needed; most NV heartbeats needed), as a calculated value object."""
+    from server.verdict import CARD_INFO, CHECK_IDS, DECIDING_RULE, DEVICE_OF
+    checks = {cid: {"device": DEVICE_OF[cid], "sensor": CARD_INFO[cid][0], "signal": CARD_INFO[cid][1],
+                    "works": [], "does_not_work": [], "needs_a_number": [], "by_location": {}, "strictest": None}
+              for cid in CHECK_IDS}
+    best, counted = {}, 0
+    for run in all_runs:
+        lean = run.get("lean") or {}
+        if not lean.get("checks"):
+            continue
+        counted += 1
+        loc, env = run.get("location_id"), run.get("environment") or {}
+        for cid, c in lean["checks"].items():
+            if cid not in checks:
+                continue
+            bl = checks[cid]["by_location"].setdefault(loc, {"place": env.get("place"), "sub_place": env.get("sub_place"),
+                                                             "runs": 0, "verdicts_seen": {}})
+            bl["runs"] += 1
+            bl["verdicts_seen"][c["verdict"]] = bl["verdicts_seen"].get(c["verdict"], 0) + 1
+            dec = c.get("deciding_requirement") or {}
+            bl.update({"latest_verdict": c["verdict"], "latest_run": run.get("run_id"),
+                       "latest_at": lean.get("decided_at"), "deciding_requirement": dec.get("id"),
+                       "missing": [{"symbol": m.get("symbol"), "id": m.get("id")} for m in dec.get("missing", [])]})
+            for key, cond in (c.get("conditions") or {}).items():
+                val = (cond or {}).get("value")
+                if isinstance(val, (int, float)) and not isinstance(val, bool):
+                    if cid not in best or val > best[cid][0]["value"]:
+                        best[cid] = (cond, key, loc, run.get("run_id"))
+    for cid, e in checks.items():
+        for loc, bl in e["by_location"].items():
+            e[VERDICT_LISTS[bl["latest_verdict"]]].append(loc)
+        if cid in best:
+            cond, key, loc, rid = best[cid]
+            e["strictest"] = {
+                "condition": key, "location_id": loc, "run_id": rid,
+                "value": calc(cond["value"], cond["unit"], [cond], f"largest {key} over the runs with a Lean result",
+                              [f"runs.{rid}.lean.checks.{cid}.conditions.{key}"], source=cond.get("source"),
+                              note_extra=f"seen at {loc} in {rid}; that value: {cond.get('note')}",
+                              as_of=cond.get("as_of"))}
+    return {"generated_at": now_iso(), "runs_total": len(all_runs), "runs_with_lean": counted,
+            "legend": {"works": "REQUIREMENTS_MET", "does_not_work": "NOT_MET",
+                       "needs_a_number": "NEED_MORE_INFORMATION (a number is missing or unconfirmed)"},
+            "lists_use": "the latest Lean verdict at each place", "rule": DECIDING_RULE,
+            "by_device": {d: [cid for cid in CHECK_IDS if DEVICE_OF[cid] == d] for d in DEVICES},
+            "checks": checks}
+
+
+def _execute(location, role, live, place, verdict_inputs):
     runs = read_json(DATA / "runs.json", {})
     if not runs or runs.get("meta", {}).get("fixture"):
         runs = {"meta": meta(False, []), "runs": []}
@@ -82,25 +162,57 @@ def _execute(location, role, live):
     specs = read_json(DATA / "specs.json")
     derived = read_json(DATA / "nv_heart_derived.json")
     sims = read_json(DATA / "simulators.json", {})
-    locs = read_json(DATA / "locations.json", {}).get("locations", [])
+    loc_id = place["id"]
+    where = f"{loc_id} ({place.get('place')} · {place.get('sub_place')})"
     inputs = {d: [] for d in DEVICES}
     outputs = {d: [] for d in DEVICES}
     links, blocks, notes, errors = [], [], {}, []
     open_q = set(comb.get("open_questions", []))
 
-    rd = (live.get("opm_readiness") or {}).get(location) or {}
-    amb = rd.get("ambient_nT") or next((l["ambient_field_nT"] for l in locs if l["id"] == location),
-                                       missing("nT", "no data", "recorded", "NOT_STATED"))
-    sf = rd.get("shielding_factor")
+    rd = loc_engine.readiness(place)
+    amb, sf = rd["ambient_nT"], rd["shielding_factor"]
     rng = specs["opm"]["dynamic_range"]
+
+    # ---------------------------------------------------------------- environment of the location
+    environment = loc_engine.values_for_run(place)
+    if amb.get("value") is not None:
+        blocks.append(_block("environment", f"Background magnetic field at {where}", amb, "environment"))
+    ratio_e = place.get("ratio_to_earth_surface") or {}
+    if ratio_e.get("value") is not None:
+        blocks.append(_block("environment", f"Background field at {where} as a fraction of Earth's surface field "
+                                            "(IGRF at Johnson Space Center)", loc_engine.bare(ratio_e), "environment"))
+    ctx = place.get("radiation_context") or {}
+    if ctx.get("text"):
+        blocks.append(_block("environment", f"Radiation context at {where}",
+                             vo(ctx["text"], "", ctx.get("source") or "", "published_spec", "VERIFIED", None,
+                                "published context for the location; the quantum-dot and carbon-dot sensors receive "
+                                "the location only through this"), "environment"))
+
+    # ---------------------------------------------------------------- Lean: can each sensor measure here?
+    lean = _lean_at(location, place, verdict_inputs, errors)
+    for cid, c in (lean.get("checks") or {}).items():
+        dev = c["device"]
+        outputs[dev].append(c["verdict_vo"])
+        blocks.append(_block("measurability (Lean)", f"Lean verdict, {c['sensor']} ({c['signal']}) at {loc_id}",
+                             c["verdict_vo"], dev))
+        for key, cond in c["conditions"].items():
+            if cond.get("value") is None:
+                continue
+            outputs[dev].append(cond)
+            label = (f"OPM shielding factor needed at {loc_id} (Lean opm_field_nulled: B_ambient / B_comp)"
+                     if key == "shielding_factor_needed" else
+                     f"{c['sensor'].split(', ')[-1].split(' (')[0]} heartbeats needed for SNR "
+                     f"{(lean['inputs_used'].get('snr_required') or {}).get('value')} on the "
+                     f"{(lean['inputs_used'].get('target') or {}).get('value')} (Lean nv_snr)")
+            blocks.append(_block(CONDITION_COMPONENT[key], label, cond, dev))
 
     # ---------------------------------------------------------------- OPM
     inputs["opm"] += [amb, rng]
     if sf and sf.get("value") is not None:
         outputs["opm"].append(sf)
-        blocks.append(_block("magnetic shielding", f"OPM field reduction needed at {location}", sf, "opm"))
+        blocks.append(_block("magnetic shielding", f"OPM field reduction needed at {loc_id}", sf, "opm"))
     else:
-        open_q.add(f"No measured magnetic field for {location}, so the OPM shielding need there is unknown.")
+        open_q.add(f"No sourced magnetic field for {loc_id}, so the OPM shielding need there is unknown.")
     subject, trial = realdata.kiel_slice(n)
     try:
         kb = realdata.kiel_beat(subject, trial)
@@ -163,19 +275,25 @@ def _execute(location, role, live):
     blocks.append(_block("field separation", "OPM ±5 nT range against the NV ~1 mT bias", clash, "link"))
     if amb.get("value"):
         ratio = calc(round(bias["value"] * 1e6 / amb["value"], 1), "×", [bias, amb], "ratio = 1 mT / ambient field",
-                     ["specs.nv.zaquant.bias_field", f"{location}.ambient_nT"], as_of=amb.get("as_of"))
+                     ["specs.nv.zaquant.bias_field", f"locations.{loc_id}.B_total_nT"], as_of=amb.get("as_of"))
         outputs["nv"].append(ratio)
-        links.append({"from": "nv", "to": "opm", "fact": f"NV bias against the ambient field at {location}",
+        links.append({"from": "nv", "to": "opm", "fact": f"NV bias against the ambient field at {loc_id}",
                       "value": ratio})
-        blocks.append(_block("field separation", f"NV bias against the ambient field at {location}", ratio, "nv"))
-    vec, vec_note = _ambient_vector_nT(location, live, locs)
+        blocks.append(_block("field separation", f"NV bias against the ambient field at {loc_id}", ratio, "nv"))
+    zeeman = place.get("nv_zeeman_shift_MHz") or {}
+    if zeeman.get("value") is not None:
+        z_vo = loc_engine.bare(zeeman)
+        outputs["nv"].append(z_vo)
+        blocks.append(_block("field separation", f"NV line shift from the background field at {loc_id} "
+                                                 "(28.025 MHz/mT × |B|)", z_vo, "nv"))
+    vec, vec_note = _ambient_vector_nT(place)
     b_sent = (vec[0] * 1e-6, vec[1] * 1e-6, bias["value"] + vec[2] * 1e-6)
     try:
         res = odmr.solve(b_sent, f"odmr_lab_{run_id}")
         res["inputs_note"] = f"bias +z (app_default) plus {vec_note}"
         outputs["nv"] += [v for v in (res["b_true_mT"], res["b_cnn_mT"]) if v]
         if res["b_cnn_mT"]:
-            blocks.append(_block("microwave drive", f"ODMR-Lab run at {location}: field estimated from the simulated "
+            blocks.append(_block("microwave drive", f"ODMR-Lab run at {loc_id}: field estimated from the simulated "
                                                     "NV spectrum", res["b_cnn_mT"], "nv"))
     except Exception as e:
         res = None
@@ -318,7 +436,8 @@ def _execute(location, role, live):
     comb["runs_counted"] += 1
     comb["open_questions"] = sorted(open_q)
     comb["meta"] = meta(False, ["data/runs.json"], last_run=run_id)
-    run = {"run_id": run_id, "started_at": now_iso(), "location": location, "role": role,
+    run = {"run_id": run_id, "started_at": now_iso(), "location": location, "location_id": loc_id, "role": role,
+           "environment": environment, "lean": lean,
            "inputs": inputs, "outputs": outputs, "links": links,
            "adds_to_combined": [{"component": b["component"], "fact": b["fact"], "value": b["value"]} for b in new],
            "notes": notes, "errors": errors,
@@ -326,6 +445,7 @@ def _execute(location, role, live):
                          "figshare_row": (n % len(fig["x"]["values"])) + 1 if fig.get("x") else None}}
     runs["runs"].append(run)
     runs["meta"] = meta(False, ["server/runs.py"], runs=len(runs["runs"]))
+    comb["lean_summary"] = lean_summary(runs["runs"])
     write_json(DATA / "runs.json", runs)
     write_json(DATA / "combined_sensor.json", comb)
     return {"run": run, "combined": comb}

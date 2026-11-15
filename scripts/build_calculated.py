@@ -367,15 +367,17 @@ def main_rows(loc, specs, live, derived, hrp, i4):
 
 
 def clinical_card(specs, live, derived, hrp, i4):
-    locs = {l["id"]: l for l in read_json(DATA / "locations.json", {}).get("locations", [])}
+    # the ambient field of each older location id comes from its sub-place in data/locations.json
+    from server import locations as loc_engine
     ready = (live or {}).get("opm_readiness", {})
     bias = vo(1.0, "mT", "Omar et al., arXiv 2601.18843, Section 4", "published_spec", "VERIFIED", None,
               "ZAQuant permanent magnet and Q.ANT Halbach ring, 'approximately 1 mT'")
     card = {}
     for loc in LOCATION_IDS:
-        amb = (locs.get(loc) or {}).get("ambient_field_nT") or missing("nT", "no location data", "calculated",
-                                                                       "NOT_YET_EXTRACTED")
         rd = ready.get(loc, {})
+        sp = loc_engine.get(None, loc)
+        amb = rd.get("ambient_nT") or (loc_engine.bare(sp["B_total_nT"]) if sp else None) or missing(
+            "nT", "no location data", "calculated", "NOT_YET_EXTRACTED")
         sf = rd.get("shielding_factor") or missing("×", "no live snapshot", "calculated", "NOT_YET_EXTRACTED")
         within = rd.get("within_range")
         rows = [

@@ -1,4 +1,4 @@
-"""Lean-decided measurability verdicts for POST /api/verdict (CryoLean pattern).
+"""Lean-decided measurability verdicts for POST /api/verdict (missing-data-never-decides pattern).
 
 Python builds one requirement set per sensor and body signal from sourced SpinDrift data and the request's inputs,
 converts every number to an exact fraction (fractions.Fraction, from the decimal text) and runs the compiled Lean
@@ -16,6 +16,14 @@ Rules at the Python -> Lean boundary
   converted: renin is asked for in pM, the unit of the paper's detection limit.
 - User inputs carry origin "user_input" (or "app_default" for the no-shield default) and the contract tag "user_input"
   (added to the contract for values a person types: a what-if value, not a measurement).
+- Three optional inputs replace one sourced factor each, only when given: brain_signal_fT (A of opm_snr_brain; default
+  the recorded peak of recorded/opm_brain_mne.json), brain_trials (N of opm_snr_brain; default the recorded
+  n_epochs) and nv_bandwidth_hz (BW of nv_snr for all three NV builds; default specs.nv.headline.bandwidth_assumed).
+  The Lean requirements are unchanged: only the factor that feeds them changes.
+- The location is a sub-place of data/locations.json (server/locations.py). Its B_total_nT is the OPM's ambient
+  field; a null or non-VERIFIED field is sent as missing. The response carries an "environment" object with what the
+  location hands to each sensor. The quantum-dot and carbon-dot sensors get no requirement from the location (none is
+  sourced): it reaches them only as radiation_context.
 """
 from __future__ import annotations
 
@@ -30,6 +38,7 @@ from decimal import Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
 
+from server import locations as loc_engine
 from server.common import DATA, RECORDED, ROOT, calc, missing, now_iso, read_json, vo
 
 LEAN_DIR = ROOT / "lean"
@@ -42,7 +51,10 @@ CHECK_IDS = ["opm_brain", "opm_heart", "nv_heart_jgu", "nv_heart_zaquant", "nv_h
 NV_BUILDS = {"nv_heart_jgu": ("jgu", "JGU"), "nv_heart_zaquant": ("zaquant", "ZAQuant"),
              "nv_heart_qant": ("qant", "Q.ANT")}
 USER_TAG = "user_input"
-INPUT_NAMES = ["shielding_factor", "beats_averaged", "snr_required", "target", "renin", "bilirubin_isf", "bandwidth_hz"]
+INPUT_NAMES = ["shielding_factor", "beats_averaged", "snr_required", "target", "renin", "bilirubin_isf", "bandwidth_hz",
+               "brain_signal_fT", "brain_trials", "nv_bandwidth_hz"]
+# optional inputs that each replace one sourced factor when given (see the module docstring)
+OPTIONAL_FACTOR_INPUTS = ("brain_signal_fT", "brain_trials", "nv_bandwidth_hz")
 OMAR = "Omar et al., arXiv 2601.18843 (2026)"
 
 # Theorems cited on the cards (full names; statements and axioms come from data/lean_proofs.json).
@@ -347,10 +359,10 @@ def proofs_audit() -> tuple[dict, dict]:
 
 
 # ----------------------------------------------------------------------------------------------- requirement sets
-def _ambient(location: str, live: dict) -> Factor:
-    ready = (live or {}).get("opm_readiness") or {}
-    amb = (ready.get(location) or {}).get("ambient_nT")
-    return source_factor(f"live_snapshot.opm_readiness.{location}.ambient_nT", "B_ambient", amb, "nT")
+def _ambient(place: dict) -> Factor:
+    """The OPM's ambient field: the sub-place's background field (the refreshed value for live sub-places)."""
+    return source_factor(f"locations.{place['id']}.B_total_nT", "B_ambient", loc_engine.bare(place["B_total_nT"]),
+                         "nT")
 
 
 def _compensation(specs: dict) -> Factor:
@@ -376,7 +388,7 @@ def _heart_amp(nvh: dict, target: str, to_fT: bool) -> Factor:
                          how="|value| in pT (amplitude of the averaged beat)")
 
 
-def build_checks(location: str, inp: dict, live: dict) -> tuple[dict[str, list[Requirement]], dict]:
+def build_checks(place: dict, inp: dict) -> tuple[dict[str, list[Requirement]], dict]:
     specs = read_json(DATA / "specs.json", {}) or {}
     nvh = read_json(DATA / "nv_heart_derived.json", {}) or {}
     target = inp.get("target") or "r_peak"
@@ -397,14 +409,15 @@ def build_checks(location: str, inp: dict, live: dict) -> tuple[dict[str, list[R
         bw_opm = source_factor("specs.opm.bandwidth_serf_class", "BW", opm.get("bandwidth_serf_class"), "Hz")
         bw_opm.read_as += "; enter inputs.bandwidth_hz"
 
-    field_note = ("B_ambient is the field outside the spacecraft or habitat (live_snapshot opm_readiness); fields "
+    field_note = (f"B_ambient is the background field of the sub-place {place['id']} (data/locations.json "
+                  "B_total_nT, refreshed for live sub-places): the field outside the spacecraft or habitat; fields "
                   "inside a cabin are larger. The QZFM ±5 nT dynamic range (specs.opm.dynamic_range) is the "
                   "operating range after nulling, not the compensation limit. Checked as B_ambient ≤ B_comp × S, "
                   "the same as B_ambient / S ≤ B_comp for S > 0.")
     field_req = lambda: Requirement(  # noqa: E731
         "opm_field_nulled", "The field at the sensor can be nulled by the OPM's on-board coils: ambient field ÷ "
         "shielding factor must not exceed the on-board field-compensation limit.",
-        "B_ambient ≤ B_comp × S", [_ambient(location, live)], [_compensation(specs), shield], "nT", field_note)
+        "B_ambient ≤ B_comp × S", [_ambient(place)], [_compensation(specs), shield], "nT", field_note)
     opm_noise_note = ("η: the QZFM Gen-3 datasheet states the dual-axis sensitivity as '<15 fT/√Hz (3–100 Hz)'; the "
                       "bound is used, so REQUIREMENTS_MET holds for any lower noise (holds_mono_lhs) and NOT_MET means "
                       "not met at the bound. The noise density is stated for 3–100 Hz, so BW should lie in that band. "
@@ -412,15 +425,24 @@ def build_checks(location: str, inp: dict, live: dict) -> tuple[dict[str, list[R
                       "BW comes from inputs.bandwidth_hz.")
 
     amp_b, n_b, info_b = brain_signal()
-    amp_brain = source_factor("recorded.opm_brain_mne.evoked.peak_abs_fT", "A", amp_b, "fT", extra=info_b)
-    n_brain = source_factor("recorded.opm_brain_mne.evoked.n_epochs", "N", n_b, "epochs")
+    amp_brain_src = source_factor("recorded.opm_brain_mne.evoked.peak_abs_fT", "A", amp_b, "fT", extra=info_b)
+    n_brain_src = source_factor("recorded.opm_brain_mne.evoked.n_epochs", "N", n_b, "epochs")
+    given = {k: inp.get(k) is not None for k in OPTIONAL_FACTOR_INPUTS}
+    amp_brain = (user_factor("brain_signal_fT", "A", inp["brain_signal_fT"], "fT",
+                             "peak evoked brain field to detect, in fT (replaces the recorded peak)")
+                 if given["brain_signal_fT"] else amp_brain_src)
+    n_brain = (user_factor("brain_trials", "N", inp["brain_trials"], "trials",
+                           "stimulus-locked trials averaged (replaces the recorded number of epochs)")
+               if given["brain_trials"] else n_brain_src)
+    brain_note = ("A: inputs.brain_signal_fT (user input). " if given["brain_signal_fT"] else
+                  "A: peak |evoked field| after the stimulus in the MNE OPM recording (Earth, QuSpin OPMs). ") + (
+        "N: inputs.brain_trials (user input). " if given["brain_trials"] else
+        "N: the recording's averaged epochs. ")
 
     checks: dict[str, list[Requirement]] = {
         "opm_brain": [field_req(), snr_requirement(
             "opm_snr_brain", "The averaged evoked brain field reaches the required SNR at the datasheet noise bound.",
-            snr, eta_opm, bw_opm, amp_brain, n_brain, "fT²",
-            "A: peak |evoked field| after the stimulus in the MNE OPM recording (Earth, QuSpin OPMs), N its averaged "
-            "epochs. " + opm_noise_note, bound=True)],
+            snr, eta_opm, bw_opm, amp_brain, n_brain, "fT²", brain_note + opm_noise_note, bound=True)],
         "opm_heart": [field_req(), snr_requirement(
             "opm_snr_heart", f"The averaged heart {sig_name} reaches the required SNR at the datasheet noise bound.",
             snr, eta_opm, bw_opm, _heart_amp(nvh, target, to_fT=True), n_beats, "fT²",
@@ -428,8 +450,13 @@ def build_checks(location: str, inp: dict, live: dict) -> tuple[dict[str, list[R
             "exactly from pT to fT; N: inputs.beats_averaged. " + opm_noise_note, bound=True)],
     }
     nv = specs.get("nv") or {}
-    bw_nv = source_factor("specs.nv.headline.bandwidth_assumed", "BW", (nv.get("headline") or {}).get("bandwidth_assumed"),
-                          "Hz")
+    bw_nv_src = source_factor("specs.nv.headline.bandwidth_assumed", "BW",
+                              (nv.get("headline") or {}).get("bandwidth_assumed"), "Hz")
+    bw_nv = (user_factor("nv_bandwidth_hz", "BW", inp["nv_bandwidth_hz"], "Hz",
+                         "measurement bandwidth for the three NV cards (replaces the paper's bandwidth)")
+             if given["nv_bandwidth_hz"] else bw_nv_src)
+    bw_nv_note = ("BW: inputs.nv_bandwidth_hz (user input)." if given["nv_bandwidth_hz"] else
+                  "BW: the paper's 'approximately 30 Hz' (specs.nv.headline.bandwidth_assumed).")
     for cid, (key, label) in NV_BUILDS.items():
         build = nv.get(key) or {}
         paper_n = (build.get("beats_averaged") or {}).get("value")
@@ -438,7 +465,7 @@ def build_checks(location: str, inp: dict, live: dict) -> tuple[dict[str, list[R
                       "noise density.",
             snr, source_factor(f"specs.nv.{key}.sensitivity", "η", build.get("sensitivity"), "pT/√Hz"), bw_nv,
             _heart_amp(nvh, target, to_fT=False), n_beats, "pT²",
-            f"η: {OMAR}, Table 2. BW: the paper's 'approximately 30 Hz' (specs.nv.headline.bandwidth_assumed). A: "
+            f"η: {OMAR}, Table 2. {bw_nv_note} A: "
             f"|{sig_name}| of the averaged beat from the Kiel OPM heart recording (a different person and geometry "
             "from the NV studies; the paper reports average R-peaks in specs.nv.headline.r_peak_average). N: "
             f"inputs.beats_averaged (the paper averaged {paper_n} beats for this build, "
@@ -507,6 +534,11 @@ def build_checks(location: str, inp: dict, live: dict) -> tuple[dict[str, list[R
                                     "NOT_STATED", "the OPM cards need it; the NV cards use the paper's bandwidth"),
                           "origin": "user_input"}),
     }
+    # the three optional factor inputs: the value typed when given, otherwise the sourced default that is used
+    for name, used, default in (("brain_signal_fT", amp_brain, amp_brain_src), ("brain_trials", n_brain, n_brain_src),
+                                ("nv_bandwidth_hz", bw_nv, bw_nv_src)):
+        inputs_used[name] = ({**used.vo, "origin": used.origin, "replaces": default.id} if given[name] else
+                             {**default.vo, "origin": default.origin, "default_from": default.id})
     return checks, inputs_used
 
 
@@ -552,12 +584,17 @@ CARD_INFO = {
 }
 
 
-def build(location: str, inputs: dict, live: dict | None = None, location_origin: str = "user_input") -> dict:
-    """Run every check through Lean and return the verdict cards."""
+def build(location: str, inputs: dict, live: dict | None = None, location_origin: str = "user_input",
+          place: dict | None = None) -> dict:
+    """Run every check through Lean and return the verdict cards. `location` is the id as sent (a sub-place id or
+    one of the five older ids); `place` is its sub-place, refreshed by the server (read from the built file when not
+    given). `live` is accepted for older callers and no longer used: the ambient field comes from the sub-place."""
     inp = {k: inputs.get(k) for k in INPUT_NAMES}
-    if live is None:
-        live = read_json(DATA / "live_snapshot.json", {}) or {}
-    checks, inputs_used = build_checks(location, inp, live)
+    if place is None:
+        place = loc_engine.get(None, location)
+    if place is None:
+        raise ValueError(f"unknown location id {location!r}")
+    checks, inputs_used = build_checks(place, inp)
     if list(checks) != CHECK_IDS:
         raise RuntimeError(f"requirement sets built for {list(checks)}, expected {CHECK_IDS}")
     text ="# SpinDrift measurability checks, generated by server/verdict.py\n" + "\n".join(
@@ -591,7 +628,8 @@ def build(location: str, inputs: dict, live: dict | None = None, location_origin
     src_files = trusted_sources()
     return {
         "as_of": now_iso(),
-        "location": {"value": location, "origin": location_origin},
+        "location": {"value": location, "origin": location_origin, "location_id": place["id"]},
+        "environment": loc_engine.environment(place, inputs_used["shielding_factor"]),
         "verdicts": cards,
         "lean": {
             "toolchain": (LEAN_DIR / "lean-toolchain").read_text(encoding="utf-8").strip(),
@@ -616,8 +654,152 @@ def build(location: str, inputs: dict, live: dict | None = None, location_origin
             "bilirubin_isf": "unit of the patch's detection range, which is not yet extracted from Tabatabaee et al. "
                              "(2024); no conversion is made",
             "bandwidth_hz": "Hz, measurement bandwidth for the OPM cards (within 3–100 Hz, where the datasheet states "
-                            "the noise density); the NV cards use the paper's bandwidth",
+                            "the noise density); the NV cards use the paper's bandwidth unless nv_bandwidth_hz is given",
+            "brain_signal_fT": "fT, the peak evoked brain field to detect (A of opm_snr_brain); optional, default the "
+                               "recorded peak |evoked field| of recorded/opm_brain_mne.json",
+            "brain_trials": "trials, the stimulus-locked trials averaged (N of opm_snr_brain); optional, a positive "
+                            "whole number, default the recording's averaged epochs (n_epochs)",
+            "nv_bandwidth_hz": "Hz, measurement bandwidth for the three NV cards (BW of nv_snr); optional, default "
+                               "specs.nv.headline.bandwidth_assumed (the paper's approximately 30 Hz)",
         },
         "notes": ["Every holds value and verdict is Lean's output; Python only builds the input and formats the reply.",
                   "Measurability check only: not diagnostic and not medical advice."],
     }
+
+
+# ----------------------------------------------------------------------------------------------- what a run keeps
+DEVICE_OF = {"opm_brain": "opm", "opm_heart": "opm", "nv_heart_jgu": "nv", "nv_heart_zaquant": "nv",
+             "nv_heart_qant": "nv", "qd_blood": "qd_renin", "cqd_skin": "cqd_patch"}
+LEAN_SRC = "Lean checker spindrift-check (SpinDrift.verdict, lean/SpinDrift/Checker.lean)"
+DECIDING_RULE = ("deciding requirement: for NOT_MET the first requirement Lean found violated with every input "
+                 "present; for NEED_MORE_INFORMATION the first requirement with a missing input; for REQUIREMENTS_MET "
+                 "the requirement with the smallest margin rhs / lhs (the tightest one). The rule only chooses which "
+                 "requirement to show: every holds value and every verdict is Lean's output.")
+SHIELD_FORMULA = ("S_needed = B_ambient / B_comp = S × lhs / rhs, with lhs = B_ambient and rhs = B_comp × S the two "
+                  "sides Lean computed for opm_field_nulled (B_ambient ≤ B_comp × S)")
+BEATS_FORMULA = ("N_needed = ceil(lhs / A²), with lhs = snr² · η² · BW the left side Lean computed for nv_snr "
+                 "(snr² · η² · BW ≤ A² · N)")
+
+
+def _frac(side: dict | None) -> Fraction | None:
+    return Fraction(side["exact"]) if side and side.get("exact") is not None else None
+
+
+def _sig(fr: Fraction, n: int = 6) -> float:
+    return float(f"{float(fr):.{n}g}")
+
+
+def _vo7(entry: dict) -> dict:
+    return {k: entry.get(k) for k in ("value", "unit", "source", "tag", "status", "as_of", "note")}
+
+
+def _factor(req: dict, symbol: str) -> tuple[dict | None, Fraction | None]:
+    """The input entry of a requirement with this symbol, and the exact value Lean received (None if sent as ?)."""
+    e = next((i for i in req.get("inputs", []) if i.get("symbol") == symbol), None)
+    if e is None or e.get("lean_factor") in (None, "?"):
+        return e, None
+    return e, Fraction(e["lean_factor"])
+
+
+def _not_computable(unit: str, entries: list[dict], formula: str, req: dict) -> dict:
+    """A condition that Lean's sides do not give (an input was missing or unconfirmed): null, with the reason."""
+    ids = [e["id"] for e in entries]
+    gone = ", ".join(f"{m['symbol']} ({m['id']}: {m['why']})" for m in req.get("missing", [])) or "a side"
+    status = "TO_CONFIRM" if any(e.get("status") == "TO_CONFIRM" for e in entries) else "NOT_YET_EXTRACTED"
+    return vo(None, unit, f"{LEAN_SRC}; SpinDrift calculation", "calculated", status, None,
+              f"formula: {formula}; inputs: {', '.join(ids)}; not computable: Lean had no value for {gone}")
+
+
+def shielding_factor_needed(card: dict) -> dict | None:
+    """OPM: the shielding factor the location's field needs, from the two sides of opm_field_nulled."""
+    req = next((r for r in card["requirements"] if r["id"] == "opm_field_nulled"), None)
+    if req is None:
+        return None
+    (b_e, _), (c_e, _), (s_e, s) = _factor(req, "B_ambient"), _factor(req, "B_comp"), _factor(req, "S")
+    entries = [e for e in (b_e, c_e, s_e) if e]
+    lhs, rhs = _frac(req["lhs"]), _frac(req["rhs"])
+    if lhs is None or rhs is None or s is None or rhs == 0:
+        return _not_computable("×", entries, SHIELD_FORMULA, req)
+    fr = s * lhs / rhs
+    note = (f"exact value {fr.numerator}/{fr.denominator}; independent of the shield entered (S cancels); a value "
+            "below 1 means the field is under the on-board coils' compensation limit, and QuSpin still operates the "
+            "OPM in a shielded or compensated environment")
+    return calc(_sig(fr), "×", [_vo7(e) for e in entries], SHIELD_FORMULA, [e["id"] for e in entries],
+                source=f"{LEAN_SRC}; SpinDrift calculation", note_extra=note, as_of=(b_e or {}).get("as_of"))
+
+
+def heartbeats_needed(card: dict, inputs_used: dict) -> dict | None:
+    """NV: the fewest heartbeats that reach the required SNR, from the left side of nv_snr."""
+    req = next((r for r in card["requirements"] if r["id"] == "nv_snr"), None)
+    if req is None:
+        return None
+    a_e, a = _factor(req, "A")
+    entries = [e for e in (_factor(req, "snr")[0], _factor(req, "η")[0], _factor(req, "BW")[0], a_e) if e]
+    lhs = _frac(req["lhs"])
+    if lhs is None or a is None or a == 0:
+        return _not_computable("beats", entries, BEATS_FORMULA, req)
+    exact = lhs / (a * a)
+    n = math.ceil(exact)
+    target = (inputs_used.get("target") or {}).get("value")
+    note = (f"lhs / A² = {exact.numerator}/{exact.denominator} ≈ {decimal_text(exact)}; the inequality holds for "
+            f"N ≥ that value, so {n} is the smallest whole number of heartbeats; target {target}; the nv_snr "
+            "requirement has no location term")
+    return calc(n, "beats", [_vo7(e) for e in entries], BEATS_FORMULA, [e["id"] for e in entries],
+                source=f"{LEAN_SRC}; SpinDrift calculation", note_extra=note)
+
+
+def _deciding(verdict: str, reqs: list[dict]) -> tuple[dict, str]:
+    if verdict == "NOT_MET":
+        return next((r for r in reqs if r["holds"] is False), reqs[0]), "first requirement violated"
+    if verdict == "NEED_MORE_INFORMATION":
+        return next((r for r in reqs if r["holds"] is None), reqs[0]), "first requirement with a missing input"
+
+    def margin(r):
+        lhs, rhs = _frac(r["lhs"]), _frac(r["rhs"])
+        return (0, rhs / lhs) if lhs and rhs is not None else (1, Fraction(0))
+    return min(reqs, key=margin), "requirement with the smallest margin rhs / lhs"
+
+
+def _side_text(side: dict | None) -> str:
+    return f"{side['exact']} ({side['decimal']} {side['unit']})".strip() if side else "missing"
+
+
+def lean_record(resp: dict) -> dict:
+    """What a run keeps of a verdict response: per check the Lean verdict (as a value object), the deciding
+    requirement with its exact sides, units, holds value, missing symbols and inputs, every requirement in short,
+    and the conditions derived from Lean's sides (OPM shielding factor needed, NV heartbeats needed)."""
+    checks = {}
+    for cid, card in resp["verdicts"].items():
+        reqs = card["requirements"]
+        dec, why = _deciding(card["verdict"], reqs)
+        ids = list(dict.fromkeys(i["id"] for r in reqs for i in r.get("inputs", [])))
+        note = (f"formula: SpinDrift.verdict over {len(reqs)} requirement(s) ({', '.join(r['id'] for r in reqs)}); "
+                f"inputs: {', '.join(ids)}; deciding requirement {dec['id']} ({why}): "
+                f"{dec['formula'].split('  (')[0]}, lhs {_side_text(dec['lhs'])}, rhs {_side_text(dec['rhs'])}, "
+                f"holds {dec['holds']}" + (f", missing {', '.join(m['symbol'] for m in dec['missing'])}"
+                                           if dec["missing"] else "") + f"; decided {resp['as_of']}")
+        conditions = {}
+        if cid in ("opm_brain", "opm_heart"):
+            conditions["shielding_factor_needed"] = shielding_factor_needed(card)
+        elif cid in NV_BUILDS:
+            conditions["heartbeats_needed"] = heartbeats_needed(card, resp["inputs_used"])
+        checks[cid] = {
+            "device": DEVICE_OF[cid], "sensor": card["sensor"], "signal": card["signal"], "verdict": card["verdict"],
+            "verdict_vo": vo(card["verdict"], "", f"{LEAN_SRC}, binary sha256 {resp['lean'].get('binary_sha256')}",
+                             "calculated", "VERIFIED", None, note),
+            "deciding_requirement": {
+                "id": dec["id"], "chosen_as": why, "text": dec["text"], "formula": dec["formula"],
+                "holds": dec["holds"], "lhs": dec["lhs"], "rhs": dec["rhs"], "missing": dec["missing"],
+                "inputs": [{k: i.get(k) for k in ("symbol", "id", "value", "unit", "source", "tag", "status", "as_of",
+                                                  "note", "origin", "lean_factor", "lean_unit", "read_as")}
+                           for i in dec.get("inputs", [])]},
+            "requirements": [{"id": r["id"], "holds": r["holds"], "lhs": r["lhs"], "rhs": r["rhs"],
+                              "missing": [m["symbol"] for m in r["missing"]],
+                              "factors": {i["symbol"]: i.get("lean_factor") for i in r.get("inputs", [])}}
+                             for r in reqs],
+            "conditions": {k: v for k, v in conditions.items() if v is not None},
+        }
+    return {"decided_at": resp["as_of"], "location": resp["location"], "inputs_used": resp["inputs_used"],
+            "rule": DECIDING_RULE, "checks": checks,
+            "lean": {k: resp["lean"].get(k) for k in ("toolchain", "checker", "binary_sha256", "source_sha256",
+                                                      "axioms_all_standard")}}

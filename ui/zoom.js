@@ -78,9 +78,15 @@ export function createMicro({ canvas, labelsEl, scaleEl, onEdge, onFov, onTick }
       controls.minDistance = 0; controls.maxDistance = Infinity;
       fly = { from: camera.position.clone(), fromT: controls.target.clone(), to: controls.target.clone().add(off.multiplyScalar(dir === 'in' ? 0.3 : 3)), toT: controls.target.clone(), t: 0, dur: 0.35 };
     }
-    const mod = await import(`./scale/${lv.file}`);
-    for (const p of mod.DATA || []) if (!(p in D)) D[p] = await getJSON(`/data/${p}.json`).catch(() => null);
-    const built = await mod.build(D, { view: lv.view, env });
+    let mod, built;
+    try {
+      mod = await import(`./scale/${lv.file}`);
+      for (const p of mod.DATA || []) if (!(p in D)) D[p] = await getJSON(`/data/${p}.json`).catch(() => null);
+      built = await mod.build(D, { view: lv.view, env });
+    } catch (e) {            // the next scene could not be built: settle back on the level we were on
+      if (cur && my === token) { const p = pose(cur.built, cur.level, cur.lv); fly = { from: camera.position.clone(), fromT: controls.target.clone(), to: p.pos, toT: p.target, t: 0, dur: 0.6, done: () => range(p.dist) }; }
+      throw e;
+    }
     if (my !== token) { try { built.dispose?.(); } catch { /* superseded */ } return null; }
     close();
     cur = { file: lv.file, lv, mod, built, level: mod.LEVEL || {}, labels: [] };

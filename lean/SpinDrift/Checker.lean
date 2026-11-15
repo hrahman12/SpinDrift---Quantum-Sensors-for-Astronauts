@@ -1,5 +1,5 @@
 /-
-SpinDrift measurability checker (CryoLean pattern), Lean 4 core only, no Mathlib.
+SpinDrift measurability checker (missing data never decides), Lean 4 core only, no Mathlib.
 
 Lean, not Python, decides whether a sensor can measure a body signal under the current conditions. Each
 requirement is one exact comparison `∏ lhs ≤ ∏ rhs` of non-negative rationals written as natural-number fractions

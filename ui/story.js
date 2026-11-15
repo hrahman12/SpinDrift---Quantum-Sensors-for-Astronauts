@@ -52,7 +52,7 @@ export const DESCENTS = {
     { fov: 500e-12, file: 'q_nv.js', view: 'pair', name: 'The spin', tags: [[/^N:/, 'nitrogen atom'], [/^vacancy/, 'empty spot'], [/^electron spin/, 'the spin']], title: 'A spin that glows', control: true,
       say: ['Electrons trapped at the flaw act as one compass needle: a spin. Lit with green light it glows red, brighter or dimmer depending on which way it points.', 'A magnetic field changes the microwave note the spin answers to. Read the note and you have read the field.'], env: 'field', lean: true },
     { fov: 10e-15, file: 'q_nucleus.js?id=n14', view: 'nucleus', name: 'The nucleus', title: 'Deeper still: the heart of the nitrogen atom',
-      say: ['The nitrogen nucleus, 7 protons and 7 neutrons, has a spin of its own.', 'It splits each of the NV’s notes into three. The sensor uses all three.'] },
+      say: ['The nitrogen nucleus, 7 protons and 7 neutrons, has a spin of its own.', 'It splits each of the diamond’s notes into three. Even here the rules are quantum.'] },
   ],
   qd: [BODY,
     { fov: 0.03, twin: 'elbow', name: 'A blood sample', title: 'A small blood sample',

@@ -22,9 +22,8 @@ def fixtures() -> dict:
     files = {
         "specs.json": {"meta": m(), "opm": {}, "nv": {"headline": {}, "jgu": {}, "zaquant": {}, "qant": {}},
                        "qd_renin": {}, "cqd_patch": {}, "space_heritage": {"oscar_qube": {}, "swarm_asm": {}}},
-        "locations.json": {"meta": m(), "locations": [
-            {"id": i, "label": i, "ambient_field_nT": null_vo("nT", "calculated"), "field_kind": "none"}
-            for i in LOCATION_IDS]},
+        # places/sub_places shape; the real file is built by scripts/build_locations.py
+        "locations.json": {"meta": m(), "places": []},
         "nv_heart_derived.json": {
             "meta": m(), "recorded_id": "opm_heart_kiel", "channel": "",
             "averaged_beat": {"t_s": [], "pT": [], "beats_averaged": null_vo("beats", "calculated"),

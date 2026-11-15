@@ -2,8 +2,8 @@
 
     python build_all.py
 
-Order: fixtures for anything missing -> specs -> one live cycle (NOAA L1, ISS + IGRF, GOES, Swarm if VIRES_TOKEN,
-ISS cabin one-shot) -> recorded datasets -> EEG -> NASA (Inspiration4, HRP) -> calculated files -> simulators
+Order: fixtures for anything missing -> specs -> locations (10 places and their sub-places, scripts/build_locations.py)
+-> one live cycle (NOAA L1, ISS + IGRF, Tiangong, GOES, Swarm if VIRES_TOKEN, ISS cabin one-shot) -> recorded datasets -> EEG -> NASA (Inspiration4, HRP) -> calculated files -> simulators
 (ODMR-Lab runs A and B only if missing) -> UI data (device map, palette, images) -> validate.
 A failed step is logged in STATUS.md and the build moves on; nothing is substituted.
 Raw downloads are cached in SPINDRIFT_CACHE (default ~/.spindrift_cache).
@@ -28,7 +28,7 @@ def live_cycle():
         resp = live.compose(st)
     except Exception as e:  # optional feed
         print(f"  ISS cabin one-shot failed: {type(e).__name__}: {e}")
-    live.write_outputs(resp, st["locations"])
+    live.write_outputs(resp)
     import json
     import os
     from server.realdata import CACHE
@@ -42,6 +42,7 @@ def live_cycle():
 STEPS = [
     ("fixtures for missing files", lambda: runpy.run_path(str(ROOT / "scripts/make_fixtures.py"), run_name="__main__")),
     ("specs", lambda: runpy.run_path(str(ROOT / "scripts/build_specs.py"), run_name="__main__")),
+    ("locations", lambda: runpy.run_path(str(ROOT / "scripts/build_locations.py"), run_name="__main__")),
     ("live cycle", live_cycle),
     ("recorded datasets", lambda: runpy.run_path(str(ROOT / "scripts/build_recorded.py"), run_name="__main__")),
     ("EEG (ds004902)", lambda: runpy.run_path(str(ROOT / "scripts/build_eeg.py"), run_name="__main__")),

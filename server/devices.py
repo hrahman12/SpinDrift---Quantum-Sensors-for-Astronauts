@@ -18,7 +18,8 @@ import os
 import threading
 from datetime import datetime, timezone
 
-from server.common import DATA, DEVICES, now_iso, read_json
+from server import locations as loc_engine
+from server.common import DATA, DEVICES, now_iso, read_json, vo
 
 MAX_AGE_S = 30
 _ingest: dict = {d: None for d in DEVICES}
@@ -54,18 +55,21 @@ def _sim_status(sims, device):
     return out
 
 
-def panels(state: dict, location: str) -> dict:
+def panels(state: dict, location: str, place: dict | None = None) -> dict:
+    """`location` is the id as sent; `place` its sub-place from data/locations.json (refreshed)."""
     resp = state.get("response") or {}
-    rd = (resp.get("opm_readiness") or {}).get(location) or {}
+    place = place or loc_engine.get(state, location)
+    rd = loc_engine.readiness(place) if place else (resp.get("opm_readiness") or {}).get(location) or {}
     amb = rd.get("ambient_nT")
     sims = read_json(DATA / "simulators.json", {})
-    cabin = resp.get("iss_cabin") if location == "iss" else None
+    on_iss = bool(place) and place.get("place_id") == "iss"
+    cabin = resp.get("iss_cabin") if on_iss else None
     rad = resp.get("radiation")
     env = []
     if cabin:
         env += [_item(f"ISS cabin: {c['name']}", c["reading"], "environment (ISS vehicle telemetry, not crew data)")
                 for c in cabin]
-    elif location == "iss":
+    elif on_iss:
         env.append(_item("ISS cabin telemetry", None, "unavailable: " + str(state["errors"].get("iss_cabin"))))
     else:
         env.append(_item("Cabin telemetry", None, "no public live cabin telemetry for this location"))
@@ -74,6 +78,11 @@ def panels(state: dict, location: str) -> dict:
                       "geostationary orbit)", rad[k], "environment (space radiation)")
                 for k in ("flux_ge10MeV_pfu", "flux_ge100MeV_pfu")]
         env.append(_item("NOAA solar radiation storm level", rad["noaa_s_scale"], "environment (space radiation)"))
+    ctx = (place or {}).get("radiation_context") or {}
+    if ctx.get("text"):
+        env.append(_item("Radiation context at this location",
+                         vo(ctx["text"], "", ctx.get("source") or "", "published_spec", "VERIFIED"),
+                         "environment (published context, not a measurement at the crew)"))
 
     opm_live = []
     if amb:
@@ -88,6 +97,9 @@ def panels(state: dict, location: str) -> dict:
                               "unavailable: " + str(state["errors"].get("swarm_asm"))))
 
     nv_live = []
+    if place and (place.get("nv_zeeman_shift_MHz") or {}).get("value") is not None:
+        nv_live.append(_item("NV line shift caused by the background field here (28.025 MHz/mT × |B|)",
+                             loc_engine.bare(place["nv_zeeman_shift_MHz"]), "calculated"))
     if amb and amb.get("value"):
         nv_live.append(_item("NV bias (~1 mT) against the ambient field here",
                              {"value": round(1e6 / amb["value"], 1), "unit": "×", "source": "calculated from the "
@@ -106,6 +118,8 @@ def panels(state: dict, location: str) -> dict:
 
     return {
         "fetched_at": now_iso(), "location": location,
+        "location_id": (place or {}).get("id"), "place": (place or {}).get("place"),
+        "sub_place": (place or {}).get("sub_place"),
         "devices": {
             "opm": {"live": opm_live, "environment": env, "simulators": _sim_status(sims, "opm"),
                     "recorded": rec("opm"), "no_live_source": NO_LIVE["opm"]},

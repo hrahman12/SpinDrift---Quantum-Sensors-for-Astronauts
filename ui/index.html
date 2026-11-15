@@ -30,6 +30,7 @@
 
   <header class="topbar">
     <div class="tb-brand"><b class="wordmark">SpinDrift</b><small>⊢ every signal a theorem</small></div>
+    <nav class="tb-nav" id="tb-nav"><button data-tab="body" class="on">Does it work?</button><button data-tab="hw">Hardware</button></nav>
     <div class="tb-mission">
       <select id="place" class="bare" title="Place" hidden></select>
       <select id="location" class="bare" title="Exact spot"></select>
@@ -46,22 +47,22 @@
       <svg id="leaders"></svg>
       <div id="labels"></div>
       <div id="micro-labels"></div>
+      <div id="twin-notes"></div>
       <div class="fov" id="fov"><div class="fov-n"><b id="fov-num">2.00</b><span id="fov-unit">m</span></div><small>FIELD OF VIEW · <span id="fov-lvl">LEVEL 1</span></small></div>
       <div id="rail-wrap"></div>
       <div class="hud" id="hud" hidden>
-        <div class="level-card" id="level-card"></div>
         <div class="hud-gene" id="hud-gene"></div>
       </div>
       <div class="scalebar" id="scalebar"><i></i><span>1 m</span></div>
       <div class="descend" id="descend"><button id="go-up" title="Up one level (↑)">↑</button><span>Scroll to dive</span><button id="go-down" title="Down one level (↓)">↓</button><button class="linkish" id="go-labels">Labels</button><button class="linkish" id="go-src">Sources</button></div>
     </div>
-    <aside class="card" id="card"></aside>
+    <!-- the right column, at every depth: what you are looking at (while diving), then Lean's four sensor cards with
+         the same four numbers you can change -->
+    <aside class="card" id="card"><div id="card-level"></div><div id="card-lean"></div></aside>
   </main>
 
-  <section class="view page sensor-tab" id="view-opm"></section>
-  <section class="view page sensor-tab" id="view-nv"></section>
-  <section class="view page sensor-tab" id="view-qd"></section>
-  <section class="view page sensor-tab" id="view-cqd"></section>
+  <!-- HARDWARE: the four real devices, and the all-in-one built run by run from Lean's results -->
+  <section class="view page" id="view-hw"></section>
 
   <footer class="statusline">
     <span>EVERY VALUE SOURCED · LEAN DECIDES · NOT DIAGNOSTIC</span>

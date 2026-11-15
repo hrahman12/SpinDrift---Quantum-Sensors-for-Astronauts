@@ -1,19 +1,25 @@
 """Live feeds for /api/live (contract v10, Section 2 of the brief).
 
 Feeds: NOAA SWPC L1 magnetometer (live), ISS position from wheretheiss.at (live), the IGRF field at the
-ISS position (calculated), ESA Swarm ASM via VirES (near_live, needs VIRES_TOKEN), ISS cabin telemetry
-via Lightstreamer (optional, live). A feed that fails returns None plus an error string; nothing is
-filled in.
+ISS position (calculated), the Tiangong position from a CelesTrak TLE propagated with SGP4 plus IGRF
+(calculated), the NOAA GOES magnetometer in geostationary orbit (near_live), ESA Swarm ASM via VirES
+(near_live, needs VIRES_TOKEN), ISS cabin telemetry via Lightstreamer (optional, live). A feed that fails
+returns None plus an error string; nothing is filled in.
+
+The per-location fields come from data/locations.json through server/locations.py: this module only refreshes
+the live inputs in memory. It no longer writes data/locations.json.
 """
 from __future__ import annotations
 
+import hashlib
 import math
 import os
 from datetime import datetime, timedelta, timezone
 
 import requests
 
-from server.common import DATA, LOCATION_IDS, calc, meta, missing, now_iso, read_json, vo, write_json
+from server import locations as loc_engine
+from server.common import DATA, calc, meta, missing, now_iso, vo, write_json
 
 UA = {"User-Agent": "SpinDrift-data-server/10 (research prototype)"}
 TIMEOUT = 15
@@ -30,13 +36,17 @@ SCN_26_21 = ("NWS SCN 26-21 (https://www.weather.gov/media/notification/pdf_2026
              "scn26-21_Data_Format_Changes_Impacting_SWPC_Products.pdf)")
 GOES_URL = "https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json"
 GOES_STALE = timedelta(minutes=30)
+GOES_MAG_URL = "https://services.swpc.noaa.gov/json/goes/primary/magnetometers-6-hour.json"
+GOES_MAG_PAGE = "NOAA SWPC, GOES Magnetometer, https://www.swpc.noaa.gov/products/goes-magnetometer"
+CELESTRAK_URL = "https://celestrak.org/NORAD/elements/gp.php?CATNR={norad_id}&FORMAT=TLE"
+TIANGONG_NORAD, ISS_NORAD = "48274", "25544"
+TLE_REFRESH = timedelta(hours=2)   # CelesTrak updates GP data about every 2 hours and asks clients not to poll faster
+TIANGONG_STALE = timedelta(minutes=5)
 ISS_URL = "https://api.wheretheiss.at/v1/satellites/25544"
 L1_STALE = timedelta(minutes=15)
 ISS_STALE = timedelta(minutes=2)
 SWARM_STALE = timedelta(hours=12)
-OPM_RANGE_NOTE = ("Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported "
-                  "interference from station equipment.")
-QUSPIN = "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/"
+OPM_RANGE_NOTE, QUSPIN = loc_engine.OPM_RANGE_NOTE, loc_engine.QUSPIN
 
 
 def _iso(dt: datetime) -> str:
@@ -114,7 +124,11 @@ def fetch_l1():
             "bx_gsm_nT": _vo_or_missing(newest.get("bx_gsm"), src, as_of),
             "by_gsm_nT": _vo_or_missing(newest.get("by_gsm"), src, as_of),
             "bz_gsm_nT": _vo_or_missing(newest.get("bz_gsm"), src, as_of),
+            "bx_gse_nT": _vo_or_missing(newest.get("bx_gse"), src, as_of),
+            "by_gse_nT": _vo_or_missing(newest.get("by_gse"), src, as_of),
+            "bz_gse_nT": _vo_or_missing(newest.get("bz_gse"), src, as_of),
             "spacecraft": spacecraft,
+            "retrieved_utc": now_iso(),
         }
         return out, None, url, errors
     return None, "L1 feed failed: " + "; ".join(errors), None, errors
@@ -143,6 +157,7 @@ def fetch_iss():
         "lon": vo(_num(j["longitude"]), "deg", src, "live", "VERIFIED", as_of),
         "alt_km": vo(_num(j["altitude"]), "km", src, "live", "VERIFIED", as_of),
         "velocity_kmh": vo(_num(j["velocity"]), "km/h", src, "live", "VERIFIED", as_of),
+        "retrieved_utc": now_iso(),
     }
     return pos, None
 
@@ -199,6 +214,62 @@ def fetch_goes():
     return out, None
 
 
+# ---------------------------------------------------------------- GOES magnetometer (near_live, geostationary orbit)
+def fetch_goes_mag():
+    """Newest 1-minute GOES primary magnetometer sample: total field and the Hp, He, Hn components."""
+    try:
+        r = requests.get(GOES_MAG_URL, headers=UA, timeout=TIMEOUT)
+        if r.status_code != 200:
+            return None, f"GOES magnetometer HTTP {r.status_code}"
+        rows, pad_note = _json(r)
+    except Exception as e:
+        return None, f"GOES magnetometer {type(e).__name__}: {e}"
+    recs = [x for x in rows if _num(x.get("total")) is not None and x.get("time_tag")
+            and x.get("arcjet_flag") in (False, None, "false", 0)]
+    if not recs:
+        return None, "GOES magnetometer: no row with a numeric total field and no arcjet firing"
+    newest = max(recs, key=lambda x: _parse_time(x["time_tag"]))
+    as_of = _iso(_parse_time(newest["time_tag"]))
+    sat = f"GOES-{newest.get('satellite')}"
+    src = f"NOAA SWPC GOES primary magnetometer ({sat}), {GOES_MAG_URL}"
+    where = ("1-minute sample in geostationary orbit, in Earth's geographic equatorial plane about 6.6 Earth radii "
+             f"from Earth's centre ({GOES_MAG_PAGE})")
+
+    def comp(key, what):
+        v = _num(newest.get(key))
+        if v is None:
+            return missing("nT", src, "near_live", "NOT_STATED", f"{key} missing in the newest row")
+        return vo(round(v, 2), "nT", src, "near_live", "VERIFIED", as_of, what)
+    return {
+        "total_nT": vo(round(_num(newest["total"]), 2), "nT", src, "near_live", "VERIFIED", as_of,
+                       "total field Ht; " + where + (f"; {pad_note}" if pad_note else "")),
+        "hp_nT": comp("Hp", "Hp: northward, perpendicular to the orbit plane"),
+        "he_nT": comp("He", "He: earthward"),
+        "hn_nT": comp("Hn", "Hn: eastward"),
+        "satellite": sat, "retrieved_utc": now_iso(),
+    }, None
+
+
+# ---------------------------------------------------------------- two-line elements (CelesTrak) for SGP4
+def fetch_tle(norad_id: str):
+    """Newest CelesTrak GP element set for one object, as a tagged dict (three text lines: name, line 1, line 2)."""
+    url = CELESTRAK_URL.format(norad_id=norad_id)
+    try:
+        r = requests.get(url, headers=UA, timeout=TIMEOUT)
+        if r.status_code != 200:
+            return None, f"CelesTrak TLE {norad_id} HTTP {r.status_code}"
+        lines = [ln.rstrip() for ln in r.text.splitlines() if ln.strip()]
+        if len(lines) < 3 or not lines[1].startswith("1 ") or not lines[2].startswith("2 "):
+            return None, f"CelesTrak TLE {norad_id}: unexpected reply {r.text[:80]!r}"
+        tle = {"norad_id": str(norad_id), "name": lines[0].strip(), "line1": lines[1], "line2": lines[2],
+               "url": url, "retrieved_utc": now_iso(), "sha256": hashlib.sha256(r.content).hexdigest(),
+               "tag": "recorded", "source": f"CelesTrak GP element set (TLE) for NORAD {norad_id}, {url}"}
+        tle["epoch_utc"] = loc_engine.tle_epoch_iso(tle)
+        return tle, None
+    except Exception as e:
+        return None, f"CelesTrak TLE {norad_id} {type(e).__name__}: {e}"
+
+
 # ---------------------------------------------------------------- Swarm ASM (near_live)
 # Swarm L1b Product Definition SW-RS-DSC-SY-0007 Issue 5.27, Table 6-2: Flags_F = 0 is "ASM nominal,
 # scalar mode"; 1 = vector mode; 2..64 flag outliers, gaps, restarts or ASM/VFM disagreement; 255 = no F.
@@ -246,83 +317,14 @@ def fetch_swarm():
         return None, f"Swarm ASM {type(e).__name__}: {e}"
 
 
-# ---------------------------------------------------------------- locations and OPM readiness
+# ---------------------------------------------------------------- published surface measurements (sources)
+# The per-location field values live in data/locations.json (scripts/build_locations.py); these two source strings
+# are kept here because the builder and the run engine cite them.
 DYAL73 = ("Dyal, Parkin & Daily (1973), 'Surface magnetometer experiments: Internal lunar properties', Proc. Lunar "
           "Sci. Conf. 4th, 2925-2945, Table 2 p. 2930 (1 gamma = 1 nT); cross-check Dyal, Parkin & Daily (1974), "
           "Rev. Geophys. 12, 568, doi:10.1029/RG012i004p00568 (abstract)")
 JOHNSON20 = ("Johnson et al. (2020), 'Crustal and time-varying magnetic fields at the InSight landing site on Mars', "
              "Nature Geoscience 13, 199-204, doi:10.1038/s41561-020-0537-x, p. 200 and Table 1")
-
-
-def published_fields():
-    """Measured, published ambient fields for locations with no live feed. No value without a citation."""
-    return {
-        "lunar_base": vo(38, "nT", DYAL73, "recorded", "VERIFIED", None,
-                         "Apollo 12 ALSEP lunar surface magnetometer, 38 ± 2 nT (deployed Nov 1969). Rule: median of the "
-                         "three stationary ALSEP sites (Apollo 15: 3.4 ± 2.9, Apollo 12: 38 ± 2, Apollo 16: 234 ± 3 nT). "
-                         "Measured sites range 3.4-327 nT (Apollo 16 Site 13); planned south-polar bases have no surface "
-                         "measurement."),
-        "mars_surface": vo(2013, "nT", JOHNSON20, "recorded", "VERIFIED", None,
-                           "InSight lander magnetometer, average surface field 2,013 ± 53 nT (mean over sols 14-299, "
-                           "20:00-04:00 local time); about ten times stronger than predicted from orbit."),
-        "gateway": missing("nT", "no measurement from a near-rectilinear halo orbit", "recorded", "NOT_STATED",
-                           "No magnetometer has measured an NRHO (CAPSTONE carried none). Nearest published: ARTEMIS "
-                           "lunar-orbit magnetotail-lobe average about 10 nT (Kamaletdinov et al., JGR Space Physics 129, "
-                           "e2023JA032130, Fig. 5f); the Gateway is in the solar wind most of each orbit and in the "
-                           "magnetotail 5-6 days per lunar orbit (Dandouras et al. 2023, Front. Astron. Space Sci. "
-                           "10:1120302)."),
-    }
-
-
-LABELS = {"iss": "ISS (low Earth orbit)", "gateway": "Lunar Gateway (near-rectilinear halo orbit)",
-          "lunar_base": "Lunar surface base", "mars_transit": "Mars transit (interplanetary)",
-          "mars_surface": "Mars surface"}
-
-
-def locations(iss_b, l1):
-    pub = published_fields()
-    out = []
-    for loc in LOCATION_IDS:
-        if loc == "iss":
-            amb = iss_b or missing("nT", "IGRF at the live ISS position", "calculated", "NOT_YET_EXTRACTED",
-                                   "ISS position or IGRF unavailable this cycle")
-            kind = "model"
-        elif loc == "mars_transit":
-            if l1:
-                b = dict(l1["bt_nT"])
-                b["note"] = ((b.get("note") + "; ") if b.get("note") else "") + (
-                    "measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit.")
-                amb = b
-            else:
-                amb = missing("nT", "NOAA SWPC L1", "live", "NOT_YET_EXTRACTED", "L1 feed unavailable this cycle")
-            kind = "live_feed"
-        elif loc in pub and pub[loc].get("value") is not None:
-            amb, kind = pub[loc], "published"
-        else:
-            amb = pub.get(loc) or missing("nT", "no cited measured value", "recorded", "NOT_STATED")
-            kind = "none"
-        out.append({"id": loc, "label": LABELS[loc], "ambient_field_nT": amb, "field_kind": kind})
-    return out
-
-
-def opm_readiness(locs):
-    rng = vo(5, "nT", QUSPIN, "datasheet", "VERIFIED", None,
-             "QZFM dynamic range ±5 nT (specs.opm.dynamic_range). QuSpin also states the field at the sensor "
-             "must be reduced to about 50 nT or below; built-in coils cancel residual fields up to 50 nT.")
-    out = {}
-    for loc in locs:
-        amb = loc["ambient_field_nT"]
-        if amb["value"] is None:
-            sf = calc(None, "×", [amb, rng], "ambient_nT / opm_range_nT", [f"{loc['id']}.ambient_field_nT",
-                                                                          "specs.opm.dynamic_range"])
-            within = None
-        else:
-            sf = calc(round(amb["value"] / 5.0, 2), "×", [amb, rng], "ambient_nT / opm_range_nT",
-                      [f"{loc['id']}.ambient_field_nT", "specs.opm.dynamic_range"], as_of=amb.get("as_of"))
-            within = bool(amb["value"] <= 5.0)
-        sf["note"] = sf["note"] + ". " + OPM_RANGE_NOTE
-        out[loc["id"]] = {"ambient_nT": amb, "opm_range_nT": rng, "shielding_factor": sf, "within_range": within}
-    return out
 
 
 # ---------------------------------------------------------------- state updates and one full cycle
@@ -353,6 +355,42 @@ def update_iss(state: dict) -> None:
         state["errors"]["iss"] = f"IGRF {type(e).__name__}: {e}"
 
 
+def update_tiangong(state: dict) -> None:
+    """Tiangong position now: SGP4 on the stored CelesTrak TLE (the one in data/locations.json, or a newer one
+    fetched at most every TLE_REFRESH), then IGRF at that position."""
+    tles = state.setdefault("tles", {})
+    tle = tles.get("tiangong")
+    if tle is None:
+        doc = loc_engine.load() or {}
+        tle = ((doc.get("meta") or {}).get("tles") or {}).get("tiangong")
+    now = datetime.now(timezone.utc)
+    err = None
+    if tle is None or now - _parse_time(tle["retrieved_utc"]) > TLE_REFRESH:
+        last_try = state.get("tle_last_try")
+        if last_try is None or now - last_try > timedelta(minutes=10):
+            state["tle_last_try"] = now
+            fresh, err = fetch_tle(TIANGONG_NORAD)
+            tle = fresh or tle
+    if tle is None:
+        state["tiangong"] = None
+        state["errors"]["tiangong"] = err or "no TLE for Tiangong (CelesTrak unreachable and none in locations.json)"
+        return
+    tles["tiangong"] = tle
+    try:
+        state["tiangong"] = loc_engine.station_from_tle(tle, now, "tiangong")
+        state["errors"]["tiangong"] = err
+    except Exception as e:
+        state["tiangong"] = None
+        state["errors"]["tiangong"] = f"Tiangong SGP4/IGRF {type(e).__name__}: {e}"
+
+
+def update_goes_mag(state: dict) -> None:
+    goes, err = fetch_goes_mag()
+    if goes is not None or not state.get("goes_mag") or feed_age_exceeded(state["goes_mag"]["total_nT"], GOES_STALE):
+        state["goes_mag"] = goes
+    state["errors"]["goes_mag"] = err
+
+
 def update_swarm(state: dict) -> None:
     swarm, err = fetch_swarm()
     state["swarm_asm"] = swarm
@@ -372,16 +410,16 @@ def feed_age_exceeded(v: dict, limit: timedelta) -> bool:
 
 
 def compose(state: dict) -> dict:
-    """Build the /api/live response from the current state."""
+    """Build the /api/live response from the current state. opm_readiness keeps its five older location ids; each
+    is read from its sub-place in data/locations.json (server/locations.py LEGACY_IDS), refreshed from this state."""
     iss, l1 = state.get("iss"), state.get("l1")
     cabin = state.get("iss_cabin")
-    locs = locations(iss["b_total_nT"] if iss else None, l1)
-    state["locations"] = locs
     resp = {
         "fetched_at": now_iso(),
         "iss": iss, "l1": l1, "swarm_asm": state.get("swarm_asm"), "iss_cabin": cabin,
-        "opm_readiness": opm_readiness(locs),
+        "opm_readiness": loc_engine.legacy_readiness(state),
         "radiation": state.get("radiation"),
+        "tiangong": state.get("tiangong"), "goes_mag": state.get("goes_mag"),
         "errors": [e for e in state["errors"].values() if e],
     }
     state["response"] = resp
@@ -389,7 +427,8 @@ def compose(state: dict) -> dict:
 
 
 def new_state() -> dict:
-    return {"errors": {"l1": None, "iss": None, "swarm_asm": None, "iss_cabin": None, "radiation": None}}
+    return {"errors": {"l1": None, "iss": None, "swarm_asm": None, "iss_cabin": None, "radiation": None,
+                       "tiangong": None, "goes_mag": None}}
 
 
 def cycle(state: dict | None = None) -> dict:
@@ -397,22 +436,25 @@ def cycle(state: dict | None = None) -> dict:
     state = state if state is not None else new_state()
     update_l1(state)
     update_iss(state)
+    update_tiangong(state)
+    update_goes_mag(state)
     update_swarm(state)
     update_goes(state)
     return compose(state)
 
 
-def write_outputs(resp: dict, locs: list) -> None:
-    """Write live_snapshot.json and locations.json (atomic) after a good cycle: L1 and ISS both present.
-    Otherwise the last good snapshot stays in place as the offline fallback."""
+def write_outputs(resp: dict, locs=None) -> None:
+    """Write live_snapshot.json (atomic) after a good cycle: L1 and ISS both present. Otherwise the last good
+    snapshot stays in place as the offline fallback. data/locations.json is not written here any more: it is built
+    by scripts/build_locations.py and its live entries are refreshed in memory (server/locations.py). `locs` is
+    accepted and ignored so older callers keep working."""
     if resp.get("l1") is None or resp.get("iss") is None:
         return
     sources = [s for s in ["NOAA SWPC L1 magnetometer", "wheretheiss.at ISS position",
                            "IGRF via ppigrf" if resp.get("iss") else None,
-                           "ESA Swarm ASM via VirES" if resp.get("swarm_asm") else None] if s]
+                           "ESA Swarm ASM via VirES" if resp.get("swarm_asm") else None,
+                           "data/locations.json (opm_readiness)"] if s]
     write_json(DATA / "live_snapshot.json", {"meta": meta(False, sources), **resp})
-    pub_sources = [l["ambient_field_nT"]["source"] for l in locs if l["field_kind"] == "published"]
-    write_json(DATA / "locations.json", {"meta": meta(False, sources + pub_sources), "locations": locs})
 
 
 def feed_health(resp: dict) -> dict:
@@ -430,6 +472,8 @@ def feed_health(resp: dict) -> dict:
         "swarm_asm": age_state((resp.get("swarm_asm") or {}).get("f_nT"), SWARM_STALE),
         "iss_cabin": "ok" if resp.get("iss_cabin") else "error",
         "radiation": age_state((resp.get("radiation") or {}).get("flux_ge10MeV_pfu"), GOES_STALE),
+        "tiangong": age_state((resp.get("tiangong") or {}).get("lat"), TIANGONG_STALE),
+        "goes_mag": age_state((resp.get("goes_mag") or {}).get("total_nT"), GOES_STALE),
     }
 
 
@@ -437,7 +481,7 @@ if __name__ == "__main__":
     import json
     st = new_state()
     r = cycle(st)
-    write_outputs(r, st["locations"])
+    write_outputs(r)
     print(json.dumps({"errors": r["errors"], "l1_url": st.get("l1_url"),
                       "l1_bt": (r["l1"] or {}).get("bt_nT"), "iss_b": (r["iss"] or {}).get("b_total_nT"),
                       "health": feed_health(r)}, indent=1, ensure_ascii=False))

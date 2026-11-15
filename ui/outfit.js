@@ -5,12 +5,63 @@
 // hip 0.530 H, ankle 0.039 H). Garment thickness, colours, the helmet and the backpack are a drawing choice.
 import * as THREE from 'three';
 import { mergeVertices, mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { lookOf } from './areas.js';
 
 // thinner figure: torso and limbs narrowed about the body axis, the head kept as is, a smooth blend at the neck
 export function slimTransform({ H, y0, cx = 0, cz = 0, s = 0.85 }) {
   return (v) => {
     const hy = (v.y - y0) / H, k = hy < 0.80 ? s : hy > 0.88 ? 1 : s + (1 - s) * ((hy - 0.80) / 0.08);
     v.x = cx + (v.x - cx) * k; v.z = cz + (v.z - cz) * k; return v;
+  };
+}
+// thinner legs: each leg narrowed about its own centre line, found per centimetre of height from the skin itself.
+// Only the stretch where the two legs are clearly apart is changed (from just above the ankles up to the highest
+// clean slice below the hips), with smooth blends at both ends, so feet, hips and hands stay as they are.
+export function legSlim(skinMeshes, { H, y0, cx = 0, s = 0.82 }) {
+  const v = new THREE.Vector3(), bins = new Map(), BIN = 0.01;
+  for (const m of skinMeshes) {
+    m.updateMatrixWorld(true);
+    const pos = m.geometry.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      v.fromBufferAttribute(pos, i).applyMatrix4(m.matrixWorld);
+      const hy = (v.y - y0) / H; if (hy < 0.03 || hy > 0.56) continue;
+      const k = Math.floor((v.y - y0) / BIN); let b = bins.get(k); if (!b) bins.set(k, b = []); b.push(v.x, v.z);
+    }
+  }
+  // per slice: one leg cluster on each side (gaps over 12 mm split clusters; the middle and the hands are left out)
+  const legs = new Map();
+  for (const [k, a] of bins) {
+    const idx = []; for (let j = 0; j < a.length; j += 2) idx.push(j);
+    idx.sort((p, q) => a[p] - a[q]);
+    const out = {}; let start = 0;
+    for (let j = 1; j <= idx.length; j++) {
+      if (j < idx.length && a[idx[j]] - a[idx[j - 1]] <= 0.012) continue;
+      const c = idx.slice(start, j); start = j;
+      let sx = 0, sz = 0; for (const q of c) { sx += a[q]; sz += a[q + 1]; }
+      const mx = sx / c.length, mz = sz / c.length, x0 = a[c[0]], x1 = a[c[c.length - 1]], d = mx - cx;
+      if (c.length < 6 || Math.abs(d) < 0.02 * H || Math.abs(d) > 0.09 * H || x1 - x0 > 0.14 * H) continue;
+      const side = d > 0 ? 'L' : 'R';
+      out[side] = side in out ? null : { x: mx, z: mz, x0, x1 };   // two candidates on one side: not a clean slice
+    }
+    if (out.L && out.R) legs.set(k, out);
+  }
+  const kKnee = Math.floor((0.285 * H) / BIN);          // knee height 0.285 H (Drillis & Contini 1966)
+  if (!legs.has(kKnee)) return null;
+  let kTop = kKnee, kBot = kKnee;
+  while (legs.has(kTop + 1)) kTop++;
+  while (legs.has(kBot - 1)) kBot--;
+  const hyTop = (kTop * BIN) / H, hyBot = Math.max(0.085, ((kBot + 1) * BIN) / H);
+  const at = (y, side) => {
+    const t = (y - y0) / BIN - 0.5, k = Math.floor(t), f = t - k, A = legs.get(k)?.[side], B = legs.get(k + 1)?.[side];
+    if (A && B) return { x: A.x + (B.x - A.x) * f, z: A.z + (B.z - A.z) * f, x0: Math.min(A.x0, B.x0), x1: Math.max(A.x1, B.x1) };
+    return A || B || null;
+  };
+  return (p) => {
+    const hy = (p.y - y0) / H; if (hy <= hyBot - 0.03 || hy >= hyTop) return p;
+    const w = Math.min(1, (hy - (hyBot - 0.03)) / 0.03) * Math.min(1, (hyTop - hy) / 0.06);
+    const c = at(p.y, p.x > cx ? 'L' : 'R'); if (!c || p.x < c.x0 - 0.003 || p.x > c.x1 + 0.003) return p;
+    const k = 1 - (1 - s) * w;
+    p.x = c.x + (p.x - c.x) * k; p.z = c.z + (p.z - c.z) * k; return p;
   };
 }
 export function deformMesh(mesh, fn) {
@@ -155,9 +206,11 @@ export const OUTFITS = {
   cabin: { label: 'station clothes', top: { male: 0x56708f, female: 0x8f6670 }, sleeve: 'short', topOff: 0.006, bottom: { male: 0x3b4049, female: 0x3a4152 }, botOff: 0.008, feet: 0x22252b },
   field: { label: 'field jacket and boots', top: { male: 0x5e6250, female: 0x6a5e50 }, sleeve: 'long', topOff: 0.012, bottom: { male: 0x3d3b33, female: 0x3d3b33 }, botOff: 0.01, feet: 0x4a3f33, bootHy: 0.075 },
   cold: { label: 'expedition parka', top: { male: 0x9a4a3c, female: 0x9a4a3c }, sleeve: 'long', topOff: 0.03, topSmooth: 12, bottom: { male: 0x2c2f36, female: 0x2c2f36 }, botOff: 0.016, feet: 0x1b1d22, bootHy: 0.09, gloves: 0x1b1d22 },
+  everyday: { label: 'everyday clothes', top: { male: 0x8ea7c2, female: 0xb98f86 }, sleeve: 'short', topOff: 0.006, bottom: { male: 0x34507a, female: 0x34507a }, botOff: 0.008, feet: 0xcfcfcf },
+  flight: { label: 'flight overall', suit: { male: 0x2f4064, female: 0x2f4064 }, suitOff: 0.008, suitSmooth: 6, feet: 0x1f2329 },
   dive: { label: 'wetsuit', suit: { male: 0x1d2c33, female: 0x1d2c33 }, suitOff: 0.003, suitSmooth: 4, feet: 0x15191d },
   launch: { label: 'launch and entry suit', suit: { male: 0xd9d7cf, female: 0xd9d7cf }, suitOff: 0.016, suitSmooth: 10, feet: 0x9a978e, bootHy: 0.065, gloves: 0x3b4a66 },
-  eva: { label: 'EVA suit', suit: { male: 0xe9e7e1, female: 0xe9e7e1 }, suitOff: 0.045, suitSmooth: 14, feet: 0x8a877f, bootHy: 0.085, gloves: 0x8a877f, helmet: true, pack: true },
+  eva: { label: 'surface suit', suit: { male: 0xe9e7e1, female: 0xe9e7e1 }, suitOff: 0.02, suitSmooth: 10, feet: 0x8a877f, bootHy: 0.085, gloves: 0x8a877f, helmet: true },
 };
 
 export function dress(body, { outfit = 'cabin', sex = 'male' }) {
@@ -165,11 +218,11 @@ export function dress(body, { outfit = 'cabin', sex = 'male' }) {
   const add = (g) => { if (g) out.push(g); };
   const isHand = (i) => cls[i] === 1 && hy[i] < 0.485;
   if (O.suit) {
-    add(garment(body, (i) => cls[i] !== 2 && hy[i] < 0.86 && hy[i] >= (O.bootHy || 0.045) && !isHand(i), { offset: O.suitOff, smooth: O.suitSmooth, melt: 12, flatFront: [0.40, 0.535], color: O.suit[sex], name: O.label }));
+    add(garment(body, (i) => cls[i] !== 2 && hy[i] < 0.86 && hy[i] >= (O.bootHy || 0.045) && !isHand(i), { offset: O.suitOff, smooth: O.suitSmooth, melt: 22, flatFront: [0.39, 0.545], color: O.suit[sex], name: O.label }));
   } else {
-    const shirt = (i) => cls[i] !== 2 && hy[i] < 0.86 && ((cls[i] === 0 && hy[i] >= 0.515) || (cls[i] === 1 && hy[i] >= (O.sleeve === 'long' ? 0.49 : 0.63)));
+    const shirt = (i) => cls[i] !== 2 && hy[i] < 0.86 && ((cls[i] === 0 && hy[i] >= 0.515) || (cls[i] === 1 && hy[i] >= (O.sleeve === 'long' ? 0.49 : 0.70)));
     add(garment(body, shirt, { offset: O.topOff, smooth: O.topSmooth || 7, color: O.top[sex], name: O.label }));
-    add(garment(body, (i) => cls[i] === 0 && hy[i] < 0.54 && hy[i] >= (O.bootHy || 0.045), { offset: O.botOff + 0.02, smooth: 4, melt: 30, color: O.bottom[sex], name: 'trousers' }));
+    add(garment(body, (i) => cls[i] === 0 && hy[i] < 0.54 && hy[i] >= (O.bootHy || 0.045), { offset: O.botOff + 0.01, smooth: 4, melt: 30, color: O.bottom[sex], name: 'trousers' }));
   }
   add(garment(body, (i) => cls[i] === 0 && hy[i] < (O.bootHy || 0.05), { offset: 0.007, smooth: 5, color: O.feet, name: 'shoes' }));
   if (O.gloves) add(garment(body, isHand, { offset: 0.006, smooth: 4, color: O.gloves, name: 'gloves' }));
@@ -189,30 +242,14 @@ export function faceShell(body, { color }) {
   return garment(body, (i) => cls[i] === 2, { offset: 0.006, smooth: 4, melt: 70, after: 4, color, name: 'head' });
 }
 
-// helmet and life-support backpack for the EVA suit (sizes are a drawing choice)
-export function evaExtras({ headCentre, headH, chestY, backZ }) {
+// a clear helmet bubble for the surface suit; nothing else is added (no backpack or visor is drawn, because their
+// real dimensions are not in an open source)
+export function evaExtras({ headCentre, headH }) {
   const g = new THREE.Group();
-  const bubble = new THREE.Mesh(new THREE.SphereGeometry(headH * 0.68, 40, 28), new THREE.MeshLambertMaterial({ color: 0xdff2ff, transparent: true, opacity: 0.22, depthWrite: false }));
-  bubble.position.copy(headCentre); bubble.material.userData.outlineParameters = { thickness: 0.003, color: [0.11, 0.11, 0.1], alpha: 1 }; g.add(bubble);
-  const visor = new THREE.Mesh(new THREE.SphereGeometry(headH * 0.685, 40, 20, -Math.PI * 0.32, Math.PI * 0.64, Math.PI * 0.28, Math.PI * 0.32), new THREE.MeshLambertMaterial({ color: 0xe0a83a, transparent: true, opacity: 0.55, depthWrite: false, side: THREE.DoubleSide }));
-  visor.position.copy(headCentre); visor.rotation.y = Math.PI / 2 * 0; g.add(visor);
-  const pack = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.56, 0.2), new THREE.MeshLambertMaterial({ color: 0xe6e3da }));
-  pack.position.set(headCentre.x, chestY, backZ - 0.1); g.add(pack);
+  const bubble = new THREE.Mesh(new THREE.SphereGeometry(headH * 0.68, 48, 32), new THREE.MeshStandardMaterial({ color: 0xe8f4ff, roughness: 0.05, metalness: 0, transparent: true, opacity: 0.12, depthWrite: false }));
+  bubble.position.copy(headCentre); g.add(bubble);
   return g;
 }
 
-// which outfit and backdrop suit a location id (sub-place ids from data/locations.json, plus the five older ids)
-export function sceneFor(id = 'iss') {
-  const s = String(id);
-  if (/^(moon_south_pole|lunar_anomalies)\b/.test(s) || s === 'lunar_base') return { outfit: 'eva', backdrop: 'lunar' };
-  if (/^mars_surface\b/.test(s)) return { outfit: 'eva', backdrop: 'mars' };
-  if (s === 'earth_analog.concordia') return { outfit: 'cold', backdrop: 'antarctic' };
-  if (s === 'earth_analog.haughton') return { outfit: 'field', backdrop: 'arctic' };
-  if (s === 'earth_analog.mdrs') return { outfit: 'field', backdrop: 'desert' };
-  if (s === 'earth_analog.aquarius') return { outfit: 'dive', backdrop: 'ocean' };
-  if (s === 'earth_flight.baikonur') return { outfit: 'launch', backdrop: 'steppe' };
-  if (s === 'earth_flight.i4_splashdown') return { outfit: 'launch', backdrop: 'ocean' };
-  if (/^earth_(flight|analog)\b/.test(s)) return { outfit: 'cabin', backdrop: 'earth' };
-  if (/^(gateway|mars_transit)\b/.test(s)) return { outfit: 'cabin', backdrop: 'deep_space' };
-  return { outfit: 'cabin', backdrop: 'orbit' };
-}
+// which outfit and backdrop suit a location id: the look of its area (ui/areas.js)
+export function sceneFor(id = 'iss') { return lookOf(String(id)); }

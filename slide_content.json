@@ -23,16 +23,16 @@
         "current_limitations": [
           "Adhesive electrodes fail in sweat and irritate skin",
           "Blood draws consume finite sterile supplies",
-          "Cryogenic SQUID scanners cannot fly"
+          "Room-sized SQUID scanners cannot fly"
         ],
         "mission_requirements": [
-          "Wearable, non-cryogenic hardware",
+          "Wearable hardware",
           "Real-time continuous cardiac, neural, and oxidative telemetry",
           "Zero consumables"
         ]
       },
       "visual_direction": "Split comparison card: Current (red-amber warning icons for electrodes, blood kits, liquid-helium dewar) vs Needed (green badges for wearable, real-time, zero consumables).",
-      "speaker_notes": "As missions leave low-Earth orbit for 180-day Mars transits and beyond, crews lose rapid return and resupply. The crew medical officer needs continuous telemetry without lab consumables or cryogens."
+      "speaker_notes": "As missions leave low-Earth orbit for 180-day Mars transits and beyond, crews lose rapid return and resupply. The crew medical officer needs continuous telemetry without lab consumables."
     },
     {
       "slide_number": 3,
@@ -43,13 +43,13 @@
         {
           "location": "Chest",
           "label": "Chest → OPM magnetocardiography (≈50 pT cardiac field)",
-          "primary_hardware": "QuSpin QZFM OPM (⁸⁷Rb vapor cell, <15 fT/√Hz, domino-sized, no cryogenics)",
+          "primary_hardware": "QuSpin QZFM OPM (⁸⁷Rb vapor cell, <15 fT/√Hz, domino-sized)",
           "alternative_hardware": "NV-diamond cardiac magnetometer (12 mm head, 6–26 pT/√Hz, measured real human hearts, arXiv 2601.18843, Jan 2026)"
         },
         {
           "location": "Head",
           "label": "Head → OPM-MEG helmet (≈100 fT neural field, <7 fT/√Hz)",
-          "primary_hardware": "Miniaturized OPM-MEG helmet (12 × 16.5 × 22.5 mm per sensor, <7 fT/√Hz, 130 Hz bandwidth, 0.7 W per head; 49–128 channels, FieldLine HEDscan class; wearable, non-cryogenic)"
+          "primary_hardware": "Miniaturized OPM-MEG helmet (12 × 16.5 × 22.5 mm per sensor, <7 fT/√Hz, 130 Hz bandwidth, 0.7 W per head; 49–128 channels, FieldLine HEDscan class; wearable)"
         },
         {
           "location": "Finger",

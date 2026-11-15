@@ -1,6 +1,6 @@
 """Build data/sensor_parts/<id>.json: the documented parts of the four SpinDrift sensors, for the 3D sensor tabs.
 
-Rule (from CryoLean): draw only parts whose size is documented, to scale (millimetres; nanometres for the
+Rule: draw only parts whose size is documented, to scale (millimetres; nanometres for the
 quantum-dot probe), with labels. Parts without a documented size or position are listed, not drawn.
 
 Every number is a value object (server.common.vo) whose source names the page, figure or table it came from,
