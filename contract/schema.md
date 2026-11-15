@@ -3,7 +3,7 @@
 Layout: `/data` and `/server` belong to Claude Code. `/app` belongs to Codex. `/contract/schema.md` holds this section word for word. `/STATUS.md` is a shared log: both agents append one line per change, formatted `<ISO time> <agent> <file or feed> <done|failed|changed> <note>`. Neither agent edits the other's folders.
 
 ### Value object (VO): used for every number or fact
-`{ "value": number | string | null, "unit": string, "source": string, "tag": "live" | "near_live" | "recorded" | "datasheet" | "published_spec" | "calculated" | "simulated", "status": "VERIFIED" | "NOT_STATED" | "NOT_YET_EXTRACTED" | "TO_CONFIRM", "as_of": ISO-8601 | null, "note": string | null }`
+`{ "value": number | string | null, "unit": string, "source": string, "tag": "live" | "near_live" | "recorded" | "datasheet" | "published_spec" | "calculated" | "simulated" | "user_input", "status": "VERIFIED" | "NOT_STATED" | "NOT_YET_EXTRACTED" | "TO_CONFIRM", "as_of": ISO-8601 | null, "note": string | null }`
 - `value` is null when status is NOT_STATED or NOT_YET_EXTRACTED. TO_CONFIRM may carry a value that still has to be checked against the primary source.
 - `as_of` is required for live and near_live (the time of the measurement, not of the fetch). For recorded, it is the recording date if known.
 - For calculated, `note` holds the formula and the ids of its inputs.

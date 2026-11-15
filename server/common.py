@@ -18,7 +18,7 @@ RECORDED = DATA / "recorded"
 STATUS_FILE = ROOT / "STATUS.md"
 AGENT = "claude-code"
 
-TAGS = {"live", "near_live", "recorded", "datasheet", "published_spec", "calculated", "simulated"}
+TAGS = {"live", "near_live", "recorded", "datasheet", "published_spec", "calculated", "simulated", "user_input"}
 STATUSES = {"VERIFIED", "NOT_STATED", "NOT_YET_EXTRACTED", "TO_CONFIRM"}
 LOCATION_IDS = ["iss", "gateway", "lunar_base", "mars_transit", "mars_surface"]
 DEVICES = ["opm", "nv", "qd_renin", "cqd_patch"]

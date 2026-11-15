@@ -14,3 +14,6 @@ cache/
 __pycache__/
 *.pyc
 *.tmp
+
+# Lean build output (recreate with: cd lean && lake build)
+lean/.lake/

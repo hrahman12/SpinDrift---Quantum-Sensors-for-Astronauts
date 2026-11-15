@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T10:24:28Z",
+    "sources": [
+      "PubChem periodic table, https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON"
+    ],
+    "sha256": {
+      "https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON": "6abc1932a117fccc4c61bf9cdbcf96a0355beac82cddba82bd436e6ce4aee72a"
+    }
+  },
+  "tag": "published_spec",
+  "elements": {
+    "H": {
+      "name": "Hydrogen",
+      "atomic_number": 1,
+      "vdw_radius_A": {
+        "value": 1.2,
+        "unit": "Å",
+        "source": "PubChem periodic table, https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON (AtomicRadius, van der Waals, pm / 100)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "cpk": "#ffffff"
+    },
+    "C": {
+      "name": "Carbon",
+      "atomic_number": 6,
+      "vdw_radius_A": {
+        "value": 1.7,
+        "unit": "Å",
+        "source": "PubChem periodic table, https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON (AtomicRadius, van der Waals, pm / 100)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "cpk": "#909090"
+    },
+    "N": {
+      "name": "Nitrogen",
+      "atomic_number": 7,
+      "vdw_radius_A": {
+        "value": 1.55,
+        "unit": "Å",
+        "source": "PubChem periodic table, https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON (AtomicRadius, van der Waals, pm / 100)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "cpk": "#3050f8"
+    },
+    "O": {
+      "name": "Oxygen",
+      "atomic_number": 8,
+      "vdw_radius_A": {
+        "value": 1.52,
+        "unit": "Å",
+        "source": "PubChem periodic table, https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON (AtomicRadius, van der Waals, pm / 100)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "cpk": "#ff0d0d"
+    },
+    "S": {
+      "name": "Sulfur",
+      "atomic_number": 16,
+      "vdw_radius_A": {
+        "value": 1.8,
+        "unit": "Å",
+        "source": "PubChem periodic table, https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON (AtomicRadius, van der Waals, pm / 100)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "cpk": "#ffff30"
+    }
+  },
+  "note": "van der Waals radii in angstrom (PubChem gives pm); CPK colours as PubChem lists them."
+}

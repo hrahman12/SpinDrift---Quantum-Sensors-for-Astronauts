@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T10:14:23Z",
+    "sources": [
+      "Tabatabaee et al., ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (doi:10.1021/acsnano.4c06191.s001, figshare article 27153931, CC BY-NC 4.0)",
+      "ams-OSRAM AS7341 product page, https://ams-osram.com/products/sensor-solutions/ambient-light-color-spectral-proximity-sensors/ams-as7341-11-channel-spectral-color-sensor",
+      "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18, 28012 (2024), doi:10.1021/acsnano.4c06191"
+    ],
+    "sha256": {
+      "https://ndownloader.figshare.com/files/49568629": "4bbda143b5cd4b2111451e4bd0a4c4fec320c2c915ec952dd7d9fccae4ee32b6",
+      "https://ams-osram.com/products/sensor-solutions/ambient-light-color-spectral-proximity-sensors/ams-as7341-11-channel-spectral-color-sensor": "1a5ec8ef3fcd0e53c36e52a2e18bb62653745d60618c2fa80b7a78f492bf3b2f"
+    },
+    "fetched": {
+      "https://ndownloader.figshare.com/files/49568629": "2026-11-15T10:07:46Z",
+      "https://ams-osram.com/products/sensor-solutions/ambient-light-color-spectral-proximity-sensors/ams-as7341-11-channel-spectral-color-sensor": "2026-11-15T10:07:47Z"
+    },
+    "fetch_errors": {},
+    "values_read_on": "2026-11-15"
+  },
+  "id": "cqd",
+  "title": "Carbon-dot microneedle tattoo patch and reader (Tabatabaee et al., ACS Nano 2024)",
+  "unit": "mm",
+  "frame": "Millimetres (micrometre features as decimals). Nothing is drawn: no dimension of the patch or the reader is available from an accessible source.",
+  "components": {},
+  "documented": {
+    "reader_channels": {
+      "value": "440, 470, 510",
+      "unit": "nm",
+      "source": "Tabatabaee et al., ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (doi:10.1021/acsnano.4c06191.s001, figshare article 27153931, CC BY-NC 4.0), Figure S10 caption (p. S9): 'at 440 nm, 470 nm, and 510 nm reader's optical channels'",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "reader_leds": {
+      "value": "390 and 470",
+      "unit": "nm",
+      "source": "Tabatabaee et al., ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (doi:10.1021/acsnano.4c06191.s001, figshare article 27153931, CC BY-NC 4.0), Table S3 (p. S11): 'SMD LED chip 390 nm', 'SMD LED chip 470 nm'",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "reader_parts": {
+      "value": "multi-spectral sensor AS7341; AVR microcontroller ATmega328; Bluetooth module; SMD LED chips 390 and 470 nm; rechargeable Li-ion polymer battery (×2); battery charging module; quartz glass; plastic materials (ABS)",
+      "unit": "",
+      "source": "Tabatabaee et al., ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (doi:10.1021/acsnano.4c06191.s001, figshare article 27153931, CC BY-NC 4.0), Table S3 (p. S11), 'Smart optoelectronic reader components'",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "needle_material": {
+      "value": "GelMA hydrogel (gelatin, methacrylic anhydride, Irgacure) with citric-acid/ethylenediamine carbon dots",
+      "unit": "",
+      "source": "Tabatabaee et al., ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (doi:10.1021/acsnano.4c06191.s001, figshare article 27153931, CC BY-NC 4.0), Table S2 (p. S11) and Figure S3 caption (p. S5)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "as7341_package": {
+      "length": {
+        "value": 3.1,
+        "unit": "mm",
+        "source": "ams-OSRAM AS7341 product page, https://ams-osram.com/products/sensor-solutions/ambient-light-color-spectral-proximity-sensors/ams-as7341-11-channel-spectral-color-sensor, package dimension 'Length 3.1 mm'",
+        "tag": "datasheet",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "the part named in Table S3; its position inside the reader is not documented"
+      },
+      "width": {
+        "value": 2.0,
+        "unit": "mm",
+        "source": "ams-OSRAM AS7341 product page, https://ams-osram.com/products/sensor-solutions/ambient-light-color-spectral-proximity-sensors/ams-as7341-11-channel-spectral-color-sensor, package dimension 'Width 2.0 mm'",
+        "tag": "datasheet",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "the part named in Table S3; its position inside the reader is not documented"
+      },
+      "height": {
+        "value": 1.0,
+        "unit": "mm",
+        "source": "ams-OSRAM AS7341 product page, https://ams-osram.com/products/sensor-solutions/ambient-light-color-spectral-proximity-sensors/ams-as7341-11-channel-spectral-color-sensor, package dimension 'Height 1.0 mm'",
+        "tag": "datasheet",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "the part named in Table S3; its position inside the reader is not documented"
+      }
+    },
+    "cqd_size": {
+      "value": "DLS diameter histogram 1–12 nm; HRTEM lattice fringes labelled 0.3 nm",
+      "unit": "",
+      "source": "Tabatabaee et al., ACS Nano 18, 28012 (2024), Supporting Information nn4c06191_si_001.pdf (doi:10.1021/acsnano.4c06191.s001, figshare article 27153931, CC BY-NC 4.0), Figure S1 (p. S4): '(A and B) HRTEM images, (C) FL spectra (excitation at 365 nm), and (D) DLS analysis of the synthesized CQDs'",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "nanometre scale; not drawable in the millimetre patch view and no mean size is stated in the text"
+    }
+  },
+  "needle_geometry": {
+    "count": {
+      "value": null,
+      "unit": "mm",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18, 28012 (2024), doi:10.1021/acsnano.4c06191: main text not accessible (pubs.acs.org returned HTTP 403 to this build; OpenAlex: closed access); not given in the open Supporting Information",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": null
+    },
+    "height": {
+      "value": null,
+      "unit": "mm",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18, 28012 (2024), doi:10.1021/acsnano.4c06191: main text not accessible (pubs.acs.org returned HTTP 403 to this build; OpenAlex: closed access); not given in the open Supporting Information",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": null
+    },
+    "base_width": {
+      "value": null,
+      "unit": "mm",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18, 28012 (2024), doi:10.1021/acsnano.4c06191: main text not accessible (pubs.acs.org returned HTTP 403 to this build; OpenAlex: closed access); not given in the open Supporting Information",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": null
+    },
+    "pitch": {
+      "value": null,
+      "unit": "mm",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18, 28012 (2024), doi:10.1021/acsnano.4c06191: main text not accessible (pubs.acs.org returned HTTP 403 to this build; OpenAlex: closed access); not given in the open Supporting Information",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": null
+    },
+    "patch_size": {
+      "value": null,
+      "unit": "mm",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18, 28012 (2024), doi:10.1021/acsnano.4c06191: main text not accessible (pubs.acs.org returned HTTP 403 to this build; OpenAlex: closed access); not given in the open Supporting Information",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": null
+    },
+    "backing_layer": {
+      "value": null,
+      "unit": "mm",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani & Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18, 28012 (2024), doi:10.1021/acsnano.4c06191: main text not accessible (pubs.acs.org returned HTTP 403 to this build; OpenAlex: closed access); not given in the open Supporting Information",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": null
+    }
+  },
+  "undocumented": [
+    {
+      "name": "Microneedles (count, shape, height, base width, pitch)",
+      "reason": "in the paywalled main text; the open Supporting Information shows microscope images with 500 µm scale bars (Fig. S3) but states no dimension, and sizes are not measured off images"
+    },
+    {
+      "name": "Patch outline and backing layer",
+      "reason": "not stated in an accessible source"
+    },
+    {
+      "name": "Carbon quantum dots",
+      "reason": "nanometre-sized (Fig. S1); no stated mean size, and not drawable at the patch's millimetre scale"
+    },
+    {
+      "name": "Wearable reader housing (ABS) and quartz-glass window",
+      "reason": "materials listed in Table S3; no dimensions"
+    },
+    {
+      "name": "AS7341 multispectral sensor",
+      "reason": "package 3.1 × 2.0 × 1.0 mm (ams-OSRAM), but its position in the reader is not documented"
+    },
+    {
+      "name": "390 nm and 470 nm SMD LEDs",
+      "reason": "wavelengths listed (Table S3); packages and positions not stated"
+    },
+    {
+      "name": "ATmega328 microcontroller, Bluetooth module, charging module, two Li-ion polymer batteries",
+      "reason": "listed in Table S3; packages, sizes and layout not stated"
+    }
+  ],
+  "checks": [
+    {
+      "source": "cqd_si",
+      "quote": "at 440 nm, 470 nm, and 510 nm reader’s optical channels",
+      "result": "found on PDF pages 2, 9"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "SMD LED chip 390 nm",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "SMD LED chip 470 nm",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "Smart optoelectronic reader components",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "multi-spectral sensor AS7341",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "AVR microcontroller ATmega328",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "quartz glass",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "plastic materials (ABS)",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "rechargeable Li-ion polymer battery",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "The optical microscope images of the fabricated MN patches at different concentrations of GelMA",
+      "result": "found on PDF pages 2, 5"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "methacrylic anhydride",
+      "result": "found on PDF page 11"
+    },
+    {
+      "source": "as7341",
+      "quote": "3.1 mm",
+      "result": "found"
+    },
+    {
+      "source": "as7341",
+      "quote": "2.0 mm",
+      "result": "found"
+    },
+    {
+      "source": "as7341",
+      "quote": "1.0 mm",
+      "result": "found"
+    },
+    {
+      "source": "as7341",
+      "quote": "OLGA",
+      "result": "found"
+    },
+    {
+      "source": "cqd_si",
+      "quote": "(D) DLS analysis of the synthesized CQDs",
+      "result": "found on PDF pages 2, 4"
+    }
+  ]
+}

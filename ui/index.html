@@ -15,90 +15,78 @@
   </script>
 </head>
 <body>
-  <!-- loader: the percentage is the real share of data files loaded -->
+  <!-- loader: the percentage is the real share of files loaded -->
   <div id="loader">
     <div class="ld-box">
       <div class="ld-brand"><span class="ld-mark">◎</span><div><b>SPINDRIFT</b><small>QUANTUM CREW HEALTH</small></div></div>
       <div class="ld-pct"><span id="ld-num">00</span><small>%</small></div>
       <ol class="ld-steps">
         <li id="ld-1"><span>01</span>Real data files</li>
-        <li id="ld-2"><span>02</span>Quantum sensors</li>
-        <li id="ld-3"><span>03</span>Body twin ready</li>
+        <li id="ld-2"><span>02</span>Anatomy and sensors</li>
+        <li id="ld-3"><span>03</span>Lean checker</li>
       </ol>
     </div>
   </div>
 
   <header class="topbar">
     <div class="tb-brand"><span class="ld-mark">◎</span><div><b>SPINDRIFT</b><small>QUANTUM CREW HEALTH</small></div></div>
-    <div class="tb-mission">
-      <div class="tb-row">
-        <input id="role" class="bare" type="text" value="Flight engineer" maxlength="40" title="Crew role: a label only, it changes no numbers">
-        <span class="dot">·</span>
-        <select id="location" class="bare" title="Mission location">
-          <option value="iss">ISS · low Earth orbit</option>
-          <option value="gateway">Lunar Gateway · NRHO</option>
-          <option value="lunar_base">Lunar surface base</option>
-          <option value="mars_transit">Mars transit</option>
-          <option value="mars_surface">Mars surface</option>
-        </select>
-      </div>
-      <div class="tb-row tb-clock"><b>RUN</b> <span id="tb-runs">000</span> <small id="tb-utc">--:--:-- UTC</small></div>
-    </div>
-    <div class="tb-status" id="tb-status"><i></i><span>Server</span></div>
     <nav class="tb-nav" role="tablist">
-      <button data-view="overview" class="on">Overview</button>
-      <button data-view="opm">OPM</button>
-      <button data-view="nv">NV diamond</button>
-      <button data-view="qd">Quantum dot</button>
-      <button data-view="cqd">Carbon dots</button>
-      <button data-view="tower">Tower</button>
-      <button data-view="sources">Sources</button>
+      <button data-view="body" class="on">Body</button>
+      <button data-view="opm"><i class="dotc opm"></i>OPM</button>
+      <button data-view="nv"><i class="dotc nv"></i>NV diamond</button>
+      <button data-view="qd"><i class="dotc qd"></i>Quantum dot</button>
+      <button data-view="cqd"><i class="dotc cqd"></i>Carbon dots</button>
     </nav>
+    <div class="tb-mission">
+      <select id="location" class="bare" title="Mission location: sets the live ambient field">
+        <option value="iss">ISS · low Earth orbit</option>
+        <option value="gateway">Lunar Gateway · NRHO</option>
+        <option value="lunar_base">Lunar surface base</option>
+        <option value="mars_transit">Mars transit</option>
+        <option value="mars_surface">Mars surface</option>
+      </select>
+      <span class="tb-clock"><b>RUN</b> <span id="tb-runs">000</span> <small id="tb-utc">--:--:-- UTC</small></span>
+      <span class="tb-status" id="tb-status"><i></i><span>Server</span></span>
+    </div>
   </header>
 
-  <!-- OVERVIEW: the quantum body twin console -->
-  <div class="view on" id="view-overview">
-    <div class="stage">
+  <!-- BODY: the giant quantum-sensor body, zoomable from 1 m to below 1 nm -->
+  <main class="view on" id="view-body">
+    <div class="stage" id="stage">
       <canvas id="twin"></canvas>
+      <canvas id="micro"></canvas>
       <svg id="leaders"></svg>
       <div id="labels"></div>
-      <div class="stage-frame"></div>
-    </div>
-    <aside class="panel left" id="sys-panel"></aside>
-    <aside class="panel right" id="right-panel"></aside>
-    <div class="runbar">
-      <div class="rb-left"><b>Real runs</b> <span id="rb-count">0</span> <small id="rb-last"></small>
-        <button id="run" class="cta">＋ Run at <span id="rb-loc">ISS</span></button></div>
-      <div class="rb-right">
-        <button class="seg on" data-mode="body">BODY</button><button class="seg" data-mode="sensors">SENSORS</button>
-        <button class="ghost-ico" id="tour-btn" title="Tour">?</button>
+      <div id="micro-labels"></div>
+      <div class="fov" id="fov"><div class="fov-n"><b id="fov-num">—</b><span id="fov-unit"></span></div><small>FIELD OF VIEW · <span id="fov-lvl">LEVEL 1</span></small></div>
+      <div class="rail" id="rail"></div>
+      <div class="hud" id="hud" hidden>
+        <div class="level-card" id="level-card">
+          <div class="hud-info" id="hud-info"></div>
+          <div class="hud-readouts" id="hud-readouts"></div>
+          <div class="hud-controls" id="hud-controls"></div>
+        </div>
+        <div class="hud-gene" id="hud-gene"></div>
       </div>
+      <div class="scalebar" id="scalebar"><i></i><span>1 m</span></div>
+      <div class="descend" id="descend"><button id="go-up" title="Up one level ([ or ↑)">↑</button><span>Scroll to descend</span><button id="go-down" title="Down one level (] or ↓)">↓</button><button class="linkish" id="go-src">Data sources</button></div>
+      <div class="stage-hint" id="stage-hint">Drag to turn · pinch or ctrl+scroll to zoom within a level</div>
+      <div class="flash" id="flash"></div>
     </div>
-    <div class="tiles" id="tiles"></div>
-  </div>
+    <aside class="card" id="card"></aside>
+  </main>
 
-  <div class="view page" id="view-opm"></div>
-  <div class="view page" id="view-nv"></div>
-  <div class="view page" id="view-qd"></div>
-  <div class="view page" id="view-cqd"></div>
-  <div class="view page" id="view-tower"></div>
-  <div class="view page" id="view-sources"></div>
+  <section class="view page sensor-tab" id="view-opm"></section>
+  <section class="view page sensor-tab" id="view-nv"></section>
+  <section class="view page sensor-tab" id="view-qd"></section>
+  <section class="view page sensor-tab" id="view-cqd"></section>
 
   <footer class="statusline">
-    <span>PROTOTYPE · EVERY VALUE SOURCED AND TAGGED · NOT DIAGNOSTIC</span>
-    <button class="linkish" data-view="sources">SOURCES AND CREDITS ›</button>
+    <span>PROTOTYPE · EVERY VALUE SOURCED AND TAGGED · LEAN DECIDES THE VERDICTS · NOT DIAGNOSTIC</span>
+    <button class="linkish" id="open-sources">SOURCES AND CREDITS ›</button>
   </footer>
-  <div class="footer-text">Live: space magnetic-field feeds (NOAA L1 magnetometer; ISS position with the IGRF model). Near-live: an optically pumped magnetometer in orbit (ESA Swarm). Recorded: real OPM brain and heart data, NV, quantum-dot and carbon-dot lab data, and Inspiration4 astronaut lab data from NASA OSDR. Simulated: online simulators, labelled. No public live feed exists from these sensors on a human in space. Not diagnostic.</div>
 
-  <div id="tour" hidden>
-    <div class="tour-card">
-      <div class="tour-head"><span id="tour-step">TOUR · 01 / 05</span><button class="x" id="tour-x">×</button></div>
-      <h3 id="tour-title"></h3>
-      <p id="tour-body"></p>
-      <div class="tour-bar"><i id="tour-prog"></i></div>
-      <div class="tour-foot"><button class="linkish" id="tour-skip">Skip tour</button><button class="cta" id="tour-next">Next →</button></div>
-    </div>
-  </div>
+  <div class="modal" id="sources" hidden><div class="modal-card"><div class="modal-head"><b>Sources and credits</b><button class="x" id="close-sources">×</button></div><div id="sources-body"></div></div></div>
   <div id="toast" hidden></div>
   <script type="module" src="app.js"></script>
 </body>

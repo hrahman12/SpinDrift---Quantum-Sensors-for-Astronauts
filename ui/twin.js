@@ -1,229 +1,296 @@
-// SpinDrift quantum body twin (Three.js). The figure is "Cesium Man" (c) 2017 Cesium, CC BY 4.0
-// (KhronosGroup glTF-Sample-Assets); its material is replaced, so the Cesium logo texture (excluded from the licence)
-// is never shown. Markers and sensors are schematic: parts and labels only, never data shapes.
-// A marker is grey until a real dataset exists for that system; then it takes the reading sensor's own colour
-// from data/palette.json (wavelength-derived). Colour never means "healthy" or "unhealthy": SpinDrift does not diagnose.
+// SpinDrift body twin (three.js): the whole body with the four quantum sensors at true size (1 unit = 1 m).
+// Body: the Human Reference Atlas anatomy (ui/anatomy.js, CC BY 4.0) when present; otherwise "Cesium Man" (c) 2017
+// Cesium, CC BY 4.0 (KhronosGroup glTF-Sample-Assets), scaled to a 1.75 m reference height, with its texture removed.
+// Sensors: QuSpin QZFM Gen-3 heads 12.4 x 16.6 x 24.4 mm (nine over the right somatomotor area as in the MNE OPM
+// recording; a 2 x 2 chest array at 3 cm spacing as in the Kiel Cardio Database), the JGU NV head (12 mm housing about
+// 1 cm from the chest), the carbon-dot patch site on the right forearm and the blood-draw site for the renin assay.
+// Each sensor is placed by casting a ray onto the real skin surface. Sensor colour shows the Lean verdict on whether
+// it can measure here (not health): green met, red not met, amber needs information.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-// anchor points in model units (joint positions read from the GLB: shoulders y 1.074, elbows (+-0.306, 0.964),
-// wrists (+-0.447, 0.882), neck 1.126-1.193, height 1.45)
-const ANCHORS = {
-  brain:  [0.0, 1.33, 0.0],
-  heart:  [0.035, 0.985, 0.045],
-  lungs:  [-0.06, 1.0, 0.0],
-  blood:  [0.306, 0.962, 0.0],
-  skin:   [-0.377, 0.923, 0.03],
-  tumour: [0.0, 0.62, 0.0],
-};
-const LABEL_SIDE = { brain: 1, heart: 1, lungs: -1, blood: 1, skin: -1, tumour: -1 };
-const GREY = 0x7d8574;
+const REF_H = 1.75;          // reference height for the fallback figure (m)
+const MM = 0.001;
+const VCOL = { REQUIREMENTS_MET: 0xa9d48c, NOT_MET: 0xff6b5b, NEED_MORE_INFORMATION: 0xe9b44c };
+const SIDE = { brain: 1, heart: 1, blood: -1, skin: -1 };
 
-export async function createTwin({ canvas, labelsEl, leadersEl, systems, modelUrl, onSelect, onProgress, safeArea }) {
+export async function createTwin({ canvas, labelsEl, leadersEl, sites, onSelect, onProgress, onEdge, onOrganPick, colors = {}, opm = null }) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 50);
-  camera.position.set(0.0, 1.0, 3.1);
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.003, 60);
   const controls = new OrbitControls(camera, canvas);
-  controls.target.set(0, 0.78, 0);
-  controls.enablePan = false;
-  controls.minDistance = 1.6;
-  controls.maxDistance = 5;
-  controls.minPolarAngle = 0.35;
-  controls.maxPolarAngle = 1.75;
-  controls.enableDamping = true;
+  controls.enablePan = false; controls.enableDamping = true; controls.enableZoom = false;
+  controls.minDistance = 0.12; controls.maxDistance = 7;
+  scene.add(new THREE.HemisphereLight(0xe8eddc, 0x1c2018, 1.05));
+  const key = new THREE.DirectionalLight(0xffffff, 1.25); key.position.set(1.5, 2.5, 2.0); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xa9d48c, 0.35); rim.position.set(-2, 1.5, -2); scene.add(rim);
 
-  scene.add(new THREE.HemisphereLight(0xe8eddc, 0x1c2018, 1.1));
-  const key = new THREE.DirectionalLight(0xffffff, 1.2);
-  key.position.set(1.5, 2.5, 2.0);
-  scene.add(key);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(0.7, 96), new THREE.MeshBasicMaterial({ color: 0x34432e, transparent: true, opacity: 0.5 }));
+  disc.rotation.x = -Math.PI / 2; scene.add(disc);
+  const grid = new THREE.PolarGridHelper(0.7, 12, 7, 96, 0x6f8b5f, 0x46573d); grid.position.y = 0.002; scene.add(grid);
 
-  // platform
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(0.62, 72),
-    new THREE.MeshBasicMaterial({ color: 0x3a4a33, transparent: true, opacity: 0.55 }));
-  disc.rotation.x = -Math.PI / 2;
-  scene.add(disc);
-  const grid = new THREE.PolarGridHelper(0.62, 12, 6, 72, 0x6f8b5f, 0x4c5e42);
-  grid.position.y = 0.002;
-  scene.add(grid);
-  const rim = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.004, 8, 120),
-    new THREE.MeshBasicMaterial({ color: 0x9dbd86 }));
-  rim.rotation.x = Math.PI / 2;
-  scene.add(rim);
-
-  // body
-  const bodyMat = new THREE.MeshPhysicalMaterial({ color: 0xd9dfcc, transparent: true, opacity: 0.32, roughness: 0.55,
-    metalness: 0.0, depthWrite: false, side: THREE.DoubleSide });
-  const wireMat = new THREE.MeshBasicMaterial({ color: 0xc9d4b8, wireframe: true, transparent: true, opacity: 0.22 });
-  let bodyMeshes = [];
-  let modelOk = false;
+  // ---------------------------------------------------------------- body
+  let anat = null, skinMeshes = [], credits = [], arm = null;
+  const organs = {};
   try {
-    const gltf = await new GLTFLoader().loadAsync(modelUrl, (e) => onProgress && e.total && onProgress(e.loaded / e.total));
-    gltf.scene.traverse((o) => {
-      if (o.isMesh) { o.material = bodyMat; o.frustumCulled = false; bodyMeshes.push(o); }
-    });
-    scene.add(gltf.scene);
-    modelOk = true;
-  } catch (e) {
-    // fallback: a plain figure from primitives (parts only)
-    const g = new THREE.Group();
-    const add = (geo, x, y, z) => { const m = new THREE.Mesh(geo, bodyMat); m.position.set(x, y, z); g.add(m); bodyMeshes.push(m); };
-    add(new THREE.SphereGeometry(0.11, 24, 16), 0, 1.31, 0);
-    add(new THREE.CapsuleGeometry(0.13, 0.33, 8, 16), 0, 0.92, 0);
-    for (const s of [-1, 1]) {
-      add(new THREE.CapsuleGeometry(0.04, 0.4, 6, 12), s * 0.07, 0.34, 0);
-      const arm = new THREE.Mesh(new THREE.CapsuleGeometry(0.035, 0.36, 6, 12), bodyMat);
-      arm.position.set(s * 0.27, 0.98, 0); arm.rotation.z = s * 1.2; g.add(arm); bodyMeshes.push(arm);
-    }
-    scene.add(g);
+    const mod = await import('./anatomy.js');
+    anat = await mod.loadAnatomy(onProgress);
+    scene.add(anat.group);
+    anat.group.updateMatrixWorld(true);
+    const skinObj = anat.skin?.object || anat.skin;
+    if (skinObj?.traverse) skinObj.traverse((o) => { if (o.isMesh) skinMeshes.push(o); });
+    Object.assign(organs, anat.organs || {});
+    credits = anat.credits || [];
+  } catch (e) { console.info('HRA anatomy not available, using the fallback figure:', e.message); anat = null; }
+  const skinMat = new THREE.MeshPhysicalMaterial({ color: 0xd9dfcc, transparent: true, opacity: 0.22, roughness: 0.55, depthWrite: false, side: THREE.DoubleSide });
+  if (!anat || !skinMeshes.length) {
+    const gltf = await new GLTFLoader().loadAsync('/data/assets/models/CesiumMan.glb', (e) => onProgress && e.total && onProgress(e.loaded / e.total));
+    const fig = gltf.scene; fig.updateMatrixWorld(true);
+    const b = new THREE.Box3().setFromObject(fig), s = REF_H / (b.max.y - b.min.y);
+    fig.scale.setScalar(s); fig.position.y = -b.min.y * s; fig.updateMatrixWorld(true);
+    fig.traverse((o) => { if (o.isMesh) { o.material = skinMat; o.frustumCulled = false; skinMeshes.push(o); } });
+    scene.add(fig); fig.updateMatrixWorld(true);
+    // the figure's own arm joints locate the right elbow and wrist (the arm on the -x side is the body's right)
+    const jp = (n) => fig.getObjectByName(n)?.getWorldPosition(new THREE.Vector3());
+    const armA = [jp('Skeleton_arm_joint_R__2_'), jp('Skeleton_arm_joint_R__3_')], armB = [jp('Skeleton_arm_joint_L__3_'), jp('Skeleton_arm_joint_L__4_')];
+    if (armA[0] && armA[1] && armB[0] && armB[1]) arm = armA[1].x < armB[1].x ? { elbow: armA[0], wrist: armA[1] } : { elbow: armB[0], wrist: armB[1] };
+    credits.push('Figure: "Cesium Man" (c) 2017 Cesium, CC BY 4.0, scaled to 1.75 m; texture removed.');
+  } else {
+    for (const m of skinMeshes) { m.material = skinMat; m.renderOrder = 2; }
   }
+  // skinned meshes need their bones applied before raycasting
+  scene.updateMatrixWorld(true);
+  const bodyBox = new THREE.Box3(); skinMeshes.forEach((m) => bodyBox.expandByObject(m));
+  const H = bodyBox.max.y - bodyBox.min.y, cx = (bodyBox.min.x + bodyBox.max.x) / 2;
 
-  // organ markers
-  const markers = {};
-  const markerGroup = new THREE.Group();
-  scene.add(markerGroup);
-  const mk = (id, geo, scale = [1, 1, 1], pos) => {
-    const mat = new THREE.MeshStandardMaterial({ color: GREY, emissive: GREY, emissiveIntensity: 0.25, transparent: true,
-      opacity: 0.9, roughness: 0.4 });
-    const m = new THREE.Mesh(geo, mat);
-    m.scale.set(...scale);
-    m.position.set(...(pos || ANCHORS[id]));
-    m.userData.system = id;
-    markerGroup.add(m);
-    (markers[id] = markers[id] || []).push(m);
-    return m;
-  };
-  mk('brain', new THREE.SphereGeometry(0.06, 24, 16), [1.15, 0.85, 1.0]);
-  mk('heart', new THREE.SphereGeometry(0.032, 20, 14), [1, 1.2, 0.9]);
-  mk('lungs', new THREE.SphereGeometry(0.045, 20, 14), [0.8, 1.5, 0.7], [-0.065, 1.0, -0.005]);
-  mk('lungs', new THREE.SphereGeometry(0.045, 20, 14), [0.8, 1.5, 0.7], [0.07, 1.0, -0.005]);
-  mk('blood', new THREE.SphereGeometry(0.022, 16, 12));
-  mk('skin', new THREE.BoxGeometry(0.06, 0.012, 0.045), [1, 1, 1]);
-  const halo = mk('tumour', new THREE.TorusGeometry(0.34, 0.008, 8, 120), [1, 1, 1]);
-  halo.rotation.x = Math.PI / 2;
-
-  // sensors (shown in "sensors" mode): sizes from specs (OPM head 12.4 x 16.6 x 24.4 mm; NV head 12 mm), scaled to the figure
-  const sensorGroup = new THREE.Group();
-  sensorGroup.visible = false;
-  scene.add(sensorGroup);
-  const s = 1.45 / 1750; // model units per mm for a 1.75 m person
-  const opmGeo = new THREE.BoxGeometry(12.4 * s * 1.6, 24.4 * s * 1.6, 16.6 * s * 1.6);
-  const opmMat = new THREE.MeshStandardMaterial({ color: 0xe6e9df, roughness: 0.5 });
-  for (let i = 0; i < 9; i++) { // helmet array: nine OPMs, as in the MNE OPM recording
-    const a = -1.1 + i * (2.2 / 8), r = 0.135;
-    const b = new THREE.Mesh(opmGeo, opmMat);
-    b.position.set(Math.sin(a) * r, 1.36 + Math.cos(a * 1.4) * 0.03, Math.cos(a) * r * 0.85);
-    b.lookAt(0, 1.33, 0);
-    sensorGroup.add(b);
-  }
-  for (const [dx, dy] of [[0, 0], [-0.03, 0], [-0.03, 0.03], [0, 0.03]]) { // Kiel 2 x 2 chest array (3 cm spacing)
-    const b = new THREE.Mesh(opmGeo, opmMat);
-    b.position.set(0.05 + dx * 1.2, 0.97 + dy * 1.2, 0.12);
-    sensorGroup.add(b);
-  }
-  const nv = new THREE.Mesh(new THREE.CylinderGeometry(6 * s * 2.2, 6 * s * 2.2, 0.05, 20),
-    new THREE.MeshStandardMaterial({ color: 0xb8bcb0, metalness: 0.6, roughness: 0.3 }));
-  nv.rotation.x = Math.PI / 2;
-  nv.position.set(0.0, 0.93, 0.13);
-  sensorGroup.add(nv);
-
-  // labels
-  const labelEls = {};
-  for (const sys of systems) {
-    const el = document.createElement('button');
-    el.className = 'twin-label';
-    el.dataset.system = sys.id;
-    el.innerHTML = `<span class="n">${sys.n}</span>${sys.name}`;
-    el.addEventListener('click', () => onSelect && onSelect(sys.id));
-    labelsEl.appendChild(el);
-    labelEls[sys.id] = el;
-  }
-
-  // picking
+  // ---------------------------------------------------------------- landmarks (from the real meshes where available)
+  const centroid = (o) => { const bb = new THREE.Box3().setFromObject(o?.object || o); return bb.getCenter(new THREE.Vector3()); };
+  const L = {};
+  const org = (k) => organs[k]?.centroid ? new THREE.Vector3(...organs[k].centroid) : (organs[k]?.object ? centroid(organs[k].object) : null);
+  L.heart = org('heart') || new THREE.Vector3(cx + 0.035 * H / 1.507, bodyBox.min.y + 0.985 / 1.507 * H, 0.045 * H / 1.507);
+  L.brain = org('brain') || new THREE.Vector3(cx, bodyBox.min.y + (1.335 / 1.507) * H, 0.005 * H / 1.507);
+  L.kidney = org('kidney_left') || org('kidney') || null;
+  // surface placement by raycasting onto the skin
   const ray = new THREE.Raycaster();
-  const ptr = new THREE.Vector2();
-  let downAt = null;
+  function onSkin(from, dir) {
+    ray.set(from, dir.clone().normalize()); ray.far = 2;
+    const hit = ray.intersectObjects(skinMeshes, false)[0];
+    if (!hit) return null;
+    const n = hit.face ? hit.face.normal.clone().transformDirection(hit.object.matrixWorld) : dir.clone().negate();
+    if (n.dot(dir) > 0) n.negate();
+    return { p: hit.point.clone(), n: n.normalize() };
+  }
+  // cast from outside inward: start a metre out along dir, look back toward the inner point
+  const fromOutside = (inner, outDir) => onSkin(inner.clone().add(outDir.clone().normalize().multiplyScalar(1.0)), outDir.clone().negate());
+
+  // ---------------------------------------------------------------- sensors at true size
+  const sensors = { brain: [], heart: [], blood: [], skin: [] };
+  const sensorGroup = new THREE.Group(); scene.add(sensorGroup);
+  const up = new THREE.Vector3(0, 1, 0);
+  // housing and vapour-cell geometry from data/sensor_parts/opm.json (QuSpin Gen-3.0 drawing); frame: +y along the
+  // long axis, skin face at y = -h/2
+  const OG = opm || { w: 16.6, h: 24.4, d: 12.4, cell: [0, -24.4 / 2 + 6.5, 0], cellSize: [3, 3, 3] };
+  const opmGeo = new THREE.BoxGeometry(OG.w * MM, OG.h * MM, OG.d * MM);
+  const mats = [];
+  const mat = (c, o = {}) => { const m = new THREE.MeshStandardMaterial({ color: c, roughness: 0.45, metalness: 0.05, emissive: 0x000000, ...o }); mats.push(m); return m; };
+  function addOpm(site, s, cableTo) {
+    const g = new THREE.Group();
+    const housing = new THREE.Mesh(opmGeo, mat(0xeef0e8)); g.add(housing);
+    const cell = new THREE.Mesh(new THREE.BoxGeometry(...OG.cellSize.map((q) => q * MM)), new THREE.MeshBasicMaterial({ color: colors.opm || 0xff0000 }));
+    cell.position.set(...OG.cell.map((q) => q * MM)); g.add(cell);
+    g.position.copy(s.p.clone().add(s.n.clone().multiplyScalar(OG.h * MM / 2)));
+    g.quaternion.setFromUnitVectors(up, s.n);
+    sensorGroup.add(g); sensors[site].push(housing);
+    const top = s.p.clone().add(s.n.clone().multiplyScalar(OG.h * MM));
+    const curve = new THREE.CatmullRomCurve3([top, top.clone().add(s.n.clone().multiplyScalar(0.04)), cableTo]);
+    sensorGroup.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 20, 1.2 * MM, 6), mat(0x2b2f27)));
+  }
+  // nine OPMs: 3 x 3 grid at 25 mm pitch on the scalp over the right somatomotor area
+  const mounts = anat?.mounts || {};
+  // HRA mounts: 3 x 3 scalp grid over the right precentral gyrus, chest point over the heart (see data/anatomy/manifest.json)
+  const scalpPts = mounts.scalp_right_precentral_gyrus?.points || null;
+  const cableHead = L.brain.clone().add(new THREE.Vector3(-0.05, 0.35, -0.25));
+  if (scalpPts && scalpPts.length >= 9) {
+    for (const m of scalpPts.slice(0, 9)) addOpm('brain', { p: new THREE.Vector3(...m.position), n: new THREE.Vector3(...m.normal).normalize() }, cableHead);
+  } else {
+    const c0 = mounts.scalp_centre ? new THREE.Vector3(...mounts.scalp_centre.normal) : new THREE.Vector3(-0.62, 0.72, 0.08).normalize();
+    const t1 = new THREE.Vector3().crossVectors(c0, up).normalize(), t2 = new THREE.Vector3().crossVectors(t1, c0).normalize();
+    const hc = L.brain;
+    const centreHit = fromOutside(hc, c0);
+    for (let i = -1; i <= 1; i++) for (let j = -1; j <= 1; j++) {
+      if (!centreHit) break;
+      const p = centreHit.p.clone().add(t1.clone().multiplyScalar(i * 25 * MM)).add(t2.clone().multiplyScalar(j * 25 * MM));
+      const s = fromOutside(hc, p.clone().sub(hc)); if (s) addOpm('brain', s, cableHead);
+    }
+  }
+  // chest: 2 x 2 OPM array at 3 cm spacing over the heart, and the NV head 1 cm off the skin
+  const cm = mounts.chest_over_heart;
+  const chest = cm?.position ? { p: new THREE.Vector3(...cm.position), n: new THREE.Vector3(...cm.normal).normalize() } : fromOutside(L.heart, new THREE.Vector3(0, 0, 1));
+  if (chest) {
+    const tx = new THREE.Vector3().crossVectors(up, chest.n).normalize(), ty = new THREE.Vector3().crossVectors(chest.n, tx).normalize();
+    for (const [dx, dy] of [[0, 0], [1, 0], [0, 1], [1, 1]]) {
+      const p = chest.p.clone().add(tx.clone().multiplyScalar((dx - 0.5) * 30 * MM)).add(ty.clone().multiplyScalar((dy - 0.5) * 30 * MM));
+      const s = fromOutside(L.heart, p.clone().sub(L.heart)); if (s) addOpm('heart', s, chest.p.clone().add(new THREE.Vector3(0.25, -0.3, 0.45)));
+    }
+    const nvL = 12 * MM, nvR = 6 * MM;
+    const nvPos = chest.p.clone().add(ty.clone().multiplyScalar(-65 * MM));
+    const sNv = fromOutside(L.heart, nvPos.clone().sub(L.heart)) || { p: nvPos, n: chest.n };
+    const nv = new THREE.Mesh(new THREE.CylinderGeometry(nvR, nvR, nvL, 28), mat(0xa9adb0, { metalness: 0.8, roughness: 0.3 }));
+    nv.position.copy(sNv.p.clone().add(sNv.n.clone().multiplyScalar(10 * MM + nvL / 2)));
+    nv.quaternion.setFromUnitVectors(up, sNv.n); sensorGroup.add(nv); sensors.heart.push(nv);
+    const f0 = nv.position.clone().add(sNv.n.clone().multiplyScalar(nvL / 2));
+    const fib = new THREE.CatmullRomCurve3([f0, f0.clone().add(sNv.n.clone().multiplyScalar(0.06)), f0.clone().add(new THREE.Vector3(0.2, -0.35, 0.4))]);
+    sensorGroup.add(new THREE.Mesh(new THREE.TubeGeometry(fib, 20, 0.9 * MM, 6), mat(colors.nv || 0xff0000, { emissive: colors.nv || 0xff0000, emissiveIntensity: 0.3 })));
+  }
+  // right forearm (the body's right = -x): carbon-dot patch site; antecubital vein: blood-draw site for the renin assay
+  // front surface of the right forearm (midway elbow-wrist) and the front of the elbow. Neither paper fixes a body
+  // site, so these are display placements: from the figure's arm joints, or on the HRA skin (no arm landmarks there)
+  // at the elbow and wrist heights of Drillis & Contini (1966) body-segment proportions (0.630 H and 0.485 H).
+  const frontOf = (p) => p ? onSkin(p.clone().add(new THREE.Vector3(0, 0, 0.4)), new THREE.Vector3(0, 0, -1)) : null;
+  function armSlice(fracH) {
+    // in a 12 mm slice at this height, the skin vertices on the body's right beyond the first 15 mm gap from the
+    // outside are the arm hanging beside the trunk; cast onto its front surface at the cluster centre
+    const y = bodyBox.min.y + fracH * H, pts = [], v = new THREE.Vector3();
+    for (const m of skinMeshes) {
+      const pos = m.geometry?.attributes?.position; if (!pos) continue;
+      for (let i = 0; i < pos.count; i++) { v.fromBufferAttribute(pos, i).applyMatrix4(m.matrixWorld); if (Math.abs(v.y - y) < 0.006 && v.x < cx) pts.push([v.x, v.z]); }
+    }
+    if (pts.length < 20) return null;
+    pts.sort((a, b) => a[0] - b[0]);
+    let cut = -1; for (let i = 1; i < pts.length; i++) if (pts[i][0] - pts[i - 1][0] > 0.015) { cut = i; break; }
+    if (cut < 8) return null;
+    const a = pts.slice(0, cut), mx = a.reduce((s, q) => s + q[0], 0) / a.length, mz = a.reduce((s, q) => s + q[1], 0) / a.length;
+    return frontOf(new THREE.Vector3(mx, y, mz));
+  }
+  const forearm = mounts.forearm_right_volar?.available ? { p: new THREE.Vector3(...mounts.forearm_right_volar.position), n: new THREE.Vector3(...mounts.forearm_right_volar.normal) }
+    : arm ? frontOf(arm.elbow.clone().lerp(arm.wrist, 0.5)) : armSlice((0.630 + 0.485) / 2);
+  const elbow = arm ? frontOf(arm.elbow) : armSlice(0.630);
+  if (!arm && (forearm || elbow)) credits.push('Forearm and elbow sites: placed at 0.5575 H and 0.630 H (Drillis & Contini 1966 segment proportions) on the HRA skin; neither sensor paper specifies a body site.');
+  const markerGeo = new THREE.SphereGeometry(7 * MM, 20, 14);
+  if (forearm) { const m = new THREE.Mesh(markerGeo, mat(colors.cqd || 0x6200ff, { emissive: colors.cqd || 0x6200ff, emissiveIntensity: 0.4 })); m.position.copy(forearm.p.clone().add(forearm.n.clone().multiplyScalar(4 * MM))); sensorGroup.add(m); sensors.skin.push(m); L.skin = forearm.p.clone(); }
+  if (elbow) { const m = new THREE.Mesh(markerGeo, mat(0x9aa08f, { emissive: 0x9aa08f, emissiveIntensity: 0.3 })); m.position.copy(elbow.p.clone().add(elbow.n.clone().multiplyScalar(4 * MM))); sensorGroup.add(m); sensors.blood.push(m); L.blood = elbow.p.clone(); }
+  L.skin ||= new THREE.Vector3(bodyBox.min.x + 0.05, bodyBox.min.y + 0.53 * H, 0.03);
+  L.blood ||= new THREE.Vector3(bodyBox.min.x + 0.07, bodyBox.min.y + 0.62 * H, 0.03);
+  const ANCH = { brain: (sensors.brain[4] ? sensors.brain[4].getWorldPosition(new THREE.Vector3()) : L.brain), heart: chest ? chest.p.clone() : L.heart, blood: L.blood, skin: L.skin };
+  for (const list of Object.values(sensors)) for (const m of list) m.userData.site = Object.keys(sensors).find((k) => sensors[k] === list);
+  sensorGroup.traverse((o) => { if (o.isMesh && !o.userData.site) o.userData.site = null; });
+
+  // ---------------------------------------------------------------- labels and picking
+  const labelEls = {};
+  for (const s of sites) {
+    const el = document.createElement('button'); el.className = 'twin-label'; el.dataset.site = s.id;
+    el.innerHTML = `<i></i>${s.name} <small>${s.sensor}</small>`;
+    el.addEventListener('click', () => onSelect?.(s.id)); labelsEl.appendChild(el); labelEls[s.id] = el;
+  }
+  const ptr = new THREE.Vector2(); let downAt = null;
   canvas.addEventListener('pointerdown', (e) => { downAt = [e.clientX, e.clientY]; });
   canvas.addEventListener('pointerup', (e) => {
     if (!downAt || Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 5) return;
-    const r = canvas.getBoundingClientRect();
-    ptr.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
-    ray.setFromCamera(ptr, camera);
-    const hit = ray.intersectObjects(markerGroup.children, false)[0];
-    if (hit && onSelect) onSelect(hit.object.userData.system);
+    const r = canvas.getBoundingClientRect(); ptr.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ptr, camera); ray.far = 60;
+    const hit = ray.intersectObjects(Object.values(sensors).flat(), false)[0];
+    if (hit) { onSelect?.(hit.object.userData.site); return; }
+    // otherwise an organ: report its key and HRA ontology ID so the app can show its cells and genes
+    const orgObjs = Object.entries(organs).filter(([, o]) => o?.object).map(([k, o]) => { o.object.userData.organKey = k; return o.object; });
+    const oh = ray.intersectObjects(orgObjs, true)[0];
+    if (oh) { let o = oh.object; while (o && !o.userData.organKey) o = o.parent; onOrganPick?.({ key: o?.userData.organKey, ontology: oh.object.userData.ontology || null, name: oh.object.name }); }
   });
-
-  let selected = null;
-  function setState(id, { color = null, hasData = false } = {}) {
-    for (const m of markers[id] || []) {
-      const c = hasData && color ? new THREE.Color(color) : new THREE.Color(GREY);
-      m.material.color.copy(c);
-      m.material.emissive.copy(c);
-      m.material.emissiveIntensity = hasData ? 0.65 : 0.2;
+  // highlight the organ behind the selected sensor site (renin comes from the kidneys' juxtaglomerular cells)
+  const SITE_ORGANS = { brain: ['brain'], heart: ['heart'], blood: ['kidney_left', 'kidney_right'], skin: [] };
+  function focusOrgans(site) {
+    for (const [k, o] of Object.entries(organs)) {
+      const on = (SITE_ORGANS[site] || []).includes(k);
+      o?.object?.traverse((m) => { if (m.isMesh && m.material?.emissive) { m.material.emissive.setHex(on ? 0x3a5530 : 0x000000); m.material.emissiveIntensity = on ? 0.9 : 0; } });
     }
-    if (labelEls[id]) labelEls[id].classList.toggle('has-data', !!hasData);
   }
-  function select(id) {
+
+  // ---------------------------------------------------------------- state
+  let selected = null, fly = null, focused = null, push = 0;
+  const verdicts = {};
+  const home = { pos: new THREE.Vector3(cx, bodyBox.min.y + 0.58 * H, 3.6 * H / 1.75), target: new THREE.Vector3(cx, bodyBox.min.y + 0.5 * H, 0) };
+  camera.position.copy(home.pos); controls.target.copy(home.target);
+  const OUT = { brain: new THREE.Vector3(-0.75, 0.55, 0.6), heart: new THREE.Vector3(0.25, 0.12, 1), blood: new THREE.Vector3(-0.7, 0.05, 0.75), skin: new THREE.Vector3(-0.75, 0.1, 0.7) };
+  function select(id, { focus = false } = {}) {
     selected = id;
     for (const [k, el] of Object.entries(labelEls)) el.classList.toggle('on', k === id);
-    for (const [k, list] of Object.entries(markers)) for (const m of list) m.scale.multiplyScalar(1); // keep scale
+    focusOrgans(id);
+    if (focus && ANCH[id]) {
+      focused = id;
+      const to = ANCH[id].clone().add(OUT[id].clone().normalize().multiplyScalar(id === 'brain' ? 0.42 : 0.38));
+      fly = { from: camera.position.clone(), fromT: controls.target.clone(), to, toT: ANCH[id].clone(), t: 0 };
+    }
   }
-  function setMode(mode) {
-    sensorGroup.visible = mode === 'sensors';
-    for (const m of bodyMeshes) m.material = mode === 'sensors' ? wireMat : bodyMat;
+  function resetView() { focused = null; fly = { from: camera.position.clone(), fromT: controls.target.clone(), to: home.pos.clone(), toT: home.target.clone(), t: 0 }; }
+  function setVerdict(site, v) {
+    verdicts[site] = v;
+    labelEls[site]?.classList.remove('met', 'notmet', 'needinfo');
+    if (v) labelEls[site]?.classList.add({ REQUIREMENTS_MET: 'met', NOT_MET: 'notmet', NEED_MORE_INFORMATION: 'needinfo' }[v]);
   }
+  function unitsPerPixel() {
+    const d = camera.position.distanceTo(controls.target);
+    return (2 * d * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))) / (canvas.clientHeight || 1);
+  }
+  // plain scroll descends or ascends one level per gesture; pinch (ctrl+wheel) or ctrl/cmd+scroll zooms freely
+  let acc = 0, cooldown = 0;
+  canvas.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (e.ctrlKey || e.metaKey) {
+      const k = Math.exp(e.deltaY * 0.0015), off = camera.position.clone().sub(controls.target);
+      camera.position.copy(controls.target).add(off.setLength(Math.min(controls.maxDistance, Math.max(controls.minDistance, off.length() * k)))); fly = null; return;
+    }
+    if (performance.now() < cooldown) return;
+    acc += e.deltaY;
+    if (Math.abs(acc) > 90) { const dir = acc > 0 ? 'in' : 'out'; acc = 0; cooldown = performance.now() + 1100; onEdge?.(dir, focused || selected); }
+  }, { passive: false });
+  function fieldOfView() { return 2 * camera.position.distanceTo(controls.target) * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)); }
 
   function resize() {
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    if (!w || !h) return;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    leadersEl.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); leadersEl.setAttribute('viewBox', `0 0 ${w} ${h}`);
   }
-  window.addEventListener('resize', resize);
-  resize();
+  new ResizeObserver(resize).observe(canvas); resize();
 
-  const tmp = new THREE.Vector3();
-  function placeLabels() {
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    const safe = (safeArea && safeArea()) || { left: 0, right: w };
-    let svg = '';
-    for (const sys of systems) {
-      const el = labelEls[sys.id];
-      tmp.set(...ANCHORS[sys.id]);
-      if (sys.id === 'tumour') tmp.x -= 0.34;
-      tmp.project(camera);
-      const x = (tmp.x * 0.5 + 0.5) * w, y = (-tmp.y * 0.5 + 0.5) * h;
-      const side = LABEL_SIDE[sys.id];
-      const ew = el.offsetWidth;
-      let lx = x + side * Math.min(170, w * 0.12);
-      // keep the label inside the visible stage (between the side panels)
-      if (side > 0) lx = Math.min(lx, safe.right - ew - 8); else lx = Math.max(lx, safe.left + ew + 8);
-      const ly = y - 8;
-      el.style.left = `${side > 0 ? lx : lx - ew}px`;
-      el.style.top = `${ly - el.offsetHeight / 2}px`;
-      const on = selected === sys.id;
-      svg += `<line x1="${x}" y1="${y}" x2="${lx}" y2="${ly}" class="${on ? 'on' : ''}"/><circle cx="${x}" cy="${y}" r="${on ? 4 : 2.5}" class="${on ? 'on' : ''}"/>`;
-    }
-    leadersEl.innerHTML = svg;
-  }
-
-  let t0 = performance.now();
+  const tmp = new THREE.Vector3(), t0 = performance.now();
   (function loop() {
     requestAnimationFrame(loop);
+    if (canvas.offsetParent === null) return;
     const t = (performance.now() - t0) / 1000;
-    controls.update();
-    for (const [id, list] of Object.entries(markers)) {
-      const pulse = id === selected ? 1 + 0.12 * Math.sin(t * 4) : 1;
-      for (const m of list) m.material.opacity = id === selected ? 0.95 : 0.8 * pulse;
+    if (fly) {
+      fly.t = Math.min(1, fly.t + 0.03); const k = fly.t < 0.5 ? 2 * fly.t * fly.t : 1 - (-2 * fly.t + 2) ** 2 / 2;
+      camera.position.lerpVectors(fly.from, fly.to, k); controls.target.lerpVectors(fly.fromT, fly.toT, k); if (fly.t >= 1) fly = null;
     }
-    halo.rotation.z = t * 0.15;
+    controls.update();
+    for (const [site, list] of Object.entries(sensors)) {
+      const v = verdicts[site], col = VCOL[v];
+      const pulse = v === 'NOT_MET' || v === 'NEED_MORE_INFORMATION' ? 0.35 + 0.35 * Math.sin(t * 5) : 0.25;
+      for (const m of list) if (m.material.emissive) { m.material.emissive.setHex(col ?? 0x000000); m.material.emissiveIntensity = col ? pulse + (site === selected ? 0.25 : 0) : 0; }
+    }
     renderer.render(scene, camera);
-    placeLabels();
+    // labels with leader lines
+    const w = canvas.clientWidth, h = canvas.clientHeight; let svg = '';
+    const placed = [];
+    for (const s of sites) {
+      const el = labelEls[s.id], a = ANCH[s.id]; if (!a) { el.style.display = 'none'; continue; }
+      tmp.copy(a).project(camera); if (tmp.z > 1) { el.style.display = 'none'; continue; }
+      el.style.display = '';
+      const x = (tmp.x * 0.5 + 0.5) * w, y = (-tmp.y * 0.5 + 0.5) * h, side = SIDE[s.id], ew = el.offsetWidth;
+      let lx = x + side * Math.min(150, w * 0.11); lx = side > 0 ? Math.min(lx, w - ew - 10) : Math.max(lx, ew + 230);
+      placed.push({ s, el, x, y, lx, ly: y - 8, side, ew, eh: el.offsetHeight });
+    }
+    // keep labels on the same side from overlapping: push later ones down
+    for (const side of [1, -1]) {
+      const list = placed.filter((p) => p.side === side).sort((a, b) => a.ly - b.ly);
+      for (let i = 1; i < list.length; i++) { const prev = list[i - 1], min = prev.ly + (prev.eh + list[i].eh) / 2 + 6; if (list[i].ly < min) list[i].ly = min; }
+    }
+    for (const p of placed) {
+      p.el.style.left = `${p.side > 0 ? p.lx : p.lx - p.ew}px`; p.el.style.top = `${p.ly - p.eh / 2}px`;
+      const on = selected === p.s.id;
+      svg += `<line x1="${p.x}" y1="${p.y}" x2="${p.lx}" y2="${p.ly}" class="${on ? 'on' : ''}"/><circle cx="${p.x}" cy="${p.y}" r="${on ? 4 : 2.5}"/>`;
+    }
+    leadersEl.innerHTML = svg;
   })();
 
-  return { setState, select, setMode, resize, modelOk };
+  return { select, resetView, setVerdict, unitsPerPixel, fieldOfView, resize, credits, organs, hasAnatomy: !!anat, get focused() { return focused; } };
 }

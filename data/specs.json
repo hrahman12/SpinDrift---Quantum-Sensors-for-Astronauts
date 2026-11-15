@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:20:38Z",
+    "generated_at": "2026-11-15T10:16:35Z",
     "sources": [
       "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
       "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
@@ -60,23 +60,32 @@
       "as_of": null,
       "note": null
     },
+    "field_compensation_max": {
+      "value": 50,
+      "unit": "nT",
+      "source": "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15); QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "On-board three-axis coils cancel residual fields up to 50 nT; QuSpin asks for about 50 nT or below at the sensor (same fact as build_log per_sensor.opm)."
+    },
     "sensor_head": {
       "value": "12.4 × 16.6 × 24.4",
       "unit": "mm",
       "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
       "tag": "datasheet",
-      "status": "VERIFIED",
+      "status": "TO_CONFIRM",
       "as_of": null,
-      "note": null
+      "note": "Product-page value. QuSpin's Gen-3.0 dimensioned drawing (https://quspin.com/qzfm-dimensions/, updated 6 Dec 2022) gives 16.6 × 26.4 × 12.4 mm, and QuSpin's 3D model measures 26.37 mm; 24.4 mm matches the Gen-2.0 drawing. The app draws the Gen-3.0 drawing (data/sensor_parts/opm.json)."
     },
     "standoff": {
       "value": "6.5 (vapor-cell center to housing)",
       "unit": "mm",
       "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
       "tag": "datasheet",
-      "status": "VERIFIED",
+      "status": "TO_CONFIRM",
       "as_of": null,
-      "note": null
+      "note": "Product-page value. The Gen-3.0 drawing places the cell centre 6.20 mm above the skin face (data/sensor_parts/opm.json)."
     },
     "head_power": {
       "value": "~0.7",

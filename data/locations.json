@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:57:59Z",
+    "generated_at": "2026-11-15T10:33:56Z",
     "sources": [
       "NOAA SWPC L1 magnetometer",
       "wheretheiss.at ISS position",
@@ -15,17 +15,17 @@
       "id": "iss",
       "label": "ISS (low Earth orbit)",
       "ambient_field_nT": {
-        "value": 19596.9,
+        "value": 23253.5,
         "unit": "nT",
         "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
         "tag": "calculated",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:57:58Z",
+        "as_of": "2026-11-15T10:33:53Z",
         "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of",
         "components_enu_nT": [
-          -287.4,
-          17409.9,
-          8991.8
+          3910.5,
+          17722.4,
+          14537.8
         ]
       },
       "field_kind": "model"
@@ -62,12 +62,12 @@
       "id": "mars_transit",
       "label": "Mars transit (interplanetary)",
       "ambient_field_nT": {
-        "value": 2.87,
+        "value": 2.3,
         "unit": "nT",
         "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
         "tag": "live",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:54:00Z",
+        "as_of": "2026-11-15T10:28:00Z",
         "note": "brief URLs failed (https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404); they were retired by NWS SCN 26-21 (https://www.weather.gov/media/notification/pdf_2026/scn26-21_Data_Format_Changes_Impacting_SWPC_Products.pdf) and replaced by this official /json/rtsw/ file; newest row with active=true; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
       },
       "field_kind": "live_feed"

@@ -1,0 +1,723 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T10:23:21Z",
+    "sources": [
+      "Ensembl REST API https://rest.ensembl.org (release 116, GRCh38.p14)",
+      "UniProt REST API (CC BY 4.0)",
+      "Bosma PJ, Seppen J, Goldhoorn B, et al. Bilirubin UDP-glucuronosyltransferase 1 is the only relevant bilirubin glucuronidating isoform in man. J Biol Chem 1994;269(27):17960-4. PubMed 8027054"
+    ],
+    "sha256": {
+      "https://rest.ensembl.org/info/data/?content-type=application/json": "86e87c46ae1a424702676493d024d0508ce60f6c951b0b2803ce10269e09c20c",
+      "https://rest.ensembl.org/info/assembly/homo_sapiens?content-type=application/json": "5c861b466a5056acd5f85c77ab5db71b188d4077a4ee5fc2bd65a064f8306295",
+      "https://rest.ensembl.org/lookup/symbol/homo_sapiens/REN?content-type=application/json": "0c740ef56e75fd8312be44e903dbc02845d988ffc9027c42e80fb5aa070db630",
+      "https://rest.ensembl.org/lookup/symbol/homo_sapiens/SCN5A?content-type=application/json": "c6e4ff6019a082c27ef2d7032bfaccceb6749b7a0bb0be2e8ec107a037ca6390",
+      "https://rest.ensembl.org/lookup/symbol/homo_sapiens/UGT1A1?content-type=application/json": "f792739ba2dc240bdf1aa3d9d587c3d876ab38b69a9cea3629ad166eb9f86181",
+      "https://rest.ensembl.org/lookup/id/ENST00000272190?expand=1;utr=1;mane=1;content-type=application/json": "2b1425300bc842c997f20a321c730f2eb41967ca41d4ec1046db596bda345692",
+      "https://rest.ensembl.org/lookup/id/ENST00000423572?expand=1;utr=1;mane=1;content-type=application/json": "0a389dd23b383ef2dcef877d12b60dba952f3695cd3e08f9448585416a198613",
+      "https://rest.ensembl.org/lookup/id/ENST00000305208?expand=1;utr=1;mane=1;content-type=application/json": "eeb77facb8abaa985935eb9564e7e4c72bd6ba30bbb60c81d51cd5fdc8b8f45f",
+      "https://rest.uniprot.org/uniprotkb/P00797.json": "cf01b5db1767b177378800316440d84b88326bb9829681006149bf8649fd28af",
+      "https://rest.uniprot.org/uniprotkb/Q14524.json": "e10e7607e48d5cd9f45b0c29c142163d046b4eef134ab991b66677db613a6877",
+      "https://rest.uniprot.org/uniprotkb/P22309.json": "1e4c0d594cda6a762311be58c2397991c7768edc56245e4bc1d8265c2440805d"
+    },
+    "ensembl_release": 116
+  },
+  "tag": "recorded",
+  "assembly": "GRCh38.p14",
+  "assembly_default": "GRCh38",
+  "ensembl_release": 116,
+  "genes": {
+    "REN": {
+      "symbol": "REN",
+      "description": "renin [Source:HGNC Symbol;Acc:HGNC:9958]",
+      "biotype": "protein_coding",
+      "ensembl_gene_id": "ENSG00000143839",
+      "gene_version": 17,
+      "chrom": "1",
+      "start": 204154815,
+      "end": 204190324,
+      "strand": -1,
+      "assembly": "GRCh38",
+      "canonical_transcript": "ENST00000272190.9",
+      "transcript_name": "REN-201",
+      "transcript_start": 204154819,
+      "transcript_end": 204166337,
+      "transcript_length_bp": 1462,
+      "is_canonical": true,
+      "mane": [
+        {
+          "type": "MANE_Select",
+          "refseq": "NM_000537.4"
+        }
+      ],
+      "translation": {
+        "id": "ENSP00000272190",
+        "start": 204155016,
+        "end": 204166293,
+        "length_aa": 406
+      },
+      "n_exons": 10,
+      "exons": [
+        {
+          "rank": 1,
+          "id": "ENSE00001952423",
+          "start": 204166196,
+          "end": 204166337,
+          "length_bp": 142
+        },
+        {
+          "rank": 2,
+          "id": "ENSE00002388313",
+          "start": 204162013,
+          "end": 204162163,
+          "length_bp": 151
+        },
+        {
+          "rank": 3,
+          "id": "ENSE00000962218",
+          "start": 204161292,
+          "end": 204161415,
+          "length_bp": 124
+        },
+        {
+          "rank": 4,
+          "id": "ENSE00001075102",
+          "start": 204160560,
+          "end": 204160678,
+          "length_bp": 119
+        },
+        {
+          "rank": 5,
+          "id": "ENSE00001075100",
+          "start": 204159399,
+          "end": 204159595,
+          "length_bp": 197
+        },
+        {
+          "rank": 6,
+          "id": "ENSE00002396134",
+          "start": 204157361,
+          "end": 204157369,
+          "length_bp": 9
+        },
+        {
+          "rank": 7,
+          "id": "ENSE00000962221",
+          "start": 204156677,
+          "end": 204156796,
+          "length_bp": 120
+        },
+        {
+          "rank": 8,
+          "id": "ENSE00001306111",
+          "start": 204156178,
+          "end": 204156319,
+          "length_bp": 142
+        },
+        {
+          "rank": 9,
+          "id": "ENSE00000962223",
+          "start": 204155820,
+          "end": 204155918,
+          "length_bp": 99
+        },
+        {
+          "rank": 10,
+          "id": "ENSE00001947658",
+          "start": 204154819,
+          "end": 204155177,
+          "length_bp": 359
+        }
+      ],
+      "exon_coords": [
+        [
+          204154819,
+          204155177
+        ],
+        [
+          204155820,
+          204155918
+        ],
+        [
+          204156178,
+          204156319
+        ],
+        [
+          204156677,
+          204156796
+        ],
+        [
+          204157361,
+          204157369
+        ],
+        [
+          204159399,
+          204159595
+        ],
+        [
+          204160560,
+          204160678
+        ],
+        [
+          204161292,
+          204161415
+        ],
+        [
+          204162013,
+          204162163
+        ],
+        [
+          204166196,
+          204166337
+        ]
+      ],
+      "utr": [
+        {
+          "type": "five_prime_utr",
+          "start": 204166294,
+          "end": 204166337
+        },
+        {
+          "type": "three_prime_utr",
+          "start": 204154819,
+          "end": 204155015
+        }
+      ],
+      "uniprot": "P00797",
+      "protein": "Renin",
+      "protein_length_aa": 406,
+      "function": {
+        "value": "Renin is a highly specific endopeptidase, whose only known function is to generate angiotensin I from angiotensinogen in the plasma, initiating a cascade of reactions that produce an elevation of blood pressure and increased sodium retention by the kidney",
+        "unit": "",
+        "source": "UniProt P00797 FUNCTION comment, https://rest.uniprot.org/uniprotkb/P00797.json (CC BY 4.0)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "isoform_note": null,
+      "role_in_spindrift": "renin, the enzyme the quantum-dot sensor reports on",
+      "site": "blood",
+      "urls": {
+        "gene_lookup": "https://rest.ensembl.org/lookup/symbol/homo_sapiens/REN?content-type=application/json",
+        "transcript_lookup": "https://rest.ensembl.org/lookup/id/ENST00000272190?expand=1;utr=1;mane=1;content-type=application/json",
+        "ensembl_page": "https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000143839",
+        "uniprot": "https://www.uniprot.org/uniprotkb/P00797/entry"
+      }
+    },
+    "SCN5A": {
+      "symbol": "SCN5A",
+      "description": "sodium voltage-gated channel alpha subunit 5 [Source:HGNC Symbol;Acc:HGNC:10593]",
+      "biotype": "protein_coding",
+      "ensembl_gene_id": "ENSG00000183873",
+      "gene_version": 22,
+      "chrom": "3",
+      "start": 38548057,
+      "end": 38649743,
+      "strand": -1,
+      "assembly": "GRCh38",
+      "canonical_transcript": "ENST00000423572.7",
+      "transcript_name": "SCN5A-205",
+      "transcript_start": 38548062,
+      "transcript_end": 38649687,
+      "transcript_length_bp": 8516,
+      "is_canonical": true,
+      "mane": [
+        {
+          "type": "MANE_Select",
+          "refseq": "NM_000335.5"
+        }
+      ],
+      "translation": {
+        "id": "ENSP00000398266",
+        "start": 38550321,
+        "end": 38633307,
+        "length_aa": 2015
+      },
+      "n_exons": 28,
+      "exons": [
+        {
+          "rank": 1,
+          "id": "ENSE00004021056",
+          "start": 38649531,
+          "end": 38649687,
+          "length_bp": 157
+        },
+        {
+          "rank": 2,
+          "id": "ENSE00001779170",
+          "start": 38633035,
+          "end": 38633359,
+          "length_bp": 325
+        },
+        {
+          "rank": 3,
+          "id": "ENSE00003585523",
+          "start": 38630311,
+          "end": 38630429,
+          "length_bp": 119
+        },
+        {
+          "rank": 4,
+          "id": "ENSE00003562400",
+          "start": 38622400,
+          "end": 38622489,
+          "length_bp": 90
+        },
+        {
+          "rank": 5,
+          "id": "ENSE00003464330",
+          "start": 38620843,
+          "end": 38620971,
+          "length_bp": 129
+        },
+        {
+          "rank": 6,
+          "id": "ENSE00004014127",
+          "start": 38613743,
+          "end": 38613834,
+          "length_bp": 92
+        },
+        {
+          "rank": 7,
+          "id": "ENSE00001414724",
+          "start": 38609734,
+          "end": 38609964,
+          "length_bp": 231
+        },
+        {
+          "rank": 8,
+          "id": "ENSE00001330780",
+          "start": 38608151,
+          "end": 38608214,
+          "length_bp": 64
+        },
+        {
+          "rank": 9,
+          "id": "ENSE00001299736",
+          "start": 38606669,
+          "end": 38606810,
+          "length_bp": 142
+        },
+        {
+          "rank": 10,
+          "id": "ENSE00001320962",
+          "start": 38605951,
+          "end": 38606148,
+          "length_bp": 198
+        },
+        {
+          "rank": 11,
+          "id": "ENSE00001300791",
+          "start": 38604729,
+          "end": 38604908,
+          "length_bp": 180
+        },
+        {
+          "rank": 12,
+          "id": "ENSE00001322079",
+          "start": 38603712,
+          "end": 38604083,
+          "length_bp": 372
+        },
+        {
+          "rank": 13,
+          "id": "ENSE00001300049",
+          "start": 38598918,
+          "end": 38599050,
+          "length_bp": 133
+        },
+        {
+          "rank": 14,
+          "id": "ENSE00001329449",
+          "start": 38597729,
+          "end": 38597967,
+          "length_bp": 239
+        },
+        {
+          "rank": 15,
+          "id": "ENSE00001306185",
+          "start": 38587400,
+          "end": 38587573,
+          "length_bp": 174
+        },
+        {
+          "rank": 16,
+          "id": "ENSE00001315108",
+          "start": 38585691,
+          "end": 38586041,
+          "length_bp": 351
+        },
+        {
+          "rank": 17,
+          "id": "ENSE00001302724",
+          "start": 38580931,
+          "end": 38581371,
+          "length_bp": 441
+        },
+        {
+          "rank": 18,
+          "id": "ENSE00004014128",
+          "start": 38579334,
+          "end": 38579492,
+          "length_bp": 159
+        },
+        {
+          "rank": 19,
+          "id": "ENSE00001308928",
+          "start": 38576661,
+          "end": 38576781,
+          "length_bp": 121
+        },
+        {
+          "rank": 20,
+          "id": "ENSE00001328382",
+          "start": 38575297,
+          "end": 38575451,
+          "length_bp": 155
+        },
+        {
+          "rank": 21,
+          "id": "ENSE00001304836",
+          "start": 38566409,
+          "end": 38566582,
+          "length_bp": 174
+        },
+        {
+          "rank": 22,
+          "id": "ENSE00001293012",
+          "start": 38562415,
+          "end": 38562537,
+          "length_bp": 123
+        },
+        {
+          "rank": 23,
+          "id": "ENSE00001301918",
+          "start": 38560147,
+          "end": 38560428,
+          "length_bp": 282
+        },
+        {
+          "rank": 24,
+          "id": "ENSE00004014126",
+          "start": 38557231,
+          "end": 38557284,
+          "length_bp": 54
+        },
+        {
+          "rank": 25,
+          "id": "ENSE00001425187",
+          "start": 38556441,
+          "end": 38556578,
+          "length_bp": 138
+        },
+        {
+          "rank": 26,
+          "id": "ENSE00001647919",
+          "start": 38555656,
+          "end": 38555760,
+          "length_bp": 105
+        },
+        {
+          "rank": 27,
+          "id": "ENSE00003534979",
+          "start": 38554279,
+          "end": 38554549,
+          "length_bp": 271
+        },
+        {
+          "rank": 28,
+          "id": "ENSE00004014129",
+          "start": 38548062,
+          "end": 38551558,
+          "length_bp": 3497
+        }
+      ],
+      "exon_coords": [
+        [
+          38548062,
+          38551558
+        ],
+        [
+          38554279,
+          38554549
+        ],
+        [
+          38555656,
+          38555760
+        ],
+        [
+          38556441,
+          38556578
+        ],
+        [
+          38557231,
+          38557284
+        ],
+        [
+          38560147,
+          38560428
+        ],
+        [
+          38562415,
+          38562537
+        ],
+        [
+          38566409,
+          38566582
+        ],
+        [
+          38575297,
+          38575451
+        ],
+        [
+          38576661,
+          38576781
+        ],
+        [
+          38579334,
+          38579492
+        ],
+        [
+          38580931,
+          38581371
+        ],
+        [
+          38585691,
+          38586041
+        ],
+        [
+          38587400,
+          38587573
+        ],
+        [
+          38597729,
+          38597967
+        ],
+        [
+          38598918,
+          38599050
+        ],
+        [
+          38603712,
+          38604083
+        ],
+        [
+          38604729,
+          38604908
+        ],
+        [
+          38605951,
+          38606148
+        ],
+        [
+          38606669,
+          38606810
+        ],
+        [
+          38608151,
+          38608214
+        ],
+        [
+          38609734,
+          38609964
+        ],
+        [
+          38613743,
+          38613834
+        ],
+        [
+          38620843,
+          38620971
+        ],
+        [
+          38622400,
+          38622489
+        ],
+        [
+          38630311,
+          38630429
+        ],
+        [
+          38633035,
+          38633359
+        ],
+        [
+          38649531,
+          38649687
+        ]
+      ],
+      "utr": [
+        {
+          "type": "five_prime_utr",
+          "start": 38649531,
+          "end": 38649687
+        },
+        {
+          "type": "five_prime_utr",
+          "start": 38633308,
+          "end": 38633359
+        },
+        {
+          "type": "three_prime_utr",
+          "start": 38548062,
+          "end": 38550320
+        }
+      ],
+      "uniprot": "Q14524",
+      "protein": "Sodium channel protein type 5 subunit alpha",
+      "protein_length_aa": 2016,
+      "function": {
+        "value": "Pore-forming subunit of Nav1.5, a voltage-gated sodium (Nav) channel that directly mediates the depolarizing phase of action potentials in excitable membranes. Navs, also called VGSCs (voltage-gated sodium channels) or VDSCs (voltage-dependent sodium channels), operate by switching between closed and open conformations depending on the voltage difference across the membrane. In the open conformation they allow Na(+) ions to selectively pass through the pore, along their electrochemical gradient. The influx of Na(+) ions provokes membrane depolarization, initiating the propagation of electrical signals throughout cells and tissues. Nav1.5 is the predominant sodium channel expressed in myocardial cells and it is responsible for the initial upstroke of the action potential in cardiac myocytes, thereby initiating the heartbeat. Required for normal electrical conduction including formation of the infranodal ventricular conduction system and normal action potential configuration, as a result of its interaction with XIRP2 (By similarity)",
+        "unit": "",
+        "source": "UniProt Q14524 FUNCTION comment, https://rest.uniprot.org/uniprotkb/Q14524.json (CC BY 4.0)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "isoform_note": "the canonical transcript's translation is 2015 aa; the UniProt Q14524 canonical sequence (used for structure numbering) is 2016 aa",
+      "role_in_spindrift": "Nav1.5, the cardiac sodium channel",
+      "site": "heart",
+      "urls": {
+        "gene_lookup": "https://rest.ensembl.org/lookup/symbol/homo_sapiens/SCN5A?content-type=application/json",
+        "transcript_lookup": "https://rest.ensembl.org/lookup/id/ENST00000423572?expand=1;utr=1;mane=1;content-type=application/json",
+        "ensembl_page": "https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000183873",
+        "uniprot": "https://www.uniprot.org/uniprotkb/Q14524/entry"
+      }
+    },
+    "UGT1A1": {
+      "symbol": "UGT1A1",
+      "description": "UDP glucuronosyltransferase family 1 member A1 [Source:HGNC Symbol;Acc:HGNC:12530]",
+      "biotype": "protein_coding",
+      "ensembl_gene_id": "ENSG00000241635",
+      "gene_version": 9,
+      "chrom": "2",
+      "start": 233760262,
+      "end": 233773313,
+      "strand": 1,
+      "assembly": "GRCh38",
+      "canonical_transcript": "ENST00000305208.10",
+      "transcript_name": "UGT1A1-201",
+      "transcript_start": 233760270,
+      "transcript_end": 233773300,
+      "transcript_length_bp": 2361,
+      "is_canonical": true,
+      "mane": [
+        {
+          "type": "MANE_Select",
+          "refseq": "NM_000463.3"
+        }
+      ],
+      "translation": {
+        "id": "ENSP00000304845",
+        "start": 233760288,
+        "end": 233772559,
+        "length_aa": 533
+      },
+      "n_exons": 5,
+      "exons": [
+        {
+          "rank": 1,
+          "id": "ENSE00001124690",
+          "start": 233760270,
+          "end": 233761151,
+          "length_bp": 882
+        },
+        {
+          "rank": 2,
+          "id": "ENSE00003709300",
+          "start": 233767034,
+          "end": 233767165,
+          "length_bp": 132
+        },
+        {
+          "rank": 3,
+          "id": "ENSE00003703538",
+          "start": 233767849,
+          "end": 233767936,
+          "length_bp": 88
+        },
+        {
+          "rank": 4,
+          "id": "ENSE00003711357",
+          "start": 233768220,
+          "end": 233768439,
+          "length_bp": 220
+        },
+        {
+          "rank": 5,
+          "id": "ENSE00003649707",
+          "start": 233772262,
+          "end": 233773300,
+          "length_bp": 1039
+        }
+      ],
+      "exon_coords": [
+        [
+          233760270,
+          233761151
+        ],
+        [
+          233767034,
+          233767165
+        ],
+        [
+          233767849,
+          233767936
+        ],
+        [
+          233768220,
+          233768439
+        ],
+        [
+          233772262,
+          233773300
+        ]
+      ],
+      "utr": [
+        {
+          "type": "five_prime_utr",
+          "start": 233760270,
+          "end": 233760287
+        },
+        {
+          "type": "three_prime_utr",
+          "start": 233772560,
+          "end": 233773300
+        }
+      ],
+      "uniprot": "P22309",
+      "protein": "UDP-glucuronosyltransferase 1A1",
+      "protein_length_aa": 533,
+      "function": {
+        "value": "Involved in the glucuronidation of bilirubin, a degradation product occurring in the normal catabolic pathway that breaks down heme in vertebrates.",
+        "unit": "",
+        "source": "UniProt P22309 FUNCTION comment, https://rest.uniprot.org/uniprotkb/P22309.json (CC BY 4.0)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "isoform_note": null,
+      "role_in_spindrift": "the enzyme that conjugates bilirubin, the carbon-dot patch's analyte",
+      "site": "skin",
+      "urls": {
+        "gene_lookup": "https://rest.ensembl.org/lookup/symbol/homo_sapiens/UGT1A1?content-type=application/json",
+        "transcript_lookup": "https://rest.ensembl.org/lookup/id/ENST00000305208?expand=1;utr=1;mane=1;content-type=application/json",
+        "ensembl_page": "https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000241635",
+        "uniprot": "https://www.uniprot.org/uniprotkb/P22309/entry"
+      },
+      "bilirubin_conjugation": {
+        "value": "UGT1A1 (bilirubin UDP-glucuronosyltransferase 1) is the only physiologically relevant isoform in bilirubin glucuronidation",
+        "unit": "",
+        "source": "Bosma PJ, Seppen J, Goldhoorn B, et al. Bilirubin UDP-glucuronosyltransferase 1 is the only relevant bilirubin glucuronidating isoform in man. J Biol Chem 1994;269(27):17960-4. PubMed 8027054 (abstract)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "B-UGT1 is UGT1A1 (UniProt P22309); quote found in the PubMed record: “B-UGT1 is the only physiologically relevant isoform in bilirubin glucuronidation”"
+      }
+    }
+  },
+  "note": "Coordinates are 1-based, inclusive, on the GRCh38 primary assembly as served by Ensembl. 'exons' are in transcript order (5' to 3'); 'exon_coords' are sorted by genomic position for drawing."
+}

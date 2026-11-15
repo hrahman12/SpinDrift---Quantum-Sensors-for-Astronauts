@@ -1,0 +1,749 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T10:14:23Z",
+    "sources": [
+      "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/",
+      "QuSpin Gen-3.0 QZFM 3D mock-up 'Gen 3.0 Mockup.stl' (Google Drive file 1tjZzhkYcjyAdH-u13VSJVo4PDJy0ZyOW, linked as 'Download the 3D file' from https://quspin.com/qzfm-dimensions/); measured here, mesh not copied",
+      "QuSpin 'QZFM Dimensions' page, https://quspin.com/qzfm-dimensions/",
+      "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/",
+      "QuSpin Gen-2.0 QZFM dimensioned drawing ('Updated February 4, 2021'), https://quspin.com/images/guides/qzfm-dimensions/Slide1.jpg, linked from https://quspin.com/qzfm-dimensions/",
+      "QuSpin Neuro-1.0 QZFM dimensioned drawing ('Updated February 12th, 2025'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-3-mockup-Feb2025_edited.png, linked from https://quspin.com/qzfm-dimensions/",
+      "QuSpin 'QZFM Gen-3' announcement (20 June 2021), https://quspin.com/qzfm-gen-3",
+      "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941v3 (2024)"
+    ],
+    "sha256": {
+      "https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg": "38aa6dd30f6c08e2dda9e7edebaaa742965fc9722a697484184627e67de69b64",
+      "https://drive.usercontent.google.com/download?id=1tjZzhkYcjyAdH-u13VSJVo4PDJy0ZyOW&export=download": "2d2c03ae4fab780cc81c3ba2eb1073bac79a85f3b4ce80cbcdd69e68a624d108",
+      "https://quspin.com/qzfm-dimensions/": "bd5c01d83f432da65a3fee1790fc1940c0780942011a23da42f75ef9d665717f",
+      "https://quspin.com/products-qzfm/": "0f6ea4766456daacfedb08a49077383820c528e97b4c3fefe0af2c369bd6eb27",
+      "https://quspin.com/images/guides/qzfm-dimensions/Slide1.jpg": "c3ae9b9e8e38df3e1b8cc4dd410e05ea6f3ac651b77fb3a440a3da384b0c5c92",
+      "https://quspin.com/images/guides/qzfm-dimensions/Gen-3-3-mockup-Feb2025_edited.png": "03659f51ce13868b1655c30364f85758b7c681ed0f3d0ff2cc8deb279b7348b2",
+      "https://quspin.com/qzfm-gen-3": "ec0405714aec97984d6a67dbd5e773b0249e72e4d398e6d22ecd1dc44754f9f9",
+      "https://arxiv.org/pdf/2408.02941v3": "11cc0868d007c44e030cf7230d1b468c02834a800e3b6f962752bfb8f10a1ed5"
+    },
+    "fetched": {
+      "https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg": "2026-11-15T10:07:36Z",
+      "https://drive.usercontent.google.com/download?id=1tjZzhkYcjyAdH-u13VSJVo4PDJy0ZyOW&export=download": "2026-11-15T10:07:37Z",
+      "https://quspin.com/qzfm-dimensions/": "2026-11-15T10:07:36Z",
+      "https://quspin.com/products-qzfm/": "2026-11-15T10:07:35Z",
+      "https://quspin.com/images/guides/qzfm-dimensions/Slide1.jpg": "2026-11-15T10:07:36Z",
+      "https://quspin.com/images/guides/qzfm-dimensions/Gen-3-3-mockup-Feb2025_edited.png": "2026-11-15T10:13:24Z",
+      "https://quspin.com/qzfm-gen-3": "2026-11-15T10:07:38Z",
+      "https://arxiv.org/pdf/2408.02941v3": "2026-11-15T10:07:38Z"
+    },
+    "fetch_errors": {},
+    "values_read_on": "2026-11-15"
+  },
+  "id": "opm",
+  "title": "QuSpin QZFM Gen-3",
+  "unit": "mm",
+  "frame": "Millimetres. Origin at the housing centre; +y up along the long axis (cable end up, skin face down at y = −H/2); +z out of the front face (the face with the label plate); +x to the right when looking at the front face, so the drawing's 'left side' is at x = −W/2. QuSpin's drawing axis Z+ points down, towards the skin face.",
+  "components": {
+    "housing": {
+      "name": "Sensor-head housing",
+      "drawn": true,
+      "shape": "box",
+      "size": {
+        "x": {
+          "value": 16.6,
+          "unit": "mm",
+          "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, overall width '16.6'",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "same value on the product page (12.4 × 16.6 × 24.4 mm)"
+        },
+        "y": {
+          "value": 26.4,
+          "unit": "mm",
+          "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, overall height '26.4'",
+          "tag": "datasheet",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "QuSpin's Gen-3.0 drawing gives 26.4 mm and its Gen-3.0 3D mock-up measures 26.37 mm (calculated below), but the product page lists 12.4 × 16.6 × 24.4 mm. 24.40 mm is the height on QuSpin's Gen-2.0 drawing, and QuSpin's 2021 Gen-3 announcement says the Gen-3 dimensions are the same as Gen-2. The Gen-3.0-specific drawing value is drawn; which height applies to a given unit is to be confirmed"
+        },
+        "z": {
+          "value": 12.4,
+          "unit": "mm",
+          "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, side view, overall depth '12.4'",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "same value on the product page (12.4 × 16.6 × 24.4 mm)"
+        }
+      },
+      "centre": null,
+      "dims": [
+        {
+          "label": "width (x)",
+          "vo": {
+            "value": 16.6,
+            "unit": "mm",
+            "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, overall width '16.6'",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "same value on the product page (12.4 × 16.6 × 24.4 mm)"
+          }
+        },
+        {
+          "label": "height (y)",
+          "vo": {
+            "value": 26.4,
+            "unit": "mm",
+            "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, overall height '26.4'",
+            "tag": "datasheet",
+            "status": "TO_CONFIRM",
+            "as_of": null,
+            "note": "QuSpin's Gen-3.0 drawing gives 26.4 mm and its Gen-3.0 3D mock-up measures 26.37 mm (calculated below), but the product page lists 12.4 × 16.6 × 24.4 mm. 24.40 mm is the height on QuSpin's Gen-2.0 drawing, and QuSpin's 2021 Gen-3 announcement says the Gen-3 dimensions are the same as Gen-2. The Gen-3.0-specific drawing value is drawn; which height applies to a given unit is to be confirmed"
+          }
+        },
+        {
+          "label": "depth (z)",
+          "vo": {
+            "value": 12.4,
+            "unit": "mm",
+            "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, side view, overall depth '12.4'",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "same value on the product page (12.4 × 16.6 × 24.4 mm)"
+          }
+        },
+        {
+          "label": "height on product page",
+          "vo": {
+            "value": 24.4,
+            "unit": "mm",
+            "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/, Overview and Specifications, 'Sensor head 12.4 × 16.6 × 24.4 mm'",
+            "tag": "datasheet",
+            "status": "TO_CONFIRM",
+            "as_of": null,
+            "note": "conflicts with the Gen-3.0 drawing (26.4 mm); equals the Gen-2.0 drawing height (24.40 mm)"
+          }
+        },
+        {
+          "label": "width, 3D mock-up",
+          "vo": {
+            "value": 16.5997,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: x_max − x_min of the mock-up's straight walls; inputs: mock-up"
+          }
+        },
+        {
+          "label": "height, 3D mock-up",
+          "vo": {
+            "value": 26.3713,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: bottom face z − top z (excluding the ribbon); inputs: mock-up"
+          }
+        },
+        {
+          "label": "depth, 3D mock-up",
+          "vo": {
+            "value": 12.4,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: y_max − y_min of the walls (front face to back face); inputs: mock-up"
+          }
+        }
+      ],
+      "note": "Outer envelope of the Gen-3.0 head. QuSpin's 3D mock-up has rounded edges whose radii are not dimensioned, so the box is drawn with square edges."
+    },
+    "label_plate": {
+      "name": "Raised label plate (front face)",
+      "drawn": true,
+      "shape": "box",
+      "size": {
+        "x": {
+          "value": 13.5,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: x extent of the raised label plate; inputs: mock-up"
+        },
+        "y": {
+          "value": 6.5,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: vertical extent of the label plate; inputs: mock-up"
+        },
+        "z": {
+          "value": 0.2,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: front face y − plate outer y; inputs: mock-up"
+        }
+      },
+      "centre": {
+        "x": {
+          "value": 0,
+          "unit": "mm",
+          "source": "QuSpin Gen-3.0 QZFM 3D mock-up 'Gen 3.0 Mockup.stl' (Google Drive file 1tjZzhkYcjyAdH-u13VSJVo4PDJy0ZyOW, linked as 'Download the 3D file' from https://quspin.com/qzfm-dimensions/); measured here, mesh not copied",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: plate x-centre − housing x-centre in the mock-up (|Δ| < 0.001 mm); inputs: mock-up"
+        },
+        "y": {
+          "value": 6.61,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "formula: y = H/2 − (top to plate) − plate height/2; inputs: housing height, plate offset, plate height"
+        },
+        "z": {
+          "value": 6.3,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: z = D/2 + plate thickness/2; inputs: housing depth, plate thickness"
+        }
+      },
+      "dims": [
+        {
+          "label": "width",
+          "vo": {
+            "value": 13.5,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: x extent of the raised label plate; inputs: mock-up"
+          }
+        },
+        {
+          "label": "height",
+          "vo": {
+            "value": 6.5,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: vertical extent of the label plate; inputs: mock-up"
+          }
+        },
+        {
+          "label": "thickness",
+          "vo": {
+            "value": 0.2,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: front face y − plate outer y; inputs: mock-up"
+          }
+        },
+        {
+          "label": "below top face",
+          "vo": {
+            "value": 3.34,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: housing top to the plate's upper edge; inputs: mock-up"
+          }
+        }
+      ],
+      "note": "The plate marks the front face, the face the drawing's 5.15 mm cell offset is measured from."
+    },
+    "cable": {
+      "name": "Flex ribbon cable",
+      "drawn": true,
+      "shape": "ribbon",
+      "size": {
+        "x": {
+          "value": 6.5,
+          "unit": "mm",
+          "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, ribbon width '6.5'",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "z": {
+          "value": 0.2,
+          "unit": "mm",
+          "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, label 'FLEX RIBBON CABLE 2 FT LENGTH 0.20mm THICK'",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "length": {
+          "value": 609.6,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: length = 2 ft × 304.8 mm/ft; inputs: flex ribbon length (ft)"
+        },
+        "drawn_length": {
+          "value": 78.3287,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: housing top − top of the ribbon stub in the mock-up (the length QuSpin's own model shows); inputs: mock-up"
+        }
+      },
+      "centre": {
+        "x": {
+          "value": -0.9999,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: x = −(mock-up offset): the mock-up's +x is the scene's −x; inputs: ribbon offset"
+        },
+        "z": {
+          "value": 5.7485,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: z = D/2 − ribbon inset; inputs: housing depth, ribbon inset"
+        },
+        "y_start": {
+          "value": 13.2,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "formula: ribbon starts at the top face, y = H/2; inputs: housing height"
+        }
+      },
+      "dims": [
+        {
+          "label": "width",
+          "vo": {
+            "value": 6.5,
+            "unit": "mm",
+            "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, ribbon width '6.5'",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          }
+        },
+        {
+          "label": "thickness",
+          "vo": {
+            "value": 0.2,
+            "unit": "mm",
+            "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, label 'FLEX RIBBON CABLE 2 FT LENGTH 0.20mm THICK'",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          }
+        },
+        {
+          "label": "full length",
+          "vo": {
+            "value": 609.6,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: length = 2 ft × 304.8 mm/ft; inputs: flex ribbon length (ft)"
+          }
+        },
+        {
+          "label": "drawn length",
+          "vo": {
+            "value": 78.3287,
+            "unit": "mm",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: housing top − top of the ribbon stub in the mock-up (the length QuSpin's own model shows); inputs: mock-up"
+          }
+        }
+      ],
+      "note": "Drawn cut at the length shown in QuSpin's own 3D mock-up; the full ribbon is 2 ft (609.6 mm), then a 6.5 m round cable."
+    },
+    "cell": {
+      "name": "Rubidium vapour cell",
+      "drawn": true,
+      "shape": "box",
+      "optical": "opm",
+      "size": {
+        "x": {
+          "value": 3.0,
+          "unit": "mm",
+          "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941v3 (2024), p. 3: 'Internal optics reflects the light into a 3 × 3 × 3 mm cell containing 87Rb vapor'",
+          "tag": "published_spec",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "QuSpin does not state the Gen-3 cell size; Zhao et al. characterise two '3rd generation tri-axial' QZFMs (p. 2) but cite this sentence to Shah et al., SPIE 2018 (the original QZFM). Inner or outer size not stated; cell orientation not stated (drawn axis-aligned)"
+        },
+        "y": {
+          "value": 3.0,
+          "unit": "mm",
+          "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941v3 (2024), p. 3: 'Internal optics reflects the light into a 3 × 3 × 3 mm cell containing 87Rb vapor'",
+          "tag": "published_spec",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "QuSpin does not state the Gen-3 cell size; Zhao et al. characterise two '3rd generation tri-axial' QZFMs (p. 2) but cite this sentence to Shah et al., SPIE 2018 (the original QZFM). Inner or outer size not stated; cell orientation not stated (drawn axis-aligned)"
+        },
+        "z": {
+          "value": 3.0,
+          "unit": "mm",
+          "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941v3 (2024), p. 3: 'Internal optics reflects the light into a 3 × 3 × 3 mm cell containing 87Rb vapor'",
+          "tag": "published_spec",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "QuSpin does not state the Gen-3 cell size; Zhao et al. characterise two '3rd generation tri-axial' QZFMs (p. 2) but cite this sentence to Shah et al., SPIE 2018 (the original QZFM). Inner or outer size not stated; cell orientation not stated (drawn axis-aligned)"
+        }
+      },
+      "centre": {
+        "x": {
+          "value": -2.05,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: x = −W/2 + 6.25; inputs: housing width, cell from left"
+        },
+        "y": {
+          "value": -7.0,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "formula: y = −H/2 + 6.20; inputs: housing height, cell above bottom face"
+        },
+        "z": {
+          "value": 1.05,
+          "unit": "mm",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: z = D/2 − 5.15; inputs: housing depth, cell behind front"
+        }
+      },
+      "dims": [
+        {
+          "label": "edge",
+          "vo": {
+            "value": 3.0,
+            "unit": "mm",
+            "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941v3 (2024), p. 3: 'Internal optics reflects the light into a 3 × 3 × 3 mm cell containing 87Rb vapor'",
+            "tag": "published_spec",
+            "status": "TO_CONFIRM",
+            "as_of": null,
+            "note": "QuSpin does not state the Gen-3 cell size; Zhao et al. characterise two '3rd generation tri-axial' QZFMs (p. 2) but cite this sentence to Shah et al., SPIE 2018 (the original QZFM). Inner or outer size not stated; cell orientation not stated (drawn axis-aligned)"
+          }
+        },
+        {
+          "label": "centre from left side",
+          "vo": {
+            "value": 6.25,
+            "unit": "mm",
+            "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, cell centre to the left side '6.25' (CENTER OF CELL)",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "QuSpin's Neuro-1.0 drawing (12 Feb 2025) repeats (6.25) as a reference dimension"
+          }
+        },
+        {
+          "label": "centre above skin face",
+          "vo": {
+            "value": 6.2,
+            "unit": "mm",
+            "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, cell centre above the bottom (skin) face '6.20'",
+            "tag": "datasheet",
+            "status": "TO_CONFIRM",
+            "as_of": null,
+            "note": "the product page says '6.5 mm from vapor-cell center to housing' (6.50 on the Gen-2.0 drawing); the Gen-3.0 drawing and QuSpin's Neuro-1.0 drawing give 6.20"
+          }
+        },
+        {
+          "label": "centre behind front face",
+          "vo": {
+            "value": 5.15,
+            "unit": "mm",
+            "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, side view, cell centre behind the front (label) face '5.15'",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "QuSpin's Neuro-1.0 drawing repeats (5.15)"
+          }
+        },
+        {
+          "label": "product-page standoff",
+          "vo": {
+            "value": 6.5,
+            "unit": "mm",
+            "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/, Specifications, 'Standoff 6.5 mm from vapor-cell center to housing'",
+            "tag": "datasheet",
+            "status": "TO_CONFIRM",
+            "as_of": null,
+            "note": "conflicts with the Gen-3.0 drawing (6.20 mm above the bottom face); equals the Gen-2.0 drawing value (6.50)"
+          }
+        }
+      ],
+      "note": "Centre from QuSpin's Gen-3.0 drawing ('CENTER OF CELL'). Size 3 × 3 × 3 mm from Zhao et al. (TUCAN), who cite the original QZFM paper; QuSpin does not publish the Gen-3 cell size (to confirm). Colour: rubidium D1 795 nm from data/palette.json."
+    }
+  },
+  "conflicts": [
+    {
+      "item": "housing height",
+      "drawn": {
+        "value": 26.4,
+        "unit": "mm",
+        "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, overall height '26.4'",
+        "tag": "datasheet",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "QuSpin's Gen-3.0 drawing gives 26.4 mm and its Gen-3.0 3D mock-up measures 26.37 mm (calculated below), but the product page lists 12.4 × 16.6 × 24.4 mm. 24.40 mm is the height on QuSpin's Gen-2.0 drawing, and QuSpin's 2021 Gen-3 announcement says the Gen-3 dimensions are the same as Gen-2. The Gen-3.0-specific drawing value is drawn; which height applies to a given unit is to be confirmed"
+      },
+      "other": [
+        {
+          "value": 24.4,
+          "unit": "mm",
+          "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/, Overview and Specifications, 'Sensor head 12.4 × 16.6 × 24.4 mm'",
+          "tag": "datasheet",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "conflicts with the Gen-3.0 drawing (26.4 mm); equals the Gen-2.0 drawing height (24.40 mm)"
+        },
+        {
+          "value": 24.4,
+          "unit": "mm",
+          "source": "QuSpin Gen-2.0 QZFM dimensioned drawing ('Updated February 4, 2021'), https://quspin.com/images/guides/qzfm-dimensions/Slide1.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, height '24.40'",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "Gen-2.0 sensor head, listed only to explain the product-page figure"
+        },
+        {
+          "value": "The dimensions of the Gen-3 sensor (both dual and triaxial variants) are the same as the Gen-2 sensor.",
+          "unit": "",
+          "source": "QuSpin 'QZFM Gen-3' announcement (20 June 2021), https://quspin.com/qzfm-gen-3, Gen-3 section",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      ]
+    },
+    {
+      "item": "cell centre above the skin face",
+      "drawn": {
+        "value": 6.2,
+        "unit": "mm",
+        "source": "QuSpin Gen-3.0 QZFM dimensioned drawing ('Updated December 6th, 2022'; 'FOR REFERENCE ONLY, UNITS: mm'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-mockup-Dec2022.jpg, linked from https://quspin.com/qzfm-dimensions/, front view, cell centre above the bottom (skin) face '6.20'",
+        "tag": "datasheet",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "the product page says '6.5 mm from vapor-cell center to housing' (6.50 on the Gen-2.0 drawing); the Gen-3.0 drawing and QuSpin's Neuro-1.0 drawing give 6.20"
+      },
+      "other": [
+        {
+          "value": 6.5,
+          "unit": "mm",
+          "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/, Specifications, 'Standoff 6.5 mm from vapor-cell center to housing'",
+          "tag": "datasheet",
+          "status": "TO_CONFIRM",
+          "as_of": null,
+          "note": "conflicts with the Gen-3.0 drawing (6.20 mm above the bottom face); equals the Gen-2.0 drawing value (6.50)"
+        },
+        {
+          "value": "cell centre (6.25) from the left side, (6.20) above the bottom face, (5.15) behind the front face",
+          "unit": "",
+          "source": "QuSpin Neuro-1.0 QZFM dimensioned drawing ('Updated February 12th, 2025'), https://quspin.com/images/guides/qzfm-dimensions/Gen-3-3-mockup-Feb2025_edited.png, linked from https://quspin.com/qzfm-dimensions/, front and side views, reference dimensions in parentheses",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "QuSpin's later Neuro-1.0 head (41.5 mm tall, different housing) keeps the Gen-3.0 cell offsets"
+        }
+      ]
+    }
+  ],
+  "info": {
+    "laser_wavelength": {
+      "value": 795,
+      "unit": "nm",
+      "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941v3 (2024), p. 3: 'a circularly polarized 795 nm laser resonant with the D1 transition'",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "generation_note": {
+      "value": "two 3rd generation tri-axial QZFMs characterised",
+      "unit": "",
+      "source": "Zhao, Mammei & Fujimoto, 'QuSpin Zero-Field Magnetometer Characterization for the TUCAN Experiment', arXiv 2408.02941v3 (2024), p. 2",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "dimensions_page": {
+      "value": "QuSpin's dimensions page links the Gen-3.0 drawing and 3D file used here",
+      "unit": "",
+      "source": "QuSpin 'QZFM Dimensions' page, https://quspin.com/qzfm-dimensions/, 'Gen-3.0 QZFM dimensions' section",
+      "tag": "datasheet",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    }
+  },
+  "stl_measurements_mm": {
+    "triangles": 4278,
+    "x_min": -9.9997,
+    "x_max": 6.6,
+    "y_min": -7.35,
+    "y_max": 5.05,
+    "z_top": -20.1713,
+    "z_bottom": 6.2,
+    "plate_x_min": -8.4498,
+    "plate_x_max": 5.0502,
+    "plate_y_min": -7.55,
+    "plate_z_min": -16.8313,
+    "plate_z_max": -10.3313,
+    "rib_x_min": -3.95,
+    "rib_x_max": 2.55,
+    "rib_y_min": -6.9485,
+    "rib_y_max": -6.8485,
+    "rib_z_top": -98.5
+  },
+  "undocumented": [
+    {
+      "name": "Laser",
+      "reason": "a semiconductor laser (795 nm per Zhao et al., p. 3) pumps the cell; its size and position in the head are not published"
+    },
+    {
+      "name": "Photodetector",
+      "reason": "named on QuSpin's technology page; size and position not published"
+    },
+    {
+      "name": "Internal optics (prisms; beam splitter in the triaxial variant)",
+      "reason": "mentioned by Zhao et al. (p. 3) and QuSpin; no sizes or positions published"
+    },
+    {
+      "name": "Three-axis field-nulling and modulation coils",
+      "reason": "the product page states 'internal field-nulling coils'; no dimensions published"
+    },
+    {
+      "name": "Cell heater",
+      "reason": "QuSpin states the cell runs at about 150 °C; heater size and position not published"
+    },
+    {
+      "name": "Head electronics (circuit board)",
+      "reason": "not described by QuSpin"
+    },
+    {
+      "name": "Round cable",
+      "reason": "length 6.5 m (spec table; '20 ft' in the package list); diameter not stated"
+    },
+    {
+      "name": "Electronics unit",
+      "reason": "3.1 × 11.0 × 16.5 cm (product page) but it sits at the far end of the cable; its placement relative to the head is not documented, so it is not drawn with the head"
+    }
+  ],
+  "checks": [
+    {
+      "source": "qs_prod",
+      "quote": "Sensor head 12.4 × 16.6 × 24.4 mm",
+      "result": "found"
+    },
+    {
+      "source": "qs_gen3",
+      "quote": "The dimensions of the Gen-3 sensor (both dual and triaxial variants) are the same as the Gen-2 sensor",
+      "result": "found"
+    },
+    {
+      "source": "qs_dims",
+      "quote": "Gen-3.0 QZFM dimensions",
+      "result": "found"
+    },
+    {
+      "source": "qs_dims",
+      "quote": "Gen-3-mockup-Dec2022.jpg",
+      "result": "found"
+    },
+    {
+      "source": "qs_dims",
+      "quote": "1tjZzhkYcjyAdH-u13VSJVo4PDJy0ZyOW",
+      "result": "found"
+    },
+    {
+      "source": "qs_prod",
+      "quote": "6.5 mm from vapor-cell center to housing",
+      "result": "found"
+    },
+    {
+      "source": "tucan",
+      "quote": "Internal optics reflects the light into a 3 × 3 × 3 mm cell",
+      "result": "found on PDF page 3"
+    },
+    {
+      "source": "tucan",
+      "quote": "two 3rd generation tri-axial QuSpin Zero-Field",
+      "result": "found on PDF page 2"
+    },
+    {
+      "source": "tucan",
+      "quote": "circularly polarized 795 nm laser",
+      "result": "found on PDF page 3"
+    },
+    {
+      "source": "qs_prod",
+      "quote": "2 ft flexible FPC at the sensor end, then 6.5 m round cable",
+      "result": "found"
+    },
+    {
+      "source": "qs_prod",
+      "quote": "Electronics dimensions 3.1 × 11.0 × 16.5 cm",
+      "result": "found"
+    },
+    {
+      "source": "qs_prod",
+      "quote": "internal field-nulling coils",
+      "result": "found"
+    }
+  ]
+}

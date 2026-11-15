@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T09:17:10Z",
+    "sources": [
+      "coda MCP connector, tool simulate, backend aer (Qiskit Aer), run 2026-11-15",
+      "Barry et al., Rev. Mod. Phys. 92, 015004 (2020): Ramsey magnetometry with NV centres"
+    ],
+    "run_date": "2026-11-15"
+  },
+  "tag": "simulated",
+  "tool": "coda simulate (Qiskit Aer, qasm method)",
+  "experiment": "Ramsey fringe on one qubit: H, RZ(phi), H, measure",
+  "code_template": "from qiskit import QuantumCircuit\nimport math\nqc = QuantumCircuit(1, 1)\nqc.h(0); qc.rz(2 * math.pi * {i} / 12, 0); qc.h(0); qc.measure(0, 0)",
+  "theory": "P(0) = cos^2(phi / 2), since H RZ(phi) H equals RX(phi) up to a global phase",
+  "mapping": "The NV m_s = 0 and m_s = +1 levels act as the qubit. A Ramsey sequence turns the phase phi = 2 pi gamma B tau gathered during the free time tau into a population. Here phi is the input; no device timing, field or noise model is assumed.",
+  "circuit_depth": 4,
+  "gate_count": 4,
+  "points": [
+    {
+      "i": 0,
+      "phi_rad": 0.0,
+      "seed_simulator": 2026,
+      "shots": 4096,
+      "counts": {
+        "0": 4096,
+        "1": 0
+      },
+      "p0": 1.0,
+      "p0_theory": 1.0,
+      "binomial_se": 0.0
+    },
+    {
+      "i": 1,
+      "phi_rad": 0.5235987755982988,
+      "seed_simulator": 2027,
+      "shots": 4096,
+      "counts": {
+        "0": 3823,
+        "1": 273
+      },
+      "p0": 0.933349609375,
+      "p0_theory": 0.9330127018922194,
+      "binomial_se": 0.0039062499999999974
+    },
+    {
+      "i": 2,
+      "phi_rad": 1.0471975511965976,
+      "seed_simulator": 2028,
+      "shots": 4096,
+      "counts": {
+        "0": 3097,
+        "1": 999
+      },
+      "p0": 0.756103515625,
+      "p0_theory": 0.7500000000000001,
+      "binomial_se": 0.006765823467065926
+    },
+    {
+      "i": 3,
+      "phi_rad": 1.5707963267948966,
+      "seed_simulator": 2029,
+      "shots": 4096,
+      "counts": {
+        "0": 2043,
+        "1": 2053
+      },
+      "p0": 0.498779296875,
+      "p0_theory": 0.5000000000000001,
+      "binomial_se": 0.0078125
+    },
+    {
+      "i": 4,
+      "phi_rad": 2.0943951023931953,
+      "seed_simulator": 2030,
+      "shots": 4096,
+      "counts": {
+        "0": 997,
+        "1": 3099
+      },
+      "p0": 0.243408203125,
+      "p0_theory": 0.2500000000000001,
+      "binomial_se": 0.006765823467065928
+    },
+    {
+      "i": 5,
+      "phi_rad": 2.6179938779914944,
+      "seed_simulator": 2031,
+      "shots": 4096,
+      "counts": {
+        "0": 244,
+        "1": 3852
+      },
+      "p0": 0.0595703125,
+      "p0_theory": 0.06698729810778066,
+      "binomial_se": 0.0039062499999999996
+    },
+    {
+      "i": 6,
+      "phi_rad": 3.141592653589793,
+      "seed_simulator": 2032,
+      "shots": 4096,
+      "counts": {
+        "0": 0,
+        "1": 4096
+      },
+      "p0": 0.0,
+      "p0_theory": 3.749399456654644e-33,
+      "binomial_se": 9.567553118338697e-19
+    },
+    {
+      "i": 7,
+      "phi_rad": 3.665191429188092,
+      "seed_simulator": 2033,
+      "shots": 4096,
+      "counts": {
+        "0": 288,
+        "1": 3808
+      },
+      "p0": 0.0703125,
+      "p0_theory": 0.0669872981077806,
+      "binomial_se": 0.003906249999999998
+    },
+    {
+      "i": 8,
+      "phi_rad": 4.1887902047863905,
+      "seed_simulator": 2034,
+      "shots": 4096,
+      "counts": {
+        "0": 1002,
+        "1": 3094
+      },
+      "p0": 0.24462890625,
+      "p0_theory": 0.24999999999999978,
+      "binomial_se": 0.006765823467065925
+    },
+    {
+      "i": 9,
+      "phi_rad": 4.71238898038469,
+      "seed_simulator": 2035,
+      "shots": 4096,
+      "counts": {
+        "0": 1996,
+        "1": 2100
+      },
+      "p0": 0.4873046875,
+      "p0_theory": 0.4999999999999999,
+      "binomial_se": 0.0078125
+    },
+    {
+      "i": 10,
+      "phi_rad": 5.235987755982989,
+      "seed_simulator": 2036,
+      "shots": 4096,
+      "counts": {
+        "0": 3076,
+        "1": 1020
+      },
+      "p0": 0.7509765625,
+      "p0_theory": 0.7500000000000001,
+      "binomial_se": 0.006765823467065926
+    },
+    {
+      "i": 11,
+      "phi_rad": 5.759586531581287,
+      "seed_simulator": 2037,
+      "shots": 4096,
+      "counts": {
+        "0": 3828,
+        "1": 268
+      },
+      "p0": 0.9345703125,
+      "p0_theory": 0.9330127018922192,
+      "binomial_se": 0.0039062500000000035
+    }
+  ]
+}

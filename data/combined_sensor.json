@@ -1,14 +1,14 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:16:34Z",
+    "generated_at": "2026-11-15T09:02:05Z",
     "sources": [
       "data/runs.json"
     ],
-    "last_run": "run-0002-ff3e"
+    "last_run": "run-0004-4d99"
   },
-  "version": 2,
-  "runs_counted": 2,
+  "version": 4,
+  "runs_counted": 4,
   "components": {
     "magnetic shielding": {
       "facts": [
@@ -52,6 +52,20 @@
             "note": "formula: ambient_nT / opm_range_nT; inputs: mars_surface.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
           },
           "from_run": "run-0002-ff3e",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM field reduction needed at iss",
+          "value": {
+            "value": 4002.7,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T09:01:51Z",
+            "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+          },
+          "from_run": "run-0003-41d9",
           "device": "opm"
         }
       ],
@@ -99,6 +113,20 @@
             "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, mars_surface.ambient_nT"
           },
           "from_run": "run-0002-ff3e",
+          "device": "nv"
+        },
+        {
+          "fact": "NV bias against the ambient field at iss",
+          "value": {
+            "value": 50.0,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T09:01:51Z",
+            "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, iss.ambient_nT"
+          },
+          "from_run": "run-0003-41d9",
           "device": "nv"
         }
       ],
@@ -273,6 +301,174 @@
           },
           "from_run": "run-0002-ff3e",
           "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 3",
+          "value": {
+            "value": 66.37,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0003-41d9.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 3",
+          "value": {
+            "value": 8.06,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0003-41d9.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 3",
+          "value": {
+            "value": 19.49,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0003-41d9.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 3",
+          "value": {
+            "value": 2.37,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0003-41d9.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 3",
+          "value": {
+            "value": 13.55,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0003-41d9.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 3",
+          "value": {
+            "value": 1.65,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0003-41d9.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 4",
+          "value": {
+            "value": 72.46,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0004-4d99.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 4",
+          "value": {
+            "value": 8.58,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0004-4d99.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 4",
+          "value": {
+            "value": 21.27,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0004-4d99.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 4",
+          "value": {
+            "value": 2.52,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0004-4d99.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 4",
+          "value": {
+            "value": 14.79,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0004-4d99.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 4",
+          "value": {
+            "value": 1.75,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0004-4d99.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "nv"
         }
       ],
       "status": "sourced"
@@ -348,6 +544,34 @@
           },
           "from_run": "run-0002-ff3e",
           "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 3",
+          "value": {
+            "value": "excited at 368 nm, emits at 439 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 3 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 4",
+          "value": {
+            "value": "excited at 368 nm, emits at 439 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 4 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "cqd_patch"
         }
       ],
       "status": "sourced"
@@ -422,6 +646,20 @@
             "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
           },
           "from_run": "run-0002-ff3e",
+          "device": "nv"
+        },
+        {
+          "fact": "ODMR-Lab run at iss: field estimated from the simulated NV spectrum",
+          "value": {
+            "value": 0.9622,
+            "unit": "mT",
+            "source": "ODMR-Lab /solve, https://huggingface.co/spaces/jeorgexyz/odmr-lab (online simulator, MIT licence)",
+            "tag": "simulated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
+          },
+          "from_run": "run-0003-41d9",
           "device": "nv"
         }
       ],
@@ -525,6 +763,62 @@
             "note": "formula: r/R0 = (1/E - 1)^(1/6) (Förster, FRET-Calc Eq. 2); inputs: recorded.qd_fret_figshare5468838"
           },
           "from_run": "run-0002-ff3e",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Measured QD -> dye FRET efficiency at 0.4 GPa",
+          "value": {
+            "value": 55.0,
+            "unit": "%",
+            "source": "figshare c.5468838 Table S1 (CdTe/CdS -> rhodamine 101, CC BY 4.0)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "at 0.4 GPa; CdTe/CdS quantum dots, not the renin sensor"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Donor-acceptor distance implied at 0.4 GPa",
+          "value": {
+            "value": 0.967,
+            "unit": "r/R0",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: r/R0 = (1/E - 1)^(1/6) (Förster, FRET-Calc Eq. 2); inputs: recorded.qd_fret_figshare5468838"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Measured QD -> dye FRET efficiency at 0.6 GPa",
+          "value": {
+            "value": 62.1,
+            "unit": "%",
+            "source": "figshare c.5468838 Table S1 (CdTe/CdS -> rhodamine 101, CC BY 4.0)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "at 0.6 GPa; CdTe/CdS quantum dots, not the renin sensor"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Donor-acceptor distance implied at 0.6 GPa",
+          "value": {
+            "value": 0.921,
+            "unit": "r/R0",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: r/R0 = (1/E - 1)^(1/6) (Förster, FRET-Calc Eq. 2); inputs: recorded.qd_fret_figshare5468838"
+          },
+          "from_run": "run-0004-4d99",
           "device": "qd_renin"
         }
       ],
@@ -642,6 +936,90 @@
             "note": "timepoint L-44 (days from launch L- or return R+); drawn on the ground"
           },
           "from_run": "run-0002-ff3e",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 3: R-peak",
+          "value": {
+            "value": -43.14,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial03, ch0 Sensor 0 -Y, sensor at [ -5  17 -14] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 47 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial03 (sha256 e34b35a3d2ee...)"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 3: Q wave",
+          "value": {
+            "value": 5.24,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial03, ch0 Sensor 0 -Y, sensor at [ -5  17 -14] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 25.0 ms before R, QRS 105.0 ms; inputs: data/subject1_preprocessed_trial03"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "opm"
+        },
+        {
+          "fact": "Inspiration4 total bilirubin at L-3",
+          "value": {
+            "value": "C001 1.0, C002 0.3, C003 0.2, C004 0.5",
+            "unit": "mg/dL",
+            "source": "NASA OSDR OSD-575 (Inspiration4 CMP, total bilirubin)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "timepoint L-3 (days from launch L- or return R+); drawn on the ground"
+          },
+          "from_run": "run-0003-41d9",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 4: R-peak",
+          "value": {
+            "value": -47.1,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial04, ch4 Sensor 2 -Y, sensor at [ -5  17 -14] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 44 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial04 (sha256 cdad06fb6848...)"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 4: Q wave",
+          "value": {
+            "value": 5.58,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial04, ch4 Sensor 2 -Y, sensor at [ -5  17 -14] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 25.0 ms before R, QRS 100.0 ms; inputs: data/subject1_preprocessed_trial04"
+          },
+          "from_run": "run-0004-4d99",
+          "device": "opm"
+        },
+        {
+          "fact": "Inspiration4 total bilirubin at R+1",
+          "value": {
+            "value": "C001 1.2, C002 0.4, C003 0.3, C004 0.4",
+            "unit": "mg/dL",
+            "source": "NASA OSDR OSD-575 (Inspiration4 CMP, total bilirubin)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "timepoint R+1 (days from launch L- or return R+); drawn on the ground"
+          },
+          "from_run": "run-0004-4d99",
           "device": "cqd_patch"
         }
       ],

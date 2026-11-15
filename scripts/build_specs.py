@@ -52,8 +52,16 @@ def opm():
         "sensitivity_triaxial": p("<23 (typ. ~15, all axes at once)", "fT/√Hz (3–100 Hz)", OSTI + " (slide 23)",
                                   note="Also stated on the QuSpin Gen-3 product page."),
         "dynamic_range": d("±5", "nT"),
-        "sensor_head": d("12.4 × 16.6 × 24.4", "mm"),
-        "standoff": d("6.5 (vapor-cell center to housing)", "mm"),
+        "field_compensation_max": d(50, "nT", f"{QS_TECH}; {QS}",
+                                    note="On-board three-axis coils cancel residual fields up to 50 nT; QuSpin asks for "
+                                         "about 50 nT or below at the sensor (same fact as build_log per_sensor.opm)."),
+        "sensor_head": d("12.4 × 16.6 × 24.4", "mm", QS, "TO_CONFIRM",
+                         "Product-page value. QuSpin's Gen-3.0 dimensioned drawing (https://quspin.com/qzfm-dimensions/, "
+                         "updated 6 Dec 2022) gives 16.6 × 26.4 × 12.4 mm, and QuSpin's 3D model measures 26.37 mm; "
+                         "24.4 mm matches the Gen-2.0 drawing. The app draws the Gen-3.0 drawing (data/sensor_parts/opm.json)."),
+        "standoff": d("6.5 (vapor-cell center to housing)", "mm", QS, "TO_CONFIRM",
+                      "Product-page value. The Gen-3.0 drawing places the cell centre 6.20 mm above the skin face "
+                      "(data/sensor_parts/opm.json)."),
         "head_power": d("~0.7", "W"),
         "total_power": d("5", "W", QS, "VERIFIED",
                          upgraded("the product page now lists 'Total power consumption Approximately 5 W'; "

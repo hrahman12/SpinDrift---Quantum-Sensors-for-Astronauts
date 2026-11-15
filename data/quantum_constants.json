@@ -1,0 +1,1167 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T10:12:13Z",
+    "sources": [
+      "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata",
+      "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15)",
+      "Holloway, Hass, Tamor, Anthony & Banholzer, 'Isotopic dependence of the lattice constant of diamond', Phys. Rev. B 44, 7123 (1991), doi:10.1103/PhysRevB.44.7123, abstract",
+      "Crystallography Open Database entry 9011575 (Riley, Nature 153, 587 (1944))",
+      "Crystallography Open Database entry 2300702 (Houben et al., J. Appl. Cryst. 56, 633 (2023), doi:10.1107/S1600576723002819)",
+      "Crystallography Open Database entry 9011577 (Trucano & Chen, 'Structure of graphite by neutron diffraction', Nature 258, 136 (1975), doi:10.1038/258136a0)",
+      "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2",
+      "Sulai et al., 'Characterizing atomic magnetic gradiometers for fetal magnetocardiography', arXiv 1906.03227 (2019)",
+      "Mantina, Chamberlin, Valero, Cramer & Truhlar, 'Consistent van der Waals radii for the whole main group', J. Phys. Chem. A 113, 5806-5812 (2009), doi:10.1021/jp8111556, abstract",
+      "Cordero et al., 'Covalent radii revisited', Dalton Trans. 2008, 2832-2838, doi:10.1039/b801115j, covalent-radius table",
+      "Griffiths & Schroeter, Introduction to Quantum Mechanics, 3rd ed. (Cambridge University Press, 2018), Sec. 2.2, the infinite square well",
+      "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20), 8846-8852 (2012), doi:10.1021/ac302284s, abstract",
+      "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41), 28012-28025 (2024), doi:10.1021/acsnano.4c06191",
+      "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
+      "Benatto et al., 'FRET-Calc: A Free Software and Web Server for Förster Resonance Energy Transfer Calculation', Comput. Phys. Commun. (2023), doi:10.1016/j.cpc.2023.108715, arXiv 2311.15476, Eq. (2)",
+      "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1)"
+    ],
+    "accessed": "2026-11-15",
+    "used_by": [
+      "ui/scale/q_nv.js",
+      "ui/scale/q_rb.js",
+      "ui/scale/q_qd.js",
+      "ui/scale/q_cqd.js"
+    ]
+  },
+  "electron": {
+    "g_factor": {
+      "value": -2.00231930436092,
+      "unit": "",
+      "source": "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15), 'electron g factor', -2.002 319 304 360 92(36)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "gyromagnetic_ratio_over_2pi": {
+      "value": 28024.9513861,
+      "unit": "MHz/T",
+      "source": "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15), 'electron gyromagnetic ratio in MHz/T' (gamma_e/2pi), 28 024.951 3861(87) MHz T^-1",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "gyromagnetic_ratio_over_2pi_per_mT": {
+      "value": 28.0249513861,
+      "unit": "MHz/mT",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: gamma_e/2pi [MHz/T] / 1000; inputs: electron.gyromagnetic_ratio_over_2pi"
+    },
+    "bohr_magneton_over_h": {
+      "value": 13996244917.1,
+      "unit": "Hz/T",
+      "source": "CODATA 2022 recommended values, NIST (https://physics.nist.gov/cuu/Constants/, accessed 2026-11-15), 'Bohr magneton in Hz/T', 1.399 624 491 71(44) x 10^10 Hz T^-1",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    }
+  },
+  "diamond": {
+    "lattice_constant": {
+      "value": 3.56715,
+      "unit": "Å",
+      "source": "Holloway, Hass, Tamor, Anthony & Banholzer, 'Isotopic dependence of the lattice constant of diamond', Phys. Rev. B 44, 7123 (1991), doi:10.1103/PhysRevB.44.7123, abstract: a0(C, 25 °C, x) = 3.567 15 - 0.000 53 x Å, x = atom fraction of 13C",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "value at x = 0; the 13C term changes a by at most 0.000 53 Å (pure 13C), below the 3.567 Å shown. Cross-checks: COD 9011575 gives 3.56679 Å at 291.15 K and COD 2300702 gives 3.566636(7) Å at 293 K, all within 0.0006 Å."
+    },
+    "lattice_constant_cod_riley_1944": {
+      "value": 3.56679,
+      "unit": "Å",
+      "source": "Crystallography Open Database entry 9011575 (Riley, Nature 153, 587 (1944)): diamond, Fd-3m, _cell_length_a, _diffrn_ambient_temperature 291.15 K",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "lattice_constant_cod_houben_2023": {
+      "value": 3.566636,
+      "unit": "Å",
+      "source": "Crystallography Open Database entry 2300702 (Houben et al., J. Appl. Cryst. 56, 633 (2023), doi:10.1107/S1600576723002819): diamond, Fd-3m, _cell_length_a 3.566636(7) at 293 K",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "structure": {
+      "value": "diamond cubic, space group Fd-3m (No. 227); two interpenetrating face-centred cubic lattices offset by a/4 (1,1,1); 8 atoms per conventional cubic cell",
+      "unit": "",
+      "source": "Crystallography Open Database entry 2300702 (Houben et al., J. Appl. Cryst. 56, 633 (2023), doi:10.1107/S1600576723002819): _space_group_name_H-M_alt 'F d -3 m :2', _cell_formula_units_Z 8, C1 at 8a",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "cc_bond_length": {
+      "value": 1.54462126,
+      "unit": "Å",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: d = sqrt(3) a / 4 (nearest-neighbour distance); inputs: diamond.lattice_constant; COD 2300702 lists C1-C1 1.5444 Å for its 3.566636 Å cell; same formula"
+    },
+    "bond_angle": {
+      "value": 109.4712206,
+      "unit": "°",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: theta = arccos(-1/3) (tetrahedral); inputs: diamond.structure; COD 2300702 lists 109.471°"
+    }
+  },
+  "nv": {
+    "geometry": {
+      "value": "a substitutional nitrogen adjacent to a lattice vacancy; the NV symmetry axis lies along one of the four <111> crystallographic directions",
+      "unit": "",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. I.A, p. 2 and Fig. 1a ('a substitutional nitrogen fixed adjacent to a vacancy within the rigid carbon lattice')",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "n_v_distance": {
+      "value": 1.54462126,
+      "unit": "Å",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: N-V distance = C-C bond length (ideal, unrelaxed lattice sites); inputs: diamond.cc_bond_length, nv.geometry; relaxation of the atoms around the vacancy is not modelled, so it is not drawn"
+    },
+    "D": {
+      "value": 2870,
+      "unit": "MHz",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. I.C, p. 4 ('D ≈ 2.87 GHz')",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "gamma": {
+      "value": 28.025,
+      "unit": "MHz/mT",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Eq. (6), gamma = g_e mu_B / h",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "Barry et al. give g_e ≈ 2.003, i.e. gamma ≈ 28.03 MHz/mT; 28.025 MHz/mT is the brief's value (free-electron g = 2.0023, also used by ODMR-Lab). The two differ by 0.03 %."
+    },
+    "g_factor_barry": {
+      "value": 2.003,
+      "unit": "",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. I.C, Eq. (2), p. 4 ('g_e ≈ 2.003 is the NV electronic g-factor')",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "gamma_from_barry_g": {
+      "value": 28.034479,
+      "unit": "MHz/mT",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: gamma = g_NV mu_B / h; inputs: nv.g_factor_barry, electron.bohr_magneton_over_h; Barry's g ≈ 2.003 gives 28.03 MHz/mT; physics.json uses 28.025 MHz/mT, the free-electron value (CODATA 2022 gamma_e/2pi = 28.02495 MHz/mT)"
+    },
+    "gamma_vs_codata_relative": {
+      "value": 1.73466e-06,
+      "unit": "",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "formula: (gamma_physics - gamma_e/2pi) / (gamma_e/2pi); inputs: nv.gamma, electron.gyromagnetic_ratio_over_2pi_per_mT; physics.json's 28.025 MHz/mT is the CODATA free-electron value rounded to 5 digits; its TO_CONFIRM status is inherited"
+    },
+    "gslac_field": {
+      "value": 102.4085638,
+      "unit": "mT",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "formula: B = D / gamma (m_s = -1 meets m_s = 0, field along the axis); inputs: nv.D, nv.gamma; the scene's field control stops at 5 mT, far below this crossing"
+    },
+    "levels": {
+      "value": "nu± = D ± (g_e mu_B / h) B_z: m_s = 0 at 0, m_s = ±1 at D ± gamma B for a field along the NV axis",
+      "unit": "",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. I.C, Eqs. (5)-(6), p. 5",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "ramsey": {
+      "value": "Ramsey on the {|0>, |+1>} pair: pi/2 pulse, free precession for tau, pi/2 pulse; phase phi = gamma_e B tau with gamma_e = g_e mu_B / hbar, i.e. phi = 2 pi gamma B tau with gamma in Hz/T",
+      "unit": "",
+      "source": "Barry et al., 'Sensitivity optimization for NV-diamond magnetometry', Rev. Mod. Phys. 92, 015004 (2020), arXiv 1903.08176v2, Sec. I.D, pp. 5-6, and Sec. I.E, p. 6",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "spin_operators": {
+      "value": "spin-1 operators S_x = [[0,1,0],[1,0,1],[0,1,0]]/sqrt2, S_y = [[0,-i,0],[i,0,-i],[0,i,0]]/sqrt2, S_z = diag(1,0,-1)",
+      "unit": "",
+      "source": "standard spin-1 matrices, as used for the NV Hamiltonian H = D S_z^2 + gamma B.S in data/math_checks.json (Barry et al. Eq. 2)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "superposition_spin_tilt": {
+      "value": 54.73561032,
+      "unit": "°",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: <S> of (|0> + e^{i phi}|+1>)/sqrt2 is (cos phi/sqrt2, sin phi/sqrt2, 1/2); tilt = arccos(<S_z>/|<S>|); inputs: nv.spin_operators, nv.ramsey; = arccos(1/sqrt3); expectation values checked symbolically in Wolfram Language"
+    },
+    "superposition_spin_length": {
+      "value": 0.8660254038,
+      "unit": "",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: |<S>| = sqrt(1/2 + 1/4) (units of hbar); inputs: nv.spin_operators, nv.ramsey"
+    }
+  },
+  "rb87": {
+    "nuclear_spin": {
+      "value": 1.5,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 2 (Rubidium 87 Physical Properties), p. 17: nuclear spin I = 3/2",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "d1_wavelength_vacuum": {
+      "value": 794.978851156,
+      "unit": "nm",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 4 (Rubidium 87 D1 (5²S1/2 -> 5²P1/2) Transition Optical Properties), p. 18: wavelength (vacuum) 794.978 851 156(23) nm",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "d1_wavelength_air": {
+      "value": 794.7664776,
+      "unit": "nm",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 4, p. 18: wavelength (air) 794.766 477 6(79) nm",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "d1_frequency": {
+      "value": 377.10746338,
+      "unit": "THz",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 4, p. 18: frequency omega_0 = 2 pi x 377.107 463 380(11) THz",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "ground_hfs_constant_A": {
+      "value": 3.417341305452145,
+      "unit": "GHz",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 5 (D Transition Hyperfine Structure Constants), p. 19: A(5²S1/2) = h x 3.417 341 305 452 145(45) GHz",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "ground_hfs_splitting": {
+      "value": 6.83468261090429,
+      "unit": "GHz",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Fig. 3 (D1 transition hyperfine structure), p. 27: 6.834 682 610 904 290(90) GHz between F = 1 and F = 2",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "ground_hfs_splitting_check": {
+      "value": 6.83468261090429,
+      "unit": "GHz",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: Delta E_hfs = A (I + 1/2) = 2A for J = 1/2, I = 3/2; inputs: rb87.ground_hfs_constant_A; equals the Fig. 3 value"
+    },
+    "p12_hfs_constant_A": {
+      "value": 407.25,
+      "unit": "MHz",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 5, p. 19: A(5²P1/2) = h x 407.25(63) MHz",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "p12_hfs_splitting": {
+      "value": 814.5,
+      "unit": "MHz",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Fig. 3, p. 27: 814.5(13) MHz between F' = 1 and F' = 2 of 5²P1/2",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "g_J_ground": {
+      "value": 2.00233107,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 6 (Magnetic and Electric Field Interaction Parameters), p. 19: g_J(5²S1/2) = 2.002 331 070(26)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "g_I": {
+      "value": -0.0009951414,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 6, p. 19: g_I = -0.000 995 141 4(10)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "g_F_F2": {
+      "value": 0.5,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Fig. 3, p. 27: 5²S1/2 F = 2, g_F = 1/2 (0.70 MHz/G)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "approximate value from Eq. (23) without the nuclear term, as printed in the figure"
+    },
+    "g_F_F1": {
+      "value": -0.5,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Fig. 3, p. 27: 5²S1/2 F = 1, g_F = -1/2 (-0.70 MHz/G)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "approximate value from Eq. (23) without the nuclear term, as printed in the figure"
+    },
+    "g_F_P12_F2": {
+      "value": 0.16666666666666666,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Fig. 3, p. 27: 5²P1/2 F' = 2, g_F = 1/6 (0.23 MHz/G)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "g_F_P12_F1": {
+      "value": -0.16666666666666666,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Fig. 3, p. 27: 5²P1/2 F' = 1, g_F = -1/6 (-0.23 MHz/G)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "g_F_F2_exact": {
+      "value": 0.49983641145,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Eq. (23), p. 7: g_F = g_J [F(F+1) - I(I+1) + J(J+1)]/[2F(F+1)] + g_I [F(F+1) + I(I+1) - J(J+1)]/[2F(F+1)]",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: Steck Eq. (23) with the nuclear term, F = 2; inputs: rb87.g_J_ground, rb87.g_I, rb87.nuclear_spin"
+    },
+    "g_F_F1_exact": {
+      "value": -0.50182669425,
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Eq. (23), p. 7: g_F = g_J [F(F+1) - I(I+1) + J(J+1)]/[2F(F+1)] + g_I [F(F+1) + I(I+1) - J(J+1)]/[2F(F+1)]",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: Steck Eq. (23) with the nuclear term, F = 1; inputs: rb87.g_J_ground, rb87.g_I, rb87.nuclear_spin"
+    },
+    "zeeman_F2_per_nT": {
+      "value": 6.995832833,
+      "unit": "Hz/nT",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: Delta nu between adjacent m_F = g_F mu_B B / h (Steck Eq. 24); inputs: rb87.g_F_F2_exact, electron.bohr_magneton_over_h; Steck Fig. 3 prints 0.70 MHz/G = 7.0 Hz/nT"
+    },
+    "zeeman_F2_at_5nT": {
+      "value": 34.9792,
+      "unit": "Hz",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: adjacent-sublevel splitting at the QZFM's 5 nT range limit; inputs: rb87.zeeman_F2_per_nT; 5 nT = QuSpin QZFM Gen-3 dynamic range (specs.json); far too small to show on the level diagram, so the sublevels are drawn unshifted"
+    },
+    "d1_sigma_plus_strengths": [
+      {
+        "F": 2,
+        "mF": -2,
+        "Fp": 2,
+        "mFp": -1,
+        "strength": {
+          "value": 0.166666666667,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 15 (D1 sigma+ hyperfine dipole matrix elements, F = 2), p. 23: element sqrt(1/6) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 2,
+        "mF": -1,
+        "Fp": 2,
+        "mFp": 0,
+        "strength": {
+          "value": 0.25,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 15 (D1 sigma+ hyperfine dipole matrix elements, F = 2), p. 23: element sqrt(1/4) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 2,
+        "mF": 0,
+        "Fp": 2,
+        "mFp": 1,
+        "strength": {
+          "value": 0.25,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 15 (D1 sigma+ hyperfine dipole matrix elements, F = 2), p. 23: element sqrt(1/4) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 2,
+        "mF": 1,
+        "Fp": 2,
+        "mFp": 2,
+        "strength": {
+          "value": 0.166666666667,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 15 (D1 sigma+ hyperfine dipole matrix elements, F = 2), p. 23: element sqrt(1/6) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 2,
+        "mF": -2,
+        "Fp": 1,
+        "mFp": -1,
+        "strength": {
+          "value": 0.5,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 15 (D1 sigma+ hyperfine dipole matrix elements, F = 2), p. 23: element sqrt(1/2) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 2,
+        "mF": -1,
+        "Fp": 1,
+        "mFp": 0,
+        "strength": {
+          "value": 0.25,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 15 (D1 sigma+ hyperfine dipole matrix elements, F = 2), p. 23: element sqrt(1/4) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 2,
+        "mF": 0,
+        "Fp": 1,
+        "mFp": 1,
+        "strength": {
+          "value": 0.0833333333333,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 15 (D1 sigma+ hyperfine dipole matrix elements, F = 2), p. 23: element sqrt(1/12) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 1,
+        "mF": -1,
+        "Fp": 2,
+        "mFp": 0,
+        "strength": {
+          "value": 0.0833333333333,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 18 (D1 sigma+ hyperfine dipole matrix elements, F = 1), p. 24: element sqrt(1/12) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 1,
+        "mF": 0,
+        "Fp": 2,
+        "mFp": 1,
+        "strength": {
+          "value": 0.25,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 18 (D1 sigma+ hyperfine dipole matrix elements, F = 1), p. 24: element sqrt(1/4) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 1,
+        "mF": 1,
+        "Fp": 2,
+        "mFp": 2,
+        "strength": {
+          "value": 0.5,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 18 (D1 sigma+ hyperfine dipole matrix elements, F = 1), p. 24: element sqrt(1/2) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 1,
+        "mF": -1,
+        "Fp": 1,
+        "mFp": 0,
+        "strength": {
+          "value": 0.0833333333333,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 18 (D1 sigma+ hyperfine dipole matrix elements, F = 1), p. 24: element sqrt(1/12) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "F": 1,
+        "mF": 0,
+        "Fp": 1,
+        "mFp": 1,
+        "strength": {
+          "value": 0.0833333333333,
+          "unit": "|<J=1/2||er||J'=1/2>|^2",
+          "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 18 (D1 sigma+ hyperfine dipole matrix elements, F = 1), p. 24: element sqrt(1/12) squared",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      }
+    ],
+    "dark_state_table": {
+      "value": "no sigma+ entry for F = 2, m_F = +2",
+      "unit": "",
+      "source": "Daniel A. Steck, 'Rubidium 87 D Line Data', revision 2.3.4, 8 August 2025, http://steck.us/alkalidata, Table 15, p. 23 (the m_F = 2 column is empty for both F' = 2 and F' = 1)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "dark_state": {
+      "value": "F = 2, m_F = +2",
+      "unit": "",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: sigma+ light drives m_F -> m_F + 1; 5²P1/2 has F' = 1, 2 only, so from m_F = +2 there is no m_F' = +3 to reach: the stretched state is dark to sigma+ D1 light; inputs: rb87.nuclear_spin, rb87.p12_hfs_splitting, rb87.dark_state_table; levels from Steck Fig. 3; QuSpin: at zero field the atoms 'become largely transparent'"
+    },
+    "vdw_radius": {
+      "value": 3.03,
+      "unit": "Å",
+      "source": "Mantina, Chamberlin, Valero, Cramer & Truhlar, 'Consistent van der Waals radii for the whole main group', J. Phys. Chem. A 113, 5806-5812 (2009), doi:10.1021/jp8111556, abstract: 'The newly determined radii (in Å) are ... Rb, 3.03'",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "van der Waals radius on Bondi's scale; drawn as the atom's size. A free atom has no sharp edge."
+    },
+    "vdw_radius_nm": {
+      "value": 0.303,
+      "unit": "nm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: 3.03 Å = 0.303 nm; inputs: rb87.vdw_radius"
+    }
+  },
+  "opm_model": {
+    "bloch_equation": {
+      "value": "2 d<F>/dt = R (s - <P>) + Omega x <P> - Gamma <P>",
+      "unit": "",
+      "source": "Sulai et al., 'Characterizing atomic magnetic gradiometers for fetal magnetocardiography', arXiv 1906.03227 (2019), Appendix B, Eq. (B1), p. 10: R optical pumping rate, s photon spin vector, Omega = gamma B, Gamma total spin relaxation rate",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "steady_state": {
+      "value": "<P> = R / (Gamma'(Gamma'^2 + Omega^2)) [Gamma' Omega_y + Omega_z Omega_x, -Gamma' Omega_x + Omega_y Omega_z, Gamma'^2 + Omega_z^2], Gamma' = Gamma + R",
+      "unit": "",
+      "source": "Sulai et al., 'Characterizing atomic magnetic gradiometers for fetal magnetocardiography', arXiv 1906.03227 (2019), Appendix B, Eq. (B2), p. 10",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "arXiv v1 prints -Gamma'^2 in the z component; +Gamma'^2 is the sign that solves Eq. (B1) (Lean theorem opm_steady_state; Wolfram check below)"
+    },
+    "dimensionless_form": {
+      "value": "with s = z, w = Omega/Gamma' and P in units of R/Gamma': dP/dtau = z - P + w x P; steady state P* = (z + w x z + (w.z) w) / (1 + |w|^2)",
+      "unit": "",
+      "source": "Sulai et al., 'Characterizing atomic magnetic gradiometers for fetal magnetocardiography', arXiv 1906.03227 (2019), Eqs. (B1)-(B2), rescaled",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "tau is dimensionless time. The left side of (B1) is 2 d<F>/dt and the paper does not give how <F> follows <P>, so tau is not converted to seconds; the steady state does not depend on it."
+    },
+    "cell_temperature": {
+      "value": 150,
+      "unit": "°C",
+      "source": "Sulai et al., 'Characterizing atomic magnetic gradiometers for fetal magnetocardiography', arXiv 1906.03227 (2019), Sec. III, p. 2 ('We heat the cells up to a temperature of 150 °C')",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "QuSpin states the QZFM cell 'runs at ~150 °C' (QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15))"
+    },
+    "cell_density": {
+      "value": 100000000000000.0,
+      "unit": "cm^-3",
+      "source": "Sulai et al., 'Characterizing atomic magnetic gradiometers for fetal magnetocardiography', arXiv 1906.03227 (2019), Sec. III, p. 2 ('the equilibrium density is n = 10^14 cm^-3')",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "Sulai's cell holds rubidium (isotope not stated) with about 200 Torr N2 and Ne buffer gas"
+    },
+    "mean_atom_spacing": {
+      "value": 215.443469,
+      "unit": "nm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: mean spacing n^(-1/3); inputs: opm_model.cell_density; neighbouring atoms lie this far apart on average: far outside the scene, which shows one atom"
+    },
+    "pump": {
+      "value": "circularly polarised light resonant with the Rb D1 line at 795 nm polarises the atoms along z",
+      "unit": "",
+      "source": "Sulai et al., 'Characterizing atomic magnetic gradiometers for fetal magnetocardiography', arXiv 1906.03227 (2019), Sec. III, p. 2",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "QuSpin does not state the QZFM's laser line; the QZFM is single-beam ('based on zero-field resonance with a single laser beam', QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15))"
+    },
+    "qzfm_species": {
+      "value": "rubidium",
+      "unit": "",
+      "source": "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15); specs.json opm.atomic_species",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "QuSpin does not state the isotope; the scene uses 87Rb constants from Steck"
+    }
+  },
+  "qd": {
+    "fret_eq2": {
+      "value": "E = R0^6 / (R0^6 + r^6)",
+      "unit": "",
+      "source": "Benatto et al., 'FRET-Calc: A Free Software and Web Server for Förster Resonance Energy Transfer Calculation', Comput. Phys. Commun. (2023), doi:10.1016/j.cpc.2023.108715, arXiv 2311.15476, Eq. (2)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "fret_eq3": {
+      "value": "E = n_A R0^6 / (n_A R0^6 + r^6) for n_A acceptors at distance r",
+      "unit": "",
+      "source": "Benatto et al., 'FRET-Calc: A Free Software and Web Server for Förster Resonance Energy Transfer Calculation', Comput. Phys. Commun. (2023), doi:10.1016/j.cpc.2023.108715, arXiv 2311.15476, Eq. (3)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "particle_in_a_box": {
+      "value": "E_n = n^2 h^2 / (8 m L^2), psi_n(x) = sqrt(2/L) sin(n pi x / L), n = 1, 2, 3, ...",
+      "unit": "",
+      "source": "Griffiths & Schroeter, Introduction to Quantum Mechanics, 3rd ed. (Cambridge University Press, 2018), Sec. 2.2, the infinite square well",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "a one-dimensional model of confinement, used here without units"
+    },
+    "dot_material_and_size": {
+      "value": null,
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20), 8846-8852 (2012), doi:10.1021/ac302284s, abstract; specs.json qd_renin.qd_model_and_emission",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": "the abstract states neither the dot's material nor its size, so the box has no length or energy unit"
+    },
+    "forster_radius": {
+      "value": null,
+      "unit": "nm",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20), 8846-8852 (2012), doi:10.1021/ac302284s, abstract",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": "the Förster radius for the paper's dot and Cy5 is not stated: distances stay in units of R0"
+    },
+    "acceptors_per_dot": {
+      "value": null,
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20), 8846-8852 (2012), doi:10.1021/ac302284s, abstract (abstract: 'multiple' Cy5-labelled substrates per dot)",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": "the count per dot is not stated, so n is a dimensionless explorer"
+    },
+    "probe": {
+      "value": "streptavidin-coated quantum dot + multiple biotinylated, Cy5-labeled peptide substrates",
+      "unit": "",
+      "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "figshare_points": [
+      {
+        "pressure_GPa": 0.000101325,
+        "E": {
+          "value": 46.1,
+          "unit": "%",
+          "source": "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1); Optics Express 29(17), 27171 (2021), doi:10.1364/OE.434341; CdTe/CdS quantum dots, not the renin sensor.",
+          "tag": "recorded",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "r_over_R0": {
+          "value": 1.0263953,
+          "unit": "r/R0",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: r/R0 = (1/E - 1)^(1/6) (Eq. 2 inverted, one acceptor; Lean fret_inverse); inputs: recorded.qd_fret_figshare5468838 FRET efficiency"
+        }
+      },
+      {
+        "pressure_GPa": 0.2,
+        "E": {
+          "value": 50.2,
+          "unit": "%",
+          "source": "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1); Optics Express 29(17), 27171 (2021), doi:10.1364/OE.434341; CdTe/CdS quantum dots, not the renin sensor.",
+          "tag": "recorded",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "r_over_R0": {
+          "value": 0.99866755,
+          "unit": "r/R0",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: r/R0 = (1/E - 1)^(1/6) (Eq. 2 inverted, one acceptor; Lean fret_inverse); inputs: recorded.qd_fret_figshare5468838 FRET efficiency"
+        }
+      },
+      {
+        "pressure_GPa": 0.4,
+        "E": {
+          "value": 55.0,
+          "unit": "%",
+          "source": "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1); Optics Express 29(17), 27171 (2021), doi:10.1364/OE.434341; CdTe/CdS quantum dots, not the renin sensor.",
+          "tag": "recorded",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "r_over_R0": {
+          "value": 0.96710799,
+          "unit": "r/R0",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: r/R0 = (1/E - 1)^(1/6) (Eq. 2 inverted, one acceptor; Lean fret_inverse); inputs: recorded.qd_fret_figshare5468838 FRET efficiency"
+        }
+      },
+      {
+        "pressure_GPa": 0.6,
+        "E": {
+          "value": 62.1,
+          "unit": "%",
+          "source": "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1); Optics Express 29(17), 27171 (2021), doi:10.1364/OE.434341; CdTe/CdS quantum dots, not the renin sensor.",
+          "tag": "recorded",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "r_over_R0": {
+          "value": 0.9209964,
+          "unit": "r/R0",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: r/R0 = (1/E - 1)^(1/6) (Eq. 2 inverted, one acceptor; Lean fret_inverse); inputs: recorded.qd_fret_figshare5468838 FRET efficiency"
+        }
+      },
+      {
+        "pressure_GPa": 0.9,
+        "E": {
+          "value": 68.5,
+          "unit": "%",
+          "source": "figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1); Optics Express 29(17), 27171 (2021), doi:10.1364/OE.434341; CdTe/CdS quantum dots, not the renin sensor.",
+          "tag": "recorded",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "r_over_R0": {
+          "value": 0.87855711,
+          "unit": "r/R0",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: r/R0 = (1/E - 1)^(1/6) (Eq. 2 inverted, one acceptor; Lean fret_inverse); inputs: recorded.qd_fret_figshare5468838 FRET efficiency"
+        }
+      }
+    ]
+  },
+  "graphite": {
+    "a": {
+      "value": 2.464,
+      "unit": "Å",
+      "source": "Crystallography Open Database entry 9011577 (Trucano & Chen, 'Structure of graphite by neutron diffraction', Nature 258, 136 (1975), doi:10.1038/258136a0): _cell_length_a 2.464",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "natural crystals (COD title note); the CIF gives no measurement temperature"
+    },
+    "c": {
+      "value": 6.711,
+      "unit": "Å",
+      "source": "Crystallography Open Database entry 9011577 (Trucano & Chen, 'Structure of graphite by neutron diffraction', Nature 258, 136 (1975), doi:10.1038/258136a0): _cell_length_c 6.711",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "structure": {
+      "value": "hexagonal, P6_3/mmc (No. 194), AB (Bernal) stacking: C1 at (0, 0, 1/4), C2 at (1/3, 2/3, 1/4) and their symmetry copies; Z = 4",
+      "unit": "",
+      "source": "Crystallography Open Database entry 9011577 (Trucano & Chen, 'Structure of graphite by neutron diffraction', Nature 258, 136 (1975), doi:10.1038/258136a0): _space_group_IT_number 194, atom sites",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "layer_spacing_d002": {
+      "value": 3.3555,
+      "unit": "Å",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: layer spacing d(002) = c/2; inputs: graphite.c"
+    },
+    "cc_in_plane": {
+      "value": 1.422591063,
+      "unit": "Å",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: in-plane C-C = a / sqrt3; inputs: graphite.a, graphite.structure"
+    },
+    "d100": {
+      "value": 2.133886595,
+      "unit": "Å",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: d(100) = a sqrt3 / 2 (hexagonal d_hk0); inputs: graphite.a; the in-plane fringe spacing often reported in TEM of carbon dots; here it is graphite's value, not a measurement on the patch's dots"
+    },
+    "patch_dot_lattice_fringe": {
+      "value": null,
+      "unit": "Å",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41), 28012-28025 (2024), doi:10.1021/acsnano.4c06191 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "the abstract gives no TEM lattice fringes or dot size; the full text and SI are paywalled (SI request returned HTTP 403 on 2026-11-15). The scene uses graphite's lattice instead."
+    },
+    "patch_dot_size": {
+      "value": null,
+      "unit": "nm",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41), 28012-28025 (2024), doi:10.1021/acsnano.4c06191 (abstract)",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "not in the abstract; the drawn fragment's extent is a display choice"
+    }
+  },
+  "cqd": {
+    "mechanism": {
+      "value": "selective recovery of quenched fluorescence of the carbon-quantum-dot tattoo upon the blue light used for jaundice phototherapy, used for bilirubin sensing",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41), 28012-28025 (2024), doi:10.1021/acsnano.4c06191, abstract",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "quenching_model": {
+      "value": null,
+      "unit": "",
+      "source": "physics.json cqd_quenching: quenching/recovery model and constants from doi:10.1021/acsnano.4c06191",
+      "tag": "published_spec",
+      "status": "NOT_STATED",
+      "as_of": null,
+      "note": "not public, so quenching and recovery are shown only as on/off states"
+    },
+    "physics_label": {
+      "value": "carbon dots are fluorescent nanoparticles; their emission is not a spin-based quantum measurement",
+      "unit": "",
+      "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "general physics label, not a claim of the paper"
+    },
+    "emission_wavelength": {
+      "value": 439,
+      "unit": "nm",
+      "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1, external measurement records (general carbon dots, not the patch)",
+      "tag": "recorded",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "emission_colour": {
+      "value": "#6200ff",
+      "unit": "sRGB hex",
+      "source": "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: CIE 1931 colour-matching table -> XYZ -> linear sRGB, negatives clipped, scaled to full brightness, sRGB gamma; inputs: Measured carbon-dot emission maximum (most common value) wavelength"
+    }
+  },
+  "radii": {
+    "carbon_sp3": {
+      "value": 0.76,
+      "unit": "Å",
+      "source": "Cordero et al., 'Covalent radii revisited', Dalton Trans. 2008, 2832-2838, doi:10.1039/b801115j, covalent-radius table; values as transcribed in the periodictable Python package, periodictable/covalent_radius.py (https://sources.debian.org/src/python-periodictable/2.0.2-1/periodictable/covalent_radius.py): 'Csp3 0.76 (uncertainty 0.01)'",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "checked against the package's transcription, not the paywalled article"
+    },
+    "carbon_sp2": {
+      "value": 0.73,
+      "unit": "Å",
+      "source": "Cordero et al., 'Covalent radii revisited', Dalton Trans. 2008, 2832-2838, doi:10.1039/b801115j, covalent-radius table; values as transcribed in the periodictable Python package, periodictable/covalent_radius.py (https://sources.debian.org/src/python-periodictable/2.0.2-1/periodictable/covalent_radius.py): 'Csp2 0.73 (uncertainty 0.02)'",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "checked against the package's transcription, not the paywalled article"
+    },
+    "nitrogen": {
+      "value": 0.71,
+      "unit": "Å",
+      "source": "Cordero et al., 'Covalent radii revisited', Dalton Trans. 2008, 2832-2838, doi:10.1039/b801115j, covalent-radius table; values as transcribed in the periodictable Python package, periodictable/covalent_radius.py (https://sources.debian.org/src/python-periodictable/2.0.2-1/periodictable/covalent_radius.py): 'N 0.71 (uncertainty 0.01)'",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "checked against the package's transcription, not the paywalled article"
+    },
+    "oxygen": {
+      "value": 0.66,
+      "unit": "Å",
+      "source": "Cordero et al., 'Covalent radii revisited', Dalton Trans. 2008, 2832-2838, doi:10.1039/b801115j, covalent-radius table; values as transcribed in the periodictable Python package, periodictable/covalent_radius.py (https://sources.debian.org/src/python-periodictable/2.0.2-1/periodictable/covalent_radius.py): 'O 0.66 (uncertainty 0.02)'",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "checked against the package's transcription, not the paywalled article"
+    },
+    "hydrogen": {
+      "value": 0.31,
+      "unit": "Å",
+      "source": "Cordero et al., 'Covalent radii revisited', Dalton Trans. 2008, 2832-2838, doi:10.1039/b801115j, covalent-radius table; values as transcribed in the periodictable Python package, periodictable/covalent_radius.py (https://sources.debian.org/src/python-periodictable/2.0.2-1/periodictable/covalent_radius.py): 'H 0.31 (uncertainty 0.05)'",
+      "tag": "published_spec",
+      "status": "TO_CONFIRM",
+      "as_of": null,
+      "note": "checked against the package's transcription, not the paywalled article"
+    },
+    "rubidium_vdw": {
+      "value": 3.03,
+      "unit": "Å",
+      "source": "Mantina, Chamberlin, Valero, Cramer & Truhlar, 'Consistent van der Waals radii for the whole main group', J. Phys. Chem. A 113, 5806-5812 (2009), doi:10.1021/jp8111556, abstract: 'The newly determined radii (in Å) are ... Rb, 3.03'",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "van der Waals radius on Bondi's scale; drawn as the atom's size. A free atom has no sharp edge."
+    }
+  },
+  "cpk_colours": {
+    "H": {
+      "value": "#ffffff",
+      "unit": "sRGB hex",
+      "source": "Jmol element colours (CPK), https://jmol.sourceforge.net/jscolors/jmol_constants.js, 'as defined in JmolConstants.java (rev. 14469, Jmol 12.1.15)', elemParams[1] = ['H', 'FFFFFF', ...]",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "a display convention"
+    },
+    "C": {
+      "value": "#909090",
+      "unit": "sRGB hex",
+      "source": "Jmol element colours (CPK), https://jmol.sourceforge.net/jscolors/jmol_constants.js, 'as defined in JmolConstants.java (rev. 14469, Jmol 12.1.15)', elemParams[6] = ['C', '909090', ...]",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "a display convention"
+    },
+    "N": {
+      "value": "#3050f8",
+      "unit": "sRGB hex",
+      "source": "Jmol element colours (CPK), https://jmol.sourceforge.net/jscolors/jmol_constants.js, 'as defined in JmolConstants.java (rev. 14469, Jmol 12.1.15)', elemParams[7] = ['N', '3050F8', ...]",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "a display convention"
+    },
+    "O": {
+      "value": "#ff0d0d",
+      "unit": "sRGB hex",
+      "source": "Jmol element colours (CPK), https://jmol.sourceforge.net/jscolors/jmol_constants.js, 'as defined in JmolConstants.java (rev. 14469, Jmol 12.1.15)', elemParams[8] = ['O', 'FF0D0D', ...]",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "a display convention"
+    },
+    "Rb": {
+      "value": "#702eb0",
+      "unit": "sRGB hex",
+      "source": "Jmol element colours (CPK), https://jmol.sourceforge.net/jscolors/jmol_constants.js, 'as defined in JmolConstants.java (rev. 14469, Jmol 12.1.15)', elemParams[37] = ['Rb', '702EB0', ...]",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "a display convention"
+    }
+  },
+  "theme_colours": {
+    "value": {
+      "ink": "#e1e5d6",
+      "muted": "#8e9684",
+      "accent": "#a9d48c",
+      "background": "#23271f"
+    },
+    "unit": "sRGB hex",
+    "source": "SpinDrift UI theme from the project brief; ink, muted and accent equal ui/style.css --ink, --muted, --acc",
+    "tag": "published_spec",
+    "status": "VERIFIED",
+    "as_of": null,
+    "note": "used only for diagrams, axes, labels and for elements whose emission colour is not cited; never as a wavelength colour"
+  },
+  "checks": {
+    "tool": "Wolfram Language (WolframLanguageEvaluator via the Wolfram MCP connector), run 2026-11-15",
+    "code": "w = {wx, wy, wz}; z = {0, 0, 1}; P = (z + Cross[w, z] + (w . z) w)/(1 + w . w);\nsx = {{0,1,0},{1,0,1},{0,1,0}}/Sqrt[2]; sy = {{0,-I,0},{I,0,-I},{0,I,0}}/Sqrt[2]; sz = DiagonalMatrix[{1,0,-1}];\npsi = {Exp[-I ph], 1, 0}/Sqrt[2];  (* basis m = +1, 0, -1 *)\nex[m_] := FullSimplify[Conjugate[psi] . m . psi, Element[ph, Reals]];\na = 3.56715; gJ = 2.002331070; gI = -0.0009951414;\ngF[F_] := gJ (F(F+1) - 15/4 + 3/4)/(2F(F+1)) + gI (F(F+1) + 15/4 - 3/4)/(2F(F+1));\n<| steady_state_residual -> FullSimplify[z - P + Cross[w, P]], spin1_expectation_S -> {ex[sx], ex[sy], ex[sz]},\n   spin_tilt_deg -> ArcCos[(1/2)/Sqrt[3/4]]/Degree, spin_length -> Sqrt[3/4], diamond_bond_A -> Sqrt[3]/4 a,\n   tetrahedral_angle_deg -> ArcCos[-1/3]/Degree, gF2 -> gF[2], gF1 -> gF[1], zeeman_F2_Hz_per_nT -> gF[2] 13.9962449171,\n   gamma_barry_MHz_per_mT -> 2.003 13.9962449171, gamma_vs_codata -> (28.025 - 28.0249513861)/28.0249513861,\n   hfs_2A_GHz -> 2 3.417341305452145, rb_spacing_nm -> (10^14)^(-1/3) 10^7,\n   fret_inverse -> (1/{0.461, 0.502, 0.55, 0.621, 0.685} - 1)^(1/6), gslac_mT -> 2870/28.025,\n   graphite -> {6.711/2, 2.464/Sqrt[3], 2.464 Sqrt[3]/2} |>",
+    "wolfram_output": {
+      "steady_state_residual": "{0, 0, 0}",
+      "spin1_expectation_S": "{Cos[ph]/Sqrt[2], Sin[ph]/Sqrt[2], 1/2}",
+      "spin_tilt_deg": 54.73561031724534,
+      "spin_length": 0.8660254037844386,
+      "diamond_bond_A": 1.54462125955483,
+      "tetrahedral_angle_deg": 109.47122063449069,
+      "gF2": 0.49983641144999996,
+      "gF1": -0.5018266942499999,
+      "zeeman_F2_Hz_per_nT": 6.995832833138566,
+      "gamma_barry_MHz_per_mT": 28.034478568951304,
+      "gamma_vs_codata": 1.734664918027145e-06,
+      "hfs_2A_GHz": 6.83468261090429,
+      "rb_spacing_nm": 215.44346900318837,
+      "fret_inverse": [
+        1.026395265227141,
+        0.9986675480589213,
+        0.9671079886163778,
+        0.9209964049617906,
+        0.8785571085573246
+      ],
+      "gslac_mT": 102.4085637823372,
+      "graphite": [
+        3.3555,
+        1.4225910632832381,
+        2.133886594924857
+      ]
+    },
+    "python_agrees": true,
+    "bloch_steady_state": {
+      "what": "|z - P* + w x P*| for 2000 random w in [-5, 5]^3",
+      "max_residual": 8.326672684688674e-16,
+      "symbolic": "{0, 0, 0}"
+    },
+    "nv_splitting": {
+      "what": "|(nu+ - nu-) - 2 gamma B| and |(nu+ + nu-)/2 - D| for B = 0 to 5 mT in 0.01 mT steps",
+      "max_residual_MHz": 4.547473508864641e-13,
+      "lean": [
+        "nv_splitting",
+        "nv_centre"
+      ]
+    },
+    "tag": "calculated"
+  },
+  "note": "Values with tag calculated carry their formula and inputs. Display choices made by the scenes (slow-down factors, magnified level spacings, sphere-size fractions, arrow lengths) are not constants and are stated in each scene's info panel."
+}

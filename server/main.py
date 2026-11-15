@@ -15,12 +15,13 @@ import os
 import threading
 import time
 from contextlib import asynccontextmanager
+from typing import Literal
 
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from server import devices, live
 from server.common import (DATA, DEVICES, RECORDED, RECORDED_IDS, LOCATION_IDS, ROOT, now_iso, read_json,
@@ -236,6 +237,36 @@ def simulate_odmr(body: OdmrRequest):
         return res
     finally:
         _SIM_LOCK.release()
+
+
+class VerdictInputs(BaseModel):
+    shielding_factor: float | None = Field(default=None, gt=0, allow_inf_nan=False)
+    beats_averaged: int | None = Field(default=None, ge=1)
+    snr_required: float | None = Field(default=None, gt=0, allow_inf_nan=False)
+    target: Literal["r_peak", "q_wave"] | None = None
+    renin: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+    bilirubin_isf: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+    bandwidth_hz: float | None = Field(default=None, gt=0, allow_inf_nan=False)
+
+
+class VerdictRequest(BaseModel):
+    location: str | None = None
+    inputs: VerdictInputs = Field(default_factory=VerdictInputs)
+
+
+@app.post("/api/verdict")
+def post_verdict(body: VerdictRequest):
+    """Lean decides, for each sensor and body signal, whether it can be measured under the current conditions
+    (REQUIREMENTS_MET / NOT_MET / NEED_MORE_INFORMATION). Python only builds the input; see server/verdict.py."""
+    location = body.location or "iss"
+    if location not in LOCATION_IDS:
+        raise HTTPException(422, f"location must be one of {LOCATION_IDS}")
+    from server import verdict
+    try:
+        return verdict.build(location, body.inputs.model_dump(), current_live(),
+                             location_origin="user_input" if body.location else "app_default")
+    except verdict.LeanUnavailable as e:
+        return JSONResponse({"error": str(e), "verdicts": None}, status_code=503)
 
 
 @app.get("/")

@@ -1,0 +1,983 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T09:58:08Z",
+    "sources": [
+      "Lean 4 theorem prover, https://lean-lang.org (core library only, no Mathlib)",
+      "lean/SpinDrift/Physics.lean (this repository)",
+      "lean/SpinDrift/Checker.lean (this repository)",
+      "lean/SpinDrift/Soundness.lean (this repository)",
+      "lean/Main.lean (this repository): the spindrift-check command-line checker"
+    ]
+  },
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "lean_version": "Lean (version 4.35.0, x86_64-w64-windows-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "file": "lean/SpinDrift/Physics.lean",
+  "file_sha256": "daddc266d2b27569d3f3a6679fc8850d1e4787b9f15edbe22bbcd386625d6b23",
+  "files": [
+    {
+      "file": "lean/SpinDrift/Physics.lean",
+      "sha256": "daddc266d2b27569d3f3a6679fc8850d1e4787b9f15edbe22bbcd386625d6b23",
+      "theorems": 12
+    },
+    {
+      "file": "lean/SpinDrift/Checker.lean",
+      "sha256": "90e53c27124c8f8b28fe4b479bd823d8e413b3f0875c4a31d373b735cc070689",
+      "theorems": 0
+    },
+    {
+      "file": "lean/SpinDrift/Soundness.lean",
+      "sha256": "7940fd6199fb3392363a7fed389d31c1f9d8e6f2f35dd14294427d6ea3bcdd91",
+      "theorems": 38
+    }
+  ],
+  "sorry_count": 0,
+  "unsafe_markers": {
+    "sorry": 0,
+    "admit": 0,
+    "native_decide": 0,
+    "axiom": 0
+  },
+  "build": "lake build: success",
+  "build_warnings": 0,
+  "how_to_check": "cd lean && lake build && lake env lean Check.lean && .lake/build/bin/spindrift-check --selftest",
+  "note": "Each theorem is proved for any field (or commutative ring) of characteristic 0, so it holds for the real numbers. Lean checks the algebra of the formulas; it does not check measured values. That note is about the physics theorems (lean/SpinDrift/Physics.lean). The checker theorems (Checker.lean, Soundness.lean) prove what the three verdicts of SpinDrift.verdict mean for exact natural-number fractions; the compiled spindrift-check binary runs those definitions for POST /api/verdict.",
+  "checker": {
+    "definition": "SpinDrift.verdict in lean/SpinDrift/Checker.lean",
+    "rule": "NOT_MET if some requirement with every input present is violated; otherwise NEED_MORE_INFORMATION if some requirement has a missing input; otherwise REQUIREMENTS_MET",
+    "requirement": "prod lhs <= prod rhs over non-negative fractions num/den (den > 0), decided by cross-multiplication in Nat; a missing factor (?) or a zero denominator leaves it undecided",
+    "binary": "lean/.lake/build/bin/spindrift-check.exe",
+    "binary_sha256": "6a9421341ebe81c58c4a3842d26a093fd23ea04d1d4c645ac96d5d25adf62705",
+    "source_files": [
+      "lean/Main.lean",
+      "lean/SpinDrift.lean",
+      "lean/SpinDrift/Checker.lean",
+      "lean/SpinDrift/Physics.lean",
+      "lean/SpinDrift/Soundness.lean"
+    ],
+    "source_sha256": "8f1933191748494e5a1f1fcc87d161bd6e98d7cdcfba1e9d257dbb33f9cf844d",
+    "selftest": "pass",
+    "input_format": "lines 'check <id>' and 'req <id> <factors> <= <factors>'; factor n/d, n or ?",
+    "theorems": [
+      "usable_eq_some_iff",
+      "usable_eq_none_iff",
+      "prod_eq_some_iff",
+      "prod_eq_none_iff",
+      "Denotes.den_pos",
+      "holds_true_iff",
+      "holds_false_iff",
+      "holds_none_iff",
+      "missing_never_decides",
+      "zero_den_never_decides",
+      "holds_violated_exclusive",
+      "missing_never_passes_or_fails",
+      "verdict_met_iff",
+      "verdict_notMet_iff",
+      "verdict_needInfo_iff",
+      "verdict_notMet_sound",
+      "verdict_needInfo_sound",
+      "verdict_met_spec",
+      "verdict_notMet_spec",
+      "verdict_notMet_complete",
+      "verdict_needInfo_spec",
+      "missing_blocks_met",
+      "verdict_append_notMet",
+      "verdict_nil",
+      "Q.le_scale_left",
+      "Q.le_scale_right",
+      "Q.le_mul_self_iff",
+      "Q.le_trans",
+      "Q.mul_comm",
+      "Q.mul_le_mul_right",
+      "Q.mul_le_mul_left",
+      "Denotes.unique",
+      "Denotes.replace_le",
+      "holds_mono_lhs",
+      "demo_met",
+      "demo_notMet",
+      "demo_needInfo",
+      "demo_notMet_beats_missing"
+    ]
+  },
+  "theorems": [
+    {
+      "name": "nv_splitting",
+      "doc": "The two lines split by `2γB`: the field is read from the splitting.",
+      "statement": "{α : Type} [CommRing α] (D γ B : α) : nuPlus D γ B - nuMinus D γ B = 2 * (γ * B)",
+      "tactics": "unfold nuPlus nuMinus; grind",
+      "section": "NV centre in diamond: optically detected magnetic resonance (Barry et al., Rev. Mod. Phys. 92, 015004, Eq. 6)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "NV console: field from the ODMR splitting",
+      "wolfram_check": "nv_splitting",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.nv_splitting",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "nv_centre",
+      "doc": "The pair stays centred on the zero-field splitting `D`.",
+      "statement": "{α : Type} [CommRing α] (D γ B : α) : nuPlus D γ B + nuMinus D γ B = 2 * D",
+      "tactics": "unfold nuPlus nuMinus; grind",
+      "section": "NV centre in diamond: optically detected magnetic resonance (Barry et al., Rev. Mod. Phys. 92, 015004, Eq. 6)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "NV console: line pair centred on D",
+      "wolfram_check": "nv_centre",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.nv_centre",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "nv_zero_field",
+      "doc": "At zero field both lines sit at `D` (2870 MHz).",
+      "statement": "{α : Type} [CommRing α] (D γ : α) : nuPlus D γ 0 = D ∧ nuMinus D γ 0 = D",
+      "tactics": "unfold nuPlus nuMinus; grind",
+      "section": "NV centre in diamond: optically detected magnetic resonance (Barry et al., Rev. Mod. Phys. 92, 015004, Eq. 6)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "NV console: both lines at 2870 MHz at zero field",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.nv_zero_field",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "opm_steady_state",
+      "doc": "Sulai's Eq. B2 (transverse field only) solves the steady-state Bloch equations: `P_x = RΩ/(Γ² + Ω²)`, `P_z = RΓ/(Γ² + Ω²)`. This also fixes the sign of the `P_z` numerator (`+Γ²`).",
+      "statement": "{α : Type} [Field α] (R Γ Ω : α) (h : Γ ^ 2 + Ω ^ 2 ≠ 0) : -Γ * (R * Ω / (Γ ^ 2 + Ω ^ 2)) + Ω * (R * Γ / (Γ ^ 2 + Ω ^ 2)) = 0 ∧ R - Γ * (R * Γ / (Γ ^ 2 + Ω ^ 2)) - Ω * (R * Ω / (Γ ^ 2 + Ω ^ 2)) = 0",
+      "tactics": "constructor <;> grind",
+      "section": "Optically pumped magnetometer: Bloch steady state (Sulai et al., arXiv 1906.03227, Eqs. B1-B2)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "OPM console: Bloch steady state P_x, P_z",
+      "wolfram_check": "opm_steady_state",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.opm_steady_state",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "bloch_circle",
+      "doc": "In units of the half width (`x = Ω/Γ`), the tip of the polarisation traces a circle of radius ½ centred at `(0, ½)`: `p_x² + (p_z − ½)² = ¼` with `p_x = x/(1+x²)`, `p_z = 1/(1+x²)`.",
+      "statement": "{α : Type} [Field α] [IsCharP α 0] (x : α) (h : 1 + x ^ 2 ≠ 0) : (x / (1 + x ^ 2)) ^ 2 + (1 / (1 + x ^ 2) - 1 / 2) ^ 2 = 1 / 4",
+      "tactics": "grind",
+      "section": "Optically pumped magnetometer: Bloch steady state (Sulai et al., arXiv 1906.03227, Eqs. B1-B2)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "OPM console: polarisation tip on a circle (Bloch sphere view)",
+      "wolfram_check": "bloch_circle",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.bloch_circle",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "opm_half_width",
+      "doc": "The Lorentzian `1/(1+x²)` falls to half its peak at `x = 1`, so `ΔB = Γ/γ` is the half width at half maximum.",
+      "statement": "{α : Type} [Field α] [IsCharP α 0] : (1 : α) / (1 + 1 ^ 2) = (1 / (1 + 0 ^ 2)) / 2",
+      "tactics": "grind",
+      "section": "Optically pumped magnetometer: Bloch steady state (Sulai et al., arXiv 1906.03227, Eqs. B1-B2)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "OPM console: resonance half width at x = 1",
+      "wolfram_check": "opm_half_width",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.opm_half_width",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "fret_half",
+      "doc": "Förster efficiency is exactly ½ at the Förster radius (`r = R₀`).",
+      "statement": "{α : Type} [Field α] [IsCharP α 0] (R₀ : α) (_h : R₀ ^ 6 ≠ 0) : R₀ ^ 6 / (R₀ ^ 6 + R₀ ^ 6) = 1 / 2",
+      "tactics": "grind",
+      "section": "Quantum-dot FRET (FRET-Calc, Comput. Phys. Commun. 2023, Eqs. 2-3)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Quantum-dot console: E = 1/2 at r = R0",
+      "wolfram_check": "fret_half",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.fret_half",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "fret_one_acceptor",
+      "doc": "The multi-acceptor form (Eq. 3) reduces to Eq. 2 for one acceptor.",
+      "statement": "{α : Type} [Field α] (R₀ r : α) : (1 * R₀ ^ 6) / (1 * R₀ ^ 6 + r ^ 6) = R₀ ^ 6 / (R₀ ^ 6 + r ^ 6)",
+      "tactics": "grind",
+      "section": "Quantum-dot FRET (FRET-Calc, Comput. Phys. Commun. 2023, Eqs. 2-3)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Quantum-dot console: n = 1 acceptor form",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.fret_one_acceptor",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "fret_inverse",
+      "doc": "Inversion used for the measured points: if `E = 1/(1+q)` with `q = (r/R₀)⁶`, then `q = 1/E − 1`.",
+      "statement": "{α : Type} [Field α] (q : α) (_h : 1 + q ≠ 0) : q = 1 / (1 / (1 + q)) - 1",
+      "tactics": "grind",
+      "section": "Quantum-dot FRET (FRET-Calc, Comput. Phys. Commun. 2023, Eqs. 2-3)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Quantum-dot console: distance from measured efficiency",
+      "wolfram_check": "fret_inverse",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.fret_inverse",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "snr_averaging",
+      "doc": "Averaging law without square roots: if the averaged noise `a` satisfies `a²·N = n²` (that is `a = n/√N`), then the averaged SNR satisfies `(A/a)² = (A/n)²·N`, i.e. SNR grows as √N.",
+      "statement": "{α : Type} [Field α] (A a n N : α) (ha : a ≠ 0) (hn : n ≠ 0) (h : a ^ 2 * N = n ^ 2) : (A / a) ^ 2 = (A / n) ^ 2 * N",
+      "tactics": "grind",
+      "section": "NV heartbeat averaging (arXiv 2601.18843 inputs)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "NV console: SNR grows as the square root of beats averaged",
+      "wolfram_check": "snr_averaging",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.snr_averaging",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "field_clash",
+      "doc": "Field clash: the NV bias (1 mT = 1 000 000 nT) over the OPM range (5 nT) is 200 000.",
+      "statement": ": (1000000 : Nat) / 5 = 200000",
+      "tactics": "decide",
+      "section": "Numbers in the build log",
+      "axioms": [],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Tower: NV bias versus OPM range",
+      "wolfram_check": "field_clash",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.field_clash",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "odmr_step_vs_rpeak",
+      "doc": "ODMR-Lab's field step (0.05 mT = 50 000 000 pT) over a 25 pT heartbeat R-peak is 2 000 000.",
+      "statement": ": (50000000 : Nat) / 25 = 2000000",
+      "tactics": "decide",
+      "section": "Numbers in the build log",
+      "axioms": [],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "NV console: simulator step versus heartbeat R-peak",
+      "wolfram_check": "odmr_step_vs_rpeak",
+      "file": "lean/SpinDrift/Physics.lean",
+      "full_name": "SpinDrift.odmr_step_vs_rpeak",
+      "module": "SpinDrift.Physics"
+    },
+    {
+      "name": "usable_eq_some_iff",
+      "doc": "A factor is usable exactly when it is present with a positive denominator.",
+      "statement": "{f : Option Q} {a : Q} : usable f = some a ↔ f = some a ∧ 0 < a.den",
+      "tactics": "cases f with",
+      "section": "Factors and exact products",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.usable_eq_some_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "usable_eq_none_iff",
+      "doc": "A factor is unusable exactly when it is missing or has a zero denominator.",
+      "statement": "(f : Option Q) : usable f = none ↔ MissingFactor f",
+      "tactics": "cases f with",
+      "section": "Factors and exact products",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.usable_eq_none_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "prod_eq_some_iff",
+      "doc": "The executable product agrees with the specification `Denotes`.",
+      "statement": "{fs : List (Option Q)} {q : Q} : prod fs = some q ↔ Denotes fs q",
+      "tactics": "induction fs generalizing q with",
+      "section": "Factors and exact products",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.prod_eq_some_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "prod_eq_none_iff",
+      "doc": "The product is undefined exactly when some factor is missing or malformed.",
+      "statement": "{fs : List (Option Q)} : prod fs = none ↔ ∃ f ∈ fs, MissingFactor f",
+      "tactics": "induction fs with",
+      "section": "Factors and exact products",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.prod_eq_none_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Denotes.den_pos",
+      "doc": "Exact products of present, well-formed factors have a positive denominator.",
+      "statement": "{fs : List (Option Q)} {q : Q} (h : Denotes fs q) : 0 < q.den",
+      "tactics": "induction h with",
+      "section": "Factors and exact products",
+      "axioms": [],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Denotes.den_pos",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "holds_true_iff",
+      "doc": "Lean says a requirement holds exactly when the specification `Holds` is true.",
+      "statement": "(r : Req) : holds r = some true ↔ Holds r",
+      "tactics": "simp only [Holds, ← prod_eq_some_iff]",
+      "section": "Requirements: holds, violated, missing",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: a requirement's holds = true",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.holds_true_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "holds_false_iff",
+      "doc": "Lean says a requirement is violated exactly when every input is present and `lhs > rhs` (`Violated`).",
+      "statement": "(r : Req) : holds r = some false ↔ Violated r",
+      "tactics": "simp only [Violated, ← prod_eq_some_iff]",
+      "section": "Requirements: holds, violated, missing",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: a requirement's holds = false",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.holds_false_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "holds_none_iff",
+      "doc": "Lean leaves a requirement undecided exactly when some input is missing or malformed (`Missing`).",
+      "statement": "(r : Req) : holds r = none ↔ Missing r",
+      "tactics": "unfold Missing",
+      "section": "Requirements: holds, violated, missing",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: a requirement's holds = null (missing input)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.holds_none_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "missing_never_decides",
+      "doc": "Missing data never becomes a pass or a fail: one missing factor leaves the requirement undecided.",
+      "statement": "{r : Req} (h : none ∈ r.lhs ∨ none ∈ r.rhs) : holds r = none",
+      "tactics": "term: (holds_none_iff r).2 ⟨none, List.mem_append.2 h, .inl rfl⟩",
+      "section": "Requirements: holds, violated, missing",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: missing, NOT_STATED and TO_CONFIRM inputs are sent as ? and never pass or fail",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.missing_never_decides",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "zero_den_never_decides",
+      "doc": "A malformed factor (zero denominator) never becomes a pass or a fail either.",
+      "statement": "{r : Req} {q : Q} (hq : q.den = 0) (h : some q ∈ r.lhs ∨ some q ∈ r.rhs) : holds r = none",
+      "tactics": "term: (holds_none_iff r).2 ⟨some q, List.mem_append.2 h, .inr ⟨q, rfl, hq⟩⟩",
+      "section": "Requirements: holds, violated, missing",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.zero_den_never_decides",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "holds_violated_exclusive",
+      "doc": "A requirement cannot both hold and be violated.",
+      "statement": "{r : Req} (h1 : Holds r) (h2 : Violated r) : False",
+      "tactics": "have h := (holds_true_iff r).2 h1",
+      "section": "Requirements: holds, violated, missing",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.holds_violated_exclusive",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "missing_never_passes_or_fails",
+      "doc": "A requirement with a missing input is neither met nor violated.",
+      "statement": "{r : Req} (h : Missing r) : ¬ Holds r ∧ ¬ Violated r",
+      "tactics": "have hn := (holds_none_iff r).2 h",
+      "section": "Requirements: holds, violated, missing",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.missing_never_passes_or_fails",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_met_iff",
+      "doc": "REQUIREMENTS_MET exactly when Lean says every requirement holds.",
+      "statement": "(rs : List Req) : verdict rs = .met ↔ ∀ r ∈ rs, holds r = some true",
+      "tactics": "unfold verdict",
+      "section": "The three verdicts",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: REQUIREMENTS_MET exactly when every requirement holds",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_met_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_notMet_iff",
+      "doc": "NOT_MET exactly when some requirement with every input present is violated.",
+      "statement": "(rs : List Req) : verdict rs = .notMet ↔ ∃ r ∈ rs, holds r = some false",
+      "tactics": "unfold verdict",
+      "section": "The three verdicts",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_notMet_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_needInfo_iff",
+      "doc": "NEED_MORE_INFORMATION exactly when no requirement is violated and some requirement has a missing input.",
+      "statement": "(rs : List Req) : verdict rs = .needInfo ↔ (∀ r ∈ rs, holds r ≠ some false) ∧ ∃ r ∈ rs, holds r = none",
+      "tactics": "unfold verdict",
+      "section": "The three verdicts",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_needInfo_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_notMet_sound",
+      "doc": "NOT_MET implies a requirement with every input present is violated.",
+      "statement": "{rs : List Req} (h : verdict rs = .notMet) : ∃ r ∈ rs, holds r = some false",
+      "tactics": "term: (verdict_notMet_iff rs).1 h",
+      "section": "The three verdicts",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: NOT_MET names a requirement violated with every input present",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_notMet_sound",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_needInfo_sound",
+      "doc": "NEED_MORE_INFORMATION implies no requirement is violated and some requirement has a missing input.",
+      "statement": "{rs : List Req} (h : verdict rs = .needInfo) : (∀ r ∈ rs, holds r ≠ some false) ∧ ∃ r ∈ rs, holds r = none",
+      "tactics": "term: (verdict_needInfo_iff rs).1 h",
+      "section": "The three verdicts",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: NEED_MORE_INFORMATION means nothing violated and an input missing",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_needInfo_sound",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_met_spec",
+      "doc": "REQUIREMENTS_MET exactly when every requirement holds in the specification.",
+      "statement": "(rs : List Req) : verdict rs = .met ↔ ∀ r ∈ rs, Holds r",
+      "tactics": "rw [verdict_met_iff]",
+      "section": "Verdicts against the independent specification",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: REQUIREMENTS_MET against the independent specification",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_met_spec",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_notMet_spec",
+      "doc": "NOT_MET implies a documented violation: every input of that requirement is present and `lhs > rhs`.",
+      "statement": "{rs : List Req} (h : verdict rs = .notMet) : ∃ r ∈ rs, Violated r",
+      "tactics": "obtain ⟨r, hr, hf⟩ := verdict_notMet_sound h",
+      "section": "Verdicts against the independent specification",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: NOT_MET implies a documented violation",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_notMet_spec",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_notMet_complete",
+      "doc": "A documented violation always gives NOT_MET.",
+      "statement": "{rs : List Req} (h : ∃ r ∈ rs, Violated r) : verdict rs = .notMet",
+      "tactics": "obtain ⟨r, hr, hv⟩ := h",
+      "section": "Verdicts against the independent specification",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_notMet_complete",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_needInfo_spec",
+      "doc": "NEED_MORE_INFORMATION implies nothing is violated in the specification and some requirement lacks an input.",
+      "statement": "{rs : List Req} (h : verdict rs = .needInfo) : (∀ r ∈ rs, ¬ Violated r) ∧ ∃ r ∈ rs, Missing r",
+      "tactics": "obtain ⟨h1, r, hr, hn⟩ := verdict_needInfo_sound h",
+      "section": "Verdicts against the independent specification",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: NEED_MORE_INFORMATION against the independent specification",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_needInfo_spec",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "missing_blocks_met",
+      "doc": "A requirement with a missing input blocks REQUIREMENTS_MET.",
+      "statement": "{rs : List Req} {r : Req} (hr : r ∈ rs) (h : Missing r) : verdict rs ≠ .met",
+      "tactics": "intro hm",
+      "section": "Verdicts against the independent specification",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.missing_blocks_met",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_append_notMet",
+      "doc": "Adding requirements never turns NOT_MET into another verdict.",
+      "statement": "{rs more : List Req} (h : verdict rs = .notMet) : verdict (rs ++ more) = .notMet",
+      "tactics": "obtain ⟨r, hr, hf⟩ := verdict_notMet_sound h",
+      "section": "Verdicts against the independent specification",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_append_notMet",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "verdict_nil",
+      "doc": "An empty check is vacuously met; the `spindrift-check` binary therefore refuses a check with no requirements.",
+      "statement": ": verdict [] = .met",
+      "tactics": "term: (verdict_met_iff []).2 (fun _ hr => by cases hr)",
+      "section": "Verdicts against the independent specification",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "spindrift-check refuses a check with no requirements",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.verdict_nil",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Q.le_scale_left",
+      "doc": "The order does not depend on the representation of the left number (scaling by `k > 0`).",
+      "statement": "(a b : Q) (k : Nat) (hk : 0 < k) : Q.le ⟨a.num * k, a.den * k⟩ b ↔ Q.le a b",
+      "tactics": "simp only [Q.le]",
+      "section": "Exact arithmetic",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Q.le_scale_left",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Q.le_scale_right",
+      "doc": "The order does not depend on the representation of the right number (scaling by `k > 0`).",
+      "statement": "(a b : Q) (k : Nat) (hk : 0 < k) : Q.le a ⟨b.num * k, b.den * k⟩ ↔ Q.le a b",
+      "tactics": "simp only [Q.le]",
+      "section": "Exact arithmetic",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Q.le_scale_right",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Q.le_mul_self_iff",
+      "doc": "Comparing squares is exact for non-negative numbers: `a² ≤ b² ↔ a ≤ b`. This is why the SNR requirement can be checked as `snr²·η²·BW ≤ A²·N` without square roots.",
+      "statement": "(a b : Q) : Q.le (Q.mul a a) (Q.mul b b) ↔ Q.le a b",
+      "tactics": "simp only [Q.le, Q.mul]",
+      "section": "Exact arithmetic",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: SNR requirements are checked in squared form, without square roots",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Q.le_mul_self_iff",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Q.le_trans",
+      "doc": "The order is transitive through a well-formed middle number.",
+      "statement": "{a b c : Q} (hb : 0 < b.den) (h1 : Q.le a b) (h2 : Q.le b c) : Q.le a c",
+      "tactics": "unfold Q.le at *",
+      "section": "Exact arithmetic",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Q.le_trans",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Q.mul_comm",
+      "doc": "The exact product does not depend on the order of the two numbers.",
+      "statement": "(a b : Q) : Q.mul a b = Q.mul b a",
+      "tactics": "simp only [Q.mul, Nat.mul_comm a.num b.num, Nat.mul_comm a.den b.den]",
+      "section": "Exact arithmetic",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Q.mul_comm",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Q.mul_le_mul_right",
+      "doc": "Multiplying both sides by the same number on the right keeps the order.",
+      "statement": "{a b : Q} (c : Q) (h : Q.le a b) : Q.le (Q.mul a c) (Q.mul b c)",
+      "tactics": "simp only [Q.le, Q.mul] at *",
+      "section": "Exact arithmetic",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Q.mul_le_mul_right",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Q.mul_le_mul_left",
+      "doc": "Multiplying both sides by the same number on the left keeps the order.",
+      "statement": "{a b : Q} (c : Q) (h : Q.le a b) : Q.le (Q.mul c a) (Q.mul c b)",
+      "tactics": "rw [Q.mul_comm c a, Q.mul_comm c b]",
+      "section": "Exact arithmetic",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Q.mul_le_mul_left",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Denotes.unique",
+      "doc": "Exact products are unique.",
+      "statement": "{fs : List (Option Q)} {p q : Q} (hp : Denotes fs p) (hq : Denotes fs q) : p = q",
+      "tactics": "have h1 := prod_eq_some_iff.2 hp",
+      "section": "Using a datasheet bound",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Denotes.unique",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "Denotes.replace_le",
+      "doc": "Replacing one left-hand factor by a smaller well-formed one keeps an exact product (and makes it no larger).",
+      "statement": "(l₁ : List (Option Q)) {l₂ : List (Option Q)} {x y p : Q} (h : Denotes (l₁ ++ some x :: l₂) p) (hy : 0 < y.den) (hyx : Q.le y x) : ∃ p', Denotes (l₁ ++ some y :: l₂) p' ∧ Q.le p' p",
+      "tactics": "induction l₁ generalizing p with",
+      "section": "Using a datasheet bound",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.Denotes.replace_le",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "holds_mono_lhs",
+      "doc": "A smaller left-hand factor never breaks a requirement that holds. This is why a datasheet upper bound (for example a noise density stated as `< 15 fT/√Hz`) may be used for that factor: if the requirement holds at the bound, it holds for every value below it.",
+      "statement": "(id : String) (l₁ : List (Option Q)) {l₂ rhs : List (Option Q)} {x y : Q} (h : Holds ⟨id, l₁ ++ some x :: l₂, rhs⟩) (hy : 0 < y.den) (hyx : Q.le y x) : Holds ⟨id, l₁ ++ some y :: l₂, rhs⟩",
+      "tactics": "obtain ⟨a, b, ha, hb, hab⟩ := h",
+      "section": "Using a datasheet bound",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Verdict cards: the OPM SNR uses the datasheet noise bound (<15 fT/√Hz)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.holds_mono_lhs",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "demo_met",
+      "doc": "`1/2 ≤ 2/3` holds, so a one-requirement check is met.",
+      "statement": ": verdict [⟨\"demo\", [some ⟨1, 2⟩], [some ⟨2, 3⟩]⟩] = .met",
+      "tactics": "decide",
+      "section": "Worked examples, decided by the kernel",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.demo_met",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "demo_notMet",
+      "doc": "`3 ≤ 2` is violated, so the check is not met.",
+      "statement": ": verdict [⟨\"demo\", [some ⟨3, 1⟩], [some ⟨2, 1⟩]⟩] = .notMet",
+      "tactics": "decide",
+      "section": "Worked examples, decided by the kernel",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.demo_notMet",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "demo_needInfo",
+      "doc": "One missing factor and nothing violated: Lean asks for more information.",
+      "statement": ": verdict [⟨\"a\", [none], [some ⟨2, 1⟩]⟩, ⟨\"b\", [some ⟨1, 1⟩], [some ⟨2, 1⟩]⟩] = .needInfo",
+      "tactics": "decide",
+      "section": "Worked examples, decided by the kernel",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.demo_needInfo",
+      "module": "SpinDrift.Soundness"
+    },
+    {
+      "name": "demo_notMet_beats_missing",
+      "doc": "A violated requirement decides the verdict even when another one lacks an input.",
+      "statement": ": verdict [⟨\"a\", [none], [some ⟨2, 1⟩]⟩, ⟨\"b\", [some ⟨3, 1⟩], [some ⟨2, 1⟩]⟩] = .notMet",
+      "tactics": "decide",
+      "section": "Worked examples, decided by the kernel",
+      "axioms": [
+        "propext"
+      ],
+      "standard_axioms_only": true,
+      "kernel_checked": true,
+      "used_in": "Checker soundness (proved about SpinDrift.verdict, run by spindrift-check)",
+      "wolfram_check": null,
+      "file": "lean/SpinDrift/Soundness.lean",
+      "full_name": "SpinDrift.demo_notMet_beats_missing",
+      "module": "SpinDrift.Soundness"
+    }
+  ]
+}

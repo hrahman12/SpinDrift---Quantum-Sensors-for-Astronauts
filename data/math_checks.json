@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T09:17:10Z",
+    "sources": [
+      "Wolfram Language, evaluated through the Wolfram MCP connector (WolframLanguageEvaluator), run 2026-11-15",
+      "Barry et al., Rev. Mod. Phys. 92, 015004 (2020), Eqs. 6-7",
+      "Sulai et al., arXiv 1906.03227, Eqs. B1-B2",
+      "FRET-Calc, Comput. Phys. Commun. (2023), Eqs. 2-3"
+    ],
+    "run_date": "2026-11-15"
+  },
+  "tool": "Wolfram Language (WolframLanguageEvaluator)",
+  "code": "sx = {{0, 1, 0}, {1, 0, 1}, {0, 1, 0}}/Sqrt[2]; sz = DiagonalMatrix[{1, 0, -1}];\nd = 2870.; g = 28.025; b = 1.0; th = 30 Degree;\nev = Sort[Eigenvalues[d sz.sz + g b (Cos[th] sz + Sin[th] sx)]];\nexact = {ev[[2]] - ev[[1]], ev[[3]] - ev[[1]]};\nu = g b/d;\neq7[s_] := d (1 + s u Cos[th] + 3/2 u^2 Sin[th]^2 + s u^3 (1/8 Sin[th]^3 Tan[th] - 1/2 Sin[th]^2 Cos[th]));\n<|\n \"nv_splitting\" -> Simplify[(D0 + g0 B0) - (D0 - g0 B0) == 2 g0 B0],\n \"nv_centre\" -> Simplify[(D0 + g0 B0) + (D0 - g0 B0) == 2 D0],\n \"opm_steady_state\" -> Solve[{-G px + W pz == 0, R - G pz - W px == 0}, {px, pz}],\n \"bloch_circle\" -> Simplify[(x/(1 + x^2))^2 + (1/(1 + x^2) - 1/2)^2 == 1/4],\n \"opm_half_width\" -> Solve[1/(1 + x^2) == 1/2 && x > 0, x],\n \"fret_half\" -> Simplify[R0^6/(R0^6 + R0^6), R0 > 0],\n \"fret_inverse\" -> Solve[e == 1/(1 + q), q],\n \"snr_averaging\" -> Simplify[(A/(n/Sqrt[NN]))^2 == (A/n)^2 NN, n > 0 && NN > 0],\n \"field_clash\" -> 10^6/5,\n \"odmr_step_vs_rpeak\" -> (5*10^-5)/(25*10^-12),\n \"eq7_vs_exact_MHz_B1mT_theta30\" -> <|\"exact_diagonalisation\" -> exact, \"barry_eq7\" -> {eq7[-1], eq7[1]}, \"difference\" -> {eq7[-1], eq7[1]} - exact|>\n|>",
+  "tool_messages": "Symbol::undefined2 warning: the symbolic names (D0, B0, G, W, R, R0, A, NN) have no values. That is expected, because these checks are symbolic.",
+  "checks": [
+    {
+      "key": "nv_splitting",
+      "wolfram_output": "True",
+      "lean_theorem": "nv_splitting",
+      "agrees": true
+    },
+    {
+      "key": "nv_centre",
+      "wolfram_output": "True",
+      "lean_theorem": "nv_centre",
+      "agrees": true
+    },
+    {
+      "key": "opm_steady_state",
+      "wolfram_output": "{{px -> (R*W)/(G^2 + W^2), pz -> (G*R)/(G^2 + W^2)}}",
+      "lean_theorem": "opm_steady_state",
+      "agrees": true
+    },
+    {
+      "key": "bloch_circle",
+      "wolfram_output": "True",
+      "lean_theorem": "bloch_circle",
+      "agrees": true
+    },
+    {
+      "key": "opm_half_width",
+      "wolfram_output": "{{x -> 1}}",
+      "lean_theorem": "opm_half_width",
+      "agrees": true
+    },
+    {
+      "key": "fret_half",
+      "wolfram_output": "1/2",
+      "lean_theorem": "fret_half",
+      "agrees": true
+    },
+    {
+      "key": "fret_inverse",
+      "wolfram_output": "{{q -> (1 - e)/e}}",
+      "lean_theorem": "fret_inverse",
+      "agrees": true
+    },
+    {
+      "key": "snr_averaging",
+      "wolfram_output": "True",
+      "lean_theorem": "snr_averaging",
+      "agrees": true
+    },
+    {
+      "key": "field_clash",
+      "wolfram_output": "200000",
+      "lean_theorem": "field_clash",
+      "agrees": true
+    },
+    {
+      "key": "odmr_step_vs_rpeak",
+      "wolfram_output": "2000000",
+      "lean_theorem": "odmr_step_vs_rpeak",
+      "agrees": true
+    }
+  ],
+  "eq7_vs_exact": {
+    "inputs": {
+      "D_MHz": 2870.0,
+      "gamma_MHz_per_mT": 28.025,
+      "B_mT": 1.0,
+      "theta_deg": 30.0
+    },
+    "hamiltonian": "H = D S_z^2 + gamma B (cos(theta) S_z + sin(theta) S_x), spin 1, frequencies from the m_s = 0 level",
+    "exact_diagonalisation_MHz": [
+      2845.8325301608597,
+      2894.3727236899526
+    ],
+    "barry_eq7_MHz": [
+      2845.8325252622917,
+      2894.372718803475
+    ],
+    "difference_MHz": [
+      -4.898568022326799e-06,
+      -4.886477654508781e-06
+    ],
+    "tag": "calculated",
+    "note": "Eq. 7 is the series expansion in u = gamma B / D. At 1 mT and 30 degrees it matches the exact eigenvalues to about 5 Hz out of 2.9 GHz."
+  }
+}

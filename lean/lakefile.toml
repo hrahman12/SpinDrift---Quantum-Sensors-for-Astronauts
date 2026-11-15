@@ -1,0 +1,10 @@
+name = "spindrift"
+version = "0.1.0"
+defaultTargets = ["SpinDrift", "spindrift-check"]
+
+[[lean_lib]]
+name = "SpinDrift"
+
+[[lean_exe]]
+name = "spindrift-check"
+root = "Main"

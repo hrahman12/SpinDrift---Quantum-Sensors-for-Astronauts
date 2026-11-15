@@ -1,0 +1,719 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T10:24:28Z",
+    "sources": [
+      "Gerdes AM, Kellerman SE, Moore JA, et al. Structural remodeling of cardiac myocytes in patients with ischemic cardiomyopathy. Circulation 1992;86(2):426-30. doi:10.1161/01.cir.86.2.426, PubMed 1638711",
+      "Ohler A, Weisser-Thomas J, Piacentino V, et al. Two-photon laser scanning microscopy of the transverse-axial tubule system in ventricular cardiomyocytes from failing and non-failing human hearts. Cardiol Res Pract 2009;2009:802373. doi:10.4061/2009/802373, PubMed 20224636, PMC2833295",
+      "Manandhar S, Wu Y, Pathak T, et al. Differential cardiac remodelling: patterns of cardiomyocyte morphometry in multiple patient conditions. Cardiovasc Res 2026;122(14):1964-1977. doi:10.1093/cvr/cvag166, PubMed 42530239, PMC13653500",
+      "Evans E, Fung YC. Improved measurements of the erythrocyte geometry. Microvasc Res 1972;4(4):335-47. doi:10.1016/0026-2862(72)90069-6, PubMed 4635577",
+      "Fischer TM. The Shape of Human Red Blood Cells Suspended in Autologous Plasma and Serum. Cells 2022;11(12):1941. doi:10.3390/cells11121941, PubMed 35741070, PMC9222013",
+      "Sraj I, Szatmary AC, Marr DW, et al. Dynamic ray tracing for modeling optical cell manipulation. Opt Express 2010;18(16):16702-14. doi:10.1364/OE.18.016702, PubMed 20721060, PMC3408928",
+      "Dodson WR, Dimitrakopoulos P. Tank-treading of erythrocytes in strong shear flows via a nonstiff cytoskeleton-based continuum computational modeling. Biophys J 2010;99(9):2906-16. doi:10.1016/j.bpj.2010.08.048, PubMed 21044588, PMC2966011",
+      "Hosseini SM, Feng JJ. How malaria parasites reduce the deformability of infected red blood cells. Biophys J 2012;103(1):1-10. doi:10.1016/j.bpj.2012.05.026, PubMed 22828326, PMC3388224",
+      "Sandby-Møller J, Poulsen T, Wulf HC. Epidermal thickness at different body sites: relationship to age, gender, pigmentation, blood content, skin type and smoking habits. Acta Derm Venereol 2003;83(6):410-3. doi:10.1080/00015550310015419, PubMed 14690333",
+      "Wang Y, Tian M, Guo R, et al. Quantification of normal skin thickness using very high-frequency ultrasound: a clinical study in Chinese adults. Quant Imaging Med Surg 2025;15(6):5218-5231. doi:10.21037/qims-2024-2637, PubMed 40606357, PMC12209672",
+      "Tabatabaee RS, Naghdi T, Peyravian M, et al. An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice. ACS Nano 2024;18(41):28012-28025. doi:10.1021/acsnano.4c06191, PubMed 39356285",
+      "Neymotin SA, Daniels DS, Caldwell B, et al. Human Neocortical Neurosolver (HNN), a new software tool for interpreting the cellular and network origin of human MEG/EEG data. Elife 2020;9:e51214. doi:10.7554/eLife.51214, PubMed 31967544, PMC7018509",
+      "NASA OSDR OSD-569, https://osdr.nasa.gov/geode-py/ws/studies/OSD-569/download?source=datamanager&file=LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv",
+      "UniProt P00797 and Q14524, https://rest.uniprot.org/uniprotkb/P00797.json"
+    ],
+    "sha256": {
+      "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12107192/fullTextXML": "a9ea499aa9cef0153a3676c808b2a6415d0fb9324faed31c76f18f0e384390bb",
+      "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2833295/fullTextXML": "9d502ae11ac62febd0030a8aa2ef748aab9e06e0e53e6175276af714172c8dc5",
+      "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13653500/fullTextXML": "17c35cf76a47546a7aab2820623de487ba56c42519465bd42788e980db9a74eb",
+      "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3408928/fullTextXML": "308a33bbe86998cfe66f09c7f3d9da578f35f90bb6636c783474250bfeb4f729",
+      "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9222013/fullTextXML": "6b7d641b0fd33c51a05e89571358008e1fbfa9cbbb8326ebfa2270c6f280e7f3",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3388224/": "ae846e575336e4c8b0b3d508597a82ccfa2d5216ea413fc563e8f7a85c04721b",
+      "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12209672/fullTextXML": "ccf504515ab57b9b0ed1f86ecc8b1ff102e804422c19d363e8e84c17a75b0af7",
+      "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7018509/fullTextXML": "4a9c996f728ad3dc42b1d8f8fe33d91b2955c7fb120bcb08a1104e8a59d4f8b6",
+      "https://osdr.nasa.gov/geode-py/ws/studies/OSD-569/download?source=datamanager&file=LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv": "10a878b009eb2ea11a13fe92ad698098858639e8ed02f5ee849431313b9457d3",
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&tool=SpinDrift-build&id=1638711,20224636,42530239,4635577,21044588,22828326,14690333,40606357,31967544,8027054,39356285,27536876,40366698,38974113,20721060,35741070": "79e700719af92b5489a6533c7b546f8397baee2168e42467c804092932981c54"
+    },
+    "verification": "each literature value carries the quote found in the downloaded text; VERIFIED only if found",
+    "browser_check_not_read": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC2966011/"
+    ]
+  },
+  "cardiomyocyte": {
+    "length": {
+      "value": 141.0,
+      "unit": "µm",
+      "source": "Gerdes AM, Kellerman SE, Moore JA, et al. Structural remodeling of cardiac myocytes in patients with ischemic cardiomyopathy. Circulation 1992;86(2):426-30. doi:10.1161/01.cir.86.2.426, PubMed 1638711 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "mean myocyte length, left-ventricular myocytes isolated from 3 nonfailing donor hearts (normal coronary arteries); ± 9 µm as reported; quote found in the PubMed record: “197 +/- 8 versus 141 +/- 9 microns”"
+    },
+    "length_width_ratio": {
+      "value": 7.5,
+      "unit": "",
+      "source": "Gerdes AM, Kellerman SE, Moore JA, et al. Structural remodeling of cardiac myocytes in patients with ischemic cardiomyopathy. Circulation 1992;86(2):426-30. doi:10.1161/01.cir.86.2.426, PubMed 1638711 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "cell length/width ratio, nonfailing donor hearts, ± 0.6; quote found in the PubMed record: “11.2 +/- 0.9 versus 7.5 +/- 0.6”"
+    },
+    "width": {
+      "value": 18.8,
+      "unit": "µm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: width = length / (length/width ratio); inputs: cardiomyocyte.length, cardiomyocyte.length_width_ratio; ratio of the two reported means; the paper's own mean width is not in the abstract"
+    },
+    "thickness": {
+      "value": 15.7,
+      "unit": "µm",
+      "source": "Manandhar S, Wu Y, Pathak T, et al. Differential cardiac remodelling: patterns of cardiomyocyte morphometry in multiple patient conditions. Cardiovasc Res 2026;122(14):1964-1977. doi:10.1093/cvr/cvag166, PubMed 42530239, PMC13653500 (Results; CC BY-NC 4.0)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "myocyte maximum inscribed circle diameter of transverse profiles, H&E sections of mid left-ventricular free wall, 202 non-failing donor hearts, ± 2.7 µm; used here as the cell's thickness (the smaller transverse dimension), fixed tissue; quote found in https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13653500/fullTextXML: “MMIC diameter of 15.70 ± 2.7 μm”"
+    },
+    "sarcomere_length": {
+      "value": 1.899,
+      "unit": "µm",
+      "source": "Ohler A, Weisser-Thomas J, Piacentino V, et al. Two-photon laser scanning microscopy of the transverse-axial tubule system in ventricular cardiomyocytes from failing and non-failing human hearts. Cardiol Res Pract 2009;2009:802373. doi:10.4061/2009/802373, PubMed 20224636, PMC2833295 (Results and Fig. 3(d); CC BY 3.0)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "mean resting sarcomere length from transmitted-light images, ventricular myocytes from non-failing human hearts (11 cells, 2 hearts), ± 0.011 µm SEM; quote found in https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2833295/fullTextXML: “1.899 ± 0.011 μ m versus 1.917”"
+    },
+    "sarcomeres_along_length": {
+      "value": 74.25,
+      "unit": "",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: length / sarcomere length; inputs: cardiomyocyte.length, cardiomyocyte.sarcomere_length"
+    },
+    "nav15_location": {
+      "value": "Cell membrane; Cytoplasm, perinuclear region; Cell membrane, sarcolemma, T-tubule; Cell junction. RANGRF promotes trafficking to the cell membrane. Colocalizes with PKP2 at intercalated disks in the heart (By similarity). Colocalizes with ANK3 at the myocyte cintercalated disks",
+      "unit": "",
+      "source": "UniProt Q14524 SUBCELLULAR LOCATION, https://rest.uniprot.org/uniprotkb/Q14524.json (CC BY 4.0)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "not_drawn": [
+      "nuclei, mitochondria, T-tubules and myofibrils (no sourced dimensions used)",
+      "stepped and branched cell ends (the cell is drawn as an elliptic cylinder of the sourced length, width and thickness)"
+    ],
+    "conduction_velocity": {
+      "value": null,
+      "unit": "m/s",
+      "source": "no sourced human ventricular conduction velocity used",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "the scene's excitation sweep uses illustrative timing"
+    }
+  },
+  "rbc": {
+    "equation": "half-thickness z(r) = ± 1/2 · sqrt(1 - (r/R0)^2) · (C0 + C2 (r/R0)^2 + C4 (r/R0)^4)",
+    "equation_source": "Evans E, Fung YC. Improved measurements of the erythrocyte geometry. Microvasc Res 1972;4(4):335-47. doi:10.1016/0026-2862(72)90069-6, PubMed 4635577",
+    "equation_quote_found": true,
+    "R0": {
+      "value": 3.91,
+      "unit": "µm",
+      "source": "Evans E, Fung YC. Improved measurements of the erythrocyte geometry. Microvasc Res 1972;4(4):335-47. doi:10.1016/0026-2862(72)90069-6, PubMed 4635577 (Evans-Fung shape: R0)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "cell radius on the central plane, half the Evans-Fung mean diameter 7.82 um; Evans-Fung mean diameter 7.82 um (SD 0.62 um, 50 cells, one donor, interference holography, saline) in Fischer TM. The Shape of Human Red Blood Cells Suspended in Autologous Plasma and Serum. Cells 2022;11(12):1941. doi:10.3390/cells11121941, PubMed 35741070, PMC9222013, Table 1: “saline 50 1 donor face-on interference holography 7.82 0.62 [ 1 ]”, reference [1] = Evans and Fung 1972; dimensionless coefficients attributed to Evans and Fung in Sraj I, Szatmary AC, Marr DW, et al. Dynamic ray tracing for modeling optical cell manipulation. Opt Express 2010;18(16):16702-14. doi:10.1364/OE.18.016702, PubMed 20721060, PMC3408928, Eq. 9: “C 0 = 0.207161, C 1 = 2.002558 and C 2 = −1.122762”; R0 with the dimensionless set in Hosseini SM, Feng JJ. How malaria parasites reduce the deformability of infected red blood cells. Biophys J 2012;103(1):1-10. doi:10.1016/j.bpj.2012.05.026, PubMed 22828326, PMC3388224, Eq. 1: “R 0 = 3.91 μ m is the cell radius on the central plane, c 0 …”; not read this run (PMC answered with a browser check): https://pmc.ncbi.nlm.nih.gov/articles/PMC2966011/"
+    },
+    "C0": {
+      "value": 0.81,
+      "unit": "µm",
+      "source": "Evans E, Fung YC. Improved measurements of the erythrocyte geometry. Microvasc Res 1972;4(4):335-47. doi:10.1016/0026-2862(72)90069-6, PubMed 4635577 (Evans-Fung shape: C0)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "thickness at the centre; = c0 x R0 = 0.207161 x 3.91 = 0.81000 um; Evans-Fung mean diameter 7.82 um (SD 0.62 um, 50 cells, one donor, interference holography, saline) in Fischer TM. The Shape of Human Red Blood Cells Suspended in Autologous Plasma and Serum. Cells 2022;11(12):1941. doi:10.3390/cells11121941, PubMed 35741070, PMC9222013, Table 1: “saline 50 1 donor face-on interference holography 7.82 0.62 [ 1 ]”, reference [1] = Evans and Fung 1972; dimensionless coefficients attributed to Evans and Fung in Sraj I, Szatmary AC, Marr DW, et al. Dynamic ray tracing for modeling optical cell manipulation. Opt Express 2010;18(16):16702-14. doi:10.1364/OE.18.016702, PubMed 20721060, PMC3408928, Eq. 9: “C 0 = 0.207161, C 1 = 2.002558 and C 2 = −1.122762”; R0 with the dimensionless set in Hosseini SM, Feng JJ. How malaria parasites reduce the deformability of infected red blood cells. Biophys J 2012;103(1):1-10. doi:10.1016/j.bpj.2012.05.026, PubMed 22828326, PMC3388224, Eq. 1: “R 0 = 3.91 μ m is the cell radius on the central plane, c 0 …”; not read this run (PMC answered with a browser check): https://pmc.ncbi.nlm.nih.gov/articles/PMC2966011/"
+    },
+    "C2": {
+      "value": 7.83,
+      "unit": "µm",
+      "source": "Evans E, Fung YC. Improved measurements of the erythrocyte geometry. Microvasc Res 1972;4(4):335-47. doi:10.1016/0026-2862(72)90069-6, PubMed 4635577 (Evans-Fung shape: C2)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "coefficient of (r/R0)^2; = c1 x R0 = 2.002558 x 3.91 = 7.83000 um; Evans-Fung mean diameter 7.82 um (SD 0.62 um, 50 cells, one donor, interference holography, saline) in Fischer TM. The Shape of Human Red Blood Cells Suspended in Autologous Plasma and Serum. Cells 2022;11(12):1941. doi:10.3390/cells11121941, PubMed 35741070, PMC9222013, Table 1: “saline 50 1 donor face-on interference holography 7.82 0.62 [ 1 ]”, reference [1] = Evans and Fung 1972; dimensionless coefficients attributed to Evans and Fung in Sraj I, Szatmary AC, Marr DW, et al. Dynamic ray tracing for modeling optical cell manipulation. Opt Express 2010;18(16):16702-14. doi:10.1364/OE.18.016702, PubMed 20721060, PMC3408928, Eq. 9: “C 0 = 0.207161, C 1 = 2.002558 and C 2 = −1.122762”; R0 with the dimensionless set in Hosseini SM, Feng JJ. How malaria parasites reduce the deformability of infected red blood cells. Biophys J 2012;103(1):1-10. doi:10.1016/j.bpj.2012.05.026, PubMed 22828326, PMC3388224, Eq. 1: “R 0 = 3.91 μ m is the cell radius on the central plane, c 0 …”; not read this run (PMC answered with a browser check): https://pmc.ncbi.nlm.nih.gov/articles/PMC2966011/"
+    },
+    "C4": {
+      "value": -4.39,
+      "unit": "µm",
+      "source": "Evans E, Fung YC. Improved measurements of the erythrocyte geometry. Microvasc Res 1972;4(4):335-47. doi:10.1016/0026-2862(72)90069-6, PubMed 4635577 (Evans-Fung shape: C4)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "coefficient of (r/R0)^4; = c2 x R0 = -1.122762 x 3.91 = -4.39000 um; Evans-Fung mean diameter 7.82 um (SD 0.62 um, 50 cells, one donor, interference holography, saline) in Fischer TM. The Shape of Human Red Blood Cells Suspended in Autologous Plasma and Serum. Cells 2022;11(12):1941. doi:10.3390/cells11121941, PubMed 35741070, PMC9222013, Table 1: “saline 50 1 donor face-on interference holography 7.82 0.62 [ 1 ]”, reference [1] = Evans and Fung 1972; dimensionless coefficients attributed to Evans and Fung in Sraj I, Szatmary AC, Marr DW, et al. Dynamic ray tracing for modeling optical cell manipulation. Opt Express 2010;18(16):16702-14. doi:10.1364/OE.18.016702, PubMed 20721060, PMC3408928, Eq. 9: “C 0 = 0.207161, C 1 = 2.002558 and C 2 = −1.122762”; R0 with the dimensionless set in Hosseini SM, Feng JJ. How malaria parasites reduce the deformability of infected red blood cells. Biophys J 2012;103(1):1-10. doi:10.1016/j.bpj.2012.05.026, PubMed 22828326, PMC3388224, Eq. 1: “R 0 = 3.91 μ m is the cell radius on the central plane, c 0 …”; not read this run (PMC answered with a browser check): https://pmc.ncbi.nlm.nih.gov/articles/PMC2966011/"
+    },
+    "dimensionless": {
+      "C0": 0.207161,
+      "C2": 2.002558,
+      "C4": -1.122762
+    },
+    "diameter_in_autologous_plasma": {
+      "value": 8.123,
+      "unit": "µm",
+      "source": "Fischer TM. The Shape of Human Red Blood Cells Suspended in Autologous Plasma and Serum. Cells 2022;11(12):1941. doi:10.3390/cells11121941, PubMed 35741070, PMC9222013 (Table 1, this work)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "mean diameter of red cells in autologous plasma, 4882 cells from 8 donors, SD 0.425 um; context only: the drawn shape is Evans and Fung's (cells in buffered saline); quote found in https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9222013/fullTextXML: “plasma 4882 8 donors face-on distribution of transmittance 8.123 0.425 this work”"
+    },
+    "diameter": {
+      "value": 7.82,
+      "unit": "µm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: 2 R0; inputs: rbc.R0"
+    },
+    "thickness_centre": {
+      "value": 0.81,
+      "unit": "µm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: 2 z(0) = C0; inputs: rbc.R0, rbc.C0, rbc.C2, rbc.C4"
+    },
+    "thickness_max": {
+      "value": 2.566,
+      "unit": "µm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: max over r of 2 z(r); inputs: rbc.R0, rbc.C0, rbc.C2, rbc.C4; at r = 2.738 µm"
+    },
+    "r_at_thickness_max": {
+      "value": 2.738,
+      "unit": "µm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: argmax of 2 z(r); inputs: rbc.R0, rbc.C0, rbc.C2, rbc.C4"
+    },
+    "volume": {
+      "value": 94.1,
+      "unit": "µm³",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: integral of 2 z(r) 2 pi r dr from 0 to R0 (numerical); inputs: rbc.R0, rbc.C0, rbc.C2, rbc.C4"
+    },
+    "area": {
+      "value": 134.1,
+      "unit": "µm²",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: surface of revolution of both faces (numerical); inputs: rbc.R0, rbc.C0, rbc.C2, rbc.C4"
+    },
+    "crew": {
+      "subject": "C001",
+      "timepoint": "R+1",
+      "rbc_count": {
+        "value": 4.84,
+        "unit": "million/µL",
+        "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001 at R+1",
+        "tag": "recorded",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "reference range 4.2-5.8 Million/uL (as released); timepoint is days from return (R+)"
+      },
+      "mcv": {
+        "value": 90.1,
+        "unit": "fL",
+        "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001 at R+1",
+        "tag": "recorded",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "reference range 80-100 fL (as released); timepoint is days from return (R+)"
+      },
+      "hematocrit": {
+        "value": 43.6,
+        "unit": "%",
+        "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001 at R+1",
+        "tag": "recorded",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "reference range 38.5-50 % (as released); timepoint is days from return (R+)"
+      },
+      "series": {
+        "rbc_count": [
+          {
+            "timepoint": "L-92",
+            "value": {
+              "value": 4.58,
+              "unit": "Million/uL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 4.2-5.8 Million/uL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "L-44",
+            "value": {
+              "value": 4.85,
+              "unit": "Million/uL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 4.2-5.8 Million/uL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "L-3",
+            "value": {
+              "value": 4.69,
+              "unit": "Million/uL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 4.2-5.8 Million/uL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+1",
+            "value": {
+              "value": 4.84,
+              "unit": "Million/uL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 4.2-5.8 Million/uL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+45",
+            "value": {
+              "value": 4.63,
+              "unit": "Million/uL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 4.2-5.8 Million/uL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+82",
+            "value": {
+              "value": 5.02,
+              "unit": "Million/uL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 4.2-5.8 Million/uL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+194",
+            "value": {
+              "value": 4.66,
+              "unit": "Million/uL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 4.2-5.8 Million/uL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          }
+        ],
+        "hemoglobin": [
+          {
+            "timepoint": "L-92",
+            "value": {
+              "value": 14.1,
+              "unit": "g/dL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 13.2-17.1 g/dL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "L-44",
+            "value": {
+              "value": 14.9,
+              "unit": "g/dL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 13.2-17.1 g/dL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "L-3",
+            "value": {
+              "value": 14.7,
+              "unit": "g/dL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 13.2-17.1 g/dL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+1",
+            "value": {
+              "value": 14.7,
+              "unit": "g/dL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 13.2-17.1 g/dL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+45",
+            "value": {
+              "value": 14.3,
+              "unit": "g/dL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 13.2-17.1 g/dL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+82",
+            "value": {
+              "value": 15.7,
+              "unit": "g/dL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 13.2-17.1 g/dL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+194",
+            "value": {
+              "value": 14.1,
+              "unit": "g/dL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 13.2-17.1 g/dL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          }
+        ],
+        "hematocrit": [
+          {
+            "timepoint": "L-92",
+            "value": {
+              "value": 42.5,
+              "unit": "%",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 38.5-50 % (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "L-44",
+            "value": {
+              "value": 45.1,
+              "unit": "%",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 38.5-50 % (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "L-3",
+            "value": {
+              "value": 44.5,
+              "unit": "%",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 38.5-50 % (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+1",
+            "value": {
+              "value": 43.6,
+              "unit": "%",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 38.5-50 % (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+45",
+            "value": {
+              "value": 43.3,
+              "unit": "%",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 38.5-50 % (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+82",
+            "value": {
+              "value": 46.1,
+              "unit": "%",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 38.5-50 % (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+194",
+            "value": {
+              "value": 41.8,
+              "unit": "%",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 38.5-50 % (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          }
+        ],
+        "mcv": [
+          {
+            "timepoint": "L-92",
+            "value": {
+              "value": 92.8,
+              "unit": "fL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 80-100 fL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "L-44",
+            "value": {
+              "value": 93.0,
+              "unit": "fL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 80-100 fL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "L-3",
+            "value": {
+              "value": 94.9,
+              "unit": "fL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 80-100 fL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+1",
+            "value": {
+              "value": 90.1,
+              "unit": "fL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 80-100 fL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+45",
+            "value": {
+              "value": 93.5,
+              "unit": "fL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 80-100 fL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+82",
+            "value": {
+              "value": 91.8,
+              "unit": "fL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 80-100 fL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          },
+          {
+            "timepoint": "R+194",
+            "value": {
+              "value": 89.7,
+              "unit": "fL",
+              "source": "NASA OSDR OSD-569 (SpaceX Inspiration4), LSDS-7_Complete_Blood_Count_CBC.upload_SUBMITTED.csv, crew C001",
+              "tag": "recorded",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "reference range 80-100 fL (as released); timepoint is days from launch (L-) or return (R+)"
+            }
+          }
+        ]
+      },
+      "study": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-569",
+      "terms": "NASA OSDR terms (https://science.nasa.gov/reference/osdr-help-terms-and-conditions/): open access under NASA's Science Information Policy; cite the study. Acknowledgement: 'Data are courtesy of the NASA Open Science Data Repository (https://osdr.nasa.gov/bio/repo)'."
+    },
+    "blood_volume_per_cell": {
+      "value": 206.6,
+      "unit": "µm³",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: 1 / RBC count (1 µL = 1e9 µm³); inputs: rbc.crew.rbc_count"
+    },
+    "cube_side": {
+      "value": 5.912,
+      "unit": "µm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: (blood volume per cell)^(1/3); inputs: rbc.blood_volume_per_cell"
+    },
+    "evans_fung_volume_fraction": {
+      "value": 45.5,
+      "unit": "%",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: RBC count x Evans-Fung volume; inputs: rbc.crew.rbc_count, rbc.volume; compare the recorded haematocrit"
+    },
+    "plasma_role": {
+      "value": "Renin is a highly specific endopeptidase, whose only known function is to generate angiotensin I from angiotensinogen in the plasma, initiating a cascade of reactions that produce an elevation of blood pressure and increased sodium retention by the kidney",
+      "unit": "",
+      "source": "UniProt P00797 FUNCTION comment, https://rest.uniprot.org/uniprotkb/P00797.json (CC BY 4.0)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "layout_note": "Cell positions and orientations in the scene are illustrative and sparser than blood; the crowding is shown by the per-cell volume cube."
+  },
+  "skin": {
+    "site": "dorsal forearm (the scene's patch site is the right forearm)",
+    "stratum_corneum": {
+      "value": 18.3,
+      "unit": "µm",
+      "source": "Sandby-Møller J, Poulsen T, Wulf HC. Epidermal thickness at different body sites: relationship to age, gender, pigmentation, blood content, skin type and smoking habits. Acta Derm Venereol 2003;83(6):410-3. doi:10.1080/00015550310015419, PubMed 14690333 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "stratum corneum, dorsal forearm, biopsies of 71 volunteers measured microscopically, SD 4.9 µm; quote found in the PubMed record: “18.3 (4.9) microm at the dorsal aspect of the forearm”"
+    },
+    "cellular_epidermis": {
+      "value": 56.6,
+      "unit": "µm",
+      "source": "Sandby-Møller J, Poulsen T, Wulf HC. Epidermal thickness at different body sites: relationship to age, gender, pigmentation, blood content, skin type and smoking habits. Acta Derm Venereol 2003;83(6):410-3. doi:10.1080/00015550310015419, PubMed 14690333 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "cellular (viable) epidermis, dorsal forearm, same biopsies, SD 11.5 µm; quote found in the PubMed record: “cellular epidermis were 56.6 (11.5) microm”"
+    },
+    "dermis": {
+      "value": 1613.8,
+      "unit": "µm",
+      "source": "Wang Y, Tian M, Guo R, et al. Quantification of normal skin thickness using very high-frequency ultrasound: a clinical study in Chinese adults. Quant Imaging Med Surg 2025;15(6):5218-5231. doi:10.21037/qims-2024-2637, PubMed 40606357, PMC12209672 (Table 3, right forearm, dorsal; 50 MHz ultrasound, longitudinal section)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "dermis 1.6138 ± 0.4217 mm, 74 healthy Chinese adults; a different study and method (ultrasound) from the epidermal values (biopsy); quote found in https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12209672/fullTextXML: “Right forearm 0.1178±0.0185 0.1132±0.0189 1.496 0.137 1.6138±0.4217”"
+    },
+    "total_drawn": {
+      "value": 1688.7,
+      "unit": "µm",
+      "source": "SpinDrift calculation",
+      "tag": "calculated",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "formula: sum of the three layers; inputs: skin.stratum_corneum, skin.cellular_epidermis, skin.dermis; layers from two different studies"
+    },
+    "patch_microneedles": {
+      "value": "dissolving/hydrogel microneedles loaded with fluorescent carbon quantum dots",
+      "unit": "",
+      "source": "Tabatabaee RS, Naghdi T, Peyravian M, et al. An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice. ACS Nano 2024;18(41):28012-28025. doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    },
+    "microneedle_geometry": {
+      "value": null,
+      "unit": "µm",
+      "source": "Tabatabaee RS, Naghdi T, Peyravian M, et al. An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice. ACS Nano 2024;18(41):28012-28025. doi:10.1021/acsnano.4c06191, PubMed 39356285",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "needle height, base width, tip, pitch and array size are not in the abstract (abstract has length values: False); the full text and supporting information are paywalled (publisher returns HTTP 403 to automated access), so the needles are not drawn"
+    },
+    "dermal_epidermal_junction": "drawn flat; its undulation is not drawn (no sourced geometry used)"
+  },
+  "neuron": {
+    "meg_source": {
+      "value": "MEG/EEG primary currents: the net intracellular current flow in the apical dendrites of pyramidal neurons",
+      "unit": "",
+      "source": "Neymotin SA, Daniels DS, Caldwell B, et al. Human Neocortical Neurosolver (HNN), a new software tool for interpreting the cellular and network origin of human MEG/EEG data. Elife 2020;9:e51214. doi:10.7554/eLife.51214, PubMed 31967544, PMC7018509 (CC BY 4.0)",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": "quote found in https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7018509/fullTextXML: “the net intracellular current flow in the apical dendrites of pyramidal neurons”"
+    },
+    "conduction_velocity": {
+      "value": null,
+      "unit": "m/s",
+      "source": "no sourced conduction velocity for this cell type used",
+      "tag": "published_spec",
+      "status": "NOT_YET_EXTRACTED",
+      "as_of": null,
+      "note": "impulses in the scene use illustrative timing"
+    }
+  }
+}

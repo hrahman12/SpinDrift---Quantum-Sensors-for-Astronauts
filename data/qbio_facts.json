@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T09:17:10Z",
+    "sources": [
+      "VisualNeuroscience.AI atlas, https://visualneuroscience.ai",
+      "ChEMBL, https://www.ebi.ac.uk/chembl/ (CC BY-SA 3.0)",
+      "Open Targets Platform, https://platform.opentargets.org"
+    ],
+    "run_date": "2026-11-15"
+  },
+  "tag": "published_spec",
+  "brain_ba4": {
+    "connector": "VisualNeuroscience.AI brain atlas (brodmann_area, area 4)",
+    "name": "BA4, primary motor cortex",
+    "region": "Precentral gyrus",
+    "lobe": "frontal",
+    "centre_of_mass_mni": [
+      1,
+      -23,
+      60
+    ],
+    "borders_longest_first": [
+      "BA6",
+      "BA3",
+      "BA5",
+      "BA43",
+      "BA48"
+    ],
+    "function": "Voluntary movement; laid out as a body map (homunculus) mirroring the sensory one across the central sulcus.",
+    "link": "https://visualneuroscience.ai/regions.html#sel=B:4",
+    "used_for": "the nine OPMs over the right somatomotor area (MNE-Python OPM somatosensory recording)"
+  },
+  "renin_target": {
+    "connector": "ChEMBL (bio-research plugin, target_search gene REN, Homo sapiens)",
+    "chembl_id": "CHEMBL286",
+    "type": "SINGLE PROTEIN",
+    "uniprot": "P00797",
+    "hgnc": "HGNC:9958",
+    "go_function": [
+      "GO:0004190 aspartic-type endopeptidase activity"
+    ],
+    "go_process": [
+      "GO:0002003 angiotensin maturation",
+      "GO:0008217 regulation of blood pressure",
+      "GO:0002016 regulation of blood volume by renin-angiotensin"
+    ],
+    "reactome": "R-HSA-2022377 Metabolism of Angiotensinogen to Angiotensins",
+    "pdb_listed": "2REN is among the ChEMBL target's PDB cross-references"
+  },
+  "renin_gene": {
+    "connector": "Open Targets Platform (search_entities 'REN renin')",
+    "ensembl": "ENSG00000143839"
+  }
+}

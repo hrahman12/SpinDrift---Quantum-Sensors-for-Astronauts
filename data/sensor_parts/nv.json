@@ -1,0 +1,769 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T10:14:23Z",
+    "sources": [
+      "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0",
+      "Omar et al., 'Diamond-optic enhanced photon collection efficiency for sensing with nitrogen-vacancy centers', arXiv 2301.06583v1 = Optics Letters 48, 2512 (2023); ref. [22] of arXiv 2601.18843 (the JGU sensing diamond)",
+      "Omar et al., 'Zero- to low-field J-spectroscopy with a diamond magnetometer', arXiv 2512.05776v3; ref. [20] of arXiv 2601.18843 (the JGU endoscopic sensor head, 'described in detail in [20]')"
+    ],
+    "sha256": {
+      "https://arxiv.org/pdf/2601.18843v1": "a04de181c0a91f6ac6f7bf02a0ee97ab3b957292bac636e6e315e519218824c5",
+      "https://arxiv.org/pdf/2301.06583v1": "d03f17aa090eff723fe653a3c6140f7b00c99fe9f5c097a5b01f5bb40036dd4d",
+      "https://arxiv.org/pdf/2512.05776v3": "2fc768c694e92fcb95e91fd3d15d88fc3cee2d06c0f2faceebbf301aa70791af"
+    },
+    "fetched": {
+      "https://arxiv.org/pdf/2601.18843v1": "2026-11-15T10:07:39Z",
+      "https://arxiv.org/pdf/2301.06583v1": "2026-11-15T10:07:40Z",
+      "https://arxiv.org/pdf/2512.05776v3": "2026-11-15T10:07:42Z"
+    },
+    "fetch_errors": {},
+    "values_read_on": "2026-11-15"
+  },
+  "id": "nv",
+  "title": "NV-diamond magnetometers of Omar et al. (arXiv 2601.18843)",
+  "unit": "mm",
+  "frame": "Millimetres. Origin at the centre of the diamond's documented envelope; +z points towards the subject (the sensing direction), +y up.",
+  "headline": {
+    "sensing_volume": {
+      "value": "<0.5",
+      "unit": "mm³",
+      "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, abstract (p. 2): 'active sensing volumes below 0.5 mm3'",
+      "tag": "published_spec",
+      "status": "VERIFIED",
+      "as_of": null,
+      "note": null
+    }
+  },
+  "builds": {
+    "jgu": {
+      "title": "JGU Mainz: zero-field fibre-coupled endoscope head",
+      "components": {
+        "diamond": {
+          "name": "Sensing diamond (NV)",
+          "drawn": true,
+          "shape": "truncated_square_pyramid",
+          "optical": "nv",
+          "size": {
+            "base": {
+              "value": 0.5,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 4: 'a truncated pyramid with 0.18 mm height and a 0.5 mm x 0.5 mm base'; Table 2 (p. 15)",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            },
+            "top": {
+              "value": 0.15,
+              "unit": "mm",
+              "source": "Omar et al., 'Diamond-optic enhanced photon collection efficiency for sensing with nitrogen-vacancy centers', arXiv 2301.06583v1 = Optics Letters 48, 2512 (2023); ref. [22] of arXiv 2601.18843 (the JGU sensing diamond), p. 2: 'the upper square surface being 0.15 mm on the side'",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "same paper, p. 2: back surface 0.5 mm square, height 0.18 mm; base angle close to 45°"
+            },
+            "height": {
+              "value": 0.18,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 4 (same sentence); Table 2 (p. 15): '0.5 × 0.5 × 0.18 mm3'",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            }
+          },
+          "centre": {
+            "x": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            },
+            "y": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            },
+            "z_base": {
+              "value": -0.09,
+              "unit": "mm",
+              "source": "SpinDrift calculation",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: z = −h/2 (envelope centred at the origin); inputs: diamond height"
+            },
+            "z_top": {
+              "value": 0.09,
+              "unit": "mm",
+              "source": "SpinDrift calculation",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: z = +h/2; inputs: diamond height"
+            }
+          },
+          "dims": [
+            {
+              "label": "base edge",
+              "vo": {
+                "value": 0.5,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 4: 'a truncated pyramid with 0.18 mm height and a 0.5 mm x 0.5 mm base'; Table 2 (p. 15)",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            },
+            {
+              "label": "top edge",
+              "vo": {
+                "value": 0.15,
+                "unit": "mm",
+                "source": "Omar et al., 'Diamond-optic enhanced photon collection efficiency for sensing with nitrogen-vacancy centers', arXiv 2301.06583v1 = Optics Letters 48, 2512 (2023); ref. [22] of arXiv 2601.18843 (the JGU sensing diamond), p. 2: 'the upper square surface being 0.15 mm on the side'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "same paper, p. 2: back surface 0.5 mm square, height 0.18 mm; base angle close to 45°"
+              }
+            },
+            {
+              "label": "height",
+              "vo": {
+                "value": 0.18,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 4 (same sentence); Table 2 (p. 15): '0.5 × 0.5 × 0.18 mm3'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            }
+          ],
+          "note": "Base (0.5 mm square) at the back, glued to the diamond anvil; the 0.15 mm top faces the subject (+z). Colour: NV fluorescence band edge 695 nm from data/palette.json."
+        },
+        "head_face": {
+          "name": "Aluminium head, front face",
+          "drawn": true,
+          "shape": "disc",
+          "size": {
+            "diameter": {
+              "value": 12,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14: 'aluminum housing (sensor head diameter: 12 mm)'; Fig. 1 a.1 and Fig. 2c ('12 mm')",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            }
+          },
+          "centre": {
+            "x": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            },
+            "y": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            },
+            "z": {
+              "value": -0.01,
+              "unit": "mm",
+              "source": "SpinDrift calculation",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: z = top face − protrusion (the PCB front surface; the PCB covers the head's front face, Fig. 1 a.1); inputs: diamond height, diamond protrusion"
+            }
+          },
+          "dims": [
+            {
+              "label": "diameter",
+              "vo": {
+                "value": 12,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14: 'aluminum housing (sensor head diameter: 12 mm)'; Fig. 1 a.1 and Fig. 2c ('12 mm')",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            },
+            {
+              "label": "microwave flex-PCB thickness",
+              "vo": {
+                "value": 0.15,
+                "unit": "mm",
+                "source": "Omar et al., 'Zero- to low-field J-spectroscopy with a diamond magnetometer', arXiv 2512.05776v3; ref. [20] of arXiv 2601.18843 (the JGU endoscopic sensor head, 'described in detail in [20]'), Appendix A, p. 9: 'The flexible PCB for the MW delivery has a thickness of ≈150 µm'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "approximate value as stated (≈)"
+              }
+            },
+            {
+              "label": "diamond protrusion beyond the PCB",
+              "vo": {
+                "value": 0.1,
+                "unit": "mm",
+                "source": "Omar et al., 'Zero- to low-field J-spectroscopy with a diamond magnetometer', arXiv 2512.05776v3; ref. [20] of arXiv 2601.18843 (the JGU endoscopic sensor head, 'described in detail in [20]'), Appendix A, p. 9: 'a center hole for the sensing diamond to stick out by approximately ≈100 µm'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "approximate value as stated (≈)"
+              }
+            }
+          ],
+          "note": "Only the 12 mm diameter of the head is published, not its length, so the head is drawn as its front-face outline, in the plane of the microwave flex-PCB the diamond sticks out of."
+        }
+      },
+      "info": {
+        "standoff_mcg": {
+          "value": 1,
+          "unit": "cm",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 4: 'positioned approximately 1 cm away from a seated subject's chest'",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "pump_beam_diameter": {
+          "value": 0.3,
+          "unit": "mm",
+          "source": "Omar et al., 'Zero- to low-field J-spectroscopy with a diamond magnetometer', arXiv 2512.05776v3; ref. [20] of arXiv 2601.18843 (the JGU endoscopic sensor head, 'described in detail in [20]'), Section II C, p. 4: 'producing a beam of 300 µm in diameter'",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "sensitivity": {
+          "value": 13,
+          "unit": "pT/√Hz",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      "undocumented": [
+        {
+          "name": "Diamond anvil (Dutch Diamond Technologies)",
+          "reason": "cone-shaped; Fig. 1a of arXiv 2301.06583 gives one length (2.5 mm) and its Fig. 2 a 45° opening angle, but not its diameter, tip or back-surface curvature"
+        },
+        {
+          "name": "Polycrystalline diamond plate (Medidia Tec)",
+          "reason": "size not stated (arXiv 2512.05776, p. 9)"
+        },
+        {
+          "name": "Aluminium housing body",
+          "reason": "only the 12 mm diameter is published; the length is not"
+        },
+        {
+          "name": "Microwave flex-PCB outline",
+          "reason": "only its ≈150 µm thickness and the ≈100 µm diamond protrusion are published"
+        },
+        {
+          "name": "Modulation field coil",
+          "reason": "visible in Fig. 1 a.1; size not stated"
+        },
+        {
+          "name": "Lens, dichroic mirror, polarizing beam splitter, beam sampler",
+          "reason": "named in Fig. 2c and arXiv 2512.05776; sizes and positions not stated"
+        },
+        {
+          "name": "Photodiodes (Hamamatsu S13228-01) on their circuit board",
+          "reason": "part number in arXiv 2512.05776 (p. 4); positions in the head not stated"
+        },
+        {
+          "name": "Fibre output coupler, titanium fibre holder, aluminium optics-holder rod",
+          "reason": "named in arXiv 2512.05776 (pp. 4, 9); sizes not stated"
+        },
+        {
+          "name": "High-power single-mode fibre (OZ Optics HPUCO-TA3AHPC-532-P-11AS)",
+          "reason": "part number stated; routing and length not stated"
+        },
+        {
+          "name": "Pump beam (300 µm)",
+          "reason": "diameter stated, path length to the diamond not stated"
+        }
+      ]
+    },
+    "zaquant": {
+      "title": "ZAQuant Stuttgart: bias-field head with compound parabolic concentrator",
+      "components": {
+        "diamond": {
+          "name": "Sensing diamond (NV), w × l × h envelope",
+          "drawn": true,
+          "shape": "envelope_box",
+          "optical": "nv",
+          "size": {
+            "x": {
+              "value": 0.5,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15): '0.5 × 0.5 × 0.5 mm3' (w × l × h); p. 14: 'a pyramidal diamond mounted on a compound parabolic concentrator (CPC)'",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            },
+            "y": {
+              "value": 0.5,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15): '0.5 × 0.5 × 0.5 mm3' (w × l × h); p. 14: 'a pyramidal diamond mounted on a compound parabolic concentrator (CPC)'",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            },
+            "z": {
+              "value": 0.5,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15): '0.5 × 0.5 × 0.5 mm3' (w × l × h); p. 14: 'a pyramidal diamond mounted on a compound parabolic concentrator (CPC)'",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            }
+          },
+          "centre": {
+            "x": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            },
+            "y": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            },
+            "z": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            }
+          },
+          "dims": [
+            {
+              "label": "width",
+              "vo": {
+                "value": 0.5,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15): '0.5 × 0.5 × 0.5 mm3' (w × l × h); p. 14: 'a pyramidal diamond mounted on a compound parabolic concentrator (CPC)'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            },
+            {
+              "label": "length",
+              "vo": {
+                "value": 0.5,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15): '0.5 × 0.5 × 0.5 mm3' (w × l × h); p. 14: 'a pyramidal diamond mounted on a compound parabolic concentrator (CPC)'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            },
+            {
+              "label": "height",
+              "vo": {
+                "value": 0.5,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15): '0.5 × 0.5 × 0.5 mm3' (w × l × h); p. 14: 'a pyramidal diamond mounted on a compound parabolic concentrator (CPC)'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            }
+          ],
+          "note": "'Pyramidal' (p. 14); whether the apex is truncated is not stated, so the documented w × l × h envelope (Table 2) is drawn, translucent."
+        }
+      },
+      "info": {
+        "standoff_mcg": {
+          "value": 1,
+          "unit": "cm",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 6: 'the subject was sitting ∼1 cm away from the sensor head'",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "gradiometer_baseline": {
+          "value": 78,
+          "unit": "mm",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 8: 'two NV sensor heads separated by 78 mm'; Fig. 3a inset",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "bias_field": {
+          "value": 1,
+          "unit": "mT",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 15: 'A static magnetic field of approximately 1 mT was applied by a permanent magnet'",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "longpass_filter": {
+          "value": 695,
+          "unit": "nm",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 15: '695 nm long-pass filter'",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "sensitivity": {
+          "value": 7,
+          "unit": "pT/√Hz",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      "undocumented": [
+        {
+          "name": "Compound parabolic concentrator (CPC)",
+          "reason": "named (p. 14); size not stated"
+        },
+        {
+          "name": "Glass rod",
+          "reason": "named (p. 14); size not stated"
+        },
+        {
+          "name": "Dichroic cube, 695 nm long-pass filter, balanced photodetectors",
+          "reason": "named (pp. 14–15); sizes and positions not stated"
+        },
+        {
+          "name": "Permanent magnet (≈1 mT)",
+          "reason": "field stated, size and position not stated"
+        },
+        {
+          "name": "Loop antenna",
+          "reason": "named (p. 15); size not stated"
+        },
+        {
+          "name": "Sensor-head housing",
+          "reason": "size not stated (Fig. 1 b.1 is an unscaled rendering)"
+        }
+      ]
+    },
+    "qant": {
+      "title": "Q.ANT Stuttgart: unshielded bias-field head",
+      "components": {
+        "diamond": {
+          "name": "Sensing diamond (NV), w × l × h envelope",
+          "drawn": true,
+          "shape": "envelope_box",
+          "optical": "nv",
+          "size": {
+            "x": {
+              "value": 1.0,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14: 'a diamond (1 mm × 1 mm × 500 µm) with a truncated pyramid geometry'; Table 2 (p. 15) '1 × 1 × 0.5 mm3'",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            },
+            "y": {
+              "value": 1.0,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14: 'a diamond (1 mm × 1 mm × 500 µm) with a truncated pyramid geometry'; Table 2 (p. 15) '1 × 1 × 0.5 mm3'",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            },
+            "z": {
+              "value": 0.5,
+              "unit": "mm",
+              "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14 (same sentence); Table 2 (p. 15)",
+              "tag": "published_spec",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": null
+            }
+          },
+          "centre": {
+            "x": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            },
+            "y": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            },
+            "z": {
+              "value": 0,
+              "unit": "mm",
+              "source": "frame definition",
+              "tag": "calculated",
+              "status": "VERIFIED",
+              "as_of": null,
+              "note": "formula: on the head axis (Fig. 2c of arXiv 2601.18843; Fig. 1 a.1 photo); inputs: frame"
+            }
+          },
+          "dims": [
+            {
+              "label": "width",
+              "vo": {
+                "value": 1.0,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14: 'a diamond (1 mm × 1 mm × 500 µm) with a truncated pyramid geometry'; Table 2 (p. 15) '1 × 1 × 0.5 mm3'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            },
+            {
+              "label": "length",
+              "vo": {
+                "value": 1.0,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14: 'a diamond (1 mm × 1 mm × 500 µm) with a truncated pyramid geometry'; Table 2 (p. 15) '1 × 1 × 0.5 mm3'",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            },
+            {
+              "label": "height",
+              "vo": {
+                "value": 0.5,
+                "unit": "mm",
+                "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14 (same sentence); Table 2 (p. 15)",
+                "tag": "published_spec",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": null
+              }
+            }
+          ],
+          "note": "A truncated pyramid (p. 14) whose top face is not stated, so the documented w × l × h envelope is drawn, translucent. About 1.7 ppm NV⁻ (EPR)."
+        }
+      },
+      "info": {
+        "head_volume": {
+          "value": 1,
+          "unit": "dm³",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14: 'a sensor head volume of 1 dm3'",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "bias_field": {
+          "value": 1,
+          "unit": "mT",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, p. 14: 'a bias field of approximately 1 mT was applied via a in-house fabricated Halbach ring'",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "sensitivity": {
+          "value": 26,
+          "unit": "pT/√Hz",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (2026), CC BY 4.0, Table 2 (p. 15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      "undocumented": [
+        {
+          "name": "Sensor head (1 dm³)",
+          "reason": "only its volume is stated; a volume does not fix a shape"
+        },
+        {
+          "name": "Halbach ring (≈1 mT)",
+          "reason": "field stated, size not stated"
+        },
+        {
+          "name": "Fibre-coupled Coherent OBIS laser (100 mW at the fibre)",
+          "reason": "no geometry stated"
+        },
+        {
+          "name": "Low-noise balanced photodiode board, collection optics (≈40 % efficiency)",
+          "reason": "sizes and positions not stated"
+        },
+        {
+          "name": "FPGA controller with USB-C",
+          "reason": "no geometry stated"
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "source": "nv",
+      "quote": "truncated pyramid with 0.18 mm height and a 0.5 mm x 0.5 mm base",
+      "result": "found on PDF page 4"
+    },
+    {
+      "source": "nv",
+      "quote": "0.5 × 0.5 × 0.18 mm3",
+      "result": "found on PDF page 15"
+    },
+    {
+      "source": "nv_ol",
+      "quote": "the upper square surface being 0.15 mm on the side",
+      "result": "found on PDF page 2"
+    },
+    {
+      "source": "nv_ol",
+      "quote": "back surface being a square 0.5 mm on the side, a height of 0.18 mm",
+      "result": "found on PDF page 2"
+    },
+    {
+      "source": "nv",
+      "quote": "sensor head diameter: 12 mm",
+      "result": "found on PDF page 14"
+    },
+    {
+      "source": "nv_zulf",
+      "quote": "has a thickness of ≈150 µm",
+      "result": "found on PDF page 9"
+    },
+    {
+      "source": "nv_zulf",
+      "quote": "center hole for the sensing diamond to stick out by approximately ≈100 µm",
+      "result": "found on PDF page 9"
+    },
+    {
+      "source": "nv_zulf",
+      "quote": "producing a beam of 300 µm in diameter",
+      "result": "found on PDF page 4"
+    },
+    {
+      "source": "nv",
+      "quote": "positioned approximately 1 cm away from a seated subject",
+      "result": "found on PDF page 4"
+    },
+    {
+      "source": "nv",
+      "quote": "sitting ∼1 cm away from the sensor head",
+      "result": "found on PDF page 6"
+    },
+    {
+      "source": "nv",
+      "quote": "13 pT/",
+      "result": "found on PDF pages 4, 5, 15"
+    },
+    {
+      "source": "nv",
+      "quote": "0.5 × 0.5 × 0.5 mm3",
+      "result": "found on PDF page 15"
+    },
+    {
+      "source": "nv",
+      "quote": "pyramidal diamond mounted on a compound parabolic concentrator",
+      "result": "found on PDF page 14"
+    },
+    {
+      "source": "nv",
+      "quote": "two NV sensor heads separated by 78 mm",
+      "result": "found on PDF page 8"
+    },
+    {
+      "source": "nv",
+      "quote": "A static magnetic field of approximately 1 mT was applied by a",
+      "result": "found on PDF page 15"
+    },
+    {
+      "source": "nv",
+      "quote": "695 nm long-pass filter",
+      "result": "found on PDF page 15"
+    },
+    {
+      "source": "nv",
+      "quote": "7 pT/",
+      "result": "found on PDF pages 5, 6, 15"
+    },
+    {
+      "source": "nv",
+      "quote": "1 mm × 1 mm × 500 µm) with a truncated pyramid geometry",
+      "result": "found on PDF page 14"
+    },
+    {
+      "source": "nv",
+      "quote": "1 × 1 × 0.5 mm3",
+      "result": "found on PDF page 15"
+    },
+    {
+      "source": "nv",
+      "quote": "a sensor head volume of 1 dm3",
+      "result": "found on PDF page 14"
+    },
+    {
+      "source": "nv",
+      "quote": "fabricated Halbach ring",
+      "result": "found on PDF page 14"
+    },
+    {
+      "source": "nv",
+      "quote": "26 pT/",
+      "result": "found on PDF pages 2, 5, 6, 15"
+    },
+    {
+      "source": "nv",
+      "quote": "active sensing volumes below 0.5 mm3",
+      "result": "found on PDF page 2"
+    }
+  ]
+}

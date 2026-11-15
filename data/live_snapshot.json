@@ -1,102 +1,102 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T08:57:59Z",
+    "generated_at": "2026-11-15T10:33:56Z",
     "sources": [
       "NOAA SWPC L1 magnetometer",
       "wheretheiss.at ISS position",
       "IGRF via ppigrf"
     ]
   },
-  "fetched_at": "2026-11-15T08:57:59Z",
+  "fetched_at": "2026-11-15T10:33:56Z",
   "iss": {
     "lat": {
-      "value": -26.81541797195,
+      "value": -34.929221992058,
       "unit": "deg",
       "source": "wheretheiss.at, https://api.wheretheiss.at/v1/satellites/25544",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:57:58Z",
+      "as_of": "2026-11-15T10:33:53Z",
       "note": null
     },
     "lon": {
-      "value": -73.576273212974,
+      "value": -88.049629968179,
       "unit": "deg",
       "source": "wheretheiss.at, https://api.wheretheiss.at/v1/satellites/25544",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:57:58Z",
+      "as_of": "2026-11-15T10:33:53Z",
       "note": null
     },
     "alt_km": {
-      "value": 431.2803624459,
+      "value": 434.20192563462,
       "unit": "km",
       "source": "wheretheiss.at, https://api.wheretheiss.at/v1/satellites/25544",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:57:58Z",
+      "as_of": "2026-11-15T10:33:53Z",
       "note": null
     },
     "velocity_kmh": {
-      "value": 27540.163065411,
+      "value": 27534.205865174,
       "unit": "km/h",
       "source": "wheretheiss.at, https://api.wheretheiss.at/v1/satellites/25544",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:57:58Z",
+      "as_of": "2026-11-15T10:33:53Z",
       "note": null
     },
     "b_total_nT": {
-      "value": 19596.9,
+      "value": 23253.5,
       "unit": "nT",
       "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
       "tag": "calculated",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:57:58Z",
+      "as_of": "2026-11-15T10:33:53Z",
       "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of",
       "components_enu_nT": [
-        -287.4,
-        17409.9,
-        8991.8
+        3910.5,
+        17722.4,
+        14537.8
       ]
     },
     "igrf_generation": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc)"
   },
   "l1": {
     "bt_nT": {
-      "value": 2.87,
+      "value": 2.3,
       "unit": "nT",
       "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:54:00Z",
+      "as_of": "2026-11-15T10:28:00Z",
       "note": "brief URLs failed (https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404); they were retired by NWS SCN 26-21 (https://www.weather.gov/media/notification/pdf_2026/scn26-21_Data_Format_Changes_Impacting_SWPC_Products.pdf) and replaced by this official /json/rtsw/ file; newest row with active=true"
     },
     "bx_gsm_nT": {
-      "value": -1.51,
+      "value": 1.01,
       "unit": "nT",
       "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:54:00Z",
+      "as_of": "2026-11-15T10:28:00Z",
       "note": null
     },
     "by_gsm_nT": {
-      "value": -2.43,
+      "value": -0.53,
       "unit": "nT",
       "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:54:00Z",
+      "as_of": "2026-11-15T10:28:00Z",
       "note": null
     },
     "bz_gsm_nT": {
-      "value": -0.2,
+      "value": 1.93,
       "unit": "nT",
       "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:54:00Z",
+      "as_of": "2026-11-15T10:28:00Z",
       "note": null
     },
     "spacecraft": "SOLAR1"
@@ -106,24 +106,24 @@
     {
       "name": "Cabin pressure (US Lab)",
       "reading": {
-        "value": 757.543,
+        "value": 757.644,
         "unit": "Torr",
         "source": "NASA ISS Live telemetry via Lightstreamer (push.lightstreamer.com, adapter set ISSLIVE); item IDs from ISS-Mimic (github.com/ISS-Mimic/Mimic)",
         "tag": "live",
         "status": "TO_CONFIRM",
-        "as_of": "2026-11-15T08:49:53Z",
+        "as_of": "2026-11-15T10:01:30Z",
         "note": "ISS vehicle telemetry, not crew data. Item USLAB000058. Unit to confirm: ISS-Mimic app label 'Cabin Pressure (Torr)'; spreadsheet says PSI. Values are pushed only when they change. Signal class at last update: 24 ('24' = signal acquired per ISS-Mimic)."
       }
     },
     {
       "name": "Cabin temperature (US Lab CCAA inlet)",
       "reading": {
-        "value": 23.26,
+        "value": 23.323,
         "unit": "deg C",
         "source": "NASA ISS Live telemetry via Lightstreamer (push.lightstreamer.com, adapter set ISSLIVE); item IDs from ISS-Mimic (github.com/ISS-Mimic/Mimic)",
         "tag": "live",
         "status": "TO_CONFIRM",
-        "as_of": "2026-11-15T08:56:54Z",
+        "as_of": "2026-11-15T10:33:12Z",
         "note": "ISS vehicle telemetry, not crew data. Item USLAB000059. Unit to confirm: ISS-Mimic app label 'Cabin Temperature (deg C)'; spreadsheet says CNT. Values are pushed only when they change. Signal class at last update: 24 ('24' = signal acquired per ISS-Mimic)."
       }
     },
@@ -155,17 +155,17 @@
   "opm_readiness": {
     "iss": {
       "ambient_nT": {
-        "value": 19596.9,
+        "value": 23253.5,
         "unit": "nT",
         "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
         "tag": "calculated",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:57:58Z",
+        "as_of": "2026-11-15T10:33:53Z",
         "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of",
         "components_enu_nT": [
-          -287.4,
-          17409.9,
-          8991.8
+          3910.5,
+          17722.4,
+          14537.8
         ]
       },
       "opm_range_nT": {
@@ -178,12 +178,12 @@
         "note": "QZFM dynamic range ±5 nT (specs.opm.dynamic_range). QuSpin also states the field at the sensor must be reduced to about 50 nT or below; built-in coils cancel residual fields up to 50 nT."
       },
       "shielding_factor": {
-        "value": 3919.38,
+        "value": 4650.7,
         "unit": "×",
         "source": "SpinDrift calculation",
         "tag": "calculated",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:57:58Z",
+        "as_of": "2026-11-15T10:33:53Z",
         "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
       },
       "within_range": false
@@ -250,12 +250,12 @@
     },
     "mars_transit": {
       "ambient_nT": {
-        "value": 2.87,
+        "value": 2.3,
         "unit": "nT",
         "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
         "tag": "live",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:54:00Z",
+        "as_of": "2026-11-15T10:28:00Z",
         "note": "brief URLs failed (https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404); they were retired by NWS SCN 26-21 (https://www.weather.gov/media/notification/pdf_2026/scn26-21_Data_Format_Changes_Impacting_SWPC_Products.pdf) and replaced by this official /json/rtsw/ file; newest row with active=true; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
       },
       "opm_range_nT": {
@@ -268,12 +268,12 @@
         "note": "QZFM dynamic range ±5 nT (specs.opm.dynamic_range). QuSpin also states the field at the sensor must be reduced to about 50 nT or below; built-in coils cancel residual fields up to 50 nT."
       },
       "shielding_factor": {
-        "value": 0.57,
+        "value": 0.46,
         "unit": "×",
         "source": "SpinDrift calculation",
         "tag": "calculated",
         "status": "VERIFIED",
-        "as_of": "2026-11-15T08:54:00Z",
+        "as_of": "2026-11-15T10:28:00Z",
         "note": "formula: ambient_nT / opm_range_nT; inputs: mars_transit.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
       },
       "within_range": true
@@ -311,22 +311,22 @@
   },
   "radiation": {
     "flux_ge10MeV_pfu": {
-      "value": 0.2134,
+      "value": 0.2283,
       "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
       "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:45:00Z",
+      "as_of": "2026-11-15T10:20:00Z",
       "note": "5-minute average"
     },
     "satellite": "GOES-18",
     "flux_ge100MeV_pfu": {
-      "value": 0.2017,
+      "value": 0.2177,
       "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
       "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
       "tag": "live",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:45:00Z",
+      "as_of": "2026-11-15T10:20:00Z",
       "note": "5-minute average"
     },
     "noaa_s_scale": {
@@ -335,7 +335,7 @@
       "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
       "tag": "calculated",
       "status": "VERIFIED",
-      "as_of": "2026-11-15T08:45:00Z",
+      "as_of": "2026-11-15T10:20:00Z",
       "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
     }
   },

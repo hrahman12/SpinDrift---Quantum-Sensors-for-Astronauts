@@ -50,6 +50,14 @@ STEPS = [
     ("simulators", lambda: runpy.run_path(str(ROOT / "scripts/build_simulators.py"), run_name="__main__")),
     ("UI data", lambda: runpy.run_path(str(ROOT / "scripts/build_ui_data.py"), run_name="__main__")),
 ]
+# Newer builders (each skipped if its script is absent): structures, genes, cells, anatomy, quantum constants,
+# exact sensor parts, connector runs (Wolfram, coda, ChEMBL, Open Targets, brain atlas) and the Lean proofs.
+for _name, _script in [("molecules (PDB, UniProt, PubChem)", "build_molecules.py"), ("genes and cells", "build_bio.py"),
+                       ("HRA anatomy", "build_anatomy.py"), ("quantum constants", "build_quantum_constants.py"),
+                       ("exact sensor parts", "build_sensor_parts.py"), ("connector runs", "record_connector_runs.py"),
+                       ("Lean proofs", "build_lean.py")]:
+    if (ROOT / "scripts" / _script).exists():
+        STEPS.append((_name, lambda s=_script: runpy.run_path(str(ROOT / "scripts" / s), run_name="__main__")))
 
 
 def main():
