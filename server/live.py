@@ -21,10 +21,15 @@ TIMEOUT = 15
 NOAA_URLS = [
     "https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json",
     "https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json",
-    # Official NOAA SWPC real-time solar wind (RTSW) 1-minute magnetometer file, same L1 instruments.
-    # Used only if both product files above fail; the source field and STATUS.md say so.
+    # NWS Service Change Notice 26-21 (2 Mar 2026) removed the /products/solar-wind/ files on or about
+    # 30 Apr 2026; the official replacement is /json/rtsw/. Both old URLs are still tried first, as the
+    # brief asks, and the VO note records that the replacement was used.
     "https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
 ]
+SCN_26_21 = ("NWS SCN 26-21 (https://www.weather.gov/media/notification/pdf_2026/"
+             "scn26-21_Data_Format_Changes_Impacting_SWPC_Products.pdf)")
+GOES_URL = "https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json"
+GOES_STALE = timedelta(minutes=30)
 ISS_URL = "https://api.wheretheiss.at/v1/satellites/25544"
 L1_STALE = timedelta(minutes=15)
 ISS_STALE = timedelta(minutes=2)
@@ -88,7 +93,8 @@ def fetch_l1():
         as_of = _iso(_parse_time(newest["time_tag"]))
         src = f"NOAA SWPC, {url}"
         note = None if url == NOAA_URLS[0] else (
-            "fallback: " + "; ".join(errors) if errors else None)
+            ("brief URLs failed (" + "; ".join(errors) + "); they were retired by " + SCN_26_21 +
+             " and replaced by this official /json/rtsw/ file; newest row with active=true") if errors else None)
         out = {
             "bt_nT": vo(_num(newest["bt"]), "nT", src, "live", "VERIFIED", as_of, note),
             "bx_gsm_nT": _vo_or_missing(newest.get("bx_gsm"), src, as_of),
@@ -135,19 +141,53 @@ def igrf_total(pos: dict):
     coeff = os.path.basename(ppigrf.igrf.__defaults__[0]) if ppigrf.igrf.__defaults__ else "unknown"
     gen = f"IGRF-{coeff.replace('IGRF', '').replace('.shc', '')} (ppigrf {version('ppigrf')}, {coeff})"
     t = _parse_time(pos["lat"]["as_of"]).replace(tzinfo=None)
-    be, bn, bu = ppigrf.igrf(pos["lon"]["value"], pos["lat"]["value"], pos["alt_km"]["value"], t)
-    b = float(np.sqrt(np.asarray(be).ravel()[0] ** 2 + np.asarray(bn).ravel()[0] ** 2 +
-                      np.asarray(bu).ravel()[0] ** 2))
+    be, bn, bu = (float(np.asarray(c).ravel()[0]) for c in
+                  ppigrf.igrf(pos["lon"]["value"], pos["lat"]["value"], pos["alt_km"]["value"], t))
+    b = float(np.sqrt(be ** 2 + bn ** 2 + bu ** 2))
     v = calc(round(b, 1), "nT", [pos["lat"], pos["lon"], pos["alt_km"]],
              "|B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time",
              ["iss.lat", "iss.lon", "iss.alt_km", "iss.as_of"], source=f"{gen}; inputs from wheretheiss.at",
              as_of=pos["lat"]["as_of"])
+    v["components_enu_nT"] = [round(be, 1), round(bn, 1), round(bu, 1)]
     return v, gen
 
 
+# ---------------------------------------------------------------- GOES proton flux (live radiation)
+def fetch_goes():
+    """Newest GOES primary integral proton flux at >=10 MeV and >=100 MeV (NOAA SWPC, 5-min averages)."""
+    try:
+        r = requests.get(GOES_URL, headers=UA, timeout=TIMEOUT)
+        if r.status_code != 200:
+            return None, f"GOES protons HTTP {r.status_code}"
+        rows = r.json()
+    except Exception as e:
+        return None, f"GOES protons {type(e).__name__}: {e}"
+    src = f"NOAA SWPC GOES primary integral protons, {GOES_URL}"
+    out = {}
+    for energy, key in ((">=10 MeV", "flux_ge10MeV_pfu"), (">=100 MeV", "flux_ge100MeV_pfu")):
+        recs = [x for x in rows if x.get("energy") == energy and _num(x.get("flux")) is not None]
+        if not recs:
+            return None, f"GOES protons: no {energy} rows"
+        newest = max(recs, key=lambda x: _parse_time(x["time_tag"]))
+        out[key] = vo(round(_num(newest["flux"]), 4), "pfu (protons cm^-2 s^-1 sr^-1)", src, "live", "VERIFIED",
+                      _iso(_parse_time(newest["time_tag"])), "5-minute average")
+        out["satellite"] = f"GOES-{newest.get('satellite')}"
+    f10 = out["flux_ge10MeV_pfu"]
+    level = 0
+    for i, thr in enumerate((10, 100, 1000, 10000, 100000), start=1):
+        if f10["value"] >= thr:
+            level = i
+    out["noaa_s_scale"] = calc(f"S{level}" if level else "below S1", "", [f10],
+                               "S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu",
+                               ["radiation.flux_ge10MeV_pfu"], source="NOAA SWPC, https://www.swpc.noaa.gov/products/"
+                               "goes-proton-flux", as_of=f10["as_of"])
+    return out, None
+
+
 # ---------------------------------------------------------------- Swarm ASM (near_live)
-# Swarm L1b MAGx_LR Flags_F: see STATUS.md / server notes. Only values in NOMINAL_F count as nominal.
-NOMINAL_F = {1}
+# Swarm L1b Product Definition SW-RS-DSC-SY-0007 Issue 5.27, Table 6-2: Flags_F = 0 is "ASM nominal,
+# scalar mode"; 1 = vector mode; 2..64 flag outliers, gaps, restarts or ASM/VFM disagreement; 255 = no F.
+NOMINAL_F = {0}
 
 
 def fetch_swarm():
@@ -192,10 +232,31 @@ def fetch_swarm():
 
 
 # ---------------------------------------------------------------- locations and OPM readiness
+DYAL73 = ("Dyal, Parkin & Daily (1973), 'Surface magnetometer experiments: Internal lunar properties', Proc. Lunar "
+          "Sci. Conf. 4th, 2925-2945, Table 2 p. 2930 (1 gamma = 1 nT); cross-check Dyal, Parkin & Daily (1974), "
+          "Rev. Geophys. 12, 568, doi:10.1029/RG012i004p00568 (abstract)")
+JOHNSON20 = ("Johnson et al. (2020), 'Crustal and time-varying magnetic fields at the InSight landing site on Mars', "
+             "Nature Geoscience 13, 199-204, doi:10.1038/s41561-020-0537-x, p. 200 and Table 1")
+
+
 def published_fields():
-    """Measured published fields for locations with no live feed (data/published_fields.json, curated
-    with citations). Missing entries stay NOT_STATED."""
-    return read_json(DATA / "published_fields.json", {}).get("fields", {})
+    """Measured, published ambient fields for locations with no live feed. No value without a citation."""
+    return {
+        "lunar_base": vo(38, "nT", DYAL73, "recorded", "VERIFIED", None,
+                         "Apollo 12 ALSEP lunar surface magnetometer, 38 ± 2 nT (deployed Nov 1969). Rule: median of the "
+                         "three stationary ALSEP sites (Apollo 15: 3.4 ± 2.9, Apollo 12: 38 ± 2, Apollo 16: 234 ± 3 nT). "
+                         "Measured sites range 3.4-327 nT (Apollo 16 Site 13); planned south-polar bases have no surface "
+                         "measurement."),
+        "mars_surface": vo(2013, "nT", JOHNSON20, "recorded", "VERIFIED", None,
+                           "InSight lander magnetometer, average surface field 2,013 ± 53 nT (mean over sols 14-299, "
+                           "20:00-04:00 local time); about ten times stronger than predicted from orbit."),
+        "gateway": missing("nT", "no measurement from a near-rectilinear halo orbit", "recorded", "NOT_STATED",
+                           "No magnetometer has measured an NRHO (CAPSTONE carried none). Nearest published: ARTEMIS "
+                           "lunar-orbit magnetotail-lobe average about 10 nT (Kamaletdinov et al., JGR Space Physics 129, "
+                           "e2023JA032130, Fig. 5f); the Gateway is in the solar wind most of each orbit and in the "
+                           "magnetotail 5-6 days per lunar orbit (Dandouras et al. 2023, Front. Astron. Space Sci. "
+                           "10:1120302)."),
+    }
 
 
 LABELS = {"iss": "ISS (low Earth orbit)", "gateway": "Lunar Gateway (near-rectilinear halo orbit)",
@@ -223,7 +284,7 @@ def locations(iss_b, l1):
         elif loc in pub and pub[loc].get("value") is not None:
             amb, kind = pub[loc], "published"
         else:
-            amb = pub.get(loc) or missing("nT", "no cited measured value", "published_spec", "NOT_STATED")
+            amb = pub.get(loc) or missing("nT", "no cited measured value", "recorded", "NOT_STATED")
             kind = "none"
         out.append({"id": loc, "label": LABELS[loc], "ambient_field_nT": amb, "field_kind": kind})
     return out
@@ -283,6 +344,14 @@ def update_swarm(state: dict) -> None:
     state["errors"]["swarm_asm"] = err
 
 
+def update_goes(state: dict) -> None:
+    goes, err = fetch_goes()
+    if goes is not None or not state.get("radiation") or feed_age_exceeded(
+            state["radiation"]["flux_ge10MeV_pfu"], GOES_STALE):
+        state["radiation"] = goes
+    state["errors"]["radiation"] = err
+
+
 def feed_age_exceeded(v: dict, limit: timedelta) -> bool:
     return not v.get("as_of") or datetime.now(timezone.utc) - _parse_time(v["as_of"]) > limit
 
@@ -297,6 +366,7 @@ def compose(state: dict) -> dict:
         "fetched_at": now_iso(),
         "iss": iss, "l1": l1, "swarm_asm": state.get("swarm_asm"), "iss_cabin": cabin,
         "opm_readiness": opm_readiness(locs),
+        "radiation": state.get("radiation"),
         "errors": [e for e in state["errors"].values() if e],
     }
     state["response"] = resp
@@ -304,7 +374,7 @@ def compose(state: dict) -> dict:
 
 
 def new_state() -> dict:
-    return {"errors": {"l1": None, "iss": None, "swarm_asm": None, "iss_cabin": None}}
+    return {"errors": {"l1": None, "iss": None, "swarm_asm": None, "iss_cabin": None, "radiation": None}}
 
 
 def cycle(state: dict | None = None) -> dict:
@@ -313,12 +383,14 @@ def cycle(state: dict | None = None) -> dict:
     update_l1(state)
     update_iss(state)
     update_swarm(state)
+    update_goes(state)
     return compose(state)
 
 
 def write_outputs(resp: dict, locs: list) -> None:
-    """Write live_snapshot.json and locations.json (atomic). Only after a cycle with L1 or ISS data."""
-    if resp.get("l1") is None and resp.get("iss") is None:
+    """Write live_snapshot.json and locations.json (atomic) after a good cycle: L1 and ISS both present.
+    Otherwise the last good snapshot stays in place as the offline fallback."""
+    if resp.get("l1") is None or resp.get("iss") is None:
         return
     sources = [s for s in ["NOAA SWPC L1 magnetometer", "wheretheiss.at ISS position",
                            "IGRF via ppigrf" if resp.get("iss") else None,
@@ -342,6 +414,7 @@ def feed_health(resp: dict) -> dict:
         "igrf": "ok" if (resp.get("iss") or {}).get("b_total_nT", {}).get("value") is not None else "error",
         "swarm_asm": age_state((resp.get("swarm_asm") or {}).get("f_nT"), SWARM_STALE),
         "iss_cabin": "ok" if resp.get("iss_cabin") else "error",
+        "radiation": age_state((resp.get("radiation") or {}).get("flux_ge10MeV_pfu"), GOES_STALE),
     }
 
 

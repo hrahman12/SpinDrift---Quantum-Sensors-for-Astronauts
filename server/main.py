@@ -14,17 +14,17 @@ import json
 import os
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel
 
-from server import live
+from server import devices, live
 from server.common import DATA, DEVICES, RECORDED, RECORDED_IDS, LOCATION_IDS, now_iso, read_json, write_json
 
 STATE = live.new_state()
 STREAMABLE = {"opm_brain_mne", "opm_heart_kiel"}
-L1_PERIOD, ISS_PERIOD, SWARM_PERIOD = 60, 10, 600
+L1_PERIOD, ISS_PERIOD, SWARM_PERIOD, GOES_PERIOD = 60, 10, 600, 300
 
 
 async def _loop(fn, period, write=False):
@@ -43,9 +43,16 @@ async def _loop(fn, period, write=False):
 async def lifespan(app):
     tasks = []
     if os.environ.get("SPINDRIFT_NO_POLL") != "1":
+        # One full cycle first, so the first snapshot is written with every feed's latest state.
+        try:
+            await asyncio.to_thread(live.cycle, STATE)
+            await asyncio.to_thread(live.write_outputs, STATE["response"], STATE["locations"])
+        except Exception as e:
+            STATE["errors"]["startup"] = f"first live cycle {type(e).__name__}: {e}"
         tasks = [asyncio.create_task(_loop(live.update_l1, L1_PERIOD, write=True)),
                  asyncio.create_task(_loop(live.update_iss, ISS_PERIOD)),
-                 asyncio.create_task(_loop(live.update_swarm, SWARM_PERIOD))]
+                 asyncio.create_task(_loop(live.update_swarm, SWARM_PERIOD)),
+                 asyncio.create_task(_loop(live.update_goes, GOES_PERIOD))]
         try:
             from server import cabin
             tasks.append(asyncio.create_task(cabin.run(STATE)))
@@ -143,10 +150,45 @@ class RunRequest(BaseModel):
 
 @app.post("/api/run")
 def post_run(body: RunRequest):
+    """One real run: next real Kiel recording, one ODMR-Lab simulator call, next rows of the real QD, carbon-dot and
+    Inspiration4 data; new facts are stacked onto the combined sensor."""
     if body.location not in LOCATION_IDS:
         raise HTTPException(422, f"location must be one of {LOCATION_IDS}")
     from server import runs
     return runs.execute(body.location, body.role, current_live())
+
+
+@app.get("/api/runs")
+def get_runs():
+    return read_json(DATA / "runs.json", {})
+
+
+@app.get("/api/devices/live")
+def devices_live(location: str = "iss"):
+    if location not in LOCATION_IDS:
+        raise HTTPException(422, f"location must be one of {LOCATION_IDS}")
+    if not STATE.get("response"):
+        STATE["response"] = current_live()
+    return devices.panels(STATE, location)
+
+
+@app.get("/api/sensors/live")
+def sensors_live():
+    """Physical-instrument slot (app/LIVE_INSTRUMENT_CONTRACT.md). connected is true only while a real instrument
+    posts readings; none is connected today."""
+    return devices.sensors_live()
+
+
+class Ingest(BaseModel):
+    instrument_id: str
+    location: str
+    readings: dict
+
+
+@app.post("/api/sensors/{device}/ingest")
+def sensors_ingest(device: str, body: Ingest, x_spindrift_key: str | None = Header(default=None)):
+    code, payload = devices.ingest(device, body.model_dump(), x_spindrift_key)
+    return JSONResponse(payload, status_code=code)
 
 
 @app.get("/api/combined")

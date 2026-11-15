@@ -1,14 +1,15 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T07:37:09Z",
+    "generated_at": "2026-11-15T07:46:25Z",
     "sources": [
       "MNE-Python OPM sample dataset (mne.datasets.opm), file MEG/OPM/OPM_SEF_raw.fif"
     ],
     "dataset": "MNE-Python OPM sample dataset, OPM_SEF_raw.fif",
     "doi_or_url": "https://mne.tools/stable/documentation/datasets.html",
-    "licence": "no licence stated by MNE (see STATUS.md)",
-    "accessed": "2026-11-15T07:37:09Z",
+    "licence": "no licence stated (MNE dataset docs; the OSF host project 'MNE' has no licence set)",
+    "credited": "dataset added to MNE 0.17 by Rasmus Zetter and Eric Larson (MNE changelog); recording lab not stated",
+    "accessed": "2026-11-15T07:46:25Z",
     "device_type": "opm",
     "label": "Recorded on Earth with real QuSpin OPM sensors. Not an astronaut.",
     "sample_rate_hz": 250.0,

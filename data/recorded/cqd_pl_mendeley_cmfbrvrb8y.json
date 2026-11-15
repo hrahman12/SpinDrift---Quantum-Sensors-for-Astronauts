@@ -1,19 +1,79 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": [],
-    "dataset": "cqd_pl_mendeley_cmfbrvrb8y",
-    "doi_or_url": "",
-    "licence": "not yet recorded",
-    "accessed": null,
+    "fixture": false,
+    "generated_at": "2026-11-15T07:46:31Z",
+    "sources": [
+      "Mendeley Data doi:10.17632/cmfbrvrb8y.1"
+    ],
+    "dataset": "Cui, 'Public data and representative code for literature-reconstructed carbon-dot photoluminescence prediction' (Mendeley Data, v1, July 2026), external_measurement_level_records.csv",
+    "doi_or_url": "https://doi.org/10.17632/cmfbrvrb8y.1",
+    "licence": "CC BY 4.0",
+    "accessed": "2026-11-15T07:46:31Z",
     "device_type": "cqd",
-    "label": ""
+    "label": "General carbon-dot data, not the patch.",
+    "file": "Supplementary_Public_Data_and_Code_for_Carbon_Dot_PL_Prediction/data/external_validation/external_measurement_level_records.csv",
+    "zip_sha256": "423928a92aea8a2074c50273d85b3206077d2058821d0449d2a2eaa1bca99617",
+    "plot_hint": "scatter",
+    "note": "The deposit has no photoluminescence spectra. These are the authors' own validation syntheses (180 °C, 6 h, 10 mL water): excitation wavelength and measured emission maximum per record, in file order. 1 of 24 records report no emission and are left out. The literature-mined demo table (emission maxima only, sources redacted) is not used."
   },
   "x": {
-    "name": "",
-    "unit": "",
-    "values": []
+    "name": "excitation wavelength",
+    "unit": "nm",
+    "values": [
+      368.0,
+      368.0,
+      368.0,
+      368.0,
+      323.0,
+      368.0,
+      381.0,
+      381.0,
+      353.0,
+      368.0,
+      272.0,
+      262.0,
+      319.0,
+      368.0,
+      365.0,
+      365.0,
+      365.0,
+      362.0,
+      368.0,
+      362.0,
+      350.0,
+      249.0,
+      252.0
+    ]
   },
-  "series": []
+  "series": [
+    {
+      "name": "measured emission maximum",
+      "unit": "nm",
+      "values": [
+        439.0,
+        439.0,
+        439.0,
+        439.0,
+        409.0,
+        439.0,
+        439.0,
+        439.0,
+        433.0,
+        439.0,
+        279.0,
+        288.0,
+        394.0,
+        441.0,
+        441.0,
+        441.0,
+        441.0,
+        439.0,
+        439.0,
+        439.0,
+        439.0,
+        497.0,
+        502.0
+      ]
+    }
+  ]
 }

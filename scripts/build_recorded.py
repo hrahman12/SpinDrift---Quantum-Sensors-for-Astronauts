@@ -45,14 +45,17 @@ def r3(a):
 
 # ---------------------------------------------------------------- Kiel Cardio Database (OPM heart)
 KIEL_BASE = "https://physionet.org/files/kiel-cardio/1.0.0/"
-KIEL_SUBJECT, KIEL_TRIAL = 1, 13
-KIEL_WINDOW_S = (0.0, 60.0)
+KIEL_SUBJECT, KIEL_TRIAL = 1, 3
+# The first second of every preprocessed trace holds the start-up transient of the dataset's filters
+# (up to ~130 pT); the 60 s window starts at 2 s to leave it out.
+KIEL_WINDOW_S = (2.0, 62.0)
 
 
 def kiel_select_note():
     return (f"subject {KIEL_SUBJECT}, trial {KIEL_TRIAL}: chosen among subject {KIEL_SUBJECT}'s 25 preprocessed trials "
-            "as the one with the most prominent QRS (largest ratio of the 99.5th percentile of |B| to the median "
-            "|B| on any channel)")
+            "as the one with the most prominent QRS (largest ratio of the 99.5th percentile of |B| to the median |B| "
+            "on any channel), computed on the 2-62 s window so the filter start-up transient in the first second "
+            "does not drive the choice")
 
 
 def build_kiel():
@@ -143,7 +146,9 @@ def build_mne_opm():
         "meta": meta(False, ["MNE-Python OPM sample dataset (mne.datasets.opm), file MEG/OPM/OPM_SEF_raw.fif"],
                      dataset="MNE-Python OPM sample dataset, OPM_SEF_raw.fif",
                      doi_or_url="https://mne.tools/stable/documentation/datasets.html",
-                     licence=os.environ.get("SPINDRIFT_MNE_OPM_LICENCE", "no licence stated by MNE (see STATUS.md)"),
+                     licence="no licence stated (MNE dataset docs; the OSF host project 'MNE' has no licence set)",
+                     credited="dataset added to MNE 0.17 by Rasmus Zetter and Eric Larson (MNE changelog); "
+                              "recording lab not stated",
                      accessed=now_iso(), device_type="opm", label=LABEL_OPM,
                      sample_rate_hz=fs_in / decim, original_sample_rate_hz=fs_in,
                      channels=names, n_opm_channels_in_file=int(len(mags)),
@@ -165,7 +170,161 @@ def build_mne_opm():
     return obj
 
 
-BUILDERS = {"opm_heart_kiel": build_kiel, "opm_brain_mne": build_mne_opm}
+def md5_of(p: Path) -> str:
+    return hashlib.md5(p.read_bytes()).hexdigest()
+
+
+def fetch_md5(url: str, dest: Path, md5: str) -> Path:
+    fetch(url, dest)
+    if md5_of(dest) != md5:
+        dest.unlink()
+        raise ValueError(f"md5 mismatch for {dest.name}")
+    return dest
+
+
+# ---------------------------------------------------------------- Zenodo 10629041 (NV ODMR spectra)
+ZEN_URL = "https://zenodo.org/api/records/10629041/files/Raw_data.txt/content"
+ZEN_MD5 = "623c6b254112b98839f8c501871f5799"
+ZEN_POSITIONS = [1, 24, 47]  # first, middle and last of the 47 positions (fixed rule, not hand-picked)
+
+
+def build_zenodo_odmr():
+    p = fetch_md5(ZEN_URL, CACHE / "zenodo-10629041" / "Raw_data.txt", ZEN_MD5)
+    lines = [l for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
+    header = lines[0].lstrip("#").split("\t")
+    rows = np.array([[float(v) for v in l.split("\t")] for l in lines[1:]])
+    if rows.shape[1] != 48 or header[0].strip() != "MW frequency (GHz)":
+        raise ValueError(f"unexpected Raw_data.txt layout: {rows.shape}, {header[0]!r}")
+    f_mhz = np.round(rows[:, 0] * 1000.0, 1)
+    cols = {pos: rows[:, pos] for pos in ZEN_POSITIONS}
+    mean = np.mean(np.stack([cols[pos] for pos in ZEN_POSITIONS]), axis=0)
+    obj = {
+        "meta": meta(False, ["Zenodo 10629041, doi:10.5281/zenodo.10629041"],
+                     dataset="Data for 'Determining Strain Components in a Diamond Waveguide from Zero-Field ODMR "
+                             "Spectra of NV- Center Ensembles' (Alam et al.), Zenodo 10629041",
+                     doi_or_url="https://doi.org/10.5281/zenodo.10629041", licence="CC BY 4.0",
+                     accessed=now_iso(), device_type="nv",
+                     label="Real NV-diamond ODMR spectra (lab sample, not the heart sensor).",
+                     paper="Phys. Rev. Applied 22, 024055 (2024), doi:10.1103/PhysRevApplied.22.024055",
+                     file="Raw_data.txt", md5=ZEN_MD5,
+                     selection=f"positions {ZEN_POSITIONS} of 47 (first, middle, last) and their mean",
+                     measurement="zero-field ODMR: photoluminescence counts versus microwave frequency, NV- "
+                                 "ensembles at 47 positions in a laser-written diamond waveguide",
+                     processing="frequency converted GHz -> MHz and rounded to 0.1 MHz (the file has float "
+                                "artefacts such as 2.8209999999999997); counts unchanged; mean calculated"),
+        "x": {"name": "microwave frequency", "unit": "MHz", "values": [float(v) for v in f_mhz]},
+        "series": [{"name": f"position {pos}", "unit": "counts", "values": r3(cols[pos])} for pos in ZEN_POSITIONS]
+                  + [{"name": f"mean of positions {', '.join(map(str, ZEN_POSITIONS))} (calculated)", "unit": "counts",
+                      "values": r3(mean)}],
+    }
+    write_json(RECORDED / "nv_odmr_zenodo10629041.json", obj)
+    log_status("data/recorded/nv_odmr_zenodo10629041.json", "done",
+               f"Raw_data.txt md5 verified; {len(f_mhz)} frequencies {f_mhz[0]}-{f_mhz[-1]} MHz; positions "
+               f"{ZEN_POSITIONS} + mean; CC BY 4.0")
+    return obj
+
+
+# ---------------------------------------------------------------- figshare c.5468838 (QD -> Rh101 FRET)
+FIG_URL = "https://ndownloader.figshare.com/files/29041080"  # article 15067392 v1, part of collection v1
+FIG_MD5 = "a496c01c51071bbf4323a2e4f1d6c2ed"
+ATM_GPA = 101325e-9  # 1 atm in GPa (exact by definition)
+
+
+def build_figshare_fret():
+    import pymupdf
+    p = fetch_md5(FIG_URL, CACHE / "figshare-c5468838" / "5362541_v1.pdf", FIG_MD5)
+    doc = pymupdf.open(p)
+    text = next(pg.get_text() for pg in doc if "Table S1" in pg.get_text() and "FRET efficiency (%)" in pg.get_text())
+    tail = text.split("FRET efficiency (%)", 1)[1].split()
+    rows = []
+    i = 0
+    while i + 3 < len(tail) and len(rows) < 5:
+        tok = tail[i]
+        if tok == "1" and tail[i + 1] == "atm":
+            press, i = ATM_GPA, i + 2
+        else:
+            try:
+                press, i = float(tok), i + 1
+            except ValueError:
+                break
+        rows.append((press, float(tail[i]), float(tail[i + 1]), float(tail[i + 2])))
+        i += 3
+    if len(rows) != 5:
+        raise ValueError(f"Table S1 parse found {len(rows)} rows, expected 5")
+    press, qd, qdrh, eff = (list(c) for c in zip(*rows))
+    obj = {
+        "meta": meta(False, ["figshare collection doi:10.6084/m9.figshare.c.5468838.v1 (Supplement 1, Table S1)"],
+                     dataset="Li et al., 'Förster resonance energy transfer outpaces Auger recombination in CdTe/CdS "
+                             "quantum dots-rhodamine101 molecules system upon compression', supplementary document",
+                     doi_or_url="https://doi.org/10.6084/m9.figshare.c.5468838.v1",
+                     licence="CC BY 4.0 (figshare article 15067392; also on the paper's cover page)",
+                     accessed=now_iso(), device_type="qd",
+                     label="CdTe/CdS quantum dots, not the renin sensor.",
+                     paper="Optics Express 29(17), 27171 (2021), doi:10.1364/OE.434341",
+                     file="5362541.pdf (article 15067392 v1)", md5=FIG_MD5,
+                     source_table="Table S1, p. 5: emission intensity of QDs alone and of QDs-Rh101 complexes, and "
+                                  "FRET efficiency, in aqueous solution at different pressures",
+                     note="The deposit holds no spectra or decay curves as numbers, only this table and Table S2 "
+                          "(lifetimes). Intensity units are not stated in the source. 1 atm is written as "
+                          "0.000101325 GPa. The supplement gives E = 1 - F_DA/F_D."),
+        "x": {"name": "pressure", "unit": "GPa", "values": press},
+        "series": [{"name": "emission intensity, QDs alone", "unit": "a.u. (unit not stated)", "values": qd},
+                   {"name": "emission intensity, QDs-Rh101 complexes", "unit": "a.u. (unit not stated)",
+                    "values": qdrh},
+                   {"name": "FRET efficiency", "unit": "%", "values": eff}],
+    }
+    write_json(RECORDED / "qd_fret_figshare5468838.json", obj)
+    log_status("data/recorded/qd_fret_figshare5468838.json", "done",
+               "deposit has no numeric spectra/decay curves; used the published Table S1 (5 pressures: QD and "
+               "QD-Rh101 emission intensity, FRET efficiency) from the CC BY 4.0 supplement, md5 verified")
+    return obj
+
+
+# ---------------------------------------------------------------- Mendeley cmfbrvrb8y (carbon-dot PL)
+MEN_URL = ("https://data.mendeley.com/public-files/datasets/cmfbrvrb8y/files/"
+           "8d46db78-b236-4b19-b562-fffa08a17223/file_downloaded")
+MEN_SHA256 = "423928a92aea8a2074c50273d85b3206077d2058821d0449d2a2eaa1bca99617"
+MEN_CSV = "data/external_validation/external_measurement_level_records.csv"
+
+
+def build_mendeley_cqd():
+    import csv
+    import io
+    import zipfile
+    p = fetch(MEN_URL, CACHE / "mendeley-cmfbrvrb8y" / "Supplementary_Public_Data_and_Code_for_Carbon_Dot_PL_Prediction.zip",
+              MEN_SHA256)
+    z = zipfile.ZipFile(p)
+    name = next(n for n in z.namelist() if n.endswith(MEN_CSV))
+    rows = list(csv.DictReader(io.TextIOWrapper(z.open(name), encoding="utf-8-sig")))
+    kept = [r for r in rows if r["is_no_emission"] == "False" and r["excitation_nm"] and r["measured_emission_nm"]]
+    obj = {
+        "meta": meta(False, ["Mendeley Data doi:10.17632/cmfbrvrb8y.1"],
+                     dataset="Cui, 'Public data and representative code for literature-reconstructed carbon-dot "
+                             "photoluminescence prediction' (Mendeley Data, v1, July 2026), "
+                             "external_measurement_level_records.csv",
+                     doi_or_url="https://doi.org/10.17632/cmfbrvrb8y.1", licence="CC BY 4.0",
+                     accessed=now_iso(), device_type="cqd",
+                     label="General carbon-dot data, not the patch.",
+                     file=name, zip_sha256=MEN_SHA256, plot_hint="scatter",
+                     note=f"The deposit has no photoluminescence spectra. These are the authors' own validation "
+                          f"syntheses (180 °C, 6 h, 10 mL water): excitation wavelength and measured emission "
+                          f"maximum per record, in file order. {len(rows) - len(kept)} of {len(rows)} records report "
+                          f"no emission and are left out. The literature-mined demo table (emission maxima only, "
+                          f"sources redacted) is not used."),
+        "x": {"name": "excitation wavelength", "unit": "nm", "values": [float(r["excitation_nm"]) for r in kept]},
+        "series": [{"name": "measured emission maximum", "unit": "nm",
+                    "values": [float(r["measured_emission_nm"]) for r in kept]}],
+    }
+    write_json(RECORDED / "cqd_pl_mendeley_cmfbrvrb8y.json", obj)
+    log_status("data/recorded/cqd_pl_mendeley_cmfbrvrb8y.json", "done",
+               f"zip sha256 verified; deposit has no PL spectra, so used the {len(kept)} first-hand external "
+               f"measurement records (excitation nm vs measured emission max nm); CC BY 4.0")
+    return obj
+
+
+BUILDERS = {"opm_heart_kiel": build_kiel, "opm_brain_mne": build_mne_opm,
+            "nv_odmr_zenodo10629041": build_zenodo_odmr, "qd_fret_figshare5468838": build_figshare_fret,
+            "cqd_pl_mendeley_cmfbrvrb8y": build_mendeley_cqd}
 
 
 def main(only=None):

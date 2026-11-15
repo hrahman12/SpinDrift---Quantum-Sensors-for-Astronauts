@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T08:11:51Z",
+    "sources": [
+      "data/specs.json",
+      "data/physics.json",
+      "data/recorded/*",
+      "data/nasa_i4.json"
+    ],
+    "note": "Physics and biology are paired so the UI can give them equal space."
+  },
+  "devices": {
+    "opm": {
+      "name": "Optically pumped magnetometer (QuSpin QZFM Gen-3)",
+      "physics": {
+        "quantum_effect": "specs.opm.quantum_effect",
+        "curve": "physics.opm_zero_field",
+        "lab_data": null,
+        "simulators": "simulators.opm",
+        "explain": "Laser light spin-polarises rubidium atoms; at zero field the vapour turns transparent, and a tiny field tips the spins and changes how much light gets through (a Lorentzian zero-field resonance)."
+      },
+      "biology": {
+        "signals": [
+          "heart: magnetocardiography R-peak and Q wave",
+          "brain: somatosensory evoked field"
+        ],
+        "recorded": [
+          "recorded/opm_heart_kiel",
+          "recorded/opm_brain_mne"
+        ],
+        "comparison": "recorded/eeg_brain_ds004902 (conventional EEG, not a quantum sensor)",
+        "nasa": null
+      },
+      "main_card_rows": [
+        "heart_q_wave",
+        "brain_eeg"
+      ]
+    },
+    "nv": {
+      "name": "NV-diamond magnetometer (JGU, ZAQuant, Q.ANT builds; arXiv 2601.18843)",
+      "physics": {
+        "quantum_effect": "spin-1 NV centre; microwaves at about 2.87 GHz flip ms = 0 to ±1, seen as a fluorescence dip (optically detected magnetic resonance)",
+        "curve": "physics.nv_odmr_lines",
+        "lab_data": "recorded/nv_odmr_zenodo10629041",
+        "simulators": "simulators.nv (ODMR-Lab runs on every Run)",
+        "explain": "A field splits the two ODMR lines by 2γB (γ ≈ 28 MHz/mT); the builds carry a ~1 mT bias and read heart fields of tens of pT after averaging."
+      },
+      "biology": {
+        "signals": [
+          "heart: averaged MCG, R-peak and Q-wave SNR per build"
+        ],
+        "recorded": [
+          "nv_heart_derived (from recorded/opm_heart_kiel)"
+        ],
+        "nasa": null
+      },
+      "main_card_rows": [
+        "heart_q_wave"
+      ]
+    },
+    "qd_renin": {
+      "name": "Quantum-dot renin nanosensor (Long et al., Anal. Chem. 2012)",
+      "physics": {
+        "quantum_effect": "specs.qd_renin.quantum_effect",
+        "curve": "physics.qd_fret_vs_distance",
+        "lab_data": "recorded/qd_fret_figshare5468838",
+        "simulators": "simulators.qd_renin",
+        "explain": "A quantum dot passes energy to Cy5 by FRET; renin cuts the peptide, Cy5 leaves, and the Cy5 count drops (single-molecule TIRF counting)."
+      },
+      "biology": {
+        "signals": [
+          "blood: renin activity (renin-angiotensin system)"
+        ],
+        "recorded": [],
+        "nasa": "renin is not in open Inspiration4 data (nasa_i4.not_found)"
+      },
+      "main_card_rows": [
+        "blood"
+      ]
+    },
+    "cqd_patch": {
+      "name": "Carbon quantum-dot microneedle patch (Tabatabaee et al., ACS Nano 2024)",
+      "physics": {
+        "quantum_effect": "specs.cqd_patch.physics_label",
+        "curve": "physics.cqd_quenching (not plotted: constants not public)",
+        "lab_data": "recorded/cqd_pl_mendeley_cmfbrvrb8y",
+        "simulators": "simulators.cqd_patch",
+        "explain": "Carbon-dot fluorescence is quenched and recovers selectively with bilirubin under blue light; carbon-dot emission is not a spin-based quantum measurement."
+      },
+      "biology": {
+        "signals": [
+          "skin: bilirubin in interstitial fluid"
+        ],
+        "recorded": [],
+        "nasa": "nasa_i4 (Inspiration4 serum total bilirubin, OSD-575)"
+      },
+      "main_card_rows": [
+        "skin_patch"
+      ]
+    }
+  }
+}

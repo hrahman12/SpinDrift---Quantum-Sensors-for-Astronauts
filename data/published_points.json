@@ -1,8 +1,12 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T08:17:57Z",
+    "sources": [
+      "doi:10.1021/ac302284s",
+      "doi:10.1021/acsnano.4c06191"
+    ],
+    "note": "Both papers are paywalled. Points are added only by a person reading the figure, each with figure and page; until then status stays 'awaiting'."
   },
   "qd_renin": {
     "status": "awaiting",

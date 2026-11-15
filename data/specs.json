@@ -1,7 +1,7 @@
 {
   "meta": {
     "fixture": false,
-    "generated_at": "2026-11-15T07:31:04Z",
+    "generated_at": "2026-11-15T08:18:11Z",
     "sources": [
       "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
       "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
@@ -829,11 +829,11 @@
       "charlie_asm": {
         "value": "The ASM on Swarm Charlie was lost.",
         "unit": "",
-        "source": "SpinDrift v10 brief",
+        "source": "ESA IDEAS+ Swarm Weekly Report, week 45 2014 (IDEAS+-SER-OQC-REP-2071, Sec. 2.1, p. 7) and week 46 (Sec. 2.1); DTU Space release notes SW-RN-DTU-GS-002 Rev 1, Sec. 3.1.1",
         "tag": "published_spec",
-        "status": "TO_CONFIRM",
+        "status": "VERIFIED",
         "as_of": null,
-        "note": "not stated on the ESA ASM overview page; needs an ESA source"
+        "note": "switched off by failure protection on 5 Nov 2014 (about 19:37 UTC) after a suspect current reading; restarts failed; the redundant ASM on Charlie had been declared lost during commissioning; https://ftp-qras.earth.esa.int/swarm/swarm_instruments/weekly/2014/swarm--swarm_instruments--weekly--20141103--l1b.pdf"
       }
     }
   }

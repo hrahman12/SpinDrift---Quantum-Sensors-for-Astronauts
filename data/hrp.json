@@ -1,8 +1,65 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T08:13:39Z",
+    "sources": [
+      "https://www.nasa.gov/hrp/hazards/",
+      "https://www.nasa.gov/hrp/risks/"
+    ],
+    "note": "verbatim quotes: 'heading' is the hazard or risk name and 'text' the sentence(s) under it, both exactly as on the page"
   },
-  "hazards": []
+  "hazards": [
+    {
+      "heading": "Space Radiation",
+      "text": "Invisible to the human eye, space radiation is not only stealthy but considered one of the most hazardous aspects of spaceflight.",
+      "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)"
+    },
+    {
+      "heading": "Isolation and Confinement",
+      "text": "Behavioral responses occur among groups of people far from Earth who are isolated and confined in a small space over a long period of time.",
+      "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)"
+    },
+    {
+      "heading": "Distance from Earth",
+      "text": "Instructions, new supplies, medical care, and more become increasingly challenging to receive from Earth as astronauts venture deeper into space.",
+      "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)"
+    },
+    {
+      "heading": "Gravity Fields",
+      "text": "Astronauts' entire bodies – muscles, bones, inner ear, and organs – must adjust to the new gravities encountered on the space station or their spacecraft, as well as on the Moon, Mars, and Earth once they return home.",
+      "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)"
+    },
+    {
+      "heading": "Hostile/Closed Environments",
+      "text": "Maintaining a safe ecosystem inside a spacecraft presents unique challenges, from ensuring optimal temperatures, pressures, and lighting, to reducing noise, monitoring microbial communities, and tracking immune responses.",
+      "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)"
+    }
+  ],
+  "risks": [
+    {
+      "heading": "Risk of Cardiovascular Adaptations",
+      "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+      "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+    },
+    {
+      "heading": "Risk of Hypoxia",
+      "text": "Astronauts on future deep space missions will take steps to avoid “the bends” during spacewalks, but following those steps also elevates the risk of mild hypoxia — a condition that occurs when oxygen levels in body tissues become lower than normal.",
+      "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+    },
+    {
+      "heading": "Risk of Reduced Cardiorespiratory and Musculoskeletal Fitness",
+      "text": "All astronauts perform exercise during their mission to counteract losses in bone density, muscle strength, and heart and blood vessel performance. Researchers are studying what types of exercise will best protect their health and their ability to perform spacewalks.",
+      "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+    },
+    {
+      "heading": "Risk of Inadequate Sleep and Irregular Schedules",
+      "text": "Space crews experience multiple hazards simultaneously. Stressors include chronic sleep loss, constant work demands, and irregularities in their internal biological clocks. Understanding how to reduce the effects of these stressors on crew health and safety is an ongoing area of research.",
+      "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+    },
+    {
+      "heading": "Risk of Radiation-Induced Cancers",
+      "text": "Crews exposed to radiation from space may be more likely to develop cancer. Identifying the best ways to mitigate this risk and understand what interventions may help are ongoing research priorities.",
+      "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+    }
+  ]
 }

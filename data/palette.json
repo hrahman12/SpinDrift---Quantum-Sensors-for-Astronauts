@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T08:13:20Z",
+    "sources": [
+      "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)"
+    ],
+    "note": "table check at 450/555/600 nm: largest difference 0.0000; beyond 700 nm the CIE chromaticity stays at x 0.7347, y 0.2653 (deep red)"
+  },
+  "colours": [
+    {
+      "device": "opm",
+      "label": "Rubidium D1 optical pumping line",
+      "wavelength": {
+        "value": 795,
+        "unit": "nm",
+        "source": "Sulai et al., arXiv 1906.03227, Sec. III ('Rb D1 line at 795 nm'); the QZFM's own laser wavelength is not stated by QuSpin",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "colour": {
+        "value": "#ff0000",
+        "unit": "sRGB hex",
+        "source": "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: CIE 1931 colour-matching table -> XYZ -> linear sRGB, negatives clipped, scaled to full brightness, sRGB gamma; inputs: Rubidium D1 optical pumping line wavelength"
+      }
+    },
+    {
+      "device": "nv",
+      "label": "NV fluorescence band edge (695 nm long-pass filter)",
+      "wavelength": {
+        "value": 695,
+        "unit": "nm",
+        "source": "Omar et al., arXiv 2601.18843, Section 4 (ZAQuant)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "colour": {
+        "value": "#ff0000",
+        "unit": "sRGB hex",
+        "source": "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: CIE 1931 colour-matching table -> XYZ -> linear sRGB, negatives clipped, scaled to full brightness, sRGB gamma; inputs: NV fluorescence band edge (695 nm long-pass filter) wavelength"
+      }
+    },
+    {
+      "device": "cqd_patch",
+      "label": "Measured carbon-dot emission maximum (most common value)",
+      "wavelength": {
+        "value": 439,
+        "unit": "nm",
+        "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1, external measurement records (general carbon dots, not the patch)",
+        "tag": "recorded",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "colour": {
+        "value": "#6200ff",
+        "unit": "sRGB hex",
+        "source": "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: CIE 1931 colour-matching table -> XYZ -> linear sRGB, negatives clipped, scaled to full brightness, sRGB gamma; inputs: Measured carbon-dot emission maximum (most common value) wavelength"
+      }
+    },
+    {
+      "device": "cqd_patch",
+      "label": "Patch reader channel",
+      "wavelength": {
+        "value": 470,
+        "unit": "nm",
+        "source": "doi:10.1021/acsnano.4c06191 (440/470/510 nm, to confirm)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": null
+      },
+      "colour": {
+        "value": "#002dff",
+        "unit": "sRGB hex",
+        "source": "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)",
+        "tag": "calculated",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "formula: CIE 1931 colour-matching table -> XYZ -> linear sRGB, negatives clipped, scaled to full brightness, sRGB gamma; inputs: Patch reader channel wavelength"
+      }
+    },
+    {
+      "device": "space_heritage",
+      "label": "Swarm ASM helium laser",
+      "wavelength": {
+        "value": 1083,
+        "unit": "nm",
+        "source": "ESA ASM overview (1083 nm laser)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      },
+      "colour": {
+        "value": null,
+        "unit": "sRGB hex",
+        "source": "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)",
+        "tag": "calculated",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "infrared: outside the CIE visible range, no visible colour"
+      }
+    },
+    {
+      "device": "qd_renin",
+      "label": "Cy5 acceptor emission",
+      "wavelength": {
+        "value": null,
+        "unit": "nm",
+        "source": "doi:10.1021/ac302284s abstract does not give it",
+        "tag": "published_spec",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": null
+      },
+      "colour": {
+        "value": null,
+        "unit": "sRGB hex",
+        "source": "CIE 1931 2° standard observer colour-matching table (via colour-science 0.4.7, colour.MSDS_CMFS['CIE 1931 2 Degree Standard Observer']); sRGB per IEC 61966-2-1 (D65)",
+        "tag": "calculated",
+        "status": "NOT_STATED",
+        "as_of": null,
+        "note": "no cited wavelength yet"
+      }
+    }
+  ]
+}

@@ -1,9 +1,399 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T08:13:38Z",
+    "sources": [
+      "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+      "https://osdr.nasa.gov/bio/repo/data/studies/OSD-575"
+    ],
+    "licence": "NASA OSDR terms (https://science.nasa.gov/reference/osdr-help-terms-and-conditions/): distributed under NASA Science Mission Directorate's Science Information Policy, open access; cite the study. No specific licence is named. Acknowledgement: 'Data are courtesy of the NASA Open Science Data Repository (https://osdr.nasa.gov/bio/repo)'.",
+    "accessed": "2026-11-15T08:13:38Z",
+    "file_sha256": "dab247eb794edab59aaaa683c85fd1f2dbf4ae3684872739338e10ead4192a0c",
+    "i4_studies_on_osdr": [
+      "OSD-569",
+      "OSD-570",
+      "OSD-571",
+      "OSD-572",
+      "OSD-573",
+      "OSD-574",
+      "OSD-575",
+      "OSD-630",
+      "OSD-656",
+      "OSD-687"
+    ],
+    "note": "Inspiration4 (SpaceX, Sept 2021, 3 days in orbit) blood was drawn on the ground before and after flight. Analyte 'BILIRUBIN; TOTAL' from the CMP (Quest Diagnostics; Beckman Coulter AU5800 per the ISA assay table). Crew codes and timepoint labels are as released."
   },
-  "datasets": [],
-  "not_found": []
+  "datasets": [
+    {
+      "accession": "OSD-575",
+      "title": "SpaceX Inspiration4 Blood Serum Metabolic Panel and Immune/Cardiac Cytokine Arrays (Comprehensive Metabolic Panel and Multiplex)",
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-575",
+      "variables": [
+        {
+          "name": "Total bilirubin, crew C001",
+          "unit": "mg/dL",
+          "points": [
+            {
+              "timepoint": "L-92",
+              "value": {
+                "value": 0.7,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "L-44",
+              "value": {
+                "value": 0.9,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "L-3",
+              "value": {
+                "value": 1.0,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+1",
+              "value": {
+                "value": 1.2,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+45",
+              "value": {
+                "value": null,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "NOT_STATED",
+                "as_of": null,
+                "note": "value 'NA' in source; reference range 0.2-1.2 mg/dL (as released)"
+              }
+            },
+            {
+              "timepoint": "R+82",
+              "value": {
+                "value": 1.2,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+194",
+              "value": {
+                "value": 0.8,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Total bilirubin, crew C002",
+          "unit": "mg/dL",
+          "points": [
+            {
+              "timepoint": "L-92",
+              "value": {
+                "value": 0.5,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "L-44",
+              "value": {
+                "value": 0.4,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "L-3",
+              "value": {
+                "value": 0.3,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+1",
+              "value": {
+                "value": 0.4,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+45",
+              "value": {
+                "value": 0.5,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+82",
+              "value": {
+                "value": 0.5,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+194",
+              "value": {
+                "value": 0.3,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Total bilirubin, crew C003",
+          "unit": "mg/dL",
+          "points": [
+            {
+              "timepoint": "L-92",
+              "value": {
+                "value": 0.3,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "L-44",
+              "value": {
+                "value": 0.4,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "L-3",
+              "value": {
+                "value": 0.2,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+1",
+              "value": {
+                "value": 0.3,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+45",
+              "value": {
+                "value": 0.7,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+82",
+              "value": {
+                "value": 0.5,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+194",
+              "value": {
+                "value": 0.3,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Total bilirubin, crew C004",
+          "unit": "mg/dL",
+          "points": [
+            {
+              "timepoint": "L-92",
+              "value": {
+                "value": 0.7,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "L-44",
+              "value": {
+                "value": 0.7,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "L-3",
+              "value": {
+                "value": 0.5,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+1",
+              "value": {
+                "value": 0.4,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+45",
+              "value": {
+                "value": 0.7,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+82",
+              "value": {
+                "value": 1.0,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            },
+            {
+              "timepoint": "R+194",
+              "value": {
+                "value": 0.5,
+                "unit": "mg/dL",
+                "source": "NASA OSDR OSD-575, LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv",
+                "tag": "recorded",
+                "status": "VERIFIED",
+                "as_of": null,
+                "note": "reference range 0.2-1.2 mg/dL (as released); collection date not released (timepoint is days from launch L- or return R+)"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "not_found": [
+    "renin: not measured in any open Inspiration4 file checked (OSD-575 CMP and cytokine arrays, OSD-569 CBC, OSD-656 urine panel, OSD-571 plasma/EVP proteomics and metabolomics); only the (pro)renin receptor ATP6AP2 appears in proteomics",
+    "aldosterone: not measured in the same files (appears only in GO annotation text)"
+  ]
 }

@@ -212,8 +212,14 @@ def heritage():
                        note="ESA: based on electron spin resonance and the Zeeman effect; an HF discharge excites "
                             "4He atoms to the metastable state; linearly polarized pumping light"),
         "role": p("measures field strength and calibrates the vector magnetometer", "", ESA_ASM),
-        "charlie_asm": p("The ASM on Swarm Charlie was lost.", "", "SpinDrift v10 brief", "TO_CONFIRM",
-                         "not stated on the ESA ASM overview page; needs an ESA source"),
+        "charlie_asm": p("The ASM on Swarm Charlie was lost.", "",
+                         "ESA IDEAS+ Swarm Weekly Report, week 45 2014 (IDEAS+-SER-OQC-REP-2071, Sec. 2.1, p. 7) and "
+                         "week 46 (Sec. 2.1); DTU Space release notes SW-RN-DTU-GS-002 Rev 1, Sec. 3.1.1",
+                         "VERIFIED",
+                         "switched off by failure protection on 5 Nov 2014 (about 19:37 UTC) after a suspect current "
+                         "reading; restarts failed; the redundant ASM on Charlie had been declared lost during "
+                         "commissioning; https://ftp-qras.earth.esa.int/swarm/swarm_instruments/weekly/2014/"
+                         "swarm--swarm_instruments--weekly--20141103--l1b.pdf"),
     }
     return {"oscar_qube": oscar, "swarm_asm": swarm}
 

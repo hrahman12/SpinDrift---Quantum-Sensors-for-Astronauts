@@ -1,14 +1,420 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T08:17:57Z",
+    "sources": [
+      "data/specs.json",
+      "data/live_snapshot.json",
+      "ODMR-Lab app.py"
+    ],
+    "live_snapshot_fetched_at": "2026-11-15T08:17:24Z"
   },
   "per_sensor": {
-    "opm": [],
-    "nv": [],
-    "qd_renin": [],
-    "cqd_patch": []
+    "opm": [
+      {
+        "fact": "OPM dynamic range",
+        "value": {
+          "value": "±5",
+          "unit": "nT",
+          "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "OPM sensor-head volume",
+        "value": {
+          "value": 5.02,
+          "unit": "cm³",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: V = 12.4 mm x 16.6 mm x 24.4 mm; inputs: specs.opm.sensor_head"
+        }
+      },
+      {
+        "fact": "OPM sensor-head power",
+        "value": {
+          "value": "~0.7",
+          "unit": "W",
+          "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "OPM total power (head + electronics)",
+        "value": {
+          "value": "5",
+          "unit": "W",
+          "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "upgraded from TO_CONFIRM on 2026-11-15: the product page now lists 'Total power consumption Approximately 5 W'; the HSE listing also states 5 W total"
+        }
+      },
+      {
+        "fact": "OPM vapor cell runs at about 150 °C",
+        "value": {
+          "value": "~150",
+          "unit": "°C",
+          "source": "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "'The vapor cell runs at ~150 °C'"
+        }
+      },
+      {
+        "fact": "OPM built-in three-axis coils cancel residual fields up to 50 nT; QuSpin asks for about 50 nT or below at the sensor",
+        "value": {
+          "value": 50,
+          "unit": "nT",
+          "source": "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/; QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/",
+          "tag": "datasheet",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "Rb pump laser part",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "not found in the SpinDrift sources",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "Vapor-cell supplier",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "not found in the SpinDrift sources",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "OPM photodiodes",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "not found in the SpinDrift sources",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        }
+      }
+    ],
+    "nv": [
+      {
+        "fact": "NV bias field (ZAQuant, Q.ANT)",
+        "value": {
+          "value": 1.0,
+          "unit": "mT",
+          "source": "Omar et al., arXiv 2601.18843, Section 4",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "'approximately 1 mT' (ZAQuant magnet, Q.ANT Halbach ring)"
+        }
+      },
+      {
+        "fact": "JGU NV head",
+        "value": {
+          "value": "12 mm aluminum housing",
+          "unit": "mm",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "'sensor head diameter: 12 mm'"
+        }
+      },
+      {
+        "fact": "Q.ANT NV head volume",
+        "value": {
+          "value": 1000,
+          "unit": "cm³",
+          "source": "Omar et al., arXiv 2601.18843, Section 4 ('a sensor head volume of 1 dm3')",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "1 dm³"
+        }
+      },
+      {
+        "fact": "NV sensor power",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "not found in the SpinDrift sources",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "NV diamond supplier",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": "The text does not name a supplier. Two co-authors are at Element Six Global Innovation Centre; the JGU diamond design is in Omar et al., Optics Letters 48, 2512 (2023), doi:10.1364/OL.486998."
+        }
+      },
+      {
+        "fact": "Microwave amplifier",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "not found in the SpinDrift sources",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": "ZAQuant says the microwave signals were amplified; model not stated"
+        }
+      },
+      {
+        "fact": "ODMR-Lab field step against a 25 pT heartbeat R-peak",
+        "value": {
+          "value": 2000000,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: ratio = 0.05 mT / 25 pT; inputs: simulators.nv.ODMR-Lab.field_step, specs.nv.headline.r_peak_average; the online NV simulator shows the sensor's operating point, not the heartbeat"
+        }
+      }
+    ],
+    "qd_renin": [
+      {
+        "fact": "Renin sensor readout needs a TIRF microscope",
+        "value": {
+          "value": "single-molecule counting by total internal reflection fluorescence (TIRF) microscopy",
+          "unit": "",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "Renin sensor detection limit",
+        "value": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "Quantum-dot model and emission",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "Quantum-dot readout power",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "not found in the SpinDrift sources",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        }
+      }
+    ],
+    "cqd_patch": [
+      {
+        "fact": "Patch already has a wearable reader",
+        "value": {
+          "value": "IoT-integrated wearable optoelectronic reader; minimally invasive, continuous, real-time",
+          "unit": "",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "Patch needle dimensions",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+          "tag": "published_spec",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": null
+        }
+      },
+      {
+        "fact": "Patch reader power",
+        "value": {
+          "value": null,
+          "unit": "",
+          "source": "not found in the SpinDrift sources",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        }
+      }
+    ]
   },
-  "combined": []
+  "combined": [
+    {
+      "fact": "OPM range ±5 nT against the NV bias ~1 mT: the two can't share an enclosure without separating their fields",
+      "value": {
+        "value": 200000,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: ratio = 1 mT / 5 nT; inputs: specs.nv.zaquant.bias_field, specs.opm.dynamic_range"
+      }
+    },
+    {
+      "fact": "Q.ANT NV head (1 dm³) against the OPM head (5.0 cm³)",
+      "value": {
+        "value": 199.0,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: ratio = 1000 cm³ / 5.02 cm³; inputs: specs.nv.qant.head_size, build_log.opm.head_volume"
+      }
+    },
+    {
+      "fact": "Readout hardware differs: the renin sensor needs a TIRF microscope, the patch has a wearable reader",
+      "value": {
+        "value": "TIRF microscope vs wearable IoT reader",
+        "unit": "",
+        "source": "doi:10.1021/ac302284s; doi:10.1021/acsnano.4c06191",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": null
+      }
+    },
+    {
+      "fact": "Space heritage: an NV magnetometer (OSCAR-QUBE) ran on the ISS",
+      "value": {
+        "value": "ran on the ISS for 10 months in 2021–22",
+        "unit": "",
+        "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+        "tag": "published_spec",
+        "status": "TO_CONFIRM",
+        "as_of": null,
+        "note": "the abstract confirms deployment aboard the ISS; duration and years: the APS full text returned HTTP 403 on 2026-11-15, so this is not yet checked"
+      }
+    },
+    {
+      "fact": "Space heritage: an optically pumped helium magnetometer flies on Swarm",
+      "value": {
+        "value": "optically pumped helium-4 magnetometer",
+        "unit": "",
+        "source": "ESA Earth Online, ASM overview, https://earth.esa.int/eogateway/instruments/asm/description (accessed 2026-11-15)",
+        "tag": "published_spec",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "ESA: based on electron spin resonance and the Zeeman effect; an HF discharge excites 4He atoms to the metastable state; linearly polarized pumping light"
+      }
+    },
+    {
+      "fact": "Field reduction the OPM needs at iss (latest live snapshot)",
+      "value": {
+        "value": 8289.96,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": "2026-11-15T08:17:19Z",
+        "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      }
+    },
+    {
+      "fact": "Field reduction the OPM needs at gateway (latest live snapshot)",
+      "value": {
+        "value": null,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "NOT_YET_EXTRACTED",
+        "as_of": null,
+        "note": "formula: ambient_nT / opm_range_nT; inputs: gateway.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      }
+    },
+    {
+      "fact": "Field reduction the OPM needs at lunar_base (latest live snapshot)",
+      "value": {
+        "value": 7.6,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: ambient_nT / opm_range_nT; inputs: lunar_base.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      }
+    },
+    {
+      "fact": "Field reduction the OPM needs at mars_transit (latest live snapshot)",
+      "value": {
+        "value": 0.66,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": "2026-11-15T08:13:00Z",
+        "note": "formula: ambient_nT / opm_range_nT; inputs: mars_transit.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      }
+    },
+    {
+      "fact": "Field reduction the OPM needs at mars_surface (latest live snapshot)",
+      "value": {
+        "value": 402.6,
+        "unit": "×",
+        "source": "SpinDrift calculation",
+        "tag": "calculated",
+        "status": "VERIFIED",
+        "as_of": null,
+        "note": "formula: ambient_nT / opm_range_nT; inputs: mars_surface.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+      }
+    }
+  ]
 }

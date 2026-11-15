@@ -1,11 +1,825 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T08:16:34Z",
+    "sources": [
+      "data/runs.json"
+    ],
+    "last_run": "run-0002-ff3e"
   },
-  "version": 0,
-  "runs_counted": 0,
-  "components": {},
-  "open_questions": []
+  "version": 2,
+  "runs_counted": 2,
+  "components": {
+    "magnetic shielding": {
+      "facts": [
+        {
+          "fact": "OPM field reduction needed at iss",
+          "value": {
+            "value": 8233.38,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T08:16:16Z",
+            "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM built-in coils cancel residual fields up to 50 nT",
+          "value": {
+            "value": 50,
+            "unit": "nT",
+            "source": "QuSpin technology page, https://quspin.com/technology/",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM field reduction needed at mars_surface",
+          "value": {
+            "value": 402.6,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: ambient_nT / opm_range_nT; inputs: mars_surface.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "opm"
+        }
+      ],
+      "status": "sourced"
+    },
+    "field separation": {
+      "facts": [
+        {
+          "fact": "OPM ±5 nT range against the NV ~1 mT bias",
+          "value": {
+            "value": 200000,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: ratio = 1 mT / 5 nT; inputs: specs.nv.zaquant.bias_field, specs.opm.dynamic_range"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "link"
+        },
+        {
+          "fact": "NV bias against the ambient field at iss",
+          "value": {
+            "value": 24.3,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T08:16:16Z",
+            "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, iss.ambient_nT"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "NV bias against the ambient field at mars_surface",
+          "value": {
+            "value": 496.8,
+            "unit": "×",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, mars_surface.ambient_nT"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "nv"
+        }
+      ],
+      "status": "sourced"
+    },
+    "magnetic sensitivity": {
+      "facts": [
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 1",
+          "value": {
+            "value": 35.38,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0001-baf9.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 1",
+          "value": {
+            "value": 4.57,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0001-baf9.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 1",
+          "value": {
+            "value": 10.39,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0001-baf9.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 1",
+          "value": {
+            "value": 1.34,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0001-baf9.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 1",
+          "value": {
+            "value": 7.22,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0001-baf9.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 1",
+          "value": {
+            "value": 0.93,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0001-baf9.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the R-peak of subject 1 position 2",
+          "value": {
+            "value": 37.58,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0002-ff3e.opm.R-peak, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU NV averaged SNR on the Q wave of subject 1 position 2",
+          "value": {
+            "value": 6.15,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0002-ff3e.opm.Q wave, nv_heart_derived.jgu.averaged_noise_pT"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the R-peak of subject 1 position 2",
+          "value": {
+            "value": 11.03,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0002-ff3e.opm.R-peak, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQUANT NV averaged SNR on the Q wave of subject 1 position 2",
+          "value": {
+            "value": 1.81,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0002-ff3e.opm.Q wave, nv_heart_derived.zaquant.averaged_noise_pT"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the R-peak of subject 1 position 2",
+          "value": {
+            "value": 7.67,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |R-peak measured this run| / averaged noise; inputs: runs.run-0002-ff3e.opm.R-peak, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "nv"
+        },
+        {
+          "fact": "QANT NV averaged SNR on the Q wave of subject 1 position 2",
+          "value": {
+            "value": 1.26,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SNR = |Q wave measured this run| / averaged noise; inputs: runs.run-0002-ff3e.opm.Q wave, nv_heart_derived.qant.averaged_noise_pT"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "nv"
+        }
+      ],
+      "status": "sourced"
+    },
+    "optical readout": {
+      "facts": [
+        {
+          "fact": "OPM: one laser beam through a rubidium vapor cell onto a photodiode",
+          "value": {
+            "value": "zero-field resonance of spin-polarized rubidium vapor, single laser beam",
+            "unit": "",
+            "source": "QuSpin technology page, 'How the QZFM works', https://quspin.com/technology/ (accessed 2026-11-15)",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "The brief's source URL https://quspin.com/products-qzfm/zero-field-magnetometer-description/ returned HTTP 404 on 2026-11-15; the same description ('based on zero-field resonance with a single laser beam', rubidium vapor cell, laser light optically pumps the atoms) is on the technology page."
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "ZAQuant: green excitation, fluorescence through a 695 nm long-pass filter, balanced photodetection",
+          "value": {
+            "value": "balanced photodetection",
+            "unit": "",
+            "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "model unspecified in source; 695 nm long-pass filter"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "Patch reader channels",
+          "value": {
+            "value": "440, 470, 510",
+            "unit": "nm",
+            "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+            "tag": "published_spec",
+            "status": "TO_CONFIRM",
+            "as_of": null,
+            "note": "full text is paywalled; not checked against the primary source"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 1",
+          "value": {
+            "value": "excited at 368 nm, emits at 439 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 1 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured carbon-dot emission, record 2",
+          "value": {
+            "value": "excited at 368 nm, emits at 439 nm",
+            "unit": "nm",
+            "source": "Mendeley Data doi:10.17632/cmfbrvrb8y.1 (CC BY 4.0), external measurement records",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "record 2 of 23; general carbon dots, not the patch"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "cqd_patch"
+        }
+      ],
+      "status": "sourced"
+    },
+    "microwave drive": {
+      "facts": [
+        {
+          "fact": "ODMR-Lab run at iss: field estimated from the simulated NV spectrum",
+          "value": {
+            "value": 0.898,
+            "unit": "mT",
+            "source": "ODMR-Lab /solve, https://huggingface.co/spaces/jeorgexyz/odmr-lab (online simulator, MIT licence)",
+            "tag": "simulated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "JGU: 2.87 GHz microwave mixed with 2.16 MHz, custom PCB antenna",
+          "value": {
+            "value": "custom PCB antenna",
+            "unit": "",
+            "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "'custom made printed circuit board (PCB)'"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "ZAQuant: microwaves amplified into a loop antenna",
+          "value": {
+            "value": "loop antenna after amplification",
+            "unit": "",
+            "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "Q.ANT: FPGA microwave generation",
+          "value": {
+            "value": "FPGA-based generation",
+            "unit": "",
+            "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "antenna unspecified in source"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "ODMR-Lab run at mars_surface: field estimated from the simulated NV spectrum",
+          "value": {
+            "value": 0.9442,
+            "unit": "mT",
+            "source": "ODMR-Lab /solve, https://huggingface.co/spaces/jeorgexyz/odmr-lab (online simulator, MIT licence)",
+            "tag": "simulated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "field magnitude the simulator's neural network estimated from its simulated spectrum"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "nv"
+        }
+      ],
+      "status": "sourced"
+    },
+    "chemistry readout": {
+      "facts": [
+        {
+          "fact": "Renin nanosensor detection limit",
+          "value": {
+            "value": 25,
+            "unit": "pM",
+            "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Renin nanosensor readout",
+          "value": {
+            "value": "single-molecule counting by total internal reflection fluorescence (TIRF) microscopy",
+            "unit": "",
+            "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Measured QD -> dye FRET efficiency at 0.000101325 GPa",
+          "value": {
+            "value": 46.1,
+            "unit": "%",
+            "source": "figshare c.5468838 Table S1 (CdTe/CdS -> rhodamine 101, CC BY 4.0)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "at 0.000101325 GPa; CdTe/CdS quantum dots, not the renin sensor"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Donor-acceptor distance implied at 0.000101325 GPa",
+          "value": {
+            "value": 1.026,
+            "unit": "r/R0",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: r/R0 = (1/E - 1)^(1/6) (Förster, FRET-Calc Eq. 2); inputs: recorded.qd_fret_figshare5468838"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Patch analyte",
+          "value": {
+            "value": "bilirubin in skin interstitial fluid",
+            "unit": "",
+            "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "Measured QD -> dye FRET efficiency at 0.2 GPa",
+          "value": {
+            "value": 50.2,
+            "unit": "%",
+            "source": "figshare c.5468838 Table S1 (CdTe/CdS -> rhodamine 101, CC BY 4.0)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "at 0.2 GPa; CdTe/CdS quantum dots, not the renin sensor"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "qd_renin"
+        },
+        {
+          "fact": "Donor-acceptor distance implied at 0.2 GPa",
+          "value": {
+            "value": 0.999,
+            "unit": "r/R0",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: r/R0 = (1/E - 1)^(1/6) (Förster, FRET-Calc Eq. 2); inputs: recorded.qd_fret_figshare5468838"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "qd_renin"
+        }
+      ],
+      "status": "sourced"
+    },
+    "body signals (recorded)": {
+      "facts": [
+        {
+          "fact": "OPM heart field, subject 1 position 1: R-peak",
+          "value": {
+            "value": -23.0,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial01, ch5 Sensor 2 X, sensor at [-14  17 -14] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 49 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial01 (sha256 f303743218ba...)"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 1: Q wave",
+          "value": {
+            "value": 2.97,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial01, ch5 Sensor 2 X, sensor at [-14  17 -14] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 25.0 ms before R, QRS 105.0 ms; inputs: data/subject1_preprocessed_trial01"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "EEG alpha power, eyes closed (conventional electrodes, for comparison with OPM-MEG)",
+          "value": {
+            "value": "normal sleep (NS): 13.3304 uV^2/Hz, sleep deprivation (SD): 10.2627 uV^2/Hz",
+            "unit": "uV^2/Hz",
+            "source": "OpenNeuro ds004902 sub-01 (CC0), data/recorded/eeg_brain_ds004902.json",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: Welch PSD mean 8-12 Hz over O1/Oz/O2, 300 s"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM-MEG somatosensory evoked field peak (MNE OPM sample)",
+          "value": {
+            "value": 1295.939,
+            "unit": "fT",
+            "source": "MNE-Python OPM sample, data/recorded/opm_brain_mne.json",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: largest |evoked| 10-100 ms after stimulus; MEG1231 evoked at 80 ms; 201 epochs"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "Inspiration4 total bilirubin at L-92",
+          "value": {
+            "value": "C001 0.7, C002 0.5, C003 0.3, C004 0.7",
+            "unit": "mg/dL",
+            "source": "NASA OSDR OSD-575 (Inspiration4 CMP, total bilirubin)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "timepoint L-92 (days from launch L- or return R+); drawn on the ground"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "cqd_patch"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 2: R-peak",
+          "value": {
+            "value": -24.43,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial02, ch0 Sensor 0 -Y, sensor at [ -8  17 -14] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean of 48 beats at the R-peak (2-62 s window, clearest channel); inputs: data/subject1_preprocessed_trial02 (sha256 dca682d27ec8...)"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM heart field, subject 1 position 2: Q wave",
+          "value": {
+            "value": 4.0,
+            "unit": "pT",
+            "source": "Kiel Cardio Database v1.0.0 (PhysioNet, CC BY-SA 4.0), data/subject1_preprocessed_trial02, ch0 Sensor 0 -Y, sensor at [ -8  17 -14] cm",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q 20.0 ms before R, QRS 100.0 ms; inputs: data/subject1_preprocessed_trial02"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "opm"
+        },
+        {
+          "fact": "Inspiration4 total bilirubin at L-44",
+          "value": {
+            "value": "C001 0.9, C002 0.4, C003 0.4, C004 0.7",
+            "unit": "mg/dL",
+            "source": "NASA OSDR OSD-575 (Inspiration4 CMP, total bilirubin)",
+            "tag": "recorded",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "timepoint L-44 (days from launch L- or return R+); drawn on the ground"
+          },
+          "from_run": "run-0002-ff3e",
+          "device": "cqd_patch"
+        }
+      ],
+      "status": "sourced"
+    },
+    "power": {
+      "facts": [
+        {
+          "fact": "OPM sensor-head power",
+          "value": {
+            "value": "~0.7",
+            "unit": "W",
+            "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM total power (head + electronics)",
+          "value": {
+            "value": "5",
+            "unit": "W",
+            "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "upgraded from TO_CONFIRM on 2026-11-15: the product page now lists 'Total power consumption Approximately 5 W'; the HSE listing also states 5 W total"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "NV magnetometer that flew on the ISS (OSCAR-QUBE): power",
+          "value": {
+            "value": 5,
+            "unit": "W",
+            "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "stated in the paper abstract (the brief pointed to the poster)"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        }
+      ],
+      "status": "sourced"
+    },
+    "size": {
+      "facts": [
+        {
+          "fact": "OPM sensor head",
+          "value": {
+            "value": "12.4 × 16.6 × 24.4",
+            "unit": "mm",
+            "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "NV active sensing volume",
+          "value": {
+            "value": "<0.5",
+            "unit": "mm³",
+            "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "Q.ANT NV head",
+          "value": {
+            "value": 1,
+            "unit": "dm³",
+            "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "'a sensor head volume of 1 dm3'"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "NV magnetometer that flew on the ISS (OSCAR-QUBE): mass",
+          "value": {
+            "value": 420,
+            "unit": "g",
+            "source": "Beerden et al., 'Diamond-based magnetometer aboard the International Space Station', Phys. Rev. Applied 25, 054017 (2026), doi:10.1103/483m-8hfc, CC BY 4.0 (abstract via Crossref)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "stated in the paper abstract (the brief pointed to the poster)"
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        }
+      ],
+      "status": "sourced"
+    },
+    "data link": {
+      "facts": [
+        {
+          "fact": "OPM outputs",
+          "value": {
+            "value": "analog and USB digital",
+            "unit": "",
+            "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "Product page footnote: the USB digital output carries one axis at a fixed 200 Hz, for setup and diagnostics; the analog outputs carry the full measurement."
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "OPM latency",
+          "value": {
+            "value": "~5",
+            "unit": "ms",
+            "source": "QuSpin QZFM Gen-3 product page, https://quspin.com/products-qzfm/ (accessed 2026-11-15)",
+            "tag": "datasheet",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "opm"
+        },
+        {
+          "fact": "Q.ANT readout",
+          "value": {
+            "value": "FPGA controller, USB-C to PC",
+            "unit": "",
+            "source": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843v1 (Jan 2026), https://arxiv.org/pdf/2601.18843 (Section 4, pp. 13-15)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "nv"
+        },
+        {
+          "fact": "Patch reader",
+          "value": {
+            "value": "IoT-integrated wearable optoelectronic reader; minimally invasive, continuous, real-time",
+            "unit": "",
+            "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          },
+          "from_run": "run-0001-baf9",
+          "device": "cqd_patch"
+        }
+      ],
+      "status": "sourced"
+    }
+  },
+  "open_questions": [
+    "NV, quantum-dot readout and patch-reader power are unspecified in their sources.",
+    "The OPM needs a field of a few nT while the NV builds carry ~1 mT: how far apart, or how shielded, must they sit in one unit?",
+    "The renin readout needs a TIRF microscope; no wearable quantum-dot renin reader exists in the source."
+  ]
 }

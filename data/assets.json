@@ -1,0 +1,231 @@
+{
+  "meta": {
+    "fixture": false,
+    "generated_at": "2026-11-15T08:12:04Z",
+    "sources": [
+      "PhysioNet Kiel Cardio Database",
+      "arXiv 2601.18843",
+      "figshare c.5468838",
+      "ODMR-Lab"
+    ],
+    "note": "Only openly licensed images; each keeps its licence and attribution. Product photos (e.g. QuSpin's) are not licensed for reuse and are linked, not copied."
+  },
+  "assets": [
+    {
+      "id": "kiel_kcd_sensors",
+      "file": "data/assets/kiel/kcd_sensors.jpg",
+      "title": "Four QuSpin QZFM Gen 1 OPMs in the Kiel sensor fixture",
+      "device": "opm",
+      "kind": "photo",
+      "source_url": "https://physionet.org/files/kiel-cardio/1.0.0/images/kcd_sensors.jpg",
+      "licence": "CC BY-SA 4.0",
+      "attribution": "Engelhardt, Frey & Schmidt, Kiel Cardio Database v1.0.0, PhysioNet, doi:10.13026/q6r2-zz68, CC BY-SA 4.0",
+      "changes": "resized to 1600x1200",
+      "label": "Real QuSpin OPM sensors recording a human heart on Earth. Not an astronaut."
+    },
+    {
+      "id": "kiel_kcd_overview",
+      "file": "data/assets/kiel/kcd_overview.jpg",
+      "title": "Kiel Cardio Database: OPM magnetocardiography set-up",
+      "device": "opm",
+      "kind": "photo",
+      "source_url": "https://physionet.org/files/kiel-cardio/1.0.0/images/kcd_overview.jpg",
+      "licence": "CC BY-SA 4.0",
+      "attribution": "Engelhardt, Frey & Schmidt, Kiel Cardio Database v1.0.0, PhysioNet, doi:10.13026/q6r2-zz68, CC BY-SA 4.0",
+      "changes": "resized to 1600x1067",
+      "label": "Real QuSpin OPM sensors recording a human heart on Earth. Not an astronaut."
+    },
+    {
+      "id": "kiel_kcd_markings",
+      "file": "data/assets/kiel/kcd_markings.jpeg",
+      "title": "Sensor positions marked on the subject",
+      "device": "opm",
+      "kind": "photo",
+      "source_url": "https://physionet.org/files/kiel-cardio/1.0.0/images/kcd_markings.jpeg",
+      "licence": "CC BY-SA 4.0",
+      "attribution": "Engelhardt, Frey & Schmidt, Kiel Cardio Database v1.0.0, PhysioNet, doi:10.13026/q6r2-zz68, CC BY-SA 4.0",
+      "changes": "resized to 1600x1200",
+      "label": "Real QuSpin OPM sensors recording a human heart on Earth. Not an astronaut."
+    },
+    {
+      "id": "kiel_coordinate_system",
+      "file": "data/assets/kiel/coordinate_system.png",
+      "title": "Kiel coordinate system",
+      "device": "opm",
+      "kind": "figure",
+      "source_url": "https://physionet.org/files/kiel-cardio/1.0.0/images/coordinate_system.png",
+      "licence": "CC BY-SA 4.0",
+      "attribution": "Engelhardt, Frey & Schmidt, Kiel Cardio Database v1.0.0, PhysioNet, doi:10.13026/q6r2-zz68, CC BY-SA 4.0",
+      "changes": "resized to 653x516",
+      "label": "Real QuSpin OPM sensors recording a human heart on Earth. Not an astronaut."
+    },
+    {
+      "id": "nv_paper_p5_1",
+      "file": "data/assets/nv_paper/p5_img1.png",
+      "title": "Figure image from page 5 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 416x250",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p5_2",
+      "file": "data/assets/nv_paper/p5_img2.png",
+      "title": "Figure image from page 5 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 637x606",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p5_3",
+      "file": "data/assets/nv_paper/p5_img3.png",
+      "title": "Figure image from page 5 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 1325x1600",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p5_4",
+      "file": "data/assets/nv_paper/p5_img4.png",
+      "title": "Figure image from page 5 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 1600x999",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p5_5",
+      "file": "data/assets/nv_paper/p5_img5.png",
+      "title": "Figure image from page 5 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 1600x1000",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p7_6",
+      "file": "data/assets/nv_paper/p7_img6.png",
+      "title": "Figure image from page 7 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 1600x1598",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p7_7",
+      "file": "data/assets/nv_paper/p7_img7.png",
+      "title": "Figure image from page 7 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 1030x376",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p7_8",
+      "file": "data/assets/nv_paper/p7_img8.png",
+      "title": "Figure image from page 7 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 691x688",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p7_9",
+      "file": "data/assets/nv_paper/p7_img9.png",
+      "title": "Figure image from page 7 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 327x768",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p7_10",
+      "file": "data/assets/nv_paper/p7_img10.png",
+      "title": "Figure image from page 7 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 858x884",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "nv_paper_p9_11",
+      "file": "data/assets/nv_paper/p9_img11.png",
+      "title": "Figure image from page 9 of arXiv 2601.18843",
+      "device": "nv",
+      "kind": "figure",
+      "source_url": "https://arxiv.org/abs/2601.18843",
+      "licence": "CC BY 4.0",
+      "attribution": "Omar et al., 'Human Cardiac Measurements with Diamond Magnetometers', arXiv 2601.18843 (2026), CC BY 4.0",
+      "changes": "extracted from the PDF, resized to 507x358",
+      "label": "Real NV-diamond sensors and their human MCG measurements (from the paper)."
+    },
+    {
+      "id": "qd_tem_figS1",
+      "file": "data/assets/qd/figS1_tem_p3.png",
+      "title": "TEM image of the CdTe/CdS quantum dots (Fig. S1)",
+      "device": "qd_renin",
+      "kind": "micrograph",
+      "source_url": "https://doi.org/10.6084/m9.figshare.c.5468838.v1",
+      "licence": "CC BY 4.0",
+      "attribution": "Li et al., Optics Express 29(17) 27171 (2021), supplementary document, CC BY 4.0",
+      "changes": "extracted, resized to 488x502",
+      "label": "Real quantum dots under the electron microscope (CdTe/CdS, not the renin sensor)."
+    },
+    {
+      "id": "sim_odmr_lab_run_A",
+      "file": "data/simulator_outputs/odmr_lab_run_A.png",
+      "title": "ODMR-Lab output odmr_lab_run_A",
+      "device": "nv",
+      "kind": "simulator_output",
+      "source_url": "https://huggingface.co/spaces/jeorgexyz/odmr-lab",
+      "licence": "MIT (simulator)",
+      "attribution": "ODMR-Lab by jeorgexyz",
+      "changes": "none",
+      "label": "Simulated spectrum from an online simulator (its legend says 'measured'; it is simulated)."
+    },
+    {
+      "id": "sim_odmr_lab_run_B",
+      "file": "data/simulator_outputs/odmr_lab_run_B.png",
+      "title": "ODMR-Lab output odmr_lab_run_B",
+      "device": "nv",
+      "kind": "simulator_output",
+      "source_url": "https://huggingface.co/spaces/jeorgexyz/odmr-lab",
+      "licence": "MIT (simulator)",
+      "attribution": "ODMR-Lab by jeorgexyz",
+      "changes": "none",
+      "label": "Simulated spectrum from an online simulator (its legend says 'measured'; it is simulated)."
+    }
+  ]
+}

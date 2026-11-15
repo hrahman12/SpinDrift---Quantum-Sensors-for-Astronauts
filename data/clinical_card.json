@@ -1,22 +1,2395 @@
 {
   "meta": {
-    "fixture": true,
-    "generated_at": "2026-11-15T07:23:28Z",
-    "sources": []
+    "fixture": false,
+    "generated_at": "2026-11-15T08:17:57Z",
+    "sources": [
+      "data/locations.json",
+      "data/live_snapshot.json",
+      "data/specs.json",
+      "data/nv_heart_derived.json",
+      "data/hrp.json",
+      "data/nasa_i4.json"
+    ],
+    "note": "Crew role is a display label only; it changes no numbers. Review notes say what a flight surgeon may want to look at; nothing here is a diagnosis."
   },
   "iss": {
-    "rows": []
+    "main": [
+      {
+        "id": "heart_q_wave",
+        "label": "Heart: Q wave",
+        "device": "opm + nv",
+        "reading": {
+          "value": 5.24,
+          "unit": "pT",
+          "source": "recorded/opm_heart_kiel.json (averaged beat)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q at 25.0 ms before R; QRS 105.0 ms; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat"
+        },
+        "supporting": [
+          {
+            "value": -43.14,
+            "unit": "pT",
+            "source": "recorded/opm_heart_kiel.json (averaged beat at the R-peak)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean over the 47 beats of B at each R-peak sample; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat.beats_averaged. Earth recording with QuSpin QZFM Gen 1 OPMs at the Kiel array position; a different person and geometry from the NV studies."
+          },
+          {
+            "value": 8.06,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 2.37,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 1.65,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          }
+        ],
+        "supporting_labels": [
+          "R-peak",
+          "JGU averaged SNR on the Q wave",
+          "ZAQuant averaged SNR on the Q wave",
+          "Q.ANT averaged SNR on the Q wave"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/opm_heart_kiel.json",
+          "nv_heart_derived.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field",
+          "physics.nv_odmr_lines"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Q wave 25.0 ms before R on a 47-beat average of a real OPM heart recording; found by a simple rule, not a clinical reading."
+      },
+      {
+        "id": "brain_eeg",
+        "label": "Brain: EEG alpha and OPM-MEG evoked field",
+        "device": "opm",
+        "reading": {
+          "value": "normal sleep (NS) 13.3304; sleep deprivation (SD) 10.2627",
+          "unit": "uV^2/Hz",
+          "source": "OpenNeuro ds004902 sub-01, eyes closed (CC0), data/recorded/eeg_brain_ds004902.json",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: Welch PSD mean 8-12 Hz over O1/Oz/O2, whole 300 s"
+        },
+        "supporting": [
+          {
+            "value": 1295.939,
+            "unit": "fT",
+            "source": "MNE-Python OPM sample (nine QuSpin SERF OPMs), data/recorded/opm_brain_mne.json",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "largest |evoked| 10-100 ms after the median-nerve stimulus: MEG1231 evoked at 80 ms, 201 epochs"
+          }
+        ],
+        "supporting_labels": [
+          "OPM-MEG evoked field peak"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/eeg_brain_ds004902.json",
+          "recorded/opm_brain_mne.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field"
+        ],
+        "risk": {
+          "heading": "Risk of Inadequate Sleep and Irregular Schedules",
+          "text": "Space crews experience multiple hazards simultaneously. Stressors include chronic sleep loss, constant work demands, and irregularities in their internal biological clocks. Understanding how to reduce the effects of these stressors on crew health and safety is an ongoing area of research.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "EEG is conventional electrodes (normal sleep vs sleep deprivation, one subject); the evoked field is from real QuSpin OPMs. Neither is an astronaut."
+      },
+      {
+        "id": "blood",
+        "label": "Blood: renin (quantum-dot nanosensor)",
+        "device": "qd_renin",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "supporting": [
+          {
+            "value": null,
+            "unit": "pM",
+            "source": "NASA OSDR Inspiration4 open data",
+            "tag": "recorded",
+            "status": "NOT_STATED",
+            "as_of": null,
+            "note": "renin is not measured in any open Inspiration4 file (see nasa_i4.not_found)"
+          }
+        ],
+        "supporting_labels": [
+          "Inspiration4 renin"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/qd_fret_figshare5468838.json",
+          "nasa_i4.json"
+        ],
+        "physics": [
+          "physics.qd_fret_vs_distance"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "The sensor's detection limit is shown; no astronaut renin or ROS value is in open data, and the readout is a TIRF microscope (lab assay)."
+      },
+      {
+        "id": "skin_patch",
+        "label": "Skin patch: bilirubin",
+        "device": "cqd_patch",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "supporting": [
+          {
+            "value": "bilirubin in skin interstitial fluid",
+            "unit": "",
+            "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          }
+        ],
+        "supporting_labels": [
+          "patch analyte"
+        ],
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "data": [
+          "nasa_i4.json",
+          "recorded/cqd_pl_mendeley_cmfbrvrb8y.json"
+        ],
+        "physics": [
+          "physics.cqd_quenching"
+        ],
+        "risk": null,
+        "review_note": "Inspiration4 serum bilirubin (drawn on the ground before and after flight) is the astronaut reference; the patch reads skin interstitial fluid and has not flown."
+      },
+      {
+        "id": "tumor",
+        "label": "Tumour risk: space radiation",
+        "device": "environment",
+        "reading": {
+          "value": 0.2621,
+          "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
+          "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
+          "tag": "live",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:05:00Z",
+          "note": "5-minute average"
+        },
+        "supporting": [
+          {
+            "value": "below S1",
+            "unit": "",
+            "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T08:05:00Z",
+            "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
+          }
+        ],
+        "supporting_labels": [
+          "NOAA solar radiation storm level"
+        ],
+        "evidence": "SOURCED",
+        "data": [
+          "live_snapshot.json (radiation)"
+        ],
+        "physics": [],
+        "risk": {
+          "heading": "Risk of Radiation-Induced Cancers",
+          "text": "Crews exposed to radiation from space may be more likely to develop cancer. Identifying the best ways to mitigate this risk and understand what interventions may help are ongoing research priorities.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Proton flux measured by GOES at geostationary orbit: exposure context, not a tumour measurement."
+      },
+      {
+        "id": "lung",
+        "label": "Lungs: cabin CO2 and O2",
+        "device": "environment",
+        "reading": {
+          "value": 2.435,
+          "unit": "mmHg",
+          "source": "NASA ISS Live telemetry via Lightstreamer (push.lightstreamer.com, adapter set ISSLIVE); item IDs from ISS-Mimic (github.com/ISS-Mimic/Mimic)",
+          "tag": "live",
+          "status": "TO_CONFIRM",
+          "as_of": "2026-11-02T15:01:08Z",
+          "note": "ISS vehicle telemetry, not crew data. Item USLAB000055. Unit to confirm: no app label; spreadsheet says PSIA; magnitude fits mmHg. Values are pushed only when they change. Signal class at last update: 24 ('24' = signal acquired per ISS-Mimic)."
+        },
+        "supporting": [
+          {
+            "value": 165.849,
+            "unit": "mmHg",
+            "source": "NASA ISS Live telemetry via Lightstreamer (push.lightstreamer.com, adapter set ISSLIVE); item IDs from ISS-Mimic (github.com/ISS-Mimic/Mimic)",
+            "tag": "live",
+            "status": "TO_CONFIRM",
+            "as_of": "2026-11-02T14:51:27Z",
+            "note": "ISS vehicle telemetry, not crew data. Item USLAB000053. Unit to confirm: no app label; spreadsheet says PSIA; magnitude fits mmHg. Values are pushed only when they change. Signal class at last update: 24 ('24' = signal acquired per ISS-Mimic)."
+          }
+        ],
+        "supporting_labels": [
+          "cabin ppO2"
+        ],
+        "evidence": "TO_CONFIRM",
+        "data": [
+          "live_snapshot.json (iss_cabin)"
+        ],
+        "physics": [],
+        "risk": [
+          {
+            "heading": "Risk of Hypoxia",
+            "text": "Astronauts on future deep space missions will take steps to avoid “the bends” during spacewalks, but following those steps also elevates the risk of mild hypoxia — a condition that occurs when oxygen levels in body tissues become lower than normal.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          },
+          {
+            "heading": "Risk of Reduced Cardiorespiratory and Musculoskeletal Fitness",
+            "text": "All astronauts perform exercise during their mission to counteract losses in bone density, muscle strength, and heart and blood vessel performance. Researchers are studying what types of exercise will best protect their health and their ability to perform spacewalks.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          }
+        ],
+        "review_note": "ISS vehicle telemetry, not crew data, and not a lung measurement; units to confirm."
+      }
+    ],
+    "rows": [
+      {
+        "label": "OPM: ambient magnetic field here",
+        "reading": {
+          "value": 41442.7,
+          "unit": "nT",
+          "source": "IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:17:17Z",
+          "note": "formula: |B| = sqrt(Be^2 + Bn^2 + Bu^2) from the IGRF model at geodetic lat, lon, altitude and time; inputs: iss.lat, iss.lon, iss.alt_km, iss.as_of"
+        },
+        "evidence": "SOURCED",
+        "review_note": "Field from IGRF-14 (ppigrf 2.1.0, IGRF14.shc); inputs from wheretheiss.at."
+      },
+      {
+        "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
+        "reading": {
+          "value": 8289.96,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:17:19Z",
+          "note": "formula: ambient_nT / opm_range_nT; inputs: iss.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "OPM needs about 8,290× field reduction here."
+      },
+      {
+        "label": "OPM: inside ±5 nT range",
+        "reading": {
+          "value": "no",
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: ambient_nT <= 5; inputs: iss.ambient_nT"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Uses the external field; cabin fields are larger (OSCAR-QUBE reported interference from station equipment)."
+      },
+      {
+        "label": "NV: own bias field against the ambient field",
+        "reading": {
+          "value": 24.1,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, iss.ambient_nT"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "The ZAQuant and Q.ANT builds bring their own ~1 mT bias, so ambient field strength doesn't stop them; the JGU build ran at zero bias in a multilayer shield."
+      },
+      {
+        "label": "NV heartbeat (JGU): averaged SNR over 12,000 beats",
+        "reading": {
+          "value": 38.46,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (ZAQuant): averaged SNR over 300 beats",
+        "reading": {
+          "value": 11.29,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (Q.ANT): averaged SNR over 2,000 beats",
+        "reading": {
+          "value": 7.85,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "Quantum-dot renin sensor: detection limit",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "The readout is a TIRF microscope, so this is a lab assay, not a wearable."
+      },
+      {
+        "label": "Carbon-dot patch analyte: Inspiration4 total bilirubin",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "review_note": "Inspiration4 blood was drawn on the ground before and after the flight; the patch itself has not flown."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Invisible to the human eye, space radiation is not only stealthy but considered one of the most hazardous aspects of spaceflight.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Behavioral responses occur among groups of people far from Earth who are isolated and confined in a small space over a long period of time.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Instructions, new supplies, medical care, and more become increasingly challenging to receive from Earth as astronauts venture deeper into space.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Astronauts' entire bodies – muscles, bones, inner ear, and organs – must adjust to the new gravities encountered on the space station or their spacecraft, as well as on the Moon, Mars, and Earth once they return home.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Maintaining a safe ecosystem inside a spacecraft presents unique challenges, from ensuring optimal temperatures, pressures, and lighting, to reducing noise, monitoring microbial communities, and tracking immune responses.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      }
+    ]
   },
   "gateway": {
-    "rows": []
+    "main": [
+      {
+        "id": "heart_q_wave",
+        "label": "Heart: Q wave",
+        "device": "opm + nv",
+        "reading": {
+          "value": 5.24,
+          "unit": "pT",
+          "source": "recorded/opm_heart_kiel.json (averaged beat)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q at 25.0 ms before R; QRS 105.0 ms; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat"
+        },
+        "supporting": [
+          {
+            "value": -43.14,
+            "unit": "pT",
+            "source": "recorded/opm_heart_kiel.json (averaged beat at the R-peak)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean over the 47 beats of B at each R-peak sample; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat.beats_averaged. Earth recording with QuSpin QZFM Gen 1 OPMs at the Kiel array position; a different person and geometry from the NV studies."
+          },
+          {
+            "value": 8.06,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 2.37,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 1.65,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          }
+        ],
+        "supporting_labels": [
+          "R-peak",
+          "JGU averaged SNR on the Q wave",
+          "ZAQuant averaged SNR on the Q wave",
+          "Q.ANT averaged SNR on the Q wave"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/opm_heart_kiel.json",
+          "nv_heart_derived.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field",
+          "physics.nv_odmr_lines"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Q wave 25.0 ms before R on a 47-beat average of a real OPM heart recording; found by a simple rule, not a clinical reading."
+      },
+      {
+        "id": "brain_eeg",
+        "label": "Brain: EEG alpha and OPM-MEG evoked field",
+        "device": "opm",
+        "reading": {
+          "value": "normal sleep (NS) 13.3304; sleep deprivation (SD) 10.2627",
+          "unit": "uV^2/Hz",
+          "source": "OpenNeuro ds004902 sub-01, eyes closed (CC0), data/recorded/eeg_brain_ds004902.json",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: Welch PSD mean 8-12 Hz over O1/Oz/O2, whole 300 s"
+        },
+        "supporting": [
+          {
+            "value": 1295.939,
+            "unit": "fT",
+            "source": "MNE-Python OPM sample (nine QuSpin SERF OPMs), data/recorded/opm_brain_mne.json",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "largest |evoked| 10-100 ms after the median-nerve stimulus: MEG1231 evoked at 80 ms, 201 epochs"
+          }
+        ],
+        "supporting_labels": [
+          "OPM-MEG evoked field peak"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/eeg_brain_ds004902.json",
+          "recorded/opm_brain_mne.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field"
+        ],
+        "risk": {
+          "heading": "Risk of Inadequate Sleep and Irregular Schedules",
+          "text": "Space crews experience multiple hazards simultaneously. Stressors include chronic sleep loss, constant work demands, and irregularities in their internal biological clocks. Understanding how to reduce the effects of these stressors on crew health and safety is an ongoing area of research.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "EEG is conventional electrodes (normal sleep vs sleep deprivation, one subject); the evoked field is from real QuSpin OPMs. Neither is an astronaut."
+      },
+      {
+        "id": "blood",
+        "label": "Blood: renin (quantum-dot nanosensor)",
+        "device": "qd_renin",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "supporting": [
+          {
+            "value": null,
+            "unit": "pM",
+            "source": "NASA OSDR Inspiration4 open data",
+            "tag": "recorded",
+            "status": "NOT_STATED",
+            "as_of": null,
+            "note": "renin is not measured in any open Inspiration4 file (see nasa_i4.not_found)"
+          }
+        ],
+        "supporting_labels": [
+          "Inspiration4 renin"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/qd_fret_figshare5468838.json",
+          "nasa_i4.json"
+        ],
+        "physics": [
+          "physics.qd_fret_vs_distance"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "The sensor's detection limit is shown; no astronaut renin or ROS value is in open data, and the readout is a TIRF microscope (lab assay)."
+      },
+      {
+        "id": "skin_patch",
+        "label": "Skin patch: bilirubin",
+        "device": "cqd_patch",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "supporting": [
+          {
+            "value": "bilirubin in skin interstitial fluid",
+            "unit": "",
+            "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          }
+        ],
+        "supporting_labels": [
+          "patch analyte"
+        ],
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "data": [
+          "nasa_i4.json",
+          "recorded/cqd_pl_mendeley_cmfbrvrb8y.json"
+        ],
+        "physics": [
+          "physics.cqd_quenching"
+        ],
+        "risk": null,
+        "review_note": "Inspiration4 serum bilirubin (drawn on the ground before and after flight) is the astronaut reference; the patch reads skin interstitial fluid and has not flown."
+      },
+      {
+        "id": "tumor",
+        "label": "Tumour risk: space radiation",
+        "device": "environment",
+        "reading": {
+          "value": 0.2621,
+          "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
+          "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
+          "tag": "live",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:05:00Z",
+          "note": "5-minute average"
+        },
+        "supporting": [
+          {
+            "value": "below S1",
+            "unit": "",
+            "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T08:05:00Z",
+            "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
+          }
+        ],
+        "supporting_labels": [
+          "NOAA solar radiation storm level"
+        ],
+        "evidence": "SOURCED",
+        "data": [
+          "live_snapshot.json (radiation)"
+        ],
+        "physics": [],
+        "risk": {
+          "heading": "Risk of Radiation-Induced Cancers",
+          "text": "Crews exposed to radiation from space may be more likely to develop cancer. Identifying the best ways to mitigate this risk and understand what interventions may help are ongoing research priorities.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Proton flux measured by GOES at geostationary orbit: exposure context, not a tumour measurement."
+      },
+      {
+        "id": "lung",
+        "label": "Lungs: cabin CO2 and O2",
+        "device": "environment",
+        "reading": {
+          "value": null,
+          "unit": "mmHg",
+          "source": "",
+          "tag": "live",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "ISS cabin telemetry only for the ISS location and only from the running server"
+        },
+        "supporting": [],
+        "supporting_labels": [
+          "cabin ppO2"
+        ],
+        "evidence": "TO_CONFIRM",
+        "data": [
+          "live_snapshot.json (iss_cabin)"
+        ],
+        "physics": [],
+        "risk": [
+          {
+            "heading": "Risk of Hypoxia",
+            "text": "Astronauts on future deep space missions will take steps to avoid “the bends” during spacewalks, but following those steps also elevates the risk of mild hypoxia — a condition that occurs when oxygen levels in body tissues become lower than normal.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          },
+          {
+            "heading": "Risk of Reduced Cardiorespiratory and Musculoskeletal Fitness",
+            "text": "All astronauts perform exercise during their mission to counteract losses in bone density, muscle strength, and heart and blood vessel performance. Researchers are studying what types of exercise will best protect their health and their ability to perform spacewalks.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          }
+        ],
+        "review_note": "ISS vehicle telemetry, not crew data, and not a lung measurement; units to confirm."
+      }
+    ],
+    "rows": [
+      {
+        "label": "OPM: ambient magnetic field here",
+        "reading": {
+          "value": null,
+          "unit": "nT",
+          "source": "no cited measured value",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "TO_CONFIRM",
+        "review_note": "No cited measured field for this location yet."
+      },
+      {
+        "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
+        "reading": {
+          "value": null,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "formula: ambient_nT / opm_range_nT; inputs: gateway.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+        },
+        "evidence": "TO_CONFIRM",
+        "review_note": "Not computable without an ambient field."
+      },
+      {
+        "label": "OPM: inside ±5 nT range",
+        "reading": {
+          "value": null,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "formula: ambient_nT <= 5; inputs: gateway.ambient_nT"
+        },
+        "evidence": "TO_CONFIRM",
+        "review_note": "Uses the external field; cabin fields are larger (OSCAR-QUBE reported interference from station equipment)."
+      },
+      {
+        "label": "NV: own bias field against the ambient field",
+        "reading": {
+          "value": null,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, gateway.ambient_nT"
+        },
+        "evidence": "TO_CONFIRM",
+        "review_note": "The ZAQuant and Q.ANT builds bring their own ~1 mT bias, so ambient field strength doesn't stop them; the JGU build ran at zero bias in a multilayer shield."
+      },
+      {
+        "label": "NV heartbeat (JGU): averaged SNR over 12,000 beats",
+        "reading": {
+          "value": 38.46,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (ZAQuant): averaged SNR over 300 beats",
+        "reading": {
+          "value": 11.29,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (Q.ANT): averaged SNR over 2,000 beats",
+        "reading": {
+          "value": 7.85,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "Quantum-dot renin sensor: detection limit",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "The readout is a TIRF microscope, so this is a lab assay, not a wearable."
+      },
+      {
+        "label": "Carbon-dot patch analyte: Inspiration4 total bilirubin",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "review_note": "Inspiration4 blood was drawn on the ground before and after the flight; the patch itself has not flown."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Invisible to the human eye, space radiation is not only stealthy but considered one of the most hazardous aspects of spaceflight.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Behavioral responses occur among groups of people far from Earth who are isolated and confined in a small space over a long period of time.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Instructions, new supplies, medical care, and more become increasingly challenging to receive from Earth as astronauts venture deeper into space.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Astronauts' entire bodies – muscles, bones, inner ear, and organs – must adjust to the new gravities encountered on the space station or their spacecraft, as well as on the Moon, Mars, and Earth once they return home.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Maintaining a safe ecosystem inside a spacecraft presents unique challenges, from ensuring optimal temperatures, pressures, and lighting, to reducing noise, monitoring microbial communities, and tracking immune responses.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      }
+    ]
   },
   "lunar_base": {
-    "rows": []
+    "main": [
+      {
+        "id": "heart_q_wave",
+        "label": "Heart: Q wave",
+        "device": "opm + nv",
+        "reading": {
+          "value": 5.24,
+          "unit": "pT",
+          "source": "recorded/opm_heart_kiel.json (averaged beat)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q at 25.0 ms before R; QRS 105.0 ms; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat"
+        },
+        "supporting": [
+          {
+            "value": -43.14,
+            "unit": "pT",
+            "source": "recorded/opm_heart_kiel.json (averaged beat at the R-peak)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean over the 47 beats of B at each R-peak sample; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat.beats_averaged. Earth recording with QuSpin QZFM Gen 1 OPMs at the Kiel array position; a different person and geometry from the NV studies."
+          },
+          {
+            "value": 8.06,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 2.37,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 1.65,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          }
+        ],
+        "supporting_labels": [
+          "R-peak",
+          "JGU averaged SNR on the Q wave",
+          "ZAQuant averaged SNR on the Q wave",
+          "Q.ANT averaged SNR on the Q wave"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/opm_heart_kiel.json",
+          "nv_heart_derived.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field",
+          "physics.nv_odmr_lines"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Q wave 25.0 ms before R on a 47-beat average of a real OPM heart recording; found by a simple rule, not a clinical reading."
+      },
+      {
+        "id": "brain_eeg",
+        "label": "Brain: EEG alpha and OPM-MEG evoked field",
+        "device": "opm",
+        "reading": {
+          "value": "normal sleep (NS) 13.3304; sleep deprivation (SD) 10.2627",
+          "unit": "uV^2/Hz",
+          "source": "OpenNeuro ds004902 sub-01, eyes closed (CC0), data/recorded/eeg_brain_ds004902.json",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: Welch PSD mean 8-12 Hz over O1/Oz/O2, whole 300 s"
+        },
+        "supporting": [
+          {
+            "value": 1295.939,
+            "unit": "fT",
+            "source": "MNE-Python OPM sample (nine QuSpin SERF OPMs), data/recorded/opm_brain_mne.json",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "largest |evoked| 10-100 ms after the median-nerve stimulus: MEG1231 evoked at 80 ms, 201 epochs"
+          }
+        ],
+        "supporting_labels": [
+          "OPM-MEG evoked field peak"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/eeg_brain_ds004902.json",
+          "recorded/opm_brain_mne.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field"
+        ],
+        "risk": {
+          "heading": "Risk of Inadequate Sleep and Irregular Schedules",
+          "text": "Space crews experience multiple hazards simultaneously. Stressors include chronic sleep loss, constant work demands, and irregularities in their internal biological clocks. Understanding how to reduce the effects of these stressors on crew health and safety is an ongoing area of research.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "EEG is conventional electrodes (normal sleep vs sleep deprivation, one subject); the evoked field is from real QuSpin OPMs. Neither is an astronaut."
+      },
+      {
+        "id": "blood",
+        "label": "Blood: renin (quantum-dot nanosensor)",
+        "device": "qd_renin",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "supporting": [
+          {
+            "value": null,
+            "unit": "pM",
+            "source": "NASA OSDR Inspiration4 open data",
+            "tag": "recorded",
+            "status": "NOT_STATED",
+            "as_of": null,
+            "note": "renin is not measured in any open Inspiration4 file (see nasa_i4.not_found)"
+          }
+        ],
+        "supporting_labels": [
+          "Inspiration4 renin"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/qd_fret_figshare5468838.json",
+          "nasa_i4.json"
+        ],
+        "physics": [
+          "physics.qd_fret_vs_distance"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "The sensor's detection limit is shown; no astronaut renin or ROS value is in open data, and the readout is a TIRF microscope (lab assay)."
+      },
+      {
+        "id": "skin_patch",
+        "label": "Skin patch: bilirubin",
+        "device": "cqd_patch",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "supporting": [
+          {
+            "value": "bilirubin in skin interstitial fluid",
+            "unit": "",
+            "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          }
+        ],
+        "supporting_labels": [
+          "patch analyte"
+        ],
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "data": [
+          "nasa_i4.json",
+          "recorded/cqd_pl_mendeley_cmfbrvrb8y.json"
+        ],
+        "physics": [
+          "physics.cqd_quenching"
+        ],
+        "risk": null,
+        "review_note": "Inspiration4 serum bilirubin (drawn on the ground before and after flight) is the astronaut reference; the patch reads skin interstitial fluid and has not flown."
+      },
+      {
+        "id": "tumor",
+        "label": "Tumour risk: space radiation",
+        "device": "environment",
+        "reading": {
+          "value": 0.2621,
+          "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
+          "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
+          "tag": "live",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:05:00Z",
+          "note": "5-minute average"
+        },
+        "supporting": [
+          {
+            "value": "below S1",
+            "unit": "",
+            "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T08:05:00Z",
+            "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
+          }
+        ],
+        "supporting_labels": [
+          "NOAA solar radiation storm level"
+        ],
+        "evidence": "SOURCED",
+        "data": [
+          "live_snapshot.json (radiation)"
+        ],
+        "physics": [],
+        "risk": {
+          "heading": "Risk of Radiation-Induced Cancers",
+          "text": "Crews exposed to radiation from space may be more likely to develop cancer. Identifying the best ways to mitigate this risk and understand what interventions may help are ongoing research priorities.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Proton flux measured by GOES at geostationary orbit: exposure context, not a tumour measurement."
+      },
+      {
+        "id": "lung",
+        "label": "Lungs: cabin CO2 and O2",
+        "device": "environment",
+        "reading": {
+          "value": null,
+          "unit": "mmHg",
+          "source": "",
+          "tag": "live",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "ISS cabin telemetry only for the ISS location and only from the running server"
+        },
+        "supporting": [],
+        "supporting_labels": [
+          "cabin ppO2"
+        ],
+        "evidence": "TO_CONFIRM",
+        "data": [
+          "live_snapshot.json (iss_cabin)"
+        ],
+        "physics": [],
+        "risk": [
+          {
+            "heading": "Risk of Hypoxia",
+            "text": "Astronauts on future deep space missions will take steps to avoid “the bends” during spacewalks, but following those steps also elevates the risk of mild hypoxia — a condition that occurs when oxygen levels in body tissues become lower than normal.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          },
+          {
+            "heading": "Risk of Reduced Cardiorespiratory and Musculoskeletal Fitness",
+            "text": "All astronauts perform exercise during their mission to counteract losses in bone density, muscle strength, and heart and blood vessel performance. Researchers are studying what types of exercise will best protect their health and their ability to perform spacewalks.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          }
+        ],
+        "review_note": "ISS vehicle telemetry, not crew data, and not a lung measurement; units to confirm."
+      }
+    ],
+    "rows": [
+      {
+        "label": "OPM: ambient magnetic field here",
+        "reading": {
+          "value": null,
+          "unit": "nT",
+          "source": "no cited measured value",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "TO_CONFIRM",
+        "review_note": "No cited measured field for this location yet."
+      },
+      {
+        "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
+        "reading": {
+          "value": 7.6,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: ambient_nT / opm_range_nT; inputs: lunar_base.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "OPM needs about 8× field reduction here."
+      },
+      {
+        "label": "OPM: inside ±5 nT range",
+        "reading": {
+          "value": null,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "formula: ambient_nT <= 5; inputs: lunar_base.ambient_nT"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Uses the external field; cabin fields are larger (OSCAR-QUBE reported interference from station equipment)."
+      },
+      {
+        "label": "NV: own bias field against the ambient field",
+        "reading": {
+          "value": null,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, lunar_base.ambient_nT"
+        },
+        "evidence": "TO_CONFIRM",
+        "review_note": "The ZAQuant and Q.ANT builds bring their own ~1 mT bias, so ambient field strength doesn't stop them; the JGU build ran at zero bias in a multilayer shield."
+      },
+      {
+        "label": "NV heartbeat (JGU): averaged SNR over 12,000 beats",
+        "reading": {
+          "value": 38.46,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (ZAQuant): averaged SNR over 300 beats",
+        "reading": {
+          "value": 11.29,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (Q.ANT): averaged SNR over 2,000 beats",
+        "reading": {
+          "value": 7.85,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "Quantum-dot renin sensor: detection limit",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "The readout is a TIRF microscope, so this is a lab assay, not a wearable."
+      },
+      {
+        "label": "Carbon-dot patch analyte: Inspiration4 total bilirubin",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "review_note": "Inspiration4 blood was drawn on the ground before and after the flight; the patch itself has not flown."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Invisible to the human eye, space radiation is not only stealthy but considered one of the most hazardous aspects of spaceflight.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Behavioral responses occur among groups of people far from Earth who are isolated and confined in a small space over a long period of time.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Instructions, new supplies, medical care, and more become increasingly challenging to receive from Earth as astronauts venture deeper into space.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Astronauts' entire bodies – muscles, bones, inner ear, and organs – must adjust to the new gravities encountered on the space station or their spacecraft, as well as on the Moon, Mars, and Earth once they return home.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Maintaining a safe ecosystem inside a spacecraft presents unique challenges, from ensuring optimal temperatures, pressures, and lighting, to reducing noise, monitoring microbial communities, and tracking immune responses.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      }
+    ]
   },
   "mars_transit": {
-    "rows": []
+    "main": [
+      {
+        "id": "heart_q_wave",
+        "label": "Heart: Q wave",
+        "device": "opm + nv",
+        "reading": {
+          "value": 5.24,
+          "unit": "pT",
+          "source": "recorded/opm_heart_kiel.json (averaged beat)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q at 25.0 ms before R; QRS 105.0 ms; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat"
+        },
+        "supporting": [
+          {
+            "value": -43.14,
+            "unit": "pT",
+            "source": "recorded/opm_heart_kiel.json (averaged beat at the R-peak)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean over the 47 beats of B at each R-peak sample; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat.beats_averaged. Earth recording with QuSpin QZFM Gen 1 OPMs at the Kiel array position; a different person and geometry from the NV studies."
+          },
+          {
+            "value": 8.06,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 2.37,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 1.65,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          }
+        ],
+        "supporting_labels": [
+          "R-peak",
+          "JGU averaged SNR on the Q wave",
+          "ZAQuant averaged SNR on the Q wave",
+          "Q.ANT averaged SNR on the Q wave"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/opm_heart_kiel.json",
+          "nv_heart_derived.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field",
+          "physics.nv_odmr_lines"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Q wave 25.0 ms before R on a 47-beat average of a real OPM heart recording; found by a simple rule, not a clinical reading."
+      },
+      {
+        "id": "brain_eeg",
+        "label": "Brain: EEG alpha and OPM-MEG evoked field",
+        "device": "opm",
+        "reading": {
+          "value": "normal sleep (NS) 13.3304; sleep deprivation (SD) 10.2627",
+          "unit": "uV^2/Hz",
+          "source": "OpenNeuro ds004902 sub-01, eyes closed (CC0), data/recorded/eeg_brain_ds004902.json",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: Welch PSD mean 8-12 Hz over O1/Oz/O2, whole 300 s"
+        },
+        "supporting": [
+          {
+            "value": 1295.939,
+            "unit": "fT",
+            "source": "MNE-Python OPM sample (nine QuSpin SERF OPMs), data/recorded/opm_brain_mne.json",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "largest |evoked| 10-100 ms after the median-nerve stimulus: MEG1231 evoked at 80 ms, 201 epochs"
+          }
+        ],
+        "supporting_labels": [
+          "OPM-MEG evoked field peak"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/eeg_brain_ds004902.json",
+          "recorded/opm_brain_mne.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field"
+        ],
+        "risk": {
+          "heading": "Risk of Inadequate Sleep and Irregular Schedules",
+          "text": "Space crews experience multiple hazards simultaneously. Stressors include chronic sleep loss, constant work demands, and irregularities in their internal biological clocks. Understanding how to reduce the effects of these stressors on crew health and safety is an ongoing area of research.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "EEG is conventional electrodes (normal sleep vs sleep deprivation, one subject); the evoked field is from real QuSpin OPMs. Neither is an astronaut."
+      },
+      {
+        "id": "blood",
+        "label": "Blood: renin (quantum-dot nanosensor)",
+        "device": "qd_renin",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "supporting": [
+          {
+            "value": null,
+            "unit": "pM",
+            "source": "NASA OSDR Inspiration4 open data",
+            "tag": "recorded",
+            "status": "NOT_STATED",
+            "as_of": null,
+            "note": "renin is not measured in any open Inspiration4 file (see nasa_i4.not_found)"
+          }
+        ],
+        "supporting_labels": [
+          "Inspiration4 renin"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/qd_fret_figshare5468838.json",
+          "nasa_i4.json"
+        ],
+        "physics": [
+          "physics.qd_fret_vs_distance"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "The sensor's detection limit is shown; no astronaut renin or ROS value is in open data, and the readout is a TIRF microscope (lab assay)."
+      },
+      {
+        "id": "skin_patch",
+        "label": "Skin patch: bilirubin",
+        "device": "cqd_patch",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "supporting": [
+          {
+            "value": "bilirubin in skin interstitial fluid",
+            "unit": "",
+            "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          }
+        ],
+        "supporting_labels": [
+          "patch analyte"
+        ],
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "data": [
+          "nasa_i4.json",
+          "recorded/cqd_pl_mendeley_cmfbrvrb8y.json"
+        ],
+        "physics": [
+          "physics.cqd_quenching"
+        ],
+        "risk": null,
+        "review_note": "Inspiration4 serum bilirubin (drawn on the ground before and after flight) is the astronaut reference; the patch reads skin interstitial fluid and has not flown."
+      },
+      {
+        "id": "tumor",
+        "label": "Tumour risk: space radiation",
+        "device": "environment",
+        "reading": {
+          "value": 0.2621,
+          "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
+          "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
+          "tag": "live",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:05:00Z",
+          "note": "5-minute average"
+        },
+        "supporting": [
+          {
+            "value": "below S1",
+            "unit": "",
+            "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T08:05:00Z",
+            "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
+          }
+        ],
+        "supporting_labels": [
+          "NOAA solar radiation storm level"
+        ],
+        "evidence": "SOURCED",
+        "data": [
+          "live_snapshot.json (radiation)"
+        ],
+        "physics": [],
+        "risk": {
+          "heading": "Risk of Radiation-Induced Cancers",
+          "text": "Crews exposed to radiation from space may be more likely to develop cancer. Identifying the best ways to mitigate this risk and understand what interventions may help are ongoing research priorities.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Proton flux measured by GOES at geostationary orbit: exposure context, not a tumour measurement."
+      },
+      {
+        "id": "lung",
+        "label": "Lungs: cabin CO2 and O2",
+        "device": "environment",
+        "reading": {
+          "value": null,
+          "unit": "mmHg",
+          "source": "",
+          "tag": "live",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "ISS cabin telemetry only for the ISS location and only from the running server"
+        },
+        "supporting": [],
+        "supporting_labels": [
+          "cabin ppO2"
+        ],
+        "evidence": "TO_CONFIRM",
+        "data": [
+          "live_snapshot.json (iss_cabin)"
+        ],
+        "physics": [],
+        "risk": [
+          {
+            "heading": "Risk of Hypoxia",
+            "text": "Astronauts on future deep space missions will take steps to avoid “the bends” during spacewalks, but following those steps also elevates the risk of mild hypoxia — a condition that occurs when oxygen levels in body tissues become lower than normal.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          },
+          {
+            "heading": "Risk of Reduced Cardiorespiratory and Musculoskeletal Fitness",
+            "text": "All astronauts perform exercise during their mission to counteract losses in bone density, muscle strength, and heart and blood vessel performance. Researchers are studying what types of exercise will best protect their health and their ability to perform spacewalks.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          }
+        ],
+        "review_note": "ISS vehicle telemetry, not crew data, and not a lung measurement; units to confirm."
+      }
+    ],
+    "rows": [
+      {
+        "label": "OPM: ambient magnetic field here",
+        "reading": {
+          "value": 3.3,
+          "unit": "nT",
+          "source": "NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
+          "tag": "live",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:13:00Z",
+          "note": "fallback: https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json HTTP 404; https://services.swpc.noaa.gov/products/solar-wind/mag-2-hour.json HTTP 404; measured at L1, about 1.5 million km from Earth; used as the interplanetary field for transit."
+        },
+        "evidence": "SOURCED",
+        "review_note": "Field from NOAA SWPC, https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json."
+      },
+      {
+        "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
+        "reading": {
+          "value": 0.66,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:13:00Z",
+          "note": "formula: ambient_nT / opm_range_nT; inputs: mars_transit.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Ambient field is inside the OPM's ±5 nT range; QuSpin still specifies a shielded or field-controlled setup."
+      },
+      {
+        "label": "OPM: inside ±5 nT range",
+        "reading": {
+          "value": "yes",
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: ambient_nT <= 5; inputs: mars_transit.ambient_nT"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Uses the external field; cabin fields are larger (OSCAR-QUBE reported interference from station equipment)."
+      },
+      {
+        "label": "NV: own bias field against the ambient field",
+        "reading": {
+          "value": 303030.3,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, mars_transit.ambient_nT"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "The ZAQuant and Q.ANT builds bring their own ~1 mT bias, so ambient field strength doesn't stop them; the JGU build ran at zero bias in a multilayer shield."
+      },
+      {
+        "label": "NV heartbeat (JGU): averaged SNR over 12,000 beats",
+        "reading": {
+          "value": 38.46,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (ZAQuant): averaged SNR over 300 beats",
+        "reading": {
+          "value": 11.29,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (Q.ANT): averaged SNR over 2,000 beats",
+        "reading": {
+          "value": 7.85,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "Quantum-dot renin sensor: detection limit",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "The readout is a TIRF microscope, so this is a lab assay, not a wearable."
+      },
+      {
+        "label": "Carbon-dot patch analyte: Inspiration4 total bilirubin",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "review_note": "Inspiration4 blood was drawn on the ground before and after the flight; the patch itself has not flown."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Invisible to the human eye, space radiation is not only stealthy but considered one of the most hazardous aspects of spaceflight.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Behavioral responses occur among groups of people far from Earth who are isolated and confined in a small space over a long period of time.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Instructions, new supplies, medical care, and more become increasingly challenging to receive from Earth as astronauts venture deeper into space.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Astronauts' entire bodies – muscles, bones, inner ear, and organs – must adjust to the new gravities encountered on the space station or their spacecraft, as well as on the Moon, Mars, and Earth once they return home.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Maintaining a safe ecosystem inside a spacecraft presents unique challenges, from ensuring optimal temperatures, pressures, and lighting, to reducing noise, monitoring microbial communities, and tracking immune responses.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      }
+    ]
   },
   "mars_surface": {
-    "rows": []
+    "main": [
+      {
+        "id": "heart_q_wave",
+        "label": "Heart: Q wave",
+        "device": "opm + nv",
+        "reading": {
+          "value": 5.24,
+          "unit": "pT",
+          "source": "recorded/opm_heart_kiel.json (averaged beat)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: SpinDrift rule on the averaged beat, polarity set so R is positive: Q = minimum 10-80 ms before R, S = minimum 10-80 ms after R; the Kiel database has no annotations, so this is not a clinical reading; Q at 25.0 ms before R; QRS 105.0 ms; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat"
+        },
+        "supporting": [
+          {
+            "value": -43.14,
+            "unit": "pT",
+            "source": "recorded/opm_heart_kiel.json (averaged beat at the R-peak)",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: mean over the 47 beats of B at each R-peak sample; inputs: recorded/opm_heart_kiel.json, nv_heart_derived.averaged_beat.beats_averaged. Earth recording with QuSpin QZFM Gen 1 OPMs at the Kiel array position; a different person and geometry from the NV studies."
+          },
+          {
+            "value": 8.06,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 2.37,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          },
+          {
+            "value": 1.65,
+            "unit": "",
+            "source": "SpinDrift calculation",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "formula: averaged_snr_q_wave = |measured Kiel Q wave| / averaged_noise; inputs: nv_heart_derived.averaged_beat.q_wave_pT, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged; can this build resolve the Q wave after averaging? (>1 means above its averaged noise)"
+          }
+        ],
+        "supporting_labels": [
+          "R-peak",
+          "JGU averaged SNR on the Q wave",
+          "ZAQuant averaged SNR on the Q wave",
+          "Q.ANT averaged SNR on the Q wave"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/opm_heart_kiel.json",
+          "nv_heart_derived.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field",
+          "physics.nv_odmr_lines"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Q wave 25.0 ms before R on a 47-beat average of a real OPM heart recording; found by a simple rule, not a clinical reading."
+      },
+      {
+        "id": "brain_eeg",
+        "label": "Brain: EEG alpha and OPM-MEG evoked field",
+        "device": "opm",
+        "reading": {
+          "value": "normal sleep (NS) 13.3304; sleep deprivation (SD) 10.2627",
+          "unit": "uV^2/Hz",
+          "source": "OpenNeuro ds004902 sub-01, eyes closed (CC0), data/recorded/eeg_brain_ds004902.json",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: Welch PSD mean 8-12 Hz over O1/Oz/O2, whole 300 s"
+        },
+        "supporting": [
+          {
+            "value": 1295.939,
+            "unit": "fT",
+            "source": "MNE-Python OPM sample (nine QuSpin SERF OPMs), data/recorded/opm_brain_mne.json",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": "largest |evoked| 10-100 ms after the median-nerve stimulus: MEG1231 evoked at 80 ms, 201 epochs"
+          }
+        ],
+        "supporting_labels": [
+          "OPM-MEG evoked field peak"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/eeg_brain_ds004902.json",
+          "recorded/opm_brain_mne.json"
+        ],
+        "physics": [
+          "physics.opm_zero_field"
+        ],
+        "risk": {
+          "heading": "Risk of Inadequate Sleep and Irregular Schedules",
+          "text": "Space crews experience multiple hazards simultaneously. Stressors include chronic sleep loss, constant work demands, and irregularities in their internal biological clocks. Understanding how to reduce the effects of these stressors on crew health and safety is an ongoing area of research.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "EEG is conventional electrodes (normal sleep vs sleep deprivation, one subject); the evoked field is from real QuSpin OPMs. Neither is an astronaut."
+      },
+      {
+        "id": "blood",
+        "label": "Blood: renin (quantum-dot nanosensor)",
+        "device": "qd_renin",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "supporting": [
+          {
+            "value": null,
+            "unit": "pM",
+            "source": "NASA OSDR Inspiration4 open data",
+            "tag": "recorded",
+            "status": "NOT_STATED",
+            "as_of": null,
+            "note": "renin is not measured in any open Inspiration4 file (see nasa_i4.not_found)"
+          }
+        ],
+        "supporting_labels": [
+          "Inspiration4 renin"
+        ],
+        "evidence": "EARTH_ONLY",
+        "data": [
+          "recorded/qd_fret_figshare5468838.json",
+          "nasa_i4.json"
+        ],
+        "physics": [
+          "physics.qd_fret_vs_distance"
+        ],
+        "risk": {
+          "heading": "Risk of Cardiovascular Adaptations",
+          "text": "Weightlessness alters blood circulation and how the heart and blood vessels function, potentially increasing the risk of cardiovascular events. Research focuses on minimizing these unhealthy changes.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "The sensor's detection limit is shown; no astronaut renin or ROS value is in open data, and the readout is a TIRF microscope (lab assay)."
+      },
+      {
+        "id": "skin_patch",
+        "label": "Skin patch: bilirubin",
+        "device": "cqd_patch",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "supporting": [
+          {
+            "value": "bilirubin in skin interstitial fluid",
+            "unit": "",
+            "source": "Tabatabaee, Naghdi, Peyravian, Kiani, Golmohammadi, 'An Invisible Dermal Nanotattoo-Based Smart Wearable Sensor for eDiagnostics of Jaundice', ACS Nano 18(41):28012-28025 (2024), doi:10.1021/acsnano.4c06191, PubMed 39356285 (abstract)",
+            "tag": "published_spec",
+            "status": "VERIFIED",
+            "as_of": null,
+            "note": null
+          }
+        ],
+        "supporting_labels": [
+          "patch analyte"
+        ],
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "data": [
+          "nasa_i4.json",
+          "recorded/cqd_pl_mendeley_cmfbrvrb8y.json"
+        ],
+        "physics": [
+          "physics.cqd_quenching"
+        ],
+        "risk": null,
+        "review_note": "Inspiration4 serum bilirubin (drawn on the ground before and after flight) is the astronaut reference; the patch reads skin interstitial fluid and has not flown."
+      },
+      {
+        "id": "tumor",
+        "label": "Tumour risk: space radiation",
+        "device": "environment",
+        "reading": {
+          "value": 0.2621,
+          "unit": "pfu (protons cm^-2 s^-1 sr^-1)",
+          "source": "NOAA SWPC GOES primary integral protons, https://services.swpc.noaa.gov/json/goes/primary/integral-protons-6-hour.json",
+          "tag": "live",
+          "status": "VERIFIED",
+          "as_of": "2026-11-15T08:05:00Z",
+          "note": "5-minute average"
+        },
+        "supporting": [
+          {
+            "value": "below S1",
+            "unit": "",
+            "source": "NOAA SWPC, https://www.swpc.noaa.gov/products/goes-proton-flux",
+            "tag": "calculated",
+            "status": "VERIFIED",
+            "as_of": "2026-11-15T08:05:00Z",
+            "note": "formula: S-level from >=10 MeV flux thresholds 10, 100, 1000, 10000, 100000 pfu; inputs: radiation.flux_ge10MeV_pfu"
+          }
+        ],
+        "supporting_labels": [
+          "NOAA solar radiation storm level"
+        ],
+        "evidence": "SOURCED",
+        "data": [
+          "live_snapshot.json (radiation)"
+        ],
+        "physics": [],
+        "risk": {
+          "heading": "Risk of Radiation-Induced Cancers",
+          "text": "Crews exposed to radiation from space may be more likely to develop cancer. Identifying the best ways to mitigate this risk and understand what interventions may help are ongoing research priorities.",
+          "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+        },
+        "review_note": "Proton flux measured by GOES at geostationary orbit: exposure context, not a tumour measurement."
+      },
+      {
+        "id": "lung",
+        "label": "Lungs: cabin CO2 and O2",
+        "device": "environment",
+        "reading": {
+          "value": null,
+          "unit": "mmHg",
+          "source": "",
+          "tag": "live",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "ISS cabin telemetry only for the ISS location and only from the running server"
+        },
+        "supporting": [],
+        "supporting_labels": [
+          "cabin ppO2"
+        ],
+        "evidence": "TO_CONFIRM",
+        "data": [
+          "live_snapshot.json (iss_cabin)"
+        ],
+        "physics": [],
+        "risk": [
+          {
+            "heading": "Risk of Hypoxia",
+            "text": "Astronauts on future deep space missions will take steps to avoid “the bends” during spacewalks, but following those steps also elevates the risk of mild hypoxia — a condition that occurs when oxygen levels in body tissues become lower than normal.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          },
+          {
+            "heading": "Risk of Reduced Cardiorespiratory and Musculoskeletal Fitness",
+            "text": "All astronauts perform exercise during their mission to counteract losses in bone density, muscle strength, and heart and blood vessel performance. Researchers are studying what types of exercise will best protect their health and their ability to perform spacewalks.",
+            "source": "https://www.nasa.gov/hrp/risks/ (accessed 2026-11-15)"
+          }
+        ],
+        "review_note": "ISS vehicle telemetry, not crew data, and not a lung measurement; units to confirm."
+      }
+    ],
+    "rows": [
+      {
+        "label": "OPM: ambient magnetic field here",
+        "reading": {
+          "value": null,
+          "unit": "nT",
+          "source": "no cited measured value",
+          "tag": "published_spec",
+          "status": "NOT_STATED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "TO_CONFIRM",
+        "review_note": "No cited measured field for this location yet."
+      },
+      {
+        "label": "OPM: field reduction needed (ambient ÷ ±5 nT range)",
+        "reading": {
+          "value": 402.6,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: ambient_nT / opm_range_nT; inputs: mars_surface.ambient_field_nT, specs.opm.dynamic_range. Uses the external field. Fields inside a spacecraft cabin are larger; OSCAR-QUBE reported interference from station equipment."
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "OPM needs about 403× field reduction here."
+      },
+      {
+        "label": "OPM: inside ±5 nT range",
+        "reading": {
+          "value": null,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "formula: ambient_nT <= 5; inputs: mars_surface.ambient_nT"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Uses the external field; cabin fields are larger (OSCAR-QUBE reported interference from station equipment)."
+      },
+      {
+        "label": "NV: own bias field against the ambient field",
+        "reading": {
+          "value": null,
+          "unit": "×",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "NOT_YET_EXTRACTED",
+          "as_of": null,
+          "note": "formula: ratio = 1 mT / ambient field; inputs: specs.nv.zaquant.bias_field, mars_surface.ambient_nT"
+        },
+        "evidence": "TO_CONFIRM",
+        "review_note": "The ZAQuant and Q.ANT builds bring their own ~1 mT bias, so ambient field strength doesn't stop them; the JGU build ran at zero bias in a multilayer shield."
+      },
+      {
+        "label": "NV heartbeat (JGU): averaged SNR over 12,000 beats",
+        "reading": {
+          "value": 38.46,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.jgu.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.jgu.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (ZAQuant): averaged SNR over 300 beats",
+        "reading": {
+          "value": 11.29,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.zaquant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.zaquant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "NV heartbeat (Q.ANT): averaged SNR over 2,000 beats",
+        "reading": {
+          "value": 7.85,
+          "unit": "",
+          "source": "SpinDrift calculation",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: averaged_snr = A / averaged_noise; inputs: specs.nv.headline.r_peak_average, specs.nv.qant.sensitivity, specs.nv.headline.bandwidth_assumed, specs.nv.qant.beats_averaged"
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "Single heartbeats are not resolved at these sensitivities; readings rely on averaging."
+      },
+      {
+        "label": "Quantum-dot renin sensor: detection limit",
+        "reading": {
+          "value": 25,
+          "unit": "pM",
+          "source": "Long, Zhang, Zhang, Zhang, 'Single quantum dot based nanosensor for renin assay', Anal. Chem. 84(20):8846-8852 (2012), doi:10.1021/ac302284s, PubMed 23003565 (abstract)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "EARTH_ONLY",
+        "review_note": "The readout is a TIRF microscope, so this is a lab assay, not a wearable."
+      },
+      {
+        "label": "Carbon-dot patch analyte: Inspiration4 total bilirubin",
+        "reading": {
+          "value": "27 values, crew C001, C002, C003, C004, timepoints L-92 to R+194: 0.2-1.2 mg/dL",
+          "unit": "mg/dL",
+          "source": "NASA OSDR OSD-575 (data/nasa_i4.json)",
+          "tag": "calculated",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": "formula: count, min and max over the released total bilirubin values; inputs: nasa_i4.datasets[OSD-575]"
+        },
+        "evidence": "EARTH_ONLY",
+        "badge": "NASA data",
+        "review_note": "Inspiration4 blood was drawn on the ground before and after the flight; the patch itself has not flown."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Invisible to the human eye, space radiation is not only stealthy but considered one of the most hazardous aspects of spaceflight.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Behavioral responses occur among groups of people far from Earth who are isolated and confined in a small space over a long period of time.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Instructions, new supplies, medical care, and more become increasingly challenging to receive from Earth as astronauts venture deeper into space.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Astronauts' entire bodies – muscles, bones, inner ear, and organs – must adjust to the new gravities encountered on the space station or their spacecraft, as well as on the Moon, Mars, and Earth once they return home.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      },
+      {
+        "label": "NASA human spaceflight hazard",
+        "reading": {
+          "value": "Maintaining a safe ecosystem inside a spacecraft presents unique challenges, from ensuring optimal temperatures, pressures, and lighting, to reducing noise, monitoring microbial communities, and tracking immune responses.",
+          "unit": "",
+          "source": "https://www.nasa.gov/hrp/hazards/ (section 'Explore the Five Hazards of Human Spaceflight', accessed 2026-11-15)",
+          "tag": "published_spec",
+          "status": "VERIFIED",
+          "as_of": null,
+          "note": null
+        },
+        "evidence": "SOURCED",
+        "review_note": "Quoted word for word from NASA."
+      }
+    ]
   }
 }
