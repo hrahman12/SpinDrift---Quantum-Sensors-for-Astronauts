@@ -518,3 +518,6 @@ canvas.mini-live { display: inline-block; vertical-align: middle; }
 .sensor-mode .srow .s-lbl { display: none; }
 .sensor-mode .theorem { display: none; }
 .sensor-mode .card-say { display: none; }
+
+/* public page: only the "Does it work?" tab; the buttons that open the Hardware tab are hidden */
+#go-hw, #go-specs { display: none !important; }

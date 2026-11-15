@@ -493,6 +493,7 @@ let hwDev = 'opm';
 const HW = [['opm', 'Brain sensor', 'QuSpin QZFM Gen-3'], ['nv', 'Heart sensor', 'NV diamond · JGU, ZAQuant, Q.ANT'], ['qd', 'Blood sensor', 'quantum-dot renin probe'], ['cqd', 'Skin sensor', 'carbon-dot patch']];
 const hwBuilt = {};
 function showTab(t, dev) {
+  t = 'body';   // the page shows only the "Does it work?" tab; Hardware and Unified sensor are not on the public page
   $$('.view').forEach((el) => el.classList.toggle('on', el.id === `view-${t}`));
   $$('#tb-nav button').forEach((b) => b.classList.toggle('on', b.dataset.tab === t));
   if (t === 'hw') { if (dev) hwDev = dev; renderHardware(); }
