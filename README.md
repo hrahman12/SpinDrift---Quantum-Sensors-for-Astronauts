@@ -37,28 +37,11 @@ How each slide is made: slide 1 is a [HyperFrames](https://github.com/heygen-com
 
 ## What we learned
 
-![Lean's verdict at 34 real places, 7 checks each](slides/figures/f2_lean_verdict_matrix.png)
-
 1. **Brain (OPM).** With no shield it works at 7 of 34 places: HALO, PPE, the NRHO perilune and apolune, interplanetary cruise, Shackleton rim and a permanently shadowed crater. It does not work at 25. The strictest shield the stored runs needed is × 1,248, at Concordia station.
-
-   ![The field at each place and the shield the brain sensor needs](slides/figures/f1_field_at_34_spots.png)
-
 2. **Heart (NV diamond).** With the R peak and 47 heartbeats averaged, the JGU and ZAQuant builds work at all 34 places. The Q.ANT build works at none; in the stored runs it needed up to 273 heartbeats.
-
-   ![A real averaged heartbeat against each build's noise](slides/figures/f3_heartbeat_vs_noise.png)
-   ![Heartbeats each NV build needs](slides/figures/f4_heartbeats_needed.png)
-   ![Lean's heart rule as a surface](slides/figures/f5_heart_rule_surface_3d.png)
-
 3. **Blood (quantum dot).** It does not work at normal renin levels. Its detection limit, 25 pM, is about 12 times the highest published reference (about 2.0 pM).
 4. **Skin (carbon dots).** It does not work at normal adult bilirubin levels. Its stated range starts at 3 mg/dL, and the adult reference tops out at 1.3 mg/dL.
-
-   ![Published references against each sensor's limit](slides/figures/f10_references_vs_limits.png)
-
 5. **Missing numbers.** Two published references and the patch's own range took the cells that need a number from 72 to 4 (30.3% to 1.7%), under the 5% limit. The 4 left are the brain checks at the Inspiration 4 splashdown and the Artemis III candidate regions, where no source gives the field inside the module.
-
-   ![Cells that need a number, step by step](slides/figures/f11_missing_cells.png)
-
-The figures are drawn by `slides/make_figures.py` from the data files and the running Lean checker (`LEAN_API=http://127.0.0.1:8001 python slides/make_figures.py`).
 
 ## Where the numbers stand
 
