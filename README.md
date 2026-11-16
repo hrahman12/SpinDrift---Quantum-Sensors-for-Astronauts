@@ -6,7 +6,19 @@
 
 SpinDrift asks one question about four quantum sensors: does each one work at a real place in space, and under which conditions? Lean 4 makes the decision from sourced numbers. A missing number never decides; it is shown as missing.
 
-**Public site:** not live yet. It is set to deploy from `main` to Vercel as `spindrift-v10`; see [Public site](#public-site).
+**Public site:** https://spindrift-v10.vercel.app (the live Lean checker runs on every change you make). See [Public site](#public-site).
+
+## Presentation
+
+Three slides: the idea, what Lean proved for each sensor, and every verdict at once.
+
+![Slide 1: SpinDrift, Quantum Sensors for Astronauts. Lean (proves it) × Quantum (senses it) × Bio (brain, heart, blood, skin) = Astronaut (in space).](slides/presentation/1-cover.png)
+
+![Slide 2: from the board to the quantum level, sensor by sensor. Brain: pass at 7 places, works at 25 more once shielded, 2 have no published field. Heart: pass at all 34. Blood and skin: fail at normal levels, pass if renin reaches 25 pM or bilirubin is 3 to 20 mg/dL.](slides/presentation/2-what-lean-proved.png)
+
+![Slide 3: every Lean verdict in 3D, one bar per sensor at each of the 34 places. Green works, yellow works with a magnetic shield, red does not work at normal body levels, grey has no published number.](slides/presentation/3-every-verdict.png)
+
+How each slide is made: slide 1 is a [HyperFrames](https://github.com/heygen-com/hyperframes) composition (`slides/front_page/index.html`, captured with `npx hyperframes snapshot`); slide 2's stacks come from `slides/make_3d_columns.py`; slide 3's graph comes from `slides/make_figures.py fig_verdicts3d`, which asks the running Lean server for every verdict.
 
 ## The four sensors
 
@@ -75,7 +87,9 @@ A value enters only with a source. Reference values are population intervals, no
 
 ## Public site
 
-The site is set to deploy from `main` on Vercel as `spindrift-v10`. The Vercel project does not exist yet, so the URL is not live. Once it is created and deployed, its public address will be listed here.
+**https://spindrift-v10.vercel.app** deploys from `main` on Vercel (project `spindrift-v10`). The build (`scripts/vercel_build.sh`) compiles the Lean checker on Linux and serves `ui/`, `data/` and the API, so the Lean cards run live.
+
+A static copy, with Lean results stored for the menu settings and the reference values, is served straight from GitHub: https://rawcdn.githack.com/hrahman12/SpinDrift---Quantum-Sensors-for-Astronauts/5c83342e142b1afadcd6a06ae0cfa8c49ebe527e/ui/index.html
 
 ## Hardware
 
@@ -103,6 +117,7 @@ Run BEAMTEAM's bench check with `BEAMTEAM_BACKEND=/path/to/beamteam/backend pyth
 - `data/`: sourced data. Each value carries its source, tag and status. `data/literature/` holds the values taken from each device's own paper.
 - `api/`, `scripts/`, `vercel.json`: the Vercel build and API.
 - `hardware/beamteam/`: the bench design, its report and the runner.
+- `slides/`: the presentation. `presentation/` holds the three slides, `front_page/` the HyperFrames title page, `figures/` every graph, and `make_figures.py` and `make_3d_columns.py` draw them.
 
 ## Sources
 

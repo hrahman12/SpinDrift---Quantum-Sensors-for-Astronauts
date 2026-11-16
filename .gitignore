@@ -23,3 +23,8 @@ public/
 # literature-builder raw API cache (scripts/build_literature.py; over 20 MB)
 data/literature/raw/
 .env*
+
+# HyperFrames working files and renders (slides/front_page)
+.hyperframes/
+slides/front_page/*.mp4
+slides/front_page/spindrift_front_*.png

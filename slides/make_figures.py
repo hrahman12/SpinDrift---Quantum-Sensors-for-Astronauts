@@ -407,6 +407,71 @@ def fig_missing():
     print("missing cells by step:", counts, "of", total)
 
 
+# ---------------------------------------------------------------- 12. Lean's verdicts in 3D: green, yellow, red
+def fig_verdicts3d():
+    """One bar per sensor per place. Colour and height both show Lean's verdict, so it reads without colour too."""
+    from matplotlib.patches import Patch
+    inputs = {"shielding_factor": 1, "beats_averaged": 47, "snr_required": 3, "build": "jgu", "target": "r_peak", "bandwidth_hz": 30,
+              "renin": 2.0, "bilirubin_isf": 1.3}   # published references (README: Where the references come from)
+    realms = [("Earth", ("earth_analog.", "earth_flight.")), ("Earth orbit", ("iss.", "tiangong.", "iss_hotspots.")),
+              ("Moon", ("gateway.", "moon_south_pole.", "lunar_anomalies.")), ("Mars", ("mars_transit.", "mars_surface."))]
+    rows = [("cqd_skin", "Skin"), ("qd_blood", "Blood"), ("opm_brain", "Brain"), ("nv_heart_jgu", "Heart")]   # front to back: short rows in front
+    GREEN, YELLOW, RED, GREY = "#8fc27a", "#e3b341", "#e5604f", "#6e7580"
+    level = {GREEN: 2.0, YELLOW: 1.35, RED: 0.7, GREY: 0.22}
+
+    def colour(v):
+        if v["verdict"] == "REQUIREMENTS_MET":
+            return GREEN
+        if v["verdict"] == "NEED_MORE_INFORMATION":
+            return GREY
+        failed = [r["id"] for r in v.get("requirements", []) if r.get("holds") is False]
+        return YELLOW if failed and all(f == "opm_field_nulled" for f in failed) else RED   # a shield fixes only the field limit
+
+    cells, groups, x = [], [], 0.0
+    for name, prefixes in realms:
+        start = x
+        for s in SUBS:
+            if s["id"].startswith(prefixes):
+                v = post("/api/verdict", {"location": s["id"], "inputs": inputs})["verdicts"]
+                cells.append((x, [colour(v[k]) for k, _ in rows]))
+                x += 1.0
+        groups.append((name, start, x - 1.0, int(x - start)))
+        x += 1.6                                                     # gap between realms
+    assert len(cells) == 34, len(cells)
+    counts = {c: sum(cs[j] == c for _, cs in cells for j in range(4)) for c in (GREEN, YELLOW, RED, GREY)}
+    print("verdict colours (green, yellow, red, grey):", [counts[c] for c in (GREEN, YELLOW, RED, GREY)])
+
+    fig = plt.figure(figsize=(12.48, 4.2), dpi=200)          # shown at 1664 x 560 on the slide
+    ax = fig.add_axes([-0.02, -0.30, 1.04, 1.50], projection="3d")
+    ax.set_facecolor(BG)
+    dx, dy, gap = 0.8, 0.8, 1.55
+    for xi, cs in cells:
+        for j, c in enumerate(cs):
+            ax.bar3d(xi, j * gap, 0, dx, dy, level[c], color=c, edgecolor=BG, linewidth=0.3, shade=True)
+    for j, (_, lab) in enumerate(rows):
+        ax.text(-2.1, j * gap + dy / 2, 0, lab, color=INK, fontsize=15, ha="right", va="center", fontweight="semibold")
+    for name, a, b, n in groups:
+        ax.text((a + b + dx) / 2, -1.15, 0, f"{name} · {n}", color=INK2, fontsize=13, ha="center", va="top")
+    ax.set_xlim(-0.5, x - 1.6 + dx); ax.set_ylim(-0.4, gap * 3 + dy + 0.4); ax.set_zlim(0, 2.2)
+    ax.set_box_aspect((4.0, 1.55, 0.42), zoom=1.22)
+    ax.set_axis_off(); ax.view_init(elev=33, azim=-74)
+    for art in ax.get_children():                            # the 3D box is square; let the wide plot draw past it
+        art.set_clip_on(False)
+    fig.legend(handles=[Patch(color=GREEN, label="works"), Patch(color=YELLOW, label="works with a magnetic shield"),
+                        Patch(color=RED, label="does not work at normal body levels"), Patch(color=GREY, label="no published number")],
+               loc="upper center", ncol=4, fontsize=13, frameon=False, handlelength=1.1, handleheight=1.1, columnspacing=1.8,
+               bbox_to_anchor=(0.5, 1.0), labelcolor=INK)
+    for ext in ("png", "svg"):
+        fig.savefig(OUT / f"f12_lean_verdicts_3d.{ext}", dpi=200, facecolor=BG)
+    plt.close(fig)
+    print("wrote f12_lean_verdicts_3d")
+
+
 if __name__ == "__main__":
-    fig_field(); fig_matrix(); fig_heartbeat(); fig_beats(); fig_surface3d(); fig_odmr3d(); fig_fret(); fig_ladder(); fig_brain()
-    fig_references(); fig_missing()
+    import sys
+    if sys.argv[1:]:                                        # e.g. python slides/make_figures.py fig_verdicts3d
+        for name in sys.argv[1:]:
+            globals()[name]()
+    else:
+        fig_field(); fig_matrix(); fig_heartbeat(); fig_beats(); fig_surface3d(); fig_odmr3d(); fig_fret(); fig_ladder(); fig_brain()
+        fig_references(); fig_missing(); fig_verdicts3d()
