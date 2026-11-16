@@ -54,12 +54,6 @@ A value enters only with a source. Reference values are population intervals, no
 - **Bilirubin, adult upper limit:** Cleveland Clinic Laboratories, total bilirubin 0.2–1.3 mg/dL for ages 18–99 (https://clevelandcliniclabs.com/test/bilirubin-total/).
 - **Carbon-dot patch range and detection limit:** Tabatabaee et al., Supporting Information, Table S1, page S10 (https://doi.org/10.1021/acsnano.4c06191; figshare 27153931, file `nn4c06191_si_001.pdf`).
 
-## Public site
-
-**https://spindrift-v10.vercel.app** deploys from `main` on Vercel (project `spindrift-v10`). The build (`scripts/vercel_build.sh`) compiles the Lean checker on Linux and serves `ui/`, `data/` and the API, so the Lean cards run live.
-
-A static copy, with Lean results stored for the menu settings and the reference values, is served straight from GitHub: https://rawcdn.githack.com/hrahman12/SpinDrift---Quantum-Sensors-for-Astronauts/5c83342e142b1afadcd6a06ae0cfa8c49ebe527e/ui/index.html
-
 ## Hardware
 
 - **Brain bench, 795 nm.** `hardware/beamteam/opm_795_bench.json` is a [BEAMTEAM](https://github.com/elevenarms/beamteam) design of a Rb-87 D1 bench: circular light through a 3 mm Rb vapour cell, then a polarizing beamsplitter onto two balanced photodiodes. BEAMTEAM's offline tracer and verifier pass it: 10 mW in, 5.0 mW on each photodiode, no stray light, no warnings. The design is not a built device. The tracer does not model Faraday rotation or the magnetic signal. Report: `hardware/beamteam/opm_795_bench_report.txt`.
