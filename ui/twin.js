@@ -11,7 +11,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { lookLights, glowView, gradientBg, BACKDROPS } from './look.js';
 import { buildPerson } from './person.js';
-import { slimTransform, legSlim, deformMesh, bodyModel, tuck, dress, hair, faceShell, evaExtras } from './outfit.js';
+import { slimTransform, legSlim, deformMesh, bodyModel, tuck, flattenFront, dress, hair, faceShell, evaExtras } from './outfit.js';
 
 const REF_H = 1.75;          // reference height for the fallback figure (m)
 const MM = 0.001;
@@ -67,6 +67,7 @@ export async function createTwin({ canvas, labelsEl, leadersEl, notesEl = null, 
     const hb = new THREE.Box3(); for (let i = 0; i < body.n; i++) if (body.cls[i] === 2 && body.hy[i] > 0.88) hb.expandByPoint(new THREE.Vector3(body.P[3 * i], body.P[3 * i + 1], body.P[3 * i + 2]));
     headC = hb.getCenter(new THREE.Vector3());
     tuck(body, skinMeshes);
+    flattenFront(body, skinMeshes);      // the skin lies behind the cloth at the front of the hips, so none shows through
     const { meshes } = dress(body, { outfit, sex });
     const hr = outfit === 'eva' ? null : hair(body, { sex, headCentre: headC });
     const face = faceShell(body, { color: skinTone });

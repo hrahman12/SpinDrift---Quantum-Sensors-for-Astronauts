@@ -157,6 +157,42 @@ export function tuck(body, skinMeshes) {
   return moves.size;
 }
 
+// Clothes hang flat at the front of the hips, so the skin under them must lie flat there too, or it shows through
+// the cloth. Between the legs (hy lo..hi, within 5% of the height of the midline) the body surface is kept a little
+// behind the front of the thighs beside it, on the welded model (garments grow from it) and on the skin meshes.
+export function flattenFront(body, skinMeshes, [lo, hi] = [0.39, 0.545], margin = 0.004) {
+  const { P, n, H, cx, hy } = body, cap = new Map(), bin = (i) => Math.round((hy[i] * H) / 0.01);
+  for (let i = 0; i < n; i++) {
+    if (body.cls[i] !== 0 || hy[i] < lo - 0.01 || hy[i] > hi + 0.01) continue;
+    const ax = Math.abs(P[3 * i] - cx);
+    if (ax > 0.05 * H && ax < 0.09 * H) { const k = bin(i); cap.set(k, Math.max(cap.get(k) ?? -Infinity, P[3 * i + 2])); }
+  }
+  const moves = new Map(), key = (x, y, z) => `${Math.round(x * 1e4)},${Math.round(y * 1e4)},${Math.round(z * 1e4)}`;
+  // full strength up to 3.5 cm under the top of the band and within 3.5% of the height of the midline, fading to
+  // nothing at the band's edges, so the surface has no step (a step shows as a dark crease in the cloth)
+  const fade = (x, full, none) => (x <= full ? 1 : x >= none ? 0 : (none - x) / (none - full));
+  for (let i = 0; i < n; i++) {
+    const ax = Math.abs(P[3 * i] - cx);
+    if (body.cls[i] !== 0 || hy[i] < lo || hy[i] > hi || ax >= 0.05 * H) continue;
+    const c = cap.get(bin(i)); if (c === undefined || P[3 * i + 2] <= c - margin) continue;
+    const w = fade(hy[i], hi - 0.035, hi) * fade(ax / H, 0.035, 0.05), z = P[3 * i + 2] - w * (P[3 * i + 2] - (c - margin));
+    if (w <= 0) continue;
+    moves.set(key(P[3 * i], P[3 * i + 1], P[3 * i + 2]), z); P[3 * i + 2] = z;
+  }
+  if (!moves.size) return 0;
+  const v = new THREE.Vector3();
+  for (const m of skinMeshes) {
+    m.updateMatrixWorld(true);
+    const pos = m.geometry.attributes.position, mw = m.matrixWorld, inv = mw.clone().invert(); let touched = false;
+    for (let i = 0; i < pos.count; i++) {
+      v.fromBufferAttribute(pos, i).applyMatrix4(mw); const z = moves.get(key(v.x, v.y, v.z)); if (z === undefined) continue;
+      v.z = z; v.applyMatrix4(inv); pos.setXYZ(i, v.x, v.y, v.z); touched = true;
+    }
+    if (touched) { pos.needsUpdate = true; m.geometry.computeVertexNormals(); }
+  }
+  return moves.size;
+}
+
 // cut a region, smooth it, offset it along its normals
 export function garment(body, pick, { offset = 0.006, smooth = 6, color = 0x3f78c4, after = 2, name = 'garment', melt = 0, flatFront = null }) {
   const { P, I, n } = body, sel = new Int32Array(n).fill(-1);
@@ -197,7 +233,8 @@ export function garment(body, pick, { offset = 0.006, smooth = 6, color = 0x3f78
   const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); geo.setIndex(tris); geo.computeVertexNormals();
   const N = geo.attributes.normal.array; for (let i = 0; i < pos.length; i++) pos[i] += N[i] * offset;
   taubin(after); geo.attributes.position.needsUpdate = true; geo.computeVertexNormals(); geo.computeBoundingSphere();
-  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.8, metalness: 0 });
+  // a small depth bias draws cloth in front of skin that lies on the same surface, so no skin flickers through it
+  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.8, metalness: 0, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -4 });
   const mesh = new THREE.Mesh(geo, mat); mesh.name = name; return mesh;
 }
 
@@ -218,7 +255,8 @@ export function dress(body, { outfit = 'cabin', sex = 'male' }) {
   const add = (g) => { if (g) out.push(g); };
   const isHand = (i) => cls[i] === 1 && hy[i] < 0.485;
   if (O.suit) {
-    add(garment(body, (i) => cls[i] !== 2 && hy[i] < 0.86 && hy[i] >= (O.bootHy || 0.045) && !isHand(i), { offset: O.suitOff, smooth: O.suitSmooth, melt: 22, flatFront: [0.39, 0.545], color: O.suit[sex], name: O.label }));
+    // the body under the suit is already flat at the front of the hips (flattenFront), so the suit follows it
+    add(garment(body, (i) => cls[i] !== 2 && hy[i] < 0.86 && hy[i] >= (O.bootHy || 0.045) && !isHand(i), { offset: O.suitOff, smooth: O.suitSmooth, melt: 22, color: O.suit[sex], name: O.label }));
   } else {
     const shirt = (i) => cls[i] !== 2 && hy[i] < 0.86 && ((cls[i] === 0 && hy[i] >= 0.515) || (cls[i] === 1 && hy[i] >= (O.sleeve === 'long' ? 0.49 : 0.70)));
     add(garment(body, shirt, { offset: O.topOff, smooth: O.topSmooth || 7, color: O.top[sex], name: O.label }));

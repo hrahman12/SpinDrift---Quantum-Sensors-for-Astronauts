@@ -668,6 +668,8 @@ function sourcesHTML() {
 // ------------------------------------------------------------------ boot
 async function boot() {
   await loadAll();
+  const askPlace = new URLSearchParams(location.search).get('place');   // ?place=gateway.halo opens that exact spot
+  if (askPlace) S.location = askPlace;
   applyPalette(); setupPlaces(); prepLive();
   $('#location').addEventListener('change', onPlaceChange);
   $$('#tb-nav button').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab)));
