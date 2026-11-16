@@ -6,20 +6,6 @@
 
 SpinDrift asks one question about four quantum sensors: does each one work at a real place in space, and under which conditions? Lean 4 makes the decision from sourced numbers. A missing number never decides; it is shown as missing.
 
-**Public site:** https://spindrift-v10.vercel.app (the live Lean checker runs on every change you make). See [Public site](#public-site).
-
-## Presentation
-
-Three slides: the idea, what Lean proved for each sensor, and every verdict at once.
-
-![Slide 1: SpinDrift, Quantum Sensors for Astronauts. Lean (proves it) × Quantum (senses it) × Bio (brain, heart, blood, skin) = Astronaut (in space).](slides/presentation/1-cover.png)
-
-![Slide 2: from the board to the quantum level, sensor by sensor. Brain: pass at 7 places, works at 25 more once shielded, 2 have no published field. Heart: pass at all 34. Blood and skin: fail at normal levels, pass if renin reaches 25 pM or bilirubin is 3 to 20 mg/dL.](slides/presentation/2-what-lean-proved.png)
-
-![Slide 3: every Lean verdict in 3D, one bar per sensor at each of the 34 places. Green works, yellow works with a magnetic shield, red does not work at normal body levels, grey has no published number.](slides/presentation/3-every-verdict.png)
-
-How each slide is made: slide 1 is a [HyperFrames](https://github.com/heygen-com/hyperframes) composition (`slides/front_page/index.html`, captured with `npx hyperframes snapshot`); slide 2's stacks come from `slides/make_3d_columns.py`; slide 3's graph comes from `slides/make_figures.py fig_verdicts3d`, which asks the running Lean server for every verdict.
-
 ## The four sensors
 
 | Job | Sensor | Quantum part | What Lean checks |
