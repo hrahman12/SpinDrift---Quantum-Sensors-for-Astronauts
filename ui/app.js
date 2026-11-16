@@ -21,7 +21,7 @@ const OLD_PLACES = { iss: 'ISS · low Earth orbit', gateway: 'Lunar Gateway · N
 const st = { sensor: 'nv', step: 0, verdicts: null, verdictErr: null, brainPeak: null, sex: 'male', scene: null, labels: false,
   // renin 2.0 pM and bilirubin 1.3 mg/dL are published population reference values (README), not measurements of anyone
   inputs: { shielding_factor: 1, beats_averaged: 47, snr_required: 3, build: 'jgu', target: 'r_peak', bandwidth_hz: 30, renin: 2.0, bilirubin_isf: 1.3 } };
-let twin = null, micro = null, busy = false;
+let twin = null, micro = null, busy = false, placeFill = null;
 const sensor = (id = st.sensor) => SENSORS.find((s) => s.id === id);
 const chain = () => DESCENTS[st.sensor];
 
@@ -68,6 +68,7 @@ function setupPlaces() {
     const multi = new Set(spots.map((s) => s.id.split('.')[0])).size > 1;
     selS.innerHTML = spots.map((s) => `<option value="${esc(s.id)}">${esc(multi ? `${s.place_name} · ${s.sub_place}` : s.sub_place || s.id)}</option>`).join('');
   };
+  placeFill = fill;
   const keep = subPlace(S.location) ? S.location : LEGACY[S.location] || null;
   selP.value = areaOf(keep || 'iss.destiny').id; fill();
   if (keep && [...selS.options].some((o) => o.value === keep)) selS.value = keep;
@@ -488,6 +489,71 @@ async function onPlaceChange() {
   if (twin && (sc.outfit !== st.scene?.outfit || sc.backdrop !== st.scene?.backdrop)) await makeTwin();
 }
 
+// ------------------------------------------------------------------ demo mode: the place and settings change on their
+// own and Lean decides again at every step, so the verdicts flip between works, cannot work and a number is missing.
+// Each step only sets inputs; every verdict shown comes from Lean. "What if" steps use numbers the public copy has no
+// stored Lean results for, so it skips them.
+const BASE_INPUTS = { ...st.inputs };          // no shield, 47 heartbeats, JGU, published renin and bilirubin references
+const DEMO_MS = 5200;
+const DEMO = [
+  { loc: 'iss.destiny', say: () => `On the ISS. Earth’s magnetic field is strong here; the brain sensor’s coils can cancel only ${D.specs?.opm?.field_compensation_max?.value ?? 50} nT.` },
+  { loc: 'iss.destiny', inputs: { shielding_factor: 10000 }, say: () => 'Same place, now with a × 10,000 magnetic shield around the brain sensor.' },
+  { loc: 'gateway.halo', say: () => 'The Lunar Gateway, far from Earth: the field is tiny, so no shield is needed.' },
+  { loc: 'moon_south_pole.shackleton_rim', say: () => 'The Moon’s south pole, on the rim of Shackleton crater.' },
+  { loc: 'mars_surface.gale', say: () => 'Gale crater on Mars, where old magnetised rock raises the field.' },
+  { loc: 'earth_flight.i4_splashdown', say: () => 'Inspiration4 splashdown: no source gives the field there, so Lean asks for a number instead of guessing.' },
+  { loc: 'iss.destiny', inputs: { build: 'qant' }, say: () => 'Back on the ISS with a noisier diamond: the Q.ANT build of the heart sensor.' },
+  { loc: 'iss.destiny', inputs: { build: 'qant', beats_averaged: 120 }, live: true, say: () => 'Same diamond, averaging 120 heartbeats instead of 47.' },
+  { loc: 'iss.destiny', inputs: { renin: 30 }, live: true, say: () => 'What if renin were 30 pM, above the 25 pM the blood test can see?' },
+  { loc: 'iss.destiny', inputs: { bilirubin_isf: 5 }, live: true, say: () => 'What if bilirubin were 5 mg/dL, inside the skin patch’s 3–20 mg/dL range?' },
+];
+const demo = { on: false, i: 0, timer: null, token: 0 };
+const demoSteps = () => (window.SPINDRIFT_STATIC ? DEMO.filter((s) => !s.live) : DEMO);
+function demoSetPlace(loc) {
+  const selP = $('#place'), selS = $('#location');
+  if (!selP.hidden && placeFill) { const a = areaOf(loc).id; if (selP.value !== a) { selP.value = a; placeFill(); } }
+  if ([...selS.options].some((o) => o.value === loc)) selS.value = loc;
+  return onPlaceChange();        // reads the menu, asks Lean, and redraws the figure when the scene changes
+}
+function demoCaption(s, n, total, done) {
+  const lean = done ? SENSORS.map((x) => { const c = mainCard(x.id); return `<span class="${c ? `v-${c.verdict}` : ''}">${esc(x.word)} ${c ? MARK[c.verdict] : ''}</span>`; }).join('')
+    : '<span class="dc-wait">Lean is checking…</span>';
+  $('#demo-cap').innerHTML = `<div class="dc-top"><span class="dc-n">DEMO ${n} / ${total}</span><span>${esc(whereText())}</span></div>
+    <div class="dc-say">${esc(s.say())}</div><div class="dc-lean"><b>Lean</b>${lean}</div><i class="dc-bar${done ? ' run' : ''}" style="--ms:${DEMO_MS}ms"></i>`;
+  $('#demo-cap').hidden = false;
+}
+async function demoStep() {
+  if (!demo.on) return;
+  const my = demo.token, steps = demoSteps(), k = demo.i % steps.length, s = steps[k];
+  const before = Object.fromEntries(SENSORS.map((x) => [x.id, mainCard(x.id)?.verdict]));
+  st.inputs = { ...BASE_INPUTS, ...(s.inputs || {}) };
+  const p = demoSetPlace(s.loc);
+  demoCaption(s, k + 1, steps.length, false);
+  await p;
+  if (!demo.on || my !== demo.token) return;
+  demoCaption(s, k + 1, steps.length, true);
+  for (const x of SENSORS) {      // a verdict that changed pulses once
+    if (mainCard(x.id)?.verdict === before[x.id]) continue;
+    $$(`#card .th-code [data-sensor="${x.id}"], #card .srow[data-sensor="${x.id}"] .s-verdict`).forEach((el) => el.classList.add('flip'));
+  }
+  demo.i++;
+  demo.timer = setTimeout(demoStep, DEMO_MS);
+}
+function startDemo() {
+  if (demo.on) return;
+  demo.on = true; demo.i = 0; demo.token++;
+  $('#demo-btn').classList.add('on'); $('#demo-btn').textContent = '■ Stop demo';
+  if (st.step > 0) goStep(0);
+  demoStep();
+}
+function stopDemo() {
+  if (!demo.on) return;
+  demo.on = false; demo.token++; clearTimeout(demo.timer);
+  $('#demo-cap').hidden = true;
+  $('#demo-btn').classList.remove('on'); $('#demo-btn').textContent = '▶ Demo';
+  st.inputs = { ...BASE_INPUTS }; checkLean();
+}
+
 // ------------------------------------------------------------------ tabs: "Does it work?" and "Hardware"
 let hwDev = 'opm';
 const HW = [['opm', 'Brain sensor', 'QuSpin QZFM Gen-3'], ['nv', 'Heart sensor', 'NV diamond · JGU, ZAQuant, Q.ANT'], ['qd', 'Blood sensor', 'quantum-dot renin probe'], ['cqd', 'Skin sensor', 'carbon-dot patch']];
@@ -605,6 +671,10 @@ async function boot() {
   applyPalette(); setupPlaces(); prepLive();
   $('#location').addEventListener('change', onPlaceChange);
   $$('#tb-nav button').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab)));
+  $('#demo-btn').addEventListener('click', () => (demo.on ? stopDemo() : startDemo()));
+  // touching the menus, a card, the figure or the dive controls hands the page back to you
+  document.addEventListener('pointerdown', (e) => { if (demo.on && e.target.closest('#place, #location, #card, .sex-toggle, #descend, #stage canvas')) stopDemo(); }, true);
+  $('#stage').addEventListener('wheel', () => stopDemo(), { passive: true });
   $$('.sex-toggle button').forEach((b) => b.addEventListener('click', () => setSex(b.dataset.sex)));
   $('#open-sources').addEventListener('click', () => { $('#sources-body').innerHTML = sourcesHTML(); $('#sources').hidden = false; });
   $('#go-src').addEventListener('click', () => $('#open-sources').click());
@@ -637,6 +707,7 @@ async function boot() {
   $('#ld-3').classList.add('ok'); $('#ld-num').textContent = '100';
   setTimeout(() => $('#loader').classList.add('done'), 300);
   loadBrainPeak();
-  poll(); setInterval(poll, 10000); setInterval(() => checkLean(), 60000);
+  poll(); setInterval(poll, 10000); setInterval(() => { if (!demo.on) checkLean(); }, 60000);
+  if (new URLSearchParams(location.search).has('demo')) setTimeout(startDemo, 1200);   // ?demo starts the demo on load
 }
 boot();

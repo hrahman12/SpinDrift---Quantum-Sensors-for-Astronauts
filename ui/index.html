@@ -31,6 +31,7 @@
   <header class="topbar">
     <div class="tb-brand"><b class="wordmark">SpinDrift</b><small>⊢ every signal a theorem</small></div>
     <nav class="tb-nav" id="tb-nav"><button data-tab="body" class="on">Does it work?</button></nav>
+    <button class="demo-btn" id="demo-btn" title="Play through places and settings; Lean decides again at every step">▶ Demo</button>
     <div class="tb-mission">
       <select id="place" class="bare" title="Place" hidden></select>
       <select id="location" class="bare" title="Exact spot"></select>
@@ -54,6 +55,7 @@
         <div class="hud-gene" id="hud-gene"></div>
       </div>
       <div class="scalebar" id="scalebar"><i></i><span>1 m</span></div>
+      <div class="demo-cap" id="demo-cap" hidden></div>
       <div class="descend" id="descend"><button id="go-up" title="Up one level (↑)">↑</button><span>Scroll to dive</span><button id="go-down" title="Down one level (↓)">↓</button><button class="linkish" id="go-labels">Labels</button><button class="linkish" id="go-src">Sources</button></div>
     </div>
     <!-- the right column, at every depth: what you are looking at (while diving), then Lean's four sensor cards with

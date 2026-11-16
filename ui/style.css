@@ -521,3 +521,25 @@ canvas.mini-live { display: inline-block; vertical-align: middle; }
 
 /* public page: only the "Does it work?" tab; the buttons that open the Hardware tab are hidden */
 #go-hw, #go-specs { display: none !important; }
+
+/* demo mode: the page plays through places and settings, and Lean decides again at each step */
+.demo-btn { margin-left: 10px; background: var(--acc-bg); border: 1px solid rgba(127, 227, 208, .5); color: var(--ink); font: 700 13px var(--sans);
+  padding: 6px 15px; border-radius: 18px; cursor: pointer; white-space: nowrap; }
+.demo-btn:hover { background: rgba(127, 227, 208, .2); }
+.demo-btn.on { background: rgba(255, 122, 107, .14); border-color: rgba(255, 122, 107, .6); }
+.demo-cap { position: absolute; bottom: 96px; left: 50%; transform: translateX(-50%); z-index: 9; width: min(660px, 72%); box-sizing: border-box;
+  background: rgba(8, 10, 16, .88); border: 1px solid var(--line2); border-radius: 14px; padding: 11px 18px 14px; text-align: center;
+  backdrop-filter: blur(8px); overflow: hidden; pointer-events: none; }
+.demo-cap[hidden] { display: none; }
+.dc-top { display: flex; justify-content: center; gap: 14px; font: 600 11px var(--mono); letter-spacing: 1px; color: var(--muted); }
+.dc-n { color: var(--acc); }
+.dc-say { margin-top: 6px; font: 600 16.5px/1.35 var(--sans); color: var(--ink); }
+.dc-lean { margin-top: 8px; display: flex; justify-content: center; align-items: baseline; gap: 14px; font: 700 15px var(--mono); }
+.dc-lean b { font: 600 11px var(--mono); letter-spacing: 1px; color: var(--muted); }
+.dc-wait { color: var(--muted); font-weight: 500; }
+.dc-bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--acc); opacity: .8; }
+.dc-bar.run { animation: dc-bar var(--ms) linear forwards; }
+@keyframes dc-bar { to { width: 100%; } }
+.flip { animation: flip 1s ease; }
+.th-code .flip { display: inline-block; }
+@keyframes flip { 0% { transform: scale(1); } 30% { transform: scale(1.3); text-shadow: 0 0 14px currentColor; } 100% { transform: scale(1); } }
